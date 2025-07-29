@@ -436,6 +436,10 @@
   const companyId = "{{ customer.current_company.id }}";
   const companyLocationId = "{{ customer.current_location.id }}";
   const customerEmail = "{{ customer.email }}";
+  const approver1Threshold = "{{ customer.current_company.metafields.custom.approver_1_cart_threshold }}";
+  const approver2Threshold = "{{ customer.current_company.metafields.custom.approver_2_cart_threshold }}";
+  const levelOfApproval = "{{ customer.current_company.metafields.custom.level_of_approval_required }}";
+  const customerId = "{{ customer.id }}";
 
   document.addEventListener('click', async (e) => {
     if (e.target && e.target.id === 'create-draft-order') {
@@ -463,10 +467,14 @@
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ 
-              lineItems,
-              customerEmail,
-              companyId,
-              companyLocationId
+                lineItems,
+                customerEmail,
+                companyId,
+                companyLocationId,
+                approver1Threshold,
+                approver2Threshold,
+                levelOfApproval,
+                customerId
             })
         });
 
