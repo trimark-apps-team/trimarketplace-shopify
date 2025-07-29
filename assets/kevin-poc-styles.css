@@ -1,0 +1,121 @@
+.uwl-wishlist-cart-header,
+a.uwl-wishlist-cart-btn {
+        background: #a8243e!important;
+}
+
+.uwl-product-single-wrap a {
+  color: #a8243e !important;
+}
+
+.uwl-product-single-wrap a:focus, .uwl-product-single-wrap a:hover  {
+  color: black !important;
+}
+
+.uwl-product-single-wrap button {
+    border: none;
+    border-radius: 10px;
+    /* padding: 0; */
+    /* margin: 0; */
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    color: white;
+  background-color: #a8243e;
+}
+
+/* Default state */
+.bss-layout-content-wrapper .Polaris-Button:not(.Polaris-Button--plain):not(.Polaris-Icon),
+.bss-bcp-qo-preview-go-to-cart-btn .Polaris-Button:not(.Polaris-Button--plain):not(.Polaris-Icon),
+.Polaris-Button--primary:not(.Polaris-Icon),
+#proceed-to-checkoutBtn {
+  background-color: #a8243e !important;
+  color: white !important;
+}
+
+/* Hover and focus state - slightly darker red */
+.bss-layout-content-wrapper .Polaris-Button:not(.Polaris-Button--plain):not(.Polaris-Icon):hover,
+.bss-layout-content-wrapper .Polaris-Button:not(.Polaris-Button--plain):not(.Polaris-Icon):focus,
+.bss-bcp-qo-preview-go-to-cart-btn .Polaris-Button:not(.Polaris-Button--plain):not(.Polaris-Icon):hover,
+.bss-bcp-qo-preview-go-to-cart-btn .Polaris-Button:not(.Polaris-Button--plain):not(.Polaris-Icon):focus,
+.Polaris-Button--primary:not(.Polaris-Icon):hover,
+.Polaris-Button--primary:not(.Polaris-Icon):focus,
+#proceed-to-checkoutBtn:hover,
+#proceed-to-checkoutBtn:focus{
+  background-color: #922136 !important;
+  color: white !important;
+}
+
+
+
+#nextURL,
+#previousURL {
+  background-color: transparent !important;
+  color: black !important;
+}
+
+#nextURL:hover,
+#previousURL:hover,
+#nextURL:focus,
+#previousURL:focus {
+  background-color: #f0f0f0 !important;
+  color: black !important;
+}
+
+
+.main-cart-container .success-message {
+    
+    text-align: center;
+    padding: 10px 0px;
+    border-radius: 3px;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: unset;
+    margin: auto;
+    display: none;
+    width: 50%;
+    margin-top: 10px;
+    background-color: white !important;
+  background: white !important;
+    border: 2px solid #a8243e !important;
+    color: black;
+}
+
+
+.bss-bcp-qo-cart-preview-modal-container .Polaris-Button svg {
+  fill: black !important;
+}
+
+.Polaris-Button svg {
+  fill: white !important;
+}
+
+.Polaris-Button__Text p {
+  color: white;
+}
+
+.uwl-wishlist-header-links {
+  display: none;
+}
+
+.main-cart-container .button-share-save {
+  justify-content: center;
+  display: flex;
+}
+
+.main-cart-container .button-share-save .cart-buttons {
+    position: relative;
+    background-color: #121212;
+    color: antiquewhite;
+    border: navajowhite;
+    border-radius: 5px;
+    font-family: unset;
+    font-weight: inherit;
+    font-size: 13px;
+    letter-spacing: 1px;
+    min-height: 38px;
+    width: 100%;
+    text-align: center;
+    margin: 5px 0px;
+    cursor: pointer;
+    overflow: hidden;
+}
