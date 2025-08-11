@@ -863,9 +863,14 @@
     </script>
   </div>
 </product-info>
-<section>Warningp {{ product.metafields.custom.prop65 }}
-</section>
 
+{%- if product.metafields.custom.prop65 == true -%}
+
+<section>Warning
+</section>
+ {%- endif -%}
+
+ 
 {% schema %}
 {
   "name": "t:sections.main-product.name",
