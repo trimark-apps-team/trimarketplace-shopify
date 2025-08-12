@@ -142,11 +142,13 @@ a.uwl-wishlist-cart-btn {
   color: #a8243e !important;
 }
 
-.shopify-pc__banner__dialog button:not(:first-of-type):hover, .shopify-pc__banner__dialog button:not(:first-of-type):focus, .shopify-pc__prefs__header-actions button:hover, .shopify-pc__prefs__header-actions button:focus {
+.shopify-pc__banner__dialog button:not(:first-of-type):hover, .shopify-pc__banner__dialog button:not(:first-of-type):focus, .shopify-pc__prefs__header-actions button:hover, .shopify-pc__prefs__header-actions button:focus ,.shopify-pc__prefs__header-actions button.primary {
   border-color: #a8243e !important; /* can stay same or change */
   box-shadow: 0 0 0 1px #a8243e !important; /* visually adds 1px without affecting layout */
+  background: white !important;
 }
 
 .shopify-pc__banner__dialog button, .shopify-pc__prefs__header-actions button { 
     padding: .8rem;
 } 
+
