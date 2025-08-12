@@ -125,8 +125,8 @@ a.uwl-wishlist-cart-btn {
   font-size: 100% !important;
 }
 
-.shopify-pc__prefs__intro h3 {
-  margin: 0px 0 7px 0;
+.shopify-pc__prefs__intro h3, .shopify-pc__prefs__option label {
+  margin: 0px 0 7px 0 !important;
 }
 .shopify-pc__banner__dialog button { 
   border-radius: var(--buttons-radius) !important;
