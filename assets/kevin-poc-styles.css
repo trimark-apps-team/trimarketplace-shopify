@@ -121,7 +121,7 @@ a.uwl-wishlist-cart-btn {
 }
 
    
-.shopify-pc__banner__dialog h2, .shopify-pc__prefs__option label {
+.shopify-pc__banner__dialog h2, .shopify-pc__prefs__option label, .shopify-pc__prefs__intro-main h3 {
   font-size: 100% !important;
 }
 .shopify-pc__banner__dialog button { 
