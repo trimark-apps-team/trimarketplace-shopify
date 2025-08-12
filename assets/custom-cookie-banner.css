@@ -1,0 +1,13 @@
+   
+   
+.shopify-pc__banner__btns shopify-pc__banner__btns-granular button { 
+    border-radius: var(--buttons-radius);
+    box-shadow: 0 0 0 calc(var(--buttons-border-width) + var(--border-offset)) rgba(var(--color-button-text), var(--border-opacity)), 0 0 0 var(--buttons-border-width) rgba(var(--color-button), var(--alpha-button-background));
+    transition: box-shadow var(--duration-short) ease;
+}
+
+.shopify-pc__banner__btns shopify-pc__banner__btns-granular button { 
+    padding: .8rem;
+    min-width: 100%;
+    box-sizing: border-box;
+} 
