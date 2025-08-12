@@ -131,9 +131,9 @@ a.uwl-wishlist-cart-btn {
     
 }
 
-
-
-
+.shopify-pc__banner__dialog p, .shopify-pc__banner__dialog a, .shopify-pc__banner__dialog button  {
+  font-size: 14px;
+}
 .shopify-pc__banner__dialog button:not(:first-of-type) {
   border: 1px solid #a8243e !important;
   transition: box-shadow 0.2s ease, border-color 0.2s ease !important;
