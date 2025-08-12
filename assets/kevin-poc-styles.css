@@ -124,11 +124,13 @@ a.uwl-wishlist-cart-btn {
 .shopify-pc__banner__dialog h2, .shopify-pc__prefs__option label, .shopify-pc__prefs__intro-main h3 {
   font-size: 100% !important;
 }
+
+.shopify-pc__prefs__intro h3 {
+  margin: 0px 0 7px 0;
+}
 .shopify-pc__banner__dialog button { 
-    border-radius: var(--buttons-radius) !important;
-    box-shadow: 0 0 0 calc(var(--buttons-border-width) + var(--border-offset)) rgba(var(--color-button-text), var(--border-opacity)), 0 0 0 var(--buttons-border-width) rgba(var(--color-button), var(--alpha-button-background));
-    
-    
+  border-radius: var(--buttons-radius) !important;
+  box-shadow: 0 0 0 calc(var(--buttons-border-width) + var(--border-offset)) rgba(var(--color-button-text), var(--border-opacity)), 0 0 0 var(--buttons-border-width) rgba(var(--color-button), var(--alpha-button-background));
 }
 
 .shopify-pc__banner__dialog p, .shopify-pc__banner__dialog a, .shopify-pc__banner__dialog button, .shopify-pc__prefs__header-actions button, .shopify-pc__prefs__scrollable p  {
