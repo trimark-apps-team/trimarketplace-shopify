@@ -126,6 +126,7 @@ a.uwl-wishlist-cart-btn {
     box-shadow: 0 0 0 calc(var(--buttons-border-width) + var(--border-offset)) rgba(var(--color-button-text), var(--border-opacity)), 0 0 0 var(--buttons-border-width) rgba(var(--color-button), var(--alpha-button-background));
     transition: box-shadow var(--duration-short) ease;
     color: #a8243e !important;
+    border: 1px solid #a8243e !important;
 }
 
 .shopify-pc__banner__dialog button { 
