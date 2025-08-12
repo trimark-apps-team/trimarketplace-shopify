@@ -121,16 +121,20 @@ a.uwl-wishlist-cart-btn {
 }
 
    
+.shopify-pc__banner__dialog h2 {
+  font-size: 100% !important;
+}
 .shopify-pc__banner__dialog button { 
     border-radius: var(--buttons-radius) !important;
     box-shadow: 0 0 0 calc(var(--buttons-border-width) + var(--border-offset)) rgba(var(--color-button-text), var(--border-opacity)), 0 0 0 var(--buttons-border-width) rgba(var(--color-button), var(--alpha-button-background));
-    color: #a8243e !important;
+    
     
 }
 
 .shopify-pc__banner__dialog button:not(:first-of-type) {
   border: 1px solid #a8243e !important;
   transition: box-shadow var(--duration-short) ease !important;
+  color: #a8243e !important;
 }
 
 .shopify-pc__banner__dialog button:not(:first-of-type):hover, .shopify-pc__banner__dialog button:not(:first-of-type):focus {
