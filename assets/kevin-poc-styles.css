@@ -128,7 +128,7 @@ a.uwl-wishlist-cart-btn {
 .shopify-pc__prefs__intro h3, .shopify-pc__prefs__option label {
   margin: 0px 0 5px 0 !important;
 }
-.shopify-pc__banner__dialog button { 
+.shopify-pc__banner__dialog button, .shopify-pc__prefs__header-actions button { 
   border-radius: var(--buttons-radius) !important;
   box-shadow: 0 0 0 calc(var(--buttons-border-width) + var(--border-offset)) rgba(var(--color-button-text), var(--border-opacity)), 0 0 0 var(--buttons-border-width) rgba(var(--color-button), var(--alpha-button-background));
 }
@@ -142,7 +142,7 @@ a.uwl-wishlist-cart-btn {
   color: #a8243e !important;
 }
 
-.shopify-pc__banner__dialog button:not(:first-of-type):hover, .shopify-pc__banner__dialog button:not(:first-of-type):focus, .shopify-pc__prefs__header-actions button:hover, .shopify-pc__prefs__header-actions button:focus ,.shopify-pc__prefs__header-actions button.primary {
+.shopify-pc__banner__dialog button:not(:first-of-type):hover, .shopify-pc__banner__dialog button:not(:first-of-type):focus, .shopify-pc__prefs__header-actions button:hover, .shopify-pc__prefs__header-actions button:focus, .shopify-pc__prefs__header-actions button.primary {
   border-color: #a8243e !important; /* can stay same or change */
   box-shadow: 0 0 0 1px #a8243e !important; /* visually adds 1px without affecting layout */
   background: white !important;
