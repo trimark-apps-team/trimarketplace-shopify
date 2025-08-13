@@ -1511,3 +1511,16 @@ a.product__text {
     border: none;
   }
 }
+
+/* Custom CSS */
+.prop65{font-size:85%;}
+.prop65 img{
+    float: left;
+    padding: 2px;
+    top: 2px;
+    position: relative;
+    margin-right: 5px;
+  height:30px;
+  font-size:85%;
+}
+.prop65 a{ text-decoration:underline;}
