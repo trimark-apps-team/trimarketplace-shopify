@@ -1,3 +1,6 @@
+.about-us-container {
+    padding: 15px;
+}
 .about-us-container .thumbnail {
     width: 33%;
     text-align: center;
@@ -20,7 +23,6 @@
 
 .about-us-container .banner {
     background-color: #A12740;
-    height: 385px;
     background-attachment: fixed;
     background-size: cover;
     background-repeat: no-repeat;
@@ -29,6 +31,18 @@
     font-size: 30px;
     line-height: 34px;
     margin: 0 0 15px;
+}
+
+.about-us-container .banner p {
+    color: #FFFFFF;
+    text-align: center;
+    float: center;
+    font-weight: 400;
+    margin-top: 30px;
+    margin-right: 30px;
+    margin-bottom: 30px;
+    margin-left: 0px;
+    font-size: 25px;
 }
 
 .about-us-container footer {
