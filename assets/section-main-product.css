@@ -1514,9 +1514,8 @@ a.product__text {
 
 /* Custom CSS */
 .prop65{
-    margin-left: 20px;
     line-height: normal;
-    font-size: 85%;
+    font-size: 90%;
     border-radius: 5px;
   }
 .prop65 img{
