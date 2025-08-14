@@ -865,16 +865,6 @@
 </product-info>
 
 {%- if product.metafields.custom.prop65 == true -%}
-<div style="overflow: hidden;">
-  <img 
-    src="{{ 'icon-alert.svg' | asset_url }}" 
-    alt="Alert icon" 
-    width="24" 
-    height="24" 
-    style="float: left; margin-right: 8px;"
-  >
-  Prop 65 Warning
-</div>
 
 {% render 'prop65-warning' %}
 
