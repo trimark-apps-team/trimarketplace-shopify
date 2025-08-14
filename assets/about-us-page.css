@@ -106,3 +106,15 @@
     margin: 0 auto;
     padding: 0 1.5rem;
 }
+
+@media screen and (max-width: 750px) {
+
+        .about-us-container footer .footer_column {
+        width: 100%;
+        margin: 15px;
+    }
+    .about-us-container .thumbnail {
+        width: 100%;
+        margin: 15px;
+    }
+}
