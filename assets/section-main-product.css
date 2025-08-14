@@ -1520,9 +1520,7 @@ a.product__text {
     border-radius: 5px;
   }
 .prop65 img{
-    float: left;
-    padding: 2px;
-    top: 2px;
+    top: 3px;
     position: relative;
     margin-right: 5px;
 }
