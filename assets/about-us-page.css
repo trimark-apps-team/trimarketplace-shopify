@@ -2,13 +2,13 @@
 
 
 
-
-
-
 .about-us-container {
     padding: 15px;
 }
 
+.about-us-container p {
+    font-size: 18px;
+}
 .about-us-container center h2 {
     width: auto;
     margin-left: 10px;
@@ -47,7 +47,7 @@
 .about-us-container .banner h2 {
     font-size: 30px;
     line-height: 34px;
-    margin: 0 0 15px;
+    color: white;
 }
 
 .about-us-container .banner p {
