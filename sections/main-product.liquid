@@ -864,11 +864,11 @@
   </div>
 </product-info>
 
-{%- if product.metafields.custom.prop65 == true -%}
+{% comment %} {%- if product.metafields.custom.prop65 == true -%} {% endcomment %}
 
 {% render 'prop65-warning' %}
 
- {%- endif -%}
+{% comment %} {%- endif -%} {% endcomment %}
 
 
 {% schema %}
