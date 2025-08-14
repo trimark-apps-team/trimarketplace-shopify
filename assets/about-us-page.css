@@ -7,7 +7,7 @@
 }
 
 .about-us-container p {
-    font-size: 18px;
+    font-size: 18px !important;
 }
 .about-us-container center h2 {
     width: auto;
@@ -43,6 +43,7 @@
 .about-us-container .banner h2 {
     font-size: 30px;
     color: white;
+    text-align: center;
 }
 
 .about-us-container .banner p {
@@ -51,7 +52,7 @@
     float: center;
     font-weight: 400;
     margin: 15px 0;
-    font-size: 25px;
+    font-size: 25px !important;
 }
 
 .about-us-container footer {
