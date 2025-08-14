@@ -861,12 +861,11 @@
     <script type="application/ld+json">
       {{ product | structured_data }}
     </script>
+      {% comment %} {%- if product.metafields.custom.prop65 == true -%} {% endcomment %}
+   {% render 'prop65-warning' %}
+   {% comment %} {%- endif -%} {% endcomment %}
   </div>
-  {% comment %} {%- if product.metafields.custom.prop65 == true -%} {% endcomment %}
 
-{% render 'prop65-warning' %}
-
-{% comment %} {%- endif -%} {% endcomment %}
 </product-info>
 
 
