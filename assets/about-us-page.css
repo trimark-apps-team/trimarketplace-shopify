@@ -87,14 +87,6 @@
     .page-width--narrow {
         padding: 0 9rem;
     }
-        .about-us-container footer .footer_column {
-        width: 100%;
-        margin: 15px;
-    }
-    .about-us-container .thumbnail {
-        width: 100%;
-        margin: 15px;
-    }
 }
 @media screen and (min-width: 750px) {
     .page-width {
