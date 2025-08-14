@@ -1517,6 +1517,7 @@ a.product__text {
     line-height: normal;
     font-size: 90%;
     border-radius: 5px;
+    letter-spacing: normal;
   }
 .prop65 img{
     top: 3px;
