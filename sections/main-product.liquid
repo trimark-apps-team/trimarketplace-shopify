@@ -862,13 +862,14 @@
       {{ product | structured_data }}
     </script>
   </div>
-</product-info>
-
-{% comment %} {%- if product.metafields.custom.prop65 == true -%} {% endcomment %}
+  {% comment %} {%- if product.metafields.custom.prop65 == true -%} {% endcomment %}
 
 {% render 'prop65-warning' %}
 
 {% comment %} {%- endif -%} {% endcomment %}
+</product-info>
+
+
 
 
 {% schema %}
