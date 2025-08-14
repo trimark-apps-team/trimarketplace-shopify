@@ -1,6 +1,15 @@
 .about-us-container {
     padding: 15px;
 }
+
+.about-us-container center h2 {
+    width: auto;
+    margin-left: 10px;
+    margin-right: 10px;
+    height: auto;
+    text-align: center;
+    font-weight: bold;
+}
 .about-us-container .thumbnail {
     width: 33%;
     text-align: center;
