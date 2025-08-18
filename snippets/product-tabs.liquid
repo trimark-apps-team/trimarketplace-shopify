@@ -1,0 +1,64 @@
+{% assign product_object = product | default: product %}
+{% assign desc = product_object.metafields.custom.description %}
+
+<div class="product-tabs-wrapper">
+
+  <!-- Tab Navigation -->
+  <div class="tabs-nav">
+    <button class="tab-btn active" data-tab="desc">Description</button>
+    <button class="tab-btn" data-tab="specs">Specifications</button>
+  </div>
+
+  <!-- Tab Panels -->
+  <div class="tabs-content">
+    <div id="desc" class="tab-panel active">
+      {{ desc }}
+    </div>
+
+    <div id="specs" class="tab-panel">
+      <ul>
+        {% if product_object.metafields.specs.width %}
+          <li><strong>Width:</strong> {{ product_object.metafields.specs.width }}</li>
+        {% endif %}
+        {% if product_object.metafields.specs.depth %}
+          <li><strong>Depth:</strong> {{ product_object.metafields.specs.depth }}</li>
+        {% endif %}
+        {% if product_object.metafields.specs.height %}
+          <li><strong>Height:</strong> {{ product_object.metafields.specs.height }}</li>
+        {% endif %}
+        {% if product_object.metafields.specs.power_type %}
+          <li><strong>Power Type:</strong> {{ product_object.metafields.specs.power_type }}</li>
+        {% endif %}
+        {% if product_object.metafields.specs.voltage %}
+          <li><strong>Voltage:</strong> {{ product_object.metafields.specs.voltage }}</li>
+        {% endif %}
+        {% if product_object.metafields.specs.wattage %}
+          <li><strong>Wattage:</strong> {{ product_object.metafields.specs.wattage }}</li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+
+  <!-- Resources Box -->
+  <div class="resources-box">
+    <h3>Resources</h3>
+    <ul>
+      {% if product_object.metafields.resources.specsheet %}
+        <li><a href="{{ product_object.metafields.resources.specsheet }}" target="_blank">Specs</a></li>
+      {% endif %}
+      {% if product_object.metafields.resources.manual %}
+        <li><a href="{{ product_object.metafields.resources.manual }}" target="_blank">Manual</a></li>
+      {% endif %}
+      {% if product_object.metafields.resources.warranty %}
+        <li><a href="{{ product_object.metafields.resources.warranty }}" target="_blank">Warranty</a></li>
+      {% endif %}
+      {% if product_object.metafields.resources.sds %}
+        <li><a href="{{ product_object.metafields.resources.sds }}" target="_blank">SDS</a></li>
+      {% endif %}
+      {% if product_object.metafields.resources.video %}
+        <li><a href="{{ product_object.metafields.resources.video }}" target="_blank">Watch Video</a></li>
+      {% endif %}
+    </ul>
+  </div>
+
+</div>
