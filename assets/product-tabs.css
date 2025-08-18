@@ -45,7 +45,7 @@
 
 .tab-content ul {
   padding-left: 1.2rem;
-  list-style-type: disc;
+  list-style-type: none;
 }
 
 .tab-content li {
