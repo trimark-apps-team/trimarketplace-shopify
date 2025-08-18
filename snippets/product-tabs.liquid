@@ -63,28 +63,28 @@
   
 </div>
 
-  {% if product.metafields.custom["4_warranty_sheet"] or product.metafields.custom["4_spec_sheet"] %}
-    <div class="tab-content" id="tab-assets">
-      <ul>
-        {% if product.metafields.custom["4_spec_sheet"] %}
-          <li>
-            <i class="fas fa-file-pdf"></i>
-            <a href="{{ product.metafields.custom["4_spec_sheet"] }}" target="_blank">
-              {{ product.metafields.custom["4_spec_sheet"] | split: '/' | last }}
-            </a>
-          </li>
-        {% endif %}
-        {% if product.metafields.custom["4_warranty_sheet"] %}
-          <li>
-            <i class="fas fa-file-pdf"></i>
-            <a href="{{ product.metafields.custom["4_warranty_sheet"] }}" target="_blank">
-              {{ product.metafields.custom["4_warranty_sheet"] | split: '/' | last }}
-            </a>
-          </li>
-        {% endif %}
-      </ul>
-    </div>
-  {% endif %}
+{% if product.metafields.custom["4_warranty_sheet"].value or product.metafields.custom["4_spec_sheet"].value %}
+  <div class="tab-content" id="tab-assets">
+    <ul>
+      {% if product.metafields.custom["4_spec_sheet"].value %}
+        <li>
+          <i class="fas fa-file-pdf"></i>
+          <a href="{{ product.metafields.custom["4_spec_sheet"].value }}" target="_blank" rel="noopener">
+            {{ product.metafields.custom["4_spec_sheet"].value | split: '/' | last }}
+          </a>
+        </li>
+      {% endif %}
+      {% if product.metafields.custom["4_warranty_sheet"].value %}
+        <li>
+          <i class="fas fa-file-pdf"></i>
+          <a href="{{ product.metafields.custom["4_warranty_sheet"].value }}" target="_blank" rel="noopener">
+            {{ product.metafields.custom["4_warranty_sheet"].value | split: '/' | last }}
+          </a>
+        </li>
+      {% endif %}
+    </ul>
+  </div>
+{% endif %}
 </div>
 
 {% render 'prop65-warning' %}
