@@ -1,102 +1,73 @@
-<div class="product-tabs-wrapper">
+<div class="specifications-and-assets">
 
-  <!-- Tab Navigation -->
-  <div class="tabs-nav">
-    <button class="tab-btn active" data-tab="desc">Description</button>
-    <button class="tab-btn" data-tab="specs">Specifications</button>
-  </div>
+  <div class="specifications">
+    <h3>Specifications</h3>
+    <ul>
+      {% assign erp_ids = "1_ERP_ID_Marlinn_Ipics,1_ERP_ID_TRMK_Golden,1_ERP_ID_Adams_Burch_SX,1_ERP_ID_SSKemp_JDE,1_ERP_ID_RWSmith_SX,1_ERP_ID_United_East_Lawson,1_ERP_ID_South_M3" | split: ',' %}
+      {% for id in erp_ids %}
+        {% assign erp = product.metafields.custom[id] %}
+        {% if erp %}
+          <li><strong>Legacy ERP:</strong> {{ erp }}</li>
+          {% break %}
+        {% endif %}
+      {% endfor %}
 
-  <!-- Tab Panels -->
-  <div class="tabs-content">
-
-    <!-- Description Tab -->
-    <div id="desc" class="tab-panel active">
-      {% if product.metafields.custom.8_Description_Web != blank %}
-        {{ product.metafields.custom.8_Description_Web }}
-      {% else %}
-        <p>No product description available.</p>
+      {% if product.vendor %}
+        <li><strong>Brand:</strong> {{ product.vendor }}</li>
       {% endif %}
-    </div>
 
-    <!-- Specifications Tab -->
-    <div id="specs" class="tab-panel">
-      <ul>
-        {% if product.metafields.custom.1_ERP_ID_TRMK_Golden != blank %}
-          <li><strong>Legacy ERP:</strong> {{ product.metafields.custom.1_ERP_ID_TRMK_Golden }}</li>
-        {% endif %}
+      {% if product.metafields.custom['6_manufacturer_id'] %}
+        <li><strong>Manufacturer Number:</strong> {{ product.metafields.custom['6_manufacturer_id'] }}</li>
+      {% endif %}
 
-        {% if product.metafields.custom.6_brand != blank %}
-          <li><strong>Brand:</strong> {{ product.metafields.custom.6_brand }}</li>
-        {% endif %}
+      {% if product.metafields.custom['11_DIM_Length_inside'] %}
+        <li><strong>Length:</strong> {{ product.metafields.custom['11_DIM_Length_inside'] }}</li>
+      {% endif %}
+      {% if product.metafields.custom['11_DIM_Width_inside'] %}
+        <li><strong>Width:</strong> {{ product.metafields.custom['11_DIM_Width_inside'] }}</li>
+      {% endif %}
+      {% if product.metafields.custom['11_DIM_Height_inside'] %}
+        <li><strong>Height:</strong> {{ product.metafields.custom['11_DIM_Height_inside'] }}</li>
+      {% endif %}
+      {% if product.metafields.custom['11_Diameter_inside'] %}
+        <li><strong>Diameter:</strong> {{ product.metafields.custom['11_Diameter_inside'] }}</li>
+      {% endif %}
 
-        {% if product.metafields.custom.6_manufacturer_id != blank %}
-          <li><strong>Manufacturer Number:</strong> {{ product.metafields.custom.6_manufacturer_id }}</li>
-        {% endif %}
+      {% if product.metafields.custom['11_capacity_1'] %}
+        <li><strong>Capacity:</strong> {{ product.metafields.custom['11_capacity_1'] }}</li>
+      {% endif %}
 
-        {% if product.metafields.custom.11_capacity_1 != blank %}
-          <li><strong>Capacity:</strong> {{ product.metafields.custom.11_capacity_1 }}</li>
-        {% endif %}
-
-        {% if product.metafields.custom.11_DIM_Length_inside != blank %}
-          <li><strong>Length:</strong> {{ product.metafields.custom.11_DIM_Length_inside }}</li>
-        {% endif %}
-
-        {% if product.metafields.custom.11_DIM_Width_inside != blank %}
-          <li><strong>Width:</strong> {{ product.metafields.custom.11_DIM_Width_inside }}</li>
-        {% endif %}
-
-        {% if product.metafields.custom.11_DIM_Height_inside != blank %}
-          <li><strong>Height:</strong> {{ product.metafields.custom.11_DIM_Height_inside }}</li>
-        {% endif %}
-
-        {% if product.metafields.custom.11_DIM_Depth_inside != blank %}
-          <li><strong>Depth:</strong> {{ product.metafields.custom.11_DIM_Depth_inside }}</li>
-        {% endif %}
-
-        {% if product.metafields.custom.11_Diameter_inside != blank %}
-          <li><strong>Diameter:</strong> {{ product.metafields.custom.11_Diameter_inside }}</li>
-        {% endif %}
-
-        {% if product.metafields.custom.12_color != blank %}
-          <li><strong>Color:</strong> {{ product.metafields.custom.12_color }}</li>
-        {% endif %}
-
-        {% if product.metafields.custom.12_material != blank %}
-          <li><strong>Material:</strong> {{ product.metafields.custom.12_material }}</li>
-        {% endif %}
-
-        {% if product.metafields.custom.9_country_of_origin != blank %}
-          <li><strong>Country of Origin:</strong> {{ product.metafields.custom.9_country_of_origin }}</li>
-        {% endif %}
-
-        {% if product.metafields.custom.9_Prop_65 != blank %}
-          <li><strong>Prop 65:</strong> {{ product.metafields.custom.9_Prop_65 }}</li>
-        {% endif %}
-      </ul>
-    </div>
-
+      {% if product.metafields.custom.color %}
+        <li><strong>Color:</strong> {{ product.metafields.custom.color }}</li>
+      {% endif %}
+      {% if product.metafields.custom.material %}
+        <li><strong>Material:</strong> {{ product.metafields.custom.material }}</li>
+      {% endif %}
+      {% if product.metafields.custom.country_of_origin %}
+        <li><strong>Country of Origin:</strong> {{ product.metafields.custom.country_of_origin }}</li>
+      {% endif %}
+    </ul>
   </div>
 
-  <!-- Resources (PDFs) -->
-  {% if product.metafields.custom.4_spec_sheet != blank or product.metafields.custom.4_warranty_sheet != blank %}
-    <div class="resources-box">
-      <h3>Resources</h3>
+  {% assign warranty_url = product.metafields.custom['4_warranty_sheet'] %}
+  {% assign specsheet_url = product.metafields.custom['4_spec_sheet'] %}
+  {% if warranty_url or specsheet_url %}
+    <div class="assets">
+      <h3>Assets</h3>
       <ul>
-        {% if product.metafields.custom.4_spec_sheet != blank %}
-          {% assign spec_url = product.metafields.custom.4_spec_sheet %}
-          {% assign spec_filename = spec_url | split: '/' | last %}
+        {% if specsheet_url %}
           <li>
-            <a href="{{ spec_url }}" target="_blank">
-              <i class="fas fa-file-pdf"></i> Spec Sheet ({{ spec_filename }})
+            <i class="fas fa-file-pdf"></i>
+            <a href="{{ specsheet_url }}" target="_blank" rel="noopener">
+              {{ specsheet_url | split: '/' | last }}
             </a>
           </li>
         {% endif %}
-        {% if product.metafields.custom.4_warranty_sheet != blank %}
-          {% assign warranty_url = product.metafields.custom.4_warranty_sheet %}
-          {% assign warranty_filename = warranty_url | split: '/' | last %}
+        {% if warranty_url %}
           <li>
-            <a href="{{ warranty_url }}" target="_blank">
-              <i class="fas fa-file-pdf"></i> Warranty ({{ warranty_filename }})
+            <i class="fas fa-file-pdf"></i>
+            <a href="{{ warranty_url }}" target="_blank" rel="noopener">
+              {{ warranty_url | split: '/' | last }}
             </a>
           </li>
         {% endif %}
@@ -104,7 +75,6 @@
     </div>
   {% endif %}
 
-</div>
+  {% render 'prop65-warning' %}
 
-<!-- Prop 65 Warning Snippet -->
-{% render 'prop65-warning' %}
+</div>
