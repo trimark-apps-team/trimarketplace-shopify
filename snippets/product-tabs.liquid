@@ -13,6 +13,7 @@
         {% else %}
           {{ product.description }}
         {% endif %}
+        {% render 'prop65-warning' %}
       </div>
 
       <div class="tab-content" id="tab-specifications">
@@ -106,4 +107,3 @@
   {% endif %}
 </div>
 
-{% render 'prop65-warning' %}
