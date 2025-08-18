@@ -123,6 +123,11 @@
     flex-direction: column;
   }
 
+  .product-tabs,
+  .product-assets {
+    width: 100%;
+  }
+
   .product-assets {
     margin-top: 2rem;
   }
