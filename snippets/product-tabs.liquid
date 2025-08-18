@@ -1,80 +1,87 @@
-<div class="specifications-and-assets">
-
-  <div class="specifications">
-    <h3>Specifications</h3>
-    <ul>
-      {% assign erp_ids = "1_ERP_ID_Marlinn_Ipics,1_ERP_ID_TRMK_Golden,1_ERP_ID_Adams_Burch_SX,1_ERP_ID_SSKemp_JDE,1_ERP_ID_RWSmith_SX,1_ERP_ID_United_East_Lawson,1_ERP_ID_South_M3" | split: ',' %}
-      {% for id in erp_ids %}
-        {% assign erp = product.metafields.custom[id] %}
-        {% if erp %}
-          <li><strong>Legacy ERP:</strong> {{ erp }}</li>
-          {% break %}
-        {% endif %}
-      {% endfor %}
-
-      {% if product.vendor %}
-        <li><strong>Brand:</strong> {{ product.vendor }}</li>
+<div class="product-tabs">
+  <div class="tab">
+    <input type="checkbox" id="tab-description">
+    <label for="tab-description">Description</label>
+    <div class="tab-content">
+      {% if product.metafields.custom["8_description_web"] %}
+        {{ product.metafields.custom["8_description_web"] }}
+      {% else %}
+        {{ product.description }}
       {% endif %}
-
-      {% if product.metafields.custom['6_manufacturer_id'] %}
-        <li><strong>Manufacturer Number:</strong> {{ product.metafields.custom['6_manufacturer_id'] }}</li>
-      {% endif %}
-
-      {% if product.metafields.custom['11_DIM_Length_inside'] %}
-        <li><strong>Length:</strong> {{ product.metafields.custom['11_DIM_Length_inside'] }}</li>
-      {% endif %}
-      {% if product.metafields.custom['11_DIM_Width_inside'] %}
-        <li><strong>Width:</strong> {{ product.metafields.custom['11_DIM_Width_inside'] }}</li>
-      {% endif %}
-      {% if product.metafields.custom['11_DIM_Height_inside'] %}
-        <li><strong>Height:</strong> {{ product.metafields.custom['11_DIM_Height_inside'] }}</li>
-      {% endif %}
-      {% if product.metafields.custom['11_Diameter_inside'] %}
-        <li><strong>Diameter:</strong> {{ product.metafields.custom['11_Diameter_inside'] }}</li>
-      {% endif %}
-
-      {% if product.metafields.custom['11_capacity_1'] %}
-        <li><strong>Capacity:</strong> {{ product.metafields.custom['11_capacity_1'] }}</li>
-      {% endif %}
-
-      {% if product.metafields.custom.color %}
-        <li><strong>Color:</strong> {{ product.metafields.custom.color }}</li>
-      {% endif %}
-      {% if product.metafields.custom.material %}
-        <li><strong>Material:</strong> {{ product.metafields.custom.material }}</li>
-      {% endif %}
-      {% if product.metafields.custom.country_of_origin %}
-        <li><strong>Country of Origin:</strong> {{ product.metafields.custom.country_of_origin }}</li>
-      {% endif %}
-    </ul>
+    </div>
   </div>
 
-  {% assign warranty_url = product.metafields.custom['4_warranty_sheet'] %}
-  {% assign specsheet_url = product.metafields.custom['4_spec_sheet'] %}
-  {% if warranty_url or specsheet_url %}
-    <div class="assets">
-      <h3>Assets</h3>
+  <div class="tab">
+    <input type="checkbox" id="tab-specifications">
+    <label for="tab-specifications">Specifications</label>
+    <div class="tab-content">
       <ul>
-        {% if specsheet_url %}
-          <li>
-            <i class="fas fa-file-pdf"></i>
-            <a href="{{ specsheet_url }}" target="_blank" rel="noopener">
-              {{ specsheet_url | split: '/' | last }}
-            </a>
-          </li>
+        {% if product.metafields.custom["1_erp_id_trmk_golden"] %}
+          <li><strong>Legacy ERP:</strong> {{ product.metafields.custom["1_erp_id_trmk_golden"] }}</li>
         {% endif %}
-        {% if warranty_url %}
-          <li>
-            <i class="fas fa-file-pdf"></i>
-            <a href="{{ warranty_url }}" target="_blank" rel="noopener">
-              {{ warranty_url | split: '/' | last }}
-            </a>
-          </li>
+        {% if product.metafields.custom["6_brand"] %}
+          <li><strong>Brand:</strong> {{ product.metafields.custom["6_brand"] }}</li>
+        {% endif %}
+        {% if product.metafields.custom["6_Manufacturer_ID"] %}
+          <li><strong>Manufacturer Number:</strong> {{ product.metafields.custom["6_Manufacturer_ID"] }}</li>
+        {% endif %}
+        {% if product.metafields.custom["11_DIM_Length_inside"] %}
+          <li><strong>Length:</strong> {{ product.metafields.custom["11_DIM_Length_inside"] }}</li>
+        {% endif %}
+        {% if product.metafields.custom["11_DIM_Width_inside"] %}
+          <li><strong>Width:</strong> {{ product.metafields.custom["11_DIM_Width_inside"] }}</li>
+        {% endif %}
+        {% if product.metafields.custom["11_DIM_Height_inside"] %}
+          <li><strong>Height:</strong> {{ product.metafields.custom["11_DIM_Height_inside"] }}</li>
+        {% endif %}
+        {% if product.metafields.custom["11_DIM_Depth_inside"] %}
+          <li><strong>Depth:</strong> {{ product.metafields.custom["11_DIM_Depth_inside"] }}</li>
+        {% endif %}
+        {% if product.metafields.custom["11_Diameter_inside"] %}
+          <li><strong>Diameter:</strong> {{ product.metafields.custom["11_Diameter_inside"] }}</li>
+        {% endif %}
+        {% if product.metafields.custom["11_capacity_1"] %}
+          <li><strong>Capacity:</strong> {{ product.metafields.custom["11_capacity_1"] }}</li>
+        {% endif %}
+        {% if product.metafields.custom["12_color"] %}
+          <li><strong>Color:</strong> {{ product.metafields.custom["12_color"] }}</li>
+        {% endif %}
+        {% if product.metafields.custom["12_material"] %}
+          <li><strong>Material:</strong> {{ product.metafields.custom["12_material"] }}</li>
+        {% endif %}
+        {% if product.metafields.custom["9_country_of_origin"] %}
+          <li><strong>Country of Origin:</strong> {{ product.metafields.custom["9_country_of_origin"] }}</li>
         {% endif %}
       </ul>
     </div>
+  </div>
+
+  {% if product.metafields.custom["4_warranty_sheet"] or product.metafields.custom["4_spec_sheet"] %}
+    <div class="tab">
+      <input type="checkbox" id="tab-assets">
+      <label for="tab-assets">Assets</label>
+      <div class="tab-content">
+        <ul>
+          {% if product.metafields.custom["4_spec_sheet"] %}
+            <li>
+              <i class="fas fa-file-pdf"></i>
+              <a href="{{ product.metafields.custom["4_spec_sheet"] }}" target="_blank">
+                {{ product.metafields.custom["4_spec_sheet"] | split: '/' | last }}
+              </a>
+            </li>
+          {% endif %}
+          {% if product.metafields.custom["4_warranty_sheet"] %}
+            <li>
+              <i class="fas fa-file-pdf"></i>
+              <a href="{{ product.metafields.custom["4_warranty_sheet"] }}" target="_blank">
+                {{ product.metafields.custom["4_warranty_sheet"] | split: '/' | last }}
+              </a>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
   {% endif %}
-
-  {% render 'prop65-warning' %}
-
 </div>
+
+{% render 'prop65-warning' %}
