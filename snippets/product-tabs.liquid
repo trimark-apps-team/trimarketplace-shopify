@@ -1,90 +1,93 @@
-<div class="product-tabs">
-  <div class="tab-buttons">
-    <button class="tab-button active" data-tab="description">Description</button>
-    <button class="tab-button" data-tab="specifications">Specifications</button>
-  </div>
 
-  
-    <div class="tab-content active" id="tab-description">
-      {% if product.metafields.custom["8_description_web"] %}
-        {{ product.metafields.custom["8_description_web"] | metafield_tag }}
-      {% else %}
-        {{ product.description }}
-      {% endif %}
+<div class="product-details-wrapper">
+  <div class="product-tabs">
+    <div class="tab-buttons">
+      <button class="tab-button active" data-tab="description">Description</button>
+      <button class="tab-button" data-tab="specifications">Specifications</button>
     </div>
 
-    <div class="tab-content" id="tab-specifications">
-      <div class="spec-columns">
-        <ul class="spec-column">
-          {% if product.metafields.custom["1_erp_id_trmk_golden"] %}
-            <li><strong>Legacy ERP:</strong> {{ product.metafields.custom["1_erp_id_trmk_golden"] }}</li>
-          {% endif %}
-          {% if product.metafields.custom["6_brand"] %}
-            <li><strong>Brand:</strong> {{ product.metafields.custom["6_brand"] }}</li>
-          {% endif %}
-          {% if product.metafields.custom["6_Manufacturer_ID"] %}
-            <li><strong>Manufacturer Number:</strong> {{ product.metafields.custom["6_Manufacturer_ID"] }}</li>
-          {% endif %}
-          {% if product.metafields.custom["11_capacity_1"] %}
-            {% assign capacity = product.metafields.custom["11_capacity_1"] %}
-            <li>
-              <strong>Capacity:</strong>
-              {{ capacity.value }}
-              {% case capacity.unit %}
-                {% when "us_fl_oz" %} fl oz
-                {% when "ml" %} mL
-                {% when "l" %} L
-                {% when "qt" %} qt
-                {% when "gal" %} gal
-                {% else %} {{ capacity.unit }}
-              {% endcase %}
-            </li>
-          {% endif %}
-          {% if product.metafields.custom["12_color"] %}
-            <li><strong>Color:</strong> {{ product.metafields.custom["12_color"] }}</li>
-          {% endif %}
-          {% if product.metafields.custom["12_material"] %}
-            <li><strong>Material:</strong> {{ product.metafields.custom["12_material"] }}</li>
-          {% endif %}
-            {% if product.metafields.custom["9_country_of_origin"] %}
-            <li><strong>Country of Origin:</strong> {{ product.metafields.custom["9_country_of_origin"] }}</li>
-          {% endif %}
-        </ul>
-
-        <ul class="spec-column">
-          {% render 'render-dimension', label: 'Length', field: product.metafields.custom["11_dim_length_inside"] %}
-          {% render 'render-dimension', label: 'Width', field: product.metafields.custom["11_dim_width_inside"] %}
-          {% render 'render-dimension', label: 'Height', field: product.metafields.custom["11_dim_height_inside"] %}
-          {% render 'render-dimension', label: 'Depth', field: product.metafields.custom["11_dim_depth_inside"] %}
-          {% render 'render-dimension', label: 'Diameter', field: product.metafields.custom["11_diameter_inside"] %}
-        
-        </ul>
+    
+      <div class="tab-content active" id="tab-description">
+        {% if product.metafields.custom["8_description_web"] %}
+          {{ product.metafields.custom["8_description_web"] | metafield_tag }}
+        {% else %}
+          {{ product.description }}
+        {% endif %}
       </div>
-  
-</div>
 
-{% if product.metafields.custom["4_warranty_sheet"].value or product.metafields.custom["4_spec_sheet"].value %}
-  <div class="product-assets" id="product-assets">
-    <ul>
-      {% if product.metafields.custom["4_spec_sheet"].value %}
-        <li>
-          <i class="fas fa-file-pdf"></i>
-          <a href="{{ product.metafields.custom["4_spec_sheet"].value }}" target="_blank" rel="noopener">
-            {{ product.metafields.custom["4_spec_sheet"].value | split: '/' | last }}
-          </a>
-        </li>
-      {% endif %}
-      {% if product.metafields.custom["4_warranty_sheet"].value %}
-        <li>
-          <i class="fas fa-file-pdf"></i>
-          <a href="{{ product.metafields.custom["4_warranty_sheet"].value }}" target="_blank" rel="noopener">
-            {{ product.metafields.custom["4_warranty_sheet"].value | split: '/' | last }}
-          </a>
-        </li>
-      {% endif %}
-    </ul>
+      <div class="tab-content" id="tab-specifications">
+        <div class="spec-columns">
+          <ul class="spec-column">
+            {% if product.metafields.custom["1_erp_id_trmk_golden"] %}
+              <li><strong>Legacy ERP:</strong> {{ product.metafields.custom["1_erp_id_trmk_golden"] }}</li>
+            {% endif %}
+            {% if product.metafields.custom["6_brand"] %}
+              <li><strong>Brand:</strong> {{ product.metafields.custom["6_brand"] }}</li>
+            {% endif %}
+            {% if product.metafields.custom["6_Manufacturer_ID"] %}
+              <li><strong>Manufacturer Number:</strong> {{ product.metafields.custom["6_Manufacturer_ID"] }}</li>
+            {% endif %}
+            {% if product.metafields.custom["11_capacity_1"] %}
+              {% assign capacity = product.metafields.custom["11_capacity_1"] %}
+              <li>
+                <strong>Capacity:</strong>
+                {{ capacity.value }}
+                {% case capacity.unit %}
+                  {% when "us_fl_oz" %} fl oz
+                  {% when "ml" %} mL
+                  {% when "l" %} L
+                  {% when "qt" %} qt
+                  {% when "gal" %} gal
+                  {% else %} {{ capacity.unit }}
+                {% endcase %}
+              </li>
+            {% endif %}
+            {% if product.metafields.custom["12_color"] %}
+              <li><strong>Color:</strong> {{ product.metafields.custom["12_color"] }}</li>
+            {% endif %}
+            {% if product.metafields.custom["12_material"] %}
+              <li><strong>Material:</strong> {{ product.metafields.custom["12_material"] }}</li>
+            {% endif %}
+              {% if product.metafields.custom["9_country_of_origin"] %}
+              <li><strong>Country of Origin:</strong> {{ product.metafields.custom["9_country_of_origin"] }}</li>
+            {% endif %}
+          </ul>
+
+          <ul class="spec-column">
+            {% render 'render-dimension', label: 'Length', field: product.metafields.custom["11_dim_length_inside"] %}
+            {% render 'render-dimension', label: 'Width', field: product.metafields.custom["11_dim_width_inside"] %}
+            {% render 'render-dimension', label: 'Height', field: product.metafields.custom["11_dim_height_inside"] %}
+            {% render 'render-dimension', label: 'Depth', field: product.metafields.custom["11_dim_depth_inside"] %}
+            {% render 'render-dimension', label: 'Diameter', field: product.metafields.custom["11_diameter_inside"] %}
+          
+          </ul>
+        </div>
+    
   </div>
-{% endif %}
+
+  {% if product.metafields.custom["4_warranty_sheet"].value or product.metafields.custom["4_spec_sheet"].value %}
+    <div class="product-assets" id="product-assets">
+      <ul>
+        {% if product.metafields.custom["4_spec_sheet"].value %}
+          <li>
+            <i class="fas fa-file-pdf"></i>
+            <a href="{{ product.metafields.custom["4_spec_sheet"].value }}" target="_blank" rel="noopener">
+              {{ product.metafields.custom["4_spec_sheet"].value | split: '/' | last }}
+            </a>
+          </li>
+        {% endif %}
+        {% if product.metafields.custom["4_warranty_sheet"].value %}
+          <li>
+            <i class="fas fa-file-pdf"></i>
+            <a href="{{ product.metafields.custom["4_warranty_sheet"].value }}" target="_blank" rel="noopener">
+              {{ product.metafields.custom["4_warranty_sheet"].value | split: '/' | last }}
+            </a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+  {% endif %}
+  </div>
 </div>
 
 {% render 'prop65-warning' %}
