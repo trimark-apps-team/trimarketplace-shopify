@@ -66,26 +66,43 @@
   </div>
 
   {% if product.metafields.custom["4_warranty_sheet"].value or product.metafields.custom["4_spec_sheet"].value %}
-    <div class="product-assets" id="product-assets">
-      <ul>
-        {% if product.metafields.custom["4_spec_sheet"].value %}
-          <li>
-            <i class="fas fa-file-pdf"></i>
-            <a href="{{ product.metafields.custom["4_spec_sheet"].value }}" target="_blank" rel="noopener">
-              {{ product.metafields.custom["4_spec_sheet"].value | split: '/' | last }}
-            </a>
-          </li>
-        {% endif %}
-        {% if product.metafields.custom["4_warranty_sheet"].value %}
-          <li>
-            <i class="fas fa-file-pdf"></i>
-            <a href="{{ product.metafields.custom["4_warranty_sheet"].value }}" target="_blank" rel="noopener">
-              {{ product.metafields.custom["4_warranty_sheet"].value | split: '/' | last }}
-            </a>
-          </li>
-        {% endif %}
-      </ul>
-    </div>
+   <div class="product-assets">
+    <h3>Resources</h3>
+    <ul>
+      {% if product.metafields.custom["4_spec_sheet"] %}
+        <li>
+          <i class="fas fa-file-pdf"></i>
+          <a href="{{ product.metafields.custom["4_spec_sheet"] }}" target="_blank">
+            Specsheet
+          </a>
+        </li>
+      {% endif %}
+      {% if product.metafields.custom["4_manual_sheet"] %}
+        <li>
+          <i class="fas fa-book"></i>
+          <a href="{{ product.metafields.custom["4_manual_sheet"] }}" target="_blank">
+            Manual
+          </a>
+        </li>
+      {% endif %}
+      {% if product.metafields.custom["4_warranty_sheet"] %}
+        <li>
+          <i class="fas fa-shield-alt"></i>
+          <a href="{{ product.metafields.custom["4_warranty_sheet"] }}" target="_blank">
+            Warranty
+          </a>
+        </li>
+      {% endif %}
+      {% if product.metafields.custom["4_sds_sheet"] %}
+        <li>
+          <i class="fas fa-chart-pie"></i>
+          <a href="{{ product.metafields.custom["4_sds_sheet"] }}" target="_blank">
+            SDS
+          </a>
+        </li>
+      {% endif %}
+    </ul>
+  </div>
   {% endif %}
   </div>
 </div>
