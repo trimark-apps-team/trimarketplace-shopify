@@ -2,8 +2,7 @@
   Prop 65 Warning Snippet
   Usage: {% render 'prop65-warning' %}
 {% endcomment %}
-
-{%- if product.metafields.custom.9_Prop_65 == true -%}
+{%- if product.metafields.custom['9_Prop_65'] == true -%}
   <div class="prop65">
     <div class="inner-alert">
       <img 
