@@ -105,31 +105,6 @@
             "show_dynamic_checkout": false,
             "show_gift_card_recipient": false
           }
-        },
-        "share": {
-          "type": "share",
-          "settings": {
-            "share_label": "Share"
-          }
-        },
-        "custom_liquid_WnCtKz": {
-          "type": "custom_liquid",
-          "settings": {
-            "custom_liquid": "{% render 'product-tabs' %}"
-          }
-        },
-        "complementary_LzizDN": {
-          "type": "complementary",
-          "settings": {
-            "block_heading": "Pairs well with",
-            "make_collapsible_row": true,
-            "icon": "price_tag",
-            "product_list_limit": 5,
-            "products_per_page": 4,
-            "pagination_style": "counter",
-            "image_ratio": "square",
-            "enable_quick_add": false
-          }
         }
       },
       "block_order": [
@@ -144,10 +119,7 @@
         "shipping_time_8nHjrd",
         "tier_pricing_bjEHBr",
         "inventory_RzP6BQ",
-        "buy_buttons",
-        "share",
-        "custom_liquid_WnCtKz",
-        "complementary_LzizDN"
+        "buy_buttons"
       ],
       "settings": {
         "enable_sticky_info": false,
