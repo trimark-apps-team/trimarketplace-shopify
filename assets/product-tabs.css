@@ -46,3 +46,21 @@
   color: #a8243e;
   margin-right: 0.5rem;
 }
+
+.spec-columns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.spec-column {
+  flex: 1;
+  min-width: 250px;
+  list-style: none;
+  padding-left: 0;
+}
+
+.spec-column li {
+  margin-bottom: 0.8rem;
+  font-size: 1.6rem;
+}
