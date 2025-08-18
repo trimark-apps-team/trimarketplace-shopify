@@ -5,26 +5,38 @@
 .product-tabs .tab-buttons {
   display: flex;
   gap: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0;
+  border-bottom: 1px solid #ccc; /* Divider between buttons and content */
 }
 
 .product-tabs .tab-button {
   background: transparent;
   color: #a8243e;
   border: 1px solid #a8243e;
+  border-bottom: none; /* Remove bottom to create tab illusion */
   padding: 0.5rem 1.25rem;
-  font-size: 1rem;
+  font-size: 20px;
   cursor: pointer;
-  border-radius: 6px;
+  border-radius: 6px 6px 0 0;
   font-family: inherit;
   box-sizing: border-box;
   transition: border-width 0.2s ease, background-color 0.2s ease;
-  height: 44px;
+  height: 48px;
 }
 
 .product-tabs .tab-button.active {
   border-width: 2px;
-  padding: calc(0.5rem - 1px) 1.25rem; /* adjust padding to offset border width */
+  padding: calc(0.5rem - 1px) 1.25rem; /* Maintain consistent height */
+  border-bottom: 1px solid white; /* Maintain tab illusion by covering divider */
+}
+
+.product-tabs .tab-content-wrapper {
+  border: 1px solid #ccc;
+  border-top: none;
+  padding: 1rem;
+  border-radius: 0 0 6px 6px;
+  background: #fff;
+  margin-top: -1px; /* Prevent gap between tab and content */
 }
 
 .product-tabs .tab-content {
