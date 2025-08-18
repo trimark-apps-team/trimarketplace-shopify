@@ -12,12 +12,6 @@
     "main": {
       "type": "main-product",
       "blocks": {
-        "custom_liquid_WnCtKz": {
-          "type": "custom_liquid",
-          "settings": {
-            "custom_liquid": "{% render 'product-tabs' %}"
-          }
-        },
         "title": {
           "type": "title",
           "settings": {}
@@ -118,6 +112,12 @@
             "share_label": "Share"
           }
         },
+        "custom_liquid_WnCtKz": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'product-tabs' %}"
+          }
+        },
         "complementary_LzizDN": {
           "type": "complementary",
           "settings": {
@@ -133,7 +133,6 @@
         }
       },
       "block_order": [
-        "custom_liquid_WnCtKz",
         "title",
         "description",
         "custom_liquid_N8U98j",
@@ -147,6 +146,7 @@
         "inventory_RzP6BQ",
         "buy_buttons",
         "share",
+        "custom_liquid_WnCtKz",
         "complementary_LzizDN"
       ],
       "settings": {
