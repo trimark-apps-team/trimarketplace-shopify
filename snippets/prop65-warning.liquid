@@ -1,23 +1,23 @@
 {% comment %}
   Prop 65 Warning Snippet
-  Usage: {% include 'prop65-warning' %}
+  Usage: {% render 'prop65-warning' %}
 {% endcomment %}
 
-{%- if product.metafields.custom.prop65 == true -%}
-<div class="prop65">
-  <div class="inner-alert">
-  <img 
-    src="{{ 'icon-alert.svg' | asset_url }}" 
-    alt="Alert icon" 
-    height="24" width="24"
-  >
-  <b>WARNING:</b> This product can expose you to chemicals including Bisphenol A (BPA) which are known to
-  the State of California to cause cancer, birth defects, or other reproductive harm.
-  Visit
-  <a href="https://www.p65warnings.ca.gov" target="_blank" rel="noopener noreferrer" class="js-no-transition">
-    www.p65warnings.ca.gov
-  </a>
-  for additional information.
+{%- if product.metafields.custom.9_Prop_65 == true -%}
+  <div class="prop65">
+    <div class="inner-alert">
+      <img 
+        src="{{ 'icon-alert.svg' | asset_url }}" 
+        alt="Alert icon" 
+        height="24" width="24"
+      >
+      <b>WARNING:</b> This product can expose you to chemicals including Bisphenol A (BPA) which are known to
+      the State of California to cause cancer, birth defects, or other reproductive harm.
+      Visit
+      <a href="https://www.p65warnings.ca.gov" target="_blank" rel="noopener noreferrer" class="js-no-transition">
+        www.p65warnings.ca.gov
+      </a>
+      for additional information.
+    </div>
   </div>
-</div>
 {%- endif -%}
