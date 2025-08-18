@@ -65,7 +65,7 @@
   font-size: 1.6rem;
 }
 
-.product-details-wrapper {
+.product-details-flex {
   display: flex;
   gap: 3rem;
   align-items: flex-start;
