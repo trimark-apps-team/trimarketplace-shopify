@@ -40,7 +40,19 @@
           <li><strong>Diameter:</strong> {{ product.metafields.custom["11_Diameter_inside"] }}</li>
         {% endif %}
         {% if product.metafields.custom["11_capacity_1"] %}
-          <li><strong>Capacity:</strong> {{ product.metafields.custom["11_capacity_1"] }}</li>
+          {% assign capacity = product.metafields.custom["11_capacity_1"] %}
+            <li>
+              <strong>Capacity:</strong>
+              {{ capacity.value }}
+              {% case capacity.unit %}
+                {% when "us_fl_oz" %} fl oz
+                {% when "ml" %} mL
+                {% when "l" %} L
+                {% when "qt" %} qt
+                {% when "gal" %} gal
+                {% else %} {{ capacity.unit }}
+              {% endcase %}
+            </li>
         {% endif %}
         {% if product.metafields.custom["12_color"] %}
           <li><strong>Color:</strong> {{ product.metafields.custom["12_color"] }}</li>
