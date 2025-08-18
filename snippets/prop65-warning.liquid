@@ -2,13 +2,9 @@
   Prop 65 Warning Snippet
   Usage: {% render 'prop65-warning' %}
 {% endcomment %}
-<p>Prop 65 raw: {{ product.metafields.custom['9_prop_65'] }}</p>
-<p>Prop 65 type: {{ product.metafields.custom['9_prop_65'] | class }}</p>
-<p>Prop 65 value: {{ product.metafields.custom['9_prop_65'].value }}</p>
-<p>Prop 65 value type: {{ product.metafields.custom['9_prop_65'].value | class }}</p>
 
- {% if product.metafields.custom['9_prop_65'] == true %} Display something for true {% else %} Display something for false {% endif %}.
 
+ {% if product.metafields.custom['9_prop_65'] == true %}
   <div class="prop65">
     <div class="inner-alert">
       <img 
@@ -25,4 +21,5 @@
       for additional information.
     </div>
   </div>
+  {% endif %}
 
