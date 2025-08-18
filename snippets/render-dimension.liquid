@@ -1,0 +1,18 @@
+{%- comment -%}
+  Usage:
+  {% render 'render-dimension', label: 'Height', field: product.metafields.custom["11_height_inside"] %}
+{%- endcomment -%}
+
+{% if field and field.value %}
+  <li>
+    <strong>{{ label }}:</strong>
+    {{ field.value }}
+    {% case field.unit %}
+      {% when "in" %} in
+      {% when "cm" %} cm
+      {% when "mm" %} mm
+      {% when "ft" %} ft
+      {% else %} {{ field.unit }}
+    {% endcase %}
+  </li>
+{% endif %}
