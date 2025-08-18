@@ -4,6 +4,8 @@
 {% endcomment %}
  <p>{{ product.metafields.custom['9_Prop_65']}}</p>
 
+ {% if product.metafields.custom['9_Prop_65'].value == true %} Display something for true {% else %} Display something for false {% endif %}.
+
   <div class="prop65">
     <div class="inner-alert">
       <img 
