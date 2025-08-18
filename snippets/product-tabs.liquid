@@ -64,8 +64,8 @@
         </div>
     
   </div>
-
-  {% if product.metafields.custom["4_warranty_sheet"].value or product.metafields.custom["4_spec_sheet"].value %}
+  </div>
+    {% if product.metafields.custom["4_warranty_sheet"].value or product.metafields.custom["4_spec_sheet"].value %}
    <div class="product-assets">
     <h3>Resources</h3>
     <ul>
@@ -104,7 +104,6 @@
     </ul>
   </div>
   {% endif %}
-  </div>
 </div>
 
 {% render 'prop65-warning' %}
