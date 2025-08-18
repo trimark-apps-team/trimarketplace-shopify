@@ -297,6 +297,11 @@
       >
     {%- endif -%}
 
+    {%- if template == 'product' -%}
+      {{ 'product-tabs.css' | asset_url | stylesheet_tag }}
+      <script src="{{ 'product-tabs.js' | asset_url }}" defer></script>
+    {%- endif -%}
+
     <script>
       if (Shopify.designMode) {
         document.documentElement.classList.add('shopify-design-mode');
