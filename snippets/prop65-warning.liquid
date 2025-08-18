@@ -6,6 +6,7 @@
 <p>Prop 65 type: {{ product.metafields.custom['9_Prop_65'] | class }}</p>
 <p>Prop 65 value: {{ product.metafields.custom['9_Prop_65'].value }}</p>
 <p>Prop 65 value type: {{ product.metafields.custom['9_Prop_65'].value | class }}</p>
+<pre>{{ product.metafields.custom | json }}</pre>
 
  {% if product.metafields.custom['9_Prop_65'] == true %} Display something for true {% else %} Display something for false {% endif %}.
 
