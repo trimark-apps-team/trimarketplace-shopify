@@ -46,6 +46,9 @@
 .product-tabs .tab-content.active {
   display: block;
 }
+.product-tabs .tab-content {
+  font-size: 1.6rem;
+}
 
 .product-tabs ul {
   list-style: none;
