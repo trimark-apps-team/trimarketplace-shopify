@@ -10,18 +10,21 @@
 
 .product-tabs .tab-button {
   background: transparent;
-  border: 1px solid #a8243e;
   color: #a8243e;
+  border: 1px solid #a8243e;
   padding: 0.5rem 1.25rem;
   font-size: 1rem;
   cursor: pointer;
   border-radius: 6px;
-  transition: all 0.2s ease;
   font-family: inherit;
+  box-sizing: border-box;
+  transition: border-width 0.2s ease, background-color 0.2s ease;
+  height: 44px;
 }
 
 .product-tabs .tab-button.active {
   border-width: 2px;
+  padding: calc(0.5rem - 1px) 1.25rem; /* adjust padding to offset border width */
 }
 
 .product-tabs .tab-content {
