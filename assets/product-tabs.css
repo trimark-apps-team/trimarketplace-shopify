@@ -4,7 +4,6 @@
 
 .product-tabs .tab-buttons {
   display: flex;
-  border-bottom: 1px solid #ccc;
   margin-bottom: 1rem;
 }
 
