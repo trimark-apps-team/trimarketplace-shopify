@@ -3,7 +3,7 @@
   Usage: {% render 'prop65-warning' %}
 {% endcomment %}
  {{ product.metafields.custom['9_Prop_65']}}
-{%- if product.metafields.custom['9_Prop_65'] == 'True' -%}
+
   <div class="prop65">
     <div class="inner-alert">
       <img 
@@ -20,4 +20,4 @@
       for additional information.
     </div>
   </div>
-{%- endif -%}
+
