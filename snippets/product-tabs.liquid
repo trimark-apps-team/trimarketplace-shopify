@@ -14,33 +14,19 @@
     </div>
 
     <div class="tab-content" id="tab-specifications">
-      <ul>
-        {% if product.metafields.custom["1_erp_id_trmk_golden"] %}
-          <li><strong>Legacy ERP:</strong> {{ product.metafields.custom["1_erp_id_trmk_golden"] }}</li>
-        {% endif %}
-        {% if product.metafields.custom["6_brand"] %}
-          <li><strong>Brand:</strong> {{ product.metafields.custom["6_brand"] }}</li>
-        {% endif %}
-        {% if product.metafields.custom["6_Manufacturer_ID"] %}
-          <li><strong>Manufacturer Number:</strong> {{ product.metafields.custom["6_Manufacturer_ID"] }}</li>
-        {% endif %}
-        {% if product.metafields.custom["11_DIM_Length_inside"] %}
-          <li><strong>Length:</strong> {{ product.metafields.custom["11_DIM_Length_inside"] }}</li>
-        {% endif %}
-        {% if product.metafields.custom["11_DIM_Width_inside"] %}
-          <li><strong>Width:</strong> {{ product.metafields.custom["11_DIM_Width_inside"] }}</li>
-        {% endif %}
-        {% if product.metafields.custom["11_DIM_Height_inside"] %}
-          <li><strong>Height:</strong> {{ product.metafields.custom["11_DIM_Height_inside"] }}</li>
-        {% endif %}
-        {% if product.metafields.custom["11_DIM_Depth_inside"] %}
-          <li><strong>Depth:</strong> {{ product.metafields.custom["11_DIM_Depth_inside"] }}</li>
-        {% endif %}
-        {% if product.metafields.custom["11_Diameter_inside"] %}
-          <li><strong>Diameter:</strong> {{ product.metafields.custom["11_Diameter_inside"] }}</li>
-        {% endif %}
-        {% if product.metafields.custom["11_capacity_1"] %}
-          {% assign capacity = product.metafields.custom["11_capacity_1"] %}
+      <div class="spec-columns">
+        <ul class="spec-column">
+          {% if product.metafields.custom["1_erp_id_trmk_golden"] %}
+            <li><strong>Legacy ERP:</strong> {{ product.metafields.custom["1_erp_id_trmk_golden"] }}</li>
+          {% endif %}
+          {% if product.metafields.custom["6_brand"] %}
+            <li><strong>Brand:</strong> {{ product.metafields.custom["6_brand"] }}</li>
+          {% endif %}
+          {% if product.metafields.custom["6_Manufacturer_ID"] %}
+            <li><strong>Manufacturer Number:</strong> {{ product.metafields.custom["6_Manufacturer_ID"] }}</li>
+          {% endif %}
+          {% if product.metafields.custom["11_capacity_1"] %}
+            {% assign capacity = product.metafields.custom["11_capacity_1"] %}
             <li>
               <strong>Capacity:</strong>
               {{ capacity.value }}
@@ -53,17 +39,26 @@
                 {% else %} {{ capacity.unit }}
               {% endcase %}
             </li>
-        {% endif %}
-        {% if product.metafields.custom["12_color"] %}
-          <li><strong>Color:</strong> {{ product.metafields.custom["12_color"] }}</li>
-        {% endif %}
-        {% if product.metafields.custom["12_material"] %}
-          <li><strong>Material:</strong> {{ product.metafields.custom["12_material"] }}</li>
-        {% endif %}
-        {% if product.metafields.custom["9_country_of_origin"] %}
-          <li><strong>Country of Origin:</strong> {{ product.metafields.custom["9_country_of_origin"] }}</li>
-        {% endif %}
-      </ul>
+          {% endif %}
+          {% if product.metafields.custom["12_color"] %}
+            <li><strong>Color:</strong> {{ product.metafields.custom["12_color"] }}</li>
+          {% endif %}
+          {% if product.metafields.custom["12_material"] %}
+            <li><strong>Material:</strong> {{ product.metafields.custom["12_material"] }}</li>
+          {% endif %}
+        </ul>
+
+        <ul class="spec-column">
+          {% render 'render-dimension', label: 'Length', field: product.metafields.custom["11_length_inside"] %}
+          {% render 'render-dimension', label: 'Width', field: product.metafields.custom["11_width_inside"] %}
+          {% render 'render-dimension', label: 'Height', field: product.metafields.custom["11_height_inside"] %}
+          {% render 'render-dimension', label: 'Depth', field: product.metafields.custom["11_depth_inside"] %}
+          {% render 'render-dimension', label: 'Diameter', field: product.metafields.custom["11_diameter_inside"] %}
+          {% if product.metafields.custom["9_country_of_origin"] %}
+            <li><strong>Country of Origin:</strong> {{ product.metafields.custom["9_country_of_origin"] }}</li>
+          {% endif %}
+        </ul>
+      </div>
   
 </div>
 
