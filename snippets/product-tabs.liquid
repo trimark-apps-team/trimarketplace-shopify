@@ -4,55 +4,55 @@
     <button class="tab-button" data-tab="specifications">Specifications</button>
   </div>
 
-  <div class="tab-content-wrapper">
-  <div class="tab-content active" id="tab-description">
-    {% if product.metafields.custom["8_description_web"] %}
-      {{ product.metafields.custom["8_description_web"] }}
-    {% else %}
-      {{ product.description }}
-    {% endif %}
-  </div>
+  
+    <div class="tab-content active" id="tab-description">
+      {% if product.metafields.custom["8_description_web"] %}
+        {{ product.metafields.custom["8_description_web"] }}
+      {% else %}
+        {{ product.description }}
+      {% endif %}
+    </div>
 
-  <div class="tab-content" id="tab-specifications">
-    <ul>
-      {% if product.metafields.custom["1_erp_id_trmk_golden"] %}
-        <li><strong>Legacy ERP:</strong> {{ product.metafields.custom["1_erp_id_trmk_golden"] }}</li>
-      {% endif %}
-      {% if product.metafields.custom["6_brand"] %}
-        <li><strong>Brand:</strong> {{ product.metafields.custom["6_brand"] }}</li>
-      {% endif %}
-      {% if product.metafields.custom["6_Manufacturer_ID"] %}
-        <li><strong>Manufacturer Number:</strong> {{ product.metafields.custom["6_Manufacturer_ID"] }}</li>
-      {% endif %}
-      {% if product.metafields.custom["11_DIM_Length_inside"] %}
-        <li><strong>Length:</strong> {{ product.metafields.custom["11_DIM_Length_inside"] }}</li>
-      {% endif %}
-      {% if product.metafields.custom["11_DIM_Width_inside"] %}
-        <li><strong>Width:</strong> {{ product.metafields.custom["11_DIM_Width_inside"] }}</li>
-      {% endif %}
-      {% if product.metafields.custom["11_DIM_Height_inside"] %}
-        <li><strong>Height:</strong> {{ product.metafields.custom["11_DIM_Height_inside"] }}</li>
-      {% endif %}
-      {% if product.metafields.custom["11_DIM_Depth_inside"] %}
-        <li><strong>Depth:</strong> {{ product.metafields.custom["11_DIM_Depth_inside"] }}</li>
-      {% endif %}
-      {% if product.metafields.custom["11_Diameter_inside"] %}
-        <li><strong>Diameter:</strong> {{ product.metafields.custom["11_Diameter_inside"] }}</li>
-      {% endif %}
-      {% if product.metafields.custom["11_capacity_1"] %}
-        <li><strong>Capacity:</strong> {{ product.metafields.custom["11_capacity_1"] }}</li>
-      {% endif %}
-      {% if product.metafields.custom["12_color"] %}
-        <li><strong>Color:</strong> {{ product.metafields.custom["12_color"] }}</li>
-      {% endif %}
-      {% if product.metafields.custom["12_material"] %}
-        <li><strong>Material:</strong> {{ product.metafields.custom["12_material"] }}</li>
-      {% endif %}
-      {% if product.metafields.custom["9_country_of_origin"] %}
-        <li><strong>Country of Origin:</strong> {{ product.metafields.custom["9_country_of_origin"] }}</li>
-      {% endif %}
-    </ul>
-  </div>
+    <div class="tab-content" id="tab-specifications">
+      <ul>
+        {% if product.metafields.custom["1_erp_id_trmk_golden"] %}
+          <li><strong>Legacy ERP:</strong> {{ product.metafields.custom["1_erp_id_trmk_golden"] }}</li>
+        {% endif %}
+        {% if product.metafields.custom["6_brand"] %}
+          <li><strong>Brand:</strong> {{ product.metafields.custom["6_brand"] }}</li>
+        {% endif %}
+        {% if product.metafields.custom["6_Manufacturer_ID"] %}
+          <li><strong>Manufacturer Number:</strong> {{ product.metafields.custom["6_Manufacturer_ID"] }}</li>
+        {% endif %}
+        {% if product.metafields.custom["11_DIM_Length_inside"] %}
+          <li><strong>Length:</strong> {{ product.metafields.custom["11_DIM_Length_inside"] }}</li>
+        {% endif %}
+        {% if product.metafields.custom["11_DIM_Width_inside"] %}
+          <li><strong>Width:</strong> {{ product.metafields.custom["11_DIM_Width_inside"] }}</li>
+        {% endif %}
+        {% if product.metafields.custom["11_DIM_Height_inside"] %}
+          <li><strong>Height:</strong> {{ product.metafields.custom["11_DIM_Height_inside"] }}</li>
+        {% endif %}
+        {% if product.metafields.custom["11_DIM_Depth_inside"] %}
+          <li><strong>Depth:</strong> {{ product.metafields.custom["11_DIM_Depth_inside"] }}</li>
+        {% endif %}
+        {% if product.metafields.custom["11_Diameter_inside"] %}
+          <li><strong>Diameter:</strong> {{ product.metafields.custom["11_Diameter_inside"] }}</li>
+        {% endif %}
+        {% if product.metafields.custom["11_capacity_1"] %}
+          <li><strong>Capacity:</strong> {{ product.metafields.custom["11_capacity_1"] }}</li>
+        {% endif %}
+        {% if product.metafields.custom["12_color"] %}
+          <li><strong>Color:</strong> {{ product.metafields.custom["12_color"] }}</li>
+        {% endif %}
+        {% if product.metafields.custom["12_material"] %}
+          <li><strong>Material:</strong> {{ product.metafields.custom["12_material"] }}</li>
+        {% endif %}
+        {% if product.metafields.custom["9_country_of_origin"] %}
+          <li><strong>Country of Origin:</strong> {{ product.metafields.custom["9_country_of_origin"] }}</li>
+        {% endif %}
+      </ul>
+  
 </div>
 
   {% if product.metafields.custom["4_warranty_sheet"] or product.metafields.custom["4_spec_sheet"] %}
