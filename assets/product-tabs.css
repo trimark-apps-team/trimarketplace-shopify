@@ -104,6 +104,17 @@
   gap: 0.6rem;
 }
 
+.product-assets a {
+  color: #333; /* dark grey */
+  text-decoration: none;
+}
+
+.product-assets a:hover,
+.product-assets a:focus {
+  text-decoration: underline;
+  text-decoration-color: #333; /* grey underline */
+}
+
 .product-assets i {
   color: #a8243e; /* match your brand red */
 }
