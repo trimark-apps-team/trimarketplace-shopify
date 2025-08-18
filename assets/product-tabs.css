@@ -2,33 +2,38 @@
   margin-top: 2rem;
 }
 
+.product-tabs {
+  margin-top: 2rem;
+}
+
 .product-tabs .tab-buttons {
   display: flex;
-  gap: 1rem;
-  margin-bottom: 0;
-  border-bottom: 1px solid #ccc; /* Divider between buttons and content */
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 1rem;
 }
 
 .product-tabs .tab-button {
-  background: transparent;
+  background: none;
+  border: none;
+  border-bottom: 5px solid transparent;
   color: #a8243e;
-  border: 1px solid #a8243e;
-  border-bottom: none; /* Remove bottom to create tab illusion */
-  padding: 0.5rem 1.25rem;
-  font-size: 20px;
+  padding: 1rem 2rem;
   cursor: pointer;
-  border-radius: 6px 6px 0 0;
-  font-family: inherit;
-  box-sizing: border-box;
-  transition: border-width 0.2s ease, background-color 0.2s ease;
-  height: 48px;
+  font-size: 20px;
+  transition: border-bottom 0.2s ease;
 }
 
 .product-tabs .tab-button.active {
-  border-width: 2px;
-  padding: calc(0.5rem - 1px) 1.25rem; /* Maintain consistent height */
-  border-bottom: 1px solid white; /* Maintain tab illusion by covering divider */
+  border-bottom: 5px solid #a8243e;
 }
+
+.product-tabs .tab-content {
+  border: 1px solid #ccc;
+  border-top: none;
+  padding: 1.5rem;
+  font-size: 1.6rem;
+}
+
 
 .product-tabs .tab-content-wrapper {
   border: 1px solid #ccc;
@@ -39,16 +44,7 @@
   margin-top: -1px; /* Prevent gap between tab and content */
 }
 
-.product-tabs .tab-content {
-  display: none;
-}
 
-.product-tabs .tab-content.active {
-  display: block;
-}
-.product-tabs .tab-content {
-  font-size: 18px;
-}
 
 .product-tabs ul {
   list-style: none;
