@@ -3,7 +3,7 @@
   Usage: {% include 'prop65-warning' %}
 {% endcomment %}
 
-{% comment %} {%- if product.metafields.custom.prop65 == true -%} {% endcomment %}
+{%- if product.metafields.custom.prop65 == true -%}
 <div class="prop65">
   <div class="inner-alert">
   <img 
@@ -20,4 +20,4 @@
   for additional information.
   </div>
 </div>
-{% comment %} {%- endif -%} {% endcomment %}
+{%- endif -%}
