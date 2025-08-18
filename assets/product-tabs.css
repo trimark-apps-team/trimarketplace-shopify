@@ -64,3 +64,44 @@
   margin-bottom: 0.8rem;
   font-size: 1.6rem;
 }
+
+.product-details-wrapper {
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+}
+
+.product-tabs {
+  flex: 2;
+}
+
+.product-assets {
+  flex: 1;
+  border: 1px solid #ccc;
+  border-radius: 0.8rem;
+  padding: 1.5rem;
+  background: #fff;
+}
+
+.product-assets h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.product-assets ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.product-assets li {
+  margin-bottom: 1.2rem;
+  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.product-assets i {
+  color: #aa1f36; /* match your brand red */
+}
