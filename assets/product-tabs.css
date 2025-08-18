@@ -2,10 +2,6 @@
   margin-top: 2rem;
 }
 
-.product-tabs {
-  margin-top: 2rem;
-}
-
 .product-tabs .tab-buttons {
   display: flex;
   border-bottom: 1px solid #ccc;
@@ -28,15 +24,16 @@
 }
 
 .product-tabs .tab-content {
+  display: none;
   border: 1px solid #ccc;
   border-top: none;
   padding: 1.5rem;
   font-size: 1.6rem;
 }
 
-
-
-
+.product-tabs .tab-content.active {
+  display: block;
+}
 
 .product-tabs ul {
   list-style: none;
