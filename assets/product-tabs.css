@@ -81,6 +81,7 @@
   border-radius: 0.8rem;
   padding: 1.5rem;
   background: #fff;
+  margin-top: 4.6rem; /* aligns top with tab content */
 }
 
 .product-assets h3 {
@@ -103,5 +104,14 @@
 }
 
 .product-assets i {
-  color: #aa1f36; /* match your brand red */
+  color: #a8243e; /* match your brand red */
+}
+@media (max-width: 768px) {
+  .product-details-flex {
+    flex-direction: column;
+  }
+
+  .product-assets {
+    margin-top: 2rem;
+  }
 }
