@@ -1,67 +1,48 @@
 .product-tabs {
   margin-top: 2rem;
-  font-family: sans-serif;
 }
 
-.tab-buttons {
+.product-tabs .tab-buttons {
   display: flex;
-  gap: 0.5rem;
+  gap: 1rem;
   margin-bottom: 1rem;
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 0.5rem;
 }
 
-.tab-button {
-  background: none;
-  border: none;
-  padding: 0.5rem 1rem;
-  font-weight: bold;
+.product-tabs .tab-button {
+  background: transparent;
+  border: 1px solid #a8243e;
+  color: #a8243e;
+  padding: 0.5rem 1.25rem;
+  font-size: 1rem;
   cursor: pointer;
-  border-radius: 4px 4px 0 0;
-  border: 1px solid transparent;
-  transition: background 0.2s ease;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  font-family: inherit;
 }
 
-.tab-button:hover {
-  background: #f3f3f3;
+.product-tabs .tab-button.active {
+  border-width: 2px;
 }
 
-.tab-button.active {
-  background: #fff;
-  border-color: #ddd;
-  border-bottom-color: transparent;
-}
-
-.tab-content {
+.product-tabs .tab-content {
   display: none;
-  border: 1px solid #ddd;
-  padding: 1rem;
-  border-radius: 0 4px 4px 4px;
 }
 
-.tab-content.active {
+.product-tabs .tab-content.active {
   display: block;
 }
 
-.tab-content ul {
-  padding-left: 1.2rem;
-  list-style-type: none;
+.product-tabs ul {
+  list-style: none;
+  padding-left: 0;
 }
 
-.tab-content li {
+.product-tabs li {
   margin-bottom: 0.5rem;
+  font-size: 1rem;
 }
 
-.tab-content a {
-  text-decoration: none;
-  color: #0066cc;
-}
-
-.tab-content a:hover {
-  text-decoration: underline;
-}
-
-.tab-content i.fas.fa-file-pdf {
+.product-tabs i.fas.fa-file-pdf {
+  color: #a8243e;
   margin-right: 0.5rem;
-  color: #d32f2f;
 }
