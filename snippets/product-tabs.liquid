@@ -1,6 +1,3 @@
-{% assign product_object = product | default: product %}
-{% assign desc = product_object.metafields.custom.description %}
-
 <div class="product-tabs-wrapper">
 
   <!-- Tab Navigation -->
@@ -11,54 +8,103 @@
 
   <!-- Tab Panels -->
   <div class="tabs-content">
+
+    <!-- Description Tab -->
     <div id="desc" class="tab-panel active">
-      {{ desc }}
+      {% if product.metafields.custom.8_Description_Web != blank %}
+        {{ product.metafields.custom.8_Description_Web }}
+      {% else %}
+        <p>No product description available.</p>
+      {% endif %}
     </div>
 
+    <!-- Specifications Tab -->
     <div id="specs" class="tab-panel">
       <ul>
-        {% if product_object.metafields.specs.width %}
-          <li><strong>Width:</strong> {{ product_object.metafields.specs.width }}</li>
+        {% if product.metafields.custom.1_ERP_ID_TRMK_Golden != blank %}
+          <li><strong>Legacy ERP:</strong> {{ product.metafields.custom.1_ERP_ID_TRMK_Golden }}</li>
         {% endif %}
-        {% if product_object.metafields.specs.depth %}
-          <li><strong>Depth:</strong> {{ product_object.metafields.specs.depth }}</li>
+
+        {% if product.metafields.custom.6_brand != blank %}
+          <li><strong>Brand:</strong> {{ product.metafields.custom.6_brand }}</li>
         {% endif %}
-        {% if product_object.metafields.specs.height %}
-          <li><strong>Height:</strong> {{ product_object.metafields.specs.height }}</li>
+
+        {% if product.metafields.custom.6_manufacturer_id != blank %}
+          <li><strong>Manufacturer Number:</strong> {{ product.metafields.custom.6_manufacturer_id }}</li>
         {% endif %}
-        {% if product_object.metafields.specs.power_type %}
-          <li><strong>Power Type:</strong> {{ product_object.metafields.specs.power_type }}</li>
+
+        {% if product.metafields.custom.11_capacity_1 != blank %}
+          <li><strong>Capacity:</strong> {{ product.metafields.custom.11_capacity_1 }}</li>
         {% endif %}
-        {% if product_object.metafields.specs.voltage %}
-          <li><strong>Voltage:</strong> {{ product_object.metafields.specs.voltage }}</li>
+
+        {% if product.metafields.custom.11_DIM_Length_inside != blank %}
+          <li><strong>Length:</strong> {{ product.metafields.custom.11_DIM_Length_inside }}</li>
         {% endif %}
-        {% if product_object.metafields.specs.wattage %}
-          <li><strong>Wattage:</strong> {{ product_object.metafields.specs.wattage }}</li>
+
+        {% if product.metafields.custom.11_DIM_Width_inside != blank %}
+          <li><strong>Width:</strong> {{ product.metafields.custom.11_DIM_Width_inside }}</li>
+        {% endif %}
+
+        {% if product.metafields.custom.11_DIM_Height_inside != blank %}
+          <li><strong>Height:</strong> {{ product.metafields.custom.11_DIM_Height_inside }}</li>
+        {% endif %}
+
+        {% if product.metafields.custom.11_DIM_Depth_inside != blank %}
+          <li><strong>Depth:</strong> {{ product.metafields.custom.11_DIM_Depth_inside }}</li>
+        {% endif %}
+
+        {% if product.metafields.custom.11_Diameter_inside != blank %}
+          <li><strong>Diameter:</strong> {{ product.metafields.custom.11_Diameter_inside }}</li>
+        {% endif %}
+
+        {% if product.metafields.custom.12_color != blank %}
+          <li><strong>Color:</strong> {{ product.metafields.custom.12_color }}</li>
+        {% endif %}
+
+        {% if product.metafields.custom.12_material != blank %}
+          <li><strong>Material:</strong> {{ product.metafields.custom.12_material }}</li>
+        {% endif %}
+
+        {% if product.metafields.custom.9_country_of_origin != blank %}
+          <li><strong>Country of Origin:</strong> {{ product.metafields.custom.9_country_of_origin }}</li>
+        {% endif %}
+
+        {% if product.metafields.custom.9_Prop_65 != blank %}
+          <li><strong>Prop 65:</strong> {{ product.metafields.custom.9_Prop_65 }}</li>
         {% endif %}
       </ul>
     </div>
+
   </div>
 
-  <!-- Resources Box -->
-  <div class="resources-box">
-    <h3>Resources</h3>
-    <ul>
-      {% if product_object.metafields.resources.specsheet %}
-        <li><a href="{{ product_object.metafields.resources.specsheet }}" target="_blank">Specs</a></li>
-      {% endif %}
-      {% if product_object.metafields.resources.manual %}
-        <li><a href="{{ product_object.metafields.resources.manual }}" target="_blank">Manual</a></li>
-      {% endif %}
-      {% if product_object.metafields.resources.warranty %}
-        <li><a href="{{ product_object.metafields.resources.warranty }}" target="_blank">Warranty</a></li>
-      {% endif %}
-      {% if product_object.metafields.resources.sds %}
-        <li><a href="{{ product_object.metafields.resources.sds }}" target="_blank">SDS</a></li>
-      {% endif %}
-      {% if product_object.metafields.resources.video %}
-        <li><a href="{{ product_object.metafields.resources.video }}" target="_blank">Watch Video</a></li>
-      {% endif %}
-    </ul>
-  </div>
+  <!-- Resources (PDFs) -->
+  {% if product.metafields.custom.4_spec_sheet != blank or product.metafields.custom.4_warranty_sheet != blank %}
+    <div class="resources-box">
+      <h3>Resources</h3>
+      <ul>
+        {% if product.metafields.custom.4_spec_sheet != blank %}
+          {% assign spec_url = product.metafields.custom.4_spec_sheet %}
+          {% assign spec_filename = spec_url | split: '/' | last %}
+          <li>
+            <a href="{{ spec_url }}" target="_blank">
+              <i class="fas fa-file-pdf"></i> Spec Sheet ({{ spec_filename }})
+            </a>
+          </li>
+        {% endif %}
+        {% if product.metafields.custom.4_warranty_sheet != blank %}
+          {% assign warranty_url = product.metafields.custom.4_warranty_sheet %}
+          {% assign warranty_filename = warranty_url | split: '/' | last %}
+          <li>
+            <a href="{{ warranty_url }}" target="_blank">
+              <i class="fas fa-file-pdf"></i> Warranty ({{ warranty_filename }})
+            </a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+  {% endif %}
 
 </div>
+
+<!-- Prop 65 Warning Snippet -->
+{% render 'prop65-warning' %}
