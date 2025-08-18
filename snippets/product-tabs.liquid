@@ -4,6 +4,7 @@
     <button class="tab-button" data-tab="specifications">Specifications</button>
   </div>
 
+  <div class="tab-content-wrapper">
   <div class="tab-content active" id="tab-description">
     {% if product.metafields.custom["8_description_web"] %}
       {{ product.metafields.custom["8_description_web"] }}
@@ -52,6 +53,7 @@
       {% endif %}
     </ul>
   </div>
+</div>
 
   {% if product.metafields.custom["4_warranty_sheet"] or product.metafields.custom["4_spec_sheet"] %}
     <div class="tab-content" id="tab-assets">
