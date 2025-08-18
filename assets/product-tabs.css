@@ -37,6 +37,9 @@
 
 .product-tabs .tab-content-wrapper {
   padding: 1rem;
+  border-radius: 0 0 6px 6px;
+  background: #fff;
+  margin-top: -1px; /* Prevent gap between tab and content */
 }
 
 
