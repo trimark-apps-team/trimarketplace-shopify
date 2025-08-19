@@ -1,3 +1,10 @@
+.product-details-flex {
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+  margin-bottom: 40px;
+}
+
 .product-tabs {
   margin-top: 2rem;
 }
