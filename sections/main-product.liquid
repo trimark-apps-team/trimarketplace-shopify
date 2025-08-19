@@ -347,6 +347,7 @@
                   <span class="visually-hidden">{{ 'products.product.sku' | t }}:</span>
                   Item Number: {{ product.selected_or_first_available_variant.sku }}
                 </p>
+
               {%- when 'custom_liquid' -%}
                 {{ block.settings.custom_liquid }}
               {%- when 'collapsible_tab' -%}
@@ -366,6 +367,9 @@
                       {{ block.settings.page.content }}
                     </div>
                   </details>
+                </div>
+                <div>
+                  {% render 'product-features-list' %}
                 </div>
               {%- when 'quantity_selector' -%}
                 <div
