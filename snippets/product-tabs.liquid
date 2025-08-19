@@ -19,7 +19,7 @@
       <div class="tab-content" id="tab-specifications">
         <div class="spec-columns">
           <ul class="spec-column">
-            <li><strong>Product Number:</strong> {{ product.selected_or_first_available_variant.sku }}</li>
+            <li><strong>Item Number:</strong> {{ product.selected_or_first_available_variant.sku }}</li>
             {% if product.metafields.custom["1_erp_id_trmk_golden"] %}
               <li><strong>Legacy ERP:</strong> {{ product.metafields.custom["1_erp_id_trmk_golden"] }}</li>
             {% endif %}
