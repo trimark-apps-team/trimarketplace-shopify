@@ -138,6 +138,8 @@
     font-size: 90%;
     border-radius: 5px;
     letter-spacing: normal;
+    border: 1px solid red;
+    padding: 5px 10px;
   }
 .prop65 img{
     top: 3px;
