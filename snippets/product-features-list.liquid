@@ -1,12 +1,18 @@
-<h4>Features:</h4>
-<ul class="product-feature-list">
-  {% if product.metafields.custom['8_feature_bullet_1'] %}
-    <li>{{ product.metafields.custom['8_feature_bullet_1'] | metafield_tag }}</li>
-  {% endif %}
-  {% if product.metafields.custom['8_feature_bullet_2'] %}
-    <li>{{ product.metafields.custom['8_feature_bullet_2'] | metafield_tag }}</li>
-  {% endif %}
-  {% if product.metafields.custom['8_feature_bullet_3'] %}
-    <li>{{ product.metafields.custom['8_feature_bullet_3'] | metafield_tag }}</li>
-  {% endif %}
-</ul>
+{% assign bullet1 = product.metafields.custom.8_feature_bullet_1 %}
+{% assign bullet2 = product.metafields.custom.8_feature_bullet_2 %}
+{% assign bullet3 = product.metafields.custom.8_feature_bullet_3 %}
+
+{% if bullet1 or bullet2 or bullet3 %}
+ <h4>Features:</h4>
+  <ul class="product-feature-list">
+    {% if bullet1 %}
+      <li>{{ bullet1 | metafield_tag }}</li>
+    {% endif %}
+    {% if bullet2 %}
+      <li>{{ bullet2 | metafield_tag }}</li>
+    {% endif %}
+    {% if bullet3 %}
+      <li>{{ bullet3 | metafield_tag }}</li>
+    {% endif %}
+  </ul>
+{% endif %}
