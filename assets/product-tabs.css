@@ -70,6 +70,7 @@
   display: flex;
   gap: 3rem;
   align-items: flex-start;
+  margin-bottom: 35px;
 }
 
 .product-tabs {
