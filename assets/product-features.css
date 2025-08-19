@@ -1,0 +1,10 @@
+.product-feature-list h4 {
+    margin-bottom: 5px;
+}
+.product-feature-list ul {
+    margin-top: 0;
+}
+
+.product-feature-list ul li p {
+    margin: 0;
+}
