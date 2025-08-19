@@ -106,11 +106,8 @@
                     </h2>
                   </a>
                 </div>
-                {% assign manufacturer_name = product.metafields.custom['6_manufacturer_name'] %}
-                {% if manufacturer_name %}
-                  <p>Manufacturer: {{ manufacturer_name }}</p>
-                {% endif %}
-                
+               
+
 
               {% when 'product_tags' %}
                 <!-- check for tags -->
@@ -216,6 +213,10 @@
                 
                 {%- if product.description != blank -%}
                   <div class="product__description rte quick-add-hidden" {{ block.shopify_attributes }}>
+                     {% assign manufacturer_name = product.metafields.custom['6_manufacturer_name'] %}
+                    {% if manufacturer_name %}
+                      <p>Manufacturer: {{ manufacturer_name }}</p>
+                    {% endif %}
                     {{ product.description }}
                   </div>
                 {%- endif -%}
