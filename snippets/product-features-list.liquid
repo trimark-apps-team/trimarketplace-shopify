@@ -1,0 +1,11 @@
+<ul class="product-feature-list">
+  {% if product.metafields.custom['8_feature_bullet_1'] %}
+    <li>{{ product.metafields.custom['8_feature_bullet_1'] | metafield_tag }}</li>
+  {% endif %}
+  {% if product.metafields.custom['8_feature_bullet_2'] %}
+    <li>{{ product.metafields.custom['8_feature_bullet_2'] | metafield_tag }}</li>
+  {% endif %}
+  {% if product.metafields.custom['8_feature_bullet_3'] %}
+    <li>{{ product.metafields.custom['8_feature_bullet_3'] | metafield_tag }}</li>
+  {% endif %}
+</ul>
