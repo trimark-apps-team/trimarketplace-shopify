@@ -1,9 +1,9 @@
-{% assign bullet1 = product.metafields.custom.8_feature_bullet_1 %}
-{% assign bullet2 = product.metafields.custom.8_feature_bullet_2 %}
-{% assign bullet3 = product.metafields.custom.8_feature_bullet_3 %}
+{% assign bullet1 = product.metafields.custom['8_feature_bullet_1'] %}
+{% assign bullet2 = product.metafields.custom['8_feature_bullet_2'] %}
+{% assign bullet3 = product.metafields.custom['8_feature_bullet_3'] %}
 
 {% if bullet1 or bullet2 or bullet3 %}
- <h4>Features:</h4>
+     <h4>Features:</h4>
   <ul class="product-feature-list">
     {% if bullet1 %}
       <li>{{ bullet1 | metafield_tag }}</li>
