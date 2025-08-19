@@ -217,7 +217,7 @@
                      {% if manufacturer_name %}
                       <p>MANUFACTURER: {{ manufacturer_name }}</p>
                     {% endif %}
-                    {{ product.description }}
+                    {% comment %} {{ product.description }} {% endcomment %}
                   </div>
                 {%- endif -%}
 
