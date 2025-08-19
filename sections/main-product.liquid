@@ -345,7 +345,7 @@
                   {{ block.shopify_attributes }}
                 >
                   <span class="visually-hidden">{{ 'products.product.sku' | t }}:</span>
-                  Item Number: {{- product.selected_or_first_available_variant.sku -}}
+                  Item Number: {{ product.selected_or_first_available_variant.sku }}
                 </p>
               {%- when 'custom_liquid' -%}
                 {{ block.settings.custom_liquid }}
