@@ -132,3 +132,16 @@
     margin-top: 2rem;
   }
 }
+
+.prop65{
+    line-height: normal;
+    font-size: 90%;
+    border-radius: 5px;
+    letter-spacing: normal;
+  }
+.prop65 img{
+    top: 3px;
+    position: relative;
+    margin-right: 5px;
+}
+.prop65 a{ text-decoration:underline;}
