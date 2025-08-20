@@ -92,7 +92,6 @@
         },
         "inventory_RzP6BQ": {
           "type": "inventory",
-          "disabled": true,
           "settings": {
             "text_style": "body",
             "inventory_threshold": 10,

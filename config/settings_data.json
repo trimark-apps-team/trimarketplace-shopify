@@ -129,7 +129,7 @@
     "show_cart_note": true,
     "cart_drawer_collection": "smallwares",
     "cart_color_scheme": "scheme-e3871aa7-89e0-4115-b62c-569bf79281f0",
-    "in_stock_text": "Expected Delivery Time: 2 - 5 Days",
+    "in_stock_text": "Expected Shipping: 2 - 3 Days",
     "in_stock_text_color": "#b90000",
     "non_stock_text_color": "#b90000",
     "non_stock_badge_text_color": "#ffffff",
