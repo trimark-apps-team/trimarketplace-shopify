@@ -158,12 +158,12 @@
                   {%- endform -%}
                 </div>
               {%- when 'inventory' -%}
-                <p
+                {% comment %} <p
                   class="product__inventory{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if product.selected_or_first_available_variant.inventory_management != 'shopify' %} visibility-hidden{% endif %}"
                   {{ block.shopify_attributes }}
                   id="Inventory-{{ section.id }}"
                   role="status"
-                >
+                > {% endcomment %}
                   {%- if product.selected_or_first_available_variant.inventory_management == 'shopify' -%}
                     {%- if product.selected_or_first_available_variant.inventory_quantity > 0 -%}
                       {%- if product.selected_or_first_available_variant.inventory_quantity
@@ -201,7 +201,7 @@
                     {%- endif -%}
                   {%- endif -%}
              
-                </p>
+                {% comment %} </p> {% endcomment %}
               {%- when 'description' -%}
                 
                 {%- if product.description != blank -%}
