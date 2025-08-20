@@ -174,23 +174,23 @@
                         </span> {% endcomment %}
                        
                       {%- if block.settings.show_inventory_quantity -%}
-                          Inventory Available: {{ product.selected_or_first_available_variant.inventory_quantity }} products available
+                          Inventory Available: <span class="trimark-red">{{ product.selected_or_first_available_variant.inventory_quantity }} products available</span>
                       {%- endif -%}
                       {%- else -%}
-                        <span class="svg-wrapper" style="color: rgb(62, 214, 96)">
+                        {% comment %} <span class="svg-wrapper" style="color: rgb(62, 214, 96)">
                           {{- 'icon-inventory-status.svg' | inline_asset_content -}}
-                        </span>
+                        </span> {% endcomment %}
                           {%- if block.settings.show_inventory_quantity -%}
-                          Inventory Available: {{ product.selected_or_first_available_variant.inventory_quantity }} products available
+                          Inventory Available: <span class="trimark-red">{{ product.selected_or_first_available_variant.inventory_quantity }} products available</span>
                         {%- else -%}
                           {{- 'products.product.inventory_in_stock' | t -}}
                         {%- endif -%}
                       {%- endif -%}
                     {%- else -%}
                       {%- if product.selected_or_first_available_variant.inventory_policy == 'continue' -%}
-                        <span class="svg-wrapper" style="color: rgb(62, 214, 96)">
+                        {% comment %} <span class="svg-wrapper" style="color: rgb(62, 214, 96)">
                           {{- 'icon-inventory-status.svg' | inline_asset_content -}}
-                        </span>
+                        </span> {% endcomment %}
                         {{- 'products.product.inventory_out_of_stock_continue_selling' | t -}}
                       {%- else -%}
                         <span class="svg-wrapper" style="color: rgb(200, 200, 200)">
