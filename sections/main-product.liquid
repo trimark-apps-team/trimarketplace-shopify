@@ -169,9 +169,9 @@
                       {%- if product.selected_or_first_available_variant.inventory_quantity
                           <= block.settings.inventory_threshold
                       -%}
-                        <span class="svg-wrapper" style="color: rgb(238, 148, 65)">
+                        {% comment %} <span class="svg-wrapper" style="color: rgb(238, 148, 65)">
                           {{- 'icon-inventory-status.svg' | inline_asset_content -}}
-                        </span>
+                        </span> {% endcomment %}
                        
                       {%- if block.settings.show_inventory_quantity -%}
                           Inventory Available: {{ product.selected_or_first_available_variant.inventory_quantity }} products available
