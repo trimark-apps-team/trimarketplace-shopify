@@ -3812,3 +3812,7 @@ details-disclosure > details {
 .edit-tier-price-btn, .cart-edit-tier-price-btn {
   cursor: pointer;
 } 
+
+.trimark-red {
+  color: #a8243e;
+}
