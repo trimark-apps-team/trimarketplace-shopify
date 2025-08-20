@@ -172,14 +172,10 @@
                         <span class="svg-wrapper" style="color: rgb(238, 148, 65)">
                           {{- 'icon-inventory-status.svg' | inline_asset_content -}}
                         </span>
-                        {%- if block.settings.show_inventory_quantity -%}
-                          {{-
-                            'products.product.inventory_low_stock_show_count'
-                            | t: quantity: product.selected_or_first_available_variant.inventory_quantity
-                          -}}
-                        {%- else -%}
-                          {{- 'products.product.inventory_low_stock' | t -}}
-                        {%- endif -%}
+                       
+                      {%- if block.settings.show_inventory_quantity -%}
+                          <p>Inventory available: {{ product.selected_or_first_available_variant.inventory_quantity }} products available</p>
+                      {%- endif -%}
                       {%- else -%}
                         <span class="svg-wrapper" style="color: rgb(62, 214, 96)">
                           {{- 'icon-inventory-status.svg' | inline_asset_content -}}
