@@ -4,7 +4,9 @@
     <div class="tab-buttons">
       <button class="tab-button active" data-tab="description">Description</button>
       <button class="tab-button" data-tab="specifications">Specifications</button>
+      {% if product.metafields.custom["4_warranty_sheet"].value or product.metafields.custom["4_spec_sheet"].value %}
       <button class="tab-button" data-tab="resources">Resources</button>
+       {% endif %}
     </div>
 
     
@@ -68,7 +70,7 @@
     
   </div>
   </div>
-    {% if product.metafields.custom["4_warranty_sheet"].value or product.metafields.custom["4_spec_sheet"].value %}
+    
    <div class="product-assets">
     <h3>Resources</h3>
     <ul>
@@ -106,6 +108,6 @@
       {% endif %}
     </ul>
   </div>
-  {% endif %}
+ 
 </div>
 
