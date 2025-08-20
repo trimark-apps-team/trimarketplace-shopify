@@ -26,6 +26,14 @@
           "type": "description",
           "settings": {}
         },
+        "inventory_RzP6BQ": {
+          "type": "inventory",
+          "settings": {
+            "text_style": "body",
+            "inventory_threshold": 10,
+            "show_inventory_quantity": true
+          }
+        },
         "custom_liquid_N8U98j": {
           "type": "custom_liquid",
           "settings": {
@@ -90,14 +98,6 @@
             "tire_f_bg_color": "#ed143d"
           }
         },
-        "inventory_RzP6BQ": {
-          "type": "inventory",
-          "settings": {
-            "text_style": "body",
-            "inventory_threshold": 10,
-            "show_inventory_quantity": true
-          }
-        },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
@@ -110,6 +110,7 @@
         "sku_aVwE4P",
         "title",
         "description",
+        "inventory_RzP6BQ",
         "custom_liquid_N8U98j",
         "shipping_time_8nHjrd",
         "product_tags_6g4jnp",
@@ -117,7 +118,6 @@
         "quantity_selector",
         "price",
         "tier_pricing_bjEHBr",
-        "inventory_RzP6BQ",
         "buy_buttons"
       ],
       "settings": {
