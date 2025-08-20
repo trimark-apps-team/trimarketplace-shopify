@@ -174,14 +174,14 @@
                         </span>
                        
                       {%- if block.settings.show_inventory_quantity -%}
-                          <p>Inventory Available: {{ product.selected_or_first_available_variant.inventory_quantity }} products available</p>
+                          Inventory Available: {{ product.selected_or_first_available_variant.inventory_quantity }} products available
                       {%- endif -%}
                       {%- else -%}
                         <span class="svg-wrapper" style="color: rgb(62, 214, 96)">
                           {{- 'icon-inventory-status.svg' | inline_asset_content -}}
                         </span>
                           {%- if block.settings.show_inventory_quantity -%}
-                          <p>Inventory Available: {{ product.selected_or_first_available_variant.inventory_quantity }} products available</p>
+                          Inventory Available: {{ product.selected_or_first_available_variant.inventory_quantity }} products available
                         {%- else -%}
                           {{- 'products.product.inventory_in_stock' | t -}}
                         {%- endif -%}
