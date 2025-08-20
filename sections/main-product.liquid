@@ -208,7 +208,7 @@
                   <div class="product__description rte quick-add-hidden" {{ block.shopify_attributes }}>
                      {% assign manufacturer_name = product.metafields.custom['6_manufacturer_name'] %}
                      {% if manufacturer_name %}
-                      <p>MANUFACTURER: {{ manufacturer_name }}</p>
+                      <p>MANUFACTURER: <span class="trimark-red">{{ manufacturer_name }}</span></p>
                     {% endif %}
                     {% comment %} {{ product.description }} {% endcomment %}
                   </div>
