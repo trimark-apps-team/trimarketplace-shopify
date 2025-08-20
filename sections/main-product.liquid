@@ -174,14 +174,14 @@
                         </span> {% endcomment %}
                        
                       {%- if block.settings.show_inventory_quantity -%}
-                          <p><strong>Inventory Available: <span class="trimark-red">{{ product.selected_or_first_available_variant.inventory_quantity }} products available</span></strong></p>
+                          {% comment %} <p><strong>Inventory Available: <span class="trimark-red">{{ product.selected_or_first_available_variant.inventory_quantity }} products available</span></strong></p> {% endcomment %}
                       {%- endif -%}
                       {%- else -%}
                         {% comment %} <span class="svg-wrapper" style="color: rgb(62, 214, 96)">
                           {{- 'icon-inventory-status.svg' | inline_asset_content -}}
                         </span> {% endcomment %}
                           {%- if block.settings.show_inventory_quantity -%}
-                          <p><strong>Inventory Available: <span class="trimark-red">{{ product.selected_or_first_available_variant.inventory_quantity }} products available</span></strong></p>
+                          {% comment %} <p><strong>Inventory Available: <span class="trimark-red">{{ product.selected_or_first_available_variant.inventory_quantity }} products available</span></strong></p> {% endcomment %}
                         {%- else -%}
                           {{- 'products.product.inventory_in_stock' | t -}}
                         {%- endif -%}
