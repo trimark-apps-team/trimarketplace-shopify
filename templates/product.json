@@ -141,9 +141,9 @@
       "settings": {
         "heading": "Related products",
         "heading_size": "h2",
-        "products_to_show": 4,
-        "columns_desktop": 4,
-        "columns_mobile": "2",
+        "products_to_show": 5,
+        "columns_desktop": 5,
+        "columns_mobile": "1",
         "color_scheme": "scheme-e3871aa7-89e0-4115-b62c-569bf79281f0",
         "image_ratio": "square",
         "image_shape": "default",
