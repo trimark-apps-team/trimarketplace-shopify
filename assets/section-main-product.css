@@ -236,6 +236,10 @@ product-info {
   padding: 20px;
 }
 
+.eta-text .eta-text-wrapper p {
+  margin-top: 0;
+}
+
 .product__info-container > * + * {
   margin: 0;
 }
