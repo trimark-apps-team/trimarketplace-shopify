@@ -240,9 +240,9 @@ product-info {
   margin-top: 0;
 }
 
-.product__info-container > * + * {
+/* .product__info-container > * + * {
   margin: 0;
-}
+} */
 
 .product__info-container iframe {
   max-width: 100%;
