@@ -133,6 +133,7 @@
     "in_stock_text_font_size": 10,
     "in_stock_text_color": "#b90000",
     "non_stock_text": "2–3 weeks",
+    "non_stock_text_font_size": 10,
     "non_stock_text_color": "#b90000",
     "non_stock_badge_text_color": "#ffffff",
     "sections": {
