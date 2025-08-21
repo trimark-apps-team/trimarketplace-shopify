@@ -306,8 +306,8 @@
                   {% assign eta_font_size = settings.in_stock_text_font_size %}
                 {% endif %}
 
-                <div class="eta-text eta-text-wrapper" style="color:{{ eta_color }};font-size:{{ eta_font_size }}px;">
-                 Expected Shipping: {{ eta_time }}
+                <div class="eta-text eta-text-wrapper">
+                 Expected Shipping: <span class="trimark-red">{{ eta_time }}</span>
                 </div>
   
           </div>
