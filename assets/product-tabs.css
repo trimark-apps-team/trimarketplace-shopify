@@ -32,8 +32,9 @@
   display: none;
   border: 1px solid #ccc;
   padding: 1.5rem;
-  font-size: 1.6rem;
   border-radius: 0.8rem;
+  font-size: 1.6rem;
+  line-height: 1.5;
 }
 
 .product-tabs .tab-content.active {
