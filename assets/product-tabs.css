@@ -104,7 +104,7 @@
   margin: 0;
 }
 
-.product-assets li {
+.product-assets li, #tab-resources li {
   margin-bottom: 1.2rem;
   font-size: 1.6rem;
   display: flex;
@@ -112,18 +112,22 @@
   gap: 0.6rem;
 }
 
-.product-assets a {
+.product-assets a, #tab-resources a {
   color: #333; /* dark grey */
   text-decoration: none;
 }
 
 .product-assets a:hover,
-.product-assets a:focus {
+.product-assets a:focus,
+#tab-resources a:hover,
+#tab-resources a:focus
+ {
   text-decoration: underline;
   text-decoration-color: #333; /* grey underline */
 }
 
-.product-assets i {
+.product-assets i,
+#tab-resources i {
   color: #a8243e; /* match your brand red */
 }
 @media (max-width: 768px) {
