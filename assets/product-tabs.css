@@ -166,20 +166,20 @@
   margin: 0 0 8px 0 !important;
 }
 
-
-.spec-table {
-  width: 100%;
-  border-collapse: collapse;
+/* Standards */
+/* Standards Logos */
+.all-standards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  align-items: center;
 }
 
-.spec-table td {
-  padding: 8px 12px;
-  border-bottom: 1px solid #eee;
+.all-standards a {
+  display: inline-block;
 }
 
-.spec-table .spec-label {
-  background-color: #f9f9f9; /* light gray background */
-  color: #333;              /* darker text for contrast */
-  font-weight: 500;
-  width: 40%;
+.all-standards img {
+  width: 75px;
+  height: auto;
 }
