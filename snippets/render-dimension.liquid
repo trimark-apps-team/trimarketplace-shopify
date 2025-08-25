@@ -4,15 +4,20 @@
 {%- endcomment -%}
 
 {% if field and field.value %}
-  <li>
-    <strong>{{ label }}:</strong>
-    {{ field.value }}
-    {% case field.unit %}
-      {% when "in" %} in
-      {% when "cm" %} cm
-      {% when "mm" %} mm
-      {% when "ft" %} ft
-      {% else %} {{ field.unit }}
-    {% endcase %}
-  </li>
+  <tr>
+    <td class="spec-label">{{ label }}</td>
+    <td>
+      {{ field.value }}
+      {% if field.unit %}
+        {% case field.unit %}
+          {% when "us_fl_oz" %} fl oz
+          {% when "ml" %} mL
+          {% when "l" %} L
+          {% when "qt" %} qt
+          {% when "gal" %} gal
+          {% else %} {{ field.unit }}
+        {% endcase %}
+      {% endif %}
+    </td>
+  </tr>
 {% endif %}
