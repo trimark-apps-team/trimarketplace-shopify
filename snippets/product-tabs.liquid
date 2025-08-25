@@ -2,12 +2,25 @@
 <div class="product-details-flex">
   <div class="product-tabs">
     <div class="tab-buttons">
-      <button class="tab-button active" data-tab="description">Description</button>
-      <button class="tab-button" data-tab="specifications">Specifications</button>
-      {% if product.metafields.custom["4_warranty_sheet"].value or product.metafields.custom["4_spec_sheet"].value %}
-      <button class="tab-button" data-tab="resources">Resources</button>
-       {% endif %}
-    </div>
+  <button class="tab-button active" data-tab="description">Description</button>
+  <button class="tab-button" data-tab="specifications">Specifications</button>
+
+  {% if product.metafields.custom["4_spec_sheet"] 
+     or product.metafields.custom["4_manual_sheet"] 
+     or product.metafields.custom["4_warranty_sheet"] 
+     or product.metafields.custom["4_sds_sheet"] 
+     or product.metafields.custom["4_parts_list"] 
+     or product.metafields.custom["4_service_manual"] 
+     or product.metafields.custom["4_sds_sheets"] 
+     or product.metafields.custom["4_product_video"] 
+     or product.metafields.custom["4_product_doc"] 
+     or product.metafields.custom["4_product_cad"] 
+     or product.metafields.custom["4_owners_manual"] 
+     or product.metafields.custom["4_installation_manual"] %}
+    
+    <button class="tab-button" data-tab="resources">Resources</button>
+  {% endif %}
+</div>
 
     
       <div class="tab-content active" id="tab-description">
