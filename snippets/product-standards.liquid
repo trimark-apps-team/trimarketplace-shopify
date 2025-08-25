@@ -2,12 +2,11 @@
   Snippet: standards-logos.liquid
   Description: Displays logos for product Standards, linking to their URLs.
 {% endcomment %}
-standards
-{% assign standards = product.metafields.custom.standards %}
+
+{% assign standards = product.metafields.custom.standards.value %}
 
 {% if standards != blank %}
   <div class="all-standards">
-  standards
     {% for standard in standards %}
       <div class="standard-item">
         <a href="{{ standard.standard_url }}" target="_blank" rel="noopener noreferrer">
