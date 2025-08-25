@@ -3,13 +3,13 @@
   Description: Displays logos for product Standards, linking to their URLs.
 {% endcomment %}
 
-{% if product.metafields.standards != blank %}
+{% if product.metafields.Standards != blank %}
   <div class="standards-logos">
     {% for standard in product.metafields.standards %}
       {% assign name = standard.standard_name %}
       {% assign logo = standard.standard_logo %}
       {% assign url = standard.standard_url %}
-      logos
+      
       {% if logo and url %}
         <a href="{{ url }}" target="_blank" rel="noopener noreferrer" class="standard-logo-link">
           <img height="100" width="100" src="{{ logo | img_url: '100x100' }}" alt="{{ name }}" class="standard-logo" />
