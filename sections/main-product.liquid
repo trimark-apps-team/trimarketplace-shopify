@@ -240,7 +240,7 @@
              {% assign show_table = false %}
               {% assign tiers = "a,b,c,d,e,f" | split: "," %}
               {% for tier in tiers %}
-                {% assign metafield_key = "tier_" | append: tier %}
+                {% assign metafield_key = "7_sip_tier_" | append: tier %}
                 {% assign metafield = product.metafields.custom[metafield_key] %}
                 {% if metafield != blank %}
                   {% assign show_table = true %}
@@ -249,31 +249,31 @@
               {% endfor %}
             {% if show_table %}
               <div class="tier-price-row">
-                <div class="tier-price-item">
-                  <span class="label">Cost Price:</span>
-                  <span>{{ product.metafields.custom.cost_price }}</span>
-                </div>
-                <div class="tier-price-item">
-                  <span class="label">PG Price:</span>
-                  <span>{{ product.metafields.custom.pg_price }}</span>
-                </div>
-                <div class="tier-price-item">
-                  <span class="label">M/U%:</span>
-                  <span>{{ product.metafields.custom.m_u }}</span>
-                </div>
-                <div class="tier-price-item">
-                  <span class="label">Floor Price:</span>
-                  <span>{{ product.metafields.custom.floor_price }}</span>
-                </div>
-                <div class="tier-price-item">
-                  <span class="label">Inv Available:</span>
-                  <span>{{ product.metafields.custom.inv_available }}</span>
-                </div>
-                <div class="tier-price-item">
-                  <span class="label">On-Order:</span>
-                  <span>{{ product.metafields.custom.on_order }}</span>
-                </div>
+              <div class="tier-price-item">
+                <span class="label">Cost Price:</span>
+                <span>{{ product.metafields.custom["3_price_cost"] }}</span>
               </div>
+              <div class="tier-price-item">
+                <span class="label">PG Price:</span>
+                <span>{{ product.metafields.custom["3_price_pg"] }}</span>
+              </div>
+              <div class="tier-price-item">
+                <span class="label">M/U%:</span>
+                <span>{{ product.metafields.custom["3_m_u"] }}</span>
+              </div>
+              <div class="tier-price-item">
+                <span class="label">Floor Price:</span>
+                <span>{{ product.metafields.custom["3_price_floor"] }}</span>
+              </div>
+              <div class="tier-price-item">
+                <span class="label">Inv Available:</span>
+                <span>{{ product.metafields.custom["3_inv_available"] }}</span>
+              </div>
+              <div class="tier-price-item">
+                <span class="label">On-Order:</span>
+                <span>{{ product.metafields.custom["3_on_order"] }}</span>
+              </div>
+            </div>
 
               <button class="button" onclick="document.getElementById('popup').classList.remove('hidden')" style="color:{{ block.settings.tire_price_button_text_color }};font-size:{{ block.settings.tire_price_button_text_font_size }}px;background-color:{{ section.settings.tire_price_button_bg_color }};border-radius: {{ section.settings.tire_price_button_border_radius }}px">
                 {{ block.settings.tire_price_button_text }}

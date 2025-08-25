@@ -617,13 +617,7 @@ function clearCart() {
 function checkAndToggleCheckoutButtons(cart) {
     if (!cart) return;
 
-    const itemApproval = Array.isArray(cart.items)
-      ? cart.items.some(item => item.properties && item.properties._approval === 'true')
-      : false;
-
-    const cartApproval = cart?.attributes?._approval === 'true' || cart?.properties?._approval === 'true';
-
-    const approvalRequired = itemApproval || cartApproval;
+    const approvalRequired = cart.total_price >= window.draftorder_threshold;
 
     const checkoutButtons = document.querySelectorAll('button[name="checkout"]');
     for (const btn of checkoutButtons) {

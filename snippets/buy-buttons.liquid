@@ -51,7 +51,7 @@
              {% assign show_table = false %}
               {% assign tiers = "a,b,c,d,e,f" | split: "," %}
               {% for tier in tiers %}
-                {% assign metafield_key = "tier_" | append: tier %}
+                {% assign metafield_key = "7_sip_tier_" | append: tier %}
                 {% assign metafield = product.metafields.custom[metafield_key] %}
                 {% if metafield != blank %}
                   {% assign show_table = true %}

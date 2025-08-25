@@ -58,6 +58,8 @@
                   {%- endif -%}
                 </div>
 
+                 <p class="cart-items_count">{{ cart.items.size }} Total Products, {{ cart.item_count }} Total Quantity</p>
+
                 <div class="totals">
                   <h2 class="totals__total">{{ 'sections.cart.estimated_total' | t }}</h2>
                   <p class="totals__total-value">{{ cart.total_price | money_with_currency }}</p>
@@ -117,8 +119,9 @@
                 >
                   {{ 'sections.cart.checkout' | t }}
                 </button> <span class="bss-bcp-custom-quote-cart-btn"></span>
-                <button id="create-draft-order" class="cart__checkout-button button hidden">Draft Order</button>
+                <button id="create-draft-order" class="cart__checkout-button button hidden">Send for Approval</button>
               </div>
+
 
               {%- if additional_checkout_buttons -%}
                 <div class="cart__dynamic-checkout-buttons additional-checkout-buttons">

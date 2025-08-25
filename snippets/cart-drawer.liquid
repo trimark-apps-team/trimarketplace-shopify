@@ -493,6 +493,7 @@
         <!-- Subtotals -->
 
         <div class="cart-drawer__footer" {{ block.shopify_attributes }}>
+           <div class="cart-items_count">{{ cart.items.size }} Total Products, {{ cart.item_count }} Total Quantity</div>
           <div>
             {%- if cart.cart_level_discount_applications.size > 0 -%}
               <ul class="discounts list-unstyled" role="list" aria-label="{{ 'customer.order.discount' | t }}">
@@ -555,7 +556,11 @@
 
         <!-- CTAs -->
 
-        <div class="cart__ctas" {{ block.shopify_attributes }}>
+        <div class="cart__ctas" {{ block.shopify_attributes }}>      
+            {% comment %} <a class="button btn btn-primary cs-save-trigger" href="/a/saved-carts/new">
+                Save Cart
+            </a> {% endcomment %}
+            <a href="{{ routes.cart_url }}" class="cart__checkout-button button cart_btn">View Cart Page</a>
           <button
             type="submit"
             id="CartDrawer-Checkout"
@@ -567,9 +572,11 @@
             {% endif %}
           >
             {{ 'sections.cart.checkout' | t }}
-          </button> <span class="bss-bcp-custom-quote-cart-btn"></span>
+          </button> 
+          
+          {% comment %} <span class="bss-bcp-custom-quote-cart-btn"></span> {% endcomment %}
 
-         <button id="create-draft-order" class="cart__checkout-button button hidden">Draft Order</button>
+         <button id="create-draft-order" class="cart__checkout-button button hidden">Send for Approval</button>
           
         </div>
       </div>

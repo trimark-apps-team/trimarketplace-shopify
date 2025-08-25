@@ -283,9 +283,18 @@ if (!customElements.get('cart-note')) {
         this.addEventListener(
           'input',
           debounce((event) => {
-            const body = JSON.stringify({ note: event.target.value });
-            fetch(`${routes.cart_update_url}`, { ...fetchConfig(), ...{ body } })
-              .then(() => CartPerformance.measureFromEvent('note-update:user-action', event));
+            const body = JSON.stringify({
+              attributes: {
+                "Customer note": event.target.value 
+              }
+            });
+
+            fetch(`${routes.cart_update_url}`, {
+              ...fetchConfig(),
+              body
+            }).then(() =>
+              CartPerformance.measureFromEvent('note-update:user-action', event)
+            );
           }, ON_CHANGE_DEBOUNCE_TIMER)
         );
       }
