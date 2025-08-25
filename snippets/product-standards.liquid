@@ -2,23 +2,18 @@
   Snippet: standards-logos.liquid
   Description: Displays logos for product Standards, linking to their URLs.
 {% endcomment %}
-
 {% assign standards = product.metafields.custom.standards.value %}
 
 {% if standards != blank %}
-  <div class="all-standards">
+  <div class="all-standards" style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
     {% for standard in standards %}
-      <div class="standard-item">
-        <a href="{{ standard.standard_url }}" target="_blank" rel="noopener noreferrer">
-          <img src="{{ standard.standard_logo | img_url: '100x100' }}" alt="{{ standard.standard_name }}">
+      {% if standard.standard_logo != blank and standard.standard_url != blank %}
+        <a href="{{ standard.standard_url }}" target="_blank" rel="noopener noreferrer" style="display: inline-block;">
+          <img src="{{ standard.standard_logo | img_url: '60x60' }}" 
+               alt="{{ standard.standard_name }}" 
+               style="width: 60px; height: auto;">
         </a>
-        <h4>{{ standard.standard_name }}</h4>
-        {% if standard.standard_description != blank %}
-          <p>{{ standard.standard_description }}</p>
-        {% endif %}
-      </div>
+      {% endif %}
     {% endfor %}
   </div>
-{% else %}
-  <p>No standards assigned to this product.</p>
 {% endif %}
