@@ -294,7 +294,7 @@
                       {% assign tiers = "a,b,c,d,e,f" | split: "," %}
                       {% for tier in tiers %}
                         {% assign tier_label = tier | upcase %}
-                        {% assign metafield_key = "tier_" | append: tier %}
+                        {% assign metafield_key = "7_sip_tier_" | append: tier %}
                         {% assign metafield = product.metafields.custom[metafield_key] %}
                         {% if forloop.index == 1 %}
                           {% assign tire_alphabet_bg_color = block.settings.tire_a_bg_color %}
