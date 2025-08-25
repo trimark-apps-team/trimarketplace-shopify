@@ -2,37 +2,16 @@
   Snippet: standards-logos.liquid
   Description: Displays logos for product Standards, linking to their URLs.
 {% endcomment %}
-standards:
-{% if product.metafields.size > 0 %}
-  <div class="product-metafields">
-    {% for namespace in product.metafields %}
-      {% assign ns_name = namespace[0] %}
-      {% assign ns_fields = namespace[1] %}
+standards
+{% assign standards_refs = product.metafields.custom.Standards %}
 
-      <h3>Namespace: {{ ns_name }}</h3>
-      <ul>
-        {% for key in ns_fields %}
-          {% assign metafield = ns_fields[key] %}
-          <li>
-            <strong>{{ key }}:</strong>
-            {% if metafield.value != blank %}
-              {% if metafield.type contains 'reference' %}
-                {% assign ref = metafield.value %}
-                <!-- If it's a metaobject reference -->
-                {% for field in ref %}
-                  {{ field[0] }}: {{ field[1] }}
-                {% endfor %}
-              {% else %}
-                {{ metafield.value }}
-              {% endif %}
-            {% else %}
-              No value
-            {% endif %}
-          </li>
-        {% endfor %}
-      </ul>
+{% if standards_refs != blank %}
+  <div class="standards-logos">
+    {% for standard_ref in standards_refs %}
+      {% assign standard = standard_ref.value %}
+      <a href="{{ standard.standard_url }}">
+        <img src="{{ standard.standard_logo | img_url: '100x100' }}" alt="{{ standard.standard_name }}">
+      </a>
     {% endfor %}
   </div>
-{% else %}
-  <p>No metafields found for this product.</p>
 {% endif %}
