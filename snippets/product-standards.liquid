@@ -12,7 +12,7 @@
       
       {% if logo and url %}
         <a href="{{ url }}" target="_blank" rel="noopener noreferrer" class="standard-logo-link">
-          <img src="{{ logo | img_url: '100x100' }}" alt="{{ name }}" class="standard-logo" />
+          <img height="100" width="100" src="{{ logo | img_url: '100x100' }}" alt="{{ name }}" class="standard-logo" />
         </a>
       {% endif %}
     {% endfor %}
