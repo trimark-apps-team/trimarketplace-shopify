@@ -3,19 +3,23 @@
   Description: Displays logos for product Standards, linking to their URLs.
 {% endcomment %}
 standards
-{% if product.metafields.custom.standards != blank %}
-  standards
-  <div class="standards-logos">
-    {% for standard in product.metafields.custom2.standards %}
-      {% assign name = standard.standard_name %}
-      {% assign logo = standard.standard_logo %}
-      {% assign url = standard.standard_url %}
-      logos
-      {% if logo and url %}
-        <a href="{{ url }}" target="_blank" rel="noopener noreferrer" class="standard-logo-link">
-          <img height="100" width="100" src="{{ logo | img_url: '100x100' }}" alt="{{ name }}" class="standard-logo" />
+{% assign standards = product.metafields.custom.standards %}
+
+{% if standards != blank %}
+  <div class="all-standards">
+  
+    {% for standard in standards %}
+      <div class="standard-item">
+        <a href="{{ standard.standard_url }}" target="_blank" rel="noopener noreferrer">
+          <img src="{{ standard.standard_logo | img_url: '100x100' }}" alt="{{ standard.standard_name }}">
         </a>
-      {% endif %}
+        <h4>{{ standard.standard_name }}</h4>
+        {% if standard.standard_description != blank %}
+          <p>{{ standard.standard_description }}</p>
+        {% endif %}
+      </div>
     {% endfor %}
   </div>
+{% else %}
+  <p>No standards assigned to this product.</p>
 {% endif %}
