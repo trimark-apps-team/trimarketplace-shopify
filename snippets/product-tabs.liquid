@@ -98,41 +98,116 @@
 </div>
 
   <div class="tab-content" id="tab-resources">
-    <ul>
-      {% if product.metafields.custom["4_spec_sheet"] %}
-        <li>
-          <i class="fas fa-file-pdf"></i>
-          <a href="{{ product.metafields.custom["4_spec_sheet"] }}" target="_blank">
-            Specsheet
-          </a>
-        </li>
-      {% endif %}
-      {% if product.metafields.custom["4_manual_sheet"] %}
-        <li>
-          <i class="fas fa-book"></i>
-          <a href="{{ product.metafields.custom["4_manual_sheet"] }}" target="_blank">
-            Manual
-          </a>
-        </li>
-      {% endif %}
-      {% if product.metafields.custom["4_warranty_sheet"] %}
-        <li>
-          <i class="fas fa-shield-alt"></i>
-          <a href="{{ product.metafields.custom["4_warranty_sheet"] }}" target="_blank">
-            Warranty
-          </a>
-        </li>
-      {% endif %}
-      {% if product.metafields.custom["4_sds_sheet"] %}
-        <li>
-          <i class="fas fa-chart-pie"></i>
-          <a href="{{ product.metafields.custom["4_sds_sheet"] }}" target="_blank">
-            SDS
-          </a>
-        </li>
-      {% endif %}
-    </ul>
-  </div>
+  <ul>
+    {% if product.metafields.custom["4_spec_sheet"] %}
+      <li>
+        <i class="fas fa-file-pdf"></i>
+        <a href="{{ product.metafields.custom["4_spec_sheet"] }}" target="_blank">
+          Spec Sheet
+        </a>
+      </li>
+    {% endif %}
+
+    {% if product.metafields.custom["4_manual_sheet"] %}
+      <li>
+        <i class="fas fa-book"></i>
+        <a href="{{ product.metafields.custom["4_manual_sheet"] }}" target="_blank">
+          Manual
+        </a>
+      </li>
+    {% endif %}
+
+    {% if product.metafields.custom["4_warranty_sheet"] %}
+      <li>
+        <i class="fas fa-shield-alt"></i>
+        <a href="{{ product.metafields.custom["4_warranty_sheet"] }}" target="_blank">
+          Warranty
+        </a>
+      </li>
+    {% endif %}
+
+    {% if product.metafields.custom["4_sds_sheet"] %}
+      <li>
+        <i class="fas fa-chart-pie"></i>
+        <a href="{{ product.metafields.custom["4_sds_sheet"] }}" target="_blank">
+          SDS
+        </a>
+      </li>
+    {% endif %}
+
+    {% if product.metafields.custom["4_parts_list"] %}
+      <li>
+        <i class="fas fa-cogs"></i>
+        <a href="{{ product.metafields.custom["4_parts_list"] }}" target="_blank">
+          Parts List
+        </a>
+      </li>
+    {% endif %}
+
+    {% if product.metafields.custom["4_service_manual"] %}
+      <li>
+        <i class="fas fa-tools"></i>
+        <a href="{{ product.metafields.custom["4_service_manual"] }}" target="_blank">
+          Service Manual
+        </a>
+      </li>
+    {% endif %}
+
+    {% if product.metafields.custom["4_sds_sheets"] %}
+      <li>
+        <i class="fas fa-vial"></i>
+        <a href="{{ product.metafields.custom["4_sds_sheets"] }}" target="_blank">
+          SDS Sheets
+        </a>
+      </li>
+    {% endif %}
+
+    {% if product.metafields.custom["4_product_video"] %}
+      <li>
+        <i class="fas fa-video"></i>
+        <a href="{{ product.metafields.custom["4_product_video"] }}" target="_blank">
+          Product Video
+        </a>
+      </li>
+    {% endif %}
+
+    {% if product.metafields.custom["4_product_doc"] %}
+      <li>
+        <i class="fas fa-file-alt"></i>
+        <a href="{{ product.metafields.custom["4_product_doc"] }}" target="_blank">
+          Product Doc
+        </a>
+      </li>
+    {% endif %}
+
+    {% if product.metafields.custom["4_product_cad"] %}
+      <li>
+        <i class="fas fa-drafting-compass"></i>
+        <a href="{{ product.metafields.custom["4_product_cad"] }}" target="_blank">
+          CAD File
+        </a>
+      </li>
+    {% endif %}
+
+    {% if product.metafields.custom["4_owners_manual"] %}
+      <li>
+        <i class="fas fa-book-open"></i>
+        <a href="{{ product.metafields.custom["4_owners_manual"] }}" target="_blank">
+          Owner's Manual
+        </a>
+      </li>
+    {% endif %}
+
+    {% if product.metafields.custom["4_installation_manual"] %}
+      <li>
+        <i class="fas fa-wrench"></i>
+        <a href="{{ product.metafields.custom["4_installation_manual"] }}" target="_blank">
+          Installation Manual
+        </a>
+      </li>
+    {% endif %}
+  </ul>
+</div>
   </div>
     
    <div class="product-standards">
