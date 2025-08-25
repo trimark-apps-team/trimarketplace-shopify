@@ -3,15 +3,22 @@
   Description: Displays logos for product Standards, linking to their URLs.
 {% endcomment %}
 standards
-{% assign standards_refs = product.metafields.custom.Standards %}
+{% assign standards = product.metafields.custom.standards %}
 
-{% if standards_refs != blank %}
-  <div class="standards-logos">
-    {% for standard_ref in standards_refs %}
-      {% assign standard = standard_ref.value %}
-      <a href="{{ standard.standard_url }}">
-        <img src="{{ standard.standard_logo | img_url: '100x100' }}" alt="{{ standard.standard_name }}">
-      </a>
+{% if standards != blank %}
+  <div class="all-standards">
+    {% for standard in standards %}
+      <div class="standard-item">
+        <a href="{{ standard.standard_url }}" target="_blank" rel="noopener noreferrer">
+          <img src="{{ standard.standard_logo | img_url: '100x100' }}" alt="{{ standard.standard_name }}">
+        </a>
+        <h4>{{ standard.standard_name }}</h4>
+        {% if standard.standard_description != blank %}
+          <p>{{ standard.standard_description }}</p>
+        {% endif %}
+      </div>
     {% endfor %}
   </div>
+{% else %}
+  <p>No standards assigned to this product.</p>
 {% endif %}
