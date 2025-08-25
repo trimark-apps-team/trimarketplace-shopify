@@ -10,7 +10,7 @@
     {% for standard in standards %}
       <div class="standard-item">
         <a href="{{ standard.standard_url }}" target="_blank" rel="noopener noreferrer">
-          <img width="60 src="{{ standard.standard_logo | img_url: '100x100' }}" alt="{{ standard.standard_name }}">
+          <img width="60" src="{{ standard.standard_logo | img_url: '100x100' }}" alt="{{ standard.standard_name }}">
         </a>
         <h4>{{ standard.standard_name }}</h4>
         {% if standard.standard_description != blank %}
