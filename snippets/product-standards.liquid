@@ -6,17 +6,15 @@
 {% assign standards = product.metafields.custom.standards.value %}
 
 {% if standards != blank %}
-  <div class="all-standards" style="display: flex; flex-wrap: wrap; gap: 15px; align-items: center;">
+  <div class="all-standards">
     {% for standard in standards %}
       {% if standard.standard_logo != blank and standard.standard_url != blank %}
         <a href="{{ standard.standard_url }}" 
            target="_blank" 
            rel="noopener noreferrer"
-           title="{{ standard.standard_name }}" 
-           style="display: inline-block;">
-          <img src="{{ standard.standard_logo | img_url: '80x80' }}" 
-               alt="{{ standard.standard_name }}" 
-               style="width: 75px; height: auto;">
+           title="{{ standard.standard_name }}">
+          <img width="80" height="80" src="{{ standard.standard_logo | img_url: '75x75' }}" 
+               alt="{{ standard.standard_name }}">
         </a>
       {% endif %}
     {% endfor %}
