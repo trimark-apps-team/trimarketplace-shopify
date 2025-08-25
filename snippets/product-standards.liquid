@@ -6,7 +6,7 @@
 {% assign standards = product.metafields.custom.standards.value %}
 
 {% if standards != blank %}
-  <div class="all-standards" style="display: flex; flex-wrap: wrap; gap: 5px; align-items: center;">
+  <div class="all-standards" style="display: flex; flex-wrap: wrap; gap: 15px; align-items: center;">
     {% for standard in standards %}
       {% if standard.standard_logo != blank and standard.standard_url != blank %}
         <a href="{{ standard.standard_url }}" 
