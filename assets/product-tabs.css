@@ -186,3 +186,20 @@
   width: 70px;
   height: auto;
 }
+
+.spec-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.spec-table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.spec-table .spec-label {
+  background-color: #f9f9f9; /* light gray background */
+  color: #333;              /* darker text for contrast */
+  font-weight: 500;
+  width: 40%;
+}
