@@ -3,7 +3,7 @@
   Description: Displays logos for product Standards, linking to their URLs.
 {% endcomment %}
 standards
-{% assign standards_refs = product.metafields.custom.Standards %}
+{% assign standards_refs = product.metafields %}
 
 {% if standards_refs != blank %}
   <div class="standards-logos">
