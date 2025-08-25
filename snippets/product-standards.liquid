@@ -3,15 +3,27 @@
   Description: Displays logos for product Standards, linking to their URLs.
 {% endcomment %}
 standards
-{% assign standards_refs = product.metafields %}
-
-{% if standards_refs != blank %}
-  <div class="standards-logos">
-    {% for standard_ref in standards_refs %}
-      {% assign standard = standard_ref.value %}
-      <a href="{{ standard.standard_url }}">
-        <img src="{{ standard.standard_logo | img_url: '100x100' }}" alt="{{ standard.standard_name }}">
-      </a>
+{% if product.metafields != blank %}
+  <div class="product-metafields">
+    {% for namespace in product.metafields %}
+      <h3>Namespace: {{ namespace[0] }}</h3>
+      {% assign fields = namespace[1] %}
+      <ul>
+        {% for field in fields %}
+          <li>
+            <strong>{{ field[0] }}:</strong>
+            {% assign value = field[1] %}
+            {% if value.value != blank %}
+              {{ value.value }}
+            {% else %}
+              {{ value }}
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
     {% endfor %}
   </div>
+{% else %}
+  <p>No metafields found for this product.</p>
 {% endif %}
+
