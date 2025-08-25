@@ -165,3 +165,20 @@
 .product__description p {
   margin: 0 0 8px 0 !important;
 }
+
+
+.spec-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.spec-table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.spec-table .spec-label {
+  color: #666;     /* grey labels */
+  font-weight: 500;
+  width: 40%;
+}
