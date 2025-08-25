@@ -4,6 +4,7 @@
 {% endcomment %}
 standards:
 {% if product.metafields != blank %}
+    standards:
   <div class="product-metafields">
     {% for namespace in product.metafields %}
       <h3>Namespace: {{ namespace[0] }}</h3>
