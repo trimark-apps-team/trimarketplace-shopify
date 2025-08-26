@@ -222,11 +222,13 @@
   </ul>
 </div>
   </div>
-    
+    {% assign standards = product.metafields.custom.standards.value %}
+   {% if standards != blank %}
    <div class="product-standards">
     <h3>Standards</h3>
     {% render 'product-standards' %}
   </div>
+{% endif %}
  
 </div>
 
