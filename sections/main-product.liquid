@@ -287,11 +287,9 @@
               </div>
               {% endif %}
             </div>
-
               <button class="button" onclick="document.getElementById('popup').classList.remove('hidden')" style="color:{{ block.settings.tire_price_button_text_color }};font-size:{{ block.settings.tire_price_button_text_font_size }}px;background-color:{{ section.settings.tire_price_button_bg_color }};border-radius: {{ section.settings.tire_price_button_border_radius }}px">
                 {{ block.settings.tire_price_button_text }}
               </button>
-            
               <div id="popup" class="popup hidden">
                 <div class="popup-content">
                   <h3>{{ block.settings.tier_table_heading }}</h3>
@@ -346,16 +344,11 @@
                       {% endfor %}
                     </tbody>
                   </table>
-
-                  
                   <button class="button" onclick="document.getElementById('popup').classList.add('hidden')" style="color:{{ block.settings.close_button_text_color }};font-size:{{ block.settings.close_button_text_font_size }}px;background-color:{{ block.settings.close_button_bg_color }};border-radius: {{ block.settings.close_button_border_radius }}px">{{ block.settings.close_button_text }}</button>
                 </div>
               </div>
             {% endif %}
-            
            {% endif %}
-
-          
               {%- when 'sku' -%}
                 <p
                   class="product__sku{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if product.selected_or_first_available_variant.sku.size == 0 %} visibility-hidden{% endif %}"
@@ -387,8 +380,6 @@
                     </div>
                   </details>
                 </div>
-                
-                
               {%- when 'quantity_selector' -%}
                 <div class="product-feature-list">
                   {% render 'product-features-list' %}
