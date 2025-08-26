@@ -550,6 +550,7 @@
 
     <script>
       window.draftorder_threshold = {{ customer.current_company.metafields.custom.approver_1_cart_threshold | times: 100 }};
+      window.approval_required = {{ customer.current_company.metafields.custom.approvals_required | default: false }};
       window.shopUrl = '{{ request.origin }}';
       window.routes = {
         cart_add_url: '{{ routes.cart_add_url }}',

@@ -1,3 +1,5 @@
+console.log(window.approval_required,"ddd")
+if(window.approval_required) {
 document.addEventListener("click", function (e) {
   if (e.target && e.target.classList.contains("edit-tier-price-btn")) {
     const button = e.target;
@@ -198,3 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
   .then(cart => checkAndToggleCheckoutButtons(cart))
   .catch(err => console.error('Cart fetch failed:', err));
 });
+}
+
+
+
