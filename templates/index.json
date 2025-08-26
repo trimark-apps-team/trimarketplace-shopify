@@ -40,110 +40,150 @@
     },
     "custom_message_slider_FWcFmd": {
       "type": "custom-message-slider",
+      "blocks": {
+        "slide_H9zrrb": {
+          "type": "slide",
+          "settings": {
+            "title": "Free Freight on all stock orders over $600...excludes rollouts, shelving.",
+            "content": "<p><strong>Please note:</strong><br/><br/>If you cannot find an item, please type the item information & quantity in the comment box on the check out page. We will then add it to your order. We are experiencing delays in receiving some products due to the supply chain shortages, we have been diligently working.</p>"
+          }
+        },
+        "slide_pFkmwK": {
+          "type": "slide",
+          "settings": {
+            "title": "Free Freight on all stock orders over $600...excludes rollouts, shelving.",
+            "content": "<p><strong>Please note:</strong><br/><br/>If you cannot find an item, please type the item information & quantity in the comment box on the check out page. We will then add it to your order. We are experiencing delays in receiving some products due to the supply chain shortages, we have been diligently working.</p>"
+          }
+        },
+        "slide_BqjCXW": {
+          "type": "slide",
+          "settings": {
+            "title": "Free Freight on all stock orders over $600...excludes rollouts, shelving.",
+            "content": "<p><strong>Please note:</strong><br/><br/>If you cannot find an item, please type the item information & quantity in the comment box on the check out page. We will then add it to your order. We are experiencing delays in receiving some products due to the supply chain shortages, we have been diligently working.</p>"
+          }
+        },
+        "slide_rrrNE4": {
+          "type": "slide",
+          "settings": {
+            "title": "Free Freight on all stock orders over $600...excludes rollouts, shelving.",
+            "content": "<p><strong>Please note:</strong><br/><br/>If you cannot find an item, please type the item information & quantity in the comment box on the check out page. We will then add it to your order. We are experiencing delays in receiving some products due to the supply chain shortages, we have been diligently working.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "slide_H9zrrb",
+        "slide_pFkmwK",
+        "slide_BqjCXW",
+        "slide_rrrNE4"
+      ],
       "name": "Message Slider",
       "settings": {
         "header_color": "#b11830",
-        "header_font_size": 18,
-        "text_color": "#b11830",
-        "text_font_size": 18,
-        "margin_top": 18,
-        "margin_bottom": 18,
+        "header_font_size": 22,
+        "text_color": "#121212",
+        "text_font_size": 20,
+        "margin_top": 20,
+        "margin_bottom": 20,
         "header_color_mobile": "#b11830",
         "header_font_size_mobile": 18,
         "text_color_mobile": "#b11830",
         "text_font_size_mobile": 18,
-        "margin_top_mobile": 18,
+        "margin_top_mobile": 20,
         "margin_bottom_mobile": 18
       }
     },
     "feature_cards_JkfJhb": {
       "type": "feature-cards",
       "blocks": {
-        "feature_B4L69W": {
+        "feature_6E3HtY": {
           "type": "feature",
           "settings": {
-            "heading": "",
-            "description": "",
+            "icon": "shopify://shop_images/Catalog.png",
+            "heading": "My Catalog",
+            "description": "View, edit, and place orders from your Managed Order Guide.",
             "link_label": "View All",
-            "link_url": ""
+            "link_url": "shopify://collections/all-products"
           }
         },
-        "feature_3ydkFm": {
+        "feature_y6w6GE": {
           "type": "feature",
           "settings": {
-            "heading": "",
-            "description": "",
+            "icon": "shopify://shop_images/Favorite.png",
+            "heading": "My Wishlist",
+            "description": "View, Track, Return or buy products again.",
             "link_label": "View All",
-            "link_url": ""
+            "link_url": "shopify://collections/new-store-opening-2"
           }
         }
       },
       "block_order": [
-        "feature_B4L69W",
-        "feature_3ydkFm"
+        "feature_6E3HtY",
+        "feature_y6w6GE"
       ],
       "name": "Feature Card Grid",
       "settings": {
         "heading_color": "#000000",
-        "heading_font_size": 20,
+        "heading_font_size": 16,
         "text_color": "#333333",
         "text_font_size": 16,
-        "margin_top": 18,
+        "margin_top": 20,
         "margin_bottom": 18,
         "view_all_color": "#b11830",
-        "view_all_font_size": 18,
+        "view_all_font_size": 16,
         "header_color_mobile": "#b11830",
-        "header_font_size_mobile": 18,
+        "header_font_size_mobile": 16,
         "text_color_mobile": "#b11830",
-        "text_font_size_mobile": 18,
-        "margin_top_mobile": 18,
-        "margin_bottom_mobile": 18,
+        "text_font_size_mobile": 16,
+        "margin_top_mobile": 20,
+        "margin_bottom_mobile": 20,
         "view_all_color_mobile": "#b11830",
-        "view_all_font_size_mobile": 18
+        "view_all_font_size_mobile": 16
       }
     },
     "feature_cards_V4i7nk": {
       "type": "feature-cards",
       "blocks": {
-        "feature_9tzjTT": {
+        "feature_GqyJDz": {
           "type": "feature",
           "settings": {
-            "heading": "",
-            "description": "",
+            "icon": "shopify://shop_images/Profile.png",
+            "heading": "My Profile",
+            "description": "Manage your profile details.",
             "link_label": "View All",
-            "link_url": ""
+            "link_url": "shopify://collections/all-products"
           }
         },
-        "feature_RdVaJz": {
+        "feature_WNTVL3": {
           "type": "feature",
           "settings": {
-            "heading": "",
-            "description": "",
+            "icon": "shopify://shop_images/Help.png",
+            "heading": "Help",
+            "description": "Get assistance and view any help documents.",
             "link_label": "View All",
-            "link_url": ""
+            "link_url": "shopify://collections/new-store-opening-2"
           }
         }
       },
       "block_order": [
-        "feature_9tzjTT",
-        "feature_RdVaJz"
+        "feature_GqyJDz",
+        "feature_WNTVL3"
       ],
       "name": "Feature Card Grid",
       "settings": {
         "heading_color": "#000000",
-        "heading_font_size": 20,
+        "heading_font_size": 16,
         "text_color": "#333333",
         "text_font_size": 16,
-        "margin_top": 18,
-        "margin_bottom": 18,
+        "margin_top": 20,
+        "margin_bottom": 20,
         "view_all_color": "#b11830",
-        "view_all_font_size": 18,
+        "view_all_font_size": 16,
         "header_color_mobile": "#b11830",
-        "header_font_size_mobile": 18,
+        "header_font_size_mobile": 16,
         "text_color_mobile": "#b11830",
-        "text_font_size_mobile": 18,
-        "margin_top_mobile": 18,
-        "margin_bottom_mobile": 18,
+        "text_font_size_mobile": 16,
+        "margin_top_mobile": 20,
+        "margin_bottom_mobile": 20,
         "view_all_color_mobile": "#b11830",
         "view_all_font_size_mobile": 18
       }
