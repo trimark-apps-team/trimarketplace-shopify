@@ -55,10 +55,57 @@
         "margin_top_mobile": 18,
         "margin_bottom_mobile": 18
       }
+    },
+    "feature_cards_JkfJhb": {
+      "type": "feature-cards",
+      "blocks": {
+        "feature_B4L69W": {
+          "type": "feature",
+          "settings": {
+            "heading": "",
+            "description": "",
+            "link_label": "View All",
+            "link_url": ""
+          }
+        },
+        "feature_3ydkFm": {
+          "type": "feature",
+          "settings": {
+            "heading": "",
+            "description": "",
+            "link_label": "View All",
+            "link_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "feature_B4L69W",
+        "feature_3ydkFm"
+      ],
+      "name": "Feature Card Grid",
+      "settings": {
+        "heading_color": "#000000",
+        "heading_font_size": 20,
+        "text_color": "#333333",
+        "text_font_size": 16,
+        "margin_top": 18,
+        "margin_bottom": 18,
+        "view_all_color": "#b11830",
+        "view_all_font_size": 18,
+        "header_color_mobile": "#b11830",
+        "header_font_size_mobile": 18,
+        "text_color_mobile": "#b11830",
+        "text_font_size_mobile": 18,
+        "margin_top_mobile": 18,
+        "margin_bottom_mobile": 18,
+        "view_all_color_mobile": "#b11830",
+        "view_all_font_size_mobile": 18
+      }
     }
   },
   "order": [
     "featured_collection",
-    "custom_message_slider_FWcFmd"
+    "custom_message_slider_FWcFmd",
+    "feature_cards_JkfJhb"
   ]
 }
