@@ -236,7 +236,7 @@
   {% assign standards = product.metafields.custom.standards.value %}
    {% if standards != blank %}
    <div class="product-standards">
-    <h3>Certifications</h3>
+    <h3 class="product-standards-title">Certifications</h3>
     {% render 'product-standards' %}
   </div>
 {% endif %}
