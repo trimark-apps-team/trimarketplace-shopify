@@ -173,11 +173,14 @@
 /* Standards Logos */
 .all-standards {
   margin-left: 8px;
-  margin-top:20px;
+  margin-top: 20px;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
 }
 
 .all-standards a {
