@@ -85,18 +85,21 @@
   flex: 2;
 }
 
+
 .product-standards {
-  flex: 1;
-  border: 1px solid #ccc;
-  border-radius: 0.8rem;
-  padding: 1.5rem;
+  flex: 0 305px;
   background: #fff;
-  margin-top: 6.6rem; /* aligns top with tab content */
+  margin-top: 6.6rem;
 }
 
-.product-standards h3 {
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
+.product-standards h3 { 
+  letter-spacing: normal;
+  background: none;
+  color: #a8243e;
+  padding: 0 5px;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: normal;
 }
 
 .product-standards ul {
@@ -169,13 +172,12 @@
 /* Standards */
 /* Standards Logos */
 .all-standards {
+  margin-left: 8px;
   margin-top:20px;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   align-items: center;
-  justify-content: center; 
-
 }
 
 .all-standards a {
@@ -183,7 +185,7 @@
 }
 
 .all-standards img {
-  width: 70px;
+  width: 60px;
   height: auto;
 }
 
