@@ -3778,6 +3778,7 @@ details-disclosure > details {
   max-width: 500px;
   text-align: center;
   animation: fadeIn 0.3s ease-out;
+  min-width: 310px;
 }
 
 @keyframes fadeIn {
