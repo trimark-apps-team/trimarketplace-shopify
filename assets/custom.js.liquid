@@ -25,7 +25,7 @@ document.addEventListener("click", function (e) {
       errorSpan.style.color = "red";
       errorSpan.style.fontSize = "12px";
       errorSpan.style.marginLeft = "8px";
-      input.parentElement.appendChild(errorSpan);
+      input.closest("tr.cart-item").after(errorSpan);
     }
 
     const handleBlur = () => {
