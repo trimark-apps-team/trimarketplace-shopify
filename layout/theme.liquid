@@ -300,6 +300,7 @@
     {%- if template == 'product' -%}
       {{ 'product-tabs.css' | asset_url | stylesheet_tag }}
       {{ 'product-features.css' | asset_url | stylesheet_tag }}
+      {{'trimark-product-labels.css' | asset_url | stylesheet_tag }}
       <script src="{{ 'product-tabs.js' | asset_url }}" defer></script>
     {%- endif -%}
 
