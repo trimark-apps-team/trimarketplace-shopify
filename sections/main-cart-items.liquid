@@ -503,7 +503,6 @@
   document.addEventListener("DOMContentLoaded", function () {
   document.addEventListener("click", function (e) {
   if (e.target && e.target.classList.contains("cart-edit-tier-price-btn")) {
-    console.log("hello")
     const button = e.target;
     const line = button.dataset.line;
     const input = document.querySelector(`.cart-tier-price-input[data-line="${line}"]`);
@@ -531,7 +530,7 @@
       errorSpan.style.color = "red";
       errorSpan.style.fontSize = "12px";
       errorSpan.style.marginLeft = "8px";
-      input.parentElement.appendChild(errorSpan);
+      input.closest("tr.cart-item").after(errorSpan);
     }
 
     const handleBlur = () => {
