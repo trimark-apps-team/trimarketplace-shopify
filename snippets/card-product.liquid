@@ -608,10 +608,15 @@
               </span>
           </div>
 
+        {%- elsif card_product.metafields.custom.private_label == true -%}
+          <div class="card__badge--private-label left">
+            <span class="private-label">
+              PRIVATE LABEL
+            </span>
+          </div>
+
         
         {%- endif -%}
-
-        <pre>{{card_product.tags|json }}</pre>
       </div>
     </div>
   </div>
