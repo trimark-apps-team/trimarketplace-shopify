@@ -95,13 +95,11 @@ function checkAndToggleCheckoutButtons(cart) {
     const checkoutButtons = document.querySelectorAll('button[name="checkout"]');
     for (const btn of checkoutButtons) {
       if (approvalRequired) {
-        console.log('Disabling checkout due to approval flag');
         btn.classList.add("hidden");
         document.querySelectorAll("#create-draft-order").forEach(el => {
           el.classList.remove("hidden");
         });
       } else {
-        console.log('Enabling checkout (no approval required)');
         document.querySelectorAll("#create-draft-order").forEach(el => {
           el.classList.add("hidden");
         });
@@ -157,13 +155,11 @@ function checkAndToggleCheckoutButtons(cart) {
     const checkoutButtons = document.querySelectorAll('button[name="checkout"]');
     for (const btn of checkoutButtons) {
       if (approvalRequired) {
-        console.log('Disabling checkout due to approval flag');
         btn.classList.add("hidden");
         document.querySelectorAll("#create-draft-order").forEach(el => {
           el.classList.remove("hidden");
         });
       } else {
-        console.log('Enabling checkout (no approval required)');
         document.querySelectorAll("#create-draft-order").forEach(el => {
           el.classList.add("hidden");
         });
