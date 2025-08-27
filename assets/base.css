@@ -3664,7 +3664,7 @@ details-disclosure > details {
   padding: 20px;
   border-radius: 10px;
   max-width: 500px;
-  width: 90%;
+  /* width: 90%; */
   box-shadow: 0 10px 25px rgba(0,0,0,0.25);
   text-align: center;
 }
@@ -3673,7 +3673,7 @@ details-disclosure > details {
   text-align: center;
 }
 .popup table {
-  width: 100%;
+  /* width: 100%; */
   border-collapse: collapse;
   margin: 16px 0;
 }
