@@ -85,7 +85,6 @@
   flex: 2;
 }
 
-
 .product-standards {
   flex: 0 325px;
   background: #fff;
@@ -191,20 +190,32 @@
   height: auto;
 }
 
+.spec-tables {
+  display: grid;
+  grid-template-columns: 1fr; /* mobile default: stacked */
+  gap: 20px;
+}
+
+@media (min-width: 768px) {
+  .spec-tables {
+    grid-template-columns: 1fr 1fr; /* side by side on tablet+ */
+  }
+}
+
 .spec-table {
   width: 100%;
   border-collapse: collapse;
 }
 
 .spec-table td {
-  padding: 8px 12px;
-  border-bottom: 1px solid #eee;
-  font-size: 12px;
+    padding: 4px 8px;
+    border-bottom: 1px solid #eee;
+    font-size: 12px;
 }
 
 .spec-table .spec-label {
-  background-color: #f9f9f9; /* light gray background */
-  color: #333;              /* darker text for contrast */
+  background-color: #f9f9f9; /* light gray */
+  color: #333;
   font-weight: 500;
   width: 40%;
 }
