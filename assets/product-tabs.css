@@ -199,6 +199,7 @@
 .spec-table td {
   padding: 8px 12px;
   border-bottom: 1px solid #eee;
+  font-size: 12px;
 }
 
 .spec-table .spec-label {
