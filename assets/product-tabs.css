@@ -87,7 +87,7 @@
 
 
 .product-standards {
-  flex: 0 305px;
+  flex: 0 325px;
   background: #fff;
 }
 
@@ -175,7 +175,7 @@
   margin-left: 8px;
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 15px;
   align-items: center;
   border: 1px solid #ccc;
   border-radius: .8rem;
