@@ -97,10 +97,10 @@
                   {{- block.settings.text -}}
                 </p>
               {%- when 'title' -%}
+
                 
-                {% if product.custom.private_label == true %}
                   <span class="product-label private-label">PRIVATE LABEL</span>
-                {%- endif %}
+                
 
                 <p><strong>Item Number: <span class="trimark-red">{{ product.selected_or_first_available_variant.sku }}</span></strong></p>
                 <div class="product__title" {{ block.shopify_attributes }}>
