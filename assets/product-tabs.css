@@ -86,17 +86,19 @@
 }
 
 .product-standards {
-  flex: 1;
-  border: 1px solid #ccc;
-  border-radius: 0.8rem;
-  padding: 1.5rem;
+  flex: 0 325px;
   background: #fff;
-  margin-top: 6.6rem; /* aligns top with tab content */
 }
 
-.product-standards h3 {
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
+.product-standards h3 { 
+  letter-spacing: normal;
+  background: none;
+  color: #a8243e;
+  padding: 0 5px;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: normal;
+  margin: 30px 0 10px 0;
 }
 
 .product-standards ul {
@@ -169,13 +171,14 @@
 /* Standards */
 /* Standards Logos */
 .all-standards {
-  margin-top:20px;
+  margin-left: 8px;
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 15px;
   align-items: center;
-  justify-content: center; 
-
+  border: 1px solid #ccc;
+  border-radius: .8rem;
+  padding: 10px;
 }
 
 .all-standards a {
@@ -183,8 +186,20 @@
 }
 
 .all-standards img {
-  width: 70px;
+  width: 60px;
   height: auto;
+}
+
+.spec-tables {
+  display: grid;
+  grid-template-columns: 1fr; /* mobile default: stacked */
+  gap: 20px;
+}
+
+@media (min-width: 768px) {
+  .spec-tables {
+    grid-template-columns: 1fr 1fr; /* side by side on tablet+ */
+  }
 }
 
 .spec-table {
@@ -193,13 +208,14 @@
 }
 
 .spec-table td {
-  padding: 8px 12px;
-  border-bottom: 1px solid #eee;
+    padding: 4px 8px;
+    border-bottom: 1px solid #eee;
+    font-size: 12px;
 }
 
 .spec-table .spec-label {
-  background-color: #f9f9f9; /* light gray background */
-  color: #333;              /* darker text for contrast */
+  background-color: #f9f9f9; /* light gray */
+  color: #333;
   font-weight: 500;
   width: 40%;
 }

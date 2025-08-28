@@ -4,7 +4,6 @@
 {% endcomment %}
 
 {% assign standards = product.metafields.custom.standards.value %}
-{% assign standard = product.metafields.custom.standard.value %}
 
 {% if standards != blank %}
   <div class="all-standards">
@@ -14,26 +13,21 @@
            target="_blank" 
            rel="noopener noreferrer"
            title="{{ standard.standard_name }}">
-          <img width="80" height="80" src="{{ standard.standard_logo | img_url: '75x75' }}" 
-               alt="{{ standard.standard_name }}">
+          <img 
+            width="80" 
+            height="80" 
+            src="{{ standard.standard_logo | img_url: '75x75' }}" 
+            alt="{{ standard.standard_name }}">
         </a>
+      {% elsif standard.standard_logo != blank %}
+        <img 
+          width="80" 
+          height="80" 
+          src="{{ standard.standard_logo | img_url: '75x75' }}" 
+          alt="{{ standard.standard_name }}">
       {% endif %}
     {% endfor %}
   </div>
 {% endif %}
 
-{% if standard != blank %}
-  <div class="all-standards">
-    {% for standard in standard %}
-      {% if standard.standard_logo != blank and standard.standard_url != blank %}
-        <a href="{{ standard.standard_url }}" 
-           target="_blank" 
-           rel="noopener noreferrer"
-           title="{{ standard.standard_name }}">
-          <img width="80" height="80" src="{{ standard.standard_logo | img_url: '75x75' }}" 
-               alt="{{ standard.standard_name }}">
-        </a>
-      {% endif %}
-    {% endfor %}
-  </div>
-{% endif %}
+

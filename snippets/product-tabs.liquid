@@ -33,81 +33,91 @@
         {% render 'reeses-law-warning' %}
       </div>
 
-  <div class="tab-content" id="tab-specifications">
-  <table class="spec-table">
-    <tbody>
-      <tr>
-        <td class="spec-label">Item Number</td>
-        <td>{{ product.selected_or_first_available_variant.sku }}</td>
-      </tr>
-
-      {% if product.metafields.custom["1_erp_id_trmk_golden"] %}
+<div class="tab-content" id="tab-specifications">
+  <div class="spec-tables">
+    
+    <!-- Table 1: 7 fields -->
+    <table class="spec-table spec-table--1">
+      <tbody>
         <tr>
-          <td class="spec-label">Legacy ERP</td>
-          <td>{{ product.metafields.custom["1_erp_id_trmk_golden"] }}</td>
+          <td class="spec-label">Item Number</td>
+          <td>{{ product.selected_or_first_available_variant.sku }}</td>
         </tr>
-      {% endif %}
 
-      {% if product.metafields.custom["6_brand"] %}
-        <tr>
-          <td class="spec-label">Brand</td>
-          <td>{{ product.metafields.custom["6_brand"] }}</td>
-        </tr>
-      {% endif %}
+        {% if product.metafields.custom["1_erp_id_trmk_golden"] %}
+          <tr>
+            <td class="spec-label">Legacy ERP</td>
+            <td>{{ product.metafields.custom["1_erp_id_trmk_golden"] }}</td>
+          </tr>
+        {% endif %}
 
-      {% if product.metafields.custom["6_manufacturer_id"] %}
-        <tr>
-          <td class="spec-label">Manufacturer Number</td>
-          <td>{{ product.metafields.custom["6_manufacturer_id"] }}</td>
-        </tr>
-      {% endif %}
+        {% if product.metafields.custom["6_brand"] %}
+          <tr>
+            <td class="spec-label">Brand</td>
+            <td>{{ product.metafields.custom["6_brand"] }}</td>
+          </tr>
+        {% endif %}
 
-      {% if product.metafields.custom["11_capacity_1"] %}
-        {% assign capacity = product.metafields.custom["11_capacity_1"] %}
-        <tr>
-          <td class="spec-label">Capacity</td>
-          <td>
-            {{ capacity.value }}
-            {% case capacity.unit %}
-              {% when "us_fl_oz" %} fl oz
-              {% when "ml" %} mL
-              {% when "l" %} L
-              {% when "qt" %} qt
-              {% when "gal" %} gal
-              {% else %} {{ capacity.unit }}
-            {% endcase %}
-          </td>
-        </tr>
-      {% endif %}
+        {% if product.metafields.custom["6_manufacturer_id"] %}
+          <tr>
+            <td class="spec-label">Manufacturer Number</td>
+            <td>{{ product.metafields.custom["6_manufacturer_id"] }}</td>
+          </tr>
+        {% endif %}
 
-      {% if product.metafields.custom["12_color"] %}
-        <tr>
-          <td class="spec-label">Color</td>
-          <td>{{ product.metafields.custom["12_color"] }}</td>
-        </tr>
-      {% endif %}
+        {% if product.metafields.custom["11_capacity_1"] %}
+          {% assign capacity = product.metafields.custom["11_capacity_1"] %}
+          <tr>
+            <td class="spec-label">Capacity</td>
+            <td>
+              {{ capacity.value }}
+              {% case capacity.unit %}
+                {% when "us_fl_oz" %} fl oz
+                {% when "ml" %} mL
+                {% when "l" %} L
+                {% when "qt" %} qt
+                {% when "gal" %} gal
+                {% else %} {{ capacity.unit }}
+              {% endcase %}
+            </td>
+          </tr>
+        {% endif %}
 
-      {% if product.metafields.custom["12_material"] %}
-        <tr>
-          <td class="spec-label">Material</td>
-          <td>{{ product.metafields.custom["12_material"] }}</td>
-        </tr>
-      {% endif %}
+        {% if product.metafields.custom["12_color"] %}
+          <tr>
+            <td class="spec-label">Color</td>
+            <td>{{ product.metafields.custom["12_color"] }}</td>
+          </tr>
+        {% endif %}
 
-      {% if product.metafields.custom["9_country_of_origin"] %}
-        <tr>
-          <td class="spec-label">Country of Origin</td>
-          <td>{{ product.metafields.custom["9_country_of_origin"] }}</td>
-        </tr>
-      {% endif %}
+        {% if product.metafields.custom["12_material"] %}
+          <tr>
+            <td class="spec-label">Material</td>
+            <td>{{ product.metafields.custom["12_material"] }}</td>
+          </tr>
+        {% endif %}
+      </tbody>
+    </table>
 
-      {% render 'render-dimension', label: 'Length', field: product.metafields.custom["11_dim_length_outside"] %}
-      {% render 'render-dimension', label: 'Width', field: product.metafields.custom["11_dim_width_outside"] %}
-      {% render 'render-dimension', label: 'Height', field: product.metafields.custom["11_dim_height_outside"] %}
-      {% render 'render-dimension', label: 'Depth', field: product.metafields.custom["11_dim_depth_outside"] %}
-      {% render 'render-dimension', label: 'Diameter', field: product.metafields.custom["11_diameter_outside"] %}
-    </tbody>
-  </table>
+    <!-- Table 2: 6 fields -->
+    <table class="spec-table spec-table--2">
+      <tbody>
+        {% if product.metafields.custom["9_country_of_origin"] %}
+          <tr>
+            <td class="spec-label">Country of Origin</td>
+            <td>{{ product.metafields.custom["9_country_of_origin"] }}</td>
+          </tr>
+        {% endif %}
+
+        {% render 'render-dimension', label: 'Length', field: product.metafields.custom["11_dim_length_outside"] %}
+        {% render 'render-dimension', label: 'Width', field: product.metafields.custom["11_dim_width_outside"] %}
+        {% render 'render-dimension', label: 'Height', field: product.metafields.custom["11_dim_height_outside"] %}
+        {% render 'render-dimension', label: 'Depth', field: product.metafields.custom["11_dim_depth_outside"] %}
+        {% render 'render-dimension', label: 'Diameter', field: product.metafields.custom["11_diameter_outside"] %}
+      </tbody>
+    </table>
+
+  </div>
 </div>
 
   <div class="tab-content" id="tab-resources">
@@ -222,11 +232,14 @@
   </ul>
 </div>
   </div>
-    
+  
+  {% assign standards = product.metafields.custom.standards.value %}
+   {% if standards != blank %}
    <div class="product-standards">
-    <h3>Standards</h3>
+    <h3>Certifications</h3>
     {% render 'product-standards' %}
   </div>
+{% endif %}
  
 </div>
 

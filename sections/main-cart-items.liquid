@@ -503,13 +503,11 @@
   document.addEventListener("DOMContentLoaded", function () {
   document.addEventListener("click", function (e) {
   if (e.target && e.target.classList.contains("cart-edit-tier-price-btn")) {
-    console.log("hello")
     const button = e.target;
     const line = button.dataset.line;
     const input = document.querySelector(`.cart-tier-price-input[data-line="${line}"]`);
     const text = document.querySelector(`.cart-tier-price-text[data-line="${line}"]`);
 
-    console.log(input,text,line,button);
     if (!input || !text) return;
 
 
@@ -520,7 +518,6 @@
     input.style.display = "inline-block";
     input.focus();
 
-    console.log()
 
     // Create or reuse error span
     let errorSpan = document.querySelector(`.cart-tier-price-error[data-line="${line}"]`);
@@ -531,7 +528,7 @@
       errorSpan.style.color = "red";
       errorSpan.style.fontSize = "12px";
       errorSpan.style.marginLeft = "8px";
-      input.parentElement.appendChild(errorSpan);
+      input.closest("tr.cart-item").after(errorSpan);
     }
 
     const handleBlur = () => {
@@ -622,13 +619,11 @@ function checkAndToggleCheckoutButtons(cart) {
     const checkoutButtons = document.querySelectorAll('button[name="checkout"]');
     for (const btn of checkoutButtons) {
       if (approvalRequired) {
-        console.log('Disabling checkout due to approval flag');
         btn.classList.add("hidden");
         document.querySelectorAll("#create-draft-order").forEach(el => {
           el.classList.remove("hidden");
         });
       } else {
-        console.log('Enabling checkout (no approval required)');
         document.querySelectorAll("#create-draft-order").forEach(el => {
           el.classList.add("hidden");
         });
