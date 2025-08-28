@@ -591,14 +591,27 @@
           </span>
         {%- endif -%}
 
-          
+        {%- assign published_date = card_product.published_at | date: "%s" -%}
+        {%- assign current_date = 'now' | date: "%s" -%}
+        {%- assign seconds_in_90_days = 60 | times: 60 | times: 24 | times: 90 -%}
+        {%- assign age_in_seconds = current_date | minus: published_date -%}
+
+        <pre>
+          {{published_date}}
+          {{ current_date }}
+          {{ seconds_in_90_days }}
+          {{  age_in_seconds }} 
+        </pre>
+
+     
+          <span class="badge badge--bottom-left color-custom-new">
+            New Arrival
+          </span>
     
       </div>
         
        
-      <span class="badge badge--bottom-left color-custom-new">
-            New Arrival {{ card_product.published_at }}
-          </span>
+      
         {%- if card_product.available == false -%}
           <div class="card__badge--non-stock left">
             <span class="non-stock">
