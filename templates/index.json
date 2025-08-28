@@ -38,60 +38,6 @@
         "padding_bottom": 36
       }
     },
-    "custom_message_slider_FWcFmd": {
-      "type": "custom-message-slider",
-      "blocks": {
-        "slide_H9zrrb": {
-          "type": "slide",
-          "settings": {
-            "title": "Free Freight on all stock orders over $600...excludes rollouts, shelving.",
-            "content": "<p><strong>Please note:</strong><br/><br/>If you cannot find an item, please type the item information & quantity in the comment box on the check out page. We will then add it to your order. We are experiencing delays in receiving some products due to the supply chain shortages, we have been diligently working.</p>"
-          }
-        },
-        "slide_pFkmwK": {
-          "type": "slide",
-          "settings": {
-            "title": "Free Freight on all stock orders over $600...excludes rollouts, shelving.",
-            "content": "<p><strong>Please note:</strong><br/><br/>If you cannot find an item, please type the item information & quantity in the comment box on the check out page. We will then add it to your order. We are experiencing delays in receiving some products due to the supply chain shortages, we have been diligently working.</p>"
-          }
-        },
-        "slide_BqjCXW": {
-          "type": "slide",
-          "settings": {
-            "title": "Free Freight on all stock orders over $600...excludes rollouts, shelving.",
-            "content": "<p><strong>Please note:</strong><br/><br/>If you cannot find an item, please type the item information & quantity in the comment box on the check out page. We will then add it to your order. We are experiencing delays in receiving some products due to the supply chain shortages, we have been diligently working.</p>"
-          }
-        },
-        "slide_rrrNE4": {
-          "type": "slide",
-          "settings": {
-            "title": "Free Freight on all stock orders over $600...excludes rollouts, shelving.",
-            "content": "<p><strong>Please note:</strong><br/><br/>If you cannot find an item, please type the item information & quantity in the comment box on the check out page. We will then add it to your order. We are experiencing delays in receiving some products due to the supply chain shortages, we have been diligently working.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "slide_H9zrrb",
-        "slide_pFkmwK",
-        "slide_BqjCXW",
-        "slide_rrrNE4"
-      ],
-      "name": "Message Slider",
-      "settings": {
-        "header_color": "#b11830",
-        "header_font_size": 22,
-        "text_color": "#121212",
-        "text_font_size": 20,
-        "margin_top": 20,
-        "margin_bottom": 20,
-        "header_color_mobile": "#b11830",
-        "header_font_size_mobile": 18,
-        "text_color_mobile": "#b11830",
-        "text_font_size_mobile": 18,
-        "margin_top_mobile": 20,
-        "margin_bottom_mobile": 18
-      }
-    },
     "feature_cards_JkfJhb": {
       "type": "feature-cards",
       "blocks": {
@@ -102,7 +48,7 @@
             "heading": "My Catalog",
             "description": "View, edit, and place orders from your Managed Order Guide.",
             "link_label": "View All",
-            "link_url": "shopify://collections/all-products"
+            "link_url": "shopify://collections"
           }
         },
         "feature_y6w6GE": {
@@ -112,7 +58,7 @@
             "heading": "My Wishlist",
             "description": "View, Track, Return or buy products again.",
             "link_label": "View All",
-            "link_url": "shopify://collections/new-store-opening-2"
+            "link_url": "#"
           }
         }
       },
@@ -150,13 +96,12 @@
             "heading": "My Profile",
             "description": "Manage your profile details.",
             "link_label": "View All",
-            "link_url": "shopify://collections/all-products"
+            "link_url": "https://shopify.com/75142004964/account/profile"
           }
         },
         "feature_WNTVL3": {
           "type": "feature",
           "settings": {
-            "icon": "shopify://shop_images/Help.png",
             "heading": "Help",
             "description": "Get assistance and view any help documents.",
             "link_label": "View All",
@@ -191,7 +136,6 @@
   },
   "order": [
     "featured_collection",
-    "custom_message_slider_FWcFmd",
     "feature_cards_JkfJhb",
     "feature_cards_V4i7nk"
   ]
