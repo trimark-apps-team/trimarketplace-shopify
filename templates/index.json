@@ -99,7 +99,7 @@
         "feature_GqyJDz": {
           "type": "feature",
           "settings": {
-            "icon": "shopify://shop_images/Profile.png",
+            "icon": "shopify://shop_images/Order_Approvals.svg",
             "heading": "My Approvals",
             "description": "Manage approval requests.",
             "link_label": "View All",
