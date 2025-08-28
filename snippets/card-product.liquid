@@ -591,6 +591,10 @@
           </span>
         {%- endif -%}
 
+       
+    
+      </div>
+        
         {%- assign published_date = card_product.published_at | date: "%s" -%}
         {%- assign current_date = 'now' | date: "%s" -%}
         {%- assign seconds_in_90_days = 60 | times: 60 | times: 24 | times: 90 -%}
@@ -607,10 +611,6 @@
           <span class="badge badge--bottom-left color-custom-new">
             New Arrival
           </span>
-    
-      </div>
-        
-       
       
         {%- if card_product.available == false -%}
           <div class="card__badge--non-stock left">
