@@ -41,6 +41,12 @@
     "feature_cards_JkfJhb": {
       "type": "feature-cards",
       "blocks": {
+        "logo_bn9mcx": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/Rectangle_1019.jpg"
+          }
+        },
         "feature_6E3HtY": {
           "type": "feature",
           "settings": {
@@ -60,16 +66,12 @@
             "link_label": "View All",
             "link_url": "#"
           }
-        },
-        "logo_bn9mcx": {
-          "type": "logo",
-          "settings": {}
         }
       },
       "block_order": [
+        "logo_bn9mcx",
         "feature_6E3HtY",
-        "feature_y6w6GE",
-        "logo_bn9mcx"
+        "feature_y6w6GE"
       ],
       "name": "Feature Card Grid",
       "settings": {
