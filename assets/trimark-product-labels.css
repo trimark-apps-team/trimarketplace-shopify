@@ -1,15 +1,16 @@
 .product-label {
     color: white;
     padding: 5px;
+    border-radius: 5px;
+    font-size: 13px;
 
 }
 .private-label {
     background-color: #ff9f1c;
-    border-radius: 5px;
-    font-size: 13px;
+   
 }
 
 .new-arrival {
     background-color: #A0522D;
-    border-radius: 5px;
+    
 }
