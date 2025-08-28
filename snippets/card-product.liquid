@@ -601,7 +601,9 @@
       </div>
      
         {% if age_in_seconds < seconds_in_60_days %}
-          <span class="badge">New Arrival</span>
+          <div class="card__badge">
+          <span class="badge badge--bottom-left">New Arrival</span>
+          </div>
         {% endif %} 
         
         {%- if card_product.available == false -%}
