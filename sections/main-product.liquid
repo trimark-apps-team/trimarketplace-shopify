@@ -107,10 +107,14 @@
                   {% if product.metafields.custom.private_label == true %}
                   <span class="product-label private-label">PRIVATE LABEL</span>
                   {%- endif %}
-                  
+
                   {% if age_in_seconds < seconds_in_60_days %}
                   <span class="product-label new-arrival-label">NEW ARRIVAL</span>
                   {% endif %} 
+
+                  {% if product.available == false %}
+                    <span class="product-label out-of-stock-label">Not Available</span>
+                  {% endif %}   
 
                 <p><strong>Item Number: <span class="trimark-red">{{ product.selected_or_first_available_variant.sku }}</span></strong></p>
                 <div class="product__title" {{ block.shopify_attributes }}>
