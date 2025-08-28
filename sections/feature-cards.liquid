@@ -25,7 +25,7 @@
             </div>
           {%- when 'logo' -%}
             <div class="feature-card">
-              {% if block.settings.icon != blank %}
+              {% if block.settings.logo != blank %}
                 <div class="feature-heading">
                   <img src="{{ block.settings.logo | img_url: '64x64' }}" alt="" class="feature-icon">
                   {{ block.settings.heading }}
