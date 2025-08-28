@@ -303,7 +303,7 @@
       {{'trimark-product-labels.css' | asset_url | stylesheet_tag }}
       <script src="{{ 'product-tabs.js' | asset_url }}" defer></script>
     {%- endif -%}
-
+    {{ 'custom.css' | asset_url | stylesheet_tag }}
     <script>
       if (Shopify.designMode) {
         document.documentElement.classList.add('shopify-design-mode');
