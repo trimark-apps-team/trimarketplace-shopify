@@ -620,7 +620,13 @@
             </span>
           </div>
         {%- endif -%}
-         
+          {% if age_in_seconds < seconds_in_60_days %}
+          <div class="card__badge--new-arrival-label left">
+            <span>
+              New Arrival
+            </span>
+          </div>
+        {% endif %} 
       </div>
     </div>
   </div>
@@ -659,13 +665,6 @@
           </div>
           
         </div>
-         {% if age_in_seconds < seconds_in_60_days %}
-          <div class="card__badge--new-arrival-label left">
-            <span>
-              New Arrival
-            </span>
-          </div>
-        {% endif %} 
       </div>
       <div class="card__content">
         <div class="card__information">
