@@ -593,10 +593,10 @@
 
         {%- assign published_date = card_product.published_at | date: "%s" -%}
         {%- assign current_date = 'now' | date: "%s" -%}
-        {%- assign seconds_in_60_days = 60 | times: 60 | times: 24 | times: 60 -%}
+        {%- assign seconds_in_90_days = 60 | times: 60 | times: 24 | times: 90 -%}
         {%- assign age_in_seconds = current_date | minus: published_date -%}
 
-        {%- if age_in_seconds < seconds_in_60_days -%}
+        {%- if age_in_seconds < seconds_in_90_days -%}
           <span class="badge badge--bottom-left color-custom-new">
             New Arrival
           </span>
