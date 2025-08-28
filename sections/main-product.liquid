@@ -99,7 +99,7 @@
                  
                 
               {%- when 'title' -%}
-                {%- assign published_date = '2025-07-01' | date: "%s" -%}
+                {%- assign published_date = card_product.published_at | date: "%s" -%}
                 {%- assign current_date = 'now' | date: "%s" -%}
                 {%- assign seconds_in_65_days = 60 | times: 60 | times: 24 | times: 65 -%}
                 {%- assign age_in_seconds = current_date | minus: published_date -%}
