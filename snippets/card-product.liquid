@@ -597,13 +597,13 @@
         
         {%- assign published_date = card_product.published_at | date: "%s" -%}
         {%- assign current_date = 'now' | date: "%s" -%}
-        {%- assign seconds_in_90_days = 60 | times: 60 | times: 24 | times: 90 -%}
+        {%- assign seconds_in_30_days = 60 | times: 60 | times: 24 | times: 30 -%}
         {%- assign age_in_seconds = current_date | minus: published_date -%}
 
         <pre>
           {{published_date}}
           {{ current_date }}
-          {{ seconds_in_90_days }}
+          {{ seconds_in_30_days }}
           {{  age_in_seconds }} 
         </pre>
 
