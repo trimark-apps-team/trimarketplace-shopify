@@ -574,10 +574,13 @@
             </div>
           {% endif %}
         {% endif %}
+
         {%- assign published_date = '2025-07-01' | date: "%s" -%}
         {%- assign current_date = 'now' | date: "%s" -%}
         {%- assign seconds_in_60_days = 60 | times: 60 | times: 24 | times: 60 -%}
         {%- assign age_in_seconds = current_date | minus: published_date -%}
+
+        
        <div class="card__badge {{ settings.badge_position }}">
         {%- if card_product.available == false -%}
           <span
