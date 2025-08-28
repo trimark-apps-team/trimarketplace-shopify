@@ -1,3 +1,4 @@
+
 (function () {
     var s = document.createElement('script');
     var h = document.querySelector('head') || document.body;
