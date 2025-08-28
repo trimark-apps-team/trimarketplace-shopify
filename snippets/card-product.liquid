@@ -574,6 +574,10 @@
             </div>
           {% endif %}
         {% endif %}
+        {%- assign published_date = '2025-07-01' | date: "%s" -%}
+        {%- assign current_date = 'now' | date: "%s" -%}
+        {%- assign seconds_in_60_days = 60 | times: 60 | times: 24 | times: 60 -%}
+        {%- assign age_in_seconds = current_date | minus: published_date -%}
        <div class="card__badge {{ settings.badge_position }}">
         {%- if card_product.available == false -%}
           <span
@@ -590,17 +594,6 @@
             {{- 'products.product.on_sale' | t -}}
           </span>
         {%- endif -%}
-
-        {%- assign published_date = '2025-07-01' | date: "%s" -%}
-        {%- assign current_date = 'now' | date: "%s" -%}
-        {%- assign seconds_in_60_days = 60 | times: 60 | times: 24 | times: 60 -%}
-        {%- assign age_in_seconds = current_date | minus: published_date -%}
-
-        {% comment %} <pre>
-          published: {{ published_date }}
-          current: {{ current_date }}
-          age: {{ age_in_seconds }}
-        </pre> {% endcomment %}
 
         {% if age_in_seconds < seconds_in_60_days %}
           <span class="badge">New Arrival</span>
