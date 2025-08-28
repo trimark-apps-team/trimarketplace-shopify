@@ -620,13 +620,7 @@
             </span>
           </div>
         {%- endif -%}
-          {% if age_in_seconds < seconds_in_60_days %}
-          <div class="card__badge--new-arrival-label left">
-            <span>
-              New Arrival
-            </span>
-          </div>
-        {% endif %} 
+         
       </div>
     </div>
   </div>
@@ -663,7 +657,15 @@
               {{ 'product-apparel-2' | placeholder_svg_tag: 'placeholder-svg' }}
             {% endif %}
           </div>
+          
         </div>
+         {% if age_in_seconds < seconds_in_60_days %}
+          <div class="card__badge--new-arrival-label left">
+            <span>
+              New Arrival
+            </span>
+          </div>
+        {% endif %} 
       </div>
       <div class="card__content">
         <div class="card__information">
