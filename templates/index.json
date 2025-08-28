@@ -113,7 +113,7 @@
             "heading": "Help",
             "description": "Get assistance and view any help documents.",
             "link_label": "View All",
-            "link_url": "shopify://pages/contact"
+            "link_url": "https://faq.trimarketplace.com/"
           }
         }
       },
