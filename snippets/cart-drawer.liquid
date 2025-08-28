@@ -159,7 +159,7 @@
                               </strong>
                             </div>
                           {%- else -%}
-                            {% if item.properties["_Tier Price"] != blank or item.properties["_Tier Price"] != "N/A" %}
+                            {% if item.properties["_Tier Price"] != blank and item.properties["_Tier Price"] != "N/A" %}
                               <div style="display: flex; align-items: center; gap: 6px;position: relative;">
                           <span class="tier-price-text" data-line="{{ forloop.index0 }}">{{ item.properties["_Tier Price"] }}</span>
                           <input type="number" step="1" class="tier-price-input" min="1" max="1000"
