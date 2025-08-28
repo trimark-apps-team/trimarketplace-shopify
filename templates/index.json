@@ -100,6 +100,16 @@
           "type": "feature",
           "settings": {
             "icon": "shopify://shop_images/Profile.png",
+            "heading": "My Approvals",
+            "description": "Manage approval requests.",
+            "link_label": "View All",
+            "link_url": "https://shopify.com/75142004964/account/profile"
+          }
+        },
+        "feature_CXbtYY": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify://shop_images/Profile.png",
             "heading": "My Profile",
             "description": "Manage your profile details.",
             "link_label": "View All",
@@ -119,6 +129,7 @@
       },
       "block_order": [
         "feature_GqyJDz",
+        "feature_CXbtYY",
         "feature_WNTVL3"
       ],
       "name": "Feature Card Grid",
