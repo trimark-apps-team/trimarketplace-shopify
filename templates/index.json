@@ -41,15 +41,6 @@
     "feature_cards_JkfJhb": {
       "type": "feature-cards",
       "blocks": {
-        "feature_888GCQ": {
-          "type": "feature",
-          "settings": {
-            "heading": "",
-            "description": "",
-            "link_label": "View All",
-            "link_url": ""
-          }
-        },
         "feature_6E3HtY": {
           "type": "feature",
           "settings": {
@@ -69,12 +60,16 @@
             "link_label": "View All",
             "link_url": "#"
           }
+        },
+        "logo_bn9mcx": {
+          "type": "logo",
+          "settings": {}
         }
       },
       "block_order": [
-        "feature_888GCQ",
         "feature_6E3HtY",
-        "feature_y6w6GE"
+        "feature_y6w6GE",
+        "logo_bn9mcx"
       ],
       "name": "Feature Card Grid",
       "settings": {
