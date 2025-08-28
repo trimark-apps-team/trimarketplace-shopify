@@ -99,10 +99,21 @@
                  
                 
               {%- when 'title' -%}
+                {%- assign published_date = '2025-07-01' | date: "%s" -%}
+                {%- assign current_date = 'now' | date: "%s" -%}
+                {%- assign seconds_in_60_days = 60 | times: 60 | times: 24 | times: 60 -%}
+                {%- assign age_in_seconds = current_date | minus: published_date -%}
                 
                   {% if product.metafields.custom.private_label == true %}
                   <span class="product-label private-label">PRIVATE LABEL</span>
                   {%- endif %}
+                   {% if age_in_seconds < seconds_in_60_days %}
+                    <div class="card__badge--new-arrival-label">
+                      <span>
+                        New Arrival
+                      </span>
+                    </div>
+                  {% endif %} 
                 <p><strong>Item Number: <span class="trimark-red">{{ product.selected_or_first_available_variant.sku }}</span></strong></p>
                 <div class="product__title" {{ block.shopify_attributes }}>
                   <h1>{{ product.title | escape }}</h1>
