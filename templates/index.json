@@ -102,10 +102,11 @@
         "feature_WNTVL3": {
           "type": "feature",
           "settings": {
+            "icon": "shopify://shop_images/Help.png",
             "heading": "Help",
             "description": "Get assistance and view any help documents.",
             "link_label": "View All",
-            "link_url": "shopify://collections/new-store-opening-2"
+            "link_url": "shopify://pages/contact"
           }
         }
       },
