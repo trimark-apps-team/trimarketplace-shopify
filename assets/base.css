@@ -3842,6 +3842,6 @@ details-disclosure > details {
 }
 
 #MainContent {
-  border: none;
+  border: none!important;
   width: 100%;
 }
