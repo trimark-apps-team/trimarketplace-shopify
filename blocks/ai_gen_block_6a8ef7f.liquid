@@ -258,7 +258,7 @@
 
   {% if customer %}
     <div class="ai-quick-reorder-products-{{ ai_gen_id }}" id="ai-quick-reorder-products-{{ ai_gen_id }}">
-      {% assign recent_orders = customer.orders | where: 'financial_status', 'paid' | sort: 'created_at' | reverse %}
+      {% assign recent_orders = customer.orders | sort: 'created_at' | reverse %}
       {% assign displayed_products = '' %}
       {% assign product_count = 0 %}
 
