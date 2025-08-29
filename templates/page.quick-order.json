@@ -17,7 +17,7 @@
           "settings": {
             "title": "Quick Reorder",
             "subtitle": "Easily reorder your favorite products from previous purchases",
-            "max_products": 6,
+            "max_products": 12,
             "text_alignment": "center",
             "background_color": "#ffffff",
             "text_color": "#121212",
