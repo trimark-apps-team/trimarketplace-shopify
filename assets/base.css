@@ -3845,3 +3845,9 @@ details-disclosure > details {
   border: none!important;
   width: 100%;
 }
+
+.header__icons i.icon-wishlist-heart-empty {
+  font-size: 20px !important;
+  padding-bottom: 3px;
+  color: #242833cf !important;
+}
