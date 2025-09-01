@@ -2683,10 +2683,7 @@ function selectTier(row) {
   document.getElementById('editable-price-text').textContent = price;
   document.getElementById('editable-price-input').value = rawPrice;
 
-  // Store original price as fallback
   document.getElementById('editable-price-input').dataset.original = rawPrice;
-
-  // Hide error message initially
   document.getElementById('price-error-msg').style.display = 'none';
 
   document.getElementById('popup').classList.add('hidden');
@@ -2705,7 +2702,7 @@ function enablePriceEdit() {
   inputEl.addEventListener('input', function () {
     let enteredPrice = parseFloat(inputEl.value);
 
-    if (isNaN(enteredPrice) || enteredPrice < 1 || enteredPrice > 1000) {
+    if (isNaN(enteredPrice) || enteredPrice < 80) {
       errorEl.style.display = "inline";
       return;
     }
@@ -2720,8 +2717,7 @@ function enablePriceEdit() {
   inputEl.addEventListener('blur', function () {
     let enteredPrice = parseFloat(inputEl.value);
 
-    // Revert on blur if still invalid
-    if (isNaN(enteredPrice) || enteredPrice < 1 || enteredPrice > 1000) {
+    if (isNaN(enteredPrice) || enteredPrice < 80) {
       inputEl.value = inputEl.dataset.original;
       textEl.textContent = document.body.dataset.symbol + parseFloat(inputEl.dataset.original).toFixed(2);
     }
