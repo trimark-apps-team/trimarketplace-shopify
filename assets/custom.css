@@ -76,6 +76,9 @@ body {
 .footer__blocks-wrapper .brand-phone a, .footer__blocks-wrapper .brand-email a {
     line-break: anywhere;
 }
+#MainContent {
+   margin: 0px;
+}
 @media screen and (max-width: 1173px) {
   .footer__blocks-wrapper .brand-email {
     align-items: center;
