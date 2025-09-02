@@ -82,4 +82,7 @@ body {
     width: 100%;
     text-align: center;
   }
+  .footer-block .list-menu__item--link {
+    justify-content: center;
+  }
 }
