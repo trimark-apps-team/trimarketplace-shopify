@@ -41,6 +41,7 @@
     endif
   -%}
   <div class="card-wrapper product-card-wrapper underline-links-hover">
+  {% render 'hulkapps-wishlist-collection-btn', productId: card_product.id, variantId: card_product.selected_or_first_available_variant.id %}
     <div
       class="
         card card--{{ settings.card_style }}
