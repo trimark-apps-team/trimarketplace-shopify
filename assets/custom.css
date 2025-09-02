@@ -104,7 +104,5 @@ body {
   .footer-block__brand-info .footer__list-social {
     justify-content: center;
   }
-  .footer__blocks-wrapper .brand-email {
-    align-items: center;
-  }
+  
 }
