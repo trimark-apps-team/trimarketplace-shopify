@@ -13,6 +13,7 @@
       "type": "main-list-collections",
       "settings": {
         "title": "My Catalog",
+        "description": "Browse categories in your order guide.",
         "sort": "alphabetical",
         "image_ratio": "square",
         "columns_desktop": 4,
