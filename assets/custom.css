@@ -37,6 +37,7 @@ body {
 .footer-block__brand-info .list-social {
     justify-content: flex-start;
     gap: 6px;
+    margin-top: 15px;
 }
 .footer-block__brand-info .list-social__link {
     align-items: center;
