@@ -72,7 +72,9 @@ body {
     border-top: 1px solid #CACED4;
 }
 
-
+.footer__blocks-wrapper .brand-phone a, .footer__blocks-wrapper .brand-email a {
+    line-break: anywhere;
+}
 
 @media screen and (max-width: 749px) {
   .footer .grid {
@@ -96,9 +98,6 @@ body {
   }
   .footer-block__brand-info .footer__list-social {
     justify-content: center;
-  }
-  .footer__blocks-wrapper .brand-phone a, .footer__blocks-wrapper .brand-email a {
-    line-break: anywhere;
   }
   .footer__blocks-wrapper .brand-phone, .footer__blocks-wrapper .brand-email {
     align-items: baseline;
