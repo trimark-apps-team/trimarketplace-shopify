@@ -130,7 +130,7 @@
                       {%- endif -%}
                       {%- if settings.brand_number != blank -%}
                         <div class="rte">
-                          <img src="{{ settings.phone_icon }}" />
+                          <img src="{{ settings.phone_icon | img_url: "50x50" }}" />
                           {{ settings.brand_number }}
                         </div>
                       {%- endif -%}
