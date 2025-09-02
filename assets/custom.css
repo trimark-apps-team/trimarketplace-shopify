@@ -45,3 +45,7 @@ body {
     color: rgba(var(--color-link),var(--alpha-link));
 }
 
+.footer-block__brand-info .list-social__item .icon {
+    width: 23px;
+    height: 25px;
+}
