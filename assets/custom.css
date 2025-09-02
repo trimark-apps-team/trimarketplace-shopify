@@ -88,4 +88,7 @@ body {
   .footer .footer-block__image-wrapper {
     margin-inline: auto;
   }
+  .footer__blocks-wrapper .brand-phone, .footer__blocks-wrapper .brand-email {
+    justify-content: center;
+  }
 }
