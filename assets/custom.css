@@ -18,4 +18,5 @@ body {
 
 .footer__blocks-wrapper .brand-phone, .footer__blocks-wrapper .brand-email {
     display:flex;
+    line-height: calc(1 + 0.8 / var(--font-body-scale));
 }
