@@ -136,8 +136,8 @@
                       {%- endif -%}
                       {%- if settings.brand_number != blank -%}
                         <div class="rte brand-email">
-                          <img src="{{ settings.phone_icon | img_url: "30x30" }}" width="20px" height="20px" />
-                          {{ settings.brand_number }}
+                          <img src="{{ settings.email_icon | img_url: "30x30" }}" width="20px" height="20px" />
+                          {{ settings.brand_email }}
                         </div>
                       {%- endif -%}
                       {%- if block.settings.show_social and has_social_icons -%}
