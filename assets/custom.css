@@ -85,4 +85,7 @@ body {
   .footer-block .list-menu__item--link {
     justify-content: center;
   }
+  .footer .footer-block__image-wrapper {
+    margin-inline: auto;
+  }
 }
