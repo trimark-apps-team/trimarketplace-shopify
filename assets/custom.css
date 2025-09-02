@@ -19,13 +19,7 @@ body {
 .footer__blocks-wrapper .brand-phone, .footer__blocks-wrapper .brand-email {
     display:flex;
     gap: 5px;
-    
-}
-.footer__blocks-wrapper .brand-phone {
     align-items: flex-end;
-}
-.footer__blocks-wrapper .brand-email {
-    align-items: center;
 }
 
 .footer__blocks-wrapper .brand-phone a, .footer__blocks-wrapper .brand-email a {
@@ -81,7 +75,12 @@ body {
 .footer__blocks-wrapper .brand-phone a, .footer__blocks-wrapper .brand-email a {
     line-break: anywhere;
 }
-
+@media screen and (max-width: 749px) {
+  .footer__blocks-wrapper .brand-email {
+    align-items: center;
+  }
+ 
+}
 @media screen and (max-width: 749px) {
   .footer .grid {
     flex-direction: column;
