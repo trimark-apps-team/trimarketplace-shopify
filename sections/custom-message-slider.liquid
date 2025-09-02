@@ -1,5 +1,5 @@
-<section class="message-slider message-slider-section-wrapper" id="{{ section.id }}" data-section-id="{{ section.id }}">
-  <div class="message-slider__wrapper page-width">
+<section class="message-slider page-width message-slider-section-wrapper" id="{{ section.id }}" data-section-id="{{ section.id }}">
+  <div class="message-slider__wrapper">
     <div class="message-slider__slides">
       {% for block in section.blocks %}
         <div class="message-slide">
@@ -37,6 +37,7 @@
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       position: relative;
       overflow: hidden;
+      width: 100%;
       margin: auto;
     }
     .message-slider__slides {
