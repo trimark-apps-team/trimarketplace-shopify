@@ -19,11 +19,12 @@ body {
 .footer__blocks-wrapper .brand-phone, .footer__blocks-wrapper .brand-email {
     display:flex;
     gap: 5px;
+    
+}
+.footer__blocks-wrapper .brand-phone {
     align-items: flex-end;
 }
 .footer__blocks-wrapper .brand-email {
-    display:flex;
-    gap: 5px;
     align-items: center;
 }
 
