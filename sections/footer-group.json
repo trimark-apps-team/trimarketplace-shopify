@@ -14,14 +14,6 @@
     "footer": {
       "type": "footer",
       "blocks": {
-        "image_YkjnPi": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/nsf-international-logo-96A5B63247-seeklogo.com.png",
-            "image_width": 100,
-            "alignment": "center"
-          }
-        },
         "brand-information": {
           "type": "brand_information",
           "settings": {
@@ -30,7 +22,6 @@
         }
       },
       "block_order": [
-        "image_YkjnPi",
         "brand-information"
       ],
       "custom_css": [],
