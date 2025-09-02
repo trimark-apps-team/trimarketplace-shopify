@@ -94,4 +94,7 @@ body {
   .footer-block__brand-info .list-social__item .icon, .footer-block__brand-info .svg-wrapper {
     justify-content: center;
   }
+  .footer-block__brand-info .footer__list-social {
+    justify-content: center;
+  }
 }
