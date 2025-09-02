@@ -66,3 +66,10 @@ body {
     font-size: 1.4rem;
     font-family: inherit;
 }
+
+.footer__copyright.caption {
+    font-size: 1rem;
+    letter-spacing: .07rem;
+    line-height: calc(1 + .7 / var(--font-body-scale));
+    border-top: 1px solid #CACED4;
+}
