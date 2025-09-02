@@ -85,6 +85,9 @@ body {
 .collection-list .card__information {
    text-align: left;
 }
+.collection-list .card__information .icon-wrap {
+   display:none;
+}
 
 @media screen and (max-width: 1054px) {
   .header__menu-item {
