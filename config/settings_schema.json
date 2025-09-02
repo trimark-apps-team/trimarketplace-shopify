@@ -1297,6 +1297,16 @@
         "default": 100,
         "unit": "px",
         "label": "t:settings_schema.brand_information.settings.brand_image_width.label"
+      },
+      {
+        "type": "richtext",
+        "id": "brand_number",
+        "label": "Contact Number"
+      },
+      {
+        "type": "richtext",
+        "id": "brand_email",
+        "label": "Email"
       }
     ]
   },
