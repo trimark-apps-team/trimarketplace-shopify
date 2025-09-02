@@ -59,3 +59,10 @@ body {
 .footer-block--newsletter .footer__list-social {
     display:none;
 }
+
+.copyright__content {
+    line-height: calc(1 + 0.8 / var(--font-body-scale));
+    color: rgb(var(--color-foreground));
+    font-size: 1.4rem;
+    font-family: inherit;
+}
