@@ -90,12 +90,14 @@ body {
   }
   .footer__blocks-wrapper .brand-phone, .footer__blocks-wrapper .brand-email {
     justify-content: center;
-    flex-wrap: wrap;
   }
   .footer-block__brand-info .list-social__item .icon, .footer-block__brand-info .svg-wrapper {
     justify-content: center;
   }
   .footer-block__brand-info .footer__list-social {
     justify-content: center;
+  }
+  .footer__blocks-wrapper .brand-phone a, .footer__blocks-wrapper .brand-email a {
+    line-break: anywhere;
   }
 }
