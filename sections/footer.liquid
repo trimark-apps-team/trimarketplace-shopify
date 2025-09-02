@@ -129,7 +129,13 @@
                         <div class="rte">{{ settings.brand_description }}</div>
                       {%- endif -%}
                       {%- if settings.brand_number != blank -%}
-                        <div class="rte">
+                        <div class="rte brand-phone">
+                          <img src="{{ settings.phone_icon | img_url: "30x30" }}" width="20px" height="20px" />
+                          {{ settings.brand_number }}
+                        </div>
+                      {%- endif -%}
+                      {%- if settings.brand_number != blank -%}
+                        <div class="rte brand-email">
                           <img src="{{ settings.phone_icon | img_url: "30x30" }}" width="20px" height="20px" />
                           {{ settings.brand_number }}
                         </div>
