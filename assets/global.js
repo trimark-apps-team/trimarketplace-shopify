@@ -1168,7 +1168,7 @@ class ProductRecommendations extends HTMLElement {
         if (html.querySelector('.grid__item')) {
           this.classList.add('product-recommendations--loaded');
         }
-        HulkappWishlist._updateWishlistButton()
+        HulkappWishlist._updateWishlistButton();
       })
       .catch((e) => {
         console.error(e);
