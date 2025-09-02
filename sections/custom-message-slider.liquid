@@ -137,6 +137,28 @@
       }
     }
 
+    @media screen and (max-width: 480px) {
+      .message-slide {
+        max-width: 100%;
+        overflow-wrap: break-word;
+        word-break: break-word;
+      }
+
+      #{{ section.id }} .message-slide .message-slide__content {
+        max-width: 100%;
+        width: auto;
+      }
+
+      .message-slider__slides {
+        width: 100%;
+      }
+
+      .message-slider__controls {
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+    }
+
   </style>
 
   <script>
