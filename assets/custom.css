@@ -21,6 +21,11 @@ body {
     gap: 5px;
     align-items: flex-end;
 }
+.footer__blocks-wrapper .brand-email {
+    display:flex;
+    gap: 5px;
+    align-items: center;
+}
 
 .footer__blocks-wrapper .brand-phone a, .footer__blocks-wrapper .brand-email a {
     line-height: calc(1 + 0.8 / var(--font-body-scale));
