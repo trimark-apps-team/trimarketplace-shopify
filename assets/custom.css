@@ -38,3 +38,9 @@ body {
     justify-content: flex-start;
     gap: 6px;
 }
+.footer-block__brand-info .list-social__link {
+    align-items: center;
+    display: flex;
+    padding: 0px;
+    color: rgb(var(--color-foreground));
+}
