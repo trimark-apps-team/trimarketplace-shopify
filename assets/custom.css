@@ -24,7 +24,7 @@ body {
 
 .footer__blocks-wrapper .brand-phone a, .footer__blocks-wrapper .brand-email a {
     line-height: calc(1 + 0.8 / var(--font-body-scale));
-    color: rgb(var(--color-foreground));
+    /* color: rgb(var(--color-foreground)); */
     font-size: 1.4rem;
     font-family: inherit;
 }
@@ -42,5 +42,4 @@ body {
     align-items: center;
     display: flex;
     padding: 0px;
-    color: rgb(var(--color-foreground));
 }
