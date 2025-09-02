@@ -2359,6 +2359,7 @@ input[type='checkbox'] {
   grid-template-columns: 1fr 2fr 1fr; */
   align-items: center;
   align-content: center;
+  justify-content: space-between;
 }
 
 @media screen and (max-width: 749px) {
