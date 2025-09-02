@@ -111,6 +111,8 @@
     "brand_description": "",
     "brand_image": "shopify://shop_images/01_TriMarketPlace_-_logo_1_copy.png",
     "brand_image_width": 150,
+    "phone_icon": "shopify://shop_images/phone-call.svg",
+    "email_icon": "shopify://shop_images/envelope_1.svg",
     "social_facebook_link": "",
     "social_instagram_link": "",
     "social_youtube_link": "",
