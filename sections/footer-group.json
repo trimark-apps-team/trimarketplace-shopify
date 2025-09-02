@@ -19,10 +19,26 @@
           "settings": {
             "show_social": true
           }
+        },
+        "link_list_9NANyH": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Quick links",
+            "menu": "footer"
+          }
+        },
+        "link_list_HYGJtf": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Quick links",
+            "menu": "footer"
+          }
         }
       },
       "block_order": [
-        "brand-information"
+        "brand-information",
+        "link_list_9NANyH",
+        "link_list_HYGJtf"
       ],
       "custom_css": [],
       "settings": {
