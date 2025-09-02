@@ -71,3 +71,11 @@ body {
     padding-top: 20px;
     border-top: 1px solid #CACED4;
 }
+
+
+
+@media screen and (max-width: 749px) {
+  .footer .grid {
+    flex-direction: column;
+  }
+}
