@@ -169,7 +169,7 @@ body {
     min-height: auto;
     
   }
-  .shopify-policy__title h1 {
+  .shopify-policy__container .shopify-policy__title h1 {
     font-size: 22px;
   }
   .shopify-policy__body {
