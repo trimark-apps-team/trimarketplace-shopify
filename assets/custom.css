@@ -123,7 +123,7 @@ body {
   padding-bottom: 20px;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
-  /* max-width: 1115px; */
+  max-width: 1115px;
 }
 .facet-filters__field .select {
     width: auto;
@@ -141,11 +141,11 @@ body {
   padding-bottom: 20px;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-  /* max-width: 1115px; */
+  max-width: 1115px;
 }
 .shopify-policy__container {
     background: #fff;
-    /* max-width: 1115px; */
+    max-width: 1115px;
     margin: 0 auto;
     padding-left: 20px;
     padding-right: 20px;
