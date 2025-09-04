@@ -152,11 +152,18 @@ body {
     border-radius:8px;
     min-height: 500px;
 }
-.page-width .product, .related-products.page-width {
+.page-width .product {
   background: #fff;
   padding: 20px;
   border-radius: 8px;
   margin-bottom: 40px;
+}
+.related-products.page-width {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 40px;
+  max-width: 1115px;
 }
 @media screen and (max-width: 1054px) {
   .header__menu-item {
