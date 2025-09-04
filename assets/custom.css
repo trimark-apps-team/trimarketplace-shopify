@@ -147,8 +147,7 @@ body {
     background: #fff;
     max-width: 1115px;
     margin: 0 auto;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: 20px;
 }
 @media screen and (max-width: 1054px) {
   .header__menu-item {
