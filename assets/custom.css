@@ -76,6 +76,9 @@ body {
 .footer__blocks-wrapper .brand-phone a, .footer__blocks-wrapper .brand-email a {
     line-break: anywhere;
 }
+.footer__blocks-wrapper .brand-phone p, .footer__blocks-wrapper .brand-email p {
+    margin-top:0px;
+}
 #MainContent {
    margin: 0px;
 }
