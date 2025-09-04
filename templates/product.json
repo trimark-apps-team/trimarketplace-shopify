@@ -22,6 +22,10 @@
           "type": "title",
           "settings": {}
         },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
         "description": {
           "type": "description",
           "settings": {}
@@ -59,10 +63,6 @@
         },
         "quantity_selector": {
           "type": "quantity_selector",
-          "settings": {}
-        },
-        "price": {
-          "type": "price",
           "settings": {}
         },
         "tier_pricing_bjEHBr": {
@@ -109,6 +109,7 @@
       "block_order": [
         "sku_aVwE4P",
         "title",
+        "price",
         "description",
         "inventory_RzP6BQ",
         "custom_liquid_N8U98j",
@@ -116,7 +117,6 @@
         "product_tags_6g4jnp",
         "variant_picker",
         "quantity_selector",
-        "price",
         "tier_pricing_bjEHBr",
         "buy_buttons"
       ],
