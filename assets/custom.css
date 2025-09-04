@@ -173,7 +173,7 @@ body {
 .collection__title h2 {
   font-size: 25px;
 }
-.collection__view-all {
+.collection__view-all a {
   border: 1px solid black;
 }
 @media screen and (max-width: 1054px) {
