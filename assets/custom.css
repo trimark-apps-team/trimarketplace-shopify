@@ -118,6 +118,9 @@ body {
 .facets-container .facets__heading, .facets-container .facets__summary-label, .facets-container .facets__summary span {
   font-weight: bold;
 }
+.facets-vertical.page-width {
+  background:#fff;
+}
 @media screen and (max-width: 1054px) {
   .header__menu-item {
     padding: 0.5rem;
