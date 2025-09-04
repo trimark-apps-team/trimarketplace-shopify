@@ -120,6 +120,9 @@ body {
 }
 .facets-vertical.page-width {
   background:#fff;
+  padding-bottom: 20px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
 }
 .facets.page-width {
   background:#fff;
