@@ -117,6 +117,9 @@ body {
   .footer .grid {
     flex-direction: column;
   }
+  .footer .grid__item {
+    width:100%;
+  }
   .footer-block.grid__item.scroll-trigger.animate--slide-in {
     width: 100%;
     text-align: center;
