@@ -109,7 +109,7 @@ body {
 }
 .template-index .view-all-wrapper {
     background: #fff;
-    padding: 0px 5rem;
+    padding: 2rem 0px;
     border-radius: 8px;
 }
 @media screen and (max-width: 1054px) {
