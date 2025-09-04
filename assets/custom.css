@@ -110,7 +110,7 @@ element.style {
 .template-index .featured-collection-body {
     background: #fff;
     padding: 5rem 5rem;
-    border-radius: 8px;
+    border-radius: 8px !important;
 }
 @media screen and (max-width: 1054px) {
   .header__menu-item {
