@@ -167,6 +167,10 @@ body {
 @media screen and (max-width: 749px) {
   .shopify-policy__container {
     min-height: auto;
+    
+  }
+  .shopify-policy__body {
+    word-wrap: break-word;
   }
   .footer .grid {
     flex-direction: column;
