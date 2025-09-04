@@ -126,13 +126,12 @@ body {
 }
 .facet-filters__field .select {
     width: auto;
-    border: 1px solid black;
-    padding: 5px;
-}
-.select .svg-wrapper, .customer select+.svg-wrapper {
     border: 1px solid #c5c1c1;
     padding: 5px;
     border-radius: 3px;
+}
+.select .svg-wrapper, .customer select+.svg-wrapper {
+    right: 5px;
 }
 
 .facets.page-width {
