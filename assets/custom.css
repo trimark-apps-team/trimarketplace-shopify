@@ -141,6 +141,13 @@ body {
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
 }
+.shopify-policy__container {
+    max-width: 560px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
 @media screen and (max-width: 1054px) {
   .header__menu-item {
     padding: 0.5rem;
