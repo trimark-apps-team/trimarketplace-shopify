@@ -174,7 +174,7 @@ body {
   font-size: 25px;
 }
 .collection__view-all a {
-  border: 1px solid black;
+  border: 1px solid #8f8f8f;
 }
 @media screen and (max-width: 1054px) {
   .header__menu-item {
