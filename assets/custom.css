@@ -115,7 +115,7 @@ body {
     border-bottom-right-radius: 8px;
     margin: 0 auto;
 }
-.facets-container .facets__heading, .facets-container .facets__summary-label {
+.facets-container .facets__heading, .facets-container .facets__summary-label, .facets-container .facets__summary-label span {
   font-weight: bold;
 }
 @media screen and (max-width: 1054px) {
