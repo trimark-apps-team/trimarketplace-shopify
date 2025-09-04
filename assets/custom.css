@@ -142,7 +142,7 @@ body {
   border-top-right-radius: 8px;
 }
 .shopify-policy__container {
-    max-width: 560px;
+    background: #fff;
     max-width: 1200px;
     margin: 0 auto;
     padding-left: 20px;
