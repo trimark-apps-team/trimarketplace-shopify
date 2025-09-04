@@ -91,6 +91,8 @@ body {
 .footer .footer-block__heading {
   font-size: 16px;
   line-height 0px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 .footer .list-menu__item--link {
     padding-bottom: 0px;
