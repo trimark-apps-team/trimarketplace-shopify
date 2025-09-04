@@ -170,7 +170,7 @@ body {
     
   }
   .shopify-policy__container .shopify-policy__title h1 {
-    font-size: 22px;
+    font-size: 22px !important;
   }
   .shopify-policy__body {
     word-wrap: break-word;
