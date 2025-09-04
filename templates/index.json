@@ -48,9 +48,9 @@
         "margin_top": 18,
         "margin_bottom": 18,
         "header_color_mobile": "#b11830",
-        "header_font_size_mobile": 18,
+        "header_font_size_mobile": 12,
         "text_color_mobile": "#121212",
-        "text_font_size_mobile": 18,
+        "text_font_size_mobile": 12,
         "margin_top_mobile": 18,
         "margin_bottom_mobile": 18
       }
