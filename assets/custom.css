@@ -173,6 +173,9 @@ body {
 .collection__title h2 {
   font-size: 25px;
 }
+.collection__view-all {
+  border: 1px solid black;
+}
 @media screen and (max-width: 1054px) {
   .header__menu-item {
     padding: 0.5rem;
