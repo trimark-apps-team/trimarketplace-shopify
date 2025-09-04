@@ -129,6 +129,9 @@ body {
     border: 1px solid black;
     padding: 5px;
 }
+.select .svg-wrapper, .customer select+.svg-wrapper {
+    right: 4px;
+}
 .facets.page-width {
   background:#fff;
   padding-top: 20px;
