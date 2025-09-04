@@ -169,6 +169,9 @@ body {
     min-height: auto;
     
   }
+  .shopify-policy__title h1 {
+    font-size: 22px;
+  }
   .shopify-policy__body {
     word-wrap: break-word;
   }
