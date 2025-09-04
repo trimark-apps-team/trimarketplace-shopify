@@ -152,7 +152,7 @@ body {
     border-radius:8px;
     min-height: 500px;
 }
-.page-width .product {
+.page-width .product, .related-products.page-width {
   background: #fff;
   padding: 20px;
   border-radius: 8px;
