@@ -130,12 +130,11 @@ body {
     padding: 5px;
 }
 .select .svg-wrapper, .customer select+.svg-wrapper {
-    border: 1px solid #c5c1c1;
     padding: 5px;
-    border-radius: 3px;
 }
 .select .svg-wrapper, .customer select{
     border-radius: 3px;
+    border: 1px solid #c5c1c1;
 }
 .facets.page-width {
   background:#fff;
