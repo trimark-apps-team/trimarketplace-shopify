@@ -116,7 +116,7 @@ body {
     margin: 0 auto;
 }
 .facets-container .facets__heading {
-  font-weight: 700px;
+  font-weight: bold;
 }
 @media screen and (max-width: 1054px) {
   .header__menu-item {
