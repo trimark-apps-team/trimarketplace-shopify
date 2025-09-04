@@ -120,6 +120,7 @@ body {
   }
   .footer .grid__item {
     width:100%;
+    margin-bottom: 10px;
   }
   .footer-block.grid__item.scroll-trigger.animate--slide-in {
     width: 100%;
