@@ -168,6 +168,7 @@ body {
 .collection__title {
   display: flex;
   justify-content: space-between;
+  align-items: flex-end;
 }
 .collection__title h2 {
   font-size: 25px;
