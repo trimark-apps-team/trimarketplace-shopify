@@ -113,7 +113,6 @@ body {
     padding: 2rem 0px;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
-    margin: 0 auto;
 }
 .facets-container .facets__heading, .facets-container .facets__summary-label, .facets-container .facets__summary span {
   font-weight: bold;
