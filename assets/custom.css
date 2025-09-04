@@ -125,6 +125,8 @@ body {
   background:#fff;
   padding-top: 20px;
   padding-bottom: 20px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 }
 @media screen and (max-width: 1054px) {
   .header__menu-item {
