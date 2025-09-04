@@ -116,6 +116,7 @@ body {
 @media screen and (max-width: 749px) {
   .footer .grid {
     flex-direction: column;
+    text-align: center;
   }
   .footer .grid__item {
     width:100%;
