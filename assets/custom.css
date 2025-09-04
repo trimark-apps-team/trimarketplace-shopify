@@ -90,6 +90,7 @@ body {
 }
 .footer .footer-block__heading {
   font-size: 16px;
+  line-height 0px;
 }
 .footer .list-menu__item--link {
     padding-bottom: 0px;
