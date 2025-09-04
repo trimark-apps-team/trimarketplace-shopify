@@ -154,6 +154,7 @@ body {
 }
 .page-width .product {
   background: #fff;
+  padding: 20px;
 }
 @media screen and (max-width: 1054px) {
   .header__menu-item {
