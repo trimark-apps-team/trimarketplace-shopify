@@ -12,15 +12,15 @@
     "main": {
       "type": "main-product",
       "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
         "sku_aVwE4P": {
           "type": "sku",
           "settings": {
             "text_style": "body"
           }
-        },
-        "title": {
-          "type": "title",
-          "settings": {}
         },
         "price": {
           "type": "price",
@@ -107,8 +107,8 @@
         }
       },
       "block_order": [
-        "sku_aVwE4P",
         "title",
+        "sku_aVwE4P",
         "price",
         "description",
         "inventory_RzP6BQ",
