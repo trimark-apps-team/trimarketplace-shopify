@@ -214,7 +214,7 @@ body {
   border-bottom-right-radius: 8px;
 }
 .cs-button {
-    background-color: rgb(168 36 62);
+    background-color: rgb(168 36 62) !important;
 }
 @media screen and (max-width: 1054px) {
   .header__menu-item {
