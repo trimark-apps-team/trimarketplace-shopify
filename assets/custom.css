@@ -198,7 +198,9 @@ body {
  
 }
 @media screen and (max-width: 1145px) {
-  
+  .responsive.page-width {
+        padding: 0 5rem;
+  }
  
 }
 @media screen and (max-width: 749px) {
