@@ -213,7 +213,7 @@ body {
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
 }
-.cs-cart-items__footer-totals .cs-button, .cs-cart-items__footer-totals .cs-button:hover {
+/* .cs-cart-items__footer-totals .cs-button, .cs-cart-items__footer-totals .cs-button:hover {
   background-color: rgb(168 36 62);
 }
 .cs-cart-items__footer-totals .cs-button.cs-button--secondary {
@@ -242,7 +242,7 @@ body {
 .cs-header {
   margin: 0px !important;
   padding: 20px;
-}
+} */
 @media screen and (max-width: 1054px) {
   .header__menu-item {
     padding: 0.5rem;
