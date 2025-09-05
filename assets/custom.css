@@ -167,7 +167,7 @@ body {
   background: #fff;
   border: 1px solid rgb(168 36 62);
 }
-.cs-cart-items__buy-buttons .cs-cart-items__actions .cs-button--icon {
+.cs-cart-items__buy-buttons .cs-button--form .cs-button--icon {
   color: rgb(168 36 62);
   background: #fff;
   border: 1px solid rgb(168 36 62);
