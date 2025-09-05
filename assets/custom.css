@@ -152,6 +152,8 @@ body {
   background:#fff;
 }
 .collection .collection__title.title-wrapper {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
     margin-bottom: 0px;
     padding: 1rem 5rem 10px;
     border-bottom: 1px solid #c1bdbd;
@@ -194,10 +196,10 @@ body {
 .collection__title h2 {
   font-size: 20px;
 }
-.collection__view-all a {
+.collection__view-all a.button.button--secondary {
   border: 0px !important;
 }
-.collection__view-all a:hover {
+.collection__view-all a.button.button--secondary:hover {
   border: 0px !important;
 }
 .cart-items_count {
