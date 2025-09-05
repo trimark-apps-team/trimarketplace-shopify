@@ -216,9 +216,13 @@ body {
 .cs-cart-items__footer-totals .cs-button, .cs-cart-items__footer-totals .cs-button:hover {
   background-color: rgb(168 36 62);
 }
-.cs-button.cs-button--secondary, .cs-button {
+.cs-button.cs-button--secondary {
   color: rgb(168 36 62);
   background: #fff;
+  border: 1px solid rgb(168 36 62);
+}
+.cs-button svg{
+  fill: rgb(168 36 62);
   border: 1px solid rgb(168 36 62);
 }
 @media screen and (max-width: 1054px) {
