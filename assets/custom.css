@@ -211,6 +211,11 @@ body {
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
 }
+.cart-footer-wrapper.page-width {
+  background: #fff;
+  border-radius: 8px;
+  max-width: 1105px;
+}
 @media screen and (max-width: 1054px) {
   .header__menu-item {
     padding: 0.5rem;
