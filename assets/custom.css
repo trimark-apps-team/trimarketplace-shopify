@@ -227,8 +227,9 @@ body {
 .cs-component {
   background: #F9F9F9 !important;
 }
-.cs-mb-3 {
+.cs-mb-3, .cs-my-6 {
   margin-bottom: 0px;
+  margin-top: 0px;
 }
 .cs-header {
   margin: 0px !important;
