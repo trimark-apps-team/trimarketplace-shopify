@@ -257,5 +257,8 @@ body {
   .facets-container .product-count__text {
     display: none;
   }
+  .product-tabs .tab-button {
+    font-size: 15px;
+  }
   
 }
