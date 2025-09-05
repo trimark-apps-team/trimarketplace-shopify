@@ -165,6 +165,10 @@ body {
 .cs-cart-items__thumbnail .cs-thumbnail {
     width: 100px;
 }
+.featured-view-all-custom {
+    color: #b11830;
+    font-size: 16px;
+}
 .cs-cart-items__buy-buttons .cs-cart-items__actions .cs-button--secondary {
   color: rgb(168 36 62);
   background: #fff;
