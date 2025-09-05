@@ -214,7 +214,7 @@
         "text_color": "#333333",
         "text_font_size": 14,
         "margin_top": 20,
-        "margin_bottom": 20,
+        "margin_bottom": 25,
         "view_all_color": "#b11830",
         "view_all_font_size": 16,
         "header_color_mobile": "#121212",
