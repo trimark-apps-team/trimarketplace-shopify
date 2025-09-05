@@ -223,6 +223,9 @@ body {
   .footer__blocks-wrapper .brand-email {
     align-items: center;
   }
+  #main-cart-footer {
+    background:#F9F9F9;
+  }
  
 }
 @media screen and (max-width: 1145px) {
