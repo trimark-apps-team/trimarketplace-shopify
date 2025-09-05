@@ -214,7 +214,7 @@ body {
   border-bottom-right-radius: 8px;
 }
 .cs-cart-items__footer-totals .cs-button {
-  background-color: rgb(168 36 62) !important;
+  background-color: rgb(168 36 62);
 }
 .cs-button .cs-button--secondary {
   color: rgb(var(--color-button-text));
