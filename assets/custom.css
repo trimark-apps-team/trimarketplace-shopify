@@ -254,7 +254,7 @@ body {
     margin-bottom:10px;
   }
 
-  .product-count__text {
+  .facets-container .product-count__text {
     display: none;
   }
   
