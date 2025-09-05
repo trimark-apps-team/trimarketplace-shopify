@@ -158,6 +158,9 @@ body {
     padding: 1rem 5rem 10px;
     /* border-bottom: 1px solid #c1bdbd; */
 }
+.facets-layout-list .facets__item {
+  line-height: 15px;
+}
 .shopify-policy__container {
     background: #fff;
     max-width: 1115px;
