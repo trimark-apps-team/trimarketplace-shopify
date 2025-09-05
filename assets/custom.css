@@ -183,6 +183,9 @@ body {
 .collection__view-all a:hover {
   border: 1px solid #8f8f8f;
 }
+.cart-items_count {
+  display: none;
+}
 @media screen and (max-width: 1054px) {
   .header__menu-item {
     padding: 0.5rem;
