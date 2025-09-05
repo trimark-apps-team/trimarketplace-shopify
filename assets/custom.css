@@ -234,7 +234,9 @@ cart-items .title-wrapper-with-link {
   .related-products.page-width {
      margin: 0 1.5rem;
   }
- 
+  .cart-item-wrapper.page-width {
+     margin: 0 5rem;
+  }
 }
 @media screen and (max-width: 749px) {
   .shopify-policy__container {
