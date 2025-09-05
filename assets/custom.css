@@ -195,10 +195,10 @@ body {
   font-size: 20px;
 }
 .collection__view-all a {
-  border: 1px solid #8f8f8f;
+  border: 0px;
 }
 .collection__view-all a:hover {
-  border: 1px solid #8f8f8f;
+  border: 0px;
 }
 .cart-items_count {
   display: none;
