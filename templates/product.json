@@ -65,10 +65,6 @@
           "type": "quantity_selector",
           "settings": {}
         },
-        "price": {
-          "type": "price",
-          "settings": {}
-        },
         "advanced_wishlist_wishlist_btn_FzD9M6": {
           "type": "shopify://apps/advanced-wishlist/blocks/wishlist-btn/330d9272-08ea-4193-b3e0-475a69fa65fa",
           "settings": {
@@ -149,7 +145,6 @@
         "product_tags_6g4jnp",
         "variant_picker",
         "quantity_selector",
-        "price",
         "advanced_wishlist_wishlist_btn_FzD9M6",
         "tier_pricing_bjEHBr",
         "buy_buttons"
