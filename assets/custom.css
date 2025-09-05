@@ -171,9 +171,8 @@ body {
 }
 .cart-item-wrapper.page-width {
   background: #fff;
-  padding: 20px;
+  /* padding: 20px; */
   border-radius: 8px;
-  margin-bottom: 40px;
   max-width: 1105px;
 }
 .collection__title {
