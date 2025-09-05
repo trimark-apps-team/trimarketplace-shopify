@@ -253,5 +253,9 @@ body {
     margin: 0px;
     margin-bottom:10px;
   }
+
+  .product-count__text {
+    display: none;
+  }
   
 }
