@@ -197,6 +197,10 @@ body {
   }
  
 }
+@media screen and (max-width: 1145px) {
+  
+ 
+}
 @media screen and (max-width: 749px) {
   .shopify-policy__container {
     min-height: auto;
