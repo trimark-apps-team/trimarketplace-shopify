@@ -162,7 +162,7 @@ body {
 .card__badge--new-arrival-label, .card__badge--non-stock {
   display:none;
 }
-.cs-thumbnail {
+.cs-cart-items__thumbnail .cs-thumbnail {
     width: 120px;
 }
 .cs-cart-items__buy-buttons .cs-cart-items__actions .cs-button--secondary {
