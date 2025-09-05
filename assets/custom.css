@@ -217,7 +217,7 @@ body {
   background-color: rgb(168 36 62);
 }
 .cs-button.cs-button--secondary {
-  color: red;
+  color: rgb(168 36 62);
   background: #fff;
 }
 @media screen and (max-width: 1054px) {
