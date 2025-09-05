@@ -159,7 +159,7 @@ body {
     
     /* border-bottom: 1px solid #c1bdbd; */
 }
-.card__badge--new-arrival-label, card__badge--non-stock {
+.card__badge--new-arrival-label, .card__badge--non-stock {
   display:none;
 }
 .facets__item .facet-checkbox .svg-wrapper {
