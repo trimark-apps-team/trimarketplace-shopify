@@ -2957,7 +2957,9 @@ details-disclosure > details {
   background: var(--gradient-background);
   background-attachment: fixed;
 }
-
+.shopify-payment-button__button {
+  display:none;
+}
 @media screen and (forced-colors: active) {
   .icon {
     color: CanvasText;
