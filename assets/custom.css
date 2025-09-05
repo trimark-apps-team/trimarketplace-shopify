@@ -241,7 +241,7 @@ body {
      margin: 0 5rem;
   }
   .cart-footer-wrapper.page-width {
-     margin: 0 5rem;
+    margin: 0px 5rem 40px 5rem;
   }
 }
 @media screen and (max-width: 749px) {
