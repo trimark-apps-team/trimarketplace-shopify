@@ -115,7 +115,7 @@ body {
     border-bottom-right-radius: 8px;
     margin: 0 auto;
 }
-.facets-container .facets__heading, .facets-container .facets__summary-label, .facets-container .facets__summary span, .facets__heading--vertical {
+.facets-container .facets__heading, .facets-container .facets__summary-label, .facets-container .facets__summary span, #FacetFiltersForm .facets__heading--vertical {
   font-weight: bold;
 }
 .facets-vertical.page-width {
