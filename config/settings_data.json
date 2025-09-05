@@ -88,7 +88,7 @@
     "media_radius": 4,
     "media_shadow_opacity": 0,
     "media_shadow_horizontal_offset": 0,
-    "media_shadow_vertical_offset": 4,
+    "media_shadow_vertical_offset": -38,
     "media_shadow_blur": 5,
     "popup_border_thickness": 1,
     "popup_border_opacity": 100,
@@ -111,9 +111,7 @@
     "brand_description": "",
     "brand_image": "shopify://shop_images/01_TriMarketPlace_-_logo_1_-_horizontal_copy.png",
     "brand_image_width": 150,
-    "phone_icon": "shopify://shop_images/phone-call.svg",
     "brand_number": "<p><a href=\"tel:8882885346\" target=\"_blank\" title=\"tel:8882885346\">(888) 288-5346</a></p>",
-    "email_icon": "shopify://shop_images/envelope_1.svg",
     "brand_email": "<p><a href=\"mailto:trimarketplacestore@trimarketplace.com\" target=\"_blank\" title=\"mailto:trimarketplacestore@trimarketplace.com\">trimarketplacestore@trimarketplace.com</a></p>",
     "social_facebook_link": "https://www.facebook.com/TrimarkUSA",
     "social_instagram_link": "https://www.instagram.com/trimarkusa/",
@@ -140,6 +138,8 @@
     "non_stock_text_font_size": 12,
     "non_stock_text_color": "#b90000",
     "non_stock_badge_text_color": "#ffffff",
+    "phone_icon": "shopify://shop_images/phone-call.svg",
+    "email_icon": "shopify://shop_images/envelope_1.svg",
     "sections": {
       "main-password-header": {
         "type": "main-password-header",
