@@ -249,5 +249,8 @@ body {
     align-items: flex-start;
     flex-direction: column;
   }
+  .collection .responsive.page-width {
+    margin: 0px;
+  }
   
 }
