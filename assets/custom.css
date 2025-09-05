@@ -310,10 +310,10 @@ body {
       margin: 0px 1.1rem;
   }
   .cart-footer-wrapper.page-width {
-      margin: 0px 1.1rem;
+      margin: 0 5rem;
   }
-  .cart-footer-wrapper.page-width {
-     margin: 0 5rem;
-  }
+  /* .cart-footer-wrapper.page-width {
+     
+  } */
   
 }
