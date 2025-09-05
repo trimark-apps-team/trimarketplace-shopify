@@ -163,7 +163,7 @@ body {
   display:none;
 }
 .cs-cart-items__thumbnail .cs-thumbnail {
-    width: 120px;
+    width: 100px;
 }
 .cs-cart-items__buy-buttons .cs-cart-items__actions .cs-button--secondary {
   color: rgb(168 36 62);
