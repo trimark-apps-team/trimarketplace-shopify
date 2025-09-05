@@ -251,6 +251,7 @@ body {
   }
   .collection .responsive.page-width {
     margin: 0px;
+    margin-bottom:10px;
   }
   
 }
