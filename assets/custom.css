@@ -153,6 +153,7 @@ body {
 }
 .collection .collection__title.title-wrapper {
     margin-bottom: 0px;
+    padding: 2rem 5rem;
 }
 .shopify-policy__container {
     background: #fff;
