@@ -1299,19 +1299,9 @@
         "label": "t:settings_schema.brand_information.settings.brand_image_width.label"
       },
       {
-        "type": "image_picker",
-        "id": "phone_icon",
-        "label": "Phone Icon"
-      },
-      {
         "type": "richtext",
         "id": "brand_number",
         "label": "Contact Number"
-      },
-      {
-        "type": "image_picker",
-        "id": "email_icon",
-        "label": "Email Icon"
       },
       {
         "type": "richtext",
