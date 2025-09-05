@@ -201,6 +201,9 @@ cart-items .title-wrapper-with-link {
 .cart-item__totals.right {
   display:none;
 }
+.cart-item-wrapper.page-width {
+  padding-top: 15px;
+}
 @media screen and (max-width: 1054px) {
   .header__menu-item {
     padding: 0.5rem;
