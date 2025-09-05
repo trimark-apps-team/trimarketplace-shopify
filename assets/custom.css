@@ -156,6 +156,7 @@ body {
     border-top-right-radius: 8px;
     margin-bottom: 0px;
     padding: 1rem 5rem 10px;
+    
     /* border-bottom: 1px solid #c1bdbd; */
 }
 .facets__item .facet-checkbox {
