@@ -206,6 +206,9 @@ cart-items .title-wrapper-with-link {
 }
 .cart-footer-wrapper.page-width  {
   margin-bottom:40px;
+  
+}
+#main-cart-footer {
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
 }
