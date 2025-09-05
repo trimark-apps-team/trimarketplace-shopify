@@ -260,8 +260,8 @@ body {
   .product-tabs .tab-button {
     font-size: 15px;
   }
-  .related-products {
-    margin-bottom:20px;
+  .related-products.page-width {
+      margin-bottom: 20px;
   }
   
 }
