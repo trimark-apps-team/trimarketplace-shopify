@@ -162,7 +162,12 @@ body {
 .card__badge--new-arrival-label, .card__badge--non-stock {
   display:none;
 }
-.cs-cart-items__buy-buttons .cs-cart-items__actions .cs-button--secondary, .cs-cart-items__buy-buttons .cs-cart-items__actions .cs-button--icon {
+.cs-cart-items__buy-buttons .cs-cart-items__actions .cs-button--secondary {
+  color: rgb(168 36 62);
+  background: #fff;
+  border: 1px solid rgb(168 36 62);
+}
+.cs-cart-items__buy-buttons .cs-cart-items__actions .cs-button--icon {
   color: rgb(168 36 62);
   background: #fff;
   border: 1px solid rgb(168 36 62);
