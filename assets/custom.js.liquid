@@ -8,15 +8,12 @@ document.addEventListener("click", function (e) {
 
     if (!input || !text) return;
 
-    // Save original value
     const original = input.value;
 
-    // Hide text, show input
     text.style.display = "none";
     input.style.display = "inline-block";
     input.focus();
 
-    // Create or reuse error span
     let errorSpan = document.querySelector(`.tier-price-error[data-line="${line}"]`);
     if (!errorSpan) {
       errorSpan = document.createElement("span");
@@ -32,15 +29,14 @@ document.addEventListener("click", function (e) {
       input.removeEventListener("blur", handleBlur);
 
       let newPrice = parseFloat(input.value);
-      if (isNaN(newPrice) || newPrice < 1 || newPrice > 1000) {
-        errorSpan.textContent = "Enter a price between $1 and $1000";
+      if (isNaN(newPrice) || newPrice < 80) {
+        errorSpan.textContent = "Enter a price above $80";
         input.value = original;
         input.style.display = "none";
         text.style.display = "inline";
         return;
       }
 
-      // Valid: Clear error
       errorSpan.textContent = "";
 
       newPrice = newPrice.toFixed(2);

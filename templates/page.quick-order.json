@@ -1,1 +1,63 @@
-{"sections":{"main":{"type":"main-page","settings":{"padding_top":20,"padding_bottom":28}},"1748889234ffb54364":{"type":"apps","settings":{"include_margins":true}}},"order":["main","1748889234ffb54364"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "1756448330e53d622e": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_6a8ef7f_LCaD8F": {
+          "type": "ai_gen_block_6a8ef7f",
+          "settings": {
+            "title": "Quick Reorder",
+            "subtitle": "Easily reorder your favorite products from previous purchases",
+            "max_products": 20,
+            "text_alignment": "center",
+            "background_color": "#ffffff",
+            "text_color": "#121212",
+            "padding": 32,
+            "border_radius": 8,
+            "title_size": 28,
+            "subtitle_size": 16,
+            "product_card_bg": "#f9f9f9",
+            "product_card_border": "#e5e5e5",
+            "product_card_radius": 8,
+            "button_color": "#121212",
+            "button_hover_color": "#000000",
+            "button_text_color": "#ffffff",
+            "button_radius": 6
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_6a8ef7f_LCaD8F"
+      ],
+      "settings": {}
+    },
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "padding_top": 20,
+        "padding_bottom": 28
+      }
+    },
+    "1748889234ffb54364": {
+      "type": "apps",
+      "settings": {
+        "include_margins": true
+      }
+    }
+  },
+  "order": [
+    "1756448330e53d622e",
+    "main",
+    "1748889234ffb54364"
+  ]
+}

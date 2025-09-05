@@ -41,6 +41,7 @@
     endif
   -%}
   <div class="card-wrapper product-card-wrapper underline-links-hover">
+  {% render 'hulkapps-wishlist-collection-btn', productId: card_product.id, variantId: card_product.selected_or_first_available_variant.id %}
     <div
       class="
         card card--{{ settings.card_style }}
@@ -574,27 +575,32 @@
             </div>
           {% endif %}
         {% endif %}
-        <div class="card__badge {{ settings.badge_position }}">
-          {%- if card_product.available == false -%}
-            <span
-              id="Badge-{{ section_id }}-{{ card_product.id }}"
-              class="badge badge--bottom-left color-{{ settings.sold_out_badge_color_scheme }}"
-            >
-              {{- 'products.product.sold_out' | t -}}
-            </span>
-          {%- elsif card_product.compare_at_price > card_product.price and card_product.available -%}
-            <span
-              id="Badge-{{ section_id }}-{{ card_product.id }}"
-              class="badge badge--bottom-left color-{{ settings.sale_badge_color_scheme }}"
-            >
-              {{- 'products.product.on_sale' | t -}}
-            </span>
-          {%- endif -%}
-         
 
-        </div>
+        {%- assign published_date = card_product.published_at | date: "%s" -%}
+        {%- assign current_date = 'now' | date: "%s" -%}
+        {%- assign seconds_in_65_days = 60 | times: 60 | times: 24 | times: 65 -%}
+        {%- assign age_in_seconds = current_date | minus: published_date -%}
+
+
+       <div class="card__badge {{ settings.badge_position }}">
+        {%- if card_product.available == false -%}
+          <span
+            id="Badge-{{ section_id }}-{{ card_product.id }}"
+            class="badge badge--bottom-left color-{{ settings.sold_out_badge_color_scheme }}"
+          >
+            {{- 'products.product.sold_out' | t -}}
+          </span>
+        {%- elsif card_product.compare_at_price > card_product.price and card_product.available -%}
+          <span
+            id="Badge-{{ section_id }}-{{ card_product.id }}"
+            class="badge badge--bottom-left color-{{ settings.sale_badge_color_scheme }}"
+          >
+            {{- 'products.product.on_sale' | t -}}
+          </span>
+        {%- endif -%}
+       
+      </div>
         
-      
         {%- if card_product.available == false -%}
           <div class="card__badge--non-stock left">
             <span class="non-stock">
@@ -614,9 +620,14 @@
               PRIVATE LABEL
             </span>
           </div>
-
-        
         {%- endif -%}
+          {% if age_in_seconds < seconds_in_65_days %}
+          <div class="card__badge--new-arrival-label">
+            <span>
+              New Arrival
+            </span>
+          </div>
+        {% endif %} 
       </div>
     </div>
   </div>
@@ -653,6 +664,7 @@
               {{ 'product-apparel-2' | placeholder_svg_tag: 'placeholder-svg' }}
             {% endif %}
           </div>
+          
         </div>
       </div>
       <div class="card__content">

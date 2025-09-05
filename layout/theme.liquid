@@ -35,6 +35,7 @@
     <script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'details-modal.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'search-form.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'accessibe-loader.js' | asset_url }}" defer="defer"></script>
 
 
     {%- if settings.animations_reveal_on_scroll -%}
@@ -523,8 +524,16 @@
   });
 </script>
 
-    
-  </head>
+
+
+
+  <script type="text/javascript">if(typeof window.hulkappsWishlist === 'undefined') {
+                            window.hulkappsWishlist = {};
+                        }
+                        window.hulkappsWishlist.baseURL = '/apps/advanced-wishlist/api';
+                        window.hulkappsWishlist.hasAppBlockSupport = '1';
+                        </script>
+</head>
 
   <body class=" gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %} template-{{ template.name }}" data-symbol="{{ localization.country.currency.symbol }}">
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
@@ -605,5 +614,6 @@
     {%- endif -%}
 
     <script src="{{ 'kevin-poc.js' | asset_url }}" defer="defer"></script>
-  </body>
+  
+</body>
 </html>

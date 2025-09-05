@@ -74,6 +74,29 @@
   z-index: 10;
 }
 
+.card__badge--private-label {
+  background-color: #ff9f1c;
+  color: white;
+  padding: 0.4rem 0.8rem;
+  font-size: 1.2rem;
+  font-weight: 300;
+ /* text-transform: uppercase;*/
+  border-radius: 0.3rem;
+  position: absolute;
+  top: 2rem;
+  z-index: 10;
+}
+.card__badge--new-arrival-label {
+    background-color: sienna;
+    position: relative;
+    width: 88%;
+    margin: 0 auto;
+    border-radius: 4px 4px 0 0;
+    font-size: 13px;
+    color: #fff;
+    bottom: 27px;
+}
+
 
 .card--card:after,
 .card--standard .card__inner:after {
