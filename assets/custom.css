@@ -298,6 +298,8 @@ cart-items .title-wrapper-with-link {
   .cart-item-wrapper.page-width {
       margin: 0px 1.1rem;
   }
-
+  .cart-footer-wrapper.page-width {
+      margin: 0px 1.1rem;
+  }
   
 }
