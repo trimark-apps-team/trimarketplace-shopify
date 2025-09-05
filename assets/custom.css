@@ -159,6 +159,9 @@ body {
     
     /* border-bottom: 1px solid #c1bdbd; */
 }
+.card__badge--new-arrival-label {
+  display:none;
+}
 .facets__item .facet-checkbox .svg-wrapper {
     top: 0.5rem;
 }
