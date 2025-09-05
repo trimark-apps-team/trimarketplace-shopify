@@ -158,8 +158,8 @@ body {
     padding: 1rem 5rem 10px;
     /* border-bottom: 1px solid #c1bdbd; */
 }
-.facets-layout-list .facets__item {
-  line-height: 15px;
+.facet-checkbox {
+    padding: 0.2rem 2rem 1rem 0;
 }
 .shopify-policy__container {
     background: #fff;
