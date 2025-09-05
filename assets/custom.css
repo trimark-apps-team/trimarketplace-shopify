@@ -150,7 +150,7 @@ body {
 .collection__title {
   background:#fff;
 }
-.collection__title.title-wrapper {
+.collection .collection__title.title-wrapper {
     margin-bottom: 0px;
 }
 .shopify-policy__container {
