@@ -150,6 +150,9 @@ body {
 .collection__title {
   background:#fff;
 }
+.collection__title.title-wrapper {
+    margin-bottom: 0px;
+}
 .shopify-policy__container {
     background: #fff;
     max-width: 1115px;
