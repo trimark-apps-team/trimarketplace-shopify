@@ -129,7 +129,7 @@ body {
     margin: 0px;
 }
 .facets-vertical-form {
-    align-items: anchor-center;
+  align-items: anchor-center;
 }
 .facet-filters__field .select {
     width: auto;
