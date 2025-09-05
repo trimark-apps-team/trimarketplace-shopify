@@ -207,11 +207,11 @@ body {
   margin-bottom:40px;
   
 }
-.cart-footer-wrapper.page-width {
+.cart-footer-wrapper {
   background: #fff;
-  max-width: 1105px;
+  /* max-width: 1105px;
   border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
+  border-bottom-right-radius: 8px; */
 }
 @media screen and (max-width: 1054px) {
   .header__menu-item {
