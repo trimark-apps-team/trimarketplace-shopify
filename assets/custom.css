@@ -106,6 +106,7 @@ body {
     background: #fff;
     padding: 3rem 5rem;
     border-radius: 8px;
+    margin-top: 0px;
 }
 .template-index .view-all-wrapper {
     max-width:1100px;
