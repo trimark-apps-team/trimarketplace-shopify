@@ -172,6 +172,9 @@ body {
   background: #fff;
   border: 1px solid rgb(168 36 62);
 }
+.cs-cart-items__buy-buttons .cs-button--form .cs-button--icon svg {
+
+}
 .facets__item .facet-checkbox .svg-wrapper {
     top: 0.5rem;
 }
