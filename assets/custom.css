@@ -244,10 +244,12 @@ body {
   .cart-footer.page-width {
      margin: 0 5rem;
   }
-  .cart-footer-wrapper.page-width {
+  /* .cart-footer-wrapper.page-width {
      margin: 0 5rem;
-  }
-  
+  } */
+  /* .cart-footer-wrapper.page-width {
+    margin: 0px 5rem 40px 5rem;
+  } */
 }
 @media screen and (max-width: 749px) {
   .shopify-policy__container {
@@ -310,10 +312,7 @@ body {
       margin: 0px 1.1rem;
   }
   .cart-footer-wrapper.page-width {
-      margin: 0 5rem;
+      margin: 0px 1.1rem;
   }
-  /* .cart-footer-wrapper.page-width {
-     
-  } */
   
 }
