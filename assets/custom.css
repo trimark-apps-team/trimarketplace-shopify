@@ -147,10 +147,9 @@ body {
   border-top-right-radius: 8px;
   max-width: 1115px;
 }
-/* .collection__title.responsive {
+.collection__title {
   background:#fff;
-  max-width: 1115px;
-}  */
+}
 .shopify-policy__container {
     background: #fff;
     max-width: 1115px;
