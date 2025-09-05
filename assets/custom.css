@@ -216,7 +216,7 @@ body {
 .cs-cart-items__footer-totals .cs-button {
   background-color: rgb(168 36 62);
 }
-.cs-button .cs-button--secondary {
+.cs-button.cs-button--secondary {
   color: red;
   background: #fff;
 }
