@@ -116,7 +116,7 @@ body {
     margin: 0 auto;
 }
 .facets-container .facets__heading, .facets-container .facets__summary-label, .facets-container .facets__summary span, #FacetFiltersForm .facets__heading--vertical .facets__heading {
-  font-weight: bold;
+  font-weight: bold !important;
 }
 .facets-vertical.page-width {
   background:#fff;
