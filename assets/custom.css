@@ -159,6 +159,9 @@ body {
     
     /* border-bottom: 1px solid #c1bdbd; */
 }
+.facet-checkbox .svg-wrapper {
+    top: 0.5rem;
+}
 .facets__item .facet-checkbox {
     padding: 0.2rem 2rem 1rem 0;
 }
