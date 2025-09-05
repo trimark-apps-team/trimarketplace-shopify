@@ -156,7 +156,7 @@ body {
     border-top-right-radius: 8px;
     margin-bottom: 0px;
     padding: 1rem 5rem 10px;
-    border-bottom: 1px solid #c1bdbd;
+    /* border-bottom: 1px solid #c1bdbd; */
 }
 .shopify-policy__container {
     background: #fff;
