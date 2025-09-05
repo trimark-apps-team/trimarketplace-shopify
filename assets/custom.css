@@ -196,8 +196,11 @@ body {
  
 }
 @media screen and (max-width: 1145px) {
-  .responsive.page-width, .collection-hero .collection-hero__title {
+  .responsive.page-width {
      margin: 0 5rem;
+  }
+  .collection-hero .collection-hero__title {
+     margin: 0 3rem;
   }
  
 }
