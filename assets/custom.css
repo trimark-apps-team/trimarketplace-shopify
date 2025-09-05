@@ -125,7 +125,9 @@ body {
   border-bottom-right-radius: 8px;
   max-width: 1115px;
 }
-
+.collection-hero__title {
+    margin: 0px;
+}
 .facet-filters__field .select {
     width: auto;
     border: 1px solid #c5c1c1;
