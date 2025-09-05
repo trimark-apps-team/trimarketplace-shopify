@@ -225,7 +225,7 @@ body {
   background: #fff;
 }
 .cs-component {
-  background: #F9F9F9;
+  background: #F9F9F9 !important;
 }
 @media screen and (max-width: 1054px) {
   .header__menu-item {
