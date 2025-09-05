@@ -235,6 +235,7 @@ body {
 }
 .cs-header {
   margin: 0px !important;
+  padding-top: 20px;
 }
 @media screen and (max-width: 1054px) {
   .header__menu-item {
