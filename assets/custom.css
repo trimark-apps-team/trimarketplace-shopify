@@ -216,6 +216,9 @@ body {
 .cs-cart-items__footer-totals .cs-button {
   background-color: rgb(168 36 62) !important;
 }
+.cs-button .cs-button--secondary {
+  color: rgb(var(--color-button-text));
+}
 @media screen and (max-width: 1054px) {
   .header__menu-item {
     padding: 0.5rem;
