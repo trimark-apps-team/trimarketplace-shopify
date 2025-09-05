@@ -223,7 +223,7 @@ body {
 .header li {
   padding-right: 5px;
 }
-.card__information {
+.card__content .card__information {
     padding-top: 0px;
 }
 .cs-cart-items__footer-totals .cs-button, .cs-cart-items__footer-totals .cs-button:hover {
