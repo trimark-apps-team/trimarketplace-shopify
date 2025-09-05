@@ -18,6 +18,18 @@
     }
   }
 {%- endstyle -%}
+ {%- capture content_for_query_string -%}{{ content_for_header }}{%- endcapture -%}
+            {%- assign page_url = content_for_query_string
+              | split: '"pageurl":"'
+              | last
+              | split: '"'
+              | first -%}
+
+           {% if page_url contains 'mergecart' or page_url contains 'replacecart' %}
+              {% assign reorder_url = true %}
+            {% else %}
+              {% assign reorder_url = false %}
+            {% endif %}
 
 {%- unless settings.cart_type == 'drawer' -%}
   <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
@@ -25,7 +37,7 @@
 
 <script src="{{ 'quantity-popover.js' | asset_url }}" defer="defer"></script>
 
-<cart-items class="gradient color-{{ section.settings.color_scheme }} isolate{% if cart == empty %} is-empty{% else %} section-{{ section.id }}-padding{% endif %}">
+<cart-items class="gradient color-{{ section.settings.color_scheme }} isolate  {% if cart == empty and reorder_url == false %} is-empty{% else %} section-{{ section.id }}-padding{% endif %}">
   <div class="page-width">
     <div class="title-wrapper-with-link">
       <h1 class="title title--primary">{{ 'sections.cart.title' | t }}</h1>
@@ -51,8 +63,12 @@
     <form action="{{ routes.cart_url }}" class="cart__contents critical-hidden" method="post" id="cart">
       <div class="cart__items" id="main-cart-items" data-id="{{ section.id }}">
         <div class="js-contents">
+
+            {%- if reorder_url -%}
+                 <div class="skeleton-shimmer"></div> 
+            {%- endif -%}
           {%- if cart != empty -%}
-            <table class="cart-items">
+            <table class="cart-items  {% if reorder_url %} hidden{% endif %}">
               <caption class="visually-hidden">
                 {{ 'sections.cart.title' | t }}
               </caption>
@@ -445,6 +461,16 @@
           {%- endif -%}
         </div>
       </div>
+      {%- if reorder_url -%}
+          <div class="aasaved-cart-actions aasaved-cart-actions--embed hidden" data-target="">
+                <a class="button btn btn-primary" href="/a/saved-carts">
+                View Carts
+                </a>
+                <a class="button btn btn-primary cs-save-trigger" href="/a/saved-carts/new">
+                    Save Cart
+                </a>
+        </div>
+      {% endif %}
 
       <p class="visually-hidden" id="cart-live-region-text" aria-live="polite" role="status"></p>
       <p
@@ -518,7 +544,6 @@
     input.focus();
 
 
-    // Create or reuse error span
     let errorSpan = document.querySelector(`.cart-tier-price-error[data-line="${line}"]`);
     if (!errorSpan) {
       errorSpan = document.createElement("span");
@@ -668,4 +693,127 @@ function refreshCart() {
     }
   }
   });
+</script>
+
+
+<script>
+  async function applyCartFromUrl() {
+    const urlParams = new URLSearchParams(window.location.search);
+
+    const addParams = urlParams.getAll("add");
+    const mergeCart = urlParams.has("mergecart");
+
+    if (!addParams.length) return;
+
+    const variantPropertiesMap = {};
+    
+    for (const [key, value] of urlParams.entries()) {
+      if (key.startsWith("properties[")) {
+        const propMatch = key.match(/properties\[(.*?)\](?:\[(.*?)\])?/);
+        
+        if (propMatch) {
+          const possibleVariantId = propMatch[1];
+          const propName = propMatch[2] || propMatch[1];
+          
+          if (/^\d+$/.test(possibleVariantId)) {
+            const variantId = parseInt(possibleVariantId, 10);
+            if (!variantPropertiesMap[variantId]) {
+              variantPropertiesMap[variantId] = {};
+            }
+            variantPropertiesMap[variantId][propName] = value;
+          } else {
+            if (!variantPropertiesMap['_global']) {
+              variantPropertiesMap['_global'] = {};
+            }
+            variantPropertiesMap['_global'][possibleVariantId] = value;
+          }
+        }
+      }
+    }
+
+    const lineItems = addParams.map(param => {
+      const [variantId, quantity] = param.split(":");
+      const variantIdNum = parseInt(variantId, 10);
+
+      let properties = variantPropertiesMap['_global'] ? {...variantPropertiesMap['_global']} : {};
+      
+      if (variantPropertiesMap[variantIdNum]) {
+        properties = {...properties, ...variantPropertiesMap[variantIdNum]};
+      }
+
+      return {
+        id: variantIdNum,
+        quantity: parseInt(quantity, 10),
+        properties: Object.keys(properties).length ? properties : undefined,
+      };
+    });
+
+    try {
+      if (!mergeCart) {
+        await fetch("/cart/clear.js", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+        });
+
+        await fetch("/cart/add.js", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ items: lineItems }),
+        }).then(res => res.json())
+        .then(data => {
+          console.log("replace data", data, lineItems);
+        });
+      } else {
+        for (const item of lineItems) {
+          await fetch("/cart/add.js", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(item),
+          }).then(res => res.json())
+        .then(data => {
+          console.log("merge data", data, item);
+        });
+        }
+      }
+
+      fetch(window.location.href)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const responseDoc = parser.parseFromString(html, 'text/html');
+          const newContent = responseDoc.querySelector('.template-cart #MainContent');
+          if (newContent) {
+            document.querySelector('.template-cart #MainContent').innerHTML = newContent.innerHTML;
+            fetch('/cart.js', {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            })
+            .then(response => {
+              if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+              }
+              return response.json();
+            })
+            .then(cartData => {
+               checkAndToggleCheckoutButtons(cartData);
+            })
+            .catch(error => {
+              console.log(error)
+            });
+            document.querySelector('.template-cart #MainContent table.cart-items')?.classList.remove("hidden");
+            document.querySelector('.template-cart #MainContent .skeleton-shimmer')?.classList.add("hidden");
+            document.querySelector('.template-cart #MainContent .aasaved-cart-actions')?.classList.remove("hidden");
+            const cleanUrl = window.location.origin + window.location.pathname;
+            window.history.replaceState({}, document.title, cleanUrl);
+          }
+        });
+        
+    } catch (err) {
+      console.error("Cart update failed:", err);
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", applyCartFromUrl);
 </script>
