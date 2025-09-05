@@ -213,6 +213,9 @@ body {
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
 }
+.copyright__content a {
+  color: black;
+}
 .cs-cart-items__footer-totals .cs-button, .cs-cart-items__footer-totals .cs-button:hover {
   background-color: rgb(168 36 62);
 }
