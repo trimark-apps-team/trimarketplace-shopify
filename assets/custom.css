@@ -281,5 +281,9 @@ cart-items .title-wrapper-with-link {
   .related-products.page-width {
       margin-bottom: 40px;
   }
+
+  .cart-item-wrapper.page-width {
+    margin: 1.1rem;
+  }
   
 }
