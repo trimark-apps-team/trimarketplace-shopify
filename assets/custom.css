@@ -174,8 +174,7 @@ body {
   border-radius: 8px;
   max-width: 1105px;
 }
-cart-items .title-wrapper-with-link {
-    
+.cart-items .title-wrapper-with-link {
     padding-top: 10px;
 }
 .collection__title {
