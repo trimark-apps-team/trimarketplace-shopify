@@ -125,9 +125,7 @@ body {
   border-bottom-right-radius: 8px;
   max-width: 1115px;
 }
-.collection-hero .collection-hero__title {
-    margin: 0px;
-}
+
 .facets-vertical-form {
   align-items: anchor-center;
 }
@@ -198,7 +196,7 @@ body {
  
 }
 @media screen and (max-width: 1145px) {
-  .responsive.page-width, .collection-hero__title {
+  .responsive.page-width, .collection-hero .collection-hero__title {
      margin: 0 5rem;
   }
  
