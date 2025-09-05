@@ -168,6 +168,7 @@ body {
 .featured-view-all-custom {
     color: #b11830;
     font-size: 16px;
+    text-decoration: none;
 }
 .cs-cart-items__buy-buttons .cs-cart-items__actions .cs-button--secondary {
   color: rgb(168 36 62);
