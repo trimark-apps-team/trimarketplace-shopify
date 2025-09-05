@@ -245,5 +245,9 @@ body {
   .footer-block__brand-info .footer__list-social {
     justify-content: center;
   }
+  .collection__title {
+    align-items: flex-start;
+    flex-direction: column;
+  }
   
 }
