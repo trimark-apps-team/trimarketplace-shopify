@@ -220,6 +220,9 @@ body {
   margin-top: 0px !important;
   margin-bottom: 0px !important;
 }
+.header li {
+  padding-right: 5px;
+}
 .cs-cart-items__footer-totals .cs-button, .cs-cart-items__footer-totals .cs-button:hover {
   background-color: rgb(168 36 62);
 }
