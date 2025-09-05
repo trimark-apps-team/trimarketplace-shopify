@@ -216,6 +216,9 @@ body {
 .copyright__content a {
   color: black;
 }
+.collection-hero__title {
+    margin: 0.5rem 0;
+}
 .cs-cart-items__footer-totals .cs-button, .cs-cart-items__footer-totals .cs-button:hover {
   background-color: rgb(168 36 62);
 }
