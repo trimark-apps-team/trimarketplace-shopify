@@ -235,6 +235,9 @@ body {
 .cs-cart-items {
   padding: 20px;
 }
+.cs-cart-items__footer {
+  padding: 20px;
+}
 .cs-header {
   margin: 0px !important;
   padding: 20px;
