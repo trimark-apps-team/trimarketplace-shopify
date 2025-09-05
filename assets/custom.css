@@ -189,6 +189,9 @@ body {
 .totals__total-value {
   font-weight: bold;
 }
+.cart-item__totals.right {
+  display:none;
+}
 @media screen and (max-width: 1054px) {
   .header__menu-item {
     padding: 0.5rem;
