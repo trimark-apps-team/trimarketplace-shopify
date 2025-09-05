@@ -213,10 +213,10 @@ body {
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
 }
-.cs-cart-items__footer-totals .cs-button, .cs-cart-items__footer-totals .cs-button:hover {
+.cs-cart-items__footer-totals .cs-button {
   background-color: rgb(168 36 62);
 }
-.cs-cart-items__footer-totals .cs-button.cs-button--secondary {
+.cs-cart-items__footer-totals .cs-button.cs-button--secondary, .cs-cart-items__footer-totals .cs-button:hover  {
   color: rgb(168 36 62);
   background: #fff;
   border: 1px solid rgb(168 36 62);
