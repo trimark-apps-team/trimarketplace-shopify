@@ -211,7 +211,7 @@ body {
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
 }
-.cart-footer-wrapper .cart__footer {
+.cart-footer-wrapper.page-width {
   background: #fff;
   max-width: 1105px;
 }
