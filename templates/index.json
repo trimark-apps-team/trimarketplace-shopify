@@ -57,6 +57,7 @@
     },
     "featured_collection_RmhiMM": {
       "type": "featured-collection",
+      "disabled": true,
       "name": "t:sections.featured-collection.presets.name",
       "settings": {
         "collection": "equipment",
