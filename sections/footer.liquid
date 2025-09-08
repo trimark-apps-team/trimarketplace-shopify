@@ -422,8 +422,7 @@
              <i class="fa fa-phone"></i> {{ settings.brand_number }}
             </a>
              <div class="email"><i class="fa fa-envelope"></i>
-             {% assign brandEmail = settings.brand_email %}
-               <a href="mailto:{{ brandEmail }}">{{ brandEmail }}</a>
+             {{ settings.brand_email }}
             </div>
              <nav class="social">
                <ul>
