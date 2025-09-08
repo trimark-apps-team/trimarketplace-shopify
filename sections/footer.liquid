@@ -601,7 +601,8 @@
             </p>
           </address>
           <p class="copyright">
-            Copyright © 2025, All Rights Reserved.
+            {% comment %} Copyright © 2025, All Rights Reserved. {% endcomment %}
+             {{  }}
           </p>
         </div>
       </div>
@@ -733,6 +734,11 @@
       "id": "newsletter_heading",
       "default": "t:sections.footer.settings.newsletter_heading.default",
       "label": "t:sections.footer.settings.newsletter_heading.label"
+    },
+    {
+       "type": "richtext",
+       "id": "copyright_text",
+       "label": "Copyright Text"
     },
     {
       "type": "header",
