@@ -483,10 +483,8 @@
             </nav> {% endcomment %}
           </div>
           <div class="link-wrapper">
-            <div class="link-columns">
-              
-             
-              <nav class="link-column">
+            <div class="link-columns">             
+              {% comment %} <nav class="link-column">
                 
                 <p class="column-head">
                  Company
@@ -518,10 +516,8 @@
                     
                   </ul>
                 
-              </nav>
-              
-             
-              <nav class="link-column">
+              </nav> {% endcomment %}
+              {% comment %} <nav class="link-column">
                 
                 <p class="column-head">
                  Legal
@@ -566,7 +562,26 @@
                        <a href="https://docs.trimarkusa.com/hubfs/SiteMedia/SiteResources/Terms/TriMark-Supplier-Code-of-Conduct.pdf" target="_blank">Supplier Code of Conduct<svg class="icon external-link" focusable="false"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#external-link"></use></svg></a>
                     </li>
                   </ul>
-              </nav> 
+              </nav>  {% endcomment %}
+              {% for block in sections.block %}
+                {%- case block.type -%}
+                {%- when 'link_list' -%}
+                      {%- if block.settings.menu != blank -%}
+                        <ul class="footer-block__details-content list-unstyled">
+                          {%- for link in block.settings.menu.links -%}
+                            <li>
+                              <a
+                                href="{{ link.url }}"
+                                class="link link--text list-menu__item list-menu__item--link{% if link.active %} list-menu__item--active{% endif %}"
+                              >
+                                {{ link.title | escape }}
+                              </a>
+                            </li>
+                          {%- endfor -%}
+                        </ul>
+                    {%- endif -%}
+                {%- endcase -%}    
+              {% endfor %}
             </div>
            
           </div>
