@@ -564,7 +564,7 @@
                   </ul>
               </nav>  {% endcomment %}
               {%- for block in section.blocks -%}
-                <div>
+                <div class="list-wrapper">
                 {%- if block.settings.heading != blank -%}
                   <h2 class="footer-block__heading inline-richtext">{{- block.settings.heading -}}</h2>
                 {%- endif -%}
