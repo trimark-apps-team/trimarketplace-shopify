@@ -596,7 +596,9 @@
         <div class="footer-bottom-wrapper">
           <address class="address">
             {% comment %} TriMark USA, LLC, 9 Hampshire Street, Mansfield, MA 02048 {% endcomment %}
-            {{ shop.address }}
+            <p>
+  {{ shop.name }}, {{ shop.address }}, {{ shop.city }}, {{ shop.province }} {{ shop.zip }}
+</p>
           </address>
           <p class="copyright">
             Copyright © 2025, All Rights Reserved.
