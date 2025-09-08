@@ -563,7 +563,7 @@
                     </li>
                   </ul>
               </nav>  {% endcomment %}
-              {% for block in sections.blocks %}
+              {%- for block in section.blocks -%}
                 {%- case block.type -%}
                 {%- when 'link_list' -%}
                       {%- if block.settings.menu != blank -%}
