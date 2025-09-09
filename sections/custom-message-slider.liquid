@@ -1,7 +1,7 @@
 
 {% assign active_user_company = "gid://shopify/Company/" | append: customer.current_company.id %}
 {% assign metaObject = shop.metaobjects.announcement_bar.values %}
-
+{% assign data_filtered_by_company = "" %}
 {% for single_slide_data in metaObject %}
   {% assign raw_companies = single_slide_data.company | remove: '["' | remove: '"]' | replace: '","', ',' %}
   {% assign companies_array = raw_companies | split: ',' %}
