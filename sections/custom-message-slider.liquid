@@ -4,7 +4,7 @@
 
 {% for single_slide_data in metaObject %}
   
-  {% for single_comp in single_slide_data.company %}
+  {% for single_comp in single_slide_data.company.values %}
     {{ single_comp }}
   {% endfor %}
   {% if current_company_list contains active_user_company %}
