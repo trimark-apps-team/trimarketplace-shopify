@@ -1,7 +1,7 @@
 
 {% assign active_user_company = customer.current_company.title %}
-{% assign metaObject = shop.metaobjects.announcement_bar.values | where: "company", "active_user_company" %}
-
+{% assign metaObject = shop.metaobjects.announcement_bar.values %}
+{% assign filtered_by_company = "" %}
 {{ metaObject }}
  
 <div class="message-slider-section-wrapper page-width">
