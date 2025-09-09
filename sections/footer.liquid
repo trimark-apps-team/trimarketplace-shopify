@@ -415,7 +415,7 @@
             <div class="logo">
               <a href="/" aria-label="TriMark Home">
 
-                 <img src="{{ settings.brand_image | img_url: "original" }}" alt="TriMark" width="{{ settings.brand_image_width }}px">
+                 <img width="170" src="{{ settings.brand_image | img_url }}" alt="TriMark" height="auto">
               </a>
             </div>
              
@@ -601,10 +601,8 @@
               {{ shop.name }}, {{ shop.address.city }}, {{ shop.address.province }} {{ shop.address.zip }}
             </p>
           </address>
-          <p class="copyright">
-            {% comment %} Copyright © 2025, All Rights Reserved. {% endcomment %}
-             {{ section.settings.copyright_text }}
-          </p>
+          
+          {{ section.settings.copyright_text }}
         </div>
       </div>
     </footer>
