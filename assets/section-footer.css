@@ -39,6 +39,10 @@
     font-weight: 600;
     margin: 0;
   }
+  .list-wrapper {
+    padding: 20px 0;
+    width: 180px;
+  }
   
   .footer-top .footer-top-body .contact-banner .logo  {
     padding-top: 30px;
