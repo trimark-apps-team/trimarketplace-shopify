@@ -6,10 +6,10 @@
   {% assign raw_companies = single_slide_data.company | remove: '["' | remove: '"]' | replace: '","', ',' %}
   {% assign companies_array = raw_companies | split: ',' %}
   {% if companies_array contains active_user_company %}
-    {% assign data_filtered_by_company = data_filtered_by_company | append: single_slide_data | append: "," %}
+    {% assign data_filtered_by_company = data_filtered_by_company | append: single_slide_data.value | append: "," %}
   {% endif %}
 {% endfor %}
-{{ data_filtered_by_company | json }}
+
 <div class="message-slider-section-wrapper page-width">
 <section class="message-slider" id="{{ section.id }}" data-section-id="{{ section.id }}">
   <div class="message-slider__wrapper">
