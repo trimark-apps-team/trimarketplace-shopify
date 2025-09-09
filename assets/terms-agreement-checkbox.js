@@ -1,22 +1,38 @@
-document.addEventListener('DOMContentLoaded', function() {
-  var checkbox   = document.getElementById('terms');
-  var pageBtn    = document.getElementById('checkout');
-  var drawerBtn  = document.getElementById('CartDrawer-Checkout');
 
+document.addEventListener('DOMContentLoaded', function() {
+  var checkbox = document.getElementById('terms');
+  var pageBtn = document.getElementById('checkout');
+  var drawerBtn = document.getElementById('CartDrawer-Checkout');
+
+  // Exit early if checkbox doesn't exist
   if (!checkbox) return;
 
-  // Add one error message directly under the checkbox
-  var error = document.createElement('div');
-  error.id = 'terms-error';
-  error.style.color = 'red';
-  error.style.fontSize = '0.9rem';
-  error.style.marginTop = '0.5rem';
-  error.style.display = 'none';
-  error.textContent = 'You must agree to the Terms & Conditions before checkout.';
-  checkbox.insertAdjacentElement('afterend', error);
+  // Add error under the checkbox (cart page)
+  var errorPage = document.createElement('div');
+  errorPage.id = 'terms-error-page';
+  errorPage.style.color = 'red';
+  errorPage.style.fontSize = '0.9rem';
+  errorPage.style.marginTop = '0.5rem';
+  errorPage.style.display = 'none';
+  errorPage.textContent = 'You must agree to the Terms & Conditions before checkout.';
+  checkbox.insertAdjacentElement('afterend', errorPage);
+
+  // Add error under the drawer checkout button if it exists
+  var errorDrawer;
+  if (drawerBtn) {
+    errorDrawer = document.createElement('div');
+    errorDrawer.id = 'terms-error-drawer';
+    errorDrawer.style.color = 'red';
+    errorDrawer.style.fontSize = '0.9rem';
+    errorDrawer.style.marginTop = '0.5rem';
+    errorDrawer.style.display = 'none';
+    errorDrawer.textContent = 'You must agree to the Terms & Conditions before checkout.';
+    drawerBtn.insertAdjacentElement('afterend', errorDrawer);
+  }
 
   function showError(show) {
-    error.style.display = show ? 'block' : 'none';
+    errorPage.style.display = show ? 'block' : 'none';
+    if (errorDrawer) errorDrawer.style.display = show ? 'block' : 'none';
   }
 
   function validate() {
@@ -26,13 +42,13 @@ document.addEventListener('DOMContentLoaded', function() {
     showError(!checked);
   }
 
-  // Run once at load
+  // Run once on load
   validate();
 
-  // Toggle on checkbox change
+  // Update when checkbox changes
   checkbox.addEventListener('change', validate);
 
-  // Block submit for both forms
+  // Safety net: block submit on either form
   [pageBtn, drawerBtn].forEach(function(btn) {
     if (!btn) return;
     var form = btn.closest('form');
