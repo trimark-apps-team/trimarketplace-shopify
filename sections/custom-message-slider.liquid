@@ -3,7 +3,9 @@
 {% assign metaObject = shop.metaobjects.announcement_bar.values %}
 {% assign filtered_by_company = "" %}
 {% for single_slide_data in metaObject %}
-{{ metaObject }}
+  {% if single_slide_data.company contains active_user_company %}
+    {{ metaObject }}
+  {% endif %}
 {% endfor %} 
 <div class="message-slider-section-wrapper page-width">
 <section class="message-slider" id="{{ section.id }}" data-section-id="{{ section.id }}">
