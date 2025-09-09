@@ -1,5 +1,5 @@
 
-{% assign active_user_company = customer.current_company.title %}
+{% assign active_user_company = customer.current_company.id %}
 {% assign metaObject = shop.metaobjects.announcement_bar.values %}
 {% assign filtered_by_company = "" %}
 {% for single_slide_data in metaObject %}
