@@ -1,26 +1,37 @@
 
 {% assign metaObject = shop.metaobjects.announcement_bar.values %}
 {% comment %} {{ metaObject | json }} {% endcomment %}
+ {% if section.settings.show_from_meta %}
+        {% for single_slide in metaObject %}
+          {{ single_slide.name }}
+        {% endfor %}
+      {% else %}
+      {% endif %}
 <div class="message-slider-section-wrapper page-width">
 <section class="message-slider" id="{{ section.id }}" data-section-id="{{ section.id }}">
   <div class="message-slider__wrapper">
-    <div class="message-slider__slides">
-      
-        {% for block in section.blocks %}
-          <div class="message-slide">
-            {% if block.settings.title != blank %}
-              <h3 class="message-slide__title">
-                {{ block.settings.title }}
-              </h3>
-            {% endif %}
-            {% if block.settings.content != blank %}
-              <div class="message-slide__content">{{ block.settings.content }}</div>
-            {% endif %}
-          </div>
+    {% if section.settings.show_from_meta %}
+      <div class="message-slider__slides">
+        {% for single_slide in metaObject %}
+          {{ single_slide.name }}
         {% endfor %}
-      
-    </div>
-
+      </div>
+    {% else %}  
+      <div class="message-slider__slides">
+          {% for block in section.blocks %}
+            <div class="message-slide">
+              {% if block.settings.title != blank %}
+                <h3 class="message-slide__title">
+                  {{ block.settings.title }}
+                </h3>
+              {% endif %}
+              {% if block.settings.content != blank %}
+                <div class="message-slide__content">{{ block.settings.content }}</div>
+              {% endif %}
+            </div>
+          {% endfor %}
+      </div>
+    {% endif %}
     <div class="message-slider__controls">
       <button class="slider-arrow prev" aria-label="Previous slide">&#10094;</button>
       <div class="slider-dots">
