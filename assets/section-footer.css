@@ -43,7 +43,12 @@
     padding: 20px 0;
     width: 180px;
   }
-  
+  #global-trimarkusa-footer .link-columns .list-wrapper .list-menu__item--link {
+    padding-bottom: 0;
+    padding-top: 0;
+    color: #26292d;
+    font-size: 12px;
+  }
   .footer-top .footer-top-body .contact-banner .logo  {
     padding-top: 30px;
     flex: 0 200px;
