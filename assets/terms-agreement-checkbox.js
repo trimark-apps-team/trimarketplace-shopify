@@ -5,7 +5,10 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('CartDrawer-Checkout')
   ].filter(Boolean);
 
-  if (!checkbox || checkoutBtns.length === 0) return;
+  if (!checkbox || checkoutBtns.length === 0) {
+    console.log("⚠️ No checkbox or checkout buttons found.");
+    return;
+  }
 
   // Insert one error message under the checkbox
   var error = document.createElement('div');
@@ -26,11 +29,18 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function toggleButtons() {
+    console.log("🔄 Checkbox state:", checkbox.checked);
     if (checkbox.checked) {
-      checkoutBtns.forEach(btn => btn.disabled = false);
+      checkoutBtns.forEach(btn => {
+        console.log("✅ Enabling button:", btn.id);
+        btn.disabled = false;
+      });
       hideError();
     } else {
-      checkoutBtns.forEach(btn => btn.disabled = true);
+      checkoutBtns.forEach(btn => {
+        console.log("🚫 Disabling button:", btn.id);
+        btn.disabled = true;
+      });
     }
   }
 
@@ -45,6 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var form = btn.closest('form');
     if (!form) return;
     form.addEventListener('submit', function(e) {
+      console.log("⛔ Attempted checkout with checkbox:", checkbox.checked);
       if (!checkbox.checked) {
         e.preventDefault();
         btn.disabled = true;
