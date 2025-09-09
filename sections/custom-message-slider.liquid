@@ -13,7 +13,9 @@
   class="message-slider-section-wrapper page-width
   {% if section.settings.show_from_meta %}
     {% if show_meta %}
-     {% endif %}
+    {% else %}
+     hide-sluder-meta
+    {% endif %}
   {% endif %}
   ">
 <section class="message-slider" id="{{ section.id }}" data-section-id="{{ section.id }}">
