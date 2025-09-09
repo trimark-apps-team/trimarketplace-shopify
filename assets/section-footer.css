@@ -293,10 +293,7 @@
       justify-content:center;
     }
     body .footer-top .footer-top-body .contact-banner .phone p, body .footer-top .footer-top-body .contact-banner .email p {
-      display: flex;
-      align-items: center;
-      gap: 2px;
-      justify-content:center;
+      margin:0;
     }
   }
   
