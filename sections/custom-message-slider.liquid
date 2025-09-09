@@ -5,8 +5,7 @@
 {% for single_slide_data in metaObject %}
   {% assign raw_companies = single_slide_data.company | remove: '["' | remove: '"]' | replace: '","', ',' %}
   {% assign companies_array = raw_companies | split: ',' %}
-  {{ companies_array }}
-  {% if single_slide_data.company contains active_user_company %}
+  {% if companies_array contains active_user_company %}
     {{ single_slide_data.name }}
   {% endif %}
 {% endfor %}
