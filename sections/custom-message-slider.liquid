@@ -15,7 +15,7 @@
   <div class="message-slider__wrapper">
     {% if section.settings.show_from_meta %}
       <div class="message-slider__slides">
-        {% for single_slide in data_filtered_by_company %}
+        {% for single_slide in data_filtered_by_company.values %}
           <div class="message-slide">
               {% if single_slide.name != blank %}
                 <h3 class="message-slide__title">
