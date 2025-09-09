@@ -35,9 +35,12 @@
     <div class="message-slider__controls">
       <button class="slider-arrow prev" aria-label="Previous slide">&#10094;</button>
       <div class="slider-dots">
-        {% for block in section.blocks %}
-          <span class="slider-dot{% if forloop.first %} active{% endif %}" data-index="{{ forloop.index0 }}"></span>
-        {% endfor %}
+        {% if section.settings.show_from_meta %}
+        {% else %}  
+          {% for block in section.blocks %}
+            <span class="slider-dot{% if forloop.first %} active{% endif %}" data-index="{{ forloop.index0 }}"></span>
+          {% endfor %}
+        {% endif %}
       </div>
       <button class="slider-arrow next" aria-label="Next slide">&#10095;</button>
     </div>
