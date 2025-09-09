@@ -43,13 +43,18 @@
     padding: 50px 0 0 40px;
     flex: 0 200px;
     font-size: 12px;
-  
+    display: flex;
+    align-items: center;
+    gap: 2px;  
   }
   
   .footer-top .footer-top-body .contact-banner .email  {
     padding-top: 45px;
     flex: 1;
     font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 2px;  
   }
   .footer-top .footer-top-body .contact-banner .social  {
     display: flex;
