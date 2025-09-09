@@ -5,11 +5,11 @@
 {% for single_slide_data in metaObject %}
   <pre>{{ single_slide_data.company }}</pre>
   {% for c in single_slide_data.company %}
-    {{ c.id }}
+    {{ c }}
   {% endfor %}
-  {% if single_slide_data.company contains active_user_company %}
+  {% comment %} {% if single_slide_data.company contains active_user_company %}
     {{ single_slide_data.name }}
-  {% endif %}
+  {% endif %} {% endcomment %}
 {% endfor %}
 <div class="message-slider-section-wrapper page-width">
 <section class="message-slider" id="{{ section.id }}" data-section-id="{{ section.id }}">
