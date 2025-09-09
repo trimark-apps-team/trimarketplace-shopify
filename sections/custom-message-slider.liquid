@@ -1,5 +1,5 @@
 
-{% assign active_user_company = customer.current_company %}
+{% assign active_user_company = customer.current_company.title %}
 {% assign metaObject = shop.metaobjects.announcement_bar.values | where: "company", "test" %}
 
  
