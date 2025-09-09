@@ -7,6 +7,7 @@
     <div class="message-slider__slides">
       {% if section.settings.show_from_meta %}
         {% for single_slide in metaObject %}
+          {{ single_slide.name }}
         {% endfor %}
       {% else %}
         {% for block in section.blocks %}
