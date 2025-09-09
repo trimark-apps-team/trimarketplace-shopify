@@ -101,7 +101,9 @@ body {
     padding-bottom: 0px;
     padding-top: 0px;
 }
-
+.svg-wrapper .icon path {
+    fill: #a02944;
+}
 .template-index .featured-collection-body {
     background: #fff;
     padding: 3rem 5rem;
