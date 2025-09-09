@@ -536,12 +536,27 @@
   },
   "customer_accounts": {
     "orders": {
-      "buy_again": "Reorder"
+      "buy_again": "Reorder",
+      "order_list": {
+        "payment_status": {
+          "gallery_view": {
+            "pay_to_confirm": "Complete purchase to confirm"
+          },
+          "list_view": {
+            "pay_to_confirm": "Complete purchase to confirm"
+          }
+        }
+      }
     },
     "B2B": {
       "draft_order_details": {
         "payment_status": {
-          "pay_now": "Complete Purchase"
+          "pay_now": "Complete Purchase",
+          "draft": {
+            "submitted": {
+              "title": "Complete purchase to confirm"
+            }
+          }
         }
       }
     }
