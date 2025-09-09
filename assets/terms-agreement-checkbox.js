@@ -2,7 +2,6 @@
     var checkbox = document.getElementById('terms');
     var checkoutBtn = document.querySelector('.cart__checkout-button');
 
-    if (!checkbox || !checkoutBtn) return;
 
     function toggleCheckout() {
       checkoutBtn.disabled = !checkbox.checked;
