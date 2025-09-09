@@ -4,6 +4,7 @@
 {{ active_user_company }}
 {% for single_slide_data in metaObject %}
   {% assign current_company_list = single_slide_data.company | split: "," %}
+  {{ current_company_list }}
   {% if current_company_list contains active_user_company %}
     {{ single_slide_data.name }}
   {% endif %}
