@@ -41,11 +41,7 @@
       ],
       "name": "Message Slider",
       "settings": {
-        "show_from_meta": false,
-        "slider_meta_object_list": [
-          "free-freight-on-all-stock-orders-over-600-excludes-rollouts-shelving",
-          "sgsdf"
-        ],
+        "show_from_meta": true,
         "header_color": "#b11830",
         "header_font_size": 18,
         "text_color": "#121212",
