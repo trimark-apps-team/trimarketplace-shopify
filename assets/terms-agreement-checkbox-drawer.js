@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var checkoutBtn = document.getElementById('CartDrawer-Checkout');
   if (!checkbox || !checkoutBtn) return;
 
+  var wrapper = checkbox.closest('.cart-terms');
   var error = document.createElement('div');
   error.style.color = 'red';
   error.style.fontSize = '0.9rem';
