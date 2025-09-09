@@ -4,7 +4,7 @@
 
 {% for single_slide_data in metaObject %}
   {% if single_slide_data.company contains active_user_company %}
-    {% comment %} {{ single_slide_data.name.value }} {% endcomment %}
+    {{ single_slide_data.name.value }}
   {% endif %}
 {% endfor %}
 <div class="message-slider-section-wrapper page-width">
