@@ -557,8 +557,15 @@
 
         <!-- CTAs -->
 
+          
+
+        <div class="cart__ctas" {{ block.shopify_attributes }}>      
+             <a class="button btn btn-primary cs-save-trigger" href="/a/saved-carts/new">
+                Save Cart
+            </a> 
+            <a href="{{ routes.cart_url }}" class="cart__checkout-button button cart_btn">View Cart Page</a>
           {% if cart != empty %}
-           <div class="cart-terms" style="margin-bottom:1rem;">
+           <div class="cart-terms" style="margin-bottom:1rem; margin-top:1rem;">
               <input type="checkbox" id="terms-drawer" name="attributes[terms_agreed]" value="yes">
               <label for="terms-drawer">
                 I agree to the 
@@ -569,12 +576,6 @@
               </label>
             </div>
           {% endif %}
-
-        <div class="cart__ctas" {{ block.shopify_attributes }}>      
-             <a class="button btn btn-primary cs-save-trigger" href="/a/saved-carts/new">
-                Save Cart
-            </a> 
-            <a href="{{ routes.cart_url }}" class="cart__checkout-button button cart_btn">View Cart Page</a>
           <button
             type="submit"
             id="CartDrawer-Checkout"
