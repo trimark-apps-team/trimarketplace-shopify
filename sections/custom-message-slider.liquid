@@ -1,5 +1,5 @@
 
-{% assign active_user_company = customer.current_company.id %}
+{% assign active_user_company = customer.current_company.external_id %}
 {{ active_user_company }}
 {% assign metaObject = shop.metaobjects.announcement_bar.values %}
 {% assign filtered_by_company = "" %}
