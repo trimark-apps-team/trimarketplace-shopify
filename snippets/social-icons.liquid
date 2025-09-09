@@ -14,9 +14,7 @@
     <li class="list-social__item">
       <a href="{{ settings.social_facebook_link }}" class="link list-social__link">
         <span class="svg-wrapper">
-          <svg class="icon facebook">
-        <use xlink:href="#facebook"></use>
-      </svg>
+          {{- 'icon-facebook.svg' | inline_asset_content -}}
         </span>
         <span class="visually-hidden">{{ 'general.social.links.facebook' | t }}</span>
       </a>
