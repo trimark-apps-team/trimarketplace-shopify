@@ -30,6 +30,7 @@
     flex-wrap: wrap;
     border-bottom: 1px solid #777;
     margin: 0 auto;
+    align-items:end;
   }
   
   
