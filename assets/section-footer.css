@@ -295,6 +295,9 @@
     body .footer-top .footer-top-body .contact-banner .phone p, body .footer-top .footer-top-body .contact-banner .email p {
       margin:0;
     }
+    .footer-top ul {
+      justify-content:center;
+    }
   }
   
   @media(max-width: 650px) {
