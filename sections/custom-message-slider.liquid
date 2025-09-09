@@ -1,4 +1,4 @@
-{% assign metaobject_list = section.settings.slider_meta_object_list %}
+{% assign metaobject_list = section.settings.slider_meta_object_list.value %}
 
 {% for meta_slide in metaobject_list  %}
 {{ meta_slide | json }}
