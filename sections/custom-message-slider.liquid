@@ -1,8 +1,4 @@
-{% assign metaobject_list = section.settings.slider_meta_object_list %}
 
-{% for meta_slide in metaobject_list  %}
-<p>{{ meta_slide | json }},</p></br>
-{% endfor %}
 <div class="message-slider-section-wrapper page-width">
 <section class="message-slider" id="{{ section.id }}" data-section-id="{{ section.id }}">
   <div class="message-slider__wrapper">
