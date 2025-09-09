@@ -48,6 +48,10 @@
     align-items: center;
     gap: 2px;  
   }
+
+  .footer-top .footer-top-body .contact-banner .phone a {
+    color:#26292d;
+  }
   
   .footer-top .footer-top-body .contact-banner .email  {
     padding-top: 45px;
