@@ -124,7 +124,9 @@
                   id="checkout"
                   class="cart__checkout-button button"
                   name="checkout"
-                  disabled
+                  {% if cart == empty %}
+                    disabled
+                  {% endif %}
                   form="cart"
                 >
                   {{ 'sections.cart.checkout' | t }}
