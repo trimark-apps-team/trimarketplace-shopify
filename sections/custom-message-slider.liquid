@@ -4,6 +4,7 @@
 
 {% for single_slide_data in metaObject %}
   <pre>{{ single_slide_data.company }}</pre>
+  
   {% if single_slide_data.company contains active_user_company %}
     {{ single_slide_data.name }}
   {% endif %}
