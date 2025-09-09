@@ -17,6 +17,9 @@
     {% if section.settings.show_from_meta %}
       <div class="message-slider__slides">
         {% for single_slide in metaObject %}
+          {% assign raw_companies = single_slide.company | remove: '["' | remove: '"]' | replace: '","', ',' %}
+          {% assign companies_array = raw_companies | split: ',' %}
+          {% if companies_array contains active_user_company %}
           <div class="message-slide">
               {% if single_slide.name != blank %}
                 <h3 class="message-slide__title">
@@ -27,6 +30,7 @@
                 <div class="message-slide__content">{{ single_slide.banner_content | metafield_tag }}</div>
               {% endif %}
             </div>
+            {% endif %}
         {% endfor %}
       </div>
     {% else %}  
