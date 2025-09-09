@@ -36,6 +36,9 @@
       <button class="slider-arrow prev" aria-label="Previous slide">&#10094;</button>
       <div class="slider-dots">
         {% if section.settings.show_from_meta %}
+          {% for single_slide in metaObject %}
+            <span class="slider-dot{% if forloop.first %} active{% endif %}" data-index="{{ forloop.index0 }}"></span>
+          {% endfor %}
         {% else %}  
           {% for block in section.blocks %}
             <span class="slider-dot{% if forloop.first %} active{% endif %}" data-index="{{ forloop.index0 }}"></span>
