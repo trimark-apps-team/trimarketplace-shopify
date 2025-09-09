@@ -1,42 +1,70 @@
 document.addEventListener('DOMContentLoaded', function() {
-  var checkbox   = document.getElementById('terms');
-  var checkoutBtn = document.getElementById('checkout');
+  var checkbox = document.getElementById('terms');
+  if (!checkbox) return;
 
-  if (!checkbox || !checkoutBtn) return;
+  var checkoutBtns = [
+    document.getElementById('checkout'),
+    document.getElementById('CartDrawer-Checkout')
+  ].filter(Boolean);
 
-  // Create error message element
-  var error = document.createElement('div');
-  error.id = 'terms-error';
-  error.style.color = 'red';
-  error.style.fontSize = '0.9rem';
-  error.style.marginTop = '0.5rem';
-  error.style.display = 'none';
-  error.textContent = 'You must agree to the Terms & Conditions before checkout.';
-  checkbox.parentNode.appendChild(error);
+  if (checkoutBtns.length === 0) return;
+
+  // Error message for cart page (under the checkbox)
+  var errorPage = document.createElement('div');
+  errorPage.id = 'terms-error-page';
+  errorPage.style.color = 'red';
+  errorPage.style.fontSize = '0.9rem';
+  errorPage.style.marginTop = '0.5rem';
+  errorPage.style.display = 'none';
+  errorPage.textContent = 'You must agree to the Terms & Conditions before checkout.';
+  checkbox.parentNode.appendChild(errorPage);
+
+  // Error message for cart drawer
+  var drawerBtn = document.getElementById('CartDrawer-Checkout');
+  var errorDrawer;
+  if (drawerBtn) {
+    errorDrawer = document.createElement('div');
+    errorDrawer.id = 'terms-error-drawer';
+    errorDrawer.style.color = 'red';
+    errorDrawer.style.fontSize = '0.9rem';
+    errorDrawer.style.marginTop = '0.5rem';
+    errorDrawer.style.display = 'none';
+    errorDrawer.textContent = 'You must agree to the Terms & Conditions before checkout.';
+    drawerBtn.insertAdjacentElement('afterend', errorDrawer);
+  }
+
+  function showError(show) {
+    if (errorPage) errorPage.style.display = show ? 'block' : 'none';
+    if (errorDrawer) errorDrawer.style.display = show ? 'block' : 'none';
+  }
 
   function validate() {
     if (checkbox.checked) {
-      checkoutBtn.disabled = false;
-      error.style.display = 'none';
+      checkoutBtns.forEach(btn => btn.disabled = false);
+      showError(false);
     } else {
-      checkoutBtn.disabled = true;
-      error.style.display = 'block';
+      checkoutBtns.forEach(btn => btn.disabled = true);
+      showError(true);
     }
   }
 
-  // Run once at load
+  // Run once
   validate();
 
-  // On checkbox toggle
+  // Update when checkbox changes
   checkbox.addEventListener('change', validate);
 
-  // Extra safeguard on click/submit
-  checkoutBtn.closest('form').addEventListener('submit', function(e) {
-    if (!checkbox.checked) {
-      e.preventDefault();
-      checkoutBtn.disabled = true; // re-enforce disabled
-      error.style.display = 'block';
-      checkbox.focus();
-    }
+  // Safeguard on form submits
+  checkoutBtns.forEach(function(btn) {
+    var form = btn.closest('form');
+    if (!form) return;
+    form.addEventListener('submit', function(e) {
+      if (!checkbox.checked) {
+        e.preventDefault();
+        btn.disabled = true;
+        showError(true);
+        checkbox.focus();
+      }
+    });
   });
 });
