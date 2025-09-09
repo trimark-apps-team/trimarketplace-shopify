@@ -4,7 +4,7 @@
 
 {% for single_slide_data in metaObject %}
   {% assign current_company_list = single_slide_data.company | split: "," %}
-  {% for single_comp in current_company_list %}
+  {% for single_comp in single_slide_data.company %}
     {{ single_comp }},===
   {% endfor %}
   {% if current_company_list contains active_user_company %}
