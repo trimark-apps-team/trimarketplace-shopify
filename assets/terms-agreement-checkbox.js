@@ -1,6 +1,6 @@
   document.addEventListener('DOMContentLoaded', function() {
     var checkbox = document.getElementById('terms');
-    var checkoutBtn = document.querySelector('.cart__checkout-button');
+    var checkoutBtn = document.getElementById('checkout');
 
 
     function toggleCheckout() {
