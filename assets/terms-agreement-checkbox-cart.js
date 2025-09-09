@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var checkoutBtn = document.getElementById('checkout');
   if (!checkbox || !checkoutBtn) return;
 
+  var wrapper = checkbox.closest('.cart-terms');
   var error = document.createElement('div');
   error.style.color = 'red';
   error.style.fontSize = '0.9rem';
@@ -10,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
   error.style.display = 'none';
   error.textContent = 'You must agree to the Terms & Conditions before checkout.';
   checkbox.insertAdjacentElement('afterend', error);
-
+wrapper.appendChild(error); 
   function validate() {
     if (checkbox.checked) {
       checkoutBtn.disabled = false;
