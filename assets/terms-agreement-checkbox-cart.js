@@ -22,13 +22,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
   validate();
   checkbox.addEventListener('change', validate);
-
-  checkoutBtn.closest('form').addEventListener('submit', function(e) {
-    if (!checkbox.checked) {
-      e.preventDefault();
-      checkoutBtn.disabled = true;
-      error.style.display = 'block';
-      checkbox.focus();
-    }
-  });
 });
