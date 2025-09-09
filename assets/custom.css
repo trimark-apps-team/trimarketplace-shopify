@@ -101,6 +101,9 @@ body {
     padding-bottom: 0px;
     padding-top: 0px;
 }
+body .footer-bottom p {
+    margin: 0;
+}
 footer .svg-wrapper .icon path {
     fill: #a02944;
 }
