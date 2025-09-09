@@ -4,7 +4,7 @@
 {% assign filtered_by_company = "" %}
 {% for single_slide_data in metaObject %}
   {% if single_slide_data.company contains active_user_company %}
-    {{ metaObject.company }}
+    {{ metaObject.name }}
   {% endif %}
 {% endfor %} 
 <div class="message-slider-section-wrapper page-width">
