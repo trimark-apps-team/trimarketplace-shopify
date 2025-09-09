@@ -9,7 +9,13 @@
     {% assign show_meta = true %}
   {% endif %}
 {% endfor %}
-<div class="message-slider-section-wrapper page-width" {% if section.settings.show_from_meta and show_meta %}{% endif %}>
+<div 
+  class="message-slider-section-wrapper page-width
+  {% if section.settings.show_from_meta %}
+    {% if show_meta %}
+     {% endif %}
+  {% endif %}
+  ">
 <section class="message-slider" id="{{ section.id }}" data-section-id="{{ section.id }}">
   <div class="message-slider__wrapper">
     {% if section.settings.show_from_meta %}
