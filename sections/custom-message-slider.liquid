@@ -3,6 +3,7 @@
 {% assign metaObject = shop.metaobjects.announcement_bar.values %}
 
 {% for single_slide_data in metaObject %}
+  {{ single_slide_data.company }}
   {% if single_slide_data.company contains active_user_company %}
     {{ single_slide_data.name.value }}
   {% endif %}
