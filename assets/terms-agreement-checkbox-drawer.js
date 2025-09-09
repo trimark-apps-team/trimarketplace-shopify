@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
   error.style.marginTop = '0.5rem';
   error.style.display = 'none';
   error.textContent = 'You must agree to the Terms & Conditions before checkout.';
-  checkbox.insertAdjacentElement('afterend', error);
+   wrapper.appendChild(error); 
 
   function validate() {
     if (checkbox.checked) {
