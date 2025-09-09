@@ -33,7 +33,11 @@
     align-items:end;
   }
   
-  
+  p.footer-block__heading.inline-richtext {
+    color: #26292d;
+    font-size: 14px;
+    font-weight: 600;
+}
   
   .footer-top .footer-top-body .contact-banner .logo  {
     padding-top: 30px;
