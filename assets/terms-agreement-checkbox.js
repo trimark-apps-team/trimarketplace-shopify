@@ -1,11 +1,13 @@
 document.addEventListener('DOMContentLoaded', function() {
   var checkbox = document.getElementById('terms');
-  var pageBtn = document.getElementById('checkout');
-  var drawerBtn = document.getElementById('CartDrawer-Checkout');
+  var checkoutBtns = [
+    document.getElementById('checkout'),
+    document.getElementById('CartDrawer-Checkout')
+  ].filter(Boolean);
 
-  if (!checkbox) return;
+  if (!checkbox || checkoutBtns.length === 0) return;
 
-  // Add one error message under the checkbox
+  // Insert one error message under the checkbox
   var error = document.createElement('div');
   error.id = 'terms-error';
   error.style.color = 'red';
@@ -23,28 +25,29 @@ document.addEventListener('DOMContentLoaded', function() {
     error.style.display = 'block';
   }
 
-  // Keep buttons disabled until checked
   function toggleButtons() {
-    var checked = checkbox.checked;
-    if (pageBtn) pageBtn.disabled = !checked;
-    if (drawerBtn) drawerBtn.disabled = !checked;
-    if (checked) hideError();
+    if (checkbox.checked) {
+      checkoutBtns.forEach(btn => btn.disabled = false);
+      hideError();
+    } else {
+      checkoutBtns.forEach(btn => btn.disabled = true);
+    }
   }
 
+  // Set initial state
   toggleButtons();
 
-  // Update on checkbox change
+  // Update whenever the checkbox changes
   checkbox.addEventListener('change', toggleButtons);
 
-  // Block form submit if not checked
-  [pageBtn, drawerBtn].forEach(function(btn) {
-    if (!btn) return;
+  // Block form submit as a safeguard
+  checkoutBtns.forEach(function(btn) {
     var form = btn.closest('form');
     if (!form) return;
     form.addEventListener('submit', function(e) {
       if (!checkbox.checked) {
         e.preventDefault();
-        if (btn) btn.disabled = true;
+        btn.disabled = true;
         showError();
         checkbox.focus();
       }
