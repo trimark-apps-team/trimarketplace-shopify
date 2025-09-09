@@ -15,7 +15,7 @@
                 </h3>
               {% endif %}
               {% if single_slide.banner_content != blank %}
-                <div class="message-slide__content">{{ single_slide.banner_content }}</div>
+                <div class="message-slide__content">{{ single_slide.banner_content | metafield_tag }}</div>
               {% endif %}
             </div>
         {% endfor %}
