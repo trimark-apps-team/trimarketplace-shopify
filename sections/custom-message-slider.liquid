@@ -6,7 +6,7 @@
   {% assign raw_companies = single_slide_data.company | remove: '["' | remove: '"]' | replace: '","', ',' %}
   {% assign companies_array = raw_companies | split: ',' %}
   {% if companies_array contains active_user_company %}
-    {% assign data_filtered_by_company = data_filtered_by_company | append: single_slide_data | append: "," %}
+    {% assign show_meta = true %}
   {% endif %}
 {% endfor %}
 <div class="message-slider-section-wrapper page-width">
