@@ -286,7 +286,7 @@
       text-align: center;
       padding: 15px 0 0 0;
     }
-    .footer-top .footer-top-body .contact-banner .phone {
+    body .footer-top .footer-top-body .contact-banner .phone {
       display: flex;
       align-items: center;
       gap: 2px;
