@@ -313,6 +313,9 @@
     .list-wrapper {
       margin: 0 auto;
     }
+    #global-trimarkusa-footer .link-columns .list-wrapper .list-menu__item--link {
+      justify-content: center;
+    }
   }
     /* end footer redesign qa */
 
