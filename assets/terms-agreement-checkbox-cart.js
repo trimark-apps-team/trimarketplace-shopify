@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
       error.style.display = 'none';
     } else {
       checkoutBtn.disabled = true;
+      error.style.display = 'block';
     }
   }
 
