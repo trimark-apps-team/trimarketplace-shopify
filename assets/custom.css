@@ -310,8 +310,11 @@ footer .svg-wrapper .icon path {
 .card-border-radius {
   border-radius: 12px;
 }
+.card-padding {
+  padding: 20px;
+}
 .message-slider-section-wrapper .message-slider .message-slider__wrapper {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 
