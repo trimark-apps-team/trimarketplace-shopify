@@ -38,7 +38,10 @@
   font-size: 1.6rem;
   line-height: 1.5;
 }
-
+.tab-content ul {
+  display: flex;
+  flex-wrap: wrap;
+}
 .tab-content ul li {
   width: 50%;
 }
