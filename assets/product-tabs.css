@@ -16,7 +16,7 @@
 .product-tabs .tab-button {
   background: none;
   border: none;
-  border-bottom: 5px solid transparent;
+  border-bottom: 2px solid transparent;
   color: #a8243e;
   padding: 1rem 2rem;
   cursor: pointer;
@@ -25,7 +25,7 @@
 }
 
 .product-tabs .tab-button.active {
-  border-bottom: 5px solid #a8243e;
+  border-bottom: 2px solid #a8243e;
 }
 
 .product-tabs .tab-content {
