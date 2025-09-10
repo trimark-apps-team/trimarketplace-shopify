@@ -1,7 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
   var checkbox   = document.getElementById('terms-drawer');
-  var checkoutBtn = document.getElementById('CartDrawer-Checkout');
-  if (!checkbox || !checkoutBtn) return;
+  var checkoutBtns = [
+    document.getElementById('CartDrawer-Checkout'), // drawer checkout
+    document.getElementById('create-draft-order')   // draft order
+  ].filter(Boolean);
+
+  if (!checkbox || checkoutBtns.length === 0) return;
 
   var error = document.createElement('div');
   error.style.color = 'red';
@@ -13,14 +17,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function validate() {
     if (checkbox.checked) {
-      checkoutBtn.disabled = false;
+      checkoutBtns.forEach(btn => btn.disabled = false);
       error.style.display = 'none';
     } else {
-      checkoutBtn.disabled = true;
+      checkoutBtns.forEach(btn => btn.disabled = true);
       error.style.display = 'block';
     }
   }
 
+  // Run once at load
   validate();
+
+  // Update when checkbox changes
   checkbox.addEventListener('change', validate);
 });
