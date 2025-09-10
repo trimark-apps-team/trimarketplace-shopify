@@ -365,6 +365,10 @@ footer .svg-wrapper .icon path {
 .tab-content .metafield-rich_text_field p {
     margin-top: 0;
 }
+.cart__ctas .cart_button {
+  display:flex;
+  gap:10px;
+}
 .cart__ctas .cart_button .btn-primary {
     font-size: 1.5rem;
     letter-spacing: .1rem;
