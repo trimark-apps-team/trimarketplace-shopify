@@ -97,7 +97,8 @@
       </facet-filters-form>
     {%- endif -%}
 
-    <div class="responsive {% if section.settings.filter_type == 'vertical' %} facets-vertical page-width{% endif %}">
+    <div class="page-width">
+      <div class="responsive {% if section.settings.filter_type == 'vertical' %} facets-vertical{% endif %}">
       {{ 'component-facets.css' | asset_url | stylesheet_tag }}
       <script src="{{ 'facets.js' | asset_url }}" defer="defer"></script>
       {%- if section.settings.enable_filtering or section.settings.enable_sorting -%}
@@ -191,6 +192,7 @@
         {%- endif -%}
       </div>
     </div>
+  </div>
   {%- endpaginate -%}
   {% if section.settings.image_shape == 'arch' %}
     {{ 'mask-arch.svg' | inline_asset_content }}
