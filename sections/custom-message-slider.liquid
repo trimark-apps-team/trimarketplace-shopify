@@ -217,10 +217,10 @@
   </style>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function() {
   const section = document.querySelector('[data-section-id="{{ section.id }}"]');
   const slidesWrapper = section.querySelector('.message-slider__slides');
-  let slides = Array.from(slidesWrapper.querySelectorAll('.message-slide')); // all slides
+  let slides = Array.from(slidesWrapper.querySelectorAll('.message-slide'));
   const dotsContainer = section.querySelector('.slider-dots');
   const prevBtn = section.querySelector('.slider-arrow.prev');
   const nextBtn = section.querySelector('.slider-arrow.next');
@@ -231,22 +231,31 @@
   let currentX = 0;
   let isDragging = false;
 
-  // 🔥 Filter slides by start/end date
-  const now = new Date();
+  // 🔥 Helper: get current EDT time
+  function getNowInEDT() {
+    const now = new Date();
+    const edtString = now.toLocaleString("en-US", { timeZone: "America/New_York" });
+    return new Date(edtString);
+  }
+
+  // 🔥 Filter slides by start/end dates (EDT)
+  const now = getNowInEDT();
   slides.forEach(slide => {
     const startDate = new Date(slide.dataset.startDate);
     const endDate = new Date(slide.dataset.endDate);
-    console.log(now);
-    console.log("=============");
-    if (now < startDate || now > endDate) {
-      slide.remove(); // remove invalid slides
+
+    const startInEDT = new Date(startDate.toLocaleString("en-US", { timeZone: "America/New_York" }));
+    const endInEDT = new Date(endDate.toLocaleString("en-US", { timeZone: "America/New_York" }));
+
+    if (now < startInEDT || now > endInEDT) {
+      slide.remove();
     }
   });
 
-  // Recollect slides after filtering
+  // Refresh slides after filtering
   slides = Array.from(slidesWrapper.querySelectorAll('.message-slide'));
 
-  // If no slides remain, hide the section
+  // If no valid slides, hide section
   if (slides.length === 0) {
     section.style.display = 'none';
     return;
@@ -262,7 +271,6 @@
     dotsContainer.appendChild(dot);
   });
   dots = Array.from(dotsContainer.querySelectorAll('.slider-dot'));
-
   const totalSlides = slides.length;
 
   function updateSliderPosition() {
@@ -271,6 +279,7 @@
     dots[index].classList.add('active');
   }
 
+  // Dot click
   dots.forEach(dot => {
     dot.addEventListener('click', function() {
       index = parseInt(this.dataset.index);
@@ -278,6 +287,7 @@
     });
   });
 
+  // Prev / Next arrows
   prevBtn.addEventListener('click', function() {
     index = index > 0 ? index - 1 : totalSlides - 1;
     updateSliderPosition();
@@ -288,6 +298,7 @@
     updateSliderPosition();
   });
 
+  // Hide button
   hideBtn.addEventListener('click', function() {
     section.style.display = 'none';
   });
@@ -295,10 +306,8 @@
   // Drag / Swipe
   slidesWrapper.addEventListener('mousedown', startDrag);
   slidesWrapper.addEventListener('touchstart', startDrag);
-
   slidesWrapper.addEventListener('mousemove', dragMove);
   slidesWrapper.addEventListener('touchmove', dragMove);
-
   slidesWrapper.addEventListener('mouseup', endDrag);
   slidesWrapper.addEventListener('mouseleave', endDrag);
   slidesWrapper.addEventListener('touchend', endDrag);
@@ -337,6 +346,7 @@
     updateSliderPosition();
   }, 5000);
 });
+
   </script>
 {% schema %}
 {
