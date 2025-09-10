@@ -1,16 +1,15 @@
 document.addEventListener('DOMContentLoaded', function() {
-  var checkbox = document.getElementById('terms-drawer');
+  var checkbox   = document.getElementById('terms-drawer');
   var checkoutBtn = document.getElementById('CartDrawer-Checkout');
   if (!checkbox || !checkoutBtn) return;
 
-  var wrapper = checkbox.closest('.cart-terms');
   var error = document.createElement('div');
   error.style.color = 'red';
   error.style.fontSize = '0.9rem';
   error.style.marginTop = '0.5rem';
   error.style.display = 'none';
   error.textContent = 'You must agree to the Terms & Conditions before checkout.';
-   wrapper.appendChild(error); 
+  checkbox.closest('.cart-terms').appendChild(error);
 
   function validate() {
     if (checkbox.checked) {
