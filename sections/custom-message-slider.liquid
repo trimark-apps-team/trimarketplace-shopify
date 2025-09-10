@@ -246,7 +246,7 @@
 
     const startInEDT = new Date(startDate.toLocaleString("en-US", { timeZone: "America/New_York" }));
     const endInEDT = new Date(endDate.toLocaleString("en-US", { timeZone: "America/New_York" }));
-
+    console.log(now);
     if (now < startInEDT || now > endInEDT) {
       slide.remove();
     }
