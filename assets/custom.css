@@ -409,7 +409,18 @@ footer .svg-wrapper .icon path {
   background-color: rgba(var(--color-button), var(--alpha-button-background));
   color: #ffffff;
 }
-
+.button:after {
+    content: "";
+    position: absolute;
+    top: var(--buttons-border-width);
+    right: var(--buttons-border-width);
+    bottom: var(--buttons-border-width);
+    left: var(--buttons-border-width);
+    z-index: 1;
+    border-radius: var(--buttons-radius);
+    box-shadow: 0 0 0 calc(var(--buttons-border-width) + var(--border-offset)) rgba(var(--color-button-text), var(--border-opacity)), 0 0 0 var(--buttons-border-width) #a8243e;
+    transition: box-shadow var(--duration-short) ease;
+}
 
 
 /*
