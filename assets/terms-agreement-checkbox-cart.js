@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var checkoutBtn = document.getElementById('checkout');
   var draftBtn    = document.querySelector('.draft-order-cart');
 
-  if (!checkbox) return;
+
 
   var error = document.createElement('div');
   error.style.color = 'red';
