@@ -428,7 +428,7 @@ footer .svg-wrapper .icon path {
   padding-bottom:60px;
 }
 
-.button, .shopify-challenge__button, .customer button {
+.product__info-wrapper .product-form__submit.button {
     color: rgb(255 255 255);
     background-color: rgb(var(--color-button-text));
 }
