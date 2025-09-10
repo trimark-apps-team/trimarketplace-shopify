@@ -557,10 +557,10 @@
         <!-- CTAs -->
 
         <div class="cart__ctas" {{ block.shopify_attributes }}>      
-             <a class="button btn btn-primary cs-save-trigger" href="/a/saved-carts/new">
-                Save Cart
-            </a> 
-            <a href="{{ routes.cart_url }}" class="cart__checkout-button button cart_btn">View Cart</a>
+            <div class="">
+              <a class="btn btn-primary cs-save-trigger" href="/a/saved-carts/new">Save Cart</a> 
+              <a href="{{ routes.cart_url }}" class="cart__checkout-button cart_btn">View Cart</a>
+            </div>
           <button
             type="submit"
             id="CartDrawer-Checkout"
