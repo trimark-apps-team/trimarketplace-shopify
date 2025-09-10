@@ -427,7 +427,7 @@
             
               {%- render 'social-icons', class: 'footer__list-social' -%}
             
-             {% comment %} <nav class="social">
+             <nav class="social">
                <ul>
                   <li class="social-icon">
                    <a href="https://www.facebook.com/TrimarkUSA" class="social-media-link" aria-label="link facebook" target="_new">
@@ -480,11 +480,11 @@
                  
                </ul>
          
-            </nav> {% endcomment %}
+            </nav> 
           </div>
           <div class="link-wrapper">
             <div class="link-columns">             
-              {% comment %} <nav class="link-column">
+               <nav class="link-column">
                 
                 <p class="column-head">
                  Company
@@ -516,7 +516,7 @@
                     
                   </ul>
                 
-              </nav> {% endcomment %}
+              </nav> 
                <nav class="link-column">
                 
                 <p class="column-head">
@@ -595,10 +595,7 @@
       <div class="footer-bottom">
         <div class="footer-bottom-wrapper">
           <address class="address">
-            {% comment %} TriMark USA, LLC, 9 Hampshire Street, Mansfield, MA 02048 {% endcomment %}
-            <p>
-              {{ shop.name }}, {{ shop.address.city }}, {{ shop.address.province }} {{ shop.address.zip }}
-            </p>
+            TriMark USA, LLC, 9 Hampshire Street, Mansfield, MA 02048
           </address>
           <div class="copyright">
             {{ section.settings.copyright_text }}             
