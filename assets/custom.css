@@ -311,6 +311,20 @@ footer .svg-wrapper .icon path {
   padding: 20px;
 }
 
+/*
+.card-background {
+  background: #fff;
+}
+.card-shadow {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+.card-border-radius {
+  border-radius: 12px;
+}
+.card-padding {
+  padding: 20px;
+}
+*/
 
 .message-slider-section-wrapper .message-slider .message-slider__wrapper {
   overflow: hidden;
