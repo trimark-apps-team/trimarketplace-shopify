@@ -39,6 +39,10 @@
   line-height: 1.5;
 }
 
+.tab-content ul li {
+  width: 50%;
+}
+
 .product-tabs .tab-content.active {
   display: block;
 }
