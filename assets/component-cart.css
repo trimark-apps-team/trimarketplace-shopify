@@ -9,9 +9,9 @@
 }
 
 #MainContent h1 {
-  font-weight: 300;
+  font-weight: var(--font-heading-weight);
   font-size: xx-large;
-  color: #555;
+  color: rgb(var(--color-foreground));
 }
 
 .cart__empty-text,
