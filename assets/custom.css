@@ -366,11 +366,17 @@ footer .svg-wrapper .icon path {
     margin-top: 0;
 }
 .cart__ctas .cart_button .btn-primary {
-  font-size: 1.5rem;
-  letter-spacing: .1rem;
-  line-height: calc(1 + .2 / var(--font-body-scale));
-  padding: 0 3rem;
-  background-color: rgba(var(--color-button), var(--alpha-button-background));
+    font-size: 1.5rem;
+    letter-spacing: .1rem;
+    line-height: calc(1 + .2 / var(--font-body-scale));
+    padding: 0 3rem;
+    background-color: rgba(var(--color-button), var(--alpha-button-background));
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-decoration: none;
 }
 
 
