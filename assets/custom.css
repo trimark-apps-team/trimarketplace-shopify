@@ -491,6 +491,12 @@ body .facets-container {
     min-height: auto;
     
   }
+  .facets-container {
+    background: transparent;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 20px 0;
+  }
   .shopify-policy__container .shopify-policy__title h1 {
     font-size: 22px !important;
   }
