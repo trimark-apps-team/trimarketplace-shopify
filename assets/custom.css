@@ -432,6 +432,12 @@ footer .svg-wrapper .icon path {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   border-radius: 12px;
 }
+.template-product .related-products {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  background: #fff;
+  padding: 20px;
+}
 
 .template-cart .content-for-layout {
   padding-bottom:60px;
