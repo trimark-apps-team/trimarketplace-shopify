@@ -317,7 +317,7 @@ footer .svg-wrapper .icon path {
     border-radius: 12px;
     padding: 20px;
 }
-.template-collection .collection {
+.template-collection ..facets-container {
   z-index: 99;
 }
 .collection #product-grid {
