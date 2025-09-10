@@ -428,7 +428,7 @@ footer .svg-wrapper .icon path {
   padding-bottom:60px;
 }
 
-.product__info-wrapper .product-form__submit.button {
+.product__info-wrapper .product-form__submit.button, .cart__checkout-button {
     color: rgb(255 255 255);
     background-color: rgb(var(--color-button-text));
 }
