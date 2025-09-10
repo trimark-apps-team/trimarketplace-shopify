@@ -318,7 +318,7 @@ footer .svg-wrapper .icon path {
     padding: 20px;
 }
 .template-collection .facets-container {
-  z-index: 99;
+  z-index: 9999;
 }
 .collection #product-grid {
   margin-top:0;
