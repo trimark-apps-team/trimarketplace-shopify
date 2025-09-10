@@ -443,6 +443,10 @@ footer .svg-wrapper .icon path {
   overflow: hidden;
 }
 
+body .facets-container {
+  position: sticky;
+  top: 0;
+}
 
 @media screen and (max-width: 1054px) {
   .header__menu-item {
@@ -532,10 +536,7 @@ footer .svg-wrapper .icon path {
   .facets-container .product-count__text {
     display: none;
   }
-  body .facets-container {
-    position: sticky;
-    top: 0;
-  }
+  
   .product-tabs .tab-button {
     font-size: 15px;
   }
