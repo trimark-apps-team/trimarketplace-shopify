@@ -532,7 +532,7 @@ footer .svg-wrapper .icon path {
   .facets-container .product-count__text {
     display: none;
   }
-  .template-collection .facets-container {
+  body .facets-container {
     position: sticky;
     top: 0;
   }
