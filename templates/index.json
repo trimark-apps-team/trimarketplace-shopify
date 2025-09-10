@@ -195,6 +195,7 @@
         },
         "feature_WNTVL3": {
           "type": "feature",
+          "disabled": true,
           "settings": {
             "icon": "shopify://shop_images/Help.png",
             "heading": "Help",
@@ -202,12 +203,22 @@
             "link_label": "View All",
             "link_url": "https://faq.trimarketplace.com/"
           }
+        },
+        "sales_contact_block_9H3zBG": {
+          "type": "sales-contact-block",
+          "settings": {
+            "heading-1": "Sales Contact",
+            "heading-2": "Phone",
+            "heading-3": "Email",
+            "heading-4": "Address"
+          }
         }
       },
       "block_order": [
         "feature_GqyJDz",
         "feature_CXbtYY",
-        "feature_WNTVL3"
+        "feature_WNTVL3",
+        "sales_contact_block_9H3zBG"
       ],
       "name": "Feature Card Grid",
       "settings": {
