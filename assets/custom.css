@@ -323,6 +323,11 @@ footer .svg-wrapper .icon path {
 .template-collection .facets-vertical-form {
     padding-bottom: 24px;
 }
+.template-collection .facet-filters__field .select:focus-visible {
+    outline: none;
+    outline-offset: none;
+    box-shadow: none;
+}
 .product-card-wrapper .card.card--standard.card--media {
     gap: 10px;
 }
