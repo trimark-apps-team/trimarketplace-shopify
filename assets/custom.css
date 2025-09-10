@@ -409,6 +409,10 @@ footer .svg-wrapper .icon path {
   background-color: rgba(var(--color-button), var(--alpha-button-background));
   color: #ffffff;
 }
+.aasaved-cart-actions .button {
+    color: #fff;
+    background-color: #a8243e;
+}
 .aasaved-cart-actions .button:after {
     box-shadow: 0 0 0 calc(var(--buttons-border-width) + var(--border-offset)) rgba(var(--color-button-text), var(--border-opacity)), 0 0 0 var(--buttons-border-width) #a8243e;
 }
