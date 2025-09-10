@@ -1,33 +1,35 @@
 document.addEventListener('DOMContentLoaded', function() {
-  var checkbox = document.getElementById('terms-cart');
-  var checkoutBtn = document.getElementById('checkout');
-  if (!checkbox || !checkoutBtn) return;
+  var checkbox   = document.getElementById('terms-cart');   // or terms-drawer
+  var checkoutBtns = [
+    document.getElementById('checkout'),              // cart page
+    document.getElementById('CartDrawer-Checkout'),   // drawer
+    document.getElementById('create-draft-order')     // draft order
+  ].filter(Boolean);
 
-  var wrapper = checkbox.closest('.cart-terms');
+  if (!checkbox || checkoutBtns.length === 0) return;
+
+  // Create error element under checkbox
   var error = document.createElement('div');
   error.style.color = 'red';
   error.style.fontSize = '0.9rem';
   error.style.marginTop = '0.5rem';
   error.style.display = 'none';
   error.textContent = 'You must agree to the Terms & Conditions before checkout.';
-  checkbox.insertAdjacentElement('afterend', error);
-  wrapper.appendChild(error); 
+  checkbox.closest('.cart-terms').appendChild(error);
+
   function validate() {
     if (checkbox.checked) {
-      checkoutBtn.disabled = false;
+      checkoutBtns.forEach(btn => btn.disabled = false);
       error.style.display = 'none';
-      document.querySelectorAll("#create-draft-order").forEach(el => {
-        el.disabled = false;
-      });
     } else {
-      checkoutBtn.disabled = true;
+      checkoutBtns.forEach(btn => btn.disabled = true);
       error.style.display = 'block';
-      document.querySelectorAll("#create-draft-order").forEach(el => {
-        el.disabled = true;
-      });
     }
   }
 
+  // Run once
   validate();
+
+  // Update when checkbox changes
   checkbox.addEventListener('change', validate);
 });
