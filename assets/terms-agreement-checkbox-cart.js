@@ -11,14 +11,20 @@ document.addEventListener('DOMContentLoaded', function() {
   error.style.display = 'none';
   error.textContent = 'You must agree to the Terms & Conditions before checkout.';
   checkbox.insertAdjacentElement('afterend', error);
-wrapper.appendChild(error); 
+  wrapper.appendChild(error); 
   function validate() {
     if (checkbox.checked) {
       checkoutBtn.disabled = false;
       error.style.display = 'none';
+      document.querySelectorAll("#create-draft-order").forEach(el => {
+        el.disabled = false;
+      });
     } else {
       checkoutBtn.disabled = true;
       error.style.display = 'block';
+      document.querySelectorAll("#create-draft-order").forEach(el => {
+        el.disabled = true;
+      });
     }
   }
 
