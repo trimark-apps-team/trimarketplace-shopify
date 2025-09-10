@@ -348,6 +348,9 @@ footer .svg-wrapper .icon path {
 .product__info-wrapper .price-item {
     font-weight: 600;
 }
+.product__info-wrapper {
+  position: relative;
+}
 
 /*
 .card-background {
