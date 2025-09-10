@@ -237,6 +237,7 @@
     const startDate = new Date(slide.dataset.startDate);
     const endDate = new Date(slide.dataset.endDate);
     console.log(now);
+    console.log("=============");
     if (now < startDate || now > endDate) {
       slide.remove(); // remove invalid slides
     }
