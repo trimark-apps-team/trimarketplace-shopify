@@ -23,10 +23,18 @@
             "title": "Free Freight on all stock orders over $600...excludes rollouts, shelving.",
             "content": "<p><strong>Please note:</strong><br/><br/>If you cannot find an item, please type the item information & quantity in the comment box on the check out page. We will then add it to your order. We are experiencing delays in receiving some products due to the supply chain shortages, we have been diligently working.</p>"
           }
+        },
+        "slide_gcbwkb": {
+          "type": "slide",
+          "settings": {
+            "title": "Free Freight on all stock orders over $600...excludes rollouts, shelving.",
+            "content": "<p><strong>Please note:</strong><br/><br/>If you cannot find an item, please type the item information & quantity in the comment box on the check out page. We will then add it to your order. We are experiencing delays in receiving some products due to the supply chain shortages, we have been diligently working.</p>"
+          }
         }
       },
       "block_order": [
-        "slide_Km6GiG"
+        "slide_Km6GiG",
+        "slide_gcbwkb"
       ],
       "name": "Message Slider",
       "settings": {
