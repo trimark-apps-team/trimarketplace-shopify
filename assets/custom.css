@@ -389,7 +389,7 @@ footer .svg-wrapper .icon path {
   letter-spacing: .1rem;
   line-height: calc(1 + .2 / var(--font-body-scale));
   padding: 0 3rem;
-  background-color: rgba(var(--color-button), var(--alpha-button-background));
+  background-color: rgba(var(--color-button),var(--alpha-button-background));
   min-height: calc(4.5rem + var(--buttons-border-width) * 2);
   display: flex;
   justify-content: center;
