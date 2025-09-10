@@ -1,300 +1,285 @@
-{% comment %}
-  Renders a list of product's variants
-
-  Accepts:
-  - product: {Object} Product Liquid object
-  - show_image: {Boolean} Shows image of the variant in the row
-  - is_modal: {Boolean} Defines if this snippet lives in a modal (optional)
-
-  Usage:
-  {% render 'quick-order-list', product: product %}
-{% endcomment %}
-
-{% comment %} TODO: enable theme-check once `line_items_for` is accepted as valid filter {% endcomment %}
-{% # theme-check-disable %}
-{%- assign items_in_cart = cart | line_items_for: product | sum: 'quantity' -%}
-{% # theme-check-enable %}
-<div class="quick-order-list-container color-{{ section.settings.color_scheme }}{% unless is_modal %} gradient{% endunless %}">
-  <quick-order-list
-    class="page-width section-{{ section.id }}-padding"
-    id="{{ section.id }}-{{ product.id }}"
-    data-section="{{ section.id }}"
-    data-product-id="{{ product.id }}"
-    data-url="{{ product.url }}"
-  >
-    <form
-      action="{{ routes.cart_update_url }}"
-      class="quick-order-list__contents critical-hidden"
-      method="post"
-      id="QuickOrderList"
+<div class="quick-order-controls page-width">
+  <div class="quick-order-controls__inner">
+    <input
+      type="text"
+      id="quick-order-search"
+      placeholder="Search by title, price, type or SKU"
+      class="quick-order-search-input"
     >
-      {% paginate product.variants by section.settings.variants_per_page %}
-        <div class="quick-order-list__container" id="main-variant-items">
-          <table class="quick-order-list__table">
-            <caption class="visually-hidden">
-              {{ 'sections.cart.title' | t }}
-            </caption>
-            <thead>
-              <tr>
-                <th class="caption-with-letter-spacing" scope="col">
-                  {%- if product.has_only_default_variant -%}
-                    {{ 'sections.quick_order_list.product' | t }}
-                  {%- else -%}
-                    {{ 'sections.quick_order_list.variant' | t }}
-                  {%- endif -%}
-                </th>
-                <th class="large-up-hide right caption-with-letter-spacing" scope="col">
-                  {%- if product.has_only_default_variant -%}
-                    {{ 'sections.quick_order_list.product_total' | t }}
-                  {%- else -%}
-                    {{ 'sections.quick_order_list.variant_total' | t }}
-                  {%- endif -%}
-                </th>
-                <th
-                  class="quick-order-list__table-heading--wide small-hide medium-hide caption-with-letter-spacing"
-                  scope="col"
-                >
-                  {{ 'products.product.quantity.label' | t }}
-                </th>
-                <th
-                  class="quick-order-list__table-heading--wide small-hide medium-hide caption-with-letter-spacing"
-                  scope="col"
-                >
-                  {{ 'sections.cart.headings.price' | t }}
-                </th>
-                <th class="small-hide medium-hide right caption-with-letter-spacing" scope="col">
-                  {%- if product.has_only_default_variant -%}
-                    {{ 'sections.quick_order_list.product_total' | t }}
-                  {%- else -%}
-                    {{ 'sections.quick_order_list.variant_total' | t }}
-                  {%- endif -%}
-                </th>
-              </tr>
-            </thead>
 
-            <tbody>
-              {%- if product.has_only_default_variant -%}
-                {%- render 'quick-order-list-row',
-                  item: product,
-                  image: product.featured_media,
-                  sku: product.selected_or_first_available_variant.sku,
-                  variant: product.selected_or_first_available_variant,
-                  show_image: show_image,
-                  show_sku: show_sku,
-                  is_modal: is_modal
-                -%}
-              {%- else -%}
-                {%- for variant in product.variants -%}
-                  {%- render 'quick-order-list-row',
-                    item: variant,
-                    image: variant.image,
-                    sku: variant.sku,
-                    variant: variant,
-                    show_image: show_image,
-                    show_sku: show_sku,
-                    is_modal: is_modal
-                  -%}
-                {%- endfor -%}
-              {%- endif -%}
-            </tbody>
-          </table>
+    <select id="quick-order-sort" class="quick-order-sort-select">
+      <option value="recent">Recently Purchased</option>
+      <option value="az">Title: A → Z</option>
+      <option value="za">Title: Z → A</option>
+      <option value="plh">Price: Low → High</option>
+      <option value="phl">Price: High → Low</option>
+      <option value="inv_low">Inventory: Low → High</option>
+      <option value="inv_high">Inventory: High → Low</option>
+    </select>
+
+      <div class="dropdown-collection">
+          <input type="text" id="collection-search" placeholder="Search collections..." class="collection-search-input">
+          <div class="dropdown-menu hidden">
+        
+        <div id="quick-order-collections" class="quick-order-collections">
+          {% for collection in collections %}
+            {% unless collection.title == "Best selling" %}
+              <label>
+                <input type="checkbox" class="collection-filter" value="{{ collection.handle }}">
+                {{ collection.title }}
+              </label>
+            {% endunless %}
+          {% endfor %}
         </div>
-        <div class="js-paginate">
-          {% render 'pagination', paginate: paginate %}
-        </div>
-      {%- endpaginate -%}
-
-      <p
-        class="visually-hidden"
-        id="quick-order-list-live-region-text-{{ product.id }}"
-        aria-live="polite"
-        role="status"
-      ></p>
-      <p
-        class="visually-hidden"
-        id="shopping-cart-variant-item-status"
-        aria-live="polite"
-        aria-hidden="true"
-        role="status"
-      >
-        {{ 'accessibility.loading' | t }}
-      </p>
-    </form>
-
-    {%- if product.has_only_default_variant or product.variants_count == 1 -%}
-      <span class="quick-order-list-error">
-        {% comment %} Populated by JS {% endcomment %}
-      </span>
-    {%- else -%}
-      <div
-        class="quick-order-list__total{% unless is_modal %} gradient{% endunless %}"
-        id="quick-order-list-total-{{ product.id }}-{{ section.id }}"
-      >
-        <div class="quick-order-list-total__info">
-          <div class="quick-order-list-total__column small-hide medium-hide">
-            <div class="quick-order-list-buttons">
-              <a
-                href="{{ routes.cart_url }} "
-                class="quick-order-list__button button button--secondary small-hide  medium-hide"
-              >
-                <span class="quick-order-list__button-text">{{- 'sections.quick_order_list.view_cart' | t -}}</span>
-              </a>
-              <div class="variant-remove-total{% if items_in_cart == 0 %} variant-remove-total--empty{% endif %}">
-                {%- render 'loading-spinner' -%}
-                <quick-order-list-remove-all-button
-                  data-action="confirm"
-                  class="{% if items_in_cart == 0 %}hidden{% endif %}"
-                >
-                  <button class="button button--tertiary" type="button">
-                    <span class="svg-wrapper">
-                      {{- 'icon-remove.svg' | inline_asset_content -}}
-                    </span>
-                    <span class="text-body">{{ 'sections.quick_order_list.remove_all' | t }}</span>
-                  </button>
-                </quick-order-list-remove-all-button>
-              </div>
-            </div>
-            <span class="quick-order-list__message caption-large" role="status">
-              <span class="quick-order-list__message-icon hidden">
-                <span class="svg-wrapper">
-                  {{- 'icon-checkmark.svg' | inline_asset_content -}}
-                </span>
-              </span>
-              <span class="quick-order-list__message-text"></span>
-            </span>
-            <span class="quick-order-list-error">
-              {% comment %} Populated by JS {% endcomment %}
-            </span>
-          </div>
-          <div class="quick-order-list__total-items">
-            <span>
-              {{ items_in_cart }}
-            </span>
-            <p class="h5">{{ 'sections.quick_order_list.total_items' | t }}</p>
-          </div>
-          <div class="quick-order-list-total__price">
-            <div class="totals__product-total">
-              <span class="totals__subtotal-value">
-                {% comment %} TODO: enable theme-check once `line_items_for` is accepted as valid filter {% endcomment %}
-                {% # theme-check-disable %}
-                {{ cart | line_items_for: product | sum: 'original_line_price' | money }}
-                {% # theme-check-enable %}
-              </span>
-              <p class="totals__subtotal h5">{{ 'sections.quick_order_list.product_total' | t }}</p>
-            </div>
-            <small class="tax-note caption-large rte">
-              {%- if cart.duties_included and cart.taxes_included -%}
-                {%- if shop.shipping_policy.body == blank -%}
-                  {{ 'sections.cart.duties_and_taxes_included_shipping_at_checkout_without_policy' | t }}
-                {%- else -%}
-                  {{
-                    'sections.cart.duties_and_taxes_included_shipping_at_checkout_with_policy_html'
-                    | t: link: shop.shipping_policy.url
-                  }}
-                {%- endif -%}
-              {%- elsif cart.duties_included == false and cart.taxes_included -%}
-                {%- if shop.shipping_policy.body == blank -%}
-                  {{ 'sections.cart.taxes_included_shipping_at_checkout_without_policy' | t }}
-                {%- else -%}
-                  {{
-                    'sections.cart.taxes_included_shipping_at_checkout_with_policy_html'
-                    | t: link: shop.shipping_policy.url
-                  }}
-                {%- endif -%}
-              {%- elsif cart.duties_included and cart.taxes_included == false -%}
-                {%- if shop.shipping_policy.body == blank -%}
-                  {{ 'sections.cart.duties_included_taxes_at_checkout_shipping_at_checkout_without_policy' | t }}
-                {%- else -%}
-                  {{
-                    'sections.cart.duties_included_taxes_at_checkout_shipping_at_checkout_with_policy_html'
-                    | t: link: shop.shipping_policy.url
-                  }}
-                {%- endif -%}
-              {%- elsif cart.duties_included == false and cart.taxes_included == false -%}
-                {%- if shop.shipping_policy.body == blank -%}
-                  {{ 'sections.cart.taxes_at_checkout_shipping_at_checkout_without_policy' | t }}
-                {%- else -%}
-                  {{
-                    'sections.cart.taxes_at_checkout_shipping_at_checkout_with_policy_html'
-                    | t: link: shop.shipping_policy.url
-                  }}
-                {%- endif -%}
-              {%- endif -%}
-            </small>
-          </div>
-          <div class="quick-order-list-total__column large-up-hide">
-            <div class="quick-order-list-buttons">
-              <a
-                href="{{ routes.cart_url }}"
-                class="quick-order-list__button button button--secondary button--full-width"
-              >
-                <span class="quick-order-list__button-text">{{- 'sections.quick_order_list.view_cart' | t -}}</span>
-              </a>
-              <div class="variant-remove-total">
-                {%- render 'loading-spinner' -%}
-                <quick-order-list-remove-all-button
-                  class="{% if items_in_cart == 0 %}hidden{% endif %}"
-                  data-action="confirm"
-                >
-                  <button class="button button--tertiary" type="button">
-                    <span class="svg-wrapper">
-                      {{- 'icon-remove.svg' | inline_asset_content -}}
-                    </span>
-
-                    <span class="text-body">{{ 'sections.quick_order_list.remove_all' | t }}</span>
-                  </button>
-                </quick-order-list-remove-all-button>
-              </div>
-            </div>
-            <span class="quick-order-list__message caption-large" role="status">
-              <span class="quick-order-list__message-icon hidden">
-                <span class="svg-wrapper">
-                  {{- 'icon-checkmark.svg' | inline_asset_content -}}
-                </span>
-              </span>
-              <span class="quick-order-list__message-text"></span>
-            </span>
-            <span class="quick-order-list-error">
-              {% comment %} Populated by JS {% endcomment %}
-            </span>
-          </div>
-        </div>
-        <div class="quick-order-list-total__confirmation hidden">
-          <span class="text-body">
-            {{ 'sections.quick_order_list.remove_all_items_confirmation' | t: quantity: items_in_cart }}
-          </span>
-          <quick-order-list-remove-all-button
-            data-action="remove"
-          >
-            <button
-              class="quick-order-list__button-confirm button button--secondary"
-              type="button"
-            >
-              {{- 'sections.quick_order_list.remove_all' | t -}}
-            </button>
-          </quick-order-list-remove-all-button>
-          <quick-order-list-remove-all-button
-            data-action="cancel"
-          >
-            <button
-              class="quick-order-list__button-cancel button button--tertiary"
-              type="button"
-            >
-              {{- 'sections.quick_order_list.cancel' | t -}}
-            </button>
-          </quick-order-list-remove-all-button>
-        </div>
-
-        <script type="application/json" data-cart-contents>
-          {{ cart | line_items_for: product | map: "variant_id" | json }}
-        </script>
       </div>
-    {%- endif -%}
-  </quick-order-list>
-  <template id="QuickOrderListErrorTemplate-{{ product.id }}">
-    <span class="svg-wrapper">
-      {{ 'icon-error.svg' | inline_asset_content }}
-    </span>
-    <span class="quick-order-list-error-message caption-large" role="alert"></span>
-  </template>
+      </div>
+  </div>
 </div>
+
+<div class="quick-order_loader"></div>
+<div id="quick-order-products" class="hidden">
+  {% paginate collections["best-selling"].products by 1000 %}
+  {% assign collection_products = collections["best-selling"].products %}
+      {% for product in collection_products %}
+        {% assign best_selling_rank = forloop.index0 %}
+          <div class="quick-order-list-container"
+               data-title="{{ product.title | escape }}"
+               data-price="{{ product.price | divided_by: 100.0 }}"
+               data-inventory="{{ product.selected_or_first_available_variant.inventory_quantity }}"
+               data-bestselling="{{ best_selling_rank }}"
+               data-type="{{ product.type }}"
+               data-collection="{% for collection in product.collections %}{{ collection.handle }}{% unless forloop.last %},{% endunless %}{% endfor %}"
+               data-sku="{% for variant in product.variants %}{{ variant.sku }} {% endfor %}">
+            <quick-order-list
+              class="page-width"
+              id="{{ section.id }}-{{ product.id }}"
+              data-section="{{ section.id }}"
+              data-product-id="{{ product.id }}"
+              data-url="{{ product.url }}"
+            >
+            <form
+              action="{{ routes.cart_update_url }}"
+              class="quick-order-list__contents critical-hidden"
+              method="post"
+            >
+              <div class="quick-order-list__container" id="main-variant-items">
+                <table class="quick-order-list__table">
+                  <caption class="visually-hidden">
+                    {{ 'sections.cart.title' | t }}
+                  </caption>
+                  <thead>
+                    <tr>
+                      <th class="caption-with-letter-spacing" scope="col">
+                        {% comment %} {%- if product.has_only_default_variant -%} {{ 'sections.quick_order_list.product' | t }} {%- else -%} {{ 'sections.quick_order_list.variant' | t }} {%- endif -%} {% endcomment %}
+                      </th>
+                      <th class="large-up-hide right caption-with-letter-spacing" scope="col">
+                        {% comment %} {%- if product.has_only_default_variant -%} {{ 'sections.quick_order_list.product_total' | t }} {%- else -%} {{ 'sections.quick_order_list.variant_total' | t }} {%- endif -%} {% endcomment %}
+                      </th>
+                      <th
+                        class="quick-order-list__table-heading--wide small-hide medium-hide caption-with-letter-spacing"
+                        scope="col"
+                      >
+                        {% comment %} {{ 'products.product.quantity.label' | t }} {% endcomment %}
+                      </th>
+                      <th
+                        class="quick-order-list__table-heading--wide small-hide medium-hide caption-with-letter-spacing"
+                        scope="col"
+                      >
+                        {% comment %} {{ 'sections.cart.headings.price' | t }} {% endcomment %}
+                      </th>
+                      <th class="small-hide medium-hide right caption-with-letter-spacing" scope="col">
+                        {% comment %} {%- if product.has_only_default_variant -%} {{ 'sections.quick_order_list.product_total' | t }} {%- else -%} {{ 'sections.quick_order_list.variant_total' | t }} {%- endif -%} {% endcomment %}
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {%- if product.has_only_default_variant -%}
+                      {%- render 'quick-order-list-row',
+                        item: product,
+                        image: product.featured_media,
+                        sku: product.selected_or_first_available_variant.sku,
+                        variant: product.selected_or_first_available_variant,
+                        show_image: show_image,
+                        show_sku: show_sku,
+                        is_modal: is_modal
+                      -%}
+                    {%- else -%}
+                      {%- for variant in product.variants -%}
+                        {%- render 'quick-order-list-row',
+                          item: variant,
+                          image: variant.image,
+                          sku: variant.sku,
+                          variant: variant,
+                          show_image: show_image,
+                          show_sku: show_sku,
+                          is_modal: is_modal
+                        -%}
+                      {%- endfor -%}
+                    {%- endif -%}
+                  </tbody>
+                </table>
+              </div>
+              <p
+                class="visually-hidden"
+                id="quick-order-list-live-region-text-{{ product.id }}"
+                aria-live="polite"
+                role="status"
+              ></p>
+              <p
+                class="visually-hidden"
+                id="shopping-cart-variant-item-status"
+                aria-live="polite"
+                aria-hidden="true"
+                role="status"
+              >
+                {{ 'accessibility.loading' | t }}
+              </p>
+            </form>
+          </quick-order-list>
+          <template id="QuickOrderListErrorTemplate-{{ product.id }}">
+            <span class="svg-wrapper"> {{ 'icon-error.svg' | inline_asset_content }} </span>
+            <span class="quick-order-list-error-message caption-large" role="alert"></span>
+          </template>
+          </div>
+      {% endfor %}
+   {% endpaginate %}
+</div>
+
+<div id="quick-order-pagination" class="pagination-controls">
+  <button id="prev-page" disabled>Prev</button>
+  <span id="page-info"></span>
+  <button id="next-page">Next</button>
+</div>
+
+<div id="no-results" class="no-results-message hidden">
+  No products found matching your search.
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const searchInput = document.getElementById('quick-order-search');
+  const sortSelect = document.getElementById('quick-order-sort');
+  const collectionCheckboxes = document.querySelectorAll('.collection-filter');
+  const collectionSearch = document.getElementById('collection-search');
+  const dropdownToggle = document.querySelector('#collection-search');
+  const dropdownMenu = document.querySelector('.dropdown-menu');
+  const container = document.getElementById('quick-order-products');
+  const items = Array.from(container.children);
+  const pagination = document.getElementById('quick-order-pagination');
+  const prevBtn = document.getElementById('prev-page');
+  const nextBtn = document.getElementById('next-page');
+  const pageInfo = document.getElementById('page-info');
+  const noResults = document.getElementById('no-results');
+
+  const ITEMS_PER_PAGE = 20;
+  let currentPage = 1;
+  let filteredItems = [...items];
+
+  dropdownToggle.addEventListener('focus', () => {
+    dropdownMenu.classList.remove('hidden');
+  });
+
+document.addEventListener("click", e => {
+    if (!dropdownMenu.contains(e.target) && e.target !== dropdownToggle) {
+      dropdownMenu.classList.add('hidden');
+    }
+  });
+
+
+  collectionSearch.addEventListener('input', function () {
+    const val = this.value.toLowerCase();
+    document.querySelectorAll('#quick-order-collections label').forEach(label => {
+      const text = label.textContent.toLowerCase();
+      label.style.display = text.includes(val) ? '' : 'none';
+    });
+  });
+
+  function applyFilters() {
+    const searchVal = searchInput.value.toLowerCase();
+    const sortVal = sortSelect.value;
+
+    const selectedCollections = Array.from(collectionCheckboxes)
+      .filter(cb => cb.checked)
+      .map(cb => cb.value);
+
+
+    filteredItems = items.filter(el => {
+      const title = el.dataset.title.toLowerCase();
+      const price = el.dataset.price;
+      const sku = el.dataset.sku.toLowerCase();
+      const type = el.dataset.type.toLowerCase();
+      const collections = el.dataset.collection.toLowerCase().split(",");
+
+      const matchesSearch =
+        title.includes(searchVal) ||
+        price.includes(searchVal) ||
+        sku.includes(searchVal) || 
+        collections.includes(searchVal) || 
+        type.includes(searchVal);
+
+      const matchesCollection =
+      selectedCollections.length === 0 ||
+      selectedCollections.some(c => collections.includes(c));
+
+      return matchesSearch && matchesCollection;
+    });
+
+ 
+    filteredItems.sort((a, b) => {
+      switch (sortVal) {
+        case 'az': return a.dataset.title.localeCompare(b.dataset.title);
+        case 'za': return b.dataset.title.localeCompare(a.dataset.title);
+        case 'plh': return parseFloat(a.dataset.price) - parseFloat(b.dataset.price);
+        case 'phl': return parseFloat(b.dataset.price) - parseFloat(a.dataset.price);
+        case 'recent': return parseInt(a.dataset.bestselling) - parseInt(b.dataset.bestselling);
+        case 'inv_low': return parseInt(a.dataset.inventory) - parseInt(b.dataset.inventory);
+        case 'inv_high': return parseInt(b.dataset.inventory) - parseInt(a.dataset.inventory);
+      }
+    });
+
+    currentPage = 1;
+    renderPage();
+  }
+
+  function renderPage() {
+    container.innerHTML = '';
+    const start = (currentPage - 1) * ITEMS_PER_PAGE;
+    const end = start + ITEMS_PER_PAGE;
+    const paginatedItems = filteredItems.slice(start, end);
+
+    if (paginatedItems.length === 0) {
+      noResults.classList.remove('hidden');
+      pagination.style.display = 'none';
+    } else {
+      noResults.classList.add('hidden');
+      pagination.style.display = 'flex';
+      paginatedItems.forEach(el => container.appendChild(el));
+    }
+
+    pageInfo.textContent = `Page ${currentPage} of ${Math.ceil(filteredItems.length / ITEMS_PER_PAGE)}`;
+    prevBtn.disabled = currentPage === 1;
+    nextBtn.disabled = currentPage === Math.ceil(filteredItems.length / ITEMS_PER_PAGE);
+
+    document.querySelector("#quick-order-products").classList.remove("hidden");
+    document.querySelector(".quick-order_loader").classList.add("hidden");
+  }
+
+  function debounce(func, delay) {
+    let timer;
+    return function (...args) {
+      clearTimeout(timer);
+      timer = setTimeout(() => func.apply(this, args), delay);
+    }
+  }
+
+  searchInput.addEventListener('input', debounce(applyFilters, 300));
+  sortSelect.addEventListener('change', applyFilters);
+  collectionCheckboxes.forEach(cb => cb.addEventListener('change', applyFilters));
+  prevBtn.addEventListener('click', () => { currentPage--; renderPage(); });
+  nextBtn.addEventListener('click', () => { currentPage++; renderPage(); });
+
+  applyFilters();
+});
+
+</script>
+
