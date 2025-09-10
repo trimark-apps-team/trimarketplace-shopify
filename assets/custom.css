@@ -320,6 +320,9 @@ footer .svg-wrapper .icon path {
 .collection #product-grid {
   margin-top:0;
 }
+.template-collection .facets-vertical-form {
+    padding-bottom: 24px;
+}
 .product-card-wrapper .card.card--standard.card--media {
     gap: 10px;
 }
