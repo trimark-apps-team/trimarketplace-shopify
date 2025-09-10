@@ -220,6 +220,7 @@ footer .svg-wrapper .icon path {
   background: #fff;
   border-radius: 8px;
   max-width: 1105px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 .cart-items .title-wrapper-with-link {
     padding-top: 10px;
