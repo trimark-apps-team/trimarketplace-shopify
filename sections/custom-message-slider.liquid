@@ -216,8 +216,7 @@
 
   </style>
 
-  <script>
-  <script>
+<script>
 document.addEventListener('DOMContentLoaded', function() {
   const section = document.querySelector('[data-section-id="{{ section.id }}"]');
   const slidesWrapper = section.querySelector('.message-slider__slides');
@@ -292,10 +291,59 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // --- Hide button ---
-  hideBtn.addEventListener('click', function
+  hideBtn.addEventListener('click', function() {
+    section.style.display = 'none';
+  });
 
+  // --- Drag / Swipe ---
+  slidesWrapper.addEventListener('mousedown', startDrag);
+  slidesWrapper.addEventListener('touchstart', startDrag);
 
-  </script>
+  slidesWrapper.addEventListener('mousemove', dragMove);
+  slidesWrapper.addEventListener('touchmove', dragMove);
+
+  slidesWrapper.addEventListener('mouseup', endDrag);
+  slidesWrapper.addEventListener('mouseleave', endDrag);
+  slidesWrapper.addEventListener('touchend', endDrag);
+
+  function startDrag(e) {
+    isDragging = true;
+    startX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+    slidesWrapper.style.transition = 'none';
+  }
+
+  function dragMove(e) {
+    if (!isDragging) return;
+    currentX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+    const deltaX = currentX - startX;
+    slidesWrapper.style.transform = `translateX(${-index * 100 + (deltaX / section.offsetWidth) * 100}%)`;
+  }
+
+  function endDrag() {
+    if (!isDragging) return;
+    isDragging = false;
+    const deltaX = (currentX || startX) - startX;
+    if (deltaX > 50 && index > 0) {
+      index--;
+    } else if (deltaX < -50 && index < totalSlides - 1) {
+      index++;
+    }
+    slidesWrapper.style.transition = 'transform 0.3s ease';
+    updateSliderPosition();
+    startX = 0;
+    currentX = 0;
+  }
+
+  // --- Auto-slide ---
+  if (totalSlides > 1) {
+    setInterval(() => {
+      index = (index + 1) % totalSlides;
+      updateSliderPosition();
+    }, 5000);
+  }
+});
+</script>
+
 {% schema %}
 {
   "name": "Message Slider",
