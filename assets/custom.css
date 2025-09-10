@@ -403,21 +403,8 @@ footer .svg-wrapper .icon path {
   border: 1px solid #a8243e;
 }
 .cart__ctas .cart_button  .cart__checkout-button:hover {
-  font-size: 1.5rem;
-  letter-spacing: .1rem;
-  line-height: calc(1 + .2 / var(--font-body-scale));
-  padding: 0 3rem;
   background-color: rgba(var(--color-button), var(--alpha-button-background));
-  min-height: calc(4.5rem + var(--buttons-border-width) * 2);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #a8243e;
-  text-decoration: none;
-  border-radius: var(--buttons-radius-outset);
-  width: 50%;
-  border: 1px solid #a8243e;
-}
+  color: #ffffff;}
 
 
 /*
