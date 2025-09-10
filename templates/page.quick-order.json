@@ -9,38 +9,6 @@
  */
 {
   "sections": {
-    "1756448330e53d622e": {
-      "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_6a8ef7f_LCaD8F": {
-          "type": "ai_gen_block_6a8ef7f",
-          "settings": {
-            "title": "Quick Reorder",
-            "subtitle": "Easily reorder your favorite products from previous purchases",
-            "max_products": 20,
-            "text_alignment": "center",
-            "background_color": "#ffffff",
-            "text_color": "#121212",
-            "padding": 32,
-            "border_radius": 8,
-            "title_size": 28,
-            "subtitle_size": 16,
-            "product_card_bg": "#f9f9f9",
-            "product_card_border": "#e5e5e5",
-            "product_card_radius": 8,
-            "button_color": "#121212",
-            "button_hover_color": "#000000",
-            "button_text_color": "#ffffff",
-            "button_radius": 6
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_6a8ef7f_LCaD8F"
-      ],
-      "settings": {}
-    },
     "main": {
       "type": "main-page",
       "settings": {
@@ -48,16 +16,21 @@
         "padding_bottom": 28
       }
     },
-    "1748889234ffb54364": {
-      "type": "apps",
+    "quick_order_list_UxBqDn": {
+      "type": "quick-order-list",
+      "name": "t:sections.quick-order-list.presets.name",
       "settings": {
-        "include_margins": true
+        "variants_per_page": 50,
+        "show_image": false,
+        "show_sku": false,
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
       }
     }
   },
   "order": [
-    "1756448330e53d622e",
     "main",
-    "1748889234ffb54364"
+    "quick_order_list_UxBqDn"
   ]
 }

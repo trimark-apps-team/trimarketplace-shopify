@@ -84,6 +84,7 @@ quick-order-list .pagination-wrapper {
 
 .variant-item__quantity-wrapper {
   display: flex;
+  align-items: center;
 }
 
 .variant-item__totals,
@@ -430,6 +431,7 @@ quick-order-list .pagination-wrapper {
 
   .variant-item__quantity-wrapper {
     flex-wrap: wrap;
+    align-self: center;
   }
 
   .variant-item--no-media .variant-item__inner {
@@ -654,4 +656,110 @@ quick-order-list .tax-note {
   margin: 0 0 2rem;
   display: block;
   width: 100%;
+}
+
+body .quick-order_loader {
+  display: block;
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #a8243e; 
+  border-radius: 50%;
+  width: 50px; 
+  height: 50px; 
+  animation: spin 2s linear infinite; 
+  margin: auto;
+  margin-block: 30px;
+}
+
+body .variant-item__quantity-wrapper .quick-order_loader {
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #a8243e; 
+  width: 30px; 
+  height: 30px; 
+  margin-block: 0;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); } 
+  100% { transform: rotate(360deg); }
+}
+
+.quick-order-controls__inner {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.quick-order-search-input, .quick-order-sort-select, .collection-search-input {
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+ 
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-block: 20px;
+}
+.pagination-controls button {
+  padding: 6px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #f9f9f9;
+  cursor: pointer;
+}
+.pagination-controls button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.no-results-message {
+  text-align: center;
+  margin-top: 20px;
+  font-weight: bold;
+  color: #555;
+}
+
+@media (max-width: 575px) {
+   .quick-order-sort-select {
+     padding: 8px 0;
+  }
+  .quick-order-search-input {
+     padding: 8px 4px;
+  }
+}
+
+.collection-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-toggle {
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  background: #fff;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: -webkit-fill-available;
+  width: max-content;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  background: #fff;
+  z-index: 1000;
+  padding: 8px;
+}
+
+.dropdown-collection {
+  position: relative;
+}
+
+.quick-order-collections {
+  display: flex;
+  flex-direction: column;
 }

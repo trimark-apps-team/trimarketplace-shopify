@@ -536,7 +536,44 @@
   },
   "customer_accounts": {
     "orders": {
-      "buy_again": "Reorder"
+      "buy_again": "Reorder",
+      "order_list": {
+        "payment_status": {
+          "gallery_view": {
+            "pay_to_confirm": "Complete purchase to confirm"
+          },
+          "list_view": {
+            "pay_to_confirm": "Complete purchase to confirm"
+          }
+        }
+      }
+    },
+    "B2B": {
+      "draft_order_details": {
+        "payment_status": {
+          "pay_now": "Complete Purchase",
+          "draft": {
+            "submitted": {
+              "title": "Complete purchase to confirm"
+            }
+          }
+        }
+      }
+    }
+  },
+  "shopify": {
+    "checkout": {
+      "general": {
+        "pay_now_button_label": "Complete Purchase"
+      },
+      "shipping": {
+        "duties_and_taxes_options": {
+          "ddp_title": "Complete Purchase"
+        }
+      },
+      "order_payment_collection": {
+        "pay_now": "Complete Purchase"
+      }
     }
   }
 }

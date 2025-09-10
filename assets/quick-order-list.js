@@ -83,6 +83,11 @@ if (!customElements.get('quick-order-list')) {
           qty.addEventListener('change', (event) => {
             this.hasPendingQuantityUpdate = true;
             debouncedOnChange(event);
+            event.target.closest(".variant-item__quantity-wrapper")?.querySelector(".quick-order_loader")?.classList.remove("hidden");
+            setTimeout(() => {
+              event.target.closest(".variant-item__quantity-wrapper")?.querySelector(".quick-order_loader")?.classList.add("hidden");
+              event.target.closest(".variant-item__quantity-wrapper")?.querySelector(".quick-order_message_change")?.classList.remove("hidden");
+            }, 2400);
           });
         });
 
@@ -91,6 +96,11 @@ if (!customElements.get('quick-order-list')) {
             event.preventDefault();
             this.toggleLoading(true);
             this.startQueue(button.dataset.index, 0);
+            event.target.closest(".variant-item__quantity-wrapper")?.querySelector(".quick-order_loader")?.classList.remove("hidden");
+            setTimeout(() => {
+              event.target.closest(".variant-item__quantity-wrapper")?.querySelector(".quick-order_loader")?.classList.add("hidden");
+               event.target.closest(".variant-item__quantity-wrapper")?.querySelector(".quick-order_message_remove")?.classList.remove("hidden");
+            }, 2500);
           });
         });
       }
@@ -169,7 +179,7 @@ if (!customElements.get('quick-order-list')) {
       }
 
       toggleTableLoading(enable) {
-        this.quickOrderListTable.classList.toggle('quick-order-list__container--disabled', enable);
+        // this.quickOrderListTable.classList.toggle('quick-order-list__container--disabled', enable);
         this.toggleLoading(enable);
       }
 
