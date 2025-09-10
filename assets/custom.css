@@ -362,6 +362,9 @@ footer .svg-wrapper .icon path {
 .product__info-wrapper .aasaved-cart-wrapper {
     margin: 0px 0;
 }
+.tab-content .metafield-rich_text_field p {
+    margin-top: 0;
+}
 
 
 /*
