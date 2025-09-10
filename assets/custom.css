@@ -351,10 +351,13 @@ footer .svg-wrapper .icon path {
 .product__info-wrapper {
   position: relative;
 }
-.wishlist-btn {
+.product__info-wrapper .wishlist-btn {
   position: absolute;
   right: 0;
   top: 0;
+}
+.product__info-wrapper .heart-wishlist-animation .heart-hulk-animation {
+    margin-right: 0;
 }
 
 
