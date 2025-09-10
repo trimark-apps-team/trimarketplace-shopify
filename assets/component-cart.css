@@ -4,20 +4,14 @@
 }
 
 #MainContent {
-  border: 1px solid #ccc;
   padding-top: 20px;
   margin: auto;
-  border-radius: 10px;
-  border-radius: 40px;
-  filter: drop-shadow(3px 4px 3px #ccc);
-  border-radius: 5px;
-  background-color: white;
 }
 
 #MainContent h1 {
-  font-weight: 300;
+  font-weight: var(--font-heading-weight);
   font-size: xx-large;
-  color: #555;
+  color: rgb(var(--color-foreground));
 }
 
 .cart__empty-text,
@@ -234,6 +228,6 @@ cart-items {
 
   .cart__ctas {
     display: flex;
-    gap: 1rem;
+    gap: 0rem;
   }
 }

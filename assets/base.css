@@ -2799,6 +2799,7 @@ details[open] > .header__submenu {
   padding: 1.2rem;
   text-decoration: none;
   color: rgba(var(--color-foreground), 0.75);
+  border-radius:5px;
 }
 
 .header__menu-item:hover {
@@ -2826,7 +2827,7 @@ details[open] > .header__menu-item .icon-caret {
   transform: rotate(180deg);
 }
 
-.header__active-menu-item {
+/* .header__active-menu-item {
   transition: text-decoration-thickness var(--duration-short) ease;
   color: rgb(var(--color-foreground));
   text-decoration: underline;
@@ -2835,10 +2836,26 @@ details[open] > .header__menu-item .icon-caret {
 
 .header__menu-item:hover .header__active-menu-item {
   text-decoration-thickness: 0.2rem;
-}
+} */
 
 .header__submenu {
   transition: opacity var(--duration-default) ease, transform var(--duration-default) ease;
+}
+
+.header-active-effect {
+  color: #943143;
+  background-color:#9431431a;
+}
+.header__menu-item:hover {
+  background-color:#9431431a;
+  color: #943143;
+}
+.header__menu-item:hover span {
+    text-decoration: none;
+}
+.header-active-effect {
+  color: #943143;
+  background-color:#9431431a;
 }
 
 .global-settings-popup,
@@ -2940,7 +2957,9 @@ details-disclosure > details {
   background: var(--gradient-background);
   background-attachment: fixed;
 }
-
+.shopify-payment-button__button {
+  display:none;
+}
 @media screen and (forced-colors: active) {
   .icon {
     color: CanvasText;
@@ -3849,7 +3868,7 @@ details-disclosure > details {
 .header__icons i.icon-wishlist-heart-empty {
   font-size: 20px !important;
   padding-bottom: 3px;
-  color: #242833cf !important;
+  color: rgb(var(--color-link)) !important;
 }
 
 body .skeleton-shimmer {

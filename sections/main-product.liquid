@@ -101,14 +101,14 @@
               {%- when 'title' -%}
                 {%- assign published_date = product.published_at | date: "%s" -%}
                 {%- assign current_date = 'now' | date: "%s" -%}
-                {%- assign seconds_in_3_days = 60 | times: 60 | times: 24 | times: 3 -%}
+                {%- assign seconds_in_65_days = 60 | times: 60 | times: 24 | times: 65 -%}
                 {%- assign age_in_seconds = current_date | minus: published_date -%}
                 
                   {% if product.metafields.custom.private_label == true %}
                   <span class="product-label private-label">PRIVATE LABEL</span>
                   {%- endif %}
 
-                  {% if age_in_seconds < seconds_in_3_days %}
+                  {% if age_in_seconds < seconds_in_65_days %}
                   <span class="product-label new-arrival-label">NEW ARRIVAL</span>
                   {% endif %} 
 
@@ -116,7 +116,7 @@
                   <span class="product-label out-of-stock-label">NOT AVAILABLE</span>
                   {% endif %}   
 
-                <p><strong>Item Number: <span class="trimark-red">{{ product.selected_or_first_available_variant.sku }}</span></strong></p>
+                <p><strong>Item Number:</strong> <span class="trimark-red">{{ product.selected_or_first_available_variant.sku }}</span></p>
                 <div class="product__title" {{ block.shopify_attributes }}>
                   <h1>{{ product.title | escape }}</h1>
                   <a href="{{ product.url }}" class="product__title">
@@ -231,7 +231,7 @@
                     {% endif %} {% endcomment %}
                     {% assign manufacturer_name = product.metafields.custom['6_manufacturer_name'] %}
                      {% if manufacturer_name %}
-                      <p><strong>Manufacturer: <span class="trimark-red">{{ manufacturer_name }}</span></strong></p>
+                      <p><strong>Manufacturer: </strong><span class="trimark-red">{{ manufacturer_name }}</span></p>
                     {% endif %}
                     {% comment %} {{ product.description }} {% endcomment %}
                   </div>
@@ -251,7 +251,7 @@
                 {% endif %}
 
                 <div class="eta-text eta-text-wrapper">
-                 <p><strong>Expected Shipping: <span class='trimark-red'>{{ eta_time }}</span></strong></p> 
+                 <p><strong>Expected Shipping: </strong><span class='trimark-red'>{{ eta_time }}</span></p> 
                 </div>
               
            {%- when 'tier-pricing' -%}

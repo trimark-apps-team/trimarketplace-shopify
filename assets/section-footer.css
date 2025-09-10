@@ -30,10 +30,25 @@
     flex-wrap: wrap;
     border-bottom: 1px solid #777;
     margin: 0 auto;
+    align-items:end;
   }
   
-  
-  
+  p.footer-block__heading.inline-richtext {
+    color: #26292d;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0;
+  }
+  .list-wrapper {
+    padding: 20px 0;
+    width: 180px;
+  }
+  #global-trimarkusa-footer .link-columns .list-wrapper .list-menu__item--link {
+    padding-bottom: 0;
+    padding-top: 0;
+    color: #26292d;
+    font-size: 12px;
+  }
   .footer-top .footer-top-body .contact-banner .logo  {
     padding-top: 30px;
     flex: 0 200px;
@@ -42,14 +57,24 @@
   .footer-top .footer-top-body .contact-banner .phone  {
     padding: 50px 0 0 40px;
     flex: 0 200px;
-    font-size: 13px;
-  
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 2px;  
+  }
+
+  .footer-top .footer-top-body .contact-banner .phone a {
+    color:#26292d;
+    text-decoration:none;
   }
   
   .footer-top .footer-top-body .contact-banner .email  {
     padding-top: 45px;
     flex: 1;
-    font-size: 13px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 2px;  
   }
   .footer-top .footer-top-body .contact-banner .social  {
     display: flex;
@@ -261,6 +286,18 @@
       text-align: center;
       padding: 15px 0 0 0;
     }
+    body .footer-top .footer-top-body .contact-banner .phone, body .footer-top .footer-top-body .contact-banner .email {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      justify-content:center;
+    }
+    body .footer-top .footer-top-body .contact-banner .phone p, body .footer-top .footer-top-body .contact-banner .email p {
+      margin:0;
+    }
+    .footer-top ul {
+      justify-content:center;
+    }
   }
   
   @media(max-width: 650px) {
@@ -272,6 +309,12 @@
     }
     .footer-top .footer-top-body .link-columns .link-column {
       margin: 0 auto;
+    }
+    .list-wrapper {
+      margin: 0 auto;
+    }
+    #global-trimarkusa-footer .link-columns .list-wrapper .list-menu__item--link {
+      justify-content: center;
     }
   }
     /* end footer redesign qa */

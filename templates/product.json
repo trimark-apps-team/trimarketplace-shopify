@@ -12,14 +12,18 @@
     "main": {
       "type": "main-product",
       "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
         "sku_aVwE4P": {
           "type": "sku",
           "settings": {
             "text_style": "body"
           }
         },
-        "title": {
-          "type": "title",
+        "price": {
+          "type": "price",
           "settings": {}
         },
         "description": {
@@ -59,10 +63,6 @@
         },
         "quantity_selector": {
           "type": "quantity_selector",
-          "settings": {}
-        },
-        "price": {
-          "type": "price",
           "settings": {}
         },
         "advanced_wishlist_wishlist_btn_FzD9M6": {
@@ -129,14 +129,15 @@
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
-            "show_dynamic_checkout": false,
+            "show_dynamic_checkout": true,
             "show_gift_card_recipient": false
           }
         }
       },
       "block_order": [
-        "sku_aVwE4P",
         "title",
+        "sku_aVwE4P",
+        "price",
         "description",
         "inventory_RzP6BQ",
         "custom_liquid_N8U98j",
@@ -144,14 +145,13 @@
         "product_tags_6g4jnp",
         "variant_picker",
         "quantity_selector",
-        "price",
         "advanced_wishlist_wishlist_btn_FzD9M6",
         "tier_pricing_bjEHBr",
         "buy_buttons"
       ],
       "settings": {
         "enable_sticky_info": false,
-        "color_scheme": "scheme-e3871aa7-89e0-4115-b62c-569bf79281f0",
+        "color_scheme": "scheme-7051d643-a32f-48ac-946d-c098c6032253",
         "media_size": "small",
         "constrain_to_viewport": true,
         "media_fit": "contain",
@@ -173,7 +173,7 @@
         "products_to_show": 5,
         "columns_desktop": 5,
         "columns_mobile": "1",
-        "color_scheme": "scheme-e3871aa7-89e0-4115-b62c-569bf79281f0",
+        "color_scheme": "scheme-7051d643-a32f-48ac-946d-c098c6032253",
         "image_ratio": "square",
         "image_shape": "default",
         "show_secondary_image": true,

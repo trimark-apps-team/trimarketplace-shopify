@@ -5,6 +5,9 @@
   <h1 class="title title--primary inline-richtext{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
     {{ section.settings.title }}
   </h1>
+  <div class="collection-list-description-wrapper">
+    {{ section.settings.description }}
+  </div>
   {%- liquid
     case section.settings.sort
       when 'products_high', 'products_low'
@@ -57,6 +60,11 @@
       "id": "title",
       "label": "t:sections.main-list-collections.settings.title.label",
       "default": "t:sections.main-list-collections.settings.title.default"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "description",
+      "label": "Description"
     },
     {
       "type": "select",

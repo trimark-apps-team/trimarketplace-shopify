@@ -11,30 +11,39 @@
 
 .product-tabs .tab-buttons {
   display: flex;
+  gap: 3rem;
 }
 
 .product-tabs .tab-button {
   background: none;
   border: none;
-  border-bottom: 5px solid transparent;
+  border-bottom: 2px solid transparent;
   color: #a8243e;
-  padding: 1rem 2rem;
+  padding: 0.8rem 0rem;
   cursor: pointer;
   font-size: 20px;
   transition: border-bottom 0.2s ease;
 }
 
 .product-tabs .tab-button.active {
-  border-bottom: 5px solid #a8243e;
+  border-bottom: 2px solid #a8243e;
 }
 
 .product-tabs .tab-content {
   display: none;
-  border: 1px solid #ccc;
-  padding: 1.5rem;
-  border-radius: 0.8rem;
+  border-top: 1px solid #ccc;
+  padding: 0rem;
+  padding-top: 2rem;
+  border-radius: 0rem;
   font-size: 1.6rem;
   line-height: 1.5;
+}
+.tab-content ul {
+  display: flex;
+  flex-wrap: wrap;
+}
+.tab-content ul li {
+  width: 50%;
 }
 
 .product-tabs .tab-content.active {
@@ -165,7 +174,7 @@
 .prop65 a{ text-decoration:underline;}
 
 .product__description p {
-  margin: 0 0 8px 0 !important;
+  margin: 0 0 0px 0 !important;
 }
 
 /* Standards */

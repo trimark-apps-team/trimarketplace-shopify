@@ -1,1 +1,64 @@
-{"name":"t:sections.footer.name","type":"footer","sections":{"footer":{"type":"footer","blocks":{"brand-information":{"type":"brand_information","settings":{"show_social":true}}},"block_order":["brand-information"],"custom_css":[],"settings":{"color_scheme":"scheme-e3871aa7-89e0-4115-b62c-569bf79281f0","newsletter_enable":false,"newsletter_heading":"Subscribe to our emails","enable_follow_on_shop":false,"show_social":true,"enable_country_selector":false,"enable_language_selector":false,"payment_enable":false,"show_policy":true,"margin_top":0,"padding_top":56,"padding_bottom":52}}},"order":["footer"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "brand-information": {
+          "type": "brand_information",
+          "settings": {
+            "show_social": true
+          }
+        },
+        "link_list_9NANyH": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Company",
+            "menu": "company"
+          }
+        },
+        "link_list_HYGJtf": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Legal",
+            "menu": "ligal-links"
+          }
+        }
+      },
+      "block_order": [
+        "brand-information",
+        "link_list_9NANyH",
+        "link_list_HYGJtf"
+      ],
+      "custom_css": [],
+      "settings": {
+        "color_scheme": "scheme-e3871aa7-89e0-4115-b62c-569bf79281f0",
+        "newsletter_enable": false,
+        "newsletter_heading": "Subscribe to our emails",
+        "copyright_text": "<p>Copyright © 2025, All Rights Reserved.</p>",
+        "enable_follow_on_shop": false,
+        "show_social": true,
+        "enable_country_selector": false,
+        "enable_language_selector": false,
+        "payment_enable": false,
+        "show_policy": false,
+        "margin_top": 0,
+        "padding_top": 28,
+        "padding_bottom": 4
+      }
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}

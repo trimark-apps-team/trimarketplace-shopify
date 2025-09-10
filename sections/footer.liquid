@@ -414,17 +414,21 @@
           <div class="contact-banner">
             <div class="logo">
               <a href="/" aria-label="TriMark Home">
-
-                 <img width="170" src="{{ 'black_text_trimark_logo.png' | asset_url }}?v={{ 'now' | date: '%s' }}" alt="TriMark" height="auto">
+                 {% comment %} <img width="170" src="{{ settings.brand_image | img_url }}" alt="TriMark" height="auto"> {% endcomment %}
+                 <img src="{{ settings.brand_image | img_url: '600x' }}" alt="TriMark" width="{{ settings.brand_image_width }}px" height="auto" >
               </a>
             </div>
-             <a href="tel:8882885346" class="phone">
-             <i class="fa fa-phone"></i> (888) 288-5346
-            </a>
-             <div class="email"><i class="fa fa-envelope"></i>
-               <a href="mailto:trimarketplacestore@trimarketplace.com">trimarketplacestore@trimarketplace.com</a>
+             
+            <div class="phone"><i class="fa fa-phone"></i>
+             {{ settings.brand_number }}
             </div>
-             <nav class="social">
+             <div class="email"><i class="fa fa-envelope"></i>
+             {{ settings.brand_email }}
+            </div>
+            
+              {%- render 'social-icons', class: 'footer__list-social' -%}
+            
+             {% comment %} <nav class="social">
                <ul>
                   <li class="social-icon">
                    <a href="https://www.facebook.com/TrimarkUSA" class="social-media-link" aria-label="link facebook" target="_new">
@@ -477,13 +481,11 @@
                  
                </ul>
          
-            </nav>
+            </nav> {% endcomment %}
           </div>
           <div class="link-wrapper">
-            <div class="link-columns">
-              
-             
-              <nav class="link-column">
+            <div class="link-columns">             
+              {% comment %} <nav class="link-column">
                 
                 <p class="column-head">
                  Company
@@ -515,10 +517,8 @@
                     
                   </ul>
                 
-              </nav>
-              
-             
-              <nav class="link-column">
+              </nav> {% endcomment %}
+              {% comment %} <nav class="link-column">
                 
                 <p class="column-head">
                  Legal
@@ -563,7 +563,31 @@
                        <a href="https://docs.trimarkusa.com/hubfs/SiteMedia/SiteResources/Terms/TriMark-Supplier-Code-of-Conduct.pdf" target="_blank">Supplier Code of Conduct<svg class="icon external-link" focusable="false"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#external-link"></use></svg></a>
                     </li>
                   </ul>
-              </nav> 
+              </nav>  {% endcomment %}
+              {%- for block in section.blocks -%}
+                <div class="list-wrapper">
+                {%- if block.settings.heading != blank -%}
+                  <p class="footer-block__heading inline-richtext">{{- block.settings.heading -}}</p>
+                {%- endif -%}
+                {%- case block.type -%}
+                {%- when 'link_list' -%}
+                      {%- if block.settings.menu != blank -%}
+                        <ul class="footer-block__details-content list-unstyled">
+                          {%- for link in block.settings.menu.links -%}
+                            <li>
+                              <a
+                                href="{{ link.url }}"
+                                class="link link--text list-menu__item list-menu__item--link{% if link.active %} list-menu__item--active{% endif %}"
+                              >
+                                {{ link.title | escape }}
+                              </a>
+                            </li>
+                          {%- endfor -%}
+                        </ul>
+                    {%- endif -%}
+                {%- endcase -%} 
+                </div>   
+              {% endfor %}
             </div>
            
           </div>
@@ -572,11 +596,15 @@
       <div class="footer-bottom">
         <div class="footer-bottom-wrapper">
           <address class="address">
-            TriMark USA, LLC, 9 Hampshire Street, Mansfield, MA 02048
+            {% comment %} TriMark USA, LLC, 9 Hampshire Street, Mansfield, MA 02048 {% endcomment %}
+            <p>
+              {{ shop.name }}, {{ shop.address.city }}, {{ shop.address.province }} {{ shop.address.zip }}
+            </p>
           </address>
-          <p class="copyright">
-            Copyright © 2025, All Rights Reserved.
-          </p>
+          <div class="copyright">
+            {{ section.settings.copyright_text }}             
+          </div>
+          
         </div>
       </div>
     </footer>
@@ -707,6 +735,11 @@
       "id": "newsletter_heading",
       "default": "t:sections.footer.settings.newsletter_heading.default",
       "label": "t:sections.footer.settings.newsletter_heading.label"
+    },
+    {
+       "type": "richtext",
+       "id": "copyright_text",
+       "label": "Copyright Text"
     },
     {
       "type": "header",
