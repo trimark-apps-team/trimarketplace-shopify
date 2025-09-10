@@ -27,7 +27,7 @@
           {% assign raw_companies = single_slide.company | remove: '["' | remove: '"]' | replace: '","', ',' %}
           {% assign companies_array = raw_companies | split: ',' %}
           {% if companies_array contains active_user_company %}
-          <div class="message-slide" data-start-date="{{ single_slide.start_date }}" data-end-date="">
+          <div class="message-slide" data-start-date="{{ single_slide.start_date }}" data-end-date="{{ single_slide.end_date }}">
               {% if single_slide.name != blank %}
                 <h3 class="message-slide__title">
                   {{ single_slide.name }}
