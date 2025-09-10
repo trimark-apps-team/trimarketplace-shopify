@@ -39,6 +39,7 @@
         "slide_nxhUAm",
         "slide_mCPEqh"
       ],
+      "disabled": true,
       "name": "Message Slider",
       "settings": {
         "show_from_meta": true,
