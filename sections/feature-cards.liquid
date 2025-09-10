@@ -32,6 +32,13 @@
                 
               {% endif %}
             </div>
+            {%- when 'sales-contact-block' -%}
+            <div class="feature-card sales-contact_details">
+               <p><b>{{ block.settings.heading-1 }}: </b>{{ customer.current_company.metafields.custom.company_sales_contact_details.value.name }}</p>
+               <p><b>{{ block.settings.heading-2 }}: </b><a href="tel:{{ customer.current_company.metafields.custom.company_sales_contact_details.value.phone }}">{{ customer.current_company.metafields.custom.company_sales_contact_details.value.phone }}</a></p>
+               <p><b>{{ block.settings.heading-3 }}: </b><a href="mailto:{{ customer.current_company.metafields.custom.company_sales_contact_details.value.email }}">{{ customer.current_company.metafields.custom.company_sales_contact_details.value.email }}</a></p>
+               <p><b>{{ block.settings.heading-4 }}: </b>{{ customer.current_company.metafields.custom.company_sales_contact_details.value.address }}</p>
+            </div>
         {%- endcase -%}
       {% endfor %}
     </div>
@@ -44,7 +51,9 @@
   gap: 20px;
   justify-content: center;
 }
-
+.sales-contact_details p {
+  margin-block: 2px;
+} 
 .icon-feature-grid .feature-card {
   background: #fff;
   border-radius: 12px;
@@ -103,7 +112,14 @@
   font-size: {{ section.settings.text_font_size }}px;
   min-height: 60px;
 }
-#section-{{ section.id }} .feature-card-link{
+.sales-contact_details p {
+  color: {{ section.settings.text_color }}; 
+  font-size: {{ section.settings.text_font_size }}px;
+}
+.sales-contact_details a {
+  color: {{ section.settings.view_all_color }}; 
+}
+#section-{{ section.id }} .feature-card-link {
   color: {{ section.settings.view_all_color }}; 
   font-size: {{ section.settings.view_all_font_size }}px;
 }
@@ -123,7 +139,7 @@
     width: 100%;
     padding: 10px 0px;
   }
-  #section-{{ section.id }} .feature-description {
+  #section-{{ section.id }} .feature-description, .sales-contact_details p {
     color: {{ section.settings.text_color_mobile }}; 
     font-size: {{ section.settings.text_font_size_mobile }}px;
   }
@@ -337,6 +353,36 @@ document.addEventListener("DOMContentLoaded", function(){
           "type": "image_picker",
           "id": "logo",
           "label": "Logo"
+        }
+      ]
+    },
+    {
+      "type": "sales-contact-block",
+      "name": "Sales contact block",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading-1",
+          "label": "Heading 1",
+          "default": "Sales Contact"
+        },
+        {
+          "type": "text",
+          "id": "heading-2",
+          "label": "Heading 2",
+          "default": "Phone"
+        },
+        {
+          "type": "text",
+          "id": "heading-3",
+          "label": "Heading 3",
+          "default": "Email"
+        },
+        {
+          "type": "text",
+          "id": "heading-4",
+          "label": "Heading 4",
+          "default": "Address"
         }
       ]
     }
