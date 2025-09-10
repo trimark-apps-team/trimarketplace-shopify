@@ -1,11 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
   var checkbox   = document.getElementById('terms-cart');
-  var checkoutBtns = [
-    document.getElementById('checkout'),          // main cart checkout
-    document.getElementById('create-draft-order') // draft order button
-  ].filter(Boolean);
-
-  if (!checkbox || checkoutBtns.length === 0) return;
+  var checkoutBtn = document.getElementById('checkout');
+  if (!checkbox || !checkoutBtn) return;
 
   var error = document.createElement('div');
   error.style.color = 'red';
@@ -17,10 +13,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function validate() {
     if (checkbox.checked) {
-      checkoutBtns.forEach(btn => btn.disabled = false);
+      checkoutBtn.disabled = false;
       error.style.display = 'none';
     } else {
-      checkoutBtns.forEach(btn => btn.disabled = true);
+      checkoutBtn.disabled = true;
       error.style.display = 'block';
     }
   }
