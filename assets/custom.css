@@ -335,6 +335,12 @@ footer .svg-wrapper .icon path {
 .product__info-wrapper .product__info-container {
     padding: 0;
 }
+.product__info-wrapper .product-label {
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 12px;
+    margin-right: 0;
+}
 
 /*
 .card-background {
