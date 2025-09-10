@@ -385,7 +385,10 @@ footer .svg-wrapper .icon path {
     width: 50%;
     border: 1px solid #a8243e;
 }
-
+.cart__ctas .cart_button .btn-primary:hover {
+    background-color: #f9f9f9;
+    color: #a8243e;
+}
 .cart__ctas .cart_button  .cart__checkout-button {
   font-size: 1.5rem;
   letter-spacing: .1rem;
