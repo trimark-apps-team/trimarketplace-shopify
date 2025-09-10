@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', function() {
   var error = document.createElement('div');
   error.style.color = 'red';
   error.style.fontSize = '0.9rem';
-  error.style.marginTop = '0.5rem';
   error.style.display = 'none';
   error.textContent = 'You must agree to the Terms & Conditions before checkout.';
   checkbox.closest('.cart-terms').appendChild(error);
