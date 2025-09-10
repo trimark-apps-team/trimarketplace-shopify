@@ -44,10 +44,57 @@
         "margin_top_mobile": 18,
         "margin_bottom_mobile": 18
       }
+    },
+    "feature_cards_iEytB4": {
+      "type": "feature-cards",
+      "blocks": {
+        "feature_tgYHwA": {
+          "type": "feature",
+          "settings": {
+            "heading": "My Catalog",
+            "description": "View, edit, and place orders from your Managed Order Guide.",
+            "link_label": "View All",
+            "link_url": "shopify://collections"
+          }
+        },
+        "feature_74weh9": {
+          "type": "feature",
+          "settings": {
+            "heading": "",
+            "description": "",
+            "link_label": "View All",
+            "link_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "feature_tgYHwA",
+        "feature_74weh9"
+      ],
+      "name": "Feature Card Grid",
+      "settings": {
+        "heading_color": "#000000",
+        "heading_font_size": 20,
+        "text_color": "#333333",
+        "text_font_size": 16,
+        "margin_top": 18,
+        "margin_bottom": 18,
+        "view_all_color": "#b11830",
+        "view_all_font_size": 18,
+        "header_color_mobile": "#b11830",
+        "header_font_size_mobile": 18,
+        "text_color_mobile": "#b11830",
+        "text_font_size_mobile": 18,
+        "margin_top_mobile": 18,
+        "margin_bottom_mobile": 18,
+        "view_all_color_mobile": "#b11830",
+        "view_all_font_size_mobile": 18
+      }
     }
   },
   "order": [
     "main",
-    "custom_message_slider_gwGijV"
+    "custom_message_slider_gwGijV",
+    "feature_cards_iEytB4"
   ]
 }
