@@ -436,6 +436,9 @@ footer .svg-wrapper .icon path {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   border-radius: 12px;
 }
+.cart-footer-wrapper {
+  padding-top:40px;
+}
 /*
 .card-background {
   background: #fff;
