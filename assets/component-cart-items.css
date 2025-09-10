@@ -271,7 +271,7 @@ cart-remove-button .icon-remove {
     box-shadow: none;
     width: 100%;
     display: table;
-    padding: 30px;
+    padding: 0px;
   }
 
   .cart-items th {
