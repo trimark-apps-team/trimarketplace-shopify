@@ -556,6 +556,20 @@
 
         <!-- CTAs -->
 
+        {% if cart == empty %}
+                <div class="drawer-terms" style="margin-top:1rem;">
+                  <input type="checkbox" id="terms" name="attributes[terms_agreed]" value="yes">
+                  <label for="terms">
+                    I agree to the 
+                    <a href="https://docs.trimarkusa.com/hubfs/SiteMedia/SiteResources/Terms/TriMark-Website-Terms-of-Use-2-27-23.pdf" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      style="color:#a8243e; text-decoration:underline;">
+                      Terms &amp; Conditions
+                    </a>
+                  </label>
+                </div>
+                {% endif %}
         <div class="cart__ctas" {{ block.shopify_attributes }}>      
             <div class="cart_button">
               <a class="btn btn-primary cs-save-trigger" href="/a/saved-carts/new">Save Cart</a> 
