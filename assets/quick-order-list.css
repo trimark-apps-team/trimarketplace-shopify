@@ -84,6 +84,7 @@ quick-order-list .pagination-wrapper {
 
 .variant-item__quantity-wrapper {
   display: flex;
+  align-items: center;
 }
 
 .variant-item__totals,
@@ -430,6 +431,7 @@ quick-order-list .pagination-wrapper {
 
   .variant-item__quantity-wrapper {
     flex-wrap: wrap;
+    align-self: center;
   }
 
   .variant-item--no-media .variant-item__inner {
