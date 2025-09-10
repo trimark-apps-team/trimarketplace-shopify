@@ -410,21 +410,6 @@ footer .svg-wrapper .icon path {
   color: #ffffff;
 }
 
-.aasaved-cart-actions .btn-primary {
-    font-size: 1.5rem;
-    letter-spacing: .1rem;
-    line-height: calc(1 + .2 / var(--font-body-scale));
-    padding: 0 3rem;
-    background-color: #a8243e;
-    min-height: calc(4.5rem + var(--buttons-border-width) * 2);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-    text-decoration: none;
-    border-radius: var(--buttons-radius-outset);
-    border: 1px solid #a8243e;
-}
 
 
 /*
