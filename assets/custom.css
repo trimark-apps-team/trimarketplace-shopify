@@ -332,6 +332,10 @@ footer .svg-wrapper .icon path {
     gap: 10px;
 }
 
+.product__info-wrapper .product__info-container {
+    padding: 0;
+}
+
 /*
 .card-background {
   background: #fff;
