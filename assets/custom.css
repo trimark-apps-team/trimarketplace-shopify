@@ -417,7 +417,7 @@ footer .svg-wrapper .icon path {
     box-shadow: 0 0 0 calc(var(--buttons-border-width) + var(--border-offset)) rgba(var(--color-button-text), var(--border-opacity)), 0 0 0 var(--buttons-border-width) #a8243e;
 }
 .aasaved-cart-actions .button.btn-primary.cs-save-trigger {
-    color: #fff;
+    color: #a8243e;
     background-color: #f9f9f9;
 }
 
