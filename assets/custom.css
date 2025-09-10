@@ -244,9 +244,9 @@ footer .svg-wrapper .icon path {
 .totals__total-value {
   font-weight: bold;
 }
-.cart-item__totals.right {
+/* .cart-item__totals.right {
   display:none;
-}
+} */
 .cart-item-wrapper.page-width, .cart-footer-wrapper.page-width  {
   padding-top: 15px;
 }
