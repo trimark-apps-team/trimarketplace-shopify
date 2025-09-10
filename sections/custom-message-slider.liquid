@@ -217,46 +217,54 @@
   </style>
 
   <script>
-  document.addEventListener('DOMContentLoaded', function() {
+  <script>
+document.addEventListener('DOMContentLoaded', function() {
   const section = document.querySelector('[data-section-id="{{ section.id }}"]');
   const slidesWrapper = section.querySelector('.message-slider__slides');
-  const slides = Array.from(section.querySelectorAll('.message-slide'));
-  const dots = section.querySelectorAll('.slider-dot');
+  const hideBtn = section.querySelector('.message-slider__hide');
   const prevBtn = section.querySelector('.slider-arrow.prev');
   const nextBtn = section.querySelector('.slider-arrow.next');
-  const hideBtn = section.querySelector('.message-slider__hide');
+
+  // --- Get current EDT time ---
+  function getNowInEDT() {
+    const now = new Date();
+    const options = { timeZone: "America/New_York" };
+    const edtString = now.toLocaleString("en-US", options);
+    return new Date(edtString);
+  }
+
+  // --- Filter slides by start/end dates ---
+  const slides = Array.from(slidesWrapper.querySelectorAll('.message-slide'));
+  const now = getNowInEDT();
+
+  slides.forEach(slide => {
+    const startDate = new Date(slide.dataset.startDate);
+    const endDate = new Date(slide.dataset.endDate);
+
+    if (!(now >= startDate && now <= endDate)) {
+      slide.remove();
+    }
+  });
+
+  // --- Refresh slides & dots after filtering ---
+  let filteredSlides = Array.from(slidesWrapper.querySelectorAll('.message-slide'));
+  let dotsWrapper = section.querySelector('.slider-dots');
+  dotsWrapper.innerHTML = ''; // clear existing
+
+  filteredSlides.forEach((_, i) => {
+    const dot = document.createElement('span');
+    dot.classList.add('slider-dot');
+    if (i === 0) dot.classList.add('active');
+    dot.dataset.index = i;
+    dotsWrapper.appendChild(dot);
+  });
+
+  let dots = dotsWrapper.querySelectorAll('.slider-dot');
+  let totalSlides = filteredSlides.length;
   let index = 0;
   let startX = 0;
   let currentX = 0;
   let isDragging = false;
-
-  // ✅ Utility to get current time in EDT
-  function getNowInEDT() {
-    const edtString = new Date().toLocaleString("en-US", { timeZone: "America/New_York" });
-    return new Date(edtString);
-  }
-
-  // ✅ Filter slides by start/end date in EDT
-  function filterSlidesByDate() {
-    const now = getNowInEDT();
-    slides.forEach(slide => {
-      const startDate = new Date(slide.dataset.startDate);
-      const endDate = new Date(slide.dataset.endDate);
-      if (now < startDate || now > endDate) {
-        slide.remove();
-      }
-    });
-  }
-
-  filterSlidesByDate(); // run filtering before slider initializes
-
-  const filteredSlides = section.querySelectorAll('.message-slide');
-  const totalSlides = filteredSlides.length;
-
-  if (totalSlides === 0) {
-    section.style.display = 'none';
-    return;
-  }
 
   function updateSliderPosition() {
     slidesWrapper.style.transform = `translateX(-${index * 100}%)`;
@@ -264,6 +272,7 @@
     if (dots[index]) dots[index].classList.add('active');
   }
 
+  // --- Dot navigation ---
   dots.forEach(dot => {
     dot.addEventListener('click', function() {
       index = parseInt(this.dataset.index);
@@ -271,6 +280,7 @@
     });
   });
 
+  // --- Prev/Next ---
   prevBtn.addEventListener('click', function() {
     index = index > 0 ? index - 1 : totalSlides - 1;
     updateSliderPosition();
@@ -281,59 +291,8 @@
     updateSliderPosition();
   });
 
-  hideBtn.addEventListener('click', function() {
-    section.style.display = 'none';
-  });
-
-  // Drag / Swipe
-  slidesWrapper.addEventListener('mousedown', startDrag);
-  slidesWrapper.addEventListener('touchstart', startDrag);
-
-  slidesWrapper.addEventListener('mousemove', dragMove);
-  slidesWrapper.addEventListener('touchmove', dragMove);
-
-  slidesWrapper.addEventListener('mouseup', endDrag);
-  slidesWrapper.addEventListener('mouseleave', endDrag);
-  slidesWrapper.addEventListener('touchend', endDrag);
-
-  function startDrag(e) {
-    isDragging = true;
-    startX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
-    slidesWrapper.style.transition = 'none';
-  }
-
-  function dragMove(e) {
-    if (!isDragging) return;
-    currentX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
-    const deltaX = currentX - startX;
-    slidesWrapper.style.transform = `translateX(${-index * 100 + (deltaX / section.offsetWidth) * 100}%)`;
-  }
-
-  function endDrag(e) {
-    if (!isDragging) return;
-    isDragging = false;
-    const deltaX = (currentX || startX) - startX;
-    if (deltaX > 50 && index > 0) {
-      index--;
-    } else if (deltaX < -50 && index < totalSlides - 1) {
-      index++;
-    }
-    slidesWrapper.style.transition = 'transform 0.3s ease';
-    updateSliderPosition();
-    startX = 0;
-    currentX = 0;
-  }
-
-  // Auto-slide
-  setInterval(() => {
-    if (totalSlides > 1) {
-      index = (index + 1) % totalSlides;
-      updateSliderPosition();
-    }
-  }, 5000);
-
-  updateSliderPosition(); // initialize
-});
+  // --- Hide button ---
+  hideBtn.addEventListener('click', function
 
 
   </script>

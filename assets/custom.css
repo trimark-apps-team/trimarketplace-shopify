@@ -244,9 +244,9 @@ footer .svg-wrapper .icon path {
 .totals__total-value {
   font-weight: bold;
 }
-/* .cart-item__totals.right {
+.cart-item__totals.right {
   display:none;
-} */
+}
 .cart-item-wrapper.page-width, .cart-footer-wrapper.page-width  {
   padding-top: 15px;
 }
@@ -394,8 +394,7 @@ footer .svg-wrapper .icon path {
   color: #ffffff;
 }
 .aasaved-cart-actions .button.btn-primary {
-    color: #fff;
-    background-color: #a8243e;
+    color: #a8243e;
 }
 .aasaved-cart-actions .button.btn-primary:after {
     box-shadow: 0 0 0 calc(var(--buttons-border-width) + var(--border-offset)) rgba(var(--color-button-text), var(--border-opacity)), 0 0 0 var(--buttons-border-width) #a8243e;
