@@ -1,1 +1,53 @@
-{"sections":{"main":{"type":"main-404","settings":{}}},"order":["main"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-404",
+      "disabled": true,
+      "settings": {}
+    },
+    "custom_message_slider_gwGijV": {
+      "type": "custom-message-slider",
+      "blocks": {
+        "slide_Km6GiG": {
+          "type": "slide",
+          "settings": {
+            "title": "Free Freight on all stock orders over $600...excludes rollouts, shelving.",
+            "content": "<p><strong>Please note:</strong><br/><br/>If you cannot find an item, please type the item information & quantity in the comment box on the check out page. We will then add it to your order. We are experiencing delays in receiving some products due to the supply chain shortages, we have been diligently working.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "slide_Km6GiG"
+      ],
+      "name": "Message Slider",
+      "settings": {
+        "show_from_meta": false,
+        "header_color": "#b11830",
+        "header_font_size": 18,
+        "text_color": "#b11830",
+        "text_font_size": 18,
+        "margin_top": 18,
+        "margin_bottom": 18,
+        "header_color_mobile": "#b11830",
+        "header_font_size_mobile": 18,
+        "text_color_mobile": "#b11830",
+        "text_font_size_mobile": 18,
+        "margin_top_mobile": 18,
+        "margin_bottom_mobile": 18
+      }
+    }
+  },
+  "order": [
+    "main",
+    "custom_message_slider_gwGijV"
+  ]
+}
