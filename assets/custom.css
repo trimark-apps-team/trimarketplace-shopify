@@ -382,6 +382,7 @@ footer .svg-wrapper .icon path {
     color: #fff;
     text-decoration: none;
     border-radius: var(--buttons-radius-outset);
+    width: 50%;
 }
 .cart__ctas .cart_button  .cart__checkout-button {
   font-size: 1.5rem;
@@ -396,6 +397,7 @@ footer .svg-wrapper .icon path {
   color: #fff;
   text-decoration: none;
   border-radius: var(--buttons-radius-outset);
+  width: 50%;
 }
 
 
