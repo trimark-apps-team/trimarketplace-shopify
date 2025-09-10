@@ -303,6 +303,12 @@ footer .svg-wrapper .icon path {
   margin: 0px !important;
   padding: 20px;
 }
+
+.card-shadow {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+
 @media screen and (max-width: 1054px) {
   .header__menu-item {
     padding: 0.5rem;
