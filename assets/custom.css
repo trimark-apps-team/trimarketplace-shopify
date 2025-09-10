@@ -430,6 +430,9 @@ footer .svg-wrapper .icon path {
   padding: 20px;
 }
 
+.template-cart .content-for-layout {
+  padding-bottom:60px;
+}
 /*
 .card-background {
   background: #fff;
