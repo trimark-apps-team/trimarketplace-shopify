@@ -10,7 +10,6 @@
 
 <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'quantity-popover.js' | asset_url }}" defer="defer"></script>
-<script src="{{ 'terms-agreement-checkbox-drawer.js' | asset_url }}" defer="defer"></script>
 
 <style>
   .drawer {
@@ -557,26 +556,11 @@
 
         <!-- CTAs -->
 
-          
-
-        {% if cart != empty %}
-           <div class="cart-terms" style="margin-bottom:1rem;">
-              <input type="checkbox" id="terms-drawer" name="attributes[terms_agreed]" value="yes">
-              <label for="terms-drawer">
-                I agree to the 
-                <a href="https://docs.trimarkusa.com/hubfs/SiteMedia/SiteResources/Terms/TriMark-Website-Terms-of-Use-2-27-23.pdf"
-                  target="_blank" rel="noopener noreferrer" style="color:#a8243e; text-decoration:underline;">
-                  Terms &amp; Conditions
-                </a>
-              </label>
-            </div>
-          {% endif %}
         <div class="cart__ctas" {{ block.shopify_attributes }}>      
              <a class="button btn btn-primary cs-save-trigger" href="/a/saved-carts/new">
                 Save Cart
             </a> 
-            <a href="{{ routes.cart_url }}" class="cart__checkout-button button cart_btn">View Cart Page</a>
-          
+            <a href="{{ routes.cart_url }}" class="cart__checkout-button button cart_btn">View Cart</a>
           <button
             type="submit"
             id="CartDrawer-Checkout"
