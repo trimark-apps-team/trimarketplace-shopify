@@ -43,7 +43,7 @@
       </div>
     {%- endif -%}
     <div class="small-hide medium-hide">
-      <span class="variant-item__name h4 break">{{ item.title | escape }}</span>
+      <span class="variant-item__name h4 break"><a class="full-unstyled-link" href="{{ item.url }}">{{ item.title | escape }}</a></span>
       {%- if show_sku -%}
         <span class="variant-item__sku break">{{ sku | escape }}</span>
       {%- endif -%}
@@ -52,7 +52,7 @@
 
   <td class="variant-item__details large-up-hide">
     <div class="variant-item__info">
-      <span class="variant-item__name h4 break">{{ item.title | escape }}</span>
+      <span class="variant-item__name h4 break"><a class="full-unstyled-link" href="{{ item.url }}">{{ item.title | escape }}</a></span>
       {%- if show_sku -%}
         <span class="variant-item__sku break">{{ sku | escape }}</span>
       {%- endif -%}
@@ -300,6 +300,9 @@
             </button>
           </div>
         {% endif %}
+       <div class="quick-order_loader hidden"></div>
+        <p class="quick-order_message_change hidden">Item quantity changed.</p>
+        <p class="quick-order_message_remove hidden">Item removed.</p>
       </div>
       {%- if has_popover -%}
         <button
