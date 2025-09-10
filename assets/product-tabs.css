@@ -11,7 +11,7 @@
 
 .product-tabs .tab-buttons {
   display: flex;
-  gap:2rem;
+  gap: 3rem;
 }
 
 .product-tabs .tab-button {
