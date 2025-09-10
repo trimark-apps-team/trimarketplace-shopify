@@ -19,13 +19,15 @@
     }
   }
 {%- endstyle -%}
-
+ {% if customer and customer.metafields.custom.buyer_role.value != blank %}
 {% render 'quick-order-list',
   product: product,
   show_image: section.settings.show_image,
   show_sku: section.settings.show_sku
 %}
-
+{% else %}
+  <h3>Access Denied</h3>
+{% endif %}
 {% schema %}
 {
   "name": "t:sections.quick-order-list.name",
