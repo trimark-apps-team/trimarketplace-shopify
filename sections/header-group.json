@@ -16,7 +16,7 @@
       "settings": {
         "logo_position": "top-left",
         "mobile_logo_position": "center",
-        "menu": "customer-account-main-menu",
+        "menu": "customer-account-main-menu-minimal",
         "menu_type_desktop": "mega",
         "sticky_header_type": "none",
         "show_line_separator": false,
