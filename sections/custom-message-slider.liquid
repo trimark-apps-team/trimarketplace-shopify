@@ -240,6 +240,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const startDate = new Date(slide.dataset.startDate);
     const endDate = new Date(slide.dataset.endDate);
     console.log(now + "==" + endDate);
+    console.log(endDate);
     if (!(now >= startDate && now <= endDate)) {
       slide.remove();
     }
