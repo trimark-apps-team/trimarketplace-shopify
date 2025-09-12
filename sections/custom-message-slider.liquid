@@ -226,34 +226,14 @@ document.addEventListener('DOMContentLoaded', function() {
   const prevBtn = section.querySelector('.slider-arrow.prev');
   const nextBtn = section.querySelector('.slider-arrow.next');
 
-  // --- Get current EDT time ---
-  function getNowInEDT() {
-    const now = new Date();
-    const options = { timeZone: "America/New_York" };
-    const edtString = now.toLocaleString("en-US", options);
-    return new Date(edtString);
-  }
+  // --- Get all slides ---
+  let slides = Array.from(slidesWrapper.querySelectorAll('.message-slide'));
 
-  // --- Filter slides by start/end dates ---
-  const slides = Array.from(slidesWrapper.querySelectorAll('.message-slide'));
-  const now = getNowInEDT();
-
-  slides.forEach(slide => {
-    const startDate = new Date(slide.dataset.startDate);
-    const endDate = new Date(slide.dataset.endDate);
-    //console.log(now + "==" + endDate);
-    console.log(endDate);
-    if (!(now >= startDate && now <= endDate)) {
-      slide.remove();
-    }
-  });
-
-  // --- Refresh slides & dots after filtering ---
-  let filteredSlides = Array.from(slidesWrapper.querySelectorAll('.message-slide'));
+  // --- Build dots ---
   let dotsWrapper = section.querySelector('.slider-dots');
-  dotsWrapper.innerHTML = ''; // clear existing
+  dotsWrapper.innerHTML = '';
 
-  filteredSlides.forEach((_, i) => {
+  slides.forEach((_, i) => {
     const dot = document.createElement('span');
     dot.classList.add('slider-dot');
     if (i === 0) dot.classList.add('active');
@@ -262,7 +242,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   let dots = dotsWrapper.querySelectorAll('.slider-dot');
-  let totalSlides = filteredSlides.length;
+  let totalSlides = slides.length;
   let index = 0;
   let startX = 0;
   let currentX = 0;
@@ -345,6 +325,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 5000);
   }
 });
+
 </script>
 
 {% schema %}
