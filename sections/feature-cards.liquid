@@ -26,10 +26,13 @@
           {%- when 'logo' -%}
             <div class="feature-card feature-logo">
               {% if block.settings.logo != blank %}
-                
+                  {% if customer.current_company.metafields.custom.company_logo != blank %}
+                    <img src="{{ customer.current_company.metafields.custom.company_logo | img_url: '243x81' }}" alt="" class="feature-logo">
+                  {% else %}
                   <img src="{{ block.settings.logo | img_url: '243x81' }}" alt="" class="feature-logo">
+                    {% endif %}
                   {{ block.settings.heading }}
-                
+
               {% endif %}
             </div>
             {%- when 'sales-contact-block' -%}
