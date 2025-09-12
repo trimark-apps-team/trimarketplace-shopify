@@ -404,6 +404,10 @@ footer .svg-wrapper .icon path {
     
 }
 
+.aasaved-cart-actions a:first-of-type {
+  display: none !important;
+}
+
 .aasaved-cart-actions .view-carts {
   display: none !important;
 }
