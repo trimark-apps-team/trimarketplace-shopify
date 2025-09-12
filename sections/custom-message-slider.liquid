@@ -239,7 +239,7 @@ document.addEventListener('DOMContentLoaded', function() {
   slides.forEach(slide => {
     const startDate = new Date(slide.dataset.startDate);
     const endDate = new Date(slide.dataset.endDate);
-    console.log(now + "==" + startDate + "==" + endDate);
+    console.log(now + "==" + endDate);
     if (!(now >= startDate && now <= endDate)) {
       slide.remove();
     }
