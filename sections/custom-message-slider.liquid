@@ -27,7 +27,7 @@
           {% assign raw_companies = single_slide.company | remove: '["' | remove: '"]' | replace: '","', ',' %}
           {% assign companies_array = raw_companies | split: ',' %}
           {% if companies_array contains active_user_company %}
-          <div class="message-slide" data-start-date="{{ single_slide.start_date | date: '%s' | times: 1000 }}" data-end-date="{{ single_slide.end_date | date: '%s' | times: 1000 }}">
+          <div class="message-slide" data-start-date="{{ single_slide.start_date }}" data-end-date="{{ single_slide.end_date }}">
               {% if single_slide.name != blank %}
                 <h3 class="message-slide__title">
                   {{ single_slide.name }}
@@ -224,31 +224,32 @@ document.addEventListener('DOMContentLoaded', function() {
   const prevBtn = section.querySelector('.slider-arrow.prev');
   const nextBtn = section.querySelector('.slider-arrow.next');
 
-  // --- Get current EDT time as timestamp ---
+  // --- Get current EDT time ---
   function getNowInEDT() {
     const now = new Date();
     const options = { timeZone: "America/New_York" };
     const edtString = now.toLocaleString("en-US", options);
-    return new Date(edtString).getTime();
+    return new Date(edtString);
   }
 
+  // --- Filter slides by start/end dates ---
+  const slides = Array.from(slidesWrapper.querySelectorAll('.message-slide'));
   const now = getNowInEDT();
 
-  // --- Filter slides ---
-  const slides = Array.from(slidesWrapper.querySelectorAll('.message-slide'));
   slides.forEach(slide => {
-    const start = parseInt(slide.dataset.startDate, 10);
-    const end = parseInt(slide.dataset.endDate, 10);
-    console.log(end);
-    if (!(now >= start && now <= end)) {
+    const startDate = new Date(slide.dataset.startDate);
+    const endDate = new Date(slide.dataset.endDate);
+    //console.log(now + "==" + endDate);
+    console.log(endDate);
+    if (!(now >= startDate && now <= endDate)) {
       slide.remove();
     }
   });
 
-  // --- Re-init slider after filtering ---
+  // --- Refresh slides & dots after filtering ---
   let filteredSlides = Array.from(slidesWrapper.querySelectorAll('.message-slide'));
   let dotsWrapper = section.querySelector('.slider-dots');
-  dotsWrapper.innerHTML = '';
+  dotsWrapper.innerHTML = ''; // clear existing
 
   filteredSlides.forEach((_, i) => {
     const dot = document.createElement('span');
@@ -271,6 +272,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (dots[index]) dots[index].classList.add('active');
   }
 
+  // --- Dot navigation ---
   dots.forEach(dot => {
     dot.addEventListener('click', function() {
       index = parseInt(this.dataset.index);
@@ -278,6 +280,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
+  // --- Prev/Next ---
   prevBtn.addEventListener('click', function() {
     index = index > 0 ? index - 1 : totalSlides - 1;
     updateSliderPosition();
@@ -288,14 +291,18 @@ document.addEventListener('DOMContentLoaded', function() {
     updateSliderPosition();
   });
 
+  // --- Hide button ---
   hideBtn.addEventListener('click', function() {
     section.style.display = 'none';
   });
 
+  // --- Drag / Swipe ---
   slidesWrapper.addEventListener('mousedown', startDrag);
   slidesWrapper.addEventListener('touchstart', startDrag);
+
   slidesWrapper.addEventListener('mousemove', dragMove);
   slidesWrapper.addEventListener('touchmove', dragMove);
+
   slidesWrapper.addEventListener('mouseup', endDrag);
   slidesWrapper.addEventListener('mouseleave', endDrag);
   slidesWrapper.addEventListener('touchend', endDrag);
@@ -328,6 +335,7 @@ document.addEventListener('DOMContentLoaded', function() {
     currentX = 0;
   }
 
+  // --- Auto-slide ---
   if (totalSlides > 1) {
     setInterval(() => {
       index = (index + 1) % totalSlides;
@@ -335,7 +343,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 5000);
   }
 });
-
 </script>
 
 {% schema %}
