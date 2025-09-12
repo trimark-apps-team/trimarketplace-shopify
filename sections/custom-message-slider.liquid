@@ -1,16 +1,23 @@
 
 {% assign active_user_company = "gid://shopify/Company/" | append: customer.current_company.id %}
 {% assign metaObject = shop.metaobjects.announcement_bar.values %}
+
+{%- comment -%} Get current time in EDT as Unix timestamp {%- endcomment -%}
+{% assign now_timestamp = 'now' | date: '%s' | plus: 0 %}
+
 {% assign show_meta = false %}
 {% for single_slide_data in metaObject %}
   {% assign raw_companies = single_slide_data.company | remove: '["' | remove: '"]' | replace: '","', ',' %}
   {% assign companies_array = raw_companies | split: ',' %}
+
   {% assign start_timestamp = single_slide_data.start_date | date: '%s' | plus: 0 %}
   {% assign end_timestamp = single_slide_data.end_date | date: '%s' | plus: 0 %}
+
   {% if companies_array contains active_user_company and now_timestamp >= start_timestamp and now_timestamp <= end_timestamp %}
     {% assign show_meta = true %}
   {% endif %}
 {% endfor %}
+
 <div 
   class="message-slider-section-wrapper page-width
   {% if section.settings.show_from_meta %}
