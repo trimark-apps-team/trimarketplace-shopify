@@ -462,7 +462,7 @@
             {%- endif -%}
           </div>
         </div>
-        {%- if reorder_url -%}
+        {% comment %} {%- if reorder_url -%}
             <div class="aasaved-cart-actions aasaved-cart-actions--embed hidden" data-target="">
                   <a class="btn btn-primary" href="/a/saved-carts">
                   View Carts
@@ -471,7 +471,7 @@
                       Save Cart
                   </a>
           </div>
-        {% endif %}
+        {% endif %} {% endcomment %}
 
         <p class="visually-hidden" id="cart-live-region-text" aria-live="polite" role="status"></p>
         <p
