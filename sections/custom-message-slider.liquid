@@ -37,14 +37,14 @@
           {% assign companies_array = raw_companies | split: ',' %}
           {% if companies_array contains active_user_company %}
           <div class="message-slide" {% if single_slide.banner_image != blank %} style="background-image: url('{{ single_slide.banner_image | img_url:"original" }}');background-size: 100% 100%;" {% endif %}>
-              {% if single_slide.name != blank %}
-                <h3 class="message-slide__title">
-                  {{ single_slide.name }}
-                </h3>
-              {% endif %}
               {% if single_slide.banner_video != blank %}
                 {{ single_slide.banner_video.value | video_tag: autoplay: true, muted: true, loop: true, controls: false }}
               {% else %}
+                {% if single_slide.name != blank %}
+                  <h3 class="message-slide__title">
+                    {{ single_slide.name }}
+                  </h3>
+                {% endif %}
                 {% if single_slide.banner_content != blank %}
                   <div class="message-slide__content">{{ single_slide.banner_content | metafield_tag }}</div>
                 {% endif %}
