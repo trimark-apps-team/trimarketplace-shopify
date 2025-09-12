@@ -401,6 +401,7 @@ footer .svg-wrapper .icon path {
 }
 .aasaved-cart-actions {
     padding-top: 24px;
+    display: none;
 }
 .cart-item-wrapper, .cart-footer-wrapper {
   background: #fff;
