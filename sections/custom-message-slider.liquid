@@ -239,6 +239,7 @@ document.addEventListener('DOMContentLoaded', function() {
   slides.forEach(slide => {
     const start = parseInt(slide.dataset.startDate, 10);
     const end = parseInt(slide.dataset.endDate, 10);
+    console.log(end);
     if (!(now >= start && now <= end)) {
       slide.remove();
     }
