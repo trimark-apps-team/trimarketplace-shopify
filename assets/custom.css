@@ -401,9 +401,11 @@ footer .svg-wrapper .icon path {
 }
 .aasaved-cart-actions {
     padding-top: 24px;
-    display: none !important;
-    
-    
+  
+}
+
+.aasaved-cart-actions .view-carts {
+  display: none !important;
 }
 .cart-item-wrapper, .cart-footer-wrapper {
   background: #fff;
