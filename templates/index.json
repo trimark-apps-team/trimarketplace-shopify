@@ -9,53 +9,6 @@
  */
 {
   "sections": {
-    "custom_message_slider_XCXCkn": {
-      "type": "custom-message-slider",
-      "blocks": {
-        "slide_keJnAy": {
-          "type": "slide",
-          "settings": {
-            "title": "{{ metaobjects.announcement_bar[\"free-freight-on-all-stock-orders-over-600-excludes-rollouts-shelving\"].name.value }}",
-            "content": "<p></p>{{ metaobjects.announcement_bar[\"free-freight-on-all-stock-orders-over-600-excludes-rollouts-shelving\"].banner_content | metafield_tag }}"
-          }
-        },
-        "slide_nxhUAm": {
-          "type": "slide",
-          "settings": {
-            "title": "Free Freight on all stock orders over $600...excludes rollouts, shelving.",
-            "content": "<p><strong>Please note:</strong><br/><br/>If you cannot find an item, please type the item information & quantity in the comment box on the check out page. We will then add it to your order. We are experiencing delays in receiving some products due to the supply chain shortages, we have been diligently working.</p>"
-          }
-        },
-        "slide_mCPEqh": {
-          "type": "slide",
-          "settings": {
-            "title": "Free Freight on all stock orders over $600...excludes rollouts, shelving.",
-            "content": "<p><strong>Please note:</strong><br/><br/>If you cannot find an item, please type the item information & quantity in the comment box on the check out page. We will then add it to your order. We are experiencing delays in receiving some products due to the supply chain shortages, we have been diligently working.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "slide_keJnAy",
-        "slide_nxhUAm",
-        "slide_mCPEqh"
-      ],
-      "name": "Message Slider",
-      "settings": {
-        "show_from_meta": true,
-        "header_color": "#b11830",
-        "header_font_size": 18,
-        "text_color": "#121212",
-        "text_font_size": 15,
-        "margin_top": 0,
-        "margin_bottom": 0,
-        "header_color_mobile": "#b11830",
-        "header_font_size_mobile": 12,
-        "text_color_mobile": "#121212",
-        "text_font_size_mobile": 12,
-        "margin_top_mobile": 0,
-        "margin_bottom_mobile": 0
-      }
-    },
     "featured_collection_RmhiMM": {
       "type": "featured-collection",
       "disabled": true,
@@ -242,7 +195,6 @@
     }
   },
   "order": [
-    "custom_message_slider_XCXCkn",
     "featured_collection_RmhiMM",
     "featured_collection",
     "feature_cards_JkfJhb",
