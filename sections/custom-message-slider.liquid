@@ -5,6 +5,8 @@
 {% for single_slide_data in metaObject %}
   {% assign raw_companies = single_slide_data.company | remove: '["' | remove: '"]' | replace: '","', ',' %}
   {% assign companies_array = raw_companies | split: ',' %}
+  {% assign start_timestamp = single_slide_data.start_date | date: '%s' | plus: 0 %}
+  {% assign end_timestamp = single_slide_data.end_date | date: '%s' | plus: 0 %}
   {% if companies_array contains active_user_company %}
     {% assign show_meta = true %}
   {% endif %}
