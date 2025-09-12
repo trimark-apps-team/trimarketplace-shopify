@@ -555,7 +555,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     cartPage.querySelector("table.cart-items")?.classList.remove("hidden");
     cartPage.querySelector(".skeleton-shimmer")?.classList.add("hidden");
-    {% comment %} cartPage.querySelector(".aasaved-cart-actions")?.classList.remove("hidden"); {% endcomment %}
+    cartPage.querySelector(".aasaved-cart-actions")?.classList.remove("hidden");
 
     const cleanUrl = window.location.origin + window.location.pathname;
     window.history.replaceState({}, document.title, cleanUrl);
