@@ -1,33 +1,28 @@
-
 {% assign active_user_company = "gid://shopify/Company/" | append: customer.current_company.id %}
 {% assign metaObject = shop.metaobjects.announcement_bar.values %}
-
-{%- comment -%} Get current time in EDT as Unix timestamp {%- endcomment -%}
 {% assign now_timestamp = 'now' | date: '%s' | plus: 0 %}
-
-{% assign show_meta = false %}
-{% for single_slide_data in metaObject %}
-  {% assign raw_companies = single_slide_data.company | remove: '["' | remove: '"]' | replace: '","', ',' %}
-  {% assign companies_array = raw_companies | split: ',' %}
-
-  {% assign start_timestamp = single_slide_data.start_date | date: '%s' | plus: 0 %}
-  {% assign end_timestamp = single_slide_data.end_date | date: '%s' | plus: 0 %}
-
-  {% if companies_array contains active_user_company and now_timestamp >= start_timestamp and now_timestamp <= end_timestamp %}
-    {% assign show_meta = true %}
-  {% endif %}
-{% endfor %}
 
 <div 
   class="message-slider-section-wrapper page-width
   {% if section.settings.show_from_meta %}
-    {% if show_meta %}
+    {% assign active_found = false %}
+    {% for single_slide in metaObject %}
+      {% assign raw_companies = single_slide.company | remove: '["' | remove: '"]' | replace: '","', ',' %}
+      {% assign companies_array = raw_companies | split: ',' %}
+      {% assign start_timestamp = single_slide.start_date | date: '%s' | plus: 0 %}
+      {% assign end_timestamp = single_slide.end_date | date: '%s' | plus: 0 %}
+      {% if companies_array contains active_user_company and now_timestamp >= start_timestamp and now_timestamp <= end_timestamp %}
+        {% assign active_found = true %}
+      {% endif %}
+    {% endfor %}
+    {% if active_found %}
      show-slider-meta
     {% else %}
      hide-slider-{{ section.id }}
     {% endif %}
   {% endif %}
   ">
+
 <section class="message-slider" id="{{ section.id }}" data-section-id="{{ section.id }}">
   <div class="message-slider__wrapper">
     {% if section.settings.show_from_meta %}
@@ -35,41 +30,39 @@
         {% for single_slide in metaObject %}
           {% assign raw_companies = single_slide.company | remove: '["' | remove: '"]' | replace: '","', ',' %}
           {% assign companies_array = raw_companies | split: ',' %}
-          {% if companies_array contains active_user_company %}
-          <div class="message-slide" {% if single_slide.banner_image != blank %} style="background-image: url('{{ single_slide.banner_image | img_url:"original" }}');background-size: 100% 100%;" {% endif %}>
+          {% assign start_timestamp = single_slide.start_date | date: '%s' | plus: 0 %}
+          {% assign end_timestamp = single_slide.end_date | date: '%s' | plus: 0 %}
+          {% if companies_array contains active_user_company and now_timestamp >= start_timestamp and now_timestamp <= end_timestamp %}
+            <div class="message-slide" {% if single_slide.banner_image != blank %} style="background-image: url('{{ single_slide.banner_image | img_url:"original" }}');background-size: 100% 100%;" {% endif %}>
               {% if single_slide.banner_video != blank %}
                 {{ single_slide.banner_video.value | video_tag: autoplay: true, muted: true, loop: true, controls: false }}
               {% else %}
                 {% if single_slide.name != blank %}
-                  <h3 class="message-slide__title">
-                    {{ single_slide.name }}
-                  </h3>
+                  <h3 class="message-slide__title">{{ single_slide.name }}</h3>
                 {% endif %}
                 {% if single_slide.banner_content != blank %}
                   <div class="message-slide__content">{{ single_slide.banner_content | metafield_tag }}</div>
                 {% endif %}
               {% endif %}
-              
             </div>
-            {% endif %}
+          {% endif %}
         {% endfor %}
       </div>
     {% else %}  
       <div class="message-slider__slides">
-          {% for block in section.blocks %}
-            <div class="message-slide">
-              {% if block.settings.title != blank %}
-                <h3 class="message-slide__title">
-                  {{ block.settings.title }}
-                </h3>
-              {% endif %}
-              {% if block.settings.content != blank %}
-                <div class="message-slide__content">{{ block.settings.content }}</div>
-              {% endif %}
-            </div>
-          {% endfor %}
+        {% for block in section.blocks %}
+          <div class="message-slide">
+            {% if block.settings.title != blank %}
+              <h3 class="message-slide__title">{{ block.settings.title }}</h3>
+            {% endif %}
+            {% if block.settings.content != blank %}
+              <div class="message-slide__content">{{ block.settings.content }}</div>
+            {% endif %}
+          </div>
+        {% endfor %}
       </div>
     {% endif %}
+
     <div class="message-slider__controls">
       <button class="slider-arrow prev" aria-label="Previous slide">&#10094;</button>
       <div class="slider-dots">
@@ -77,7 +70,9 @@
           {% for single_slide in metaObject %}
             {% assign raw_companies = single_slide.company | remove: '["' | remove: '"]' | replace: '","', ',' %}
             {% assign companies_array = raw_companies | split: ',' %}
-            {% if companies_array contains active_user_company %}
+            {% assign start_timestamp = single_slide.start_date | date: '%s' | plus: 0 %}
+            {% assign end_timestamp = single_slide.end_date | date: '%s' | plus: 0 %}
+            {% if companies_array contains active_user_company and now_timestamp >= start_timestamp and now_timestamp <= end_timestamp %}
               <span class="slider-dot{% if forloop.first %} active{% endif %}" data-index="{{ forloop.index0 }}"></span>
             {% endif %}
           {% endfor %}
@@ -90,9 +85,7 @@
       <button class="slider-arrow next" aria-label="Next slide">&#10095;</button>
     </div>
 
-    <button type="button" class="message-slider__hide">
-      <?xml version="1.0"?><!DOCTYPE svg  PUBLIC '-//W3C//DTD SVG 1.1//EN'  'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'><svg enable-background="new 0 0 128 128" height="20px" id="Layer_1" version="1.1" viewBox="0 0 128 128" width="20px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g><g><path d="M84.815,43.399c-0.781-0.782-2.047-0.782-2.828,0L64.032,61.356L46.077,43.399c-0.781-0.782-2.047-0.782-2.828,0    c-0.781,0.781-0.781,2.047,0,2.828l17.955,17.957L43.249,82.141c-0.781,0.78-0.781,2.047,0,2.828    c0.391,0.39,0.902,0.585,1.414,0.585s1.023-0.195,1.414-0.585l17.955-17.956l17.955,17.956c0.391,0.39,0.902,0.585,1.414,0.585    s1.023-0.195,1.414-0.585c0.781-0.781,0.781-2.048,0-2.828L66.86,64.184l17.955-17.957C85.597,45.447,85.597,44.18,84.815,43.399z     M64.032,14.054c-27.642,0-50.129,22.487-50.129,50.127c0.002,27.643,22.491,50.131,50.133,50.131    c27.639,0,50.125-22.489,50.125-50.131C114.161,36.541,91.674,14.054,64.032,14.054z M64.036,110.313h-0.002    c-25.435,0-46.129-20.695-46.131-46.131c0-25.435,20.693-46.127,46.129-46.127s46.129,20.693,46.129,46.127    C110.161,89.617,89.47,110.313,64.036,110.313z"/></g></g></svg>
-    </button>
+    <button type="button" class="message-slider__hide">…</button>
   </div>
 </section>
 </div>
