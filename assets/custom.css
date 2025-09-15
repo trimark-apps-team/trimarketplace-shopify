@@ -341,7 +341,9 @@ footer .svg-wrapper .icon path {
 }
 .product__info-wrapper p {
     margin: 0;
-    font-size: 14px;
+    font-size: 16px;
+    color: #121212;
+    
 }
 .product__info-wrapper .price-item {
     font-weight: 600;
