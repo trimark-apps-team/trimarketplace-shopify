@@ -41,7 +41,7 @@
       ],
       "name": "Message Slider",
       "settings": {
-        "show_from_meta": false,
+        "show_from_meta": true,
         "header_color": "#b11830",
         "header_font_size": 18,
         "text_color": "#121212",
