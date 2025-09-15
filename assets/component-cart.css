@@ -8,11 +8,11 @@
   margin: auto;
 }
 
-#MainContent h1 {
+/* #MainContent h1 {
   font-weight: var(--font-heading-weight);
   font-size: xx-large;
   color: rgb(var(--color-foreground));
-}
+} */
 
 .cart__empty-text,
 .is-empty .cart__contents,
