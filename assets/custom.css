@@ -577,3 +577,10 @@ body .facets-container {
   }
   
 }
+
+/* override hulk app heading style kk 9/15/25*/
+
+.hulk__wishlist-wrap .fancy_title p {
+  font-weight: bold;
+  font-size: 2.1rem;
+}
