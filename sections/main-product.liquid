@@ -306,7 +306,7 @@
               </div>
               {% endif %}
             </div>
-              <button class="button" onclick="document.getElementById('popup').classList.remove('hidden')" style="color:{{ block.settings.tire_price_button_text_color }};font-size:{{ block.settings.tire_price_button_text_font_size }}px;background-color:{{ section.settings.tire_price_button_bg_color }};border-radius: {{ section.settings.tire_price_button_border_radius }}px">
+              <button class="button" onclick="document.getElementById('popup').classList.remove('hidden')" style="color:{{ block.settings.tire_price_button_text_color }};font-size:{{ block.settings.tire_price_button_text_font_size }}px;background-color:{{ block.settings.tire_price_button_bg_color }};border-radius: {{ block.settings.tire_price_button_border_radius }}px">
                 {{ block.settings.tire_price_button_text }}
               </button>
               <div id="popup" class="popup hidden">
