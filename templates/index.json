@@ -70,6 +70,7 @@
     },
     "custom_message_slider_nFxNGh": {
       "type": "custom-message-slider",
+      "disabled": true,
       "name": "Message Slider",
       "settings": {
         "show_from_meta": true,
