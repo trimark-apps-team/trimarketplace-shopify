@@ -68,6 +68,25 @@
         "padding_bottom": 36
       }
     },
+    "custom_message_slider_nFxNGh": {
+      "type": "custom-message-slider",
+      "name": "Message Slider",
+      "settings": {
+        "show_from_meta": true,
+        "header_color": "#b11830",
+        "header_font_size": 18,
+        "text_color": "#b11830",
+        "text_font_size": 18,
+        "margin_top": 18,
+        "margin_bottom": 18,
+        "header_color_mobile": "#b11830",
+        "header_font_size_mobile": 18,
+        "text_color_mobile": "#b11830",
+        "text_font_size_mobile": 18,
+        "margin_top_mobile": 18,
+        "margin_bottom_mobile": 18
+      }
+    },
     "feature_cards_JkfJhb": {
       "type": "feature-cards",
       "blocks": {
@@ -198,6 +217,7 @@
   "order": [
     "featured_collection_RmhiMM",
     "featured_collection",
+    "custom_message_slider_nFxNGh",
     "feature_cards_JkfJhb",
     "feature_cards_V4i7nk"
   ]
