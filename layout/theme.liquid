@@ -547,11 +547,11 @@
     {% sections 'header-group' %}
 
     <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
-      <div class='page-width'>
+      
         {% if customer.current_company.metafields.custom.company_logo != blank %}
         <img src="{{ customer.current_company.metafields.custom.company_logo | img_url: }}" width="150" height="auto" alt="">
         {% endif %}
-      </div>
+    
       
       {{ content_for_layout }}
     </main>
