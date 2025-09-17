@@ -306,14 +306,15 @@ footer .svg-wrapper .icon path {
   padding: 20px;
 }
 
-.collection, .facets-container {
-    background: #fff;
+.collection {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     border-radius: 12px;
-    padding: 20px;
 }
 
-
+.collection, .facets-container {
+    background: #fff;
+    padding: 20px;
+}
 .template-collection .facets-container {
   z-index: 999;
 }
