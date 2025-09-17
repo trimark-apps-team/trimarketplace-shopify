@@ -90,6 +90,7 @@
         },
         "feature_y6w6GE": {
           "type": "feature",
+          "disabled": true,
           "settings": {
             "icon": "shopify://shop_images/Favorite.png",
             "heading": "My Wishlist",
