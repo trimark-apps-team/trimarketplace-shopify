@@ -308,12 +308,9 @@ footer .svg-wrapper .icon path {
 
 .collection, .facets-container {
     background: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
     padding: 20px;
-}
-
-.collection {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  border-radius: 12px;
 }
 
 
