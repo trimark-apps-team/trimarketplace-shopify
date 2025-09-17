@@ -96,12 +96,22 @@
             "link_label": "View All",
             "link_url": "/apps/advanced-wishlist"
           }
+        },
+        "sales_contact_block_bPFnUe": {
+          "type": "sales-contact-block",
+          "settings": {
+            "heading-1": "Sales Contact",
+            "heading-2": "Phone",
+            "heading-3": "Email",
+            "heading-4": "Address"
+          }
         }
       },
       "block_order": [
         "logo_bn9mcx",
         "feature_6E3HtY",
-        "feature_y6w6GE"
+        "feature_y6w6GE",
+        "sales_contact_block_bPFnUe"
       ],
       "name": "Feature Card Grid",
       "settings": {
@@ -146,32 +156,21 @@
             "link_url": "https://shopify.com/75142004964/account/profile"
           }
         },
-        "feature_WNTVL3": {
+        "feature_MinG96": {
           "type": "feature",
-          "disabled": true,
           "settings": {
-            "icon": "shopify://shop_images/Help.png",
-            "heading": "Help",
-            "description": "Get assistance and view any help documents.",
+            "icon": "shopify://shop_images/Favorite.png",
+            "heading": "My Wishlist",
+            "description": "View, Track, Return or buy products again.",
             "link_label": "View All",
-            "link_url": "https://faq.trimarketplace.com/"
-          }
-        },
-        "sales_contact_block_9H3zBG": {
-          "type": "sales-contact-block",
-          "settings": {
-            "heading-1": "Sales Contact",
-            "heading-2": "Phone",
-            "heading-3": "Email",
-            "heading-4": "Address"
+            "link_url": "/apps/advanced-wishlist"
           }
         }
       },
       "block_order": [
         "feature_GqyJDz",
         "feature_CXbtYY",
-        "feature_WNTVL3",
-        "sales_contact_block_9H3zBG"
+        "feature_MinG96"
       ],
       "name": "Feature Card Grid",
       "settings": {
