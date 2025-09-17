@@ -549,7 +549,7 @@
     <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
       
         {% if customer.current_company.metafields.custom.company_logo != blank %}
-        <img src="{{ customer.current_company.metafields.custom.company_logo | img_url: }}" width="150" height="auto" alt="">
+        <img src="{{ customer.current_company.metafields.custom.company_logo | img_url: }}" width="150" height="auto" alt=""/>
         {% endif %}
     
       
