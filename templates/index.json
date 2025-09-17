@@ -73,6 +73,7 @@
       "blocks": {
         "logo_bn9mcx": {
           "type": "logo",
+          "disabled": true,
           "settings": {
             "logo": "shopify://shop_images/01_TriMarketPlace_-_logo_1_-_horizontal_copy.png"
           }
