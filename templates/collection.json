@@ -19,6 +19,9 @@
     },
     "product-grid": {
       "type": "main-collection-product-grid",
+      "custom_css": [
+        ".facets-wrapper {padding: 20px;}"
+      ],
       "settings": {
         "products_per_page": 24,
         "columns_desktop": 3,
