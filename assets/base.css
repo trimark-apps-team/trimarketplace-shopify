@@ -3996,7 +3996,6 @@ body .variant-item__quantity-wrapper .quick-order_loader {
 }
 
 .icon-feature-grid .grid-wrapper {
-  display: grid;
   gap: 20px;
   justify-content: center;
 }
