@@ -587,3 +587,8 @@ body .facets-container {
   font-weight: bold;
   font-size: 2.1rem;
 }
+
+/* override max=width layout for hulk app wish list page kk 9/16/25 */
+.hulk__wishlist-wrap .wrapper {
+  max-width: 1200px !important;
+}
