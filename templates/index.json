@@ -135,8 +135,8 @@
         "feature_f6k9n7": {
           "type": "feature",
           "settings": {
-            "heading": "Saved Carts",
-            "description": "",
+            "heading": "My Saved Carts",
+            "description": "Manage your saved carts",
             "link_label": "View All",
             "link_url": "shopify://pages/my-saved-carts"
           }
