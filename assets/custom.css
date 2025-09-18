@@ -236,9 +236,6 @@ footer .svg-wrapper .icon path {
 .collection__view-all a.button.button--secondary:hover {
   border: 0px !important;
 }
-.cart-items_count {
-  display: none;
-}
 .totals__total-value {
   font-weight: bold;
 }
