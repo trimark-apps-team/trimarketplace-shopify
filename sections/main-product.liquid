@@ -176,7 +176,35 @@
                     {{ form | payment_terms }}
                   {%- endform -%}
                 </div>
+
+                {% when 'stock-level-indicator' %}
+                    {% comment %} ===== STOCK LEVEL INDICATOR BLOCK ===== {% endcomment %}
+                    <div
+                      data-updates-on-change
+                      data-update-id="item-{{ block.id }}"
+                      data-block-id="{{ block.id }}"
+                      style="margin-block: {{ block.settings.margin_block }}px"
+                    >
+                      {% render 'stock-level-indicator' with 
+                        block_attributes: block.shopify_attributes,
+                        stock_product: product,
+                        stock_variant: product.selected_or_first_available_variant,
+                        stock_style: block.settings.stock-level-indicator-style,
+                        stock_bar_color: block.settings.bar-indicator-color,
+                        stock_indicator_animation: block.settings.stock_indicator_animation,
+                        stock_amt: block.settings.stock-range,
+                        stock_notice: block.settings.stock-level-notice,
+                        show_stock_count: block.settings.show-stock-count,
+                        preorder_message: block.settings.preorder-message,
+                        in_stock_message: block.settings.in-stock-message,
+                        low_stock_message: block.settings.low-stock-message,
+                        out_of_stock_message: block.settings.out-of-stock-message,
+                        high_stock_range: block.settings.high-stock-range,
+                        medium_stock_message: block.settings.medium-stock-message
+                      %}
+                    </div>
               {%- when 'inventory' -%}
+    
                 {% comment %} <p
                   class="product__inventory{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if product.selected_or_first_available_variant.inventory_management != 'shopify' %} visibility-hidden{% endif %}"
                   {{ block.shopify_attributes }}
@@ -1860,6 +1888,136 @@
         }
       ]
     },
+    {
+  "type": "stock-level-indicator",
+  "name": "Stock level indicator",
+  "limit": 1,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Product inventory must be tracked to use this functionality."
+    },
+    {
+      "type": "range",
+      "id": "stock-range",
+      "min": 1,
+      "max": 50,
+      "step": 1,
+      "label": "Low stock threshold",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "high-stock-range",
+      "min": 1,
+      "max": 50,
+      "step": 1,
+      "label": "High stock threshold",
+      "default": 26
+    },
+    {
+      "type": "radio",
+      "id": "stock-level-notice",
+      "label": "Show stock level indicator",
+      "default": "always",
+      "options": [
+        {
+          "value": "always",
+          "label": "Always"
+        },
+        {
+          "value": "below-stock-range",
+          "label": "When stock level is lower than low stock threshold"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "in-stock-message",
+      "label": "Low stock message"
+    },
+    {
+      "type": "text",
+      "id": "low-stock-message",
+      "label": "High stock message"
+    },
+    {
+      "type": "text",
+      "id": "medium-stock-message",
+      "label": "Medium stock message",
+      "default": "Inventory is Medium"
+    },
+    {
+      "type": "text",
+      "id": "out-of-stock-message",
+      "label": "Out of stock message",
+      "default": "Back in soon"
+    },
+    {
+      "type": "text",
+      "id": "preorder-message",
+      "label": "Preorder message",
+      "default": "Preorder today"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "radio",
+      "id": "stock-level-indicator-style",
+      "label": "Style",
+      "info": "Out of stock products show Classic count",
+      "default": "bar",
+      "options": [
+        {
+          "value": "classic",
+          "label": "Classic count"
+        },
+        {
+          "value": "bar",
+          "label": "Bar count"
+        }
+      ]
+    },
+    {
+      "type": "radio",
+      "id": "bar-indicator-color",
+      "label": "Bar indicator color",
+      "default": "standard",
+      "options": [
+        {
+          "value": "text",
+          "label": "Text color"
+        },
+        {
+          "value": "standard",
+          "label": "Standard"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "stock_indicator_animation",
+      "label": "Enable animation",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "margin_block",
+      "label": "Block spacing",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 8
+    }
+  ]
+},
     {
       "type": "icon-with-text",
       "name": "t:sections.main-product.blocks.icon_with_text.name",

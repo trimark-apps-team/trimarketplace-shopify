@@ -599,3 +599,185 @@ body .facets-container {
   padding: 0 1.5rem !important;
 }
 }
+
+
+.inventory-badge {
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.inventory-badge.low {
+  background-color: #fdecea;
+  color: #d93025;
+}
+
+.inventory-badge.medium {
+  background-color: #fff4e5;
+  color: #e69500;
+}
+
+.inventory-badge.high {
+  background-color: #e6f4ea;
+  color: #188038;
+}
+
+.icon-dot-outline {
+    display: flex;
+    width: var(--inline-icon-size);
+    height: var(--inline-icon-size);
+    border-radius: 100%;
+    background-color: var(--color-scheme-text-color-transparent10,var(--text-color-transparent10));
+    z-index: 1
+}
+
+.icon-dot-outline .icon-dot {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    width: 12px;
+    height: 12px;
+    border-radius: 100%;
+    z-index: 2;
+    margin: auto
+}
+
+.icon-dot-outline .icon-dot.icon-dot.icon-dot--success {
+    background-color: var(--success-color)
+}
+
+.icon-dot-outline .icon-dot.icon-dot.icon-dot--warning {
+    background-color: var(--warning-color)
+}
+
+.icon-dot-outline .icon-dot.icon-dot.icon-dot--error {
+    background-color: var(--error-color)
+}
+
+.icon-dot-outline .icon-dot.icon-dot.icon-dot--stock {
+    background-color: var(--stock-color)
+}
+
+@media screen and (prefers-reduced-motion:no-preference) {
+    .stock-indicator-animations .icon-dot--pulsing.icon-dot--success {
+        box-shadow: 0 1px 10px var(--success-color)
+    }
+
+    .stock-indicator-animations .icon-dot--pulsing.icon-dot--warning {
+        box-shadow: 0 1px 10px var(--warning-color)
+    }
+
+    .stock-indicator-animations .icon-dot--pulsing.icon-dot--error {
+        box-shadow: 0 1px 10px var(--error-color)
+    }
+
+    .stock-indicator-animations .icon-dot--pulsing.icon-dot:after {
+        position: absolute;
+        content: "";
+        width: inherit;
+        height: inherit;
+        left: 0;
+        top: 0;
+        z-index: -1;
+        border-radius: 50%;
+        -webkit-animation: 2s pulsatingDot ease-in-out infinite;
+        animation: 2s pulsatingDot ease-in-out infinite;
+        opacity: .4
+    }
+
+    .stock-indicator-animations .icon-dot--pulsing.icon-dot--success:after {
+        color: var(--success-color)
+    }
+
+    .stock-indicator-animations .icon-dot--pulsing.icon-dot--warning:after {
+        color: var(--warning-color)
+    }
+
+    .stock-indicator-animations .icon-dot--pulsing.icon-dot--error:after {
+        color: var(--error-color)
+    }
+
+    @keyframes pulsatingDot {
+        0% {
+            transform: scale(.95);
+            box-shadow: 0 0;
+            opacity: .7
+        }
+
+        70% {
+            transform: scale(1);
+            box-shadow: 0 0 0 10px;
+            opacity: 0
+        }
+
+        100% {
+            transform: scale(.95);
+            box-shadow: 0 0;
+            opacity: 0
+        }
+    }
+}
+
+.stock-indicator-bar {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+    position: relative;
+    height: 8px;
+    background-color: var(--color-scheme-text-color-transparent10,var(--text-color-transparent10));
+    border-radius: 50px;
+    padding-left: 2px
+}
+
+.stock-indicator-bar .bar {
+    height: calc(8px / 2);
+    border-radius: 50px
+}
+
+@media screen and (prefers-reduced-motion:no-preference) {
+    .stock-indicator-animations:not(.animate-bar) .stock-indicator-bar>.bar {
+        width: calc(100% - 2px)!important
+    }
+
+    @keyframes barExpands {
+        0% {
+            width: calc(100% - 2px)
+        }
+    }
+
+    .stock-indicator-animations.animate-bar .stock-indicator-bar>.bar {
+        animation: barExpands 1.2s ease-in-out
+    }
+}
+
+div[data-updates-on-change]:has(stock-level-indicator) {
+    display: none
+}
+
+div[data-updates-on-change]:has(stock-level-indicator):has(div.stock-indicator-wrapper) {
+    display: block
+}
+
+stock-level-indicator .stock-indicator-wrapper.hidden {
+    display: none
+}
+
+stock-level-indicator .stock-level-message {
+    display: flex;
+    align-items: center
+}
+
+stock-level-indicator .stock-level-message p {
+    line-height: normal;
+    margin: 0
+}
+
+stock-level-indicator .icon-dot-outline {
+    margin-right: 10px
+}
+
+stock-level-indicator .icon-dot-outline .icon-dot {
+    flex: 0 0 auto
+}
