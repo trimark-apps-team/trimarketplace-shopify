@@ -94,14 +94,11 @@
         "logo_bn9mcx": {
           "type": "logo",
           "disabled": true,
-          "settings": {
-            "logo": "shopify://shop_images/01_TriMarketPlace_-_logo_1_-_horizontal_copy.png"
-          }
+          "settings": {}
         },
         "feature_6E3HtY": {
           "type": "feature",
           "settings": {
-            "icon": "shopify://shop_images/Catalog.png",
             "heading": "My Catalog",
             "description": "View, edit, and place orders from your Managed Order Guide.",
             "link_label": "View All",
@@ -112,7 +109,6 @@
           "type": "feature",
           "disabled": true,
           "settings": {
-            "icon": "shopify://shop_images/Favorite.png",
             "heading": "My Wishlist",
             "description": "View, Track, Return or buy products again.",
             "link_label": "View All",
@@ -127,13 +123,21 @@
             "heading-3": "Email",
             "heading-4": "Address"
           }
+        },
+        "link_list_NVGqyC": {
+          "type": "link_list",
+          "settings": {
+            "heading": "My Account Quick Links",
+            "menu": ""
+          }
         }
       },
       "block_order": [
         "logo_bn9mcx",
         "feature_6E3HtY",
         "feature_y6w6GE",
-        "sales_contact_block_bPFnUe"
+        "sales_contact_block_bPFnUe",
+        "link_list_NVGqyC"
       ],
       "name": "Feature Card Grid",
       "settings": {
@@ -161,7 +165,6 @@
         "feature_GqyJDz": {
           "type": "feature",
           "settings": {
-            "icon": "shopify://shop_images/Order_Approvals.svg",
             "heading": "My Approvals",
             "description": "Manage approval requests.",
             "link_label": "View All",
@@ -171,7 +174,6 @@
         "feature_CXbtYY": {
           "type": "feature",
           "settings": {
-            "icon": "shopify://shop_images/Profile.png",
             "heading": "My Profile",
             "description": "Manage your profile details.",
             "link_label": "View All",
@@ -181,7 +183,6 @@
         "feature_MinG96": {
           "type": "feature",
           "settings": {
-            "icon": "shopify://shop_images/Favorite.png",
             "heading": "My Wishlist",
             "description": "View, Track, Return or buy products again.",
             "link_label": "View All",
