@@ -762,11 +762,11 @@ a.active-facets__button.focused .active-facets__button-inner {
 
 .mobile-facets__disclosure:hover, .mobile-facets__disclosure:active {
   color: #fff;
-  background: #333;
+  /* background: #333; */
   text-decoration: none;
 }
 
-.mobile-facets__disclosure:hover a: active, .mobile-facets__disclosure:active a:active; {
+.mobile-facets__disclosure:hover a: active, .mobile-facets__disclosure:active a: {
   color: #fff;
   background: #333;
   text-decoration: none;
