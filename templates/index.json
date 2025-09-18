@@ -126,9 +126,19 @@
         },
         "link_list_NVGqyC": {
           "type": "link_list",
+          "disabled": true,
           "settings": {
             "heading": "My Account Quick Links",
             "menu": "my-account-quicklinks"
+          }
+        },
+        "feature_f6k9n7": {
+          "type": "feature",
+          "settings": {
+            "heading": "Saved Carts",
+            "description": "",
+            "link_label": "View All",
+            "link_url": "shopify://pages/my-saved-carts"
           }
         }
       },
@@ -137,7 +147,8 @@
         "feature_6E3HtY",
         "feature_y6w6GE",
         "sales_contact_block_bPFnUe",
-        "link_list_NVGqyC"
+        "link_list_NVGqyC",
+        "feature_f6k9n7"
       ],
       "name": "Feature Card Grid",
       "settings": {
