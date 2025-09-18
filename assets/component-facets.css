@@ -760,14 +760,6 @@ a.active-facets__button.focused .active-facets__button-inner {
   border: 2px solid #aaa;
 }
 
-.mobile-facets__open-label:hover {
-  background-color: black;
-  color: white; /* optional, so text stays readable */
-  cursor: pointer; /* makes it feel like a button */
-  border-radius: 4px; /* optional, to soften edges */
-  padding: 4px 8px; /* optional, to give some breathing room */
-}
-
 .mobile-facets__wrapper {
   margin-left: 0;
   display: flex;
