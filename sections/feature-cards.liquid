@@ -95,6 +95,39 @@
   align-content: center;
   text-align: center;
 }
+
+.account-links {
+  padding: 10px;
+}
+
+.account-links-heading {
+  color: {{ section.settings.heading_color }};
+  font-size: {{ section.settings.heading_font_size }}px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #e0e0e1;
+  padding-bottom: 6px;
+}
+
+.account-links-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.account-links-list li {
+  margin: 4px 0;
+}
+
+.account-links-list a {
+  color: {{ section.settings.view_all_color }};
+  text-decoration: none;
+  font-size: {{ section.settings.text_font_size }}px;
+}
+
+.account-links-list a:hover {
+  text-decoration: underline;
+}
+
 @media screen and (max-width: 749px) {
   #section-{{ section.id }} {
     margin-top: {{ section.settings.margin_top_mobile }}px;
