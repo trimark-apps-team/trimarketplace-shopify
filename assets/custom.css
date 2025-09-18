@@ -121,7 +121,7 @@ footer .svg-wrapper .icon path {
     border-bottom-right-radius: 8px;
     margin: 0 auto;
 }
-.facets-container .facets__heading, .facets-container .facets__summary-label, .facets-container .facets__summary span, #FacetFiltersForm .facets__heading--vertical .facets__heading {
+.facets-container .facets__heading, .facets-container .facets__summary-label,  .facets__summary span, #FacetFiltersForm .facets__heading--vertical .facets__heading {
   font-weight: bold;
 }
 .facets-vertical.page-width {
