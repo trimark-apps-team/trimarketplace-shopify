@@ -312,7 +312,9 @@ footer .svg-wrapper .icon path {
     background: #fff;
     padding: 20px;
 }
-
+.template-collection .facets-container {
+  z-index: 999;
+}
 .collection #product-grid {
   margin-top:0;
 }
