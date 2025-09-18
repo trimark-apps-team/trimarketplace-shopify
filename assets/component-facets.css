@@ -755,6 +755,9 @@ a.active-facets__button.focused .active-facets__button-inner {
 
 .mobile-facets__disclosure {
   display: flex;
+  padding: 2px 10px;
+  margin-bottom: 4px;
+  border: 1px solid #bbb;
 }
 
 .mobile-facets__wrapper {
