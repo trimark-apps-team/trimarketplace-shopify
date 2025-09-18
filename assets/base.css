@@ -2855,7 +2855,9 @@ details[open] > .header__menu-item .icon-caret {
 .header-active-effect {
   background-color:#f5f5f5;
 }
-
+span.header__active-menu-item {
+   text-decoration: underline;
+}
 .global-settings-popup,
 .header__submenu.global-settings-popup {
   border-radius: var(--popup-corner-radius);
