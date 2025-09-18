@@ -547,8 +547,8 @@
           }
         }
       },
-      "list_title": "Your orders",
-      "list_title_with_pending_orders": "Your Orders:"
+      "list_title": "My Orders",
+      "list_title_with_pending_orders": "My Orders:"
     },
     "B2B": {
       "draft_order_details": {
