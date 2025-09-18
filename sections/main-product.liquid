@@ -116,7 +116,7 @@
                   <span class="product-label out-of-stock-label">NOT AVAILABLE</span>
                   {% endif %}   
 
-                <p><strong>Item Number: <span class="trimark-red">{{ product.selected_or_first_available_variant.sku }}</span></strong></p>
+                <p>Item Number: <span class="trimark-red">{{ product.selected_or_first_available_variant.sku }}</span></p>
                 <div class="product__title" {{ block.shopify_attributes }}>
                   <h1>{{ product.title | escape }}</h1>
                   <a href="{{ product.url }}" class="product__title">
