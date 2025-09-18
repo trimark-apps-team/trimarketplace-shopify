@@ -1231,7 +1231,7 @@ input.mobile-facets__checkbox {
   }
 
   .facets-container-drawer .mobile-facets__wrapper {
-    margin-right: 2rem;
+    /* margin-right: 2rem; */
     flex-grow: 1; 
     display: flex;
     justify-content: flex-end;
