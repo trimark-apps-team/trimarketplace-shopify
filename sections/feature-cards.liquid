@@ -5,12 +5,14 @@
         {%- case block.type -%}
           {%- when 'feature' -%}
             <div class="feature-card">
-              {% if block.settings.icon != blank %}
-                <div class="feature-heading">
-                  <img src="{{ block.settings.icon | img_url: '64x64' }}" alt="" class="feature-icon">
-                  {{ block.settings.heading }}
-                </div>
-              {% endif %}
+             {% if block.settings.icon != blank or block.settings.heading != blank %}
+  <div class="feature-heading">
+    {% if block.settings.icon != blank %}
+      <img src="{{ block.settings.icon | img_url: '64x64' }}" alt="" class="feature-icon">
+    {% endif %}
+    {{ block.settings.heading }}
+  </div>
+{% endif %}
               <div class="feature-description" >
                 {{ block.settings.description }}
               </div>
