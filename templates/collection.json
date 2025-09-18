@@ -20,7 +20,7 @@
     "product-grid": {
       "type": "main-collection-product-grid",
       "custom_css": [
-        ".facets-wrapper {padding: 20px;}"
+        ".facets-wrapper {padding: 0 0 10px 0;}"
       ],
       "settings": {
         "products_per_page": 24,
@@ -37,7 +37,7 @@
         "filter_type": "drawer",
         "enable_sorting": true,
         "padding_top": 4,
-        "padding_bottom": 4
+        "padding_bottom": 0
       }
     }
   },
