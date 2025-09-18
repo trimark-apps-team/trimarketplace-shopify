@@ -42,21 +42,21 @@
                <p><b>{{ block.settings.heading-3 }}: </b><a href="mailto:{{ customer.current_company.metafields.custom.company_sales_contact_details.value.email }}">{{ customer.current_company.metafields.custom.company_sales_contact_details.value.email }}</a></p>
                <p><b>{{ block.settings.heading-4 }}: </b>{{ customer.current_company.metafields.custom.company_sales_contact_details.value.address }}</p>
             </div>
-            {%- when 'link_list' -%}
+           {%- when 'link_list' -%}
             <div class="feature-card account-links">
               {% if block.settings.heading != blank %}
                 <h3 class="account-links-heading">{{ block.settings.heading }}</h3>
               {% endif %}
               {% if block.settings.menu != blank %}
                 <ul class="account-links-list">
-                  {% for link in linklists[block.settings.menu].links %}
+                  {% for link in block.settings.menu.links %}
                     <li>
                       <a href="{{ link.url }}">{{ link.title }}</a>
                     </li>
                   {% endfor %}
                 </ul>
               {% endif %}
-            </div> 
+            </div>
         {%- endcase -%}
       {% endfor %}
     </div>
