@@ -167,7 +167,7 @@
         "feature_GqyJDz": {
           "type": "feature",
           "settings": {
-            "heading": "My Approvals",
+            "heading": "Approvals",
             "description": "Manage approval requests.",
             "link_label": "View All",
             "link_url": "https://shopify.com/75142004964/account/pages/e32ae15a-30ea-4dfe-a2f3-63cd5501531a"
@@ -176,7 +176,7 @@
         "feature_CXbtYY": {
           "type": "feature",
           "settings": {
-            "heading": "My Profile",
+            "heading": "Profile",
             "description": "Manage your profile details.",
             "link_label": "View All",
             "link_url": "https://shopify.com/75142004964/account/profile"
