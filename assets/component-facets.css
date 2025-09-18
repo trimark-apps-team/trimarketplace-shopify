@@ -772,6 +772,13 @@ a.active-facets__button.focused .active-facets__button-inner {
   text-decoration: none;
 }
 
+/* Hover over the whole label */
+.mobile-facets__label:hover .facet-checkbox__text-label {
+  color: blue;
+}
+
+
+
 .mobile-facets__wrapper {
   margin-left: 0;
   display: flex;
