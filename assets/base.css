@@ -2849,9 +2849,6 @@ details[open] > .header__menu-item .icon-caret {
 .header__menu-item:hover {
   background-color:#f5f5f5;
 }
-.header__menu-item:hover span {
-    text-decoration: none;
-}
 .header-active-effect {
   background-color:#f5f5f5;
 }
