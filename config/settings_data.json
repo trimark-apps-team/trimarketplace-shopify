@@ -326,7 +326,7 @@
         "settings": {
           "background": "#ffffff",
           "background_gradient": "",
-          "text": "#242833",
+          "text": "#000000",
           "button": "#a8243e",
           "button_label": "#ffffff",
           "secondary_button_label": "#a8243e",
