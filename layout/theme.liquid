@@ -550,7 +550,7 @@
       
       {% if customer.current_company.metafields.custom.company_logo != blank %}
         <div class='page-width'>
-        <img src="{{ customer.current_company.metafields.custom.company_logo | img_url: }}" width="150" height="auto" alt=""/>
+        <img src="{{ customer.current_company.metafields.custom.company_logo | image_url }}" width="150" height="auto" alt=""/>
       </div>
       {% endif %}
     
