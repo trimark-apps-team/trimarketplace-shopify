@@ -760,7 +760,7 @@ a.active-facets__button.focused .active-facets__button-inner {
   border: 2px solid #aaa;
 }
 
-.mobile-facets__disclosure .button-label:hover {
+.mobile-facets__disclosure.button-label:hover {
  background: #333;
  color: white;
 }
