@@ -2798,7 +2798,7 @@ details[open] > .header__submenu {
 .header__menu-item {
   padding: 1.2rem;
   text-decoration: none;
-  color: rgba(var(--color-foreground), 0.75);
+  color: rgba(var(--color-foreground));
   border-radius:5px;
 }
 
@@ -2847,15 +2847,13 @@ details[open] > .header__menu-item .icon-caret {
   background-color:#9431431a;
 }
 .header__menu-item:hover {
-  background-color:#9431431a;
-  color: #943143;
+  background-color:#f5f5f5;
 }
 .header__menu-item:hover span {
     text-decoration: none;
 }
 .header-active-effect {
-  color: #943143;
-  background-color:#9431431a;
+  background-color:#f5f5f5;
 }
 
 .global-settings-popup,
