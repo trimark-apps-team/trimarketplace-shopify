@@ -762,6 +762,7 @@ a.active-facets__button.focused .active-facets__button-inner {
 
 .mobile-facets__disclosure:hover {
   background: #333;
+  color: white;
 }
 
 .mobile-facets__wrapper {
