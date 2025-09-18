@@ -844,7 +844,7 @@ a.active-facets__button.focused .active-facets__button-inner {
 }
 
 .mobile-facets__open:hover {
-  color: rgb(var(--color-link));
+  color: white;
 }
 
 .mobile-facets__open:hover line,
@@ -858,7 +858,6 @@ a.active-facets__button.focused .active-facets__button-inner {
 
 .mobile-facets__open:hover .mobile-facets__open-label {
   /* text-decoration: underline; */
-  color: white;
   text-underline-offset: 0.3rem;
 }
 
