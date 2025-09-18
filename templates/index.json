@@ -185,7 +185,7 @@
         "feature_MinG96": {
           "type": "feature",
           "settings": {
-            "heading": "My Wishlist",
+            "heading": "Wishlist",
             "description": "View, Track, Return or buy products again.",
             "link_label": "View All",
             "link_url": "/apps/advanced-wishlist"
