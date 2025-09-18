@@ -761,7 +761,7 @@ a.active-facets__button.focused .active-facets__button-inner {
 }
 
 .mobile-facets__disclosure:hover, .mobile-facets__disclosure:active {
-  color: #fff;
+  /* color: #fff; */
   /* background: #333; */
   text-decoration: none;
 }
