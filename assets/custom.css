@@ -591,6 +591,10 @@ body .facets-container {
   padding: 0 5rem !important;
 }
 
+.header-wrapper {
+  background-color: white !important;
+}
+
 @media max-width(750px) {
   .hulk__wishlist-wrap .wrapper {
   padding: 0 1.5rem !important;
