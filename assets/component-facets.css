@@ -859,7 +859,6 @@ a.active-facets__button.focused .active-facets__button-inner {
 
 .mobile-facets__open:hover .mobile-facets__open-label {
   /* text-decoration: underline; */
-  color: #ddd;
   text-underline-offset: 0.3rem;
 }
 
