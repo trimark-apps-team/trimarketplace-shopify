@@ -128,7 +128,7 @@
           "type": "link_list",
           "settings": {
             "heading": "My Account Quick Links",
-            "menu": ""
+            "menu": "my-account-quicklinks"
           }
         }
       },
