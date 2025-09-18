@@ -124,21 +124,13 @@
             "heading-4": "Address"
           }
         },
-        "link_list_NVGqyC": {
-          "type": "link_list",
-          "disabled": true,
-          "settings": {
-            "heading": "My Account Quick Links",
-            "menu": "my-account-quicklinks"
-          }
-        },
-        "feature_f6k9n7": {
+        "feature_6kaUBq": {
           "type": "feature",
           "settings": {
             "heading": "My Saved Carts",
-            "description": "Manage your saved carts",
+            "description": "",
             "link_label": "View All",
-            "link_url": "shopify://pages/my-saved-carts"
+            "link_url": ""
           }
         }
       },
@@ -147,8 +139,7 @@
         "feature_6E3HtY",
         "feature_y6w6GE",
         "sales_contact_block_bPFnUe",
-        "link_list_NVGqyC",
-        "feature_f6k9n7"
+        "feature_6kaUBq"
       ],
       "name": "Feature Card Grid",
       "settings": {
