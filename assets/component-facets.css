@@ -760,25 +760,6 @@ a.active-facets__button.focused .active-facets__button-inner {
   border: 2px solid #aaa;
 }
 
-.mobile-facets__disclosure:hover, .mobile-facets__disclosure:active {
-  /* color: #fff; */
-  /* background: #333; */
-  text-decoration: none;
-}
-
-.mobile-facets__disclosure:hover a: active, .mobile-facets__disclosure:active a: {
-  color: #fff;
-  background: #333;
-  text-decoration: none;
-}
-
-/* Hover over the whole label */
-.mobile-facets__label:hover .facet-checkbox__text-label {
-  color: blue;
-}
-
-
-
 .mobile-facets__wrapper {
   margin-left: 0;
   display: flex;
