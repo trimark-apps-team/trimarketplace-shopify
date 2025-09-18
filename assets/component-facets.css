@@ -836,11 +836,11 @@ a.active-facets__button.focused .active-facets__button-inner {
 .mobile-facets__open {
   text-align: left;
   width: 100%;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  padding-top: 3px;
+  padding-bottom: 2px;
   display: flex;
   align-items: center;
-  color: rgba(var(--color-link), var(--alpha-link));
+  /* color: rgba(var(--color-link), var(--alpha-link)); */
 }
 
 .mobile-facets__open:hover {
