@@ -582,7 +582,6 @@ body .facets-container {
 }
 
 /* override hulk app heading style kk 9/15/25*/
-
 .hulk__wishlist-wrap .fancy_title p {
   font-weight: bold;
   font-size: 2.1rem;
@@ -598,6 +597,11 @@ body .facets-container {
   .hulk__wishlist-wrap .wrapper {
   padding: 0 1.5rem !important;
 }
+}
+
+/* override z-index for hulkapp heart icon kk 9/18/25*/
+.wishlist-btn[data-custom-wishlist-icon] {
+  z-index: 998 !important;
 }
 
 
