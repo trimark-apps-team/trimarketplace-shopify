@@ -1233,7 +1233,8 @@ input.mobile-facets__checkbox {
   }
 
   .facets-container-drawer .product-count {
-    margin: 0 0 0.5rem 3.5rem;
+    margin: 0 0 0.5rem 0;
+    order: -1;
   }
 
   .facets-container-drawer .facets-pill {
