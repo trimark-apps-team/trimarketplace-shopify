@@ -99,7 +99,7 @@
         "feature_6E3HtY": {
           "type": "feature",
           "settings": {
-            "heading": "My Catalog",
+            "heading": "Catalog",
             "description": "View, edit, and place orders from your Managed Order Guide.",
             "link_label": "View All",
             "link_url": "/collections/all"
@@ -109,7 +109,7 @@
           "type": "feature",
           "disabled": true,
           "settings": {
-            "heading": "My Wishlist",
+            "heading": "Wishlist",
             "description": "View, Track, Return or buy products again.",
             "link_label": "View All",
             "link_url": "/apps/advanced-wishlist"
