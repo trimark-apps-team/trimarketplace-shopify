@@ -60,6 +60,12 @@
     cursor: pointer;
     margin: 0 8px;
   }
+  .close-empty-cart {
+    min-width: 10px;
+    font-size: 20px;
+    padding: 5px;
+  }
+     
 
  
   #confirm-empty-cart {
