@@ -410,7 +410,9 @@ footer .svg-wrapper .icon path {
   display: none !important;
 } */
 
-
+.aasaved-cart-actions.aasaved-cart-actions--embed {
+  display: none !important;
+}
 
 .cart-item-wrapper, .cart-footer-wrapper {
   background: #fff;
