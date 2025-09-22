@@ -337,9 +337,9 @@
     <button type="submit" name="add" class="quick-add__submit button" {% if variant.available == false or quantity_rule_soldout == false %}disabled{% endif %}>              
       <span>
          {% if variant.available == false or quantity_rule_soldout %}
-        Add to cart 
-      {% else %}
         Sold out
+      {% else %}
+        Add to cart
     {% endif %}
         </span>
 <div class="loading__spinner hidden">
