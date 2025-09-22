@@ -334,9 +334,9 @@
   </td>
 
   <td class="variant-item__quantity">
-    <button type="submit" name="add" class="quick-add__submit button" {% if item.available == false %}disabled{% endif %}>              
+    <button type="submit" name="add" class="quick-add__submit button" {% if variant.available == false or quantity_rule_soldout == false %}disabled{% endif %}>              
       <span>
-         {% if item.available %}
+         {% if variant.available == false or quantity_rule_soldout %}
         Add to cart 
       {% else %}
         Sold out
