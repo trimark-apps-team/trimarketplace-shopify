@@ -61,7 +61,7 @@
     margin: 0 8px;
   }
 
-  #close-empty-cart {
+  #empty-cart-modal .modal-content .modal-close {
     min-width: 10px;
     font-size: 20px;
     padding: 5px;
