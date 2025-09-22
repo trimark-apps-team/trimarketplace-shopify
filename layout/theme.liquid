@@ -516,12 +516,12 @@
         } else {
           const message = result.message || "Something went wrong while creating your order.";
           document.querySelector('.spinner-wrapper').style.display = 'none';
-          showPopup("Order Creation Failed", message, true);
+          showPopup("Unable to process this order.", "Please contact your Sales Representative for more information.", "");
         }
       } catch (error) {
         console.error('Unexpected error:', error);
         document.querySelector('.spinner-wrapper').style.display = 'none';
-        showPopup("Unexpected Error", "❌ An unexpected error occurred. Please try again later.", true);
+        showPopup("Unable to process this order.", "Please contact your Sales Representative for more information.", "");
       }
     }
   });
