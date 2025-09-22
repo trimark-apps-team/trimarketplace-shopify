@@ -310,9 +310,10 @@ footer .svg-wrapper .icon path {
     padding: 20px;
 }
 
-.template-collection .facets-container {
+.template-collection .facets-container.facets-container-drawer:has(.menu-opening) {
   z-index: 999;
 }
+
 .collection #product-grid {
   margin-top:0;
 }
