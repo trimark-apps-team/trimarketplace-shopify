@@ -70,7 +70,7 @@
         </span>
       {% elsif inventory_variant.inventory_quantity <= stock_amt %}
         <span class="stock-level-message">
-          {% render 'icon-dot' with class: 'success', dot_pulsing: animate_pulsing_dot %}
+          {% render 'icon-dot' with class: 'warning', dot_pulsing: animate_pulsing_dot %}
           {% assign stock_count = '' %}
           {% if show_stock_count %}
             {% capture stock_count %}
