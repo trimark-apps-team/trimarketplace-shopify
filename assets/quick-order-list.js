@@ -572,7 +572,7 @@ document.querySelector("#cart-click").addEventListener("click", (e) => {
   .then(cart => {
     document.querySelector('.cart-count-bubble').innerText = cart.item_count;
     document.querySelector('.cart-items_count').innerText =
-      `${cart.items.length} Total Products, ${cart.item_count} Total Quantity`;
+      `Preview Cart (${cart.items.length} Total Products, ${cart.item_count} Total Quantity)`;
   });
 
         button.querySelector("span").innerText = "Added!";
