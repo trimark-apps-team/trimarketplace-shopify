@@ -482,6 +482,8 @@
           customAttributes: item.properties || {}
         }));
 
+        const cartTotal = cart.original_total_price;
+
         const response = await fetch('/apps/order', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -496,7 +498,8 @@
                 customerId,
                 customerName,
                 customerNote,
-                domain
+                domain,
+                cartTotal
             })
         });
 
