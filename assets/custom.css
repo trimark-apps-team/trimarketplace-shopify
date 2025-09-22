@@ -787,3 +787,27 @@ stock-level-indicator .icon-dot-outline {
 stock-level-indicator .icon-dot-outline .icon-dot {
     flex: 0 0 auto
 }
+
+button.button {
+  background: #a8243e;
+  border-color: #a8243e;
+  color: white;
+}
+
+button.button span {
+  color: white;
+}
+
+button.quick-add__submit::after, #cart-click::after {
+  display: none;
+}
+
+.flex {
+  display:flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.flex .quick-order_loader {
+  margin: 0
+}
