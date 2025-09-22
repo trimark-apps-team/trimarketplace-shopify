@@ -280,10 +280,10 @@
             {% # theme-check-disable %}
             {% assign cart_qty = cart | item_count_for_variant: variant.id %}
             {% # theme-check-enable %}
-            {% render 'quantity-input', variant: variant, min: 0 %}
+            {% render 'quantity-input', variant: variant, min: 1 %}
           {%- endif -%}
         </div>
-        {% if cart_qty > 0 %}
+        {% comment %} {% if cart_qty > 0 %}
           <div
             id="Remove-{{ variant.id }}"
             class="quick-order-list-remove-button"
@@ -299,7 +299,7 @@
               </span>
             </button>
           </div>
-        {% endif %}
+        {% endif %} {% endcomment %}
        <div class="quick-order_loader hidden"></div>
         <p class="quick-order_message_change hidden">Item quantity changed.</p>
         <p class="quick-order_message_remove hidden">Item removed.</p>
@@ -331,6 +331,21 @@
         </span>
       </div>
     </quantity-popover>
+  </td>
+
+  <td class="variant-item__quantity">
+    <button type="submit" name="add" class="quick-add__submit button" {% if item.available == false %}disabled{% endif %}>              
+      <span>
+         {% if item.available %}
+        Add to cart 
+      {% else %}
+        Sold out
+    {% endif %}
+        </span>
+<div class="loading__spinner hidden">
+  <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66"><circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle></svg>
+</div>
+</button>
   </td>
   {%- assign item_price = item.price | money -%}
   <td class="variant-item__price small-hide medium-hide">
