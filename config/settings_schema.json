@@ -8,6 +8,23 @@
     "theme_support_url": "https://support.shopify.com/"
   },
   {
+    "name": "Approval Order Settings (Popup)",
+    "settings": [
+      {
+        "type": "textarea",
+        "id": "error_text",
+        "label": "Error text",
+        "default": "Unable to process this order."
+      },
+      {
+        "type": "textarea",
+        "id": "error_message",
+        "label": "Error message",
+        "default": "Please contact your Sales Representative for more information."
+      }
+    ]
+  },
+  {
     "name": "t:settings_schema.logo.name",
     "settings": [
       {

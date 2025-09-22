@@ -516,12 +516,12 @@
         } else {
           const message = result.message || "Something went wrong while creating your order.";
           document.querySelector('.spinner-wrapper').style.display = 'none';
-          showPopup("Unable to process this order.", "Please contact your Sales Representative for more information.", "");
+          showPopup("{{ settings.error_text }}", "{{ settings.error_message }}", "");
         }
       } catch (error) {
         console.error('Unexpected error:', error);
         document.querySelector('.spinner-wrapper').style.display = 'none';
-        showPopup("Unable to process this order.", "Please contact your Sales Representative for more information.", "");
+        showPopup("{{ settings.error_text }}", "{{ settings.error_message }}", "");
       }
     }
   });
