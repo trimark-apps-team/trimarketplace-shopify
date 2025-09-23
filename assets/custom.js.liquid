@@ -222,7 +222,9 @@ if(document.querySelector("cart-drawer").classList.contains("is-empty")) {
 fetch('/cart.js')
   .then(res => res.json())
   .then(cart => {
-    document.querySelector('.cart-count-bubble').innerHTML = cart.item_count;
+    document.querySelectorAll('.cart-count-bubble span').forEach(el => {
+          el.innerHTML = cart.item_count;
+        });
   });
 });
 }
