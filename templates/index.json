@@ -70,7 +70,18 @@
     },
     "custom_message_slider_nFxNGh": {
       "type": "custom-message-slider",
-      "disabled": true,
+      "blocks": {
+        "slide_J36eHx": {
+          "type": "slide",
+          "settings": {
+            "title": "asdfasdfasd",
+            "content": "<p>asdfasdfasdfasdfasdfasdf</p>"
+          }
+        }
+      },
+      "block_order": [
+        "slide_J36eHx"
+      ],
       "name": "Message Slider",
       "settings": {
         "show_from_meta": true,
