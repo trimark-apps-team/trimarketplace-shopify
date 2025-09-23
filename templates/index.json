@@ -70,21 +70,9 @@
     },
     "custom_message_slider_nFxNGh": {
       "type": "custom-message-slider",
-      "blocks": {
-        "slide_iJLUkt": {
-          "type": "slide",
-          "settings": {
-            "title": "",
-            "content": ""
-          }
-        }
-      },
-      "block_order": [
-        "slide_iJLUkt"
-      ],
       "name": "Message Slider",
       "settings": {
-        "show_from_meta": true,
+        "show_from_meta": false,
         "header_color": "#b11830",
         "header_font_size": 32,
         "text_color": "#b11830",
