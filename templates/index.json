@@ -77,19 +77,10 @@
             "title": "",
             "content": ""
           }
-        },
-        "slide_J36eHx": {
-          "type": "slide",
-          "source": "{{ metaobjects.announcement_bar[\"coming-soon\"] }}",
-          "settings": {
-            "title": "{{ metaobjects.announcement_bar[\"coming-soon\"].name.value }}",
-            "content": "{{ metaobjects.announcement_bar[\"coming-soon\"].banner_content | metafield_tag }}"
-          }
         }
       },
       "block_order": [
-        "slide_Fktz4U",
-        "slide_J36eHx"
+        "slide_Fktz4U"
       ],
       "name": "Message Slider",
       "settings": {
