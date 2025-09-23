@@ -73,9 +73,10 @@
       "blocks": {
         "slide_J36eHx": {
           "type": "slide",
+          "source": "{{ metaobjects.announcement_bar[\"coming-soon\"] }}",
           "settings": {
-            "title": "asdfasdfasd",
-            "content": "<p>asdfasdfasdfasdfasdfasdf</p>"
+            "title": "{{ metaobjects.announcement_bar[\"coming-soon\"].name.value }}",
+            "content": "{{ metaobjects.announcement_bar[\"coming-soon\"].banner_content | metafield_tag }}"
           }
         }
       },
