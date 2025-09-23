@@ -191,6 +191,40 @@ document.addEventListener('DOMContentLoaded', () => {
   .then(cart => checkAndToggleCheckoutButtons(cart))
   .catch(err => console.error('Cart fetch failed:', err));
 });
+
+document.addEventListener("pc-cart:added", function (event) {
+  function refreshCart() {
+  const cartDrawer = document.getElementById('CartDrawer');
+
+  if (cartDrawer) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', window.location.href);
+    xhr.onload = () => {
+      if (xhr.status === 200) {
+        const parser = new DOMParser();
+        const responseDoc = parser.parseFromString(xhr.responseText, 'text/html');
+
+        if (cartDrawer) {
+          const newDrawer = responseDoc.querySelector('#CartDrawer');
+          if (newDrawer) cartDrawer.innerHTML = newDrawer.innerHTML;
+        }
+
+      }
+    };
+    xhr.send();
+  }
+}
+
+ refreshCart();
+if(document.querySelector("cart-drawer").classList.contains("is-empty")) {
+    document.querySelector("cart-drawer").classList.remove("is-empty");
+}
+fetch('/cart.js')
+  .then(res => res.json())
+  .then(cart => {
+    document.querySelector('.cart-count-bubble').innerText = cart.item_count;
+  });
+});
 }
 
 
