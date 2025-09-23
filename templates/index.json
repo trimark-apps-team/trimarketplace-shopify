@@ -71,13 +71,11 @@
     "custom_message_slider_nFxNGh": {
       "type": "custom-message-slider",
       "blocks": {
-        "slide_fHtVTM": {
+        "slide_9QwG9d": {
           "type": "slide",
-          "disabled": true,
-          "source": "{{ metaobjects.announcement_bar[\"rupali-shopping-test\"] }}",
           "settings": {
-            "title": "{{ metaobjects.announcement_bar[\"rupali-shopping-test\"].name.value }}",
-            "content": "{{ metaobjects.announcement_bar[\"rupali-shopping-test\"].banner_content | metafield_tag }}"
+            "title": "{{ metaobjects.announcement_bar[\"rupali-shopping-test\"].start_date | metafield_text }}",
+            "content": ""
           }
         },
         "slide_J36eHx": {
@@ -90,7 +88,7 @@
         }
       },
       "block_order": [
-        "slide_fHtVTM",
+        "slide_9QwG9d",
         "slide_J36eHx"
       ],
       "name": "Message Slider",
