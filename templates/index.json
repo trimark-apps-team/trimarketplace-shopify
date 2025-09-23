@@ -72,7 +72,7 @@
       "type": "custom-message-slider",
       "name": "Message Slider",
       "settings": {
-        "show_from_meta": true,
+        "show_from_meta": false,
         "header_color": "#b11830",
         "header_font_size": 18,
         "text_color": "#b11830",
