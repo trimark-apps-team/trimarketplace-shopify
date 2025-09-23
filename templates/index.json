@@ -71,7 +71,7 @@
     "custom_message_slider_nFxNGh": {
       "type": "custom-message-slider",
       "blocks": {
-        "slide_9QwG9d": {
+        "slide_Fktz4U": {
           "type": "slide",
           "settings": {
             "title": "",
@@ -88,7 +88,7 @@
         }
       },
       "block_order": [
-        "slide_9QwG9d",
+        "slide_Fktz4U",
         "slide_J36eHx"
       ],
       "name": "Message Slider",
