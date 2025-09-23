@@ -74,7 +74,7 @@
         "slide_9QwG9d": {
           "type": "slide",
           "settings": {
-            "title": "{{ metaobjects.announcement_bar[\"rupali-shopping-test\"].start_date | metafield_text }}",
+            "title": "",
             "content": ""
           }
         },
