@@ -270,6 +270,9 @@
                   {% assign eta_time = settings.non_stock_text %}
                 
                 {% else %}
+                  {% if product.metafields.custom['5_non-stock'] != blank %}
+                    <p>not blank</p>
+                  {% endif %}
                   {% assign eta_time = settings.in_stock_text  %}
                 {% endif %}
 
