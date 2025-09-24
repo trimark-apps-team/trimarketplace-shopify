@@ -149,7 +149,7 @@
       </div>
       <div class="card__content">
         <div class="card__information">
-          <p style="font-size: 12px; margin: 6px 0;">Item Number: <span class="trimark-red">{{ card_product.selected_or_first_available_variant.sku }}</span></p> 
+          <p style="font-size: 12px; margin: 6px 0;">Item#: <span class="trimark-red">{{ card_product.selected_or_first_available_variant.sku }}</span></p> 
           <h3
             class="card__heading{% if card_product.featured_media or settings.card_style == 'standard' %} h5{% endif %}"
             {% if card_product.featured_media or settings.card_style == 'card' %}
