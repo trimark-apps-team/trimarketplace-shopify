@@ -112,7 +112,7 @@
         {%- endif -%}
         <div class="card__content">
           <div class="card__information">
-             <p style="font-size:12px;"">Item Number: <span class="trimark-red">{{ product.selected_or_first_available_variant.sku }}</span></p> 
+             <p style="font-size:12px;">Item Number: <span class="trimark-red">{{ card_product.selected_or_first_available_variant.sku }}</span></p> 
             <h3
               class="card__heading"
               {% if card_product.featured_media == null and settings.card_style == 'standard' %}
