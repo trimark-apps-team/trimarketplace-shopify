@@ -268,12 +268,13 @@
                 {%- when 'shipping-time' -%}
                 {% if product.metafields.custom['5_non-stock'] == true %}
                   {% assign eta_time = settings.non_stock_text %}
-                  <p>{{settings.non_stock_text }}</p>
+                  
                 {% else %}
                   {% assign eta_time = settings.in_stock_text  %}
                 {% endif %}
 
                 <div class="eta-text eta-text-wrapper">
+                  <p>{{settings.non_stock_text }}</p>
                  <p> Shipping: <span class='trimark-red'>{{ eta_time }}</span></p> 
                 </div>
               
