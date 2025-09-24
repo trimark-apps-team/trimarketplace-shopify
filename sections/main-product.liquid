@@ -266,12 +266,11 @@
                 {%- endif -%}
 
                 {%- when 'shipping-time' -%}
-                {% assign stock_type = product.metafields.custom.none_stock %}
+                {% assign non_stock_type = product.metafields.custom['5_non-stock'] %}
 
-                {% if stock_type %}
-                  {% assign eta_time = settings.non_stock_text %}
-                  {% assign eta_color = settings.non_stock_text_color %}
-                  {% assign eta_font_size = settings.non_stock_text_font_size %}
+                {% if non_stock_type %}
+                  {% assign eta_time = '14-21 Days' %}
+                
                 {% else %}
                   {% assign eta_time = settings.in_stock_text  %}
                   {% assign eta_color = settings.in_stock_text_color %}
@@ -279,7 +278,7 @@
                 {% endif %}
 
                 <div class="eta-text eta-text-wrapper">
-                 <p>Expected Shipping: <span class='trimark-red'>{{ eta_time }}</span></p> 
+                 <p> Shipping: <span class='trimark-red'>{{ eta_time }}</span></p> 
                 </div>
               
            {%- when 'tier-pricing' -%}
