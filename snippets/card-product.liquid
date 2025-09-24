@@ -295,15 +295,13 @@
               {% endif %}
             {%- endif -%}
 
-               {% assign stock_type = card_product.metafields.custom.none_stock %}
+              
 
-                {% if stock_type %}
+                {% if product.metafields.custom['5_non_stock'] == true %}
                   {% assign eta_time = settings.non_stock_text %}
-                  {% assign eta_color = settings.non_stock_text_color %}
                   {% assign eta_font_size = settings.non_stock_text_font_size %}
                 {% else %}
                   {% assign eta_time = settings.in_stock_text  %}
-                  {% assign eta_color = settings.in_stock_text_color %}
                   {% assign eta_font_size = settings.in_stock_text_font_size %}
                 {% endif %}
                 <div class="eta-text eta-text-wrapper" style="font-size:{{ eta_font_size }}px;">
