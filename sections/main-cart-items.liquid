@@ -115,6 +115,13 @@
                         {% endif %}
                       </td>
 
+                      {% if product.metafields.custom['5_non_stock'] == true %}
+                        {% assign eta_time = settings.non_stock_text %}
+                        
+                      {% else %}
+                        {% assign eta_time = settings.in_stock_text  %}
+                      {% endif %}
+
                       <td class="cart-item__details">
                         {%- if settings.show_vendor -%}
                           <p class="caption-with-letter-spacing">{{ item.product.vendor }}</p>
@@ -201,6 +208,7 @@
                             </li>
                           {%- endfor -%}
                         </ul>
+                        <p>Expected Shipping: <span class='trimark-red'>{{ eta_time }}</span></p>
                       </td>
 
                       <td class="cart-item__totals right medium-hide large-up-hide">
