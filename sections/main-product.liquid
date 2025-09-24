@@ -266,9 +266,8 @@
                 {%- endif -%}
 
                 {%- when 'shipping-time' -%}
-
                 {% if product.metafields.custom['5_non-stock'] == true %}
-                  {% assign eta_time = '14-21 Days' %}
+                  {% assign eta_time = settings.non_stock_text %}
                 
                 {% else %}
                   {% assign eta_time = settings.in_stock_text  %}
