@@ -115,7 +115,7 @@
                         {% endif %}
                       </td>
 
-                      {% if product.metafields.custom['5_non_stock'] == true %}
+                      {% if item.product.metafields.custom['5_non_stock'] == true %}
                         {% assign eta_time = settings.non_stock_text %}
                         
                       {% else %}
