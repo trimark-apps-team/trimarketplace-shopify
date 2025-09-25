@@ -17,7 +17,15 @@
   class="variant-item{% unless show_image %} variant-item--no-media{% endunless %}{% if item.available and item.unit_price_measurement %} variant-item--unit-price{% endif %}"
   id="Variant-{{ variant.id }}"
   data-variant-id="{{ variant.id }}"
+  data-title="{{ data.title | escape }}"
+  data-price="{{ data.price | divided_by: 100.0 }}"
+  data-inventory="{{ data.selected_or_first_available_variant.inventory_quantity }}"
+  data-recent="{{ data.metafields.custom.purchased_date.value | default: '1970-01-01T00:00:00Z' }}"
+  data-type="{{ data.type }}"
+  data-collection="{% for collection in data.collections %}{{ collection.handle }}{% unless forloop.last %},{% endunless %}{% endfor %}"
+  data-sku="{% for variant in data.variants %}{{ variant.sku }} {% endfor %}"
 >
+ {% comment %} {% if item.metafields.custom.purchased_date.value %}<td class="variant-item__inner">Ordered at: {{ item.metafields.custom.purchased_date.value | date: '%B %d, %Y' }}</td>{% endif %} {% endcomment %}
   <td class="variant-item__inner{% unless sku and show_sku %} variant-item__inner--no-sku{% endunless %}">
     {%- if show_image -%}
       <div class="variant-item__media">
@@ -45,7 +53,10 @@
     <div class="small-hide medium-hide">
       <span class="variant-item__name h4 break"><a class="full-unstyled-link" href="{{ item.url }}">{{ item.title | escape }}</a></span>
       {%- if show_sku -%}
-        <span class="variant-item__sku break">{{ sku | escape }}</span>
+        <span class="variant-item__sku break">{{ sku | escape }}  {% if item.metafields.custom.purchased_date.value %} 
+         | Ordered at: {{ item.metafields.custom.purchased_date.value | date: "%m-%d-%Y" }}
+
+        {% endif %}</span>
       {%- endif -%}
     </div>
   </td>
@@ -54,8 +65,12 @@
     <div class="variant-item__info">
       <span class="variant-item__name h4 break"><a class="full-unstyled-link" href="{{ item.url }}">{{ item.title | escape }}</a></span>
       {%- if show_sku -%}
-        <span class="variant-item__sku break">{{ sku | escape }}</span>
+        <span class="variant-item__sku break">{{ sku | escape }} {% if item.metafields.custom.purchased_date.value %}
+         | Ordered at: {{ item.metafields.custom.purchased_date.value | date: "%m-%d-%Y" }}
+
+        {% endif %}</span>
       {%- endif -%}
+     
     </div>
 
     {%- assign item_price = item.price | money -%}
@@ -164,6 +179,21 @@
     {% # theme-check-disable %}
     <span class="price">{{ cart | line_items_for: item | sum: 'original_line_price' | money }}</span>
     {% # theme-check-enable %}
+  </td>
+
+  <td class="variant-item__quantity small-hide medium-hide">
+    <button class="quick-add__submit button" {% if variant.available == false or quantity_rule_soldout == false %}disabled{% endif %}>              
+      <span>
+         {% if variant.available == false or quantity_rule_soldout %}
+        Sold out
+      {% else %}
+        Add to cart
+    {% endif %}
+        </span>
+<div class="loading__spinner hidden">
+  <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66"><circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle></svg>
+</div>
+</button>
   </td>
 
   <td class="variant-item__quantity">
@@ -281,28 +311,22 @@
             {% assign cart_qty = cart | item_count_for_variant: variant.id %}
             {% # theme-check-enable %}
             {% render 'quantity-input', variant: variant, min: 1 %}
+            
           {%- endif -%}
+          <button class="quick-add__submit button large-up-hide" {% if variant.available == false or quantity_rule_soldout == false %}disabled{% endif %}>              
+      <span>
+         {% if variant.available == false or quantity_rule_soldout %}
+        Sold out
+      {% else %}
+        Add to cart
+    {% endif %}
+        </span>
+<div class="loading__spinner hidden">
+  <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66"><circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle></svg>
+</div>
+</button>
         </div>
-        {% comment %} {% if cart_qty > 0 %}
-          <div
-            id="Remove-{{ variant.id }}"
-            class="quick-order-list-remove-button"
-            data-index="{{ variant.id }}"
-          >
-            <button
-              class="button button--tertiary"
-              aria-label="{{ 'sections.cart.remove_title' | t: title: item.title }}"
-              data-target="remove-{{ variant.id }}"
-            >
-              <span class="svg-wrapper">
-                {{- 'icon-remove.svg' | inline_asset_content -}}
-              </span>
-            </button>
-          </div>
-        {% endif %} {% endcomment %}
-       <div class="quick-order_loader hidden"></div>
-        <p class="quick-order_message_change hidden">Item quantity changed.</p>
-        <p class="quick-order_message_remove hidden">Item removed.</p>
+
       </div>
       {%- if has_popover -%}
         <button
@@ -333,20 +357,7 @@
     </quantity-popover>
   </td>
 
-  <td class="variant-item__quantity">
-    <button type="submit" name="add" class="quick-add__submit button" {% if variant.available == false or quantity_rule_soldout == false %}disabled{% endif %}>              
-      <span>
-         {% if variant.available == false or quantity_rule_soldout %}
-        Sold out
-      {% else %}
-        Add to cart
-    {% endif %}
-        </span>
-<div class="loading__spinner hidden">
-  <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66"><circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle></svg>
-</div>
-</button>
-  </td>
+  
   {%- assign item_price = item.price | money -%}
   <td class="variant-item__price small-hide medium-hide">
     {%- if item.compare_at_price -%}
@@ -455,7 +466,7 @@
     {% # theme-check-enable %}
   </td>
 </tr>
-<tr class="small-hide medium-hide hidden desktop-row-error">
+{% comment %} <tr class="small-hide medium-hide hidden desktop-row-error">
   <td></td>
   <td>
     <div class="variant-item__error" id="Quick-order-list-item-error-desktop-{{ variant.id }}" role="alert">
@@ -486,4 +497,4 @@
       {%- endfor -%}
     </ul>
   </volume-pricing>
-{%- endif -%}
+{%- endif -%} {% endcomment %}

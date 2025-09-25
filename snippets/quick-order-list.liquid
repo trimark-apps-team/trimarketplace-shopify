@@ -1,11 +1,7 @@
 <div class="quick-order-controls page-width">
-  <form
-              action="{{ routes.cart_update_url }}"
-              class="quick-order-list__contents critical-hidden"
-              method="post"
-            >
-         <button id="cart-click" class="button"><span class="cart-items_count">Preview Cart ({{ cart.items.size }} Total Products, {{ cart.item_count }} Total Quantity)</span></button>
-  </form>
+  
+  <button id="cart-click" class="button"><span class="cart-items_count"> Cart ({{ cart.items.size }} Products, {{ cart.item_count }} Quantities)</span></button>
+  
   <div class="quick-order-controls__inner">
     <input
       type="text"
@@ -43,20 +39,13 @@
   </div>
 </div>
 
+
+
 <div class="quick-order_loader"></div>
-<div id="quick-order-products" class="hidden">
-  {% paginate collections["best-selling"].products by 1000 %}
-  {% assign collection_products = collections["best-selling"].products %}
-      {% for product in collection_products %}
-        {% assign best_selling_rank = forloop.index0 %}
-          <div class="quick-order-list-container"
-               data-title="{{ product.title | escape }}"
-               data-price="{{ product.price | divided_by: 100.0 }}"
-               data-inventory="{{ product.selected_or_first_available_variant.inventory_quantity }}"
-               data-bestselling="{{ best_selling_rank }}"
-               data-type="{{ product.type }}"
-               data-collection="{% for collection in product.collections %}{{ collection.handle }}{% unless forloop.last %},{% endunless %}{% endfor %}"
-               data-sku="{% for variant in product.variants %}{{ variant.sku }} {% endfor %}">
+
+
+        {% comment %} {% assign best_selling_rank = forloop.index0 %} {% endcomment %}
+          <div class="quick-order-list-container">
             <quick-order-list
               class="page-width"
               id="{{ section.id }}-{{ product.id }}"
@@ -64,11 +53,7 @@
               data-product-id="{{ product.id }}"
               data-url="{{ product.url }}"
             >
-            <form
-              action="{{ routes.cart_update_url }}"
-              class="quick-order-list__contents critical-hidden"
-              method="post"
-            >
+            
               <div class="quick-order-list__container" id="main-variant-items">
                 <table class="quick-order-list__table">
                   <caption class="visually-hidden">
@@ -77,32 +62,44 @@
                   <thead>
                     <tr>
                       <th class="caption-with-letter-spacing" scope="col">
-                        {% comment %} {%- if product.has_only_default_variant -%} {{ 'sections.quick_order_list.product' | t }} {%- else -%} {{ 'sections.quick_order_list.variant' | t }} {%- endif -%} {% endcomment %}
+                       {%- if product.has_only_default_variant -%} {{ 'sections.quick_order_list.product' | t }} {%- else -%} {{ 'sections.quick_order_list.variant' | t }} {%- endif -%}
                       </th>
                       <th class="large-up-hide right caption-with-letter-spacing" scope="col">
-                        {% comment %} {%- if product.has_only_default_variant -%} {{ 'sections.quick_order_list.product_total' | t }} {%- else -%} {{ 'sections.quick_order_list.variant_total' | t }} {%- endif -%} {% endcomment %}
+                       {%- if product.has_only_default_variant -%} {{ 'sections.quick_order_list.product_total' | t }} {%- else -%} {{ 'sections.quick_order_list.variant_total' | t }} {%- endif -%}
                       </th>
                       <th
                         class="quick-order-list__table-heading--wide small-hide medium-hide caption-with-letter-spacing"
                         scope="col"
                       >
-                        {% comment %} {{ 'products.product.quantity.label' | t }} {% endcomment %}
+                      Action
+                      </th>
+                      <th
+                        class="quick-order-list__table-heading--wide small-hide medium-hide caption-with-letter-spacing"
+                        scope="col"
+                        style="text-align: center; padding-left: 0;"
+                      >
+                      {{ 'products.product.quantity.label' | t }}
                       </th>
                       <th
                         class="quick-order-list__table-heading--wide small-hide medium-hide caption-with-letter-spacing"
                         scope="col"
                       >
-                        {% comment %} {{ 'sections.cart.headings.price' | t }} {% endcomment %}
+                       {{ 'sections.cart.headings.price' | t }}
                       </th>
                       <th class="small-hide medium-hide right caption-with-letter-spacing" scope="col">
-                        {% comment %} {%- if product.has_only_default_variant -%} {{ 'sections.quick_order_list.product_total' | t }} {%- else -%} {{ 'sections.quick_order_list.variant_total' | t }} {%- endif -%} {% endcomment %}
+                        {%- if product.has_only_default_variant -%} {{ 'sections.quick_order_list.product_total' | t }} {%- else -%} {{ 'sections.quick_order_list.variant_total' | t }} {%- endif -%}
                       </th>
                     </tr>
                   </thead>
-                  <tbody>
-                    {%- if product.has_only_default_variant -%}
+                  <tbody id="quick-order-products" class="hidden">
+                      {% paginate collections["best-selling"].products by 1000 %}
+  
+   {% assign recent_products = collections["best-selling"].products | sort: 'metafields.custom.purchased_date.value' | reverse %}
+      {% for product in recent_products %}
+                     {%- if product.has_only_default_variant -%}
                       {%- render 'quick-order-list-row',
                         item: product,
+                        data: product,
                         image: product.featured_media,
                         sku: product.selected_or_first_available_variant.sku,
                         variant: product.selected_or_first_available_variant,
@@ -110,10 +107,11 @@
                         show_sku: show_sku,
                         is_modal: is_modal
                       -%}
-                    {%- else -%}
+                        {%- else -%}
                       {%- for variant in product.variants -%}
                         {%- render 'quick-order-list-row',
                           item: variant,
+                          data: product,
                           image: variant.image,
                           sku: variant.sku,
                           variant: variant,
@@ -122,7 +120,10 @@
                           is_modal: is_modal
                         -%}
                       {%- endfor -%}
+
                     {%- endif -%}
+                    {% endfor %}
+   {% endpaginate %}
                   </tbody>
                 </table>
               </div>
@@ -141,16 +142,15 @@
               >
                 {{ 'accessibility.loading' | t }}
               </p>
-            </form>
+    
           </quick-order-list>
           <template id="QuickOrderListErrorTemplate-{{ product.id }}">
             <span class="svg-wrapper"> {{ 'icon-error.svg' | inline_asset_content }} </span>
             <span class="quick-order-list-error-message caption-large" role="alert"></span>
           </template>
           </div>
-      {% endfor %}
-   {% endpaginate %}
-</div>
+   
+
 
 <div id="quick-order-pagination" class="pagination-controls">
   <button id="prev-page" disabled>Prev</button>
@@ -238,7 +238,8 @@ document.addEventListener("click", e => {
         case 'za': return b.dataset.title.localeCompare(a.dataset.title);
         case 'plh': return parseFloat(a.dataset.price) - parseFloat(b.dataset.price);
         case 'phl': return parseFloat(b.dataset.price) - parseFloat(a.dataset.price);
-        case 'recent': return parseInt(a.dataset.bestselling) - parseInt(b.dataset.bestselling);
+        {% comment %} case 'recent': return parseInt(a.dataset.bestselling) - parseInt(b.dataset.bestselling); {% endcomment %}
+        case 'recent': return new Date(b.dataset.recent || 0) - new Date(a.dataset.recent || 0);
         case 'inv_low': return parseInt(a.dataset.inventory) - parseInt(b.dataset.inventory);
         case 'inv_high': return parseInt(b.dataset.inventory) - parseInt(a.dataset.inventory);
       }

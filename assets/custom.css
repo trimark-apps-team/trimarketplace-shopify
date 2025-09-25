@@ -809,3 +809,22 @@ button.quick-add__submit::after, #cart-click::after {
 .flex .quick-order_loader {
   margin: 0
 }
+
+.cart-items_count {
+  font-size: 13px;
+}
+
+.quick-order-list__container .variant-item {
+  gap: 0.5rem;
+}
+
+.quantity-popover-container {
+  gap: 5px;
+}
+
+#cart-click {
+  margin-bottom: 10px;
+}
+.quick-add__submit.button {
+  min-height: 38px;
+}
