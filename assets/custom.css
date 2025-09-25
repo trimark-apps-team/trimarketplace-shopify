@@ -827,6 +827,7 @@ button.quick-add__submit::after, #cart-click::after {
 }
 .quick-add__submit.button {
   min-height: 38px;
+  min-width: 152px;
 }
 
 .quick-add__submit.button .loading__spinner circle {
@@ -836,4 +837,5 @@ button.quick-add__submit::after, #cart-click::after {
 .quick-add__submit.button .loading__spinner {
   padding-top: 10px;
   right: 6px; 
+  left: 46%;
 }

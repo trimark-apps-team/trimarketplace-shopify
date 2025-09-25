@@ -55,6 +55,8 @@ document.addEventListener("click", async (e) => {
 
   button.querySelector(".loading__spinner").classList.remove("hidden");
 
+  button.querySelector("span").innerText = "";
+
   button.disabled = true;
 
   try {
