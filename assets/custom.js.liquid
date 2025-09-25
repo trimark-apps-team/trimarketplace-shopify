@@ -229,5 +229,10 @@ fetch('/cart.js')
 });
 }
 
+subscribe(PUB_SUB_EVENTS.variantChange, async function (e) {
+  if(document.querySelector(".product__info-container p .trimark-red")) {
+  document.querySelector(".product__info-container p .trimark-red").innerText = e.data.variant.sku;
+  }
+})
 
 
