@@ -2855,7 +2855,7 @@ function enablePriceEdit() {
   inputEl.addEventListener('input', function () {
     let enteredPrice = parseFloat(inputEl.value);
 
-    if (isNaN(enteredPrice) || enteredPrice < 80) {
+    if (isNaN(enteredPrice) || enteredPrice < inputEl.dataset.floor) {
       errorEl.style.display = "inline";
       return;
     }
@@ -2870,7 +2870,7 @@ function enablePriceEdit() {
   inputEl.addEventListener('blur', function () {
     let enteredPrice = parseFloat(inputEl.value);
 
-    if (isNaN(enteredPrice) || enteredPrice < 80) {
+    if (isNaN(enteredPrice) || enteredPrice < inputEl.dataset.floor) {
       inputEl.value = inputEl.dataset.original;
       textEl.textContent = document.body.dataset.symbol + parseFloat(inputEl.dataset.original).toFixed(2);
     }

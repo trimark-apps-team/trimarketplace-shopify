@@ -97,7 +97,7 @@
 
                 <tbody>
                   {%- for item in cart.items -%}
-                    <tr class="cart-item" id="CartItem-{{ item.index | plus: 1 }}">
+                    <tr class="cart-item" id="CartItem-{{ item.index | plus: 1 }}" data-floor="{{ item.product.metafields.custom["7_sip_tier_f"] | split: '-' | first }}">
                       <td class="cart-item__media">
                         {% if item.image %}
                           {% comment %} Leave empty space due to a:empty CSS display: none rule {% endcomment %}
@@ -598,6 +598,8 @@ document.addEventListener("DOMContentLoaded", () => {
     input.style.display = "inline-block";
     input.focus();
 
+    console.log(input.closest("tr.cart-item").dataset.floor);
+
     let errorSpan = document.querySelector(`.cart-tier-price-error[data-line="${line}"]`);
     if (!errorSpan) {
       errorSpan = document.createElement("span");
@@ -611,8 +613,8 @@ document.addEventListener("DOMContentLoaded", () => {
       input.removeEventListener("blur", handleBlur);
 
       let newPrice = parseFloat(input.value);
-      if (isNaN(newPrice) || newPrice < 80) {
-        errorSpan.textContent = "Enter a price above $80";
+      if (isNaN(newPrice) || newPrice < input.closest("tr.cart-item").dataset.floor) {
+        errorSpan.textContent = `Enter a price above $${input.closest("tr.cart-item").dataset.floor}`;
         input.value = original;
       } else {
         errorSpan.textContent = "";

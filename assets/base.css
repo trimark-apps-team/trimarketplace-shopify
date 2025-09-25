@@ -3857,7 +3857,7 @@ details-disclosure > details {
 
 @media screen and (min-width: 750px) {
   .template-cart .cart-tier-price-error {
-    position: fixed;
+    position: absolute;
   }
 }
 

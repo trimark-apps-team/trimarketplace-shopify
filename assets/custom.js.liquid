@@ -29,8 +29,8 @@ document.addEventListener("click", function (e) {
       input.removeEventListener("blur", handleBlur);
 
       let newPrice = parseFloat(input.value);
-      if (isNaN(newPrice) || newPrice < 80) {
-        errorSpan.textContent = "Enter a price above $80";
+      if (isNaN(newPrice) || newPrice < input.closest("tr.cart-item").dataset.floor) {
+        errorSpan.textContent = `Enter a price above $${input.closest("tr.cart-item").dataset.floor}`;
         input.value = original;
         input.style.display = "none";
         text.style.display = "inline";
