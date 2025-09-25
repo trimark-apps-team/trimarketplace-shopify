@@ -51,7 +51,11 @@ document.addEventListener("click", async (e) => {
   const qtyInput = row.querySelector(".quantity__input");
   const quantity = qtyInput ? parseInt(qtyInput.value) || 1 : 1;
 
-  button.classList.add("loading");
+  button.classList.add("load-data");
+
+  button.querySelector(".loading__spinner").classList.remove("hidden");
+
+  button.disabled = true;
 
   try {
     const res = await fetch("/cart/add.js", {
@@ -91,9 +95,14 @@ document.addEventListener("click", async (e) => {
         }
       });
 
+
+
     const buttonText = button.querySelector("span");
     if (buttonText) {
       buttonText.innerText = "Added!";
+              button.querySelector(".loading__spinner").classList.add("hidden");
+
+        button.disabled = false;
       setTimeout(() => {
         buttonText.innerText = "Add to cart";
       }, 2000);
@@ -103,7 +112,7 @@ document.addEventListener("click", async (e) => {
     console.error("Error adding to cart:", error);
     alert("Something went wrong. Please try again.");
   } finally {
-    button.classList.remove("loading");
+    button.classList.remove("load-data");
   }
 });
 

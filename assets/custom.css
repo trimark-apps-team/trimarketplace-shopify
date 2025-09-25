@@ -828,3 +828,12 @@ button.quick-add__submit::after, #cart-click::after {
 .quick-add__submit.button {
   min-height: 38px;
 }
+
+.quick-add__submit.button .loading__spinner circle {
+  stroke: white;
+}
+
+.quick-add__submit.button .loading__spinner {
+  padding-top: 10px;
+  right: 6px; 
+}

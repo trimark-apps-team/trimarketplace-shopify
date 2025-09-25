@@ -59,7 +59,7 @@
                   <caption class="visually-hidden">
                     {{ 'sections.cart.title' | t }}
                   </caption>
-                  <thead>
+                  <thead class="hidden">
                     <tr>
                       <th class="caption-with-letter-spacing" scope="col">
                        {%- if product.has_only_default_variant -%} {{ 'sections.quick_order_list.product' | t }} {%- else -%} {{ 'sections.quick_order_list.variant' | t }} {%- endif -%}
@@ -269,6 +269,7 @@ document.addEventListener("click", e => {
     nextBtn.disabled = currentPage === Math.ceil(filteredItems.length / ITEMS_PER_PAGE);
 
     document.querySelector("#quick-order-products").classList.remove("hidden");
+    document.querySelector(".quick-order-list__table thead").classList.remove("hidden");
     document.querySelector(".quick-order_loader").classList.add("hidden");
   }
 
