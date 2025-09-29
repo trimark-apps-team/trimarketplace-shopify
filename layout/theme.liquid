@@ -334,7 +334,7 @@
   </div>
 </div>
 
-{% if customer and customer.current_company and customer.current_company.metafields.custom.collections %}
+{% comment %} {% if customer and customer.current_company and customer.current_company.metafields.custom.collections %}
   {% assign company_collections = customer.current_company.metafields.custom.collections %}
 
   <ul>
@@ -353,7 +353,7 @@
       </li>
     {% endfor %}
   </ul>
-{% endif %}
+{% endif %} {% endcomment %}
 
 <script>
   const modal = document.querySelector('.modal');
