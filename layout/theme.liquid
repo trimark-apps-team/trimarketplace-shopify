@@ -337,7 +337,7 @@
 {% if customer %}
   <script>
     try {
-      console.log("Full customer object:", {{ customer | json }});
+      console.log("Full customer object:", {{ customer }});
     } catch (e) {
       console.error("Error logging customer object:", e);
     }
