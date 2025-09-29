@@ -62,7 +62,7 @@
                   <thead class="hidden">
                     <tr>
                       <th class="caption-with-letter-spacing" scope="col">
-                       {%- if product.has_only_default_variant -%} {{ 'sections.quick_order_list.product' | t }} {%- else -%} {{ 'sections.quick_order_list.variant' | t }} {%- endif -%}
+                       Item
                       </th>
                       <th class="large-up-hide right caption-with-letter-spacing" scope="col">
                        {%- if product.has_only_default_variant -%} {{ 'sections.quick_order_list.product_total' | t }} {%- else -%} {{ 'sections.quick_order_list.variant_total' | t }} {%- endif -%}
@@ -87,7 +87,7 @@
                        {{ 'sections.cart.headings.price' | t }}
                       </th>
                       <th class="small-hide medium-hide right caption-with-letter-spacing" scope="col">
-                        {%- if product.has_only_default_variant -%} {{ 'sections.quick_order_list.product_total' | t }} {%- else -%} {{ 'sections.quick_order_list.variant_total' | t }} {%- endif -%}
+                        Item Total
                       </th>
                     </tr>
                   </thead>
