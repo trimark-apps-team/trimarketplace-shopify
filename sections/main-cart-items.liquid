@@ -115,12 +115,12 @@
                         {% endif %}
                       </td>
 
-                      {% if item.product.metafields.custom['5_non_stock'] == true %}
+                      {% comment %} {% if item.product.metafields.custom['5_non_stock'] == true %}
                         {% assign eta_time = settings.non_stock_text %}
                         
                       {% else %}
                         {% assign eta_time = settings.in_stock_text  %}
-                      {% endif %}
+                      {% endif %} {% endcomment %}
 
                       <td class="cart-item__details">
                         {%- if settings.show_vendor -%}
@@ -208,7 +208,7 @@
                             </li>
                           {%- endfor -%}
                         </ul>
-                        <p class="product-option">Expected Shipping: <span class='trimark-red'>{{ eta_time }}</span></p>
+                        {% comment %} <p class="product-option">Expected Shipping: <span class='trimark-red'>{{ eta_time }}</span></p> {% endcomment %}
                       </td>
 
                       <td class="cart-item__totals right medium-hide large-up-hide">

@@ -308,6 +308,9 @@
                 <div class="eta-text eta-text-wrapper" style="font-size:{{ eta_font_size }}px;">
                   Expected Shipping: <span class="trimark-red">{{ eta_time }}</span>
                 </div>
+
+
+
   
           </div>
         </div>
@@ -371,6 +374,8 @@
                   {% if card_product.metafields.custom.requires_approval == true %}
                     <input type="hidden" name="properties[_approval]" value="true">
                   {% endif %}
+
+                     <input type="hidden" name="properties[Expected Shipping]" value="{{ eta_time }}">
                   <input
                     type="hidden"
                     name="id"
