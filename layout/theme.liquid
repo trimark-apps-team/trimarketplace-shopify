@@ -334,27 +334,6 @@
   </div>
 </div>
 
-{% comment %} {% if customer and customer.current_company and customer.current_company.metafields.custom.collections %}
-  {% assign company_collections = customer.current_company.metafields.custom.collections %}
-
-  <ul>
-    {% for collection in company_collections.value %}
-      <li class="megamenu-column">
-        <h4>{{ collection.title }}</h4>
-        <ul>
-          {% for product in collection.products limit:5 %}
-            <li>
-              <a href="{{ product.url }}">
-                {{ product.title }}
-              </a>
-            </li>
-          {% endfor %}
-        </ul>
-      </li>
-    {% endfor %}
-  </ul>
-{% endif %} {% endcomment %}
-
 <script>
   const modal = document.querySelector('.modal');
   const overlay = document.querySelector('.overlay');
