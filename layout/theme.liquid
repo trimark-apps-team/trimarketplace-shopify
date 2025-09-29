@@ -314,6 +314,7 @@
 
 
 <div class="overlay order-modal_overlay"></div>
+
 <div class="modal">
   <div class="spinner-wrapper">
     <div class="spinner"></div>
@@ -333,6 +334,15 @@
   </div>
 </div>
 
+{% if customer %}
+  <script>
+    try {
+      console.log("Full customer object:", {{ customer | json }});
+    } catch (e) {
+      console.error("Error logging customer object:", e);
+    }
+  </script>
+{% endif %}
 
 <script>
   const modal = document.querySelector('.modal');
