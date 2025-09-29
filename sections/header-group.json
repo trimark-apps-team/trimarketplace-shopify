@@ -17,7 +17,7 @@
         "logo_position": "top-left",
         "mobile_logo_position": "center",
         "menu": "customer-account-main-menu",
-        "menu_type_desktop": "dropdown",
+        "menu_type_desktop": "mega",
         "sticky_header_type": "none",
         "show_line_separator": false,
         "color_scheme": "scheme-e3871aa7-89e0-4115-b62c-569bf79281f0",
