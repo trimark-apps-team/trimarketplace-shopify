@@ -314,7 +314,6 @@
 
 
 <div class="overlay order-modal_overlay"></div>
-
 <div class="modal">
   <div class="spinner-wrapper">
     <div class="spinner"></div>
@@ -333,6 +332,7 @@
     <button id="cancel-empty-cart">No</button>
   </div>
 </div>
+
 
 <script>
   const modal = document.querySelector('.modal');
@@ -474,6 +474,7 @@
 
       let customerNote = document.querySelector("#CartDrawer-Note")?.value || document.querySelector("#Cart-note")?.value || "";
 
+      
       try {
         const cartRes = await fetch('/cart.js');
         const cart = await cartRes.json();
@@ -566,6 +567,13 @@
         <img src="{{ customer.current_company.metafields.custom.company_logo | image_url }}" width="150" height="auto" alt=""/>
       </div>
       {% endif %}
+
+      {% if customer.displayName != blank %}
+         <div class='page-width'>
+          <h2 class="trimark-red">Welcome, {{customer.displayName }}</h2>
+          
+      </div>
+      {%  endif %}
     
       
       {{ content_for_layout }}
