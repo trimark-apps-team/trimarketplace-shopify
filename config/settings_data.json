@@ -156,36 +156,10 @@
     },
     "content_for_index": [],
     "blocks": {
-      "406024653658000078": {
-        "type": "shopify://apps/pluralcart/blocks/add-product-embed/6d5574dc-9fb8-484c-96e4-d6123e2934d8",
+      "1744347199190486471": {
+        "type": "shopify://apps/advanced-wishlist/blocks/app/330d9272-08ea-4193-b3e0-475a69fa65fa",
         "disabled": false,
-        "settings": {
-          "use_default_carts": false,
-          "embed_button": true,
-          "customer_tags": "",
-          "button_class": "aasaved-cart-trigger",
-          "button_color": "",
-          "button_text_color": "",
-          "button_full_width": true,
-          "button_vertical_padding": 10,
-          "button_horizontal_padding": 10,
-          "button_border_radius": 0,
-          "button_icon": true,
-          "button_icon_html": "<svg width=\"24\" height=\"24\" viewbox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M23 17V22.5C23 22.7761 22.7761 23 22.5 23H1.5C1.22386 23 1 22.7761 1 22.5V17\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"></path><path d=\"M12 1V16M12 16L6 10M12 16L18 10\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>",
-          "show_id": true,
-          "trigger_button_text": "Save Product",
-          "modal_title_text": "Save Product",
-          "create_new_section_text": "Create new",
-          "create_new_placeholder_text": "My new collection",
-          "existing_section_text": "Save to existing",
-          "create_new_text": "Save",
-          "view_all_text": "View all",
-          "load_more_text": "Load More",
-          "success_text": "Item saved to",
-          "error_text": "An error occurred",
-          "login_text": "Log in to save",
-          "login_create_text": "Log in to create a new collection"
-        }
+        "settings": {}
       },
       "5073133894706448843": {
         "type": "shopify://apps/pluralcart/blocks/save-cart-embed/6d5574dc-9fb8-484c-96e4-d6123e2934d8",
@@ -218,11 +192,6 @@
           "login_create_text": "Log in to create a new collection"
         }
       },
-      "11391643856454973168": {
-        "type": "shopify://apps/pluralcart/blocks/tools/6d5574dc-9fb8-484c-96e4-d6123e2934d8",
-        "disabled": false,
-        "settings": {}
-      },
       "14832512241302024094": {
         "type": "shopify://apps/pluralcart/blocks/list-carts/6d5574dc-9fb8-484c-96e4-d6123e2934d8",
         "disabled": false,
@@ -238,10 +207,41 @@
           "table_head_count_text": "Item Count"
         }
       },
-      "1744347199190486471": {
-        "type": "shopify://apps/advanced-wishlist/blocks/app/330d9272-08ea-4193-b3e0-475a69fa65fa",
+      "11391643856454973168": {
+        "type": "shopify://apps/pluralcart/blocks/tools/6d5574dc-9fb8-484c-96e4-d6123e2934d8",
         "disabled": false,
         "settings": {}
+      },
+      "406024653658000078": {
+        "type": "shopify://apps/pluralcart/blocks/add-product-embed/6d5574dc-9fb8-484c-96e4-d6123e2934d8",
+        "disabled": false,
+        "settings": {
+          "use_default_carts": false,
+          "embed_button": true,
+          "customer_tags": "",
+          "button_class": "aasaved-cart-trigger",
+          "button_color": "",
+          "button_text_color": "",
+          "button_full_width": true,
+          "button_vertical_padding": 10,
+          "button_horizontal_padding": 10,
+          "button_border_radius": 0,
+          "button_icon": true,
+          "button_icon_html": "<svg width=\"24\" height=\"24\" viewbox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M23 17V22.5C23 22.7761 22.7761 23 22.5 23H1.5C1.22386 23 1 22.7761 1 22.5V17\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"></path><path d=\"M12 1V16M12 16L6 10M12 16L18 10\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>",
+          "show_id": true,
+          "trigger_button_text": "Save Product",
+          "modal_title_text": "Save Product",
+          "create_new_section_text": "Create new",
+          "create_new_placeholder_text": "My new collection",
+          "existing_section_text": "Save to existing",
+          "create_new_text": "Save",
+          "view_all_text": "View all",
+          "load_more_text": "Load More",
+          "success_text": "Item saved to",
+          "error_text": "An error occurred",
+          "login_text": "Log in to save",
+          "login_create_text": "Log in to create a new collection"
+        }
       },
       "384495262013941155": {
         "type": "shopify://apps/advanced-wishlist/blocks/collection-btn/330d9272-08ea-4193-b3e0-475a69fa65fa",
@@ -253,15 +253,15 @@
           "collection_icon_background_type": "icon_no_background",
           "collection_icon_size": 16,
           "collection_icon_background_color": "#ffffff",
-          "collection_icon_fill_color": "#a8243e",
-          "collection_icon_border_color": "#a8243e",
+          "collection_icon_fill_color": "#5c6ac4",
+          "collection_icon_border_color": "#5c6ac4",
           "collection_icon_hover_color": "#f5f5f5",
-          "collection_selected_icon_fill_color": "#a8243e",
-          "collection_selected_icon_border_color": "#a8243e",
-          "custom_wishlist_icon": true,
+          "collection_selected_icon_fill_color": "#5c6ac4",
+          "collection_selected_icon_border_color": "#5c6ac4",
+          "custom_wishlist_icon": false,
           "custom_wishlist_icon_right": "true",
           "collection_count_layout": "top_count",
-          "collection_count_background_color": "#a8243e",
+          "collection_count_background_color": "#5c6ac4",
           "collection_count_color": "#ffffff"
         }
       }
