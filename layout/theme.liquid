@@ -568,7 +568,7 @@
       </div>
       {% endif %}
 
-      {% if request.page_type == 'index' %}
+      {% if template == 'index' %}
       {% if customer.displayName != blank %}
          <div class='page-width'>
           <h2 class="trimark-red">Welcome, {{customer.displayName }}</h2>
