@@ -569,6 +569,7 @@
       {% endif %}
 
       {% if template == 'index' %}
+        {{customer.email }}
         {% if customer.name != blank %}
          <div class='page-width'>
           <h2 class="trimark-red">Welcome, {{customer.name }}</h2>
