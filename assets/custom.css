@@ -839,3 +839,8 @@ button.quick-add__submit::after, #cart-click::after {
   right: 6px; 
   left: 46%;
 }
+
+
+.welcome-tagline h2 {
+  margin: 5px 0;
+}
