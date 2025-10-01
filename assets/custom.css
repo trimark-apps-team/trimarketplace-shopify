@@ -845,7 +845,7 @@ button.quick-add__submit::after, #cart-click::after {
 }
 .welcome-tagline .icon-feature-grid .feature-card:hover{
   transform: none;
-  box-shadow: auto;
+  box-shadow: 0 4px 12px #00000014;
 
 }
 .welcome-tagline h2 {
