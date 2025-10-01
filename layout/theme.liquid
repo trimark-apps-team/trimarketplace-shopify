@@ -571,7 +571,7 @@
       {% if template == 'index' %}
         {% if customer.name != blank %}
          <div class='page-width'>
-          <h2 class="trimark-red">Welcome, {{customer.displayName }}</h2>
+          <h2 class="trimark-red">Welcome, {{customer.name }}</h2>
           {% if customer.emailAddress != blank %}
             <p>Email Address: {{ customer.emailAddress }}</p>
           {% endif %}
