@@ -840,7 +840,9 @@ button.quick-add__submit::after, #cart-click::after {
   left: 46%;
 }
 
-
+.welcome-tagline {
+  margin-bottom: 15px;
+}
 .welcome-tagline h2 {
   margin: 5px 0;
 }
