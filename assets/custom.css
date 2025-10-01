@@ -848,8 +848,10 @@ button.quick-add__submit::after, #cart-click::after {
   color: #b11830;
 }
 
-.welcome-tagline p span {
+.welcome-tagline p {
   margin: 3px 0;
-  
+
+}
+.welcome-tagline p span {
   color: #b11830;
 }
