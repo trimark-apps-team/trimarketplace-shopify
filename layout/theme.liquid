@@ -569,6 +569,7 @@
       {% endif %}
 
       {% if template == 'index' %}
+        {{ customer | json }}
       {% if customer.emailAddress != blank %}
          <div class='page-width'>
           <h2 class="trimark-red">Welcome, {{customer.displayName }}</h2>
