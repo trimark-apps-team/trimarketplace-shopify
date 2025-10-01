@@ -569,7 +569,7 @@
       {% endif %}
 
       {% if template == 'index' %}
-      {% if customer.displayName != blank %}
+      
          <div class='page-width'>
           <h2 class="trimark-red">Welcome, {{customer.displayName }}</h2>
           {% if customer.emailAddress != blank %}
@@ -579,7 +579,7 @@
             <p>Company: {{ customer.current_company.name }}</p>
           {% endif %}
         </div>
-      {%  endif %}
+      
     {% endif %}
     
       
