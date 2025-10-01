@@ -573,10 +573,10 @@
          <div class='page-width welcome-tagline'>
           <h2 class="trimark-red">Welcome, {{customer.name }}</h2>
           {% if customer.email != blank %}
-            <p><span class="trimark-red">Email Address:</span> {{ customer.email }}</p>
+            <p><span>Email Address:</span> {{ customer.email }}</p>
           {% endif %}
           {% if customer.current_company.name != blank %}
-            <p><span class="trimark-red">Company:</span> {{ customer.current_company.name }}</p>
+            <p><span>Company:</span> {{ customer.current_company.name }}</p>
           {% endif %}
         </div>
       {%  endif %}
