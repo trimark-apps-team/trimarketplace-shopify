@@ -19,15 +19,20 @@
     }
   }
 {%- endstyle -%}
- {% if customer and customer.metafields.custom.buyer_role.value != blank %}
-{% render 'quick-order-list',
-  product: product,
-  show_image: section.settings.show_image,
-  show_sku: section.settings.show_sku
-%}
+
+{% if customer %}
+{% assign sales_rep = customer.metafields.custom.buyer_role.value | default: blank %}
+{% endif %}
+{% if shop.metafields.custom.allow_sales_order or sales_rep != blank %}
+  {% render 'quick-order-list',
+    product: product,
+    show_image: section.settings.show_image,
+    show_sku: section.settings.show_sku
+  %}
 {% else %}
   <h3 class="page-width center page-margin">You don't have permission to view this page.</h3>
 {% endif %}
+
 {% schema %}
 {
   "name": "t:sections.quick-order-list.name",
