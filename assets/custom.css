@@ -845,8 +845,10 @@ button.quick-add__submit::after, #cart-click::after {
 }
 .welcome-tagline h2 {
   margin: 5px 0;
+  color: #b11830;
 }
 
 .welcome-tagline p {
   margin: 3px 0;
+  color: #b11830;
 }
