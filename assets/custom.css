@@ -409,6 +409,9 @@ footer .svg-wrapper .icon path {
 .aasaved-cart-actions--embed {
   display: none !important;
 }
+.product-form__buttons .aasaved-cart-wrapper {
+  display: none;
+}
 
 .cart-item-wrapper, .cart-footer-wrapper {
   background: #fff;
@@ -845,7 +848,7 @@ button.quick-add__submit::after, #cart-click::after {
 }
 .welcome-tagline .icon-feature-grid .feature-card:hover{
   transform: none;
-  box-shadow: 0 4px 12px #00000014;
+  box-shadow: auto;
 
 }
 .welcome-tagline h2 {
