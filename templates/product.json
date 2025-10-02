@@ -191,10 +191,52 @@
         "padding_top": 8,
         "padding_bottom": 28
       }
+    },
+    "1759428583c6c5e7bc": {
+      "type": "apps",
+      "blocks": {
+        "pluralcart_add_product_YiVGkR": {
+          "type": "shopify://apps/pluralcart/blocks/add-product/6d5574dc-9fb8-484c-96e4-d6123e2934d8",
+          "settings": {
+            "use_default_carts": false,
+            "form_class": "",
+            "customer_tags": "",
+            "button_class": "aasaved-cart-trigger",
+            "button_color": "",
+            "button_text_color": "",
+            "button_full_width": true,
+            "button_vertical_padding": 10,
+            "button_horizontal_padding": 10,
+            "button_border_radius": 0,
+            "show_id": true,
+            "button_icon": true,
+            "button_icon_html": "<svg width=\"24\" height=\"24\" viewbox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M23 17V22.5C23 22.7761 22.7761 23 22.5 23H1.5C1.22386 23 1 22.7761 1 22.5V17\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"></path><path d=\"M12 1V16M12 16L6 10M12 16L18 10\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>",
+            "trigger_button_text": "Save to Cart list",
+            "modal_title_text": "Save to Cart list",
+            "create_new_section_text": "Create new",
+            "create_new_placeholder_text": "My new collection",
+            "existing_section_text": "Save to existing",
+            "create_new_text": "Save",
+            "view_all_text": "View all",
+            "load_more_text": "Load More",
+            "success_text": "Item saved to",
+            "error_text": "An error occurred",
+            "login_text": "Log in to save",
+            "login_create_text": "Log in to create a new collection"
+          }
+        }
+      },
+      "block_order": [
+        "pluralcart_add_product_YiVGkR"
+      ],
+      "settings": {
+        "include_margins": true
+      }
     }
   },
   "order": [
     "main",
-    "related-products"
+    "related-products",
+    "1759428583c6c5e7bc"
   ]
 }
