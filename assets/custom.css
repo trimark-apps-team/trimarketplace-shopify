@@ -358,6 +358,10 @@ footer .svg-wrapper .icon path {
 .product__info-wrapper .heart-wishlist-animation .heart-hulk-animation {
     margin-right: 0;
 }
+
+.hulk__wishlist-wrap .wishlist-list-view .wishlist-status .product-share {
+  display: none;
+}
 .product__info-wrapper .aasaved-cart-wrapper {
     margin: 0px 0;
 }
