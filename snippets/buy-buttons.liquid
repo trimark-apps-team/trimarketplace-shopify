@@ -44,17 +44,14 @@
         data-type: 'add-to-cart-form'
       -%}
 
-                {% if product.metafields.custom['5_non_stock'] == true %}
+                {% comment %} {% if product.metafields.custom['5_non_stock'] == true %}
                   {% assign eta_time = settings.non_stock_text %}
                   
                 {% else %}
                   {% assign eta_time = settings.in_stock_text  %}
                 {% endif %}
 
-                <input type="hidden" name="properties[Expected Shipping]" value="{{ eta_time }}">
-        {% if product.metafields.custom.requires_approval == true %}
-            <input type="hidden" name="properties[_approval]" value="true">
-        {% endif %}
+                <input type="hidden" name="properties[Expected Shipping]" value="{{ eta_time }}"> {% endcomment %}
 
 {% if customer and customer.metafields.custom.buyer_role.value != blank %}
              {% assign show_table = false %}
