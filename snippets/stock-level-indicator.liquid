@@ -22,7 +22,7 @@
     Usage:
     {% render 'stock-level-indicator' with block_attributes: block.shopify_attributes, stock_variant: current_variant, stock_amt: block.settings.stock_range %}
 {% endcomment %}
-
+{% assign sales_order = | shop.metafields.custom.allow_sales_order | default: false %}
 {%- liquid
   assign inventory_variant = stock_variant
   assign preorder_string = 'products.product.preorder_today' | t
@@ -77,10 +77,16 @@
               <span>&nbsp;-&nbsp;</span> <span data-flow-stock-count="variant_stock_count">{{ inventory_variant.inventory_quantity }}</span>&nbsp;left
             {% endcapture %}
           {% endif %}
+
           {% if preorder_product %}
             <p class="level-indicator-message">{{ preorder_message | default: preorder_string | append: stock_count }}</p>
           {% else %}
-            <p class="level-indicator-message">{{ in_stock_message | default: in_stock_string | append: stock_count }}</p>
+            {% if sales_order %}
+              <p class="level-indicator-message">{{ inventory_variant.inventory_quantity }} On hand</p>
+              {% else %}
+                <p class="level-indicator-message">{{ in_stock_message | default: in_stock_string | append: stock_count }}</p>
+              {% endif %}
+    
           {% endif %}
         </span>
         {% liquid
@@ -103,7 +109,11 @@
           {% if preorder_product %}
             <p class="level-indicator-message">{{ preorder_message | default: preorder_string | append: stock_count }}</p>
           {% else %}
-            <p class="level-indicator-message">{{ medium_stock_message }}</p>
+            {% if sales_order %}
+              <p class="level-indicator-message">{{ inventory_variant.inventory_quantity }} On hand</p>
+              {% else %}
+                <p class="level-indicator-message">{{ medium_stock_message | default: in_stock_string | append: stock_count }}</p>
+              {% endif %}
           {% endif %}
         </span>
         {% liquid
@@ -127,7 +137,11 @@
           {% if preorder_product %}
             <p class="level-indicator-message">{{ preorder_message | default: preorder_string | append: stock_count }}</p>
           {% else %}
-            <p class="level-indicator-message">{{ low_stock_message | default: low_stock_string | append: stock_count }}</p>
+            {% if sales_order %}
+              <p class="level-indicator-message">{{ inventory_variant.inventory_quantity }} On hand</p>
+              {% else %}
+                <p class="level-indicator-message">{{ low_stock_message | default: in_stock_string | append: stock_count }}</p>
+              {% endif %}
           {% endif %}
         </span>
         {% liquid
