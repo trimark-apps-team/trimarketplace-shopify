@@ -371,11 +371,6 @@
                   novalidate: 'novalidate',
                   data-type: 'add-to-cart-form'
                 -%}
-                  {% if card_product.metafields.custom.requires_approval == true %}
-                    <input type="hidden" name="properties[_approval]" value="true">
-                  {% endif %}
-
-                     <input type="hidden" name="properties[Expected Shipping]" value="{{ eta_time }}">
                   <input
                     type="hidden"
                     name="id"
