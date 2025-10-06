@@ -38,15 +38,7 @@
     <script src="{{ 'search-form.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'accessibe-loader.js' | asset_url }}" defer="defer"></script>
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const params = new URLSearchParams(window.location.search);
-    if (params.has('logged_in') && window.location.pathname === '/') {
-      // You can run custom code here after login if needed
-      console.log("User just logged in!");
-      // Example: redirect to landing page
-     // window.location.href = "/";
-    }
-  });
+
 </script>
 
     {%- if settings.animations_reveal_on_scroll -%}
