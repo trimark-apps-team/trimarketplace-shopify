@@ -591,25 +591,29 @@
       </div>
       {% endif %}
 
-      {% if template == 'index' %}
-        {% if customer.name != blank %}
-         <div class='page-width welcome-tagline'>
-          <div class='icon-feature-grid'>
-          <div class="feature-card">
-          <div class="feature-description">
-          <h2 class="trimark-red">Welcome, {{customer.name }}</h2>
+{% if template == 'index' %}
+  <div class="page-width welcome-tagline">
+    <div class="icon-feature-grid">
+      <div class="feature-card">
+        <div class="feature-description">
+          {% if customer.name != blank %}
+            <h2 class="trimark-red">Welcome, {{ customer.name }}</h2>
+          {% else %}
+            <h2 class="trimark-red">Welcome</h2>
+          {% endif %}
+          
           {% if customer.email != blank %}
             <p><span>Email Address:</span> {{ customer.email }}</p>
           {% endif %}
+          
           {% if customer.current_company.name != blank %}
             <p><span>Company:</span> {{ customer.current_company.name }}</p>
           {% endif %}
         </div>
-        </div>
-        </div>
-        </div>
-      {%  endif %}
-    {% endif %}
+      </div>
+    </div>
+  </div>
+{% endif %}
     
       
       {{ content_for_layout }}
