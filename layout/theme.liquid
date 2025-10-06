@@ -553,7 +553,7 @@
     {% comment %} redirenct to login {% endcomment %}
     {% unless customer %}
     <script>
-      window.location.href = "/admin/login";
+   {% comment %} window.location.href = "/admin/login"; {% endcomment %}
     </script>
     {% endunless %}
     
