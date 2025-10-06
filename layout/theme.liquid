@@ -550,11 +550,17 @@
 </head>
 
   <body class=" gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %} template-{{ template.name }}" data-symbol="{{ localization.country.currency.symbol }}">
-  {% if customer == nil and request.design_mode == false %}
-    <script>
+{% unless customer %}
+  <script>
+    // Detect if in Shopify Theme Editor or Preview
+    const inShopifyAdmin = window.Shopify && window.Shopify.designMode;
+    const inPreview = window.location.search.includes('preview_theme_id');
+
+    if (!inShopifyAdmin && !inPreview) {
       window.location.href = "/account/login";
-    </script>
-  {% endif %}
+    }
+  </script>
+{% endunless %}
     
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
       {{ 'accessibility.skip_to_text' | t }}
