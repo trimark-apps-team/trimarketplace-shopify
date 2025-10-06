@@ -548,7 +548,10 @@
         }
       },
       "list_title": "My Orders",
-      "list_title_with_pending_orders": "My Orders:"
+      "list_title_with_pending_orders": "My Orders:",
+      "order_status": {
+        "on_its_way_label": "Complete"
+      }
     },
     "B2B": {
       "draft_order_details": {
@@ -575,6 +578,9 @@
       },
       "order_payment_collection": {
         "pay_now": "Complete Purchase"
+      },
+      "thank_you": {
+        "in_transit": "Complete"
       }
     }
   }
