@@ -44,11 +44,12 @@
           <td>{{ product.selected_or_first_available_variant.sku }}</td>
         </tr>
 
-       {% if product.metafields.custom["1_erp_id_marlinn_ipics"] != blank %}
-  <p class="product-erp-id">
-    <strong>Marlinn ERP ID:</strong> {{ product.metafields.custom["1_erp_id_marlinn_ipics"] }}
-  </p>
-{% endif %}
+        {% if product.metafields.custom["1_erp_id_marlinn_ipics"] != blank %}
+          <tr>
+            <td class="spec-label">Marlinn ERP ID</td>
+            <td> {{ product.metafields.custom["1_erp_id_marlinn_ipics"] }}</td>
+          </tr>
+        {% endif %}
 
         {% if product.metafields.custom["1_erp_id_trmk_golden"] %}
           <tr>
