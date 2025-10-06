@@ -37,19 +37,7 @@
     <script src="{{ 'empty-cart-modal.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'search-form.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'accessibe-loader.js' | asset_url }}" defer="defer"></script>
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
 
-    const params = new URLSearchParams(window.location.search);
-    console.log('params');
-    if (params.has('logged_in') {
-      // You can run custom code here after login if needed
-      console.log("User just logged in!");
-      // Example: redirect to landing page
-      window.location.href = "/landing";
-    }
-  });
-</script>
     {%- if settings.animations_reveal_on_scroll -%}
       <script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
@@ -568,7 +556,7 @@
     const inPreview = window.location.search.includes('preview_theme_id');
 
     if (!inShopifyAdmin && !inPreview) {
-      window.location.href = "/account/login";
+      window.location.href = "/account/login?return_to=/";
     }
   </script>
 {% endunless %}
@@ -591,29 +579,25 @@
       </div>
       {% endif %}
 
-{% if template == 'index' %}
-  <div class="page-width welcome-tagline">
-    <div class="icon-feature-grid">
-      <div class="feature-card">
-        <div class="feature-description">
-          {% if customer.name != blank %}
-            <h2 class="trimark-red">Welcome, {{ customer.name }}</h2>
-          {% else %}
-            <h2 class="trimark-red">Welcome</h2>
-          {% endif %}
-          
+      {% if template == 'index' %}
+        {% if customer.name != blank %}
+         <div class='page-width welcome-tagline'>
+          <div class='icon-feature-grid'>
+          <div class="feature-card">
+          <div class="feature-description">
+          <h2 class="trimark-red">Welcome, {{customer.name }}</h2>
           {% if customer.email != blank %}
             <p><span>Email Address:</span> {{ customer.email }}</p>
           {% endif %}
-          
           {% if customer.current_company.name != blank %}
             <p><span>Company:</span> {{ customer.current_company.name }}</p>
           {% endif %}
         </div>
-      </div>
-    </div>
-  </div>
-{% endif %}
+        </div>
+        </div>
+        </div>
+      {%  endif %}
+    {% endif %}
     
       
       {{ content_for_layout }}
