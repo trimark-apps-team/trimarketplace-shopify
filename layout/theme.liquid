@@ -550,12 +550,11 @@
 </head>
 
   <body class=" gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %} template-{{ template.name }}" data-symbol="{{ localization.country.currency.symbol }}">
-    {% comment %} redirenct to login {% endcomment %}
-    {% unless customer %}
+  {% if customer == nil and request.design_mode == false %}
     <script>
-   {% comment %} window.location.href = "/admin/login"; {% endcomment %}
+      window.location.href = "/account/login";
     </script>
-    {% endunless %}
+  {% endif %}
     
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
       {{ 'accessibility.skip_to_text' | t }}
