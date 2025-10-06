@@ -39,8 +39,9 @@
     <script src="{{ 'accessibe-loader.js' | asset_url }}" defer="defer"></script>
 <script>
   document.addEventListener("DOMContentLoaded", function() {
+
     const params = new URLSearchParams(window.location.search);
-    console.log(params);
+    console.log('params');
     if (params.has('logged_in') {
       // You can run custom code here after login if needed
       console.log("User just logged in!");
