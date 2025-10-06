@@ -556,7 +556,8 @@
     const inPreview = window.location.search.includes('preview_theme_id');
 
     if (!inShopifyAdmin && !inPreview) {
-      window.location.href = "/account/login?return_to=/";
+      // Redirect guests to login page
+      window.location.href = "/account/login";
     }
   </script>
 {% endunless %}
