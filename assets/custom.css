@@ -431,7 +431,7 @@ footer .svg-wrapper .icon path {
     font-size: 21px;
 }
 .cs-container .cs-input, input.cs-input {
-  padding: 0;
+  padding: 10px;
 }
 
 .cs-container .cs-toolbar {
