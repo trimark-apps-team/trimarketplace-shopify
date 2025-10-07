@@ -418,7 +418,7 @@ footer .svg-wrapper .icon path {
 }
 
 .cs-component {
-  padding: 10px 0;
+  padding: 10px 0 !important;
 }
 .cs-container {
   border-radius: 10px;
