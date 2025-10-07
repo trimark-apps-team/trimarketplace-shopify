@@ -417,6 +417,23 @@ footer .svg-wrapper .icon path {
   display: none;
 }
 
+.cs-container {
+  border-radius: 10px;
+}
+
+.cs-container .cs-header .cs-title {
+    font-size: 21px;
+}
+
+.cs-container .cs-toolbar {
+  padding: 20px;
+}
+
+.cs-container .cs-table-wrapper {
+  padding: 20px;
+}
+
+
 .cart-item-wrapper, .cart-footer-wrapper {
   background: #fff;
   padding: 20px;
