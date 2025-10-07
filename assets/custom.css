@@ -421,6 +421,11 @@ footer .svg-wrapper .icon path {
   border-radius: 10px;
 }
 
+.cs-container .cs-header {
+      background-color: #f9f9f9;
+      padding: 0;
+}
+
 .cs-container .cs-header .cs-title {
     font-size: 21px;
 }
