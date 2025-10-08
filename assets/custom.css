@@ -366,6 +366,10 @@ footer .svg-wrapper .icon path {
 .hulk-price {
   display: none !important;
 }
+
+.header__icons .hulk-wishlist-icon {
+  display: none;
+}
 .product__info-wrapper .aasaved-cart-wrapper {
     margin: 0px 0;
 }
