@@ -687,7 +687,7 @@ body .variant-item__quantity-wrapper .quick-order_loader {
   display: flex;
   gap: 10px;
   margin-bottom: 15px;
-  align-items: center;
+  align-items: self-start;
   flex-wrap: wrap;
 }
 .quick-order-search-input, .quick-order-sort-select, .collection-search-input {

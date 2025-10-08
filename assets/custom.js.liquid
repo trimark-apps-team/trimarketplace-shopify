@@ -235,4 +235,30 @@ subscribe(PUB_SUB_EVENTS.variantChange, async function (e) {
   }
 })
 
+subscribe(PUB_SUB_EVENTS.cartUpdate, async function (e) {
+  const rows = document.querySelectorAll('#quick-order-products .variant-item');
+  rows.forEach(row => {
+    const variantId = row.dataset.variantId;
+    const cart = e.cartData;
+    const cartItem = cart.items.find(i => i.variant_id.toString() === variantId);
+
+    document.querySelector('#cart-click .cart-items_count').innerText = `CART (${cart.items.length} PRODUCTS, ${cart.item_count} QUANTITY)`;
+
+    if (cartItem) {
+
+      const qtyInput = row.querySelector('.quantity__input');
+      if (qtyInput) qtyInput.value = cartItem.quantity;
+
+      const totals = row.querySelectorAll('.variant-item__totals .price');
+      totals.forEach(totalEl => {
+        totalEl.textContent = `$${(cartItem.price * cartItem.quantity / 100).toFixed(2)}`;
+      });
+    } else {
+      const totals = row.querySelectorAll('.variant-item__totals .price');
+      totals.forEach(totalEl => {
+        totalEl.textContent = "$0";
+      });
+    }
+  });
+})
 

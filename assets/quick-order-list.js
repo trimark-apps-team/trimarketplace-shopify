@@ -27,7 +27,6 @@ document.addEventListener("DOMContentLoaded", () => {
 }
 
 document.addEventListener("click", (e) => {
-  console.log(e.target);
   if (e.target.id === "cart-click" || e.target.classList.contains("cart-items_count")) {
     document.querySelector("cart-drawer").classList.add("active");
     document.body.classList.add("overflow-hidden");
@@ -73,7 +72,6 @@ document.addEventListener("click", async (e) => {
     });
 
     const data = await res.json();
-    console.log("Added to cart:", data);
     
     const linePrice = "$" + (data.line_price / 100).toFixed(2);
     row.querySelector(".variant-item__totals.small-hide span.price").textContent = linePrice;
@@ -93,7 +91,7 @@ document.addEventListener("click", async (e) => {
         
         if (cartCountBubble) cartCountBubble.innerText = cart.item_count;
         if (cartItemsCount) {
-          cartItemsCount.innerText = `Cart (${cart.items.length} Products, ${cart.item_count} Quantity)`;
+          cartItemsCount.innerText = `CART (${cart.items.length} PRODUCTS, ${cart.item_count} QUANTITY)`;
         }
       });
 

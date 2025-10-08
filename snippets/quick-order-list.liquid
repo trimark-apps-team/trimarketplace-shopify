@@ -1,6 +1,6 @@
 <div class="quick-order-controls page-width">
   
-  <button id="cart-click" class="button"><span class="cart-items_count"> Cart ({{ cart.items.size }} Products, {{ cart.item_count }} Quantities)</span></button>
+  <button id="cart-click" class="button"><span class="cart-items_count"> CART ({{ cart.items.size }} PRODUCTS, {{ cart.item_count }} QUANTITIES)</span></button>
   
   <div class="quick-order-controls__inner">
     <input
@@ -70,15 +70,16 @@
                       <th
                         class="quick-order-list__table-heading--wide small-hide medium-hide caption-with-letter-spacing"
                         scope="col"
+                        style="text-align: center; padding-left: 0;"
                       >
-                      Action
+                      {{ 'products.product.quantity.label' | t }}
                       </th>
                       <th
                         class="quick-order-list__table-heading--wide small-hide medium-hide caption-with-letter-spacing"
                         scope="col"
                         style="text-align: center; padding-left: 0;"
                       >
-                      {{ 'products.product.quantity.label' | t }}
+                      Action
                       </th>
                       <th
                         class="quick-order-list__table-heading--wide small-hide medium-hide caption-with-letter-spacing"

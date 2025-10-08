@@ -859,9 +859,6 @@ button.quick-add__submit::after, #cart-click::after {
   gap: 5px;
 }
 
-#cart-click {
-  margin-bottom: 10px;
-}
 .quick-add__submit.button {
   min-height: 38px;
   min-width: 152px;
@@ -897,3 +894,30 @@ button.quick-add__submit::after, #cart-click::after {
 .welcome-tagline p span {
   color: #b11830;
 }
+
+#download-collection-file, #add-collection-to-cart, .active-collection__button, #cart-click {
+  font-size: 13px;
+  font-weight: 700;
+  padding: 8px;
+  min-height: 32px;
+  margin-bottom: 5px;
+}
+
+.active-collection__button {
+  font-weight: normal;
+  border-radius: 21px;
+}
+
+.active-collection__button .svg-wrapper {
+    width: 10px;
+    height: 10px;
+    margin-left: 8px;
+}
+
+.active-collection__button .svg-wrapper path {
+    fill: currentColor;
+    stroke: currentColor;
+    stroke-width: 1.4;
+}
+
+

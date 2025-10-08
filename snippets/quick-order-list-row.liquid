@@ -51,10 +51,10 @@
       </div>
     {%- endif -%}
     <div class="small-hide medium-hide">
-      <span class="variant-item__name h4 break"><a class="full-unstyled-link" href="{{ item.url }}">{{ item.title | escape }}</a></span>
+      <span class="variant-item__name h4 break"><a class="full-unstyled-link" href="{{ item.url }}">{{ data.title | escape }}</a></span>
       {%- if show_sku -%}
-        <span class="variant-item__sku break">{{ sku | escape }}  {% if item.metafields.custom.purchased_date.value %} 
-         | Ordered at: {{ item.metafields.custom.purchased_date.value | date: "%m-%d-%Y" }}
+        <span class="variant-item__sku break">{{ sku | escape }}  {% if data.metafields.custom.purchased_date.value %} 
+         | Ordered at: {{ data.metafields.custom.purchased_date.value | date: "%m-%d-%Y" }}
 
         {% endif %}</span>
       {%- endif -%}
@@ -63,10 +63,10 @@
 
   <td class="variant-item__details large-up-hide">
     <div class="variant-item__info">
-      <span class="variant-item__name h4 break"><a class="full-unstyled-link" href="{{ item.url }}">{{ item.title | escape }}</a></span>
+      <span class="variant-item__name h4 break"><a class="full-unstyled-link" href="{{ item.url }}">{{ data.title | escape }}</a></span>
       {%- if show_sku -%}
-        <span class="variant-item__sku break">{{ sku | escape }} {% if item.metafields.custom.purchased_date.value %}
-         | Ordered at: {{ item.metafields.custom.purchased_date.value | date: "%m-%d-%Y" }}
+        <span class="variant-item__sku break">{{ sku | escape }} {% if data.metafields.custom.purchased_date.value %}
+         | Ordered at: {{ data.metafields.custom.purchased_date.value | date: "%m-%d-%Y" }}
 
         {% endif %}</span>
       {%- endif -%}
@@ -181,20 +181,7 @@
     {% # theme-check-enable %}
   </td>
 
-  <td class="variant-item__quantity small-hide medium-hide">
-    <button class="quick-add__submit button" {% if variant.available == false or quantity_rule_soldout == false %}disabled{% endif %}>              
-      <span>
-         {% if variant.available == false or quantity_rule_soldout %}
-        Sold out
-      {% else %}
-        Add to cart
-    {% endif %}
-        </span>
-<div class="loading__spinner hidden">
-  <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66"><circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle></svg>
-</div>
-</button>
-  </td>
+  
 
   <td class="variant-item__quantity">
     {%- liquid
@@ -357,7 +344,20 @@
     </quantity-popover>
   </td>
 
-  
+  <td class="variant-item__quantity small-hide medium-hide">
+    <button class="quick-add__submit button" {% if variant.available == false or quantity_rule_soldout == false %}disabled{% endif %}>              
+      <span>
+         {% if variant.available == false or quantity_rule_soldout %}
+        Sold out
+      {% else %}
+        Add to cart
+    {% endif %}
+        </span>
+<div class="loading__spinner hidden">
+  <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66"><circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle></svg>
+</div>
+</button>
+  </td>
   {%- assign item_price = item.price | money -%}
   <td class="variant-item__price small-hide medium-hide">
     {%- if item.compare_at_price -%}

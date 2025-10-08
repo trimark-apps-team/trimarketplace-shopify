@@ -1250,7 +1250,7 @@ button.shopify-payment-button__button--unbranded {
     rgba(var(--color-shadow), var(--shadow-opacity));
 }
 
-.button:after,
+/* .button:after,
 .shopify-challenge__button:after,
 .customer button:after,
 .shopify-payment-button__button--unbranded:after {
@@ -1266,7 +1266,7 @@ button.shopify-payment-button__button--unbranded {
       rgba(var(--color-button-text), var(--border-opacity)),
     0 0 0 var(--buttons-border-width) rgba(var(--color-button), var(--alpha-button-background));
   transition: box-shadow var(--duration-short) ease;
-}
+} */
 
 .button:not([disabled]):hover::after,
 .shopify-challenge__button:hover::after,
@@ -2084,8 +2084,8 @@ input[type='checkbox'] {
   position: absolute;
   background-color: rgb(var(--color-button));
   color: rgb(var(--color-button-text));
-  height: 1.7rem;
-  width: 1.7rem;
+  height: 2rem;
+  width: 2rem;
   border-radius: 100%;
   display: flex;
   justify-content: center;
@@ -3919,7 +3919,7 @@ body .variant-item__quantity-wrapper .quick-order_loader {
   display: flex;
   gap: 10px;
   margin-bottom: 15px;
-  align-items: center;
+  align-items: self-start;
   flex-wrap: wrap;
 }
 .quick-order-search-input, .quick-order-sort-select, .collection-search-input {
