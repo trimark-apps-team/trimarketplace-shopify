@@ -193,6 +193,28 @@ document.addEventListener('DOMContentLoaded', async function () {
     link.remove();
   });
 
+  function refreshCart() {
+  const cartDrawer = document.getElementById('CartDrawer');
+
+  if (cartDrawer || quickOrderForm) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', window.location.href);
+    xhr.onload = () => {
+      if (xhr.status === 200) {
+        const parser = new DOMParser();
+        const responseDoc = parser.parseFromString(xhr.responseText, 'text/html');
+
+        if (cartDrawer) {
+          const newDrawer = responseDoc.querySelector('#CartDrawer');
+          if (newDrawer) cartDrawer.innerHTML = newDrawer.innerHTML;
+        }
+
+      }
+    };
+    xhr.send();
+  }
+}
+
 
   addCollectionBtn.addEventListener('click', async () => {
 
