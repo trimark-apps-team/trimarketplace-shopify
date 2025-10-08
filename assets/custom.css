@@ -938,7 +938,7 @@ button.quick-add__submit::after, #cart-click::after {
   max-width: 600px;
   margin: 15px auto;
   padding: 6px 10px;
-  border: 1px solidrgb(17, 16, 16);
+  border: 1.5px solid #444;
   border-radius: 6px;
   background-color: #fff;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
