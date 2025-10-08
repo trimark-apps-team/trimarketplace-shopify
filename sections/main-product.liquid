@@ -96,7 +96,10 @@
                 >
                   {{- block.settings.text -}}
                 </p>
-                     {% for variant in product.variants %}
+  
+                
+              {%- when 'title' -%}
+                                   {% for variant in product.variants %}
   <p>{{ variant.title }}</p>
   <ul>
     <li>inventory_quantity: {{ variant.inventory_quantity }}</li>
@@ -105,8 +108,6 @@
     <li>available: {{ variant.available }}</li>
   </ul>
 {% endfor %}
-                
-              {%- when 'title' -%}
                 {%- assign published_date = product.published_at | date: "%s" -%}
                 {%- assign current_date = 'now' | date: "%s" -%}
                 {%- assign seconds_in_3_days = 60 | times: 60 | times: 24 | times: 3 -%}
