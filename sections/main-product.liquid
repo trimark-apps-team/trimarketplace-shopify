@@ -101,7 +101,7 @@
                                    {% for variant in product.variants %}
   <p>{{ variant.title }}</p>
   <ul>
-    <li>inventory_quantity: {{ variant.inventory_quantity }}</li>
+    <li>inventory_quantity: {{ variant.inventory_quantity.value }}</li>
     <li>inventory_management: {{ variant.inventory_management }}</li>
     <li>inventory_policy: {{ variant.inventory_policy }}</li>
     <li>available: {{ variant.available }}</li>
