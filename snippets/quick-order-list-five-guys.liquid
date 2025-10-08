@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', async function () {
       collectionCheckboxes.forEach(other => { if (other !== cb) other.checked = false; });
       if (cb.checked) {
         selectedCollectionHandle = cb.value;
-        if(cb.value == "five-guys-new-store-opening-1" || cb.value == "five-guys-new-store-opening-2") {
+        if(cb.value == "new-store-opening-1" || cb.value == "new-store-opening-2") {
           selectedCollectionDownload = cb.dataset.download;
           selectedCollectionTitle = cb.dataset.title;
           downloadBtn.classList.remove('hidden');
