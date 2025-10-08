@@ -98,15 +98,7 @@
                 </p>
   
               {%- when 'title' -%}
-                                   {% for variant in product.variants %}
-  <p>{{ variant.title }}</p>
-  <ul>
-    <li>inventory_quantity: {{ variant.inventory_quantity.value }}</li>
-    <li>inventory_management: {{ variant.inventory_management }}</li>
-    <li>inventory_policy: {{ variant.inventory_policy }}</li>
-    <li>available: {{ variant.available }}</li>
-  </ul>
-{% endfor %}
+
                 {%- assign published_date = product.published_at | date: "%s" -%}
                 {%- assign current_date = 'now' | date: "%s" -%}
                 {%- assign seconds_in_3_days = 60 | times: 60 | times: 24 | times: 3 -%}
