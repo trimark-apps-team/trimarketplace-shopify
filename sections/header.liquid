@@ -313,6 +313,7 @@
       </a>
     </div>
   </header>
+  {% unless template == 'search' %}
 <form action="/search" method="get" class="search-bar trimark-search-bar" role="search">
   <input 
     type="text" 
@@ -338,6 +339,7 @@
     </svg>
   </button>
 </form>
+{% endunless %}
 </{{ header_tag }}>
 
 {%- if settings.cart_type == "notification" -%}
