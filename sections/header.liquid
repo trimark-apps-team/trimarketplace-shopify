@@ -313,6 +313,10 @@
       </a>
     </div>
   </header>
+  <form action="/search" method="get" class="search-bar">
+      <input type="text" name="q" placeholder="Search" class="search-bar__input">
+      <button type="submit" class="search-bar__submit">Search</button>
+    </form>
 </{{ header_tag }}>
 
 {%- if settings.cart_type == "notification" -%}
