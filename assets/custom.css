@@ -362,6 +362,10 @@ footer .svg-wrapper .icon path {
 .hulk__wishlist-wrap .wishlist-list-view .wishlist-status .product-share {
   display: none;
 }
+
+.hulk-price {
+  display: none !important;
+}
 .product__info-wrapper .aasaved-cart-wrapper {
     margin: 0px 0;
 }
