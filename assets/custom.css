@@ -895,7 +895,7 @@ button.quick-add__submit::after, #cart-click::after {
   color: #b11830;
 }
 
-#download-collection-file, #add-collection-to-cart, .active-collection__button, #cart-click {
+#download-collection-file, #add-collection-to-cart, .active-collection__button, #cart-click, #cart-clear {
   font-size: 13px;
   font-weight: 700;
   padding: 8px;

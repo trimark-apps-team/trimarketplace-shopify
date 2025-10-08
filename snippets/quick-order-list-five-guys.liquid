@@ -1,6 +1,7 @@
 <div class="quick-order-controls page-width">
   <div class="quick-order-controls__inner">
   <button id="cart-click" class="button"><span class="cart-items_count"> CART ({{ cart.items.size }} PRODUCTS, {{ cart.item_count }} QUANTITIES)</span></button>
+  <button id="cart-clear" class="button">CLEAR CART</button>
       <button id="download-collection-file" class="button hidden">DOWNLOAD FILE</button>
     <button id="add-collection-to-cart" class="button hidden">ADD COLLECTION TO CART</button>
   </div>
@@ -102,6 +103,7 @@ document.addEventListener('DOMContentLoaded', async function () {
   const pageInfo = document.getElementById('page-info');
   const noResults = document.getElementById('no-results');
   const activeCollectionBtn = document.querySelector(".active-collection__button");
+  const cartClear = document.querySelector("#cart-clear");
 
   const downloadBtn = document.getElementById('download-collection-file');
   const addCollectionBtn = document.getElementById('add-collection-to-cart');
@@ -113,8 +115,6 @@ document.addEventListener('DOMContentLoaded', async function () {
   let selectedCollectionHandle = null;
   let selectedCollectionTitle = null;
   let selectedCollectionDownload = null;
-
-  
 
   const modal = document.querySelector('.modal');
   const overlay = document.querySelector('.overlay');
@@ -164,12 +164,17 @@ document.addEventListener('DOMContentLoaded', async function () {
       collectionCheckboxes.forEach(other => { if (other !== cb) other.checked = false; });
       if (cb.checked) {
         selectedCollectionHandle = cb.value;
-        selectedCollectionDownload = cb.dataset.download;
-        selectedCollectionTitle = cb.dataset.title;
-        document.querySelector(".active-collection__button .collection-title").innerText = cb.dataset.title;
-        document.querySelector(".active-collection__button").classList.remove("hidden");
-        downloadBtn.classList.remove('hidden');
-        addCollectionBtn.classList.remove('hidden');
+        if(cb.value == "five-guys-new-store-opening-1" || cb.value == "five-guys-new-store-opening-2") {
+          selectedCollectionDownload = cb.dataset.download;
+          selectedCollectionTitle = cb.dataset.title;
+          downloadBtn.classList.remove('hidden');
+          addCollectionBtn.classList.remove('hidden');
+        } else {
+          downloadBtn.classList.add('hidden');
+          addCollectionBtn.classList.add('hidden');
+        }
+          document.querySelector(".active-collection__button .collection-title").innerText = cb.dataset.title;
+          document.querySelector(".active-collection__button").classList.remove("hidden");
       } else {
         selectedCollectionHandle = null;
         selectedCollectionDownload = null;
@@ -214,6 +219,38 @@ document.addEventListener('DOMContentLoaded', async function () {
     xhr.send();
   }
 }
+
+ function clearCart() {
+    fetch('/cart/clear.js', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+        refreshCart();
+        document.querySelector("cart-drawer").classList.add("is-empty");
+        const cartCountBubble = document.querySelector('.cart-count-bubble');
+        const cartItemsCount = document.querySelector('#cart-click .cart-items_count');
+        
+        if (cartCountBubble) cartCountBubble.innerText = data.item_count;
+        if (cartItemsCount) {
+          cartItemsCount.innerText = `CART (${data.items.length} PRODUCTS, ${data.item_count} QUANTITY)`;
+        }
+        updateRowsWithCart(data);
+    })
+  }
+
+  cartClear.addEventListener('click', function () {
+    clearCart()
+  });
 
 
   addCollectionBtn.addEventListener('click', async () => {
