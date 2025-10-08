@@ -371,6 +371,11 @@
                   novalidate: 'novalidate',
                   data-type: 'add-to-cart-form'
                 -%}
+                  {% if card_product.metafields.custom.requires_approval == true %}
+                    <input type="hidden" name="properties[_approval]" value="true">
+                  {% endif %}
+
+                     <input type="hidden" name="properties[Expected Shipping]" value="{{ eta_time }}">
                   <input
                     type="hidden"
                     name="id"
@@ -599,7 +604,15 @@
         {%- endif -%}
        
       </div>
-        
+        {% for variant in product.variants %}
+  <p>{{ variant.title }}</p>
+  <ul>
+    <li>inventory_quantity: {{ variant.inventory_quantity }}</li>
+    <li>inventory_management: {{ variant.inventory_management }}</li>
+    <li>inventory_policy: {{ variant.inventory_policy }}</li>
+    <li>available: {{ variant.available }}</li>
+  </ul>
+{% endfor %}
         {%- if card_product.available == false -%}
           <div class="card__badge--non-stock left">
             <span class="non-stock">
