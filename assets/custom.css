@@ -936,8 +936,8 @@ button.quick-add__submit::after, #cart-click::after {
   justify-content: space-between;
   width: 100%;
   max-width: 600px;
-  margin: 0 auto;
-  padding: 6px 10px 15px 10px;
+  margin: 15px auto;
+  padding: 6px 10px;
   border: 1px solid #d1d1d1;
   border-radius: 6px;
   background-color: #fff;
