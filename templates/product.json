@@ -208,7 +208,7 @@
     "related-products": {
       "type": "related-products",
       "settings": {
-        "heading": "Related products",
+        "heading": "Related Products",
         "heading_size": "h2",
         "products_to_show": 5,
         "columns_desktop": 5,
