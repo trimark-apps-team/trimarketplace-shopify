@@ -54,7 +54,7 @@
       <span class="variant-item__name h4 break"><a class="full-unstyled-link" href="{{ item.url }}">{{ data.title | escape }}</a></span>
       {%- if show_sku -%}
         <span class="variant-item__sku break">{{ sku | escape }}  {% if data.metafields.custom.purchased_date.value %} 
-         | Ordered at: {{ data.metafields.custom.purchased_date.value | date: "%m-%d-%Y" }}
+         | Ordered at: {{ data.metafields.custom.purchased_date.value | date: "%m/%d/%Y" }}
 
         {% endif %}</span>
       {%- endif -%}
@@ -66,7 +66,7 @@
       <span class="variant-item__name h4 break"><a class="full-unstyled-link" href="{{ item.url }}">{{ data.title | escape }}</a></span>
       {%- if show_sku -%}
         <span class="variant-item__sku break">{{ sku | escape }} {% if data.metafields.custom.purchased_date.value %}
-         | Ordered at: {{ data.metafields.custom.purchased_date.value | date: "%m-%d-%Y" }}
+         | Ordered at: {{ data.metafields.custom.purchased_date.value | date: "%m/%d/%Y" }}
 
         {% endif %}</span>
       {%- endif -%}
