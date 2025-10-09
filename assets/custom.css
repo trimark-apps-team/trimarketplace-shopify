@@ -367,7 +367,7 @@ footer .svg-wrapper .icon path {
   display: none !important;
 }
 
-.header__icons .hulk-wishlist-icon, .header__icons .header__search {
+.header__icons .hulk-wishlist-icon {
   display: none !important;
 }
 .product__info-wrapper .aasaved-cart-wrapper {
