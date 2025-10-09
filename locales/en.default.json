@@ -545,13 +545,66 @@
           "list_view": {
             "pay_to_confirm": "Complete purchase to confirm"
           }
+        },
+        "sort": {
+          "date": {
+            "newest": "Newest to Oldest",
+            "oldest": "Oldest to Newest"
+          },
+          "order_number": {
+            "ascending": "Order Number (low to high)",
+            "descending": "Order Number (high to low)"
+          },
+          "order_total": {
+            "ascending": "Order Total (low to high)",
+            "descending": "Order Total (high to low)"
+          }
+        },
+        "location_filter_picker": {
+          "all_location": "All Locations",
+          "current_location": "Current Location",
+          "switch_view": "Switch View"
+        },
+        "filter": {
+          "clear_section": "Clear Section",
+          "clear_all": "Clear All",
+          "date": {
+            "start_date": "Start Date",
+            "end_date": "End Date",
+            "title": "Order Date",
+            "last_7_days": "Last 7 Days",
+            "last_30_days": "Last 30 Days",
+            "last_90_days": "Last 90 Days",
+            "last_365_days": "Last 12 Months"
+          }
         }
       },
       "list_title": "My Orders",
       "list_title_with_pending_orders": "My Orders:",
       "order_status": {
-        "on_its_way_label": "Complete"
-      }
+        "on_its_way_label": "Complete",
+        "attempted_delivery_label": "Attempted Delivery",
+        "picked_up_label": "Picked Up",
+        "in_review_label": "In Review",
+        "last_updated": "Last Updated {{date}}",
+        "tracking_number": {
+          "one": "Tracking Number",
+          "other": "Tracking Numbers"
+        },
+        "out_for_delivery_label": "Out for Delivery",
+        "resume_tracking": "Resume Tracking",
+        "track_shipment": "Track Shipment",
+        "request_return": "Request Return",
+        "delivery_promise_v2": {
+          "details_modal": {
+            "learn_more_button_label": "Learn More"
+          }
+        }
+      },
+      "list_layout_accessibility_label": "Layout Options",
+      "list_title_confirmed_orders_accessibility_label": "Orders: Confirmed",
+      "list_title_pending_orders_accessibility_label": "Orders: Pending",
+      "fulfillment_status_title": "Fulfillment Status: {{status}}"
     },
     "B2B": {
       "draft_order_details": {
@@ -561,8 +614,106 @@
             "submitted": {
               "title": "Complete purchase to confirm"
             }
-          }
+          },
+          "pending": {
+            "title": "Payment Due"
+          },
+          "title": "Payment Status"
+        },
+        "order_timeline": {
+          "expand_events_label": "Show Details",
+          "hide_events_label": "Hide Details"
         }
+      },
+      "locations": {
+        "contact_phone_number": "Phone Number",
+        "location_picker_label": "Location Name"
+      },
+      "location_selection": {
+        "continue_to_store": "Continue to Store",
+        "list_accessibility_label": "Locations List"
+      }
+    },
+    "navigation_and_structure": {
+      "account_menu": {
+        "hide_accessibility_label": "Hide Account Menu"
+      },
+      "action_menu_accessibility_label": "More Actions",
+      "contact_link": "Contact Information",
+      "go_to_store_link": "Go to Store",
+      "log_out_link": "Sign Out"
+    },
+    "account_information": {
+      "profile_card": {
+        "edit_accessibility_label": "Edit Profie",
+        "first_name": "First Name",
+        "last_name": "Last Name",
+        "save_accessibility_label": "Save Profile"
+      },
+      "verify_new_email_modal": {
+        "title": "Verify Email"
+      }
+    },
+    "order_details": {
+      "addresses_section_title": "Billing and Shipping",
+      "order_details": "Order Details",
+      "billing_address": "Billing Address",
+      "contact_information": "Contact Information",
+      "company_and_location": "Company and Location",
+      "hide_items": "Hide Items",
+      "login_card": {
+        "log_in": "Sign In"
+      },
+      "returns": {
+        "expand_events_label": "Show Details",
+        "hide_events_label": "Hide Details"
+      },
+      "shipping": {
+        "address": "Shipping Address",
+        "address_map_marker": "Shipping Address",
+        "method": "Shipping Method"
+      },
+      "show_items": "Show Items",
+      "show_order_summary": "Show Order Summary",
+      "hide_order_summary": "Hide Order Summary",
+      "summary_title": "Order Summary",
+      "summary_totals_title_accessibility_label": "Order Totals",
+      "shop_pay": {
+        "learn_more": "Learn More"
+      },
+      "pagination": {
+        "load_more": "Load More"
+      },
+      "log_in": "Sign In"
+    },
+    "addresses": {
+      "add_button": "Add Address",
+      "add_button_accessibility_label": "Add Address",
+      "default_address": {
+        "title": "Default Address"
+      },
+      "delete_confirmation_button": "Delete Address",
+      "edit_modal_title": {
+        "default": "Edit Address",
+        "billing": "Edit Billing Address",
+        "shipping": "Edit Shipping Address"
+      },
+      "pagination": {
+        "load_more": "Load More"
+      },
+      "save_new_address_accessibility_label": "Save Address",
+      "billing_address_dropdown_placeholder": "Billing Address"
+    },
+    "payment_methods": {
+      "title": "Payment Methods",
+      "add_payment_method_button": "Add Payment Methods",
+      "store_credit": {
+        "label": "Store Credit"
+      }
+    },
+    "sign_in": {
+      "step_one": {
+        "heading": "Sign In"
       }
     }
   },
