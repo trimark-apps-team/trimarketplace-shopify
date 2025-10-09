@@ -13,7 +13,7 @@
       "login_form_heading": "Enter store using password:",
       "login_password_button": "Enter using password",
       "login_form_password_label": "Password",
-      "login_form_password_placeholder": "Your password",
+      "login_form_password_placeholder": "Your Password",
       "login_form_error": "Wrong password!",
       "login_form_submit": "Enter",
       "admin_link_html": "Are you the store owner? <a href=\"/admin\" class=\"link underlined-link\">Log in here</a>",
@@ -37,7 +37,7 @@
         "tiktok": "TikTok"
       }
     },
-    "continue_shopping": "Continue shopping",
+    "continue_shopping": "Continue Shopping",
     "pagination": {
       "label": "Pagination",
       "page": "Page {{ number }}",
@@ -49,13 +49,13 @@
       "reset": "Clear search term"
     },
     "cart": {
-      "view": "View cart ({{ count }})",
-      "view_empty_cart": "View cart",
+      "view": "View Cart ({{ count }})",
+      "view_empty_cart": "View Cart",
       "item_added": "Item added to your cart"
     },
     "share": {
-      "close": "Close share",
-      "copy_to_clipboard": "Copy link",
+      "close": "Close Share",
+      "copy_to_clipboard": "Copy Link",
       "share_url": "Link",
       "success_message": "Link copied to clipboard"
     },
