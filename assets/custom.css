@@ -867,9 +867,11 @@ button.quick-add__submit::after, #cart-click::after {
   gap: 5px;
 }
 
-.quick-add__submit.button {
+.quick-add__submit.button, #product-grid .btn.btn-secondary.button {
   min-height: 38px;
   min-width: 152px;
+  width: 100%;
+  text-decoration: none;
 }
 
 .quick-add__submit.button .loading__spinner circle {

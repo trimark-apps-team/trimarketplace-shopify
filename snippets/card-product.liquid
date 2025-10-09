@@ -325,23 +325,16 @@
             -%}
             {%- if card_product.variants_count > 1 or qty_rules -%}
               <modal-opener data-modal="#QuickAdd-{{ card_product.id }}">
-                <button
+                <a
                   id="{{ product_form_id }}-submit"
-                  type="submit"
-                  name="add"
-                  class="quick-add__submit button button--full-width button--secondary{% if horizontal_quick_add %} card--horizontal__quick-add animate-arrow{% endif %}"
+                  href="{{ card_product.url }}"
+                  class="btn btn-secondary button"
                   aria-haspopup="dialog"
                   aria-labelledby="{{ product_form_id }}-submit title-{{ section_id }}-{{ card_product.id }}"
                   data-product-url="{{ card_product.url }}"
                 >
-                  {{ 'products.product.choose_options' | t }}
-                  {%- if horizontal_quick_add -%}
-                    <span class="icon-wrap">
-                      {{- 'icon-arrow.svg' | inline_asset_content -}}
-                    </span>
-                  {%- endif -%}
-                  {%- render 'loading-spinner' -%}
-                </button>
+                  Visit Product
+                </a>
               </modal-opener>
               <quick-add-modal id="QuickAdd-{{ card_product.id }}" class="quick-add-modal">
                 <div
@@ -459,18 +452,16 @@
                 id="QuickBulk-{{ card_product.id }}-{{ section_id }}"
                 data-modal="#QuickAddBulk-{{ card_product.id }}-{{ section.id }}"
               >
-                <button
+                <a
                   id="{{ product_form_id }}-submit"
-                  type="submit"
-                  name="add"
-                  class="quick-add__submit button button--full-width button--secondary"
+                  href="{{ card_product.url }}"
+                  class="btn btn-secondary button"
                   aria-haspopup="dialog"
                   aria-labelledby="{{ product_form_id }}-submit title-{{ section_id }}-{{ card_product.id }}"
                   data-product-url="{{ card_product.url }}"
                 >
-                  {{ 'products.product.choose_options' | t }}
-                  {%- render 'loading-spinner' -%}
-                </button>
+                  Visit Product
+                </a>
               </modal-opener>
               <modal-dialog
                 id="QuickAddBulk-{{ card_product.id }}-{{ section_id }}"
