@@ -115,19 +115,19 @@
   },
   "products": {
     "product": {
-      "add_to_cart": "Add to cart",
-      "choose_options": "Choose options",
+      "add_to_cart": "Add to Cart",
+      "choose_options": "Choose Options",
       "choose_product_options": "Choose options for {{ product_name }}",
       "description": "Description",
-      "inventory_in_stock": "In stock",
-      "inventory_in_stock_show_count": "{{ quantity }} in stock",
-      "inventory_low_stock": "Low stock",
-      "inventory_low_stock_show_count": "Low stock: {{ quantity }} left",
-      "inventory_out_of_stock": "Out of stock",
-      "inventory_out_of_stock_continue_selling": "In stock",
+      "inventory_in_stock": "In Stock",
+      "inventory_in_stock_show_count": "{{ quantity }} in Stock",
+      "inventory_low_stock": "Low Stock",
+      "inventory_low_stock_show_count": "Low Stock: {{ quantity }} left",
+      "inventory_out_of_stock": "Out of Stock",
+      "inventory_out_of_stock_continue_selling": "In Stock",
       "sku": "SKU",
       "on_sale": "Sale",
-      "product_variants": "Product variants",
+      "product_variants": "Product Variants",
       "media": {
         "gallery_viewer": "Gallery Viewer",
         "load_image": "Load image {{ index }} in gallery view",
@@ -136,7 +136,7 @@
         "image_available": "Image {{ index }} is now available in gallery view",
         "open_media": "Open media {{ index }} in modal",
         "play_model": "Play 3D Viewer",
-        "play_video": "Play video"
+        "play_video": "Play Video"
       },
       "quantity": {
         "label": "Quantity",
@@ -159,9 +159,9 @@
         "price_range": "{{ minimum }} - {{ maximum }}"
       },
       "pickup_availability": {
-        "view_store_info": "View store information",
+        "view_store_info": "View Store Information",
         "check_other_stores": "Check availability at other stores",
-        "pick_up_available": "Pickup available",
+        "pick_up_available": "Pickup Available",
         "pick_up_available_at_html": "Pickup available at <span class=\"color-foreground\">{{ location_name }}</span>",
         "pick_up_unavailable_at_html": "Pickup currently unavailable at <span class=\"color-foreground\">{{ location_name }}</span>",
         "unavailable": "Couldn't load pickup availability",
@@ -173,8 +173,8 @@
         "sale_price": "Sale price",
         "unit_price": "Unit price"
       },
-      "share": "Share this product",
-      "sold_out": "Sold out",
+      "share": "Share this Product",
+      "sold_out": "Sold Out",
       "unavailable": "Unavailable",
       "vendor": "Vendor",
       "value_unavailable": "{{ option_value }} - Unavailable",
