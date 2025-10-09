@@ -569,18 +569,313 @@
   "shopify": {
     "checkout": {
       "general": {
-        "pay_now_button_label": "Complete Purchase"
+        "pay_now_button_label": "Complete Purchase",
+        "complete_purchase_button_label": "Complete Order",
+        "authenticate_purchase_button_label": "Authenticate Payment",
+        "expand_notice_label": "View More",
+        "continue_to_shipping_method": "Continue to Shipping",
+        "continue_to_payment_method": "Continue to Payment",
+        "continue_to_review": "Review Order",
+        "back_to_cart": "Return to Cart",
+        "back_to_contact_information": "Return to Information",
+        "back_to_shipping_method": "Return to Shipping",
+        "back_to_payment_method": "Return to Paymeny",
+        "qr_code": "QR Code",
+        "full_price": "Full Price:",
+        "confirm_order_button_label": "Confirm Order",
+        "submit_order_button_label": "Submit Order",
+        "submit_for_review_button_label": "Submit for Review",
+        "remove_chip": "Remove Item",
+        "remove_tag": "Remove Tag",
+        "dropzone": {
+          "add_file": "Add File"
+        }
       },
       "shipping": {
         "duties_and_taxes_options": {
           "ddp_title": "Complete Purchase"
-        }
+        },
+        "shipping_method_title": "Shipping Method",
+        "unbranded_default_description": "Ready to Ship",
+        "address_update": "Update Address",
+        "shipping_address_title": "Ship To",
+        "address_edit": "Edit Address",
+        "address_delete": "Delete Address",
+        "address_form": {
+          "add_address": "Add Address"
+        },
+        "split_shipping_multiple_shipment_label": "Multiple Shipments",
+        "split_shipping_option_free": "Free Shipping"
       },
       "order_payment_collection": {
         "pay_now": "Complete Purchase"
       },
       "thank_you": {
-        "in_transit": "Complete"
+        "in_transit": "Complete",
+        "return_to_store_link_label": "Continue Shopping",
+        "print_link_label": "Print Receipt",
+        "payment_information_title": "Payment Information",
+        "shipping_information_title": "Shipping Information",
+        "cancelled_page_title": "Order Cancelled",
+        "customer_information_title": "Order Details",
+        "contact_information_title": "Contact Information",
+        "billing_address_title": "Billing Address",
+        "shipping_address_title": "Shipping Addresss",
+        "payment_method_title": "Payment Method",
+        "payment_method_not_charged": "Not Charged",
+        "shipping_method_title": "Shipping Method",
+        "tracking_number": "Tracking Number:",
+        "estimated_arrival": "Estimated Delivery Date:",
+        "estimated_delivery": "Current Delivery Estimate:",
+        "gift_card_title": "Gift Cards",
+        "order_updates_title": "Order Updates",
+        "login": "Sign In",
+        "marker": {
+          "shipping": "Shipping Address"
+        },
+        "pick_up_in_store_marker": {
+          "shipping": "Pickup Location"
+        },
+        "track_shipment": "Track Shipment",
+        "breadcrumbs_in_review": "In Review",
+        "resend_gift_cards_by_email": "Resend Email"
+      },
+      "contact": {
+        "delivery_option_title": "Delivery Method",
+        "email_rollup_accessibility_label": "Email Options",
+        "available_addresses_label": "Available Addresses",
+        "first_name_label": "First Name",
+        "optional_first_name_label": "First Name (optional)",
+        "last_name_label": "Last Name",
+        "postal_code_label": "Postal Code",
+        "optional_postal_code_label": "Postal Code (optional)",
+        "postal_code_placeholder": "Postal Code",
+        "pincode_label": "PIN Code",
+        "optional_pincode_label": "PIN Code (optional)",
+        "pincode_placeholder": "PIN Code",
+        "optional_last_name_label": "Last Name (optional)",
+        "change_location_link_label": "Change Location"
+      },
+      "delivery_options": {
+        "ship_to_address": "Ship to Address",
+        "shipping_address": "Shipping Address",
+        "pick_up": "Pick Up",
+        "pick_up_locations": "Pickup Locations",
+        "none_method_definition": "No Shipping"
+      },
+      "customer_account": {
+        "sign_in_link_label": "Sign In",
+        "sign_out_link_label": "Sign Out",
+        "rollup_accessibility_label": "Account Options"
+      },
+      "remote_merchandise_only": {
+        "return_to_store_label": "Return to Store"
+      },
+      "stock": {
+        "page_title": "Inventory Issues",
+        "title": "Out of Stock",
+        "removed_from_cart_notice": "Removed from Cart",
+        "sold_out_label": "Sold Out",
+        "remove_from_cart_button_label": "Remove from Cart",
+        "return_to_store_label": "Return to Store",
+        "continue_cta_label": "Continue Checkout",
+        "quantity_update": {
+          "page_title": "Quantity Update",
+          "title": "Quantity Update"
+        },
+        "unpurchasable_product": {
+          "status_column_header": "Not Available"
+        },
+        "unpurchasable_product_generic": {
+          "status_column_header": "Not Available"
+        },
+        "unshippable_product": {
+          "title": "No Delivery Available",
+          "status_column_header": "No Delivery"
+        },
+        "price_update": {
+          "title": "Price Update",
+          "updated_price": "Updated Price"
+        }
+      },
+      "contextual_availability": {
+        "title": {
+          "one": "Unavailable Product",
+          "other": "Unavailable Products"
+        }
+      },
+      "deliverability": {
+        "not_deliverable": {
+          "label": "No Delivery"
+        }
+      },
+      "order_summary": {
+        "title": "Order Summary",
+        "more_items_modal": {
+          "clear_search": "Clear Search"
+        },
+        "shopping_cart_label": "Shopping Cart",
+        "discount_label": "Discount Code",
+        "discount_placeholder": "Discount Code",
+        "enter_shipping_address": "Enter Shipping Address",
+        "gift_card_title": "Gift Card",
+        "gift_card_label": "Gift Card",
+        "gift_card_placeholder": "Gift Card",
+        "return_shipping_fee_label": "Return Shipping",
+        "free_shipping_discount_label": "Free Shipping",
+        "estimated_taxes_label": "Estimated Taxes",
+        "total_due_label": "Total Due",
+        "total_paid_label": "Total Paid",
+        "total_price_label": "Total Price",
+        "payment_due_label": "Payment Due",
+        "cost_table_title": "Cost Summary",
+        "original_price": "Original Price",
+        "sale_price": "Sale Price",
+        "order_total_updated_label": "Updated Total",
+        "estimated_tax_label": "Estimated Tax",
+        "multiple_shipping_lines_label": "Shipping Total",
+        "payment_terms_totals": {
+          "due_today_next": "Due Today"
+        },
+        "deferred_total_due_date_label": "Total Due {{ date }}"
+      },
+      "payment": {
+        "card_number_label": "Card Number",
+        "card_number_placeholder": "Card Number",
+        "card_pay_with": "Pay With:",
+        "store_credit": {
+          "label": "Store Credit",
+          "apply_label": "Apply Store Credit",
+          "add_label": "Add Store Credit",
+          "manage_label": "Manage Store Credit"
+        },
+        "add_credit_card_modal": {
+          "title": "Add Card"
+        },
+        "delete_credit_card_modal": {
+          "title": "Delete Card"
+        },
+        "edit_credit_card_modal": {
+          "title": "Edit Card",
+          "fields": {
+            "default": "Set as Default",
+            "card_number": "Card Number",
+            "expiry": "Expiration Date",
+            "security_code": "Security Code",
+            "name": "Name on Card",
+            "billing": "Bill To"
+          }
+        },
+        "order_edit_banner_updated_order_label": "Updated Order",
+        "gift_card_wrapper": {
+          "heading": "Gift Card",
+          "payment_tag": "Gift Card"
+        },
+        "purchase_order_number": {
+          "title": "PO Number",
+          "label": "PO Number (optional)"
+        },
+        "waiting_on_taxes_notice": "Calculating Taxes",
+        "payment_method": "Payment Method",
+        "payment_method_rollup_accessibility_label": "Payment Method Options"
+      },
+      "billing": {
+        "billing_address_title": "Bill To",
+        "billing_address_rollup_accessibility_label": "Bill to Options",
+        "address_edit": "Edit Address",
+        "address_delete": "Delete Address",
+        "address_form": {
+          "add_address": "Add Address"
+        }
+      },
+      "company_location": {
+        "location_title": "Company Location",
+        "location_rollup_accessibility_label": "Company Location Options"
+      },
+      "payment_summary": {
+        "billing_address_title": "Billing Address"
+      },
+      "payment_gateway": {
+        "login_prompt": {
+          "no_access": {
+            "link": "Log In"
+          }
+        }
+      },
+      "review": {
+        "blocks": {
+          "shipping_address_title": "Ship To",
+          "shipping_method_title": "Shipping Method",
+          "payment_method_title": "Payment Method",
+          "change_contact_method_link_label": "Change Contact Information",
+          "change_billing_address_link_label": "Change Billing Address",
+          "change_company_location_link_label": "Change Company Location",
+          "change_shipping_address_link_label": "Change Shipping Address",
+          "change_shipping_method_link_label": "Change Shipping Method",
+          "change_payment_method_link_label": "Change Payment Method",
+          "company_location": "Company Location"
+        }
+      },
+      "change_currency": {
+        "payment_total_label": "Payment Total"
+      },
+      "customer_payment_methods": {
+        "page_title": "Payment Method",
+        "title": "Payment Methods",
+        "update_card_button_label": "Update Card"
+      },
+      "throttle": {
+        "cart_summary_heading": "Your Cart",
+        "inventory": {
+          "sold_out": {
+            "link": "Back to Store"
+          }
+        }
+      },
+      "pickup_point": {
+        "geolocation": {
+          "shared_location_button": "Use My Location"
+        }
+      },
+      "notice_banner": {
+        "return_to_cart_link_text": "Return to Cart",
+        "individual_violations_title": {
+          "DeliveryViolations": "Shipping Address",
+          "PaymentViolations": "Billing Address",
+          "OtherViolations": "Order Information",
+          "UnhandledViolations": "Order Information"
+        }
+      },
+      "review_address_modal": {
+        "title": "Review Address",
+        "return_to_cart": "Return to Cart"
+      },
+      "local_pickup": {
+        "toggle_location": "Change Location",
+        "search_button": "Find Stores"
+      },
+      "b2b_errors": {
+        "log_out_link_text": "Sign Out"
+      }
+    },
+    "links": {
+      "learn_more": "Learn More"
+    },
+    "addresses": {
+      "zip_code": "ZIP Code",
+      "postal_code": "Postal Code"
+    },
+    "collections": {
+      "sorting": {
+        "best_selling": "Best Selling"
+      }
+    },
+    "filters": {
+      "availability": {
+        "value": {
+          "in_stock": "In Stock",
+          "out_of_stock": "Out of Stock"
+        }
       }
     }
   }
