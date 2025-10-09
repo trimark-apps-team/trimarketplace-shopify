@@ -806,7 +806,10 @@
         "optional_pincode_label": "PIN Code (optional)",
         "pincode_placeholder": "PIN Code",
         "optional_last_name_label": "Last Name (optional)",
-        "change_location_link_label": "Change Location"
+        "change_location_link_label": "Change Location",
+        "zip_code_label": "Zip Code",
+        "optional_zip_code_label": "Zip Code (optional)",
+        "zip_code_placeholder": "Zip Code"
       },
       "delivery_options": {
         "ship_to_address": "Ship to Address",
