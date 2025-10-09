@@ -290,13 +290,13 @@
       }
     },
     "cart": {
-      "title": "Your cart",
-      "caption": "Cart items",
+      "title": "Your Cart",
+      "caption": "Cart Items",
       "remove_title": "Remove {{ title }}",
-      "estimated_total": "Estimated total",
-      "new_estimated_total": "New estimated total",
-      "note": "Order special instructions",
-      "checkout": "Check out",
+      "estimated_total": "Estimated Total",
+      "new_estimated_total": "New Estimated Total",
+      "note": "Order Special Instructions",
+      "checkout": "Checkout",
       "empty": "Your cart is empty",
       "cart_error": "There was an error while updating your cart. Please try again.",
       "cart_quantity_error_html": "You can only add {{ quantity }} of this item to your cart.",
@@ -313,7 +313,7 @@
         "price": "Price",
         "total": "Total",
         "quantity": "Quantity",
-        "image": "Product image"
+        "image": "Product Image"
       },
       "update": "Update",
       "login": {
@@ -354,15 +354,15 @@
       "slide": "Slide"
     },
     "page": {
-      "title": "Page title"
+      "title": "Page Title"
     },
     "quick_order_list": {
-      "product_total": "Product subtotal",
-      "view_cart": "View cart",
+      "product_total": "Product Subtotal",
+      "view_cart": "View Cart",
       "each": "{{ money }}/ea",
       "product": "Product",
       "variant": "Variant",
-      "variant_total": "Variant total",
+      "variant_total": "Variant Total",
       "items_added": {
         "one": "{{ quantity }} item added",
         "other": "{{ quantity }} items added"
@@ -371,11 +371,11 @@
         "one": "{{ quantity }} item removed",
         "other": "{{ quantity }} items removed"
       },
-      "product_variants": "Product variants",
-      "total_items": "Total items",
+      "product_variants": "Product Variants",
+      "total_items": "Total Items",
       "remove_all_single_item_confirmation": "Remove 1 item from your cart?",
       "remove_all_items_confirmation": "Remove all {{ quantity }} items from your cart?",
-      "remove_all": "Remove all",
+      "remove_all": "Remove All",
       "cancel": "Cancel",
       "min_error": "This item has a minimum of {{ min }}",
       "max_error": "This item has a maximum of {{ max }}",
