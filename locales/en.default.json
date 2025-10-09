@@ -789,7 +789,8 @@
         },
         "track_shipment": "Track Shipment",
         "breadcrumbs_in_review": "In Review",
-        "resend_gift_cards_by_email": "Resend Email"
+        "resend_gift_cards_by_email": "Resend Email",
+        "company_location_section_title": "Company and Location"
       },
       "contact": {
         "delivery_option_title": "Delivery Method",
