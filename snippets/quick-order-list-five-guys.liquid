@@ -326,7 +326,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     do {
       const first = isFirstCall ? 250 : 100;
-      const url = `https://trimark-draft-order-api-pearl.vercel.app/get-company-location-products?companyLocationId=${companyLocationId}&domain=${domain}&first=${first}${cursor ? `&after=${cursor}` : ''}`;
+      const url = `/apps/api/get-company-location-products?companyLocationId=${companyLocationId}&domain=${domain}&first=${first}${cursor ? `&after=${cursor}` : ''}`;
       
       const res = await fetch(url);
       const data = await res.json();
