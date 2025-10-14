@@ -588,11 +588,11 @@
                   `Customer: ${companyName}`
                 );
               } else {
-                showPopup('Order Creation Failed', result.message || 'Something went wrong.', true);
+                showPopup("{{ settings.error_text }}", "{{ settings.error_message }}", "");
               }
             } catch (error) {
               console.error(error);
-              showPopup('Error', 'Unexpected error occurred.', true);
+                showPopup("{{ settings.error_text }}", "{{ settings.error_message }}", "");
             }
           }
         });
@@ -602,7 +602,6 @@
     {% assign assigned_locations = customer.metafields.locations.assigned_locations.value %}
 
     {% if customer.metafields.custom.buyer_role.value == 'Sales Rep' and assigned_locations != blank %}
-      <div id="company-popup-overlay" class="company-overlay"></div>
 
       <div id="company-popup" class="company-modal">
         <div class="company-modal-header">
@@ -636,7 +635,12 @@
 
         <div class="company-modal-actions">
           <div id="company-popup-status" class="company-status"></div>
-          <button id="confirm-location-switch" class="company-btn primary">Switch</button>
+          <button id="confirm-location-switch" class="company-btn primary">
+            <span>Switch</span>
+              <div class="loading__spinner hidden">
+                   <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66"><circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle></svg>
+              </div>
+          </button>
         </div>
       </div>
 
@@ -656,7 +660,6 @@
 
           let selectedLocation = null;
 
-          // --- Cookie Helpers ---
           function setCookie(name, value, minutes) {
             const d = new Date();
             d.setTime(d.getTime() + minutes * 60 * 1000);
@@ -667,7 +670,6 @@
             return match ? match[2] : null;
           }
 
-          // --- Popup Show/Hide ---
           function showPopup() {
             overlay.style.visibility = 'visible';
             popup.classList.add('visible');
@@ -677,7 +679,6 @@
             popup.classList.remove('visible');
           }
 
-          // --- Dropdown behavior ---
           function filterDropdown() {
             const term = searchInput.value.toLowerCase().trim();
             const items = dropdownList.querySelectorAll('.dropdown-item');
@@ -718,14 +719,12 @@
             }
           });
 
-          // --- Popup Close ---
           closeBtn.addEventListener('click', hidePopup);
           overlay.addEventListener('click', hidePopup);
           document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') hidePopup();
           });
 
-          // --- On Page Load ---
           document.addEventListener('DOMContentLoaded', () => {
             const cookie = getCookie(cookieKey);
             if (!cookie) {
@@ -737,7 +736,6 @@
             if (openBtn) openBtn.addEventListener('click', showPopup);
           });
 
-          // --- Confirm Switch ---
           confirmBtn.addEventListener('click', async () => {
             if (!selectedLocation) {
               statusBox.innerHTML = '<div class="error">⚠ Please select a location.</div>';
@@ -745,7 +743,10 @@
             }
 
             confirmBtn.disabled = true;
-            statusBox.innerHTML = '<div class="loading"><span class="spinner"></span> Switching location...</div>';
+            confirmBtn.querySelector(".loading__spinner").classList.remove("hidden");
+            confirmBtn.querySelector("span").innerText = "";
+
+            {% comment %} statusBox.innerHTML = '<div class="loading"><span class="spinner"></span> Switching location...</div>'; {% endcomment %}
 
             try {
               const res = await fetch('/apps/api/transfer-salesrep', {
@@ -771,9 +772,7 @@
               )}&return_to=${returnTo}`;
               window.location.href = locHref;
             } catch (err) {
-              statusBox.innerHTML = `<div class="error">❌ Failed to switch: ${
-                err.error?.message || 'Unexpected error.'
-              }</div>`;
+              statusBox.innerHTML = `<div class="error">{{ settings.error_message }}</div>`;
               confirmBtn.disabled = false;
             }
           });

@@ -234,9 +234,11 @@
       </div>
       {% render 'header-search', input_id: 'Search-In-Modal' %}
       
-      {% if customer.metafields.custom.buyer_role.value == "Sales Rep" %}
+          {% assign assigned_locations = customer.metafields.locations.assigned_locations.value %}
+
+    {% if customer.metafields.custom.buyer_role.value == 'Sales Rep' and assigned_locations != blank %}
       <a href="javascript:void(0)" id="open-company-switch" class="header__icon">
-        <img src="https://cdn.shopify.com/s/files/1/0787/0395/2128/files/image.png?v=1760182463" alt="Switch company" width="26" height="26"/>
+        <img src="https://cdn.shopify.com/s/files/1/0787/0395/2128/files/image.png?v=1760182463" alt="Switch company" width="23" height="23"/>
       </a>
       {% endif %}
 
