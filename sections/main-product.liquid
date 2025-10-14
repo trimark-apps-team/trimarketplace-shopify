@@ -328,7 +328,7 @@
               </div>
               {% endif %}
             </div>
-              <button class="button" onclick="document.getElementById('popup').classList.remove('hidden')" style="color:{{ block.settings.tire_price_button_text_color }};font-size:{{ block.settings.tire_price_button_text_font_size }}px;background-color:{{ block.settings.tire_price_button_bg_color }};border-radius: {{ block.settings.tire_price_button_border_radius }}px">
+              <button class="button" onclick="document.getElementById('popup').classList.remove('hidden'); document.querySelector('.order-modal_overlay').style.visibility='visible';" style="color:{{ block.settings.tire_price_button_text_color }};font-size:{{ block.settings.tire_price_button_text_font_size }}px;background-color:{{ block.settings.tire_price_button_bg_color }};border-radius: {{ block.settings.tire_price_button_border_radius }}px">
                 {{ block.settings.tire_price_button_text }}
               </button>
               <div id="popup" class="popup hidden">
@@ -385,7 +385,7 @@
                       {% endfor %}
                     </tbody>
                   </table>
-                  <button class="button" onclick="document.getElementById('popup').classList.add('hidden')" style="color:{{ block.settings.close_button_text_color }};font-size:{{ block.settings.close_button_text_font_size }}px;background-color:{{ block.settings.close_button_bg_color }};border-radius: {{ block.settings.close_button_border_radius }}px">{{ block.settings.close_button_text }}</button>
+                  <button class="button" onclick="document.getElementById('popup').classList.add('hidden'); document.querySelector('.order-modal_overlay').style.visibility='hidden';" style="color:{{ block.settings.close_button_text_color }};font-size:{{ block.settings.close_button_text_font_size }}px;background-color:{{ block.settings.close_button_bg_color }};border-radius: {{ block.settings.close_button_border_radius }}px">{{ block.settings.close_button_text }}</button>
                 </div>
               </div>
             {% endif %}
@@ -2840,6 +2840,7 @@ function selectTier(row) {
 
   document.getElementById('popup').classList.add('hidden');
   document.querySelector("product-info .price-item--regular")?.classList.add("hidden");
+  document.querySelector('.order-modal_overlay').style.visibility='hidden';
 }
 
 function enablePriceEdit() {
