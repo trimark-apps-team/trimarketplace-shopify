@@ -755,8 +755,9 @@
                   domain,
                   salesRepCustomerId,
                   targetCompanyId: selectedLocation.companyId,
+                  targetLocationId: selectedLocation.locationId
                 }),
-              });
+              }); 
 
               const result = await res.json();
               if (!result.success) throw result;
