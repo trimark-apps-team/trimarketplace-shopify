@@ -794,7 +794,7 @@
     data-symbol="{{ localization.country.currency.symbol }}"
   >
     <div class="main-content">
-      {% unless customer %}
+      {% comment %} {% unless customer %}
         <script>
           // Detect if in Shopify Theme Editor or Preview
           const inShopifyAdmin = window.Shopify && window.Shopify.designMode;
@@ -805,7 +805,7 @@
             window.location.href = '/account/login';
           }
         </script>
-      {% endunless %}
+      {% endunless %} {% endcomment %}
 
       <a class="skip-to-content-link button visually-hidden" href="#MainContent">
         {{ 'accessibility.skip_to_text' | t }}
