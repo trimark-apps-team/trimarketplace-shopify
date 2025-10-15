@@ -801,19 +801,11 @@
     class=" gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %} template-{{ template.name }}"
     data-symbol="{{ localization.country.currency.symbol }}"
   >
-    <div class="main-content">
-      {% unless customer %}
-        <script>
-          // Detect if in Shopify Theme Editor or Preview
-          const inShopifyAdmin = window.Shopify && window.Shopify.designMode;
-          const inPreview = window.location.search.includes('preview_theme_id');
 
-          if (!inShopifyAdmin && !inPreview) {
-            // Redirect guests to login page
-            window.location.href = '/account/login?return_to=/';
-          }
-        </script>
-      {% endunless %}
+
+     {% if customer %}
+    <div class="main-content">
+    
 
       <a class="skip-to-content-link button visually-hidden" href="#MainContent">
         {{ 'accessibility.skip_to_text' | t }}
@@ -928,5 +920,17 @@
 
       <script src="{{ 'kevin-poc.js' | asset_url }}" defer="defer"></script>
     </div>
+
+
+  {% else %}
+    <script>
+      window.location.href = '/account/login?return_to=' + encodeURIComponent(window.location.pathname + window.location.search);
+    </script>
+    <noscript>
+      <p>You must <a href="/account/login">log in</a> to access this site.</p>
+    </noscript>
+  {% endif %}
+
+
   </body>
 </html>
