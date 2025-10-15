@@ -44,7 +44,8 @@
             autofocus
           {% endif %}
           placeholder="{{ 'customer.login_page.email' | t }}"
-        >
+        > 
+        <input type="hidden" name="return_to" value="/" />
         <label for="RecoverEmail">
           {{ 'customer.login_page.email' | t }}
         </label>
@@ -117,6 +118,7 @@
           {% endif %}
           placeholder="{{ 'customer.login_page.email' | t }}"
         >
+           <input type="hidden" name="return_to" value="/" />
         <label for="CustomerEmail">
           {{ 'customer.login_page.email' | t }}
         </label>
@@ -135,6 +137,7 @@
             {% endif %}
             placeholder="{{ 'customer.login_page.password' | t }}"
           >
+             <input type="hidden" name="return_to" value="/" />
           <label for="CustomerPassword">
             {{ 'customer.login_page.password' | t }}
           </label>
@@ -145,7 +148,7 @@
         </a>
       {%- endif -%}
 
-      <input type="hidden" name="return_to" value="/" />
+     
       <button>
         {{ 'customer.login_page.sign_in' | t }}
       </button>
