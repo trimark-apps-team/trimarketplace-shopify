@@ -588,11 +588,11 @@
                   `Customer: ${companyName}`
                 );
               } else {
-                showPopup("{{ settings.error_text }}", "{{ settings.error_message }}", "");
+                showPopup('Order Creation Failed', result.message || 'Something went wrong.', true);
               }
             } catch (error) {
               console.error(error);
-                showPopup("{{ settings.error_text }}", "{{ settings.error_message }}", "");
+              showPopup('Error', 'Unexpected error occurred.', true);
             }
           }
         });
@@ -602,6 +602,7 @@
     {% assign assigned_locations = customer.metafields.locations.assigned_locations.value %}
 
     {% if customer.metafields.custom.buyer_role.value == 'Sales Rep' and assigned_locations != blank %}
+      <div id="company-popup-overlay" class="company-overlay"></div>
 
       <div id="company-popup" class="company-modal">
         <div class="company-modal-header">
@@ -772,7 +773,9 @@
               )}&return_to=${returnTo}`;
               window.location.href = locHref;
             } catch (err) {
-              statusBox.innerHTML = `<div class="error">{{ settings.error_message }}</div>`;
+              statusBox.innerHTML = `<div class="error">❌ Failed to switch: ${
+                err.error?.message || 'Unexpected error.'
+              }</div>`;
               confirmBtn.disabled = false;
             }
           });
