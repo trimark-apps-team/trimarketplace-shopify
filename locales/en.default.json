@@ -632,6 +632,9 @@
       "location_selection": {
         "continue_to_store": "Continue to Store",
         "list_accessibility_label": "Locations List"
+      },
+      "addresses": {
+        "shipping_address_card_title": "Shipping Address"
       }
     },
     "navigation_and_structure": {
