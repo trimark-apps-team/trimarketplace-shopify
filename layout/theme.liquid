@@ -805,7 +805,7 @@
 
           if (!inShopifyAdmin && !inPreview) {
             // Redirect guests to login page
-            window.location.href = '/account/login';
+            window.location.href = '/account/login?return_to=/';
           }
         </script>
       {% endunless %}
