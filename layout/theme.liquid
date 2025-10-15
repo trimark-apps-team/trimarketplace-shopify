@@ -40,7 +40,7 @@
 
     <script>
   window.referrerUrl = "{{ request.referrer | escape }}";
-  console.log("Referrer:", window.referrerUrl);
+  console.log("Referrer:", window);
 </script>
 
     {%- if settings.animations_reveal_on_scroll -%}
