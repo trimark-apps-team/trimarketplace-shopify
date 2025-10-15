@@ -44,8 +44,7 @@
             autofocus
           {% endif %}
           placeholder="{{ 'customer.login_page.email' | t }}"
-        > 
-        <input type="hidden" name="return_to" value="/" />
+        >
         <label for="RecoverEmail">
           {{ 'customer.login_page.email' | t }}
         </label>
@@ -118,7 +117,6 @@
           {% endif %}
           placeholder="{{ 'customer.login_page.email' | t }}"
         >
-           <input type="hidden" name="return_to" value="/" />
         <label for="CustomerEmail">
           {{ 'customer.login_page.email' | t }}
         </label>
@@ -137,7 +135,6 @@
             {% endif %}
             placeholder="{{ 'customer.login_page.password' | t }}"
           >
-             <input type="hidden" name="return_to" value="/" />
           <label for="CustomerPassword">
             {{ 'customer.login_page.password' | t }}
           </label>
@@ -148,7 +145,6 @@
         </a>
       {%- endif -%}
 
-     
       <button>
         {{ 'customer.login_page.sign_in' | t }}
       </button>
@@ -172,6 +168,18 @@
     </div>
   {%- endif -%}
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Check if on any /account page
+    if (window.location.pathname.includes('/account')) {
+      // If Shopify has a customer object (logged in)
+      if (window.Shopify && Shopify.customer) {
+        window.location.href = '/'; // Redirect to homepage
+      }
+    }
+  });
+</script>
 
 {% schema %}
 {
