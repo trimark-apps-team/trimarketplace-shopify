@@ -924,12 +924,20 @@
 
   {% else %}
     <script>
-      window.location.href = '/account/login?return_to=/pages/order-entry?country=US';
+      window.location.href = '/account/login';
     </script>
     <noscript>
       <p>You must <a href="/account/login">log in</a> to access this site.</p>
     </noscript>
   {% endif %}
+
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    if (window.location.pathname === "/account/orders") {
+      window.location.href = "/";
+    }
+  });
+</script>
 
 
   </body>
