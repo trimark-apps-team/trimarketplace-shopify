@@ -845,8 +845,9 @@
                     {% if customer.current_company.name != blank %}
                       <p><span>Company:</span> {{ customer.current_company.name }}</p>
                     {% endif %}
-                
+                      {% if customer.current_company.name != blank %}
                       <p><span>Location:</span> {{ customer.current_location.name }}</p>
+                      {% endif %}
                     
                   </div>
                 </div>
