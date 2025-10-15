@@ -38,6 +38,11 @@
     <script src="{{ 'search-form.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'accessibe-loader.js' | asset_url }}" defer="defer"></script>
 
+    <script>
+  window.referrerUrl = "{{ request.referrer | escape }}";
+  console.log("Referrer:", window.referrerUrl);
+</script>
+
     {%- if settings.animations_reveal_on_scroll -%}
       <script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
