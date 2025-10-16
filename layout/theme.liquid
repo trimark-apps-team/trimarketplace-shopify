@@ -770,7 +770,6 @@
               if (!result.success) throw result;
 
               setCookie(cookieKey, 'yes', 59);
-              document.querySelector('.main-content')?.classList.remove('hidden-by-cookie');
 
               const returnTo = encodeURIComponent(`{{ request.path }}`);
               const locHref = `https://${domain}/company_location/update?location_id=${encodeURIComponent(
