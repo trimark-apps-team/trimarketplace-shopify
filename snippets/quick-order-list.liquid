@@ -153,9 +153,9 @@ document.addEventListener('DOMContentLoaded', async function () {
   });
 
   collectionSearch.addEventListener('input', function () {
-    const val = this.value.toLowerCase();
+    const val = this.value?.toLowerCase();
     document.querySelectorAll('#quick-order-collections label').forEach(label => {
-      label.style.display = label.textContent.toLowerCase().includes(val) ? '' : 'none';
+      label.style.display = label.textContent?.toLowerCase().includes(val) ? '' : 'none';
     });
   });
 
@@ -360,15 +360,15 @@ document.addEventListener('DOMContentLoaded', async function () {
     const row = document.createElement('tr');
     row.classList.add('variant-item');
     row.dataset.variantId = variant.id.split("/").pop();
-    row.dataset.title = product.title.toLowerCase();
+    row.dataset.title = product.title?.toLowerCase();
     row.dataset.price = variant.price;
     row.dataset.inventory = variant.inventoryQuantity;
-    row.dataset.type = product.productType.toLowerCase();
-    row.dataset.collection = product.tags.join(',').toLowerCase();
-    row.dataset.sku = variant.sku.toLowerCase();
+    row.dataset.type = product.productType?.toLowerCase();
+    row.dataset.collection = product.tags.join(',')?.toLowerCase();
+    row.dataset.sku = variant.sku?.toLowerCase();
     row.dataset.recent = product.recent;
     row.dataset.collection = product.collections?.edges
-      .map(c => c.node.handle.toLowerCase())
+      .map(c => c.node.handle?.toLowerCase())
       .join(',');
 
     const orderedDate = product.purchasedDate?.value
@@ -455,15 +455,15 @@ document.addEventListener('DOMContentLoaded', async function () {
   }
 
   function applyFilters() {
-    const searchVal = searchInput.value.toLowerCase();
+    const searchVal = searchInput.value?.toLowerCase();
     const sortVal = sortSelect.value;
 
     filteredProducts = allProducts.filter(p => {
-      const title = p.title.toLowerCase();
-      const type = p.productType.toLowerCase();
-      const sku = p.variants.edges[0]?.node.sku.toLowerCase() || '';
+      const title = p.title?.toLowerCase();
+      const type = p.productType?.toLowerCase();
+      const sku = p.variants.edges[0]?.node.sku?.toLowerCase() || '';
       const price = p.variants.edges[0]?.node.price || '';
-      const productCollections = p.collections?.edges.map(c => c.node.handle.toLowerCase()) || [];
+      const productCollections = p.collections?.edges.map(c => c.node.handle?.toLowerCase()) || [];
 
       const matchesSearch =
         title.includes(searchVal) ||
@@ -473,7 +473,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         productCollections.some(c => c.includes(searchVal));
 
       const matchesCollection =
-        !selectedCollectionHandle || productCollections.includes(selectedCollectionHandle.toLowerCase());
+        !selectedCollectionHandle || productCollections.includes(selectedCollectionHandle?.toLowerCase());
 
       return matchesSearch && matchesCollection;
     });
