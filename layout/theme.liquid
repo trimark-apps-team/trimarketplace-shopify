@@ -38,6 +38,7 @@
     <script src="{{ 'search-form.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'accessibe-loader.js' | asset_url }}" defer="defer"></script>
 
+
     <script>
   window.referrerUrl = "{{ request.referrer | escape }}";
   console.log("Referrer:", window);
@@ -794,6 +795,120 @@
       window.hulkappsWishlist.baseURL = '/apps/advanced-wishlist/api';
       window.hulkappsWishlist.hasAppBlockSupport = '1';
     </script>
+
+
+
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", async () => {
+  const domainName = "{{ shop.domain }}";
+  const customerId = "{{ customer.id }}"; 
+
+  const authKey = "{{ shop.metafields.custom.allow_sales_order }}";
+
+  const wishlistContainer = document.querySelector("#wishlist-container");
+  const savedCartContainer = document.querySelector("#savedcart-container");
+
+  function createCard(title, image, url, type) {
+    const div = document.createElement("div");
+    div.className = "item-card";
+    div.innerHTML = `
+      <a href="${url}" target="_blank" class="block">
+        <img src="${image}" alt="${title}" class="item-image"/>
+        <div class="item-title">${title}</div>
+        <div class="item-type">${type}</div>
+      </a>
+    `;
+    return div;
+  }
+
+  async function fetchWishlist() {
+    try {
+      const encryptToken = btoa(
+        CryptoJS.SHA256(domainName + customerId).toString()
+      );
+
+      const url = new URL("https://advanced-wishlist.hulkapps.com/api/public/v1/wishlist/lists");
+      url.searchParams.append("customer_id", customerId);
+
+      const headers = {
+        "Authorization": `Bearer ${authKey}`,
+        "Encrypt-token": encryptToken,
+        "Accept": "application/json"
+      };
+
+      const res = await fetch(url, { headers });
+      const data = await res.json();
+
+      if (Array.isArray(data)) {
+        data.forEach(list => {
+          list.products.forEach(product => {
+            const card = createCard(
+              product.title,
+              product.image || "https://cdn.shopify.com/s/files/no-image.png",
+              `https://${domainName}/products/${product.handle}`,
+              "Wishlist"
+            );
+            wishlistContainer.appendChild(card);
+          });
+        });
+      }
+    } catch (err) {
+      console.error("Wishlist Error:", err);
+    }
+  }
+
+  async function fetchSavedCarts() {
+    try {
+      const url = `https://cart-saver.activatedapps.com/api/v1/carts?page=1&per_page=20&logged_in_customer_id=${customerId}&shop=${domainName}`;
+      const res = await fetch(url);
+      const data = await res.json();
+
+      if (Array.isArray(data.results)) {
+        data.results.forEach(cart => {
+          const card = createCard(
+            cart.title,
+            cart.featuredImage || "https://cdn.shopify.com/s/files/no-image.png",
+            cart.url,
+            "Saved Cart"
+          );
+          savedCartContainer.appendChild(card);
+        });
+      }
+    } catch (err) {
+      console.error("Saved Cart Error:", err);
+    }
+  }
+
+  await Promise.all([fetchWishlist(), fetchSavedCarts()]);
+});
+</script>
+
+<style>
+  .item-card {
+    display: inline-block;
+    width: 180px;
+    margin: 10px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.2s ease;
+  }
+  .item-card:hover { transform: scale(1.04); }
+  .item-image {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+  }
+  .item-title { font-size: 14px; font-weight: 600; padding: 8px; }
+  .item-type { font-size: 12px; color: #666; margin-bottom: 8px; }
+</style>
+
   </head>
 
   <body
@@ -801,10 +916,10 @@
     data-symbol="{{ localization.country.currency.symbol }}"
   >
 
-
      {% if customer %}
     <div class="main-content">
-    
+    <div id="wishlist-container"></div>
+    <div id="savedcart-container"></div>
 
       <a class="skip-to-content-link button visually-hidden" href="#MainContent">
         {{ 'accessibility.skip_to_text' | t }}
