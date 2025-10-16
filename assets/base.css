@@ -4055,3 +4055,7 @@ body .variant-item__quantity-wrapper .quick-order_loader {
   width: 16px;
   height: 16px;
 }
+
+.button__cell {
+  padding: 24px;
+}
