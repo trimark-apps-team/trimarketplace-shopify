@@ -4054,8 +4054,7 @@ body .variant-item__quantity-wrapper .quick-order_loader {
 .icon-feature-grid .arrow-icon {
   width: 16px;
   height: 16px;
-}
-
-.button__cell {
+} 
+.main-action-cell .button__cell {
   padding: 24px;
 }
