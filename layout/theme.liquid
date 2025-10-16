@@ -802,7 +802,7 @@
 
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+{% comment %} <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", async () => {
   const domainName = "{{ shop.domain }}";
@@ -818,7 +818,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     div.className = "item-card";
     div.innerHTML = `
       <a href="${url}" target="_blank" class="block">
-        <img src="${image}" alt="${title}" class="item-image"/>
         <div class="item-title">${title}</div>
         <div class="item-type">${type}</div>
       </a>
@@ -846,15 +845,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       if (Array.isArray(data)) {
         data.forEach(list => {
-          list.products.forEach(product => {
             const card = createCard(
-              product.title,
-              product.image || "https://cdn.shopify.com/s/files/no-image.png",
-              `https://${domainName}/products/${product.handle}`,
-              "Wishlist"
+              list.name,
+              list.total_products
             );
             wishlistContainer.appendChild(card);
-          });
         });
       }
     } catch (err) {
@@ -864,11 +859,19 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   async function fetchSavedCarts() {
     try {
-      const url = `https://cart-saver.activatedapps.com/api/v1/carts?page=1&per_page=20&logged_in_customer_id=${customerId}&shop=${domainName}`;
+      const url = `/a/saved-carts`;
       const res = await fetch(url);
-      const data = await res.json();
+      const data = await res.text();
 
-      if (Array.isArray(data.results)) {
+      const parser = new DOMParser();
+
+      const doc = parser.parseFromString(data, 'text/html');
+
+      const element = doc.querySelector("tbody");
+
+      console.log(element,doc);
+ 
+      {% comment %} if (Array.isArray(data.results)) {
         data.results.forEach(cart => {
           const card = createCard(
             cart.title,
@@ -878,13 +881,13 @@ document.addEventListener("DOMContentLoaded", async () => {
           );
           savedCartContainer.appendChild(card);
         });
-      }
+      } {% endcomment %}
     } catch (err) {
       console.error("Saved Cart Error:", err);
-    }
+    } 
   }
 
-  await Promise.all([fetchWishlist(), fetchSavedCarts()]);
+  await Promise.all([fetchSavedCarts()]);
 });
 </script>
 
@@ -907,7 +910,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
   .item-title { font-size: 14px; font-weight: 600; padding: 8px; }
   .item-type { font-size: 12px; color: #666; margin-bottom: 8px; }
-</style>
+</style> {% endcomment %}
 
   </head>
 
@@ -918,8 +921,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
      {% if customer %}
     <div class="main-content">
-    <div id="wishlist-container"></div>
-    <div id="savedcart-container"></div>
+    {% comment %} <div id="wishlist-container"></div>
+    <div id="savedcart-container"></div> {% endcomment %}
 
       <a class="skip-to-content-link button visually-hidden" href="#MainContent">
         {{ 'accessibility.skip_to_text' | t }}
