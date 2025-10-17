@@ -850,7 +850,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const data = await res.json();
 
       if (Array.isArray(data)) {
-        data.slice(0, 2).forEach(list => {
+        data.forEach(list => {
             const card = createWishlistCard(
               list.name,
               list.total_products
@@ -877,12 +877,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       console.log(element);
 
-      element.slice(0, 2).forEach(item => {
+      element.forEach(item => {
          const card = createSavedCartCard(
             item.querySelector("a").href,
             item.querySelector("a").innerText,
             item.querySelector(".cs-center-text span").innerText
-          ); 
+          );
           savedCartContainer.appendChild(card);
       })
 
