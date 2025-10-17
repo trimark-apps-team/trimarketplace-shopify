@@ -6,16 +6,24 @@
           {%- when 'feature' -%}
             <div class="feature-card">
          
-  <div class="feature-heading">
-    {% if block.settings.icon != blank %}
-      <img src="{{ block.settings.icon | img_url: '64x64' }}" alt="" class="feature-icon">
-    {% endif %}
-    {{ block.settings.heading }}
-  </div>
+              <div class="feature-heading">
+                {% if block.settings.icon != blank %}
+                  <img src="{{ block.settings.icon | img_url: '64x64' }}" alt="" class="feature-icon">
+                {% endif %}
+                {{ block.settings.heading }}
+              </div>
 
+              {% if block.settings.description != blank %}
               <div class="feature-description" >
                 {{ block.settings.description }}
               </div>
+              {% endif %}
+              
+              {% if block.settings.custom-liquid != blank %}
+              <div class="feature-data-list">
+                {{ block.settings.custom-liquid }}
+              </div>
+              {% endif %}
              
                 <a href="{% if block.settings.app_url %}{{ block.settings.app_url }}{% else %}{{ block.settings.link_url }}{% endif %}" class="feature-card-link">
                   {{ block.settings.link_label }}
@@ -334,6 +342,11 @@ document.addEventListener("DOMContentLoaded", function(){
           "type": "textarea",
           "id": "description",
           "label": "Description"
+        },
+        {
+          "type": "liquid",
+          "id": "custom-liquid",
+          "label": "Custom Liquid"
         },
         {
           "type": "text",

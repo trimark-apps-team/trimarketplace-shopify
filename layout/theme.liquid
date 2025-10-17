@@ -795,14 +795,8 @@
       window.hulkappsWishlist.baseURL = '/apps/advanced-wishlist/api';
       window.hulkappsWishlist.hasAppBlockSupport = '1';
     </script>
-
-
-
-
-
-
-
-{% comment %} <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", async () => {
   const domainName = "{{ shop.domain }}";
@@ -810,17 +804,29 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const authKey = "{{ shop.metafields.custom.wishlist_app_token }}";
 
-  const wishlistContainer = document.querySelector("#wishlist-container");
-  const savedCartContainer = document.querySelector("#savedcart-container");
+  const wishlistContainer = document.querySelector(".wishlist-list_data");
+  const savedCartContainer = document.querySelector(".saved-cart-list_data");
 
-  function createCard(title, image, url, type) {
-    const div = document.createElement("div");
+  function createSavedCartCard(url, title, count) {
+    const div = document.createElement("ul");
     div.className = "item-card";
     div.innerHTML = `
-      <a href="${url}" target="_blank" class="block">
+      <li class="block">
+        <a href="${url}" target="_blank" class="item-title">${title}</a>
+        <div class="item-count">${count}</div>
+      </li>
+    `;
+    return div;
+  }
+
+  function createWishlistCard(url, title, count) {
+    const div = document.createElement("ul");
+    div.className = "item-card";
+    div.innerHTML = `
+      <li class="block">
         <div class="item-title">${title}</div>
-        <div class="item-type">${type}</div>
-      </a>
+        <div class="item-count">${count}</div>
+      </li>
     `;
     return div;
   }
@@ -844,8 +850,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       const data = await res.json();
 
       if (Array.isArray(data)) {
-        data.forEach(list => {
-            const card = createCard(
+        data.slice(0, 2).forEach(list => {
+            const card = createWishlistCard(
               list.name,
               list.total_products
             );
@@ -867,50 +873,27 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       const doc = parser.parseFromString(data, 'text/html');
 
-      const element = doc.querySelector("tbody");
+      const element = doc.querySelectorAll("tbody tr");
 
-      console.log(element,doc);
- 
-      {% comment %} if (Array.isArray(data.results)) {
-        data.results.forEach(cart => {
-          const card = createCard(
-            cart.title,
-            cart.featuredImage || "https://cdn.shopify.com/s/files/no-image.png",
-            cart.url,
-            "Saved Cart"
-          );
+      console.log(element);
+
+      element..slice(0, 2).forEach(item => {
+         const card = createSavedCartCard(
+            item.querySelector("a").href,
+            item.querySelector("a").innerText,
+            item.querySelector(".cs-center-text span").innerText
+          ); 
           savedCartContainer.appendChild(card);
-        });
-      } {% endcomment %}
+      })
+
     } catch (err) {
       console.error("Saved Cart Error:", err);
     } 
   }
 
-  await Promise.all([fetchSavedCarts()]);
+  await Promise.all([fetchSavedCarts(), fetchWishlist()]);
 });
 </script>
-
-<style>
-  .item-card {
-    display: inline-block;
-    width: 180px;
-    margin: 10px;
-    text-align: center;
-    border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    overflow: hidden;
-    transition: transform 0.2s ease;
-  }
-  .item-card:hover { transform: scale(1.04); }
-  .item-image {
-    width: 100%;
-    height: 160px;
-    object-fit: cover;
-  }
-  .item-title { font-size: 14px; font-weight: 600; padding: 8px; }
-  .item-type { font-size: 12px; color: #666; margin-bottom: 8px; }
-</style> {% endcomment %}
 
   </head>
 
@@ -921,8 +904,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
      {% if customer %}
     <div class="main-content">
-    {% comment %} <div id="wishlist-container"></div>
-    <div id="savedcart-container"></div> {% endcomment %}
 
       <a class="skip-to-content-link button visually-hidden" href="#MainContent">
         {{ 'accessibility.skip_to_text' | t }}

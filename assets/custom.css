@@ -1180,3 +1180,16 @@ button.quick-add__submit::after, #cart-click::after {
   display: none !important;
 }
 
+.block {
+  display: flex;
+  justify-content: space-between;
+}
+
+.item-card {
+  margin: 0;
+  padding: 0;
+}
+
+.saved-cart-list_data, .wishlist-list_data, .approval-list_data {
+  margin-block: 3px;
+}

@@ -1,0 +1,7 @@
+{% for order in customer.orders %} 
+    Order {{ order.name }} {{ order.financial_status_label }}
+    {{ order.item_count }} Items
+      {% if forloop.index == 2 %}
+         {% break %} 
+      {% endif %}
+{% endfor %}
