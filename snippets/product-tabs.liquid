@@ -48,9 +48,8 @@
         {% if variant.weight and variant.weight > 0 %}
           <tr>
             <td>Weight</td>
-            <td>{{ variant.weight }}</td>
+            <td>{{ variant.weight | weight_with_unit }}</td>
           </tr>
-          <p>Weight: {{ variant.weight | weight_with_unit }}</p>
         {% endif %}
         {% if product.metafields.custom["1_erp_id_marlinn_ipics"] != blank %}
           <tr>
