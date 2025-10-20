@@ -44,6 +44,14 @@
           <td>{{ product.selected_or_first_available_variant.sku }}</td>
         </tr>
 
+        {% assign variant = product.selected_or_first_available_variant %}
+        {% if variant.weight and variant.weight > 0 %}
+          <tr>
+            <td>Weight</td>
+            <td>{{ variant.weight }}</td>
+          </tr>
+          <p>Weight: {{ variant.weight | weight_with_unit }}</p>
+        {% endif %}
         {% if product.metafields.custom["1_erp_id_marlinn_ipics"] != blank %}
           <tr>
             <td class="spec-label">Marlinn ERP ID</td>
