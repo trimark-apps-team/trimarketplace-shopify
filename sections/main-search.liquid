@@ -70,7 +70,7 @@
 {% endcomment %}
 
 {% if shop.permanent_domain contains 'qa-marlinn-trimarketplace.myshopify.com' %}
-  {# do nothing here — Algolia’s app block will render right after this section #}
+  {% comment %} {# do nothing here — Algolia’s app block will render right after this section #} {% endcomment %}
 {% else %}
   {% render 'trimark-default-search' %}
 {% endif %}
