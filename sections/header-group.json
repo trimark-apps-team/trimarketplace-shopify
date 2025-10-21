@@ -29,9 +29,16 @@
         "padding_top": 8,
         "padding_bottom": 12
       }
+    },
+    "1761075207c81adb05": {
+      "type": "apps",
+      "settings": {
+        "include_margins": true
+      }
     }
   },
   "order": [
-    "header"
+    "header",
+    "1761075207c81adb05"
   ]
 }
