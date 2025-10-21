@@ -796,7 +796,7 @@
       window.hulkappsWishlist.hasAppBlockSupport = '1';
     </script>
     
-{% comment %} <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", async () => {
   const domainName = "{{ shop.domain }}";
@@ -893,7 +893,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   await Promise.all([fetchSavedCarts(), fetchWishlist()]);
 });
-</script> {% endcomment %}
+</script>
 
   {% include 'punchout' %}
 {% include 'punchout_settings' %}
@@ -904,8 +904,21 @@ document.addEventListener("DOMContentLoaded", async () => {
     data-symbol="{{ localization.country.currency.symbol }}"
   >
 
-  {% if customer %}
+  
     <div class="main-content">
+
+      {% unless customer %}
+        <script>
+          // Detect if in Shopify Theme Editor or Preview
+          const inShopifyAdmin = window.Shopify && window.Shopify.designMode;
+          const inPreview = window.location.search.includes('preview_theme_id');
+
+          if (!inShopifyAdmin && !inPreview) {
+            // Redirect guests to login page
+            window.location.href = '/account/login?return_to=/';
+          }
+        </script>
+      {% endunless %}
 
       <a class="skip-to-content-link button visually-hidden" href="#MainContent">
         {{ 'accessibility.skip_to_text' | t }}
@@ -1022,14 +1035,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     </div>
 
 
-  {% comment %} {% else %}
+   {% comment %} {% else %}
     <script>
       window.location.href = '/account/login';
     </script>
     <noscript>
       <p>You must <a href="/account/login">log in</a> to access this site.</p>
     </noscript> {% endcomment %}
-  {% endif %}
+
 
 
 
