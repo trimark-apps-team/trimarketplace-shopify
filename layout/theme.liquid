@@ -904,7 +904,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     data-symbol="{{ localization.country.currency.symbol }}"
   >
 
-     {% if customer %}
+  {% if customer %}
     <div class="main-content">
 
       <a class="skip-to-content-link button visually-hidden" href="#MainContent">
@@ -1022,13 +1022,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     </div>
 
 
-  {% else %}
+  {% comment %} {% else %}
     <script>
       window.location.href = '/account/login';
     </script>
     <noscript>
       <p>You must <a href="/account/login">log in</a> to access this site.</p>
-    </noscript>
+    </noscript> {% endcomment %}
   {% endif %}
 
 
