@@ -63,9 +63,21 @@
   }
 {%- endstyle -%}
 
-{% render 'trimark-default-search' %}
+{% comment %}
+  Conditional search routing
+  - For qa-marlinn-trimarketplace.myshopify.com → let Algolia's app block render automatically
+  - For all other stores → render the default Shopify search layout
+{% endcomment %}
 
-{% render 'trimark-algolia-search' %}
+{% if shop.permanent_domain contains 'qa-marlinn-trimarketplace.myshopify.com' %}
+  {# do nothing here — Algolia’s app block will render right after this section #}
+{% else %}
+  {% render 'trimark-default-search' %}
+{% endif %}
+
+
+
+
 {% comment %} {% if section.settings.image_shape == 'arch' %}
   {{ 'mask-arch.svg' | inline_asset_content }}
 {%- endif -%} {% endcomment %}
