@@ -64,6 +64,8 @@
 {%- endstyle -%}
 
 {% render 'trimark-default-search' %}
+
+{% render 'trimark-algolia-search' %}
 {% comment %} {% if section.settings.image_shape == 'arch' %}
   {{ 'mask-arch.svg' | inline_asset_content }}
 {%- endif -%} {% endcomment %}
