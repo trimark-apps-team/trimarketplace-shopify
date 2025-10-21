@@ -796,7 +796,7 @@
       window.hulkappsWishlist.hasAppBlockSupport = '1';
     </script>
     
-<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+{% comment %} <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", async () => {
   const domainName = "{{ shop.domain }}";
@@ -893,7 +893,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   await Promise.all([fetchSavedCarts(), fetchWishlist()]);
 });
-</script>
+</script> {% endcomment %}
 
   {% include 'punchout' %}
 {% include 'punchout_settings' %}
