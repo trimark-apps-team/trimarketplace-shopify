@@ -1,0 +1,14 @@
+{%- comment -%}
+  Renders Algolia InstantSearch when enabled in the store’s theme.
+  This snippet doesn’t rely on block IDs — Shopify handles them.
+{%- endcomment -%}
+
+<div id="algolia-search-container" class="page-width">
+  {% section 'apps' %}
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log('Algolia InstantSearch active for {{ shop.permanent_domain }}');
+  });
+</script>
