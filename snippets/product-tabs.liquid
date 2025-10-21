@@ -47,7 +47,7 @@
         {% assign variant = product.selected_or_first_available_variant %}
         {% if variant.weight and variant.weight > 0 %}
           <tr>
-            <td>Weight</td>
+            <td>Shipping Weight</td>
             <td>{{ variant.weight | weight_with_unit }}</td>
           </tr>
         {% endif %}
