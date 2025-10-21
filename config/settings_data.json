@@ -264,6 +264,11 @@
           "collection_count_background_color": "#5c6ac4",
           "collection_count_color": "#ffffff"
         }
+      },
+      "11735689235857492391": {
+        "type": "shopify://apps/algolia-ai-search-discovery/blocks/autocomplete/57bb7f86-d5fe-4d43-96ca-3953324494cf",
+        "disabled": false,
+        "settings": {}
       }
     },
     "color_schemes": {
