@@ -6,7 +6,12 @@
 document.addEventListener('DOMContentLoaded', function () {
   const { algoliasearch, autocomplete, getAlgoliaResults } = algoliaShopify.externals;
 
-  const searchClient = algoliaShopify.searchClient; // already initialized with your app ID & key
+  const searchClient =
+    algoliaShopify.searchClient ||
+    algoliaShopify.externals.algoliasearch(
+      algoliaShopify.config.app_id,
+      algoliaShopify.config.search_api_key
+    );
   const indexName = `${algoliaShopify.config.index_prefix}products`; // reuse their prefix
 
   autocomplete({
