@@ -46,7 +46,7 @@
     <script src="{{ 'price-per-item.js' | asset_url }}" defer="defer"></script>
   {%- endif -%}
 
-  {% assign domain = shop.permanent_domain | downcase %}
+  
 
 
 
@@ -120,6 +120,7 @@
                   <span class="product-label out-of-stock-label">NOT AVAILABLE</span>
                   {% endif %}   
 
+                  
                   {% assign domain = shop.permanent_domain | downcase %}
                   {% assign erp_id_key = '' %}
 
