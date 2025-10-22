@@ -52,6 +52,7 @@
                 const variantId = item.objectID?.split('_').pop();
                 const price = item.price ;
                 const title = item.title;
+                const vendor = item.vendor;
 
 
 
@@ -71,6 +72,9 @@
                           
                           <div class="aa-ItemContentTitle">
                             ${title || ''}
+                          </div>
+                          <div class="aa-ItemContentVendor">
+                            ${vendor || ''}
                           </div>
                           <div class="aa-ItemContentPrice">$${price || ''}</div>
                         </div>
