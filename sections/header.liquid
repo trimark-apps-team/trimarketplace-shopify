@@ -323,6 +323,10 @@
   </header>
   {% unless template == 'search' %}
 <div class="page-width">
+
+{% if shop.permanent_domain contains 'qa-marlinn-trimarketplace.myshopify.com' %}
+  {% render 'trimark-algolia-search-input' %}
+  {% else %}
   {% if settings.predictive_search_enabled %}
     <predictive-search data-loading-text="{{ 'accessibility.loading' | t }}">
   {% endif %}
@@ -330,6 +334,7 @@
   {% if settings.predictive_search_enabled %}
     </predictive-search>
   {% endif %}
+{% endif %}
 </div>
 
 
