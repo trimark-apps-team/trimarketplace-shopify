@@ -909,32 +909,29 @@ document.addEventListener("DOMContentLoaded", async () => {
     <div class="main-content">
 
       {% unless customer %}
-        <script>
-        // --- Detect if in Shopify Admin, Theme Editor, or Preview ---
+      <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          const referrer = document.referrer || '';
+          const url = window.location.href;
+          const isInIframe = window.top !== window.self;
 
-        const referrer = document.referrer || '';
-        const url = window.location.href;
+          const isAdminRef = referrer.includes('admin.shopify.com');
+          const isDesignMode = !!(window.Shopify && window.Shopify.designMode);
+          const isPreviewURL = url.includes('preview_theme_id') || url.includes('preview=true');
 
-        const isInIframe = window.top !== window.self;
+          const isShopifyInternal = isInIframe && (isAdminRef || isDesignMode || isPreviewURL);
+          const isCustomer = {{ customer | json }} !== null;
 
-        // Shopify Admin (e.g. theme editor, admin preview, etc.)
-        const isAdminRef = referrer.includes('admin.shopify.com');
+          // Debug (optional)
+          console.debug('Detection:', { isInIframe, isAdminRef, isDesignMode, isPreviewURL, isCustomer, isShopifyInternal });
 
-        // Theme Editor (Shopify injects `window.Shopify.designMode = true`)
-        const isDesignMode = !!(window.Shopify && window.Shopify.designMode);
+          if (!isShopifyInternal && !isCustomer) {
+            // Redirect guests to login page
+            window.location.href = '/account/login?return_to=/';
+          }
+        });
+      </script>
 
-        // Preview mode (preview_theme_id or ?preview=true)
-        const isPreviewURL = url.includes('preview_theme_id') || url.includes('preview=true');
-
-        // Combined flag
-        const isShopifyInternal = isInIframe && (isAdminRef || isDesignMode || isPreviewURL);
-
-        // --- Action ---
-        if (!isShopifyInternal) {
-          // Redirect guests to login page
-          window.location.href = '/account/login?return_to=/';
-        }
-        </script>
 
       {% endunless %}
 
