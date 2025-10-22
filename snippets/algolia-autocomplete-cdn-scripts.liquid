@@ -43,29 +43,47 @@
                 const price = item.price ;
                 const title = item.title;
                 return html`
-                  <div class="aa-ItemWrapper">
-                    <a href="${productUrl}" class="aa-ItemLink">
-                      <div class="aa-ItemContent">
-                        <div class="aa-ItemPicture aa-ItemPicture--loaded">
-                          <img
-                            src="${item.image || item.image_url}"
-                            alt="${item.title}"
-                          />
-                        </div>
-                        <div class="aa-ItemContentBody">
-                          <div class="aa-ItemContentTitleWrapper">
+                <div class="aa-SourceHeader">
+                  <div class="aa-SourceHeader">
+                    <span class="aa-SourceHeaderTitle">Products for foo</span>
+                    <div class="aa-SourceHeaderLine"></div>
+                  </div>
+                </div>
+
+                <div class="aa-ItemWrapper">
+                  <a href="${productUrl}" class="aa-ItemLink">
+                    <div class="aa-ItemContent">
+                      <div class="aa-ItemPicture aa-ItemPicture--loaded">
+                        <img
+                          src="${item.image || item.image_url}"
+                          alt="${item.title}"
+                        />
+                      </div>
+
+                      <div class="aa-ItemContentBody">
+                        <div class="aa-ItemContentTitleWrapper">
                           <div class="aa-ItemContentTitle">
-                          ${components.Highlight({ hit: item, attribute: 'title' })}
+                            ${components.Highlight({
+                              hit: item,
+                              attribute: 'title',
+                            })}
                           </div>
-                          </div>
-                          <div class="aa-ItemContentVendor">
-                            ${components.Highlight({ hit: item, attribute: 'vendor' })}
-                          </div>
-                          <div class="aa-ItemContentPrice">$${price || ''}</div>
+                        </div>
+
+                        <div class="aa-ItemContentVendor">
+                          ${components.Highlight({
+                            hit: item,
+                            attribute: 'vendor',
+                          })}
+                        </div>
+
+                        <div class="aa-ItemContentPrice">
+                          $${price || ''}
                         </div>
                       </div>
-                    </a>
-                  </div>
+                    </div>
+                  </a>
+                </div>
                 `;
               },
 
