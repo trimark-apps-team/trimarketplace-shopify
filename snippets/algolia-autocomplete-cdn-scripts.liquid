@@ -51,6 +51,8 @@
                 const productUrl = item.url || `/products/${item.handle}`;
                 const variantId = item.objectID?.split('_').pop();
                 const price = item.price ;
+                const title = item.title;
+
 
 
                 return html`
@@ -61,13 +63,14 @@
                           <img
                             src="${item.image || item.image_url}"
                             alt="${item.name}"
-                            width="50"
-                            height="50"
+                            width="200"
+                            height="auto"
                           />
                         </div>
                         <div class="aa-ItemContentBody">
+                          
                           <div class="aa-ItemContentTitle">
-                            ${components.Highlight({ hit: item, attribute: 'name' })}
+                            ${title}
                           </div>
                           <div class="aa-ItemContentPrice">$${price || ''}</div>
                         </div>
