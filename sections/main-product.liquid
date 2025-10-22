@@ -121,7 +121,7 @@
                   {% endif %}   
 
                   {% capture erp_id_key %}
-                    {% render 'triamrk-erp-id-mapper' %}
+                    {% render 'trimark-erp-id-mapper' %}
                   {% endcapture %}
                   {}% assign erp_id_key = erp_id_key | strip %}
                 <p>Item Number: <span class="trimark-red">{{ product.metafields.custom[erp_id_key] }}</span></p>
