@@ -893,6 +893,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   await Promise.all([fetchSavedCarts(), fetchWishlist()]);
 });
+
 </script>
 
   {% include 'punchout' %}
@@ -909,15 +910,32 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       {% unless customer %}
         <script>
-          // Detect if in Shopify Theme Editor or Preview
-          const inShopifyAdmin = window.Shopify && window.Shopify.designMode;
-          const inPreview = window.location.search.includes('preview_theme_id');
+        // --- Detect if in Shopify Admin, Theme Editor, or Preview ---
 
-          if (!inShopifyAdmin && !inPreview) {
-            // Redirect guests to login page
-            window.location.href = '/account/login?return_to=/';
-          }
+        const referrer = document.referrer || '';
+        const url = window.location.href;
+
+        const isInIframe = window.top !== window.self;
+
+        // Shopify Admin (e.g. theme editor, admin preview, etc.)
+        const isAdminRef = referrer.includes('admin.shopify.com');
+
+        // Theme Editor (Shopify injects `window.Shopify.designMode = true`)
+        const isDesignMode = !!(window.Shopify && window.Shopify.designMode);
+
+        // Preview mode (preview_theme_id or ?preview=true)
+        const isPreviewURL = url.includes('preview_theme_id') || url.includes('preview=true');
+
+        // Combined flag
+        const isShopifyInternal = isInIframe && (isAdminRef || isDesignMode || isPreviewURL);
+
+        // --- Action ---
+        if (!isShopifyInternal) {
+          // Redirect guests to login page
+          window.location.href = '/account/login?return_to=/';
+        }
         </script>
+
       {% endunless %}
 
       <a class="skip-to-content-link button visually-hidden" href="#MainContent">
