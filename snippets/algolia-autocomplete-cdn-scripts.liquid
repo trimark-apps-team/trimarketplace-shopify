@@ -1,62 +1,51 @@
-<script src="https://cdn.jsdelivr.net/npm/@algolia/autocomplete-js@VERSION/dist/umd/index.production.js" defer></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@algolia/autocomplete-theme-classic@VERSION/dist/theme.min.css">
 
 
 
 <script defer>
-  document.addEventListener('DOMContentLoaded', function() {
-    const searchClient = algoliasearch('testingMUEWDUHCI5', '6c021d2e41d9adb957e13dd95fc93581');
-    const search = instantsearch({
-      indexName: 'qa-marlinn_products',
-      searchClient,
-    });
+document.addEventListener('DOMContentLoaded', function () {
+  const { algoliasearch, autocomplete, getAlgoliaResults } = algoliaShopify.externals;
 
-    search.addWidgets([
-      instantsearch.widgets.searchBox({ container: '#searchbox' }),
-      instantsearch.widgets.hits({ container: '#hits' }),
-    ]);
+  const searchClient = algoliaShopify.searchClient; // already initialized with your app ID & key
+  const indexName = `${algoliaShopify.config.index_prefix}products`; // reuse their prefix
 
-    search.start();
-  });
-</script>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const searchClient = algoliasearch('testingMUEWDUHCI5', '6c021d2e41d9adb957e13dd95fc93581');
-
-    autocomplete({
-      container: '#autocomplete-container',
-      placeholder: 'Search...',
-      openOnFocus: true,
-      getSources({ query }) {
-        return [
-          {
-            sourceId: 'products',
-            getItems() {
-              return getAlgoliaResults({
-                searchClient,
-                queries: [
-                  {
-                    indexName: 'qa-marlinn_products',
-                    params: {
-                      query: query,
-                      hitsPerPage: 5
-                    },
+  autocomplete({
+    container: '#autocomplete-container',
+    placeholder: 'Search products...',
+    openOnFocus: true,
+    getSources({ query }) {
+      return [
+        {
+          sourceId: 'products',
+          getItems() {
+            return getAlgoliaResults({
+              searchClient,
+              queries: [
+                {
+                  indexName,
+                  params: {
+                    query,
+                    hitsPerPage: 5,
                   },
-                ],
-              });
+                },
+              ],
+            });
+          },
+          templates: {
+            item({ item }) {
+              return `
+                <div style="padding:8px 0;">
+                  <strong>${item.title || item.name}</strong><br>
+                  <small>${item.handle || ''}</small>
+                </div>`;
             },
-            templates: {
-              item({ item }) {
-                return `<div>${item.title || item.name}</div>`;
-              },
-              noResults() {
-                return 'No results found';
-              },
+            noResults() {
+              return 'No results found';
             },
           },
-        ];
-      },
-    });
+        },
+      ];
+    },
   });
+});
 </script>
