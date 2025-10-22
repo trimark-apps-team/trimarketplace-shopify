@@ -120,8 +120,8 @@
                   <span class="product-label out-of-stock-label">NOT AVAILABLE</span>
                   {% endif %}   
 
-                  {% render 'trimark-erp-id-mapper' %}
-                <p>Item Number: <span class="trimark-red">{{ product.metafields.custom[erp_id_key] }}</span></p>
+                  
+                <p>Item Number: <span class="trimark-red">{% render 'trimark-erp-id-mapper' %}</span></p>
                 <div class="product__title" {{ block.shopify_attributes }}>
                   <h1>{{ product.title | escape }}</h1>
                   <a href="{{ product.url }}" class="product__title">
