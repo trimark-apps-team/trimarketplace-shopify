@@ -20,4 +20,43 @@
   });
 </script>
 
-testingMUEWDUHCI5
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const searchClient = algoliasearch('YOUR_APP_ID', 'YOUR_SEARCH_ONLY_API_KEY');
+
+    autocomplete({
+      container: '#autocomplete-container',
+      placeholder: 'Search...',
+      openOnFocus: true,
+      getSources({ query }) {
+        return [
+          {
+            sourceId: 'products',
+            getItems() {
+              return getAlgoliaResults({
+                searchClient,
+                queries: [
+                  {
+                    indexName: 'your_index_name',
+                    params: {
+                      query: query,
+                      hitsPerPage: 5
+                    },
+                  },
+                ],
+              });
+            },
+            templates: {
+              item({ item }) {
+                return `<div>${item.title || item.name}</div>`;
+              },
+              noResults() {
+                return 'No results found';
+              },
+            },
+          },
+        ];
+      },
+    });
+  });
+</script>
