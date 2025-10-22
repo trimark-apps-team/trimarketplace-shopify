@@ -37,19 +37,18 @@
             },
 
             templates: {
+              header({ html }) {
+                if (!query) return null;
+                return html`<div class="aa-SourceHeader">
+                  <span class="aa-SourceHeaderTitle">Products for "${query}"</span>
+                </div>`;
+              },
               item({ item, components, html }) {
                 const productUrl = item.url || `/products/${item.handle}`;
                 const variantId = item.objectID?.split('_').pop();
                 const price = item.price ;
                 const title = item.title;
                 return html`
-                <div class="aa-SourceHeader">
-                  <div class="aa-SourceHeader">
-                    <span class="aa-SourceHeaderTitle">Products for foo</span>
-                    <div class="aa-SourceHeaderLine"></div>
-                  </div>
-                </div>
-
                 <div class="aa-ItemWrapper">
                   <a href="${productUrl}" class="aa-ItemLink">
                     <div class="aa-ItemContent">
