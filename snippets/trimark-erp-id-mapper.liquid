@@ -4,14 +4,16 @@
 {% endcomment %}
 
 {% assign domain = shop.permanent_domain | downcase %}
+{% assign erp_id_key = '' %}
+
 {% if domain contains 'marlinn' or domain contains 'fiveguys' %}
-  1_erp_id_marlinn_ipics
+  {% assign erp_id_key = '1_erp_id_marlinn_ipics' %}
 {% elsif domain contains 'ab' %}
-  1_erp_id_adams_burch_sx
+  {% assign erp_id_key = '1_erp_id_adams_burch_sx' %}
 {% elsif domain contains 'sskemp' %}
-  1_erp_id_sskemp_jde
+  {% assign erp_id_key = '1_erp_id_sskemp_jde' %}
 {% elsif domain contains 'rwsmith' %}
-  1_erp_id_rwsmith_sx
+  {% assign erp_id_key = '1_erp_id_rwsmith_sx' %}
 {% endif %}
 
 {%- comment -%}
