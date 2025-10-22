@@ -1,4 +1,17 @@
 
+
+         {% assign domain = shop.permanent_domain | downcase %}
+                  {% assign erp_id_key = '' %}
+            {% if domain contains 'marlinn' or domain contains 'fiveguys' %}
+                    {% assign erp_id_key = '1_erp_id_marlinn_ipics' %}
+                  {% elsif domain contains 'ab' %}
+                    {% assign erp_id_key = '1_erp_id_adams_burch_sx' %}
+                  {% elsif domain contains 'sskemp' %}
+                    {% assign erp_id_key = '1_erp_id_sskemp_jde' %}
+                  {% elsif domain contains 'rwsmith' %}
+                    {% assign erp_id_key = '1_erp_id_rwsmith_sx' %}
+          {% endif %}
+          
 <div class="product-details-flex">
   <div class="product-tabs">
     <div class="tab-buttons">
