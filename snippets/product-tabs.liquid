@@ -54,9 +54,12 @@
       <tbody>
         <tr>
           <td class="spec-label">Item Number</td>
-          <td>{{ product.selected_or_first_available_variant.sku }}</td>
+          <td>{{ product.metafields.custom[erp_id_key] }}</td>
         </tr>
 
+        
+
+        
         {% assign variant = product.selected_or_first_available_variant %}
         {% if variant.weight and variant.weight > 0 %}
           <tr>
@@ -64,12 +67,12 @@
             <td>{{ variant.weight | weight_with_unit }}</td>
           </tr>
         {% endif %}
-        {% if product.metafields.custom["1_erp_id_marlinn_ipics"] != blank %}
+       
           <tr>
-            <td class="spec-label">Marlinn ERP ID</td>
-            <td> {{ product.metafields.custom["1_erp_id_marlinn_ipics"] }}</td>
+            <td class="spec-label">Product SKU</td>
+            <td>{{ product.selected_or_first_available_variant.sku }}</td>
           </tr>
-        {% endif %}
+       
 
         {% if product.metafields.custom["1_erp_id_trmk_golden"] %}
           <tr>
