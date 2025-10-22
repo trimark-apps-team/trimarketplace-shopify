@@ -130,7 +130,6 @@
                   <span class="product-label out-of-stock-label">NOT AVAILABLE</span>
                   {% endif %}   
 
-                 <p> {{ product.metafields.custom[erp_id_key] }}</p>
                 <p>Item Number: <span class="trimark-red">{{ product.metafields.custom[erp_id_key] }}</span></p>
                 <div class="product__title" {{ block.shopify_attributes }}>
                   <h1>{{ product.title | escape }}</h1>
