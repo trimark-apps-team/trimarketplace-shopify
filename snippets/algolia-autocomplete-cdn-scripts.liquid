@@ -6,6 +6,16 @@
   document.addEventListener('DOMContentLoaded', function () {
     const { algoliasearch, autocomplete, getAlgoliaResults } = algoliaShopify.externals;
 
+    // 🧩 Define fallback money formatter if missing
+    if (typeof Shopify === 'undefined') window.Shopify = {};
+    if (typeof Shopify.formatMoney !== 'function') {
+      Shopify.formatMoney = function (cents, format = '${{amount}}') {
+        if (typeof cents === 'string') cents = cents.replace('.', '');
+        const value = (cents / 100).toFixed(2);
+        return format.replace('{{amount}}', value);
+      };
+    }
+
     const searchClient =
       algoliaShopify.searchClient ||
       algoliaShopify.externals.algoliasearch(
@@ -37,10 +47,11 @@
             },
 
             templates: {
-              // 🧩 Each result card
               item({ item, components, html }) {
                 const productUrl = item.url || `/products/${item.handle}`;
-                const variantId = item.objectID?.split('_').pop(); // handle variant fallback
+                const variantId = item.objectID?.split('_').pop();
+                const price =
+                  item.price && Shopify.formatMoney(item.price, window.shopMoneyFormat || '${{amount}}');
 
                 return html`
                   <div class="aa-ItemWrapper">
@@ -56,14 +67,9 @@
                         </div>
                         <div class="aa-ItemContentBody">
                           <div class="aa-ItemContentTitle">
-                            ${components.Highlight({
-                              hit: item,
-                              attribute: 'name',
-                            })}
+                            ${components.Highlight({ hit: item, attribute: 'name' })}
                           </div>
-                          <div class="aa-ItemContentPrice">
-                            ${Shopify.formatMoney(item.price, window.shopMoneyFormat || '${{amount}}')}
-                          </div>
+                          <div class="aa-ItemContentPrice">${price || ''}</div>
                         </div>
                       </div>
                     </a>
@@ -88,7 +94,7 @@
       },
     });
 
-    // 🛒 Handle add-to-cart clicks
+    // 🛒 Add-to-cart event
     document.body.addEventListener('click', async (e) => {
       const btn = e.target.closest('.aa-AddToCart');
       if (!btn) return;
@@ -104,7 +110,10 @@
           body: JSON.stringify({ id, quantity: 1 }),
         });
         btn.textContent = 'Added!';
-        setTimeout(() => (btn.textContent = 'Add to cart', btn.disabled = false), 2000);
+        setTimeout(() => {
+          btn.textContent = 'Add to cart';
+          btn.disabled = false;
+        }, 2000);
       } catch (err) {
         console.error('Add to cart failed', err);
         btn.disabled = false;
