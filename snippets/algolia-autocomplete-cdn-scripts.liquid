@@ -50,8 +50,8 @@
               item({ item, components, html }) {
                 const productUrl = item.url || `/products/${item.handle}`;
                 const variantId = item.objectID?.split('_').pop();
-                const price =
-                  item.price && Shopify.formatMoney(item.price, window.shopMoneyFormat || '${{amount}}');
+                const price = item.price ;
+
 
                 return html`
                   <div class="aa-ItemWrapper">
@@ -73,14 +73,6 @@
                         </div>
                       </div>
                     </a>
-
-                    <button
-                      class="aa-AddToCart"
-                      data-variant-id="${variantId}"
-                      type="button"
-                    >
-                      Add to cart
-                    </button>
                   </div>
                 `;
               },
