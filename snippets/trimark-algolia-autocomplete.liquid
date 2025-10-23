@@ -15,13 +15,56 @@
 
     const indexName = `${algoliaShopify.config.index_prefix}products`;
 
-    autocomplete({
-      container: '#autocomplete-container',
-      placeholder: 'Search products...',
-      openOnFocus: false,
+autocomplete({
+  container: '#autocomplete-container',
+  placeholder: 'Search products...',
+  openOnFocus: false,
 
-      getSources({ query }) {
+  getSources({ query }) {
+    if (!query) return [];
+
         return [
+          // 🧠 1. Query suggestions
+          {
+            sourceId: 'querySuggestions',
+            getItems() {
+              return getAlgoliaResults({
+                searchClient,
+                queries: [
+                  {
+                    indexName: `${algoliaShopify.config.index_prefix}query_suggestions`,
+                    params: {
+                      query,
+                      hitsPerPage: 5,
+                    },
+                  },
+                ],
+              });
+            },
+            templates: {
+              header({ html }) {
+                return html`<div class="aa-SourceHeader">
+                  <span class="aa-SourceHeaderTitle">Suggestions</span>
+                  <div class="aa-SourceHeaderLine"></div>
+                </div>`;
+              },
+              item({ item, html }) {
+                return html`
+                  <div class="aa-ItemWrapper aa-SuggestionItem">
+                    <div class="aa-ItemContent">
+                      <div class="aa-ItemContentBody">
+                        <div class="aa-ItemContentTitle">
+                          ${html`${item.query}`}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                `;
+              },
+            },
+          },
+
+          // 🛍️ 2. Product hits
           {
             sourceId: 'products',
             getItems() {
@@ -29,65 +72,55 @@
                 searchClient,
                 queries: [
                   {
-                    indexName,
-                    params: { query, hitsPerPage: 6 },
+                    indexName: `${algoliaShopify.config.index_prefix}products`,
+                    params: {
+                      query,
+                      hitsPerPage: 6,
+                    },
                   },
                 ],
               });
             },
-
             templates: {
               header({ html }) {
-                if (!query) return null;
                 return html`<div class="aa-SourceHeader">
-                  <span class="aa-SourceHeaderTitle">Products for "${query}"</span>
+                  <span class="aa-SourceHeaderTitle">Products</span>
                   <div class="aa-SourceHeaderLine"></div>
                 </div>`;
               },
               item({ item, components, html }) {
                 const productUrl = item.url || `/products/${item.handle}`;
-                const variantId = item.objectID?.split('_').pop();
-                const price = item.price ;
-                const title = item.title;
-                const uom = item.meta.custom['3_uom'] || '';
-                
+                const price = item.price;
+                const uom =
+                  item.metafields?.custom?.uom ||
+                  item.metafields?.custom?.['1_uom_ab_sx'] ||
+                  item.metafields?.custom?.['1_uom_rwsmith_sx'] ||
+                  '';
+
                 return html`
-                <div class="aa-ItemWrapper">
-                  <a href="${productUrl}" class="aa-ItemLink">
-                    <div class="aa-ItemContent">
-                      <div class="aa-ItemPicture aa-ItemPicture--loaded">
-                        <img
-                          src="${item.image || item.image_url}"
-                          alt="${item.title}"
-                        />
-                      </div>
-
-                      <div class="aa-ItemContentBody">
+                  <div class="aa-ItemWrapper">
+                    <a href="${productUrl}" class="aa-ItemLink">
+                      <div class="aa-ItemContent">
+                        <div class="aa-ItemPicture">
+                          <img src="${item.image || item.image_url}" alt="${item.title}" />
+                        </div>
+                        <div class="aa-ItemContentBody">
                           <div class="aa-ItemContentTitle">
-                            ${components.Highlight({
-                              hit: item,
-                              attribute: 'title',
-                            })}
+                            ${components.Highlight({ hit: item, attribute: 'title' })}
                           </div>
-                       
-
-                        <div class="aa-ItemContentVendor">
-                          ${components.Highlight({
-                            hit: item,
-                            attribute: 'vendor',
-                          })}
-                        </div>
-                        <div class="aa-ItemContentPrice">
-                          ${price ? html`$${price}` : ''}
-                          ${uom ? html`<span class="aa-ItemUOM"> ${uom}</span>` : ''}
+                          <div class="aa-ItemContentVendor">
+                            ${components.Highlight({ hit: item, attribute: 'vendor' })}
+                          </div>
+                          <div class="aa-ItemContentPrice">
+                            ${price ? html`$${price}` : ''}
+                            ${uom ? html`<span class="aa-ItemUOM"> / ${uom}</span>` : ''}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </a>
-                </div>
+                    </a>
+                  </div>
                 `;
               },
-
               noResults() {
                 return 'No results found';
               },
