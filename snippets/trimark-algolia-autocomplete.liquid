@@ -95,31 +95,5 @@
         ];
       },
     });
-
-    // 🛒 Add-to-cart event
-    document.body.addEventListener('click', async (e) => {
-      const btn = e.target.closest('.aa-AddToCart');
-      if (!btn) return;
-
-      const id = btn.dataset.variantId;
-      if (!id) return console.warn('Missing variant ID');
-
-      try {
-        btn.disabled = true;
-        await fetch('/cart/add.js', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ id, quantity: 1 }),
-        });
-        btn.textContent = 'Added!';
-        setTimeout(() => {
-          btn.textContent = 'Add to cart';
-          btn.disabled = false;
-        }, 2000);
-      } catch (err) {
-        console.error('Add to cart failed', err);
-        btn.disabled = false;
-      }
-    });
   });
 </script>
