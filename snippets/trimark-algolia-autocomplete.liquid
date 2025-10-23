@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
             setQuery(item.query);
             setCollections([]); // clear current items
             autocomplete.refresh(); // now re-runs getSources()
-          }
+          },
           templates: {
             header({ html }) {
               return html`<div class="aa-SourceHeader">
