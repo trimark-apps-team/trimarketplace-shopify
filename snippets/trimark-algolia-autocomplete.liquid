@@ -43,11 +43,11 @@ document.addEventListener('DOMContentLoaded', function () {
               ],
             });
           },
-        onSelect({ item, setQuery }) {
-          setQuery(item.query);
-          // Re-open and force new sources run
-          autoInstance.refresh();
-        },
+          onSelect({ item, setQuery, setIsOpen, event }) {
+              // instead of/after setting query:
+              const targetUrl = `/search?query=${encodeURIComponent(item.query)}`;
+              window.location.href = targetUrl;  // redirect
+            },
           templates: {
             header({ html }) {
               return html`<div class="aa-SourceHeader">
