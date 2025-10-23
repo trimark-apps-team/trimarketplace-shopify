@@ -10,6 +10,9 @@
                     {% assign erp_id_key = '1_erp_id_sskemp_jde' %}
                   {% elsif domain contains 'rwsmith' %}
                     {% assign erp_id_key = '1_erp_id_rwsmith_sx' %}
+                  {% else %}
+                  {% assign erp_id_key = '' %}
+
           {% endif %}
           
 <div class="product-details-flex">
@@ -54,7 +57,13 @@
       <tbody>
         <tr>
           <td class="spec-label">Item Number</td>
-          <td>{{ product.metafields.custom[erp_id_key] }}</td>
+          <td>
+             {% if card_product.metafields.custom[erp_id_key] %}
+              {{ card_product.metafields.custom[erp_id_key] }}
+            {% else %}
+              {{ card_product.selected_or_first_available_variant.sku }}
+            {% endif %}
+          </td>
         </tr>
 
         
