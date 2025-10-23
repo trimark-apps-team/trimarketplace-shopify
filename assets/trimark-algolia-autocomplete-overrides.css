@@ -1,0 +1,106 @@
+/* Panel layout */
+#aa-autocomplete-container .aa-PanelLayout {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 800px; /* or whatever max width you prefer */
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+/* Column for suggestions */
+#aa-autocomplete-container .aa-PanelColumn-suggestions {
+  flex: 1 1 30%; /* roughly 30% width */
+  padding: 12px 16px;
+  border-right: 1px solid #eee;
+}
+
+/* Column for products */
+#aa-autocomplete-container .aa-PanelColumn-products {
+  flex: 1 1 70%; /* roughly 70% width */
+  padding: 12px 16px;
+}
+
+/* Header styling */
+.aa-SourceHeader {
+  font-size: 0.85em;
+  text-transform: uppercase;
+  color: #777;
+  margin-bottom: 8px;
+}
+.aa-SourceHeaderLine {
+  height: 1px;
+  background: #ddd;
+  margin-top: 4px;
+  margin-bottom: 12px;
+}
+
+/* Suggestion item style */
+.aa-SuggestionItem {
+  padding: 8px 0;
+  cursor: pointer;
+}
+.aa-SuggestionItem:hover {
+  background: #f7f7f7;
+}
+.aa-ItemContentTitle {
+  font-weight: 600;
+  color: #333;
+}
+
+/* Product item style */
+.aa-ItemWrapper {
+  display: flex;
+  padding: 10px 0;
+  border-bottom: 1px solid #f1f1f1;
+}
+.aa-ItemWrapper:last-child {
+  border-bottom: none;
+}
+.aa-ItemPicture {
+  width: 60px;
+  height: 60px;
+  margin-right: 12px;
+}
+.aa-ItemPicture img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.aa-ItemContentBody {
+  flex: 1;
+}
+.aa-ItemContentVendor {
+  font-size: 0.85em;
+  color: #888;
+  margin-bottom: 4px;
+}
+.aa-ItemContentPrice {
+  font-size: 1em;
+  font-weight: 700;
+  color: #222;
+  margin-top: 4px;
+}
+.aa-ItemUOM {
+  font-size: 0.85em;
+  color: #666;
+  margin-left: 6px;
+}
+
+/* Responsive: collapse to single column on smaller screens */
+@media (max-width: 600px) {
+  #aa-autocomplete-container .aa-PanelLayout {
+    display: block;
+  }
+  #aa-autocomplete-container .aa-PanelColumn-suggestions,
+  #aa-autocomplete-container .aa-PanelColumn-products {
+    width: 100%;
+    border-right: none;
+    padding: 8px 12px;
+  }
+  #aa-autocomplete-container .aa-PanelColumn-products {
+    padding-top: 0;
+  }
+}
