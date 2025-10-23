@@ -80,7 +80,8 @@
                         </div>
 
                         <div class="aa-ItemContentPrice">
-                          $${price || ''}
+                          ${price ? `$${price}` : ''}
+                          ${uom ? `<span class="aa-ItemUOM"> / ${uom}</span>` : ''}
                         </div>
                       </div>
                     </div>
