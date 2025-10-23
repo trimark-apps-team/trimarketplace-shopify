@@ -648,7 +648,7 @@
     },
     "account_information": {
       "profile_card": {
-        "edit_accessibility_label": "Edit Profie",
+        "edit_accessibility_label": "Edit Profile",
         "first_name": "First Name",
         "last_name": "Last Name",
         "save_accessibility_label": "Save Profile"
