@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
           },
           onSelect({ item, setQuery, setIsOpen, event }) {
               // instead of/after setting query:
-              const targetUrl = `/search?query=${encodeURIComponent(item.query)}`;
+              const targetUrl = `/search?q=${encodeURIComponent(item.query)}`;
               window.location.href = targetUrl;  // redirect
             },
           templates: {
