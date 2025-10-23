@@ -20,7 +20,12 @@ document.addEventListener('DOMContentLoaded', function () {
     container: '#autocomplete-container',
     placeholder: 'Search products...',
     openOnFocus: true, // allows suggestions to appear on focus
-
+    onSubmit({ state, event, setQuery }) {
+      const query = state.query;
+      if (query) {
+        window.location.href = `/search?q=${encodeURIComponent(query)}`;
+      }
+    },
     getSources({ query }) {
       // render suggestions even for short queries
       if (query.length < 1) return [];
