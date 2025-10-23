@@ -41,9 +41,7 @@
   padding: 8px 0;
   cursor: pointer;
 }
-.aa-SuggestionItem:hover {
-  background: #f7f7f7;
-}
+
 .aa-ItemContentTitle {
   font-weight: 600;
   color: #333;
