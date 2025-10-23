@@ -79,8 +79,8 @@
                         </div>
 
                         <div class="aa-ItemContentPrice">
-                          ${price ? `$${price}` : ''}
-                          ${uom ? "<span class='aa-ItemUOM'> / ${uom}</span>" : ''}
+                          ${price ? html`$${price}` : ''}
+                          ${uom ? html`<span class="aa-ItemUOM"> / ${uom}</span>` : ''}
                         </div>
                       </div>
                     </div>
