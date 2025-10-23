@@ -110,15 +110,15 @@ document.addEventListener('DOMContentLoaded', function () {
                         <img src="${item.image || item.image_url}" alt="${item.title}" />
                       </div>
                       <div class="aa-ItemContentBody">
+                      <div class="aa-ItemContentVendor">
+                          ${components.Highlight({ hit: item, attribute: 'vendor' })}
+                        </div>
                         <div class="aa-ItemContentTitle">
                           ${components.Highlight({ hit: item, attribute: 'title' })}
                         </div>
-                        <div class="aa-ItemContentVendor">
-                          ${components.Highlight({ hit: item, attribute: 'vendor' })}
-                        </div>
                         <div class="aa-ItemContentPrice">
                           ${price ? html`$${price}` : ''}
-                          ${uom ? html`<span class="aa-ItemUOM"> ${uom}</span>` : ''}
+                          ${uom ? html`<span class="aa-ItemUOM">${uom}</span>` : ''}
                         </div>
                       </div>
                     </div>
