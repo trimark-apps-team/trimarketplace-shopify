@@ -49,6 +49,7 @@
                 const variantId = item.objectID?.split('_').pop();
                 const price = item.price ;
                 const title = item.title;
+                const uom = item.meta.custom['3_uom'] || '';
                 
                 return html`
                 <div class="aa-ItemWrapper">
