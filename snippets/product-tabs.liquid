@@ -58,10 +58,10 @@
         <tr>
           <td class="spec-label">Item Number</td>
           <td>
-             {% if card_product.metafields.custom[erp_id_key] %}
-              {{ card_product.metafields.custom[erp_id_key] }}
+             {% if product.metafields.custom[erp_id_key] %}
+              {{ product.metafields.custom[erp_id_key] }}
             {% else %}
-              {{ card_product.selected_or_first_available_variant.sku }}
+              {{ product.selected_or_first_available_variant.sku }}
             {% endif %}
           </td>
         </tr>
