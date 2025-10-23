@@ -30,8 +30,8 @@
 }
 .aa-SourceHeaderLine {
   background: #ddd;
-  margin-top: 4px !important;
-  margin-bottom: 12px !important;
+  /* margin-top: 4px !important;
+  margin-bottom: 12px !important; */
   position: relative !important;
 
 }
