@@ -43,11 +43,11 @@ document.addEventListener('DOMContentLoaded', function () {
               ],
             });
           },
-          onSelect({ item, setQuery, setCollections }) {
-            setQuery(item.query);
-            setCollections([]); // clear current items
-            autocomplete.refresh(); // now re-runs getSources()
-          },
+        onSelect({ item, setQuery }) {
+          setQuery(item.query);
+          // Re-open and force new sources run
+          autoInstance.refresh();
+        },
           templates: {
             header({ html }) {
               return html`<div class="aa-SourceHeader">
