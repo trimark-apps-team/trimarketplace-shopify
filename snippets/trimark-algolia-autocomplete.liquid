@@ -1,5 +1,8 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@algolia/autocomplete-theme-classic@VERSION/dist/theme.min.css">
-
+<link
+  rel="stylesheet"
+  href="{{ 'trimark-algolia-autocomplete-overrides.css' | asset_url }}"
+>
 <script defer>
 document.addEventListener('DOMContentLoaded', function () {
   const { algoliasearch, autocomplete, getAlgoliaResults } = algoliaShopify.externals;
