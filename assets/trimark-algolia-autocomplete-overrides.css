@@ -1,5 +1,5 @@
 /* Panel layout */
-.aa-PanelLayout .aa-PanelLayout {
+.aa-PanelLayout {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
