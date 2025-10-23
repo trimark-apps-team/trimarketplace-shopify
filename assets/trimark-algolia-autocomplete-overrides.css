@@ -82,13 +82,11 @@
 }
 .aa-ItemUOM {
   font-size: 0.85em;
-  color: #666;
-  margin-left: 6px;
 }
 
 /* Responsive: collapse to single column on smaller screens */
 @media (max-width: 600px) {
-  .aa-PanelLayout .aa-PanelLayout {
+  .aa-PanelLayout {
     display: block;
   }
   .aa-PanelLayout .aa-PanelColumn-suggestions,
