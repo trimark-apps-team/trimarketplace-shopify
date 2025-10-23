@@ -25,6 +25,9 @@
   color: #777;
   margin-bottom: 8px;
 }
+.aa-SourceHeaderTitle {
+    display: block;
+}
 .aa-SourceHeaderLine {
   height: 1px;
   background: #ddd;
