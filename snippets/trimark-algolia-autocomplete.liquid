@@ -22,9 +22,7 @@ autocomplete({
 
   getSources({ query }) {
     if (!query) return [];
-
         return [
-          // 🧠 1. Query suggestions
           {
             sourceId: 'querySuggestions',
             getItems() {
