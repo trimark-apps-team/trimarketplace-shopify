@@ -66,13 +66,7 @@
 .aa-ItemContentBody {
   flex: 1;
 }
-.aa-ItemContentVendor {
-  color: #888;
-  margin-bottom: 4px;
-}
-.aa-ItemContentPrice {
-  margin-top: 4px;
-}
+
 
 
 /* Responsive: collapse to single column on smaller screens */
