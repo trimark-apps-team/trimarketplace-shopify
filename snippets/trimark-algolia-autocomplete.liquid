@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const productsIndex = `${algoliaShopify.config.index_prefix}products`;
   const suggestionsIndex = `${algoliaShopify.config.index_prefix}products_query_suggestions`;
 
-  autocomplete({
+  const autoInstance = autocomplete({
     container: '#autocomplete-container',
     placeholder: 'Search products...',
     openOnFocus: true, // allows suggestions to appear on focus
