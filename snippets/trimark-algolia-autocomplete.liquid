@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const searchClient =
     algoliaShopify.searchClient ||
-    algoliaShopify.externals.algoliasearch(
+    algoliasearch(
       algoliaShopify.config.app_id,
       algoliaShopify.config.search_api_key
     );
@@ -19,19 +19,17 @@ document.addEventListener('DOMContentLoaded', function () {
   const autoInstance = autocomplete({
     container: '#autocomplete-container',
     placeholder: 'Search products...',
-    openOnFocus: true, // allows suggestions to appear on focus
-    onSubmit({ state, event, setQuery }) {
+    openOnFocus: true,
+    onSubmit({ state }) {
       const query = state.query;
       if (query) {
         window.location.href = `/search?q=${encodeURIComponent(query)}`;
       }
     },
     getSources({ query }) {
-      // render suggestions even for short queries
       if (query.length < 1) return [];
 
       return [
-        // 🧠 QUERY SUGGESTIONS SOURCE
         {
           sourceId: 'querySuggestions',
           getItems() {
@@ -48,26 +46,24 @@ document.addEventListener('DOMContentLoaded', function () {
               ],
             });
           },
-          onSelect({ item, setQuery, setIsOpen, event }) {
-              // instead of/after setting query:
-              const targetUrl = `/search?q=${encodeURIComponent(item.query)}`;
-              window.location.href = targetUrl;  // redirect
-            },
+          onSelect({ item }) {
+            window.location.href = `/search?q=${encodeURIComponent(item.query)}`;
+          },
           templates: {
             header({ html }) {
-              return html`<div class="aa-SourceHeader">
-                <span class="aa-SourceHeaderTitle">Suggestions</span>
-                <div class="aa-SourceHeaderLine"></div>
-              </div>`;
+              return html`
+                <div class="aa-SourceHeader">
+                  <span class="aa-SourceHeaderTitle">Suggestions</span>
+                  <div class="aa-SourceHeaderLine"></div>
+                </div>
+              `;
             },
             item({ item, html }) {
               return html`
                 <div class="aa-ItemWrapper aa-SuggestionItem">
                   <div class="aa-ItemContent">
                     <div class="aa-ItemContentBody">
-                      <div class="aa-ItemContentTitle">
-                        ${html`${item.query}`}
-                      </div>
+                      <div class="aa-ItemContentTitle">${html`${item.query}`}</div>
                     </div>
                   </div>
                 </div>
@@ -75,8 +71,6 @@ document.addEventListener('DOMContentLoaded', function () {
             },
           },
         },
-
-        // 🛒 PRODUCTS SOURCE
         {
           sourceId: 'products',
           getItems() {
@@ -95,26 +89,24 @@ document.addEventListener('DOMContentLoaded', function () {
           },
           templates: {
             header({ html }) {
-              return html`<div class="aa-SourceHeader">
-                <span class="aa-SourceHeaderTitle">Products</span>
-                <div class="aa-SourceHeaderLine"></div>
-              </div>`;
+              return html`
+                <div class="aa-SourceHeader">
+                  <span class="aa-SourceHeaderTitle">Products</span>
+                  <div class="aa-SourceHeaderLine"></div>
+                </div>
+              `;
             },
             item({ item, components, html }) {
               const productUrl = item.url || `/products/${item.handle}`;
               const price = item.price;
-              const uom =
-                item.metafields?.custom?.['3_uom'] || '';
+              const uom = item.metafields?.custom?.['3_uom'] || '';
 
               return html`
                 <div class="aa-ItemWrapper">
                   <a href="${productUrl}" class="aa-ItemLink">
                     <div class="aa-ItemContent">
                       <div class="aa-ItemPicture aa-ItemPicture--loaded">
-                        <img
-                          src="${item.image || item.image_url}"
-                          alt="${item.title}"
-                        />
+                        <img src="${item.image || item.image_url}" alt="${item.title}" />
                       </div>
                       <div class="aa-ItemContentBody">
                         <div class="aa-ItemContentTitle">
@@ -136,6 +128,17 @@ document.addEventListener('DOMContentLoaded', function () {
           },
         },
       ];
+    },
+    render({ sections, html, render }, root) {
+      render(
+        html`
+          <div class="aa-PanelLayout">
+            <div class="aa-PanelColumn aa-PanelColumn-suggestions">${sections[0]}</div>
+            <div class="aa-PanelColumn aa-PanelColumn-products">${sections[1]}</div>
+          </div>
+        `,
+        root
+      );
     },
   });
 });
