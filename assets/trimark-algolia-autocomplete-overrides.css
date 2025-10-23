@@ -29,10 +29,11 @@
     display: block;
 }
 .aa-SourceHeaderLine {
-  height: 1px;
   background: #ddd;
-  margin-top: 4px;
-  margin-bottom: 12px;
+  margin-top: 4px !important;
+  margin-bottom: 12px !important;
+  position: relative !important;
+
 }
 
 /* Suggestion item style */
