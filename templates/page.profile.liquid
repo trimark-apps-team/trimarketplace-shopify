@@ -1,72 +1,85 @@
-{% if customer %}
-  <section aria-label="Profile" class="max-w-4xl mx-auto py-12 px-6 font-sans text-gray-800">
-    <h1 class="text-3xl font-semibold mb-8">Profile</h1>
-
-    <!-- Profile details -->
-    <div id="profile-details" class="bg-white shadow-sm border rounded-xl p-6 mb-8">
-      <h2 class="text-lg font-medium mb-4">Account Information</h2>
-      <div class="space-y-2">
-        <p><strong>Name:</strong> {{ customer.first_name }} {{ customer.last_name }}</p>
-        <p><strong>Email:</strong> {{ customer.email }}</p>
-        {% if customer.phone %}
-          <p><strong>Phone:</strong> {{ customer.phone }}</p>
-        {% endif %}
-      </div>
-      <a href="{{ routes.account_addresses_url }}" class="text-blue-600 hover:underline mt-4 inline-block">
-        Manage addresses →
-      </a>
-    </div>
-
-    <!-- Company info (if metafield or tag exists) -->
-    {% if customer.metafields.company %}
-      <section aria-label="Company" class="bg-white shadow-sm border rounded-xl p-6 mb-8">
-        <h2 class="text-lg font-medium mb-4">Company</h2>
-        <p>{{ customer.metafields.company.value }}</p>
-      </section>
-    {% endif %}
-
-    <!-- Addresses -->
-    <section aria-label="Addresses" class="bg-white shadow-sm border rounded-xl p-6 mb-8">
-      <h2 class="text-lg font-medium mb-4">Addresses</h2>
-      {% for address in customer.addresses %}
-        <div class="border-b pb-4 mb-4">
-          <p><strong>{{ address.name }}</strong></p>
-          <p>{{ address.address1 }}</p>
-          {% if address.address2 != blank %}
-            <p>{{ address.address2 }}</p>
-          {% endif %}
-          <p>{{ address.city }}, {{ address.province }} {{ address.zip }}</p>
-          <p>{{ address.country }}</p>
-          {% if address.default %}
-            <p class="text-sm text-gray-500">(Default address)</p>
-          {% endif %}
-        </div>
-      {% else %}
-        <p>No addresses yet.</p>
-      {% endfor %}
-    </section>
-
-    <!-- Staff and permissions -->
-    {% if customer.tags contains "staff" %}
-      <section aria-label="Staff and permissions" class="bg-white shadow-sm border rounded-xl p-6 mb-8">
-        <h2 class="text-lg font-medium mb-4">Staff and Permissions</h2>
-        <p>Name: {{ customer.first_name }} {{ customer.last_name }}</p>
-        <p>Email: {{ customer.email }}</p>
-        <p>Permissions: Ordering only</p>
-      </section>
-    {% endif %}
-
-    <!-- Logout -->
-    <div class="text-center">
-      <a href="{{ routes.account_logout_url }}" class="text-gray-600 hover:text-gray-900 text-sm">
-        Log out
-      </a>
-    </div>
-  </section>
-
-{% else %}
-  <div class="text-center py-20">
-    <h2 class="text-2xl font-medium mb-4">Please log in</h2>
-    <a href="{{ routes.account_login_url }}" class="text-blue-600 hover:underline">Go to login page</a>
+<div class="profile-container">
+  <!-- Profile Header -->
+  <div class="profile-header">
+    <h2>Name: <span id="profile-name">Ben Ray</span></h2>
+    <button id="edit-profile-btn" type="button">Edit Profile</button>
   </div>
-{% endif %}
+
+  <!-- Contact Info -->
+  <div class="profile-section" id="profile-details">
+    <h3>Contact Info</h3>
+    <p>Email: <span id="profile-email">ben.ray@trimarkusa.com</span></p>
+  </div>
+
+  <!-- Company Info -->
+  <div class="profile-section" id="company-info">
+    <h3>Company</h3>
+    <p id="company-name">FIVE GUYS%FIVE STAR BURGERS OR</p>
+  </div>
+
+  <!-- Location Info -->
+  <div class="profile-section" id="location-info">
+    <h3>Location</h3>
+    <p id="location-name">FIVE GUYS%FIVE STAR BURGERS OR</p>
+  </div>
+
+  <!-- Addresses -->
+  <div class="profile-section" id="addresses">
+    <h3>Addresses</h3>
+    <div class="address">
+      <strong>Billing Address:</strong>
+      <p>912 W BAXTER DR</p>
+      <p>SOUTH JORDAN, Oregon 97086</p>
+      <p>United States</p>
+    </div>
+    <div class="address">
+      <strong>Shipping Address:</strong>
+      <p>17105 SE SUNNYSIDE DR</p>
+      <p>HAPPY VALLEY, Utah 84095</p>
+      <p>United States</p>
+    </div>
+  </div>
+
+  <!-- Staff and Permissions -->
+  <div class="profile-section" id="staff-permissions">
+    <h3>Staff and Permissions</h3>
+    <ul>
+      <li>
+        <p>Name: You</p>
+        <p>Permissions: Ordering only</p>
+        <p>Email: ben.ray@trimarkusa.com</p>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<style>
+  .profile-container {
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+  }
+  .profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .profile-section {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+  }
+  .profile-section h3 {
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    color: #333;
+  }
+  .address {
+    margin-bottom: 10px;
+  }
+  #edit-profile-btn {
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+</style>
