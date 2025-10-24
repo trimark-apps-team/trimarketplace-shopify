@@ -499,7 +499,7 @@
 
         const cartTotal = cart.original_total_price;
 
-        const response = await fetch('https://trimark-draft-order-api-pearl.vercel.app/api/order', {
+        const response = await fetch('/apps/api/order', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ 
@@ -569,7 +569,7 @@
                 customAttributes: item.properties || {},
               }));
 
-              const response = await fetch('https://trimark-draft-order-api-pearl.vercel.app/api/live-order', {
+              const response = await fetch('/apps/api/live-order', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -756,7 +756,7 @@
             {% comment %} statusBox.innerHTML = '<div class="loading"><span class="spinner"></span> Switching location...</div>'; {% endcomment %}
 
             try {
-              const res = await fetch('https://trimark-draft-order-api-pearl.vercel.app/api/transfer-salesrep', {
+              const res = await fetch('/apps/api/transfer-salesrep', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
