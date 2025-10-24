@@ -570,7 +570,9 @@
               <a class="btn btn-primary cs-save-trigger" href="/a/saved-carts/new">Save Cart</a> 
               <a href="{{ routes.cart_url }}" class="cart__checkout-button cart_btn">View Cart</a>
             </div>
-          {% if customer.metafields.custom.buyer_role.value == "Sales Rep" %}
+              {% assign assigned_locations = customer.metafields.locations.assigned_locations.value %}
+
+    {% if customer.metafields.custom.buyer_role.value == 'Sales Rep' and assigned_locations != blank %}
                       <button id="create-salesrep-order" class="cart__checkout-button button draft-order-drawer">
               Place Order
             </button>

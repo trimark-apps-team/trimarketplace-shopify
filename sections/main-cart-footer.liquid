@@ -122,7 +122,9 @@
               </div>
                 {% endif %}
                 <div class="cart__ctas" {{ block.shopify_attributes }}>
-                   {% if customer.metafields.custom.buyer_role.value == "Sales Rep" %}
+                  {% assign assigned_locations = customer.metafields.locations.assigned_locations.value %}
+
+    {% if customer.metafields.custom.buyer_role.value == 'Sales Rep' and assigned_locations != blank %}
                    
                <button id="create-salesrep-order" class="cart__checkout-button button button--secondary draft-order-cart">
                         Place Order 
