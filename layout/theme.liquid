@@ -898,6 +898,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   {% include 'punchout' %}
 {% include 'punchout_settings' %}
+<script type="text/javascript">if(typeof window.hulkappsWishlist === 'undefined') {
+                            window.hulkappsWishlist = {};
+                        }
+                        window.hulkappsWishlist.baseURL = '/apps/advanced-wishlist/api';
+                        window.hulkappsWishlist.hasAppBlockSupport = '1';
+                        </script>
 </head>
 
   <body
