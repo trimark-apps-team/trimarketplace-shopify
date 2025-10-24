@@ -1,15 +1,30 @@
-<div class="profile-container">
-  <!-- Profile Header -->
-  <div class="profile-header">
-    <h2>Name: <span id="profile-name">Ben Ray</span></h2>
-    <div class="edit-icon" id="edit-profile-btn" title="Edit Profile">
-      ✏️
+<div class="_1ip0g651 _1ip0g650 _1fragemn2 _1fragem5p _1fragem7i _1fragem41">
+  <div class="_1ip0g651 _1ip0g650 _1fragemn2 _1fragem5f _1fragem78 _1fragem41">
+    <div class="_17kya4ui _17kya4ug _1fragemou _17kya4uu _17kya4un _1fragemor _1fragemqf _1fragemqd _1fragemqh _1fragemqb _1fragemqm _1fragemqs _1fragemr4 _1fragemqy _1fragemrg _1fragemrc _1fragemrk _1fragemr8 _1fragemci _1fragemby _1fragemd2 _1fragembe _1fragemge _1fragemi7 _1fragemel _1fragemk0 _1fragemuu _1fragemob _1fragem32 _1fragemn2 hhu2n BoUfj">
+      <div class="_1ip0g651 _1ip0g650 _1fragemn2 _1fragem50 _1fragem6t _1fragem41" id="profile-details">
+        <div class="_5uqybw0 _1fragemn2 _1fragem3c _1fragem8w">
+          <div class="_5uqybw1 _1fragem3c _1fragemm3 _1fragempd _1fragem50 _1fragem6t _1fragema _1fragemns _1fragem8w">
+            <div class="_197l2of1i _1fragemtw _1fragem32 _1fragemn2">
+              Name: <span class="mw2e2" id="profile-name">Ben Ray</span>
+              <!-- Edit Icon -->
+              <button id="edit-profile-btn" style="margin-left:10px; cursor:pointer;" title="Edit Profile">
+                ✏️
+              </button>
+            </div>
+            <div class="_1fragem32 _1fragemn2" aria-hidden="true">
+              <p class="_1tx8jg70 _1fragemn2 _1tx8jg717 _1tx8jg71f _1tx8jg71h">
+                <strong class="_19gi7yt0 _19gi7yt2 _19gi7yt12 _19gi7yt1a _19gi7yt1l">
+                  <span class="mw2e2" id="profile-name-hidden">Ben Ray</span>
+                </strong>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="_1fragem32 _16s97g7z _16s97g711 _16s97g712 _16s97g713">
+          Email: <span class="mw2e2" id="profile-email">ben.ray@trimarkusa.com</span>
+        </div>
+      </div>
     </div>
-  </div>
-
-  <!-- Contact Info -->
-  <div class="profile-section" id="profile-details">
-    <p>Email: <span id="profile-email">ben.ray@trimarkusa.com</span></p>
   </div>
 </div>
 
@@ -31,20 +46,7 @@
 </div>
 
 <style>
-  .profile-container {
-    max-width: 600px;
-    margin: 50px auto;
-    font-family: Arial, sans-serif;
-  }
-  .profile-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .edit-icon {
-    cursor: pointer;
-    font-size: 1.2rem;
-  }
+  /* Modal Styles */
   .modal {
     display: none;
     position: fixed;
@@ -104,9 +106,7 @@
   });
 
   window.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      modal.style.display = 'none';
-    }
+    if (e.target === modal) modal.style.display = 'none';
   });
 
   form.addEventListener('submit', (e) => {
@@ -115,6 +115,7 @@
     const email = document.getElementById('email').value;
 
     document.getElementById('profile-name').textContent = name;
+    document.getElementById('profile-name-hidden').textContent = name;
     document.getElementById('profile-email').textContent = email;
     modal.style.display = 'none';
   });
