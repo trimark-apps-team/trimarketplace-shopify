@@ -570,8 +570,14 @@
               <a class="btn btn-primary cs-save-trigger" href="/a/saved-carts/new">Save Cart</a> 
               <a href="{{ routes.cart_url }}" class="cart__checkout-button cart_btn">View Cart</a>
             </div>
-          {% if customer.metafields.custom.buyer_role.value != "Sales Rep" %}
-          <button
+          {% if customer.metafields.custom.buyer_role.value == "Sales Rep" %}
+                      <button id="create-salesrep-order" class="cart__checkout-button button draft-order-drawer">
+              Place Order
+            </button>
+        {% else %}
+
+
+            <button
             type="submit"
             id="CartDrawer-Checkout"
             class="cart__checkout-button button"
@@ -588,10 +594,6 @@
           <button id="create-draft-order" class="cart__checkout-button button hidden draft-order-drawer">
             Send for Approval
           </button>
-        {% else %}
-            <button id="create-salesrep-order" class="cart__checkout-button button draft-order-drawer">
-              Place Order
-            </button>
         {% endif %}
           
         </div>

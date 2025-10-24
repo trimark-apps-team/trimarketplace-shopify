@@ -122,8 +122,14 @@
               </div>
                 {% endif %}
                 <div class="cart__ctas" {{ block.shopify_attributes }}>
-                   {% if customer.metafields.custom.buyer_role.value != "Sales Rep" %}
-                  <button
+                   {% if customer.metafields.custom.buyer_role.value == "Sales Rep" %}
+                   
+               <button id="create-salesrep-order" class="cart__checkout-button button button--secondary draft-order-cart">
+                        Place Order 
+                      </button>
+              
+              {% else %}
+                     <button
                     type="submit"
                     id="checkout"
                     class="cart__checkout-button button button--secondary"
@@ -137,10 +143,7 @@
                   </button> <span class="bss-bcp-custom-quote-cart-btn"></span>
 
                <button id="create-draft-order" class="cart__checkout-button button hidden button--secondary draft-order-cart">Send for Approval</button>
-                  {% else %}
-                      <button id="create-salesrep-order" class="cart__checkout-button button button--secondary draft-order-cart">
-                        Place Order 
-                      </button>
+                 
                   {% endif %}
                 </div>
 
