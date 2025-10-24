@@ -895,7 +895,8 @@
         "payment_terms_totals": {
           "due_today_next": "Due Today"
         },
-        "deferred_total_due_date_label": "Total Due {{ date }}"
+        "deferred_total_due_date_label": "Total Due {{ date }}",
+        "shipping_label": "Estimated Shipping"
       },
       "payment": {
         "card_number_label": "Card Number",
