@@ -1,0 +1,69 @@
+{% if customer %}
+  <section class="max-w-3xl mx-auto py-12 px-6 text-gray-800 font-sans">
+    <h1 class="text-3xl font-semibold mb-8">Your profile</h1>
+
+    <!-- Profile Info Card -->
+    <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-6 mb-8">
+      <h2 class="text-lg font-medium mb-4">Account information</h2>
+      <dl class="space-y-2 text-sm">
+        <div class="flex justify-between">
+          <dt class="text-gray-500">Name</dt>
+          <dd class="font-medium">{{ customer.first_name }} {{ customer.last_name }}</dd>
+        </div>
+        <div class="flex justify-between">
+          <dt class="text-gray-500">Email</dt>
+          <dd class="font-medium">{{ customer.email }}</dd>
+        </div>
+        {% if customer.phone %}
+          <div class="flex justify-between">
+            <dt class="text-gray-500">Phone</dt>
+            <dd class="font-medium">{{ customer.phone }}</dd>
+          </div>
+        {% endif %}
+      </dl>
+      <div class="mt-6">
+        <a href="{{ routes.account_addresses_url }}" class="text-blue-600 hover:underline">
+          Manage addresses →
+        </a>
+      </div>
+    </div>
+
+    <!-- Orders Card -->
+    <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-6 mb-8">
+      <h2 class="text-lg font-medium mb-4">Your recent orders</h2>
+      {% if customer.orders_count > 0 %}
+        <ul class="divide-y divide-gray-100 text-sm">
+          {% for order in customer.orders limit: 5 %}
+            <li class="py-3 flex justify-between items-center">
+              <div>
+                <a href="{{ order.customer_url }}" class="text-blue-600 hover:underline font-medium">
+                  Order {{ order.name }}
+                </a>
+                <p class="text-gray-500">{{ order.created_at | date: "%b %d, %Y" }}</p>
+              </div>
+              <span class="text-gray-600">{{ order.financial_status_label }}</span>
+            </li>
+          {% endfor %}
+        </ul>
+        <a href="{{ routes.account_url }}" class="text-blue-600 hover:underline mt-3 inline-block">
+          View all orders →
+        </a>
+      {% else %}
+        <p class="text-gray-500">You haven’t placed any orders yet.</p>
+      {% endif %}
+    </div>
+
+    <!-- Logout -->
+    <div class="text-center">
+      <a href="{{ routes.account_logout_url }}" class="text-gray-600 hover:text-gray-900 text-sm">
+        Log out
+      </a>
+    </div>
+  </section>
+
+{% else %}
+  <div class="text-center py-20">
+    <h2 class="text-2xl font-medium mb-4">Please log in</h2>
+    <a href="{{ routes.account_login_url }}" class="text-blue-600 hover:underline">Go to login page</a>
+  </div>
+{% endif %}
