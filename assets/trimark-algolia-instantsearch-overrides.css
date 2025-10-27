@@ -230,17 +230,7 @@ Results in maximum flexibility and provides algoliashopify access for store cont
 }
 
 /* === Product text === */
-.ais-Hits-item h3 {
-  font-weight: 600;
-  color: #222;
-  margin: 0.5rem 0 0.25rem;
-  line-height: 1.3;
-}
 
-.ais-Hits-item p {
-  color: #444;
-  margin: 0;
-}
 
 
 .ais-HitLink {
@@ -264,31 +254,41 @@ Results in maximum flexibility and provides algoliashopify access for store cont
   object-fit: contain;
 }
 
-/* Vendor smaller and lighter */
+/* InstantSearch Item Styling — scaled for better legibility */
+.ais-HitContentBody {
+  text-align: left;
+  padding: 0.75rem 0;
+  line-height: 1.4;
+}
+
 .ais-HitVendor {
-  color: #888;
+  font-size: 1.2rem;
+  color: #777;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.4px;
 }
 
-/* Product title bold and darker */
 .ais-HitTitle {
+  font-size: 1.3rem;
   font-weight: 700;
-  color: #222;
-  line-height: 1.3;
-}
-
-/* Price + UOM bold and clean */
-.ais-HitPrice {
-  font-weight: 700;
-  color: #000;
+  color: #111;
+  line-height: 1.35;
   margin-top: 0.25rem;
 }
 
-.ais-HitUOM {
+.ais-HitPrice {
+  font-size: 1.3rem;
   font-weight: 700;
-  color: #444;
-  margin-left: 4px;
+  color: #000;
+  margin-top: 0.35rem;
+}
+
+.ais-HitUOM {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #333;
+  margin-left: 6px;
+  text-transform: uppercase;
 }
 
 /* === Responsive adjustments === */
