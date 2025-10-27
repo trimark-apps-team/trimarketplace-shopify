@@ -252,6 +252,7 @@ Results in maximum flexibility and provides algoliashopify access for store cont
   height: auto;
   object-fit: contain;
   border-radius: 4px;
+  text-align: center;
 }
 
 /* InstantSearch Item Styling — scaled for better legibility */
