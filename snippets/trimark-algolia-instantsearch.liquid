@@ -5,7 +5,18 @@
 >
 <script defer>
 document.addEventListener('DOMContentLoaded', () => {
-  const { algoliasearch, instantsearch } = algoliaShopify.externals;
+  if (!window.algoliaShopify) {
+    console.error('Algolia not initialized. Make sure the hidden block is included.');
+    return;
+  }
+
+  const {
+    algoliasearch,
+    instantsearch,
+    searchBox,
+    hits,
+    pagination,
+  } = algoliaShopify.externals;
 
   const searchClient =
     algoliaShopify.searchClient ||
@@ -22,11 +33,11 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   search.addWidgets([
-    instantsearch.widgets.searchBox({
+    searchBox({
       container: '#searchbox',
       placeholder: 'Search products...',
     }),
-    instantsearch.widgets.hits({
+    hits({
       container: '#hits',
       templates: {
         item(hit) {
@@ -40,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
       },
     }),
-    instantsearch.widgets.pagination({
+    pagination({
       container: '#pagination',
     }),
   ]);
