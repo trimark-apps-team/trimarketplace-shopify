@@ -71,6 +71,10 @@ Results in maximum flexibility and provides algoliashopify access for store cont
   font-size: 13px;
 }
 
+.ais-RefinementList-showMore {
+    font-size: 13px;
+    text-decoration: underline;
+}
 
 /* === Pagination === */
 .ais-Pagination {
