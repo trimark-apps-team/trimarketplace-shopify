@@ -37,3 +37,6 @@ Results in maximum flexibility and provides algoliashopify access for store cont
 .ais-Panel--collapsed .ais-Panel-header::after {
   transform: rotate(-90deg);
 }
+.ais-RefinementList-count {
+    display: none;
+}
