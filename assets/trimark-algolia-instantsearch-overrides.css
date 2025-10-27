@@ -115,11 +115,12 @@ Results in maximum flexibility and provides algoliashopify access for store cont
   }
 }
 
-/* === Search box === */
+/* === Search box size + styling === */
 .ais-SearchBox {
   width: 100%;
   display: flex;
   align-items: center;
+  margin-bottom: 1.5rem;
 }
 
 .ais-SearchBox-form {
@@ -130,15 +131,36 @@ Results in maximum flexibility and provides algoliashopify access for store cont
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
-  padding: 0.6rem 1rem;
-  font-size: 1rem;
+  padding: 0.9rem 1.25rem;
+  font-size: 1.1rem;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 6px;
+  height: 56px; /* increase height */
+  line-height: 1.4;
+  background-color: #fff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.ais-SearchBox-submit,
-.ais-SearchBox-reset {
-  display: none; /* optional: hides the default buttons */
+.ais-SearchBox-input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.15);
+}
+
+/* Search icon alignment */
+.ais-SearchBox-submit {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.ais-SearchBox {
+  position: relative;
 }
 
 .ais-Panel-body {
