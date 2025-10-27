@@ -58,37 +58,38 @@ document.addEventListener('DOMContentLoaded', () => {
       attribute: 'tags',
     }),
     refinementList({
-    container: '#price-range',
-    attribute: 'price_range',
-    sortBy: (a, b) => {
-        const getStart = (label) => parseFloat(label.split(':')[0]) || 0;
-        return getStart(a.name) - getStart(b.name);
-    },
-    limit: 20,
-    showMore: true,
-    templates: {
-        item(item, { html }) {
-        const label = item.label.includes(':')
-            ? item.label
-                .split(':')
-                .map((v, i) =>
-                i === 0 ? `$${v.trim()}` : v ? `$${v.trim()}` : '+'
-                )
-                .join(' – ')
-            : `$${item.label}`;
-        return html`
-            <label class="ais-RefinementList-label">
-            <input
-                type="checkbox"
-                class="ais-RefinementList-checkbox"
-                ${item.isRefined ? 'checked' : ''}
-            />
-            <span class="ais-RefinementList-labelText">${label}</span>
-            <span class="ais-RefinementList-count">${item.count}</span>
-            </label>
-        `;
+        container: '#price-range',
+        attribute: 'price_range',
+        sortBy: (a, b) => {
+            const getStart = (label) => parseFloat(label.split(':')[0]) || 0;
+            return getStart(a.name) - getStart(b.name);
         },
-    },
+        limit: 10,          // how many ranges to show initially
+        showMore: true,     // enable the "Show more" link
+        showMoreLimit: 30,  // how many total ranges to reveal when expanded
+        templates: {
+            item(item, { html }) {
+            const label = item.label.includes(':')
+                ? item.label
+                    .split(':')
+                    .map((v, i) =>
+                    i === 0 ? `$${v.trim()}` : v ? `$${v.trim()}` : '+'
+                    )
+                    .join(' – ')
+                : `$${item.label}`;
+            return html`
+                <label class="ais-RefinementList-label">
+                <input
+                    type="checkbox"
+                    class="ais-RefinementList-checkbox"
+                    ${item.isRefined ? 'checked' : ''}
+                />
+                <span class="ais-RefinementList-labelText">${label}</span>
+                <span class="ais-RefinementList-count">${item.count}</span>
+                </label>
+            `;
+            },
+        },
     }),
     widgets.sortBy({
     container: '#sort-by',
