@@ -115,6 +115,32 @@ Results in maximum flexibility and provides algoliashopify access for store cont
   }
 }
 
+/* === Search box === */
+.ais-SearchBox {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.ais-SearchBox-form {
+  width: 100%;
+}
+
+.ais-SearchBox-input {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.ais-SearchBox-submit,
+.ais-SearchBox-reset {
+  display: none; /* optional: hides the default buttons */
+}
+
 .ais-Panel-body {
   display: block;
 }
