@@ -54,12 +54,15 @@ document.addEventListener('DOMContentLoaded', () => {
     attribute: 'vendor',
   }),
 
-  widgets.panel({
-    templates: { header: 'Product Type' },
-  })(widgets.refinementList)({
-    container: '#product-type',
-    attribute: 'product_type',
-  }),
+widgets.panel({
+  templates: { header: 'Product Type' },
+})(widgets.refinementList)({
+  container: '#product-type',
+  attribute: 'product_type',
+  limit: 20,            // show 20 types initially
+  showMore: true,       // enable "Show more" button
+  showMoreLimit: 100,   // max total when expanded
+}),
 
   widgets.panel({
     templates: { header: 'Tags' },
