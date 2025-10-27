@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <a href="/products/${hit.handle}">
               <img src="${hit.image || hit.image_url}" alt="${hit.title}" width="150" />
               <h3>${instantsearch.highlight({ attribute: 'title', hit })}</h3>
-              <p>${Shopify.formatMoney(hit.price, Shopify.money_format)}</p>
+              <p>${hit.price}</p>
             </a>
           `;
         },
