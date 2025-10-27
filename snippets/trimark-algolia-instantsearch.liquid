@@ -160,10 +160,11 @@ hits({
                 <div class="ais-HitTitle">
                   ${components.Highlight({ hit, attribute: 'title' })}
                 </div>
+             
                 <div class="ais-HitPrice">
-                  ${price ? `$${price}` : ''}
-                  ${uom ? `<span class="ais-HitUOM">${uom}</span>` : ''}
-                </div>
+                          ${price ? html`$${price}` : ''}
+                          ${uom ? html`<span class="aa-ItemUOM">${uom}</span>` : ''}
+                        </div>
               </div>
             </div>
           </a>
