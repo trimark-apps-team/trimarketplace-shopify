@@ -33,21 +33,21 @@ const {
   });
 
   search.addWidgets([
-    instantsearch.widgets.searchBox({
+    searchBox({
       container: '#searchbox',
       placeholder: 'Search products...',
     }),
 
-    instantsearch.widgets.clearRefinements({
+    clearRefinements({
       container: '#clear-refinements',
     }),
 
-    instantsearch.widgets.refinementList({
+    refinementList({
       container: '#brand-list',
       attribute: 'brand',
     }),
 
-    instantsearch.widgets.hits({
+    hits({
       container: '#hits',
       templates: {
         item(hit) {
@@ -61,11 +61,11 @@ const {
       },
     }),
 
-    instantsearch.widgets.pagination({
+    pagination({
       container: '#pagination',
     }),
 
-    instantsearch.widgets.configure({
+    configure({
       hitsPerPage: 8,
     }),
   ]);
