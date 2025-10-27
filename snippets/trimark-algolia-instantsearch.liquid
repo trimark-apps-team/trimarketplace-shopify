@@ -56,6 +56,10 @@ document.addEventListener('DOMContentLoaded', () => {
     { label: 'Price (desc)', value: `${indexName}_price_desc` },
   ],
 }),
+rangeInput({
+  container: "#range-input",
+  attribute: "price",
+});
 
 widgets.rangeSlider({
   container: '#price-slider',
