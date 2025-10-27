@@ -1,22 +1,22 @@
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/instantsearch.css@8.5.1/themes/reset-min.css"
-  integrity="sha256-KvFgFCzgqSErAPu6y9gz/AhZAvzK48VJASu3DpNLCEQ="
-  crossorigin="anonymous"
-/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@8.5.1/themes/reset-min.css" integrity="sha256-KvFgFCzgqSErAPu6y9gz/AhZAvzK48VJASu3DpNLCEQ=" crossorigin="anonymous">
 <link
   rel="stylesheet"
   href="{{ 'trimark-algolia-instantsearch-overrides.css' | asset_url }}"
 >
-
 <script defer>
 document.addEventListener('DOMContentLoaded', () => {
-  if (!window.algoliaShopify) {
-    console.error('Algolia not initialized — make sure the hidden InstantSearch block is included.');
-    return;
-  }
 
-  const { algoliasearch, instantsearch } = algoliaShopify.externals;
+  const { algoliasearch, instantsearch, widgets } = algoliaShopify.externals;
+
+  // Destructure widgets from the top-level `widgets` object (not instantsearch.widgets)
+  const {
+    searchBox,
+    hits,
+    pagination,
+    refinementList,
+    clearRefinements,
+    configure,
+  } = widgets;
 
   const searchClient =
     algoliaShopify.searchClient ||
@@ -32,23 +32,23 @@ document.addEventListener('DOMContentLoaded', () => {
     searchClient,
   });
 
-  // 🧩 Direct demo-style widget calls
+  // ✅ Don't use instantsearch.widgets.* — use the destructured widget functions directly.
   search.addWidgets([
-    instantsearch.widgets.searchBox({
+    searchBox({
       container: '#searchbox',
       placeholder: 'Search products...',
     }),
 
-    instantsearch.widgets.clearRefinements({
+    clearRefinements({
       container: '#clear-refinements',
     }),
 
-    instantsearch.widgets.refinementList({
+    refinementList({
       container: '#brand-list',
       attribute: 'brand',
     }),
 
-    instantsearch.widgets.hits({
+    hits({
       container: '#hits',
       templates: {
         item(hit) {
@@ -63,11 +63,11 @@ document.addEventListener('DOMContentLoaded', () => {
       },
     }),
 
-    instantsearch.widgets.pagination({
+    pagination({
       container: '#pagination',
     }),
 
-    instantsearch.widgets.configure({
+    configure({
       hitsPerPage: 8,
     }),
   ]);
