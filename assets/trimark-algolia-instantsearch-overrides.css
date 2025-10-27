@@ -8,15 +8,23 @@ Results in maximum flexibility and provides algoliashopify access for store cont
 } */
 
 /* Hide the panel body when collapsed */
+/* Default: refinement body visible */
+.ais-Panel-body {
+  display: block;
+}
+
+/* When collapsed, hide the body */
 .ais-Panel--collapsed .ais-Panel-body {
   display: none;
 }
 
-/* Optional: add a cursor and chevron rotation effect */
+/* Optional chevron + header styling */
 .ais-Panel-header {
   cursor: pointer;
   position: relative;
   font-weight: 600;
+  padding: 6px 0;
+  user-select: none;
 }
 
 .ais-Panel-header::after {
