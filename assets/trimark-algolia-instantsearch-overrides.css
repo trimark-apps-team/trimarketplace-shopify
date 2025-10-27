@@ -395,3 +395,43 @@ Results in maximum flexibility and provides algoliashopify access for store cont
 .ais-RefinementList-count {
     display: none;
 }
+
+/* Sort by layout */
+.ais-SortByWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  font-family: inherit;
+}
+
+.ais-SortByLabel {
+  font-size: 1rem;
+  color: #777;
+}
+
+/* Algolia select styling */
+.ais-SortBy select {
+  font-size: 1rem;
+  padding: 0.4rem 1.8rem 0.4rem 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #000;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='10' viewBox='0 0 20 20'%3E%3Cpath fill='%23000' d='M5 7l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.6rem center;
+  background-size: 0.65rem auto;
+  cursor: pointer;
+}
+
+/* Optional: hover and focus states */
+.ais-SortBy select:hover {
+  border-color: #bbb;
+}
+
+.ais-SortBy select:focus {
+  outline: none;
+  border-color: #8C072A; /* TriMark red */
+}
