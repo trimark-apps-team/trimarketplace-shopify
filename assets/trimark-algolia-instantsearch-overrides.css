@@ -7,8 +7,114 @@ Results in maximum flexibility and provides algoliashopify access for store cont
     display: none !important;
 } */
 
-/* Hide the panel body when collapsed */
-/* Default: refinement body visible */
+/* === Layout === */
+.ais-InstantSearch {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  max-width: 1200px;
+  margin: 2rem auto;
+}
+
+.left-panel {
+  flex: 0 0 260px;
+  border-right: 1px solid #e1e3e5;
+  padding-right: 1.5rem;
+}
+
+.right-panel {
+  flex: 1;
+}
+
+/* === Panel === */
+.ais-Panel {
+  margin-bottom: 1.25rem;
+}
+
+.ais-Panel-header {
+  cursor: pointer;
+  position: relative;
+  font-weight: 600;
+  color: #222;
+  padding: 0.25rem 0;
+  user-select: none;
+}
+
+.ais-Panel-header::after {
+  content: "▾";
+  position: absolute;
+  right: 0;
+  transition: transform 0.2s ease;
+}
+
+.ais-Panel--collapsed .ais-Panel-header::after {
+  transform: rotate(-90deg);
+}
+
+.ais-Panel-body {
+  display: block;
+  padding-top: 0.25rem;
+}
+
+.ais-Panel--collapsed .ais-Panel-body {
+  display: none;
+}
+
+/* === Refinement list styling === */
+.ais-RefinementList-item {
+  margin: 0.15rem 0;
+}
+
+.ais-RefinementList-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.ais-RefinementList-count {
+  color: #999;
+  font-size: 0.8rem;
+}
+
+/* === Search + hits === */
+#searchbox {
+  margin-bottom: 1.5rem;
+}
+
+.ais-Hits-item {
+  border-bottom: 1px solid #eee;
+  padding: 1rem 0;
+  display: flex;
+  gap: 1rem;
+}
+
+.ais-Hits-item img {
+  width: 80px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.ais-Pagination {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+/* === Responsive === */
+@media (max-width: 900px) {
+  .ais-InstantSearch {
+    flex-direction: column;
+  }
+
+  .left-panel {
+    border-right: none;
+    border-bottom: 1px solid #eee;
+    padding-right: 0;
+    padding-bottom: 1rem;
+  }
+}
+
 .ais-Panel-body {
   display: block;
 }
