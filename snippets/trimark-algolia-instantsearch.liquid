@@ -49,14 +49,20 @@ document.addEventListener('DOMContentLoaded', () => {
       attribute: 'vendor',
     }),
     
-widgets.sortBy({
-  container: '#sort-by',
-  items: [
-    { label: 'Relevance', value: `${indexName}` },
-    { label: 'Price (asc)', value: `${indexName}_price_asc` },
-    { label: 'Price (desc)', value: `${indexName}_price_desc` },
-  ],
-}),
+
+    refinementList({
+      container: '#price-range',
+      attribute: 'price_range',
+    }),
+
+    widgets.sortBy({
+    container: '#sort-by',
+    items: [
+        { label: 'Relevance', value: `${indexName}` },
+        { label: 'Price (asc)', value: `${indexName}_price_asc` },
+        { label: 'Price (desc)', value: `${indexName}_price_desc` },
+    ],
+    }),
 
 widgets.refinementList({
   container: '#price-range',
@@ -83,7 +89,6 @@ widgets.refinementList({
             ${item.isRefined ? 'checked' : ''}
           />
           <span class="ais-RefinementList-labelText">${label}</span>
-          <span class="ais-RefinementList-count">${item.count}</span>
         </label>
       `;
     },
