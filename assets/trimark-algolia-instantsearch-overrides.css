@@ -180,19 +180,13 @@ Results in maximum flexibility and provides algoliashopify access for store cont
   background-color: #f5f5f5;
 }
 
-.ais-Pagination-item--selected {
+.ais-Pagination-item--selected, .ais-Pagination-item--selected:hover  {
   background-color: #666;
   color: #fff;
   border-color: #666;
   cursor: default;
 }
 
-.ais-Pagination-item--selected:hover {
-  background-color: #666;
-  color: #fff;
-  border-color: #666;
-  cursor: default;
-}
 
 /* === Hits grid === */
 .ais-Hits {
