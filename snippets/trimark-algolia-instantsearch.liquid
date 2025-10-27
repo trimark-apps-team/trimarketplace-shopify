@@ -25,27 +25,21 @@ document.addEventListener('DOMContentLoaded', () => {
     instantsearch.widgets.searchBox({
       container: '#searchbox',
       placeholder: 'Search products...',
-      showReset: true,
-      showSubmit: true,
     }),
-
     instantsearch.widgets.hits({
       container: '#hits',
       templates: {
         item(hit) {
           return `
-            <article class="ais-Hits-item">
-              <a href="/products/${hit.handle}" class="ais-Hits-link">
-                <img src="${hit.image || hit.image_url}" alt="${hit.title}" width="150" />
-                <h2>${instantsearch.highlight({ attribute: 'title', hit })}</h2>
-                <p>${Shopify.formatMoney(hit.price, Shopify.money_format)}</p>
-              </a>
-            </article>
+            <a href="/products/${hit.handle}">
+              <img src="${hit.image || hit.image_url}" alt="${hit.title}" width="150">
+              <h3>${instantsearch.highlight({ attribute: 'title', hit })}</h3>
+              <p>${Shopify.formatMoney(hit.price, Shopify.money_format)}</p>
+            </a>
           `;
         },
       },
     }),
-
     instantsearch.widgets.pagination({
       container: '#pagination',
     }),
