@@ -270,6 +270,58 @@ Results in maximum flexibility and provides algoliashopify access for store cont
   background: #b92017;
 }
 
+.ais-HitLink {
+  display: block;
+  width: 100%;
+  max-width: 240px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.ais-HitContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ais-HitPicture img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  object-fit: contain;
+}
+
+/* Vendor smaller and lighter */
+.ais-HitVendor {
+  font-size: 0.8rem;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Product title bold and darker */
+.ais-HitTitle {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #222;
+  line-height: 1.3;
+}
+
+/* Price + UOM bold and clean */
+.ais-HitPrice {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #000;
+  margin-top: 0.25rem;
+}
+
+.ais-HitUOM {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #444;
+  margin-left: 4px;
+}
+
 /* === Responsive adjustments === */
 @media (max-width: 900px) {
   .ais-Hits-list {
