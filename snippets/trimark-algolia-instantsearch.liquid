@@ -6,7 +6,18 @@
 <script defer>
 document.addEventListener('DOMContentLoaded', () => {
 
+const {
+    algoliasearch,
+    instantsearch,
+    searchBox,
+    clearRefinements,
+    refinementList,
+    hits,
+    pagination,
+    configure,
+  } = algoliaShopify.externals;
 
+  console.log(algoliasearch)
   const searchClient =
     algoliaShopify.searchClient ||
     algoliasearch(
