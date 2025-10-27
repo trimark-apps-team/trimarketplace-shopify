@@ -819,7 +819,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     return div;
   }
 
-  function createWishlistCard(url, title, count) {
+  function createWishlistCard(title, count) {
     const div = document.createElement("ul");
     div.className = "item-card";
     div.innerHTML = `
@@ -873,7 +873,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       const doc = parser.parseFromString(data, 'text/html');
 
-      const element = doc.querySelectorAll("tbody tr");
+      const element = doc.querySelectorAll(".cs-table tbody tr");
 
       console.log(element);
 
