@@ -31,17 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const search = instantsearch({
     indexName,
     searchClient,
-  });
-
-
-  search.addWidgets([
-    searchBox({
-      container: '#searchbox',
-      placeholder: 'Search products...',
-    }),
-
-    
-  routing: {
+    routing: {
     stateMapping: {
       stateToRoute(uiState) {
         return {
@@ -60,7 +50,14 @@ document.addEventListener('DOMContentLoaded', () => {
     },
   },
 }),
-    
+  });
+
+
+  search.addWidgets([
+    searchBox({
+      container: '#searchbox',
+      placeholder: 'Search products...',
+    }),
 
     clearRefinements({
       container: '#clear-refinements',
