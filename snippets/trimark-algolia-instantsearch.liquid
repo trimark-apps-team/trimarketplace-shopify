@@ -135,43 +135,43 @@ widgets.panel({
 
 
 hits({
-    container: '#hits',
-    templates: {
-        item(hit, { html, components }) {
-        const productUrl = hit.url || `/products/${hit.handle}`;
-        const price = hit.price;
-        const uom = hit.meta?.custom?.['3_uom'] || '';
+  container: '#hits',
+  templates: {
+    item(hit, { html, components }) {
+      const productUrl = hit.url || `/products/${hit.handle}`;
+      const price = hit.price;
+      const uom = hit.meta?.custom?.['3_uom'] || '';
 
-        return html`
-            <div class="ais-HitWrapper">
-            <a href="${productUrl}" class="ais-HitLink">
-                <div class="ais-HitContent">
-                <div class="ais-HitPicture">
-                    <img
-                    src="${hit.image || hit.image_url}"
-                    alt="${hit.title}"
-                    loading="lazy"
-                    />
+      return html`
+        <div class="ais-HitWrapper">
+          <a href="${productUrl}" class="ais-HitLink">
+            <div class="ais-HitContent">
+              <div class="ais-HitPicture">
+                <img
+                  src="${hit.image || hit.image_url}"
+                  alt="${hit.title}"
+                  loading="lazy"
+                />
+              </div>
+              <div class="ais-HitContentBody">
+                <div class="ais-HitVendor">
+                  ${components.Highlight({ hit, attribute: 'vendor' })}
                 </div>
-                <div class="ais-HitContentBody">
-                    <div class="ais-HitVendor">
-                    ${components.Highlight({ hit, attribute: 'vendor' })}
-                    </div>
-                    <div class="ais-HitTitle">
-                    ${components.Highlight({ hit, attribute: 'title' })}
-                    </div>
-                    <div class="ais-HitPrice">
-                    ${price ? `$${price}` : ''}
-                    ${uom ? `<span class="ais-HitUOM">${uom}</span>` : ''}
-                    </div>
+                <div class="ais-HitTitle">
+                  ${components.Highlight({ hit, attribute: 'title' })}
                 </div>
+                <div class="ais-HitPrice">
+                  ${price ? `$${price}` : ''}
+                  ${uom ? `<span class="ais-HitUOM">${uom}</span>` : ''}
                 </div>
-            </a>
+              </div>
             </div>
-        `;
-        },
+          </a>
+        </div>
+      `;
     },
-    });
+  },
+}),
 
     pagination({
       container: '#pagination',
