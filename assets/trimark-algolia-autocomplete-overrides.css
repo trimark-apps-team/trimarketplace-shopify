@@ -78,7 +78,7 @@
 }
 
 .aa-ItemContentPrice {
-  display: block;
+  display: block !important;
 
 }
 
