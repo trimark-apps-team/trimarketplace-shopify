@@ -141,14 +141,14 @@ document.addEventListener('DOMContentLoaded', () => {
   search.start();
 
 
-  document.addEventListener('click', (e) => {
-  const header = e.target.closest('.ais-Panel-header');
-  if (!header) return;
+    document.addEventListener('click', (e) => {
+        const header = e.target.closest('.ais-Panel-header');
+        if (!header) return;
 
-  const panel = header.closest('.ais-Panel');
-  if (!panel) return;
+        const panel = header.closest('.ais-Panel');
+        if (!panel) return;
 
-  panel.classList.toggle('ais-Panel--collapsed');
-});
+        panel.classList.toggle('ais-Panel--collapsed');
+    });
 });
 </script>
