@@ -56,23 +56,15 @@ document.addEventListener('DOMContentLoaded', () => {
     { label: 'Price (desc)', value: `${indexName}_price_desc` },
   ],
 }),
-widgets.menu({
+widgets.refinementList({
   container: '#price-range',
   attribute: 'price_range',
-  items: [
-    { label: '$0 – $10', start: 0, end: 10 },
-    { label: '$10 – $25', start: 10, end: 25 },
-    { label: '$25 – $50', start: 25, end: 50 },
-    { label: '$50 – $75', start: 50, end: 75 },
-    { label: '$75 – $100', start: 75, end: 100 },
-    { label: '$100 – $200', start: 100, end: 200 },
-    { label: '$200 – $500', start: 200, end: 500 },
-    { label: '$500 – $1000', start: 500, end: 1000 },
-    { label: '$1000+', start: 1000 },
-  ],
-  limit: 5, // how many to show before “see more”
+  sortBy: ['name:asc'],
+  limit: 10,
   showMore: true,
-  showMoreLimit: 10,
+  templates: {
+    header: 'Price Range',
+  },
 }),
 
 widgets.stats({
