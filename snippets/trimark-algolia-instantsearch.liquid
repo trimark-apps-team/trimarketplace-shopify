@@ -33,13 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     searchClient,
   });
 
-  const makeCollapsiblePanel = (title, widget) =>
-  widgets.panel({
-    templates: {
-      header: () => `<button class="ais-Panel-header">${title}</button>`,
-    },
-    collapsed: () => true, // start collapsed by default
-  })(widget);
+
 
   // ✅ Don't use instantsearch.widgets.* — use the destructured widget functions directly.
   search.addWidgets([
@@ -52,65 +46,67 @@ document.addEventListener('DOMContentLoaded', () => {
       container: '#clear-refinements',
     }),
 
-  makeCollapsiblePanel(
-    'Brand',
-    refinementList({
-      container: '#brand-list',
-      attribute: 'vendor',
-    })
-  ),
-  makeCollapsiblePanel(
-    'Product Type',
-    refinementList({
-      container: '#product-type',
-      attribute: 'product_type',
-    })
-  ),
+  widgets.panel({
+    templates: { header: 'Brand' },
+    collapsed: () => true,
+  })(widgets.refinementList)({
+    container: '#brand-list',
+    attribute: 'vendor',
+  }),
 
-  makeCollapsiblePanel(
-    'Tags',
-    refinementList({
-      container: '#tags',
-      attribute: 'tags',
-    })
-  ),
-  makeCollapsiblePanel(
-    'Price Range',
-    refinementList({
-      container: '#price-range',
-      attribute: 'price_range',
-      sortBy: (a, b) => {
-        const getStart = (label) => parseFloat(label.split(':')[0]) || 0;
-        return getStart(a.name) - getStart(b.name);
+  widgets.panel({
+    templates: { header: 'Product Type' },
+    collapsed: () => true,
+  })(widgets.refinementList)({
+    container: '#product-type',
+    attribute: 'product_type',
+  }),
+
+  widgets.panel({
+    templates: { header: 'Tags' },
+    collapsed: () => true,
+  })(widgets.refinementList)({
+    container: '#tags',
+    attribute: 'tags',
+  }),
+
+  widgets.panel({
+    templates: { header: 'Price Range' },
+    collapsed: () => true,
+  })(widgets.refinementList)({
+    container: '#price-range',
+    attribute: 'price_range',
+    sortBy: (a, b) => {
+      const getStart = (label) => parseFloat(label.split(':')[0]) || 0;
+      return getStart(a.name) - getStart(b.name);
+    },
+    limit: 10,
+    showMore: true,
+    showMoreLimit: 30,
+    templates: {
+      item(item, { html }) {
+        const label = item.label.includes(':')
+          ? item.label
+              .split(':')
+              .map((v, i) =>
+                i === 0 ? `$${v.trim()}` : v ? `$${v.trim()}` : '+'
+              )
+              .join(' – ')
+          : `$${item.label}`;
+        return html`
+          <label class="ais-RefinementList-label">
+            <input
+              type="checkbox"
+              class="ais-RefinementList-checkbox"
+              ${item.isRefined ? 'checked' : ''}
+            />
+            <span class="ais-RefinementList-labelText">${label}</span>
+            <span class="ais-RefinementList-count">${item.count}</span>
+          </label>
+        `;
       },
-      limit: 10,
-      showMore: true,
-      showMoreLimit: 30,
-      templates: {
-        item(item, { html }) {
-          const label = item.label.includes(':')
-            ? item.label
-                .split(':')
-                .map((v, i) =>
-                  i === 0 ? `$${v.trim()}` : v ? `$${v.trim()}` : '+'
-                )
-                .join(' – ')
-            : `$${item.label}`;
-          return html`
-            <label class="ais-RefinementList-label">
-              <input
-                type="checkbox"
-                class="ais-RefinementList-checkbox"
-                ${item.isRefined ? 'checked' : ''}
-              />
-              <span class="ais-RefinementList-labelText">${label}</span>
-              <span class="ais-RefinementList-count">${item.count}</span>
-            </label>
-          `;
-        },
-      },
-    })
-  ),
+    },
+  }),
     widgets.sortBy({
     container: '#sort-by',
     items: [
