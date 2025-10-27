@@ -6,3 +6,26 @@ Results in maximum flexibility and provides algoliashopify access for store cont
 /* #algolia-shopify-instantsearch {
     display: none !important;
 } */
+
+/* Hide the panel body when collapsed */
+.ais-Panel--collapsed .ais-Panel-body {
+  display: none;
+}
+
+/* Optional: add a cursor and chevron rotation effect */
+.ais-Panel-header {
+  cursor: pointer;
+  position: relative;
+  font-weight: 600;
+}
+
+.ais-Panel-header::after {
+  content: '▾';
+  position: absolute;
+  right: 0;
+  transition: transform 0.2s ease;
+}
+
+.ais-Panel--collapsed .ais-Panel-header::after {
+  transform: rotate(-90deg);
+}
