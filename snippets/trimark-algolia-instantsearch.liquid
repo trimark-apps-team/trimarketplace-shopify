@@ -6,19 +6,16 @@
 <script defer>
 document.addEventListener('DOMContentLoaded', () => {
 
-const {
+ const {
     algoliasearch,
     instantsearch,
     searchBox,
-    clearRefinements,
-    refinementList,
     hits,
     pagination,
+    refinementList,
+    clearRefinements,
     configure,
   } = algoliaShopify.externals;
-
-  console.log("algoliasearch", algoliasearch)
-
 
   const searchClient =
     algoliaShopify.searchClient ||
@@ -27,25 +24,52 @@ const {
       algoliaShopify.config.search_api_key
     );
 
+  const indexName = `${algoliaShopify.config.index_prefix}products`;
+
   const search = instantsearch({
-    indexName: `${algoliaShopify.config.index_prefix}products`,
+    indexName,
     searchClient,
   });
 
-search.addWidgets([
-  instantsearch.widgets.clearRefinements({
-    container: "#clear-refinements",
-  }),
+  // ✅ Don't use instantsearch.widgets.* — use the destructured widget functions directly.
+  search.addWidgets([
+    searchBox({
+      container: '#searchbox',
+      placeholder: 'Search products...',
+    }),
 
-  instantsearch.widgets.refinementList({
-    container: "#brand-list",
-    attribute: "brand",
-  }),
+    clearRefinements({
+      container: '#clear-refinements',
+    }),
 
-  instantsearch.widgets.configure({
-    hitsPerPage: 8,
-  }),
-]);
+    refinementList({
+      container: '#brand-list',
+      attribute: 'brand',
+    }),
+
+    hits({
+      container: '#hits',
+      templates: {
+        item(hit) {
+          return `
+            <a href="/products/${hit.handle}">
+              <img src="${hit.image || hit.image_url}" alt="${hit.title}" width="150" />
+              <h3>${instantsearch.highlight({ attribute: 'title', hit })}</h3>
+              <p>${Shopify.formatMoney(hit.price, Shopify.money_format)}</p>
+            </a>
+          `;
+        },
+      },
+    }),
+
+    pagination({
+      container: '#pagination',
+    }),
+
+    configure({
+      hitsPerPage: 8,
+    }),
+  ]);
 
   search.start();
 });
