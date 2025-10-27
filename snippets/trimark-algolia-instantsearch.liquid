@@ -124,14 +124,14 @@ widgets.panel({
       },
     },
   }),
-    widgets.sortBy({
-    container: '#sort-by',
-    items: [
-        { label: 'Relevance', value: `${indexName}` },
-        { label: 'Price (asc)', value: `${indexName}_price_asc` },
-        { label: 'Price (desc)', value: `${indexName}_price_desc` },
-    ],
-    }),
+ widgets.sortBy({
+  container: '#sort-by',
+  items: [
+    { label: 'Relevance', value: `${indexName}` },
+    { label: 'Price (asc)', value: `${indexName}_price_asc` },
+    { label: 'Price (desc)', value: `${indexName}_price_desc` },
+  ],
+}),
 
 
 hits({
