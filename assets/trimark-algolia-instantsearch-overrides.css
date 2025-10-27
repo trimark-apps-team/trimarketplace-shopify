@@ -68,14 +68,10 @@ Results in maximum flexibility and provides algoliashopify access for store cont
 .ais-RefinementList-label {
   display: flex;
   justify-content: space-between;
-  font-size: 0.9rem;
   color: #333;
 }
 
-.ais-RefinementList-count {
-  color: #999;
-  font-size: 0.8rem;
-}
+
 
 /* === Search + hits === */
 #searchbox {
@@ -132,7 +128,6 @@ Results in maximum flexibility and provides algoliashopify access for store cont
   max-width: 100%;
   box-sizing: border-box;
   padding: 0.9rem 1.25rem;
-  font-size: 1.1rem;
   border: 1px solid #ccc;
   border-radius: 6px;
   height: 56px; /* increase height */
