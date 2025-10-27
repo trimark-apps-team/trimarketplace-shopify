@@ -77,11 +77,17 @@
   margin-top: 0.35rem;
 }
 
+.aa-ItemContentPrice {
+  display: block;
+
+}
+
 .aa-ItemUOM {
   font-size: 1.5rem;
   font-weight: 700;
   color: #333;
   text-transform: uppercase;
+  margin-left: 3px;
 }
 
 .aa-ItemPicture img {
