@@ -256,6 +256,9 @@ Results in maximum flexibility and provides algoliashopify access for store cont
   align-items: center;
   margin-bottom: 1.5rem;
 }
+.ais-SearchBox-submit {
+    display: none;
+}
 
 .ais-SearchBox-form {
   width: 100%;
