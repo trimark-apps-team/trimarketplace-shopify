@@ -275,6 +275,7 @@ Results in maximum flexibility and provides algoliashopify access for store cont
   line-height: 1.4;
   background-color: #fff;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  font-size: 16px;
 }
 
 .ais-SearchBox-input:focus {
