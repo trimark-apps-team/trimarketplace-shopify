@@ -1,1 +1,53 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@8.5.1/themes/reset-min.css" integrity="sha256-KvFgFCzgqSErAPu6y9gz/AhZAvzK48VJASu3DpNLCEQ=" crossorigin="anonymous">
+
+<script defer>
+document.addEventListener('DOMContentLoaded', () => {
+  const { algoliasearch, instantsearch } = algoliaShopify.externals;
+
+  const searchClient =
+    algoliaShopify.searchClient ||
+    algoliasearch(
+      algoliaShopify.config.app_id,
+      algoliaShopify.config.search_api_key
+    );
+
+  const indexName = `${algoliaShopify.config.index_prefix}products`;
+
+  const search = instantsearch({
+    indexName,
+    searchClient,
+  });
+
+  search.addWidgets([
+    instantsearch.widgets.searchBox({
+      container: '#searchbox',
+      placeholder: 'Search products...',
+      showReset: true,
+      showSubmit: true,
+    }),
+
+    instantsearch.widgets.hits({
+      container: '#hits',
+      templates: {
+        item(hit) {
+          return `
+            <article class="ais-Hits-item">
+              <a href="/products/${hit.handle}" class="ais-Hits-link">
+                <img src="${hit.image || hit.image_url}" alt="${hit.title}" width="150" />
+                <h2>${instantsearch.highlight({ attribute: 'title', hit })}</h2>
+                <p>${Shopify.formatMoney(hit.price, Shopify.money_format)}</p>
+              </a>
+            </article>
+          `;
+        },
+      },
+    }),
+
+    instantsearch.widgets.pagination({
+      container: '#pagination',
+    }),
+  ]);
+
+  search.start();
+});
+</script>
