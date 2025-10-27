@@ -406,13 +406,13 @@ Results in maximum flexibility and provides algoliashopify access for store cont
 }
 
 .ais-SortByLabel {
-  font-size: 1rem;
+  font-size: 1.3rem;
   color: #777;
 }
 
 /* Algolia select styling */
 .ais-SortBy select {
-  font-size: 1rem;
+  font-size: 1.3rem;
   padding: 0.4rem 1.8rem 0.4rem 0.75rem;
   border: 1px solid #ddd;
   border-radius: 4px;
