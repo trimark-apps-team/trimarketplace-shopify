@@ -56,7 +56,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   widgets.panel({
     templates: { header: 'Product Type' },
-    collapsed: () => true,
   })(widgets.refinementList)({
     container: '#product-type',
     attribute: 'product_type',
@@ -64,7 +63,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   widgets.panel({
     templates: { header: 'Tags' },
-    collapsed: () => true,
   })(widgets.refinementList)({
     container: '#tags',
     attribute: 'tags',
@@ -72,7 +70,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   widgets.panel({
     templates: { header: 'Price Range' },
-    collapsed: () => true,
   })(widgets.refinementList)({
     container: '#price-range',
     attribute: 'price_range',
