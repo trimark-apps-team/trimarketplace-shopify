@@ -257,7 +257,7 @@ Results in maximum flexibility and provides algoliashopify access for store cont
   margin-bottom: 1.5rem;
 }
 .ais-SearchBox-submit {
-    display: none;
+    display: none !important;
 }
 
 .ais-SearchBox-form {
