@@ -187,6 +187,13 @@ Results in maximum flexibility and provides algoliashopify access for store cont
   cursor: default;
 }
 
+.ais-Pagination-item--selected:hover {
+  background-color: #666;
+  color: #fff;
+  border-color: #666;
+  cursor: default;
+}
+
 /* === Hits grid === */
 .ais-Hits {
   width: 100%;
