@@ -6,16 +6,17 @@
 <script defer>
 document.addEventListener('DOMContentLoaded', () => {
 
- const {
-    algoliasearch,
-    instantsearch,
+  const { algoliasearch, instantsearch, widgets } = algoliaShopify.externals;
+
+  // Destructure widgets from the top-level `widgets` object (not instantsearch.widgets)
+  const {
     searchBox,
     hits,
     pagination,
     refinementList,
     clearRefinements,
     configure,
-  } = algoliaShopify.externals;
+  } = widgets;
 
   const searchClient =
     algoliaShopify.searchClient ||
