@@ -32,43 +32,20 @@ const {
     searchClient,
   });
 
-  search.addWidgets([
-    searchBox({
-      container: '#searchbox',
-      placeholder: 'Search products...',
-    }),
+search.addWidgets([
+  instantsearch.widgets.clearRefinements({
+    container: "#clear-refinements",
+  }),
 
-    clearRefinements({
-      container: '#clear-refinements',
-    }),
+  instantsearch.widgets.refinementList({
+    container: "#brand-list",
+    attribute: "brand",
+  }),
 
-    refinementList({
-      container: '#brand-list',
-      attribute: 'brand',
-    }),
-
-    hits({
-      container: '#hits',
-      templates: {
-        item(hit) {
-          return `
-            <a href="/products/${hit.handle}">
-              <img src="${hit.image || hit.image_url}" alt="${hit.title}" width="150">
-              <h3>${instantsearch.highlight({ attribute: 'title', hit })}</h3>
-              <p>${Shopify.formatMoney(hit.price, Shopify.money_format)}</p>
-            </a>`;
-        },
-      },
-    }),
-
-    pagination({
-      container: '#pagination',
-    }),
-
-    configure({
-      hitsPerPage: 8,
-    }),
-  ]);
+  instantsearch.widgets.configure({
+    hitsPerPage: 8,
+  }),
+]);
 
   search.start();
 });
