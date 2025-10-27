@@ -56,6 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
     { label: 'Price (desc)', value: `${indexName}_price_desc` },
   ],
 }),
+
 widgets.refinementList({
   container: '#price-range',
   attribute: 'price_range',
@@ -63,9 +64,30 @@ widgets.refinementList({
   limit: 10,
   showMore: true,
   templates: {
-    header: 'Price Range',
+    item(item, { html, components }) {
+      // Convert "10:25" → "$10 – $25"
+      const label = item.label.includes(':')
+        ? item.label
+            .split(':')
+            .map((v, i) =>
+              i === 0 ? `$${v.trim()}` : v ? `$${v.trim()}` : '+'
+            )
+            .join(' – ')
+        : `$${item.label}`;
+      return html`
+        <label class="ais-RefinementList-label">
+          <input
+            type="checkbox"
+            class="ais-RefinementList-checkbox"
+            ${item.isRefined ? 'checked' : ''}
+          />
+          <span class="ais-RefinementList-labelText">${label}</span>
+          <span class="ais-RefinementList-count">${item.count}</span>
+        </label>
+      `;
+    },
   },
-}),
+});
 
 widgets.stats({
   container: '#search-stats',
