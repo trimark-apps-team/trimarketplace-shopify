@@ -56,15 +56,13 @@ document.addEventListener('DOMContentLoaded', () => {
   ],
 }),
 
-  // 👇 Add this
-  widgets.rangeInput({
-    container: '#price-range',
-    attribute: 'price',
-    templates: {
-      separatorText: 'to',
-    },
-  }),
-
+widgets.rangeSlider({
+  container: '#price-slider',
+  attribute: 'price',
+}), 
+widgets.stats({
+  container: '#search-stats',
+}),
     hits({
       container: '#hits',
       templates: {
