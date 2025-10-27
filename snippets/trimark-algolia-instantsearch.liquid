@@ -37,10 +37,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ✅ Don't use instantsearch.widgets.* — use the destructured widget functions directly.
   search.addWidgets([
+    configure({
+        hitsPerPage: 60,   // show 60 items per page (initial & unfiltered)
+    }),
     searchBox({
       container: '#searchbox',
       placeholder: 'Search products...',
     }),
+    
 
     clearRefinements({
       container: '#clear-refinements',
