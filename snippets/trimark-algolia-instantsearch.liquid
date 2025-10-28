@@ -32,6 +32,49 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const indexName = `${algoliaShopify.config.index_prefix}products`;
 
+  // Build a connected widget
+const customCurrentRefinements = instantsearch.connectors.connectCurrentRefinements(
+  (renderOptions, isFirstRender) => {
+    const { items, refine, widgetParams } = renderOptions;
+
+    if (isFirstRender) {
+      widgetParams.container.innerHTML = `
+        <div class="ais-CustomCurrentRefinements">
+          <h4>Selected Filters</h4>
+          <div class="ais-CustomCurrentRefinements-list"></div>
+          <button class="ais-CustomCurrentRefinements-clear">Clear all</button>
+        </div>`;
+      widgetParams.container
+        .querySelector('.ais-CustomCurrentRefinements-clear')
+        .addEventListener('click', () => refine([]));
+    }
+
+    const list = widgetParams.container.querySelector(
+      '.ais-CustomCurrentRefinements-list'
+    );
+
+    list.innerHTML = items
+      .map(
+        (item) => `
+        <div class="ais-CustomCurrentRefinements-item">
+          <span class="ais-CustomCurrentRefinements-label">${item.label}: ${item.refinements
+            .map((ref) => ref.label)
+            .join(', ')}</span>
+          <button data-attribute="${item.attribute}">✕</button>
+        </div>`
+      )
+      .join('');
+
+    list.querySelectorAll('button').forEach((btn) =>
+      btn.addEventListener('click', () => {
+        const attribute = btn.getAttribute('data-attribute');
+        const refinement = items.find((i) => i.attribute === attribute);
+        if (refinement) refine(refinement.refinements);
+      })
+    );
+  }
+);
+
   const search = instantsearch({
     indexName,
     searchClient,
@@ -64,6 +107,9 @@ document.addEventListener('DOMContentLoaded', () => {
     clearRefinements({
       container: '#clear-refinements',
     }),
+  customCurrentRefinements({
+    container: document.querySelector('#current-refinements'),
+  }),
 
   widgets.panel({
   templates: { header: 'Brand' },
