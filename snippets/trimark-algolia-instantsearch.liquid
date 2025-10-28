@@ -145,7 +145,7 @@ widgets.panel({
     attribute: 'tags',
   }),
 
-widgets.panel({
+idgets.panel({
   templates: { header: 'Price Range' },
 })(widgets.refinementList)({
   container: '#price-range',
@@ -158,18 +158,21 @@ widgets.panel({
   showMore: true,
   showMoreLimit: 30,
   transformItems(items) {
-    // Format the labels before rendering
-    return items.map(item => ({
-      ...item,
-      label: item.label.includes(':')
+    return items.map(item => {
+      const formattedLabel = item.label.includes(':')
         ? item.label
             .split(':')
             .map((v, i) =>
               i === 0 ? `$${v.trim()}` : v ? `$${v.trim()}` : '+'
             )
             .join(' – ')
-        : `$${item.label}`,
-    }));
+        : `$${item.label}`;
+      return {
+        ...item,
+        label: formattedLabel,
+        name: formattedLabel, // also update `name` so refinement pills show dashes, not colons
+      };
+    });
   },
 }),
 
