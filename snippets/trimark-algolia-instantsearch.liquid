@@ -111,6 +111,15 @@ document.addEventListener('DOMContentLoaded', () => {
       container: '#searchbox',
       placeholder: 'Search products...',
   }),
+    clearRefinements({
+    container: '#clear-refinements',
+    templates: {
+      resetLabel: 'Clear all',
+    },
+    cssClasses: {
+      button: 'ais-CurrentRefinements-clearAll',
+    },
+  }),
 
   customCurrentRefinements({
     container: document.querySelector('#current-refinements'),
