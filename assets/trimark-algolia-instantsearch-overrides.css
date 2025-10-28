@@ -60,8 +60,8 @@ Results in maximum flexibility and provides algoliashopify access for store cont
   display: none;
 }
 
-/* Container */
-#selected-filters {
+/* Main wrapper */
+.ais-CurrentRefinements {
   background: #fafafa;
   border-radius: 6px;
   padding: 1rem 1.25rem;
@@ -69,19 +69,21 @@ Results in maximum flexibility and provides algoliashopify access for store cont
   font-family: inherit;
 }
 
-/* Header row */
-#selected-filters h4 {
+/* Header */
+.ais-CurrentRefinements-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   font-size: 0.95rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.4px;
   color: #444;
-  display: inline-block;
-  margin-right: 0.75rem;
+  margin-bottom: 0.75rem;
 }
 
 /* “Clear all” button */
-#selected-filters button.clear-all {
+.ais-CurrentRefinements-clearAll {
   background: none;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -89,48 +91,67 @@ Results in maximum flexibility and provides algoliashopify access for store cont
   padding: 0.25rem 0.6rem;
   cursor: pointer;
   transition: all 0.15s ease;
-  margin-left: 0.5rem;
 }
-#selected-filters button.clear-all:hover {
+.ais-CurrentRefinements-clearAll:hover {
   border-color: #000;
   color: #000;
 }
 
-/* Each refinement group */
-.selected-filter-group {
-  margin-top: 0.6rem;
-  color: #333;
+/* Refinement list */
+.ais-CurrentRefinements-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-/* Attribute label (vendor, price range, etc.) */
-.selected-filter-attribute {
+/* Each refinement item */
+.ais-CurrentRefinements-item {
+  margin: 0.4rem 0;
+  font-size: 0.95rem;
+  color: #222;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* Attribute name (vendor, price range, etc.) */
+.ais-CurrentRefinements-item strong {
   font-weight: 700;
   text-transform: lowercase;
   margin-right: 0.25rem;
 }
 
-/* Filter value */
-.selected-filter-value {
-  font-weight: 400;
-  color: #222;
+/* Refinement “chips” */
+.ais-CurrentRefinements-label {
+  display: inline-flex;
+  align-items: center;
+  background: #f3f3f3;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 0.25rem 0.6rem;
+  margin: 0.2rem 0.3rem 0.2rem 0;
+  font-size: 0.9rem;
+  color: #333;
+  transition: background 0.2s ease;
+}
+.ais-CurrentRefinements-label:hover {
+  background: #eee;
 }
 
-/* “X” remove buttons */
-button.remove-filter {
-  display: inline-block;
+/* Remove button inside each chip */
+.ais-CurrentRefinements-remove {
   background: none;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 0.75rem;
+  border: none;
+  margin-left: 6px;
+  font-size: 0.9rem;
   line-height: 1;
-  padding: 2px 6px;
-  margin-left: 0.4rem;
+  color: #666;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: color 0.15s ease;
 }
-button.remove-filter:hover {
-  background: #f2f2f2;
-  border-color: #999;
+.ais-CurrentRefinements-remove:hover {
+  color: #000;
 }
 
 /* === Refinement list styling === */
