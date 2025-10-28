@@ -158,7 +158,7 @@ Results in maximum flexibility and provides algoliashopify access for store cont
 /* Attribute name (vendor, price range, etc.) */
 .ais-CurrentRefinements-item strong {
   font-weight: 700;
-  text-transform: lowercase;
+  text-transform: uppercase;
   margin-right: 0.25rem;
 }
 
