@@ -47,9 +47,9 @@ document.addEventListener('DOMContentLoaded', () => {
           <ul class="ais-CurrentRefinements-list"></ul>
         </div>
       `;
-      container.querySelector('#clear-all-filters').addEventListener('click', () => {
+      {% comment %} container.querySelector('#clear-all-filters').addEventListener('click', () => {
         items.forEach(group => group.refinements.forEach(refine));
-      });
+      }); {% endcomment %}
     }
 
     const list = container.querySelector('.ais-CurrentRefinements-list');
