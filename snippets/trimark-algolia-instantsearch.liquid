@@ -60,33 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
     clearRefinements({
       container: '#clear-refinements',
     }),
-    instantsearch.widgets.currentRefinements({
-  container: '#current-refinements',
-  cssClasses: {
-    root: 'ais-CurrentRefinements',
-    item: 'ais-CurrentRefinements-item',
-    label: 'ais-CurrentRefinements-label',
-    category: 'ais-CurrentRefinements-category',
-    delete: 'ais-CurrentRefinements-delete',
-  },
-  templates: {
-    header: 'Selected Filters',
-  },
-}),
-
-{% comment %} widgets.panel({
-  templates: { header: 'Selected Filters' },
-})(widgets.currentRefinedValues)({
-  container: '#current-refinements',
-  clearAll: 'after', // show “Clear all” on the right
-  cssClasses: {
-    root: 'ais-CurrentRefinements',
-    list: 'ais-CurrentRefinements-list',
-    item: 'ais-CurrentRefinements-item',
-    label: 'ais-CurrentRefinements-label',
-    delete: 'ais-CurrentRefinements-delete',
-  },
-}), {% endcomment %}
 
   widgets.panel({
   templates: { header: 'Brand' },
