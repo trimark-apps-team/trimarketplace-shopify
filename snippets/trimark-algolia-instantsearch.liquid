@@ -145,42 +145,56 @@ widgets.panel({
     attribute: 'tags',
   }),
 
-  widgets.panel({
-    templates: { header: 'Price Range' },
-  })(widgets.refinementList)({
-    container: '#price-range',
-    attribute: 'price_range',
-    sortBy: (a, b) => {
-      const getStart = (label) => parseFloat(label.split(':')[0]) || 0;
-      return getStart(a.name) - getStart(b.name);
+widgets.panel({
+  templates: { header: 'Price Range' },
+})(widgets.refinementList)({
+  container: '#price-range',
+  attribute: 'price_range',
+  sortBy: (a, b) => {
+    const getStart = (label) => parseFloat(label.split(':')[0]) || 0;
+    return getStart(a.name) - getStart(b.name);
+  },
+  limit: 10,
+  showMore: true,
+  showMoreLimit: 30,
+  templates: {
+    item(item, { html, state, refine }) {
+      const label = item.label.includes(':')
+        ? item.label
+            .split(':')
+            .map((v, i) =>
+              i === 0 ? `$${v.trim()}` : v ? `$${v.trim()}` : '+'
+            )
+            .join(' – ')
+        : `$${item.label}`;
+
+      // Render input with dynamic checked state and event binding
+      return html`
+        <label class="ais-RefinementList-label">
+          <input
+            type="checkbox"
+            class="ais-RefinementList-checkbox"
+            ${item.isRefined ? 'checked' : ''}
+            onclick="event.preventDefault(); window.__refinePrice('${item.value}')"
+          />
+          <span class="ais-RefinementList-labelText">${label}</span>
+          <span class="ais-RefinementList-count">${item.count}</span>
+        </label>
+      `;
     },
-    limit: 10,
-    showMore: true,
-    showMoreLimit: 30,
-    templates: {
-      item(item, { html }) {
-        const label = item.label.includes(':')
-          ? item.label
-              .split(':')
-              .map((v, i) =>
-                i === 0 ? `$${v.trim()}` : v ? `$${v.trim()}` : '+'
-              )
-              .join(' – ')
-          : `$${item.label}`;
-        return html`
-          <label class="ais-RefinementList-label">
-            <input
-              type="checkbox"
-              class="ais-RefinementList-checkbox"
-              ${item.isRefined ? 'checked' : ''}
-            />
-            <span class="ais-RefinementList-labelText">${label}</span>
-            <span class="ais-RefinementList-count">${item.count}</span>
-          </label>
-        `;
-      },
-    },
-  }),
+  },
+  transformItems(items) {
+    // Expose refine globally for inline onclick (since InstantSearch escapes scope)
+    if (typeof window.__refinePrice !== 'function') {
+      window.__refinePrice = (value) => {
+        const widget = items.find((i) => i.value === value);
+        if (widget && widget.refine) widget.refine(value);
+      };
+    }
+    return items;
+  },
+}),
+
  widgets.sortBy({
   container: '#sort-by',
   items: [
