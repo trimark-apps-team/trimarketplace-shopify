@@ -151,26 +151,30 @@ widgets.panel({
   container: '#price-range',
   attribute: 'price_range',
   sortBy: (a, b) => {
-    const getStart = (label) => parseFloat(label.split(':')[0]) || 0;
-    return getStart(a.name) - getStart(b.name);
+    const start = (s) => parseFloat(String(s).split(':')[0]) || 0;
+    return start(a.name) - start(b.name);
   },
   limit: 10,
   showMore: true,
   showMoreLimit: 30,
+
+  // If you enabled searchable: true at any point, the widget will prefer
+  // `item.highlighted`. We format all possible fields to be safe.
   transformItems(items) {
-    return items.map(item => {
-      const formattedLabel = item.label.includes(':')
-        ? item.label
-            .split(':')
-            .map((v, i) =>
-              i === 0 ? `$${v.trim()}` : v ? `$${v.trim()}` : '+'
-            )
-            .join(' – ')
-        : `$${item.label}`;
+    const fmt = (raw) => {
+      if (!raw) return '';
+      if (!String(raw).includes(':')) return `$${raw}`;
+      const [lo, hi] = String(raw).split(':').map(s => s.trim());
+      return hi ? `$${lo} – $${hi}` : `$${lo} +`;
+    };
+
+    return items.map((item) => {
+      const label = fmt(item.label ?? item.name ?? item.value);
       return {
         ...item,
-        label: formattedLabel,
-        name: formattedLabel, // also update `name` so refinement pills show dashes, not colons
+        label,          // used by default renderer
+        name: label,    // used by chips / some render paths
+        highlighted: label, // used when searchable is on
       };
     });
   },
