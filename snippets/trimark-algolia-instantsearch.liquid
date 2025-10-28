@@ -16,8 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     refinementList,
     clearRefinements,
     configure,
-    rangeInput,
-    currentRefinements
+    rangeInput
   } = widgets;
 
   const searchClient =
@@ -61,9 +60,19 @@ document.addEventListener('DOMContentLoaded', () => {
     clearRefinements({
       container: '#clear-refinements',
     }),
-    currentRefinements({
-        container: '#current-refinements', // A DOM element where the widget will be rendered
-      }),
+    instantsearch.widgets.currentRefinements({
+  container: '#current-refinements',
+  cssClasses: {
+    root: 'ais-CurrentRefinements',
+    item: 'ais-CurrentRefinements-item',
+    label: 'ais-CurrentRefinements-label',
+    category: 'ais-CurrentRefinements-category',
+    delete: 'ais-CurrentRefinements-delete',
+  },
+  templates: {
+    header: 'Selected Filters',
+  },
+})
 
 {% comment %} widgets.panel({
   templates: { header: 'Selected Filters' },
