@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
       container: '#clear-refinements',
     }),
 
-widgets.panel({
+{% comment %} widgets.panel({
   templates: { header: 'Selected Filters' },
 })(widgets.currentRefinedValues)({
   container: '#current-refinements',
@@ -73,7 +73,8 @@ widgets.panel({
     label: 'ais-CurrentRefinements-label',
     delete: 'ais-CurrentRefinements-delete',
   },
-}),
+}), {% endcomment %}
+
   widgets.panel({
   templates: { header: 'Brand' },
 })(widgets.refinementList)({
