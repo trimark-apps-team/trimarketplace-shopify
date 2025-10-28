@@ -33,49 +33,56 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const indexName = `${algoliaShopify.config.index_prefix}products`;
 
-  // Build a connected widget
-const customCurrentRefinements = instantsearch.connectors.connectCurrentRefinements(
-  (renderOptions, isFirstRender) => {
-    const { items, refine, widgetParams } = renderOptions;
+  const customCurrentRefinements = connectCurrentRefinements((renderOptions, isFirstRender) => {
+    const { items, refine } = renderOptions;
 
+    const container = document.querySelector('#selected-filters');
     if (isFirstRender) {
-      widgetParams.container.innerHTML = `
-        <div class="ais-CustomCurrentRefinements">
-          <h4>Selected Filters</h4>
-          <div class="ais-CustomCurrentRefinements-list"></div>
-          <button class="ais-CustomCurrentRefinements-clear">Clear all</button>
-        </div>`;
-      widgetParams.container
-        .querySelector('.ais-CustomCurrentRefinements-clear')
-        .addEventListener('click', () => refine([]));
+      container.innerHTML = `
+        <div class="ais-CurrentRefinements">
+          <div class="ais-CurrentRefinements-header">
+            <span>SELECTED FILTERS</span>
+            <button id="clear-all-filters" class="ais-CurrentRefinements-clearAll">Clear all</button>
+          </div>
+          <ul class="ais-CurrentRefinements-list"></ul>
+        </div>
+      `;
+      container.querySelector('#clear-all-filters').addEventListener('click', () => {
+        items.forEach(group => group.refinements.forEach(refine));
+      });
     }
 
-    const list = widgetParams.container.querySelector(
-      '.ais-CustomCurrentRefinements-list'
-    );
-
+    const list = container.querySelector('.ais-CurrentRefinements-list');
     list.innerHTML = items
       .map(
-        (item) => `
-        <div class="ais-CustomCurrentRefinements-item">
-          <span class="ais-CustomCurrentRefinements-label">${item.label}: ${item.refinements
-            .map((ref) => ref.label)
-            .join(', ')}</span>
-          <button data-attribute="${item.attribute}">✕</button>
-        </div>`
+        (group) => `
+        <li class="ais-CurrentRefinements-item">
+          <strong>${group.attribute.replace(/_/g, ' ')}</strong>:
+          ${group.refinements
+            .map(
+              (refinement) => `
+              <span class="ais-CurrentRefinements-label">
+                ${refinement.label.replace(':', '–')}
+                <button class="ais-CurrentRefinements-remove" data-attribute="${group.attribute}" data-label="${refinement.label}">×</button>
+              </span>
+            `
+            )
+            .join('')}
+        </li>`
       )
       .join('');
 
-    list.querySelectorAll('button').forEach((btn) =>
-      btn.addEventListener('click', () => {
-        const attribute = btn.getAttribute('data-attribute');
-        const refinement = items.find((i) => i.attribute === attribute);
-        if (refinement) refine(refinement.refinements);
-      })
-    );
-  }
-);
-
+    list.querySelectorAll('.ais-CurrentRefinements-remove').forEach((btn) => {
+      const attr = btn.dataset.attribute;
+      const label = btn.dataset.label;
+      const group = items.find((g) => g.attribute === attr);
+      const refinement = group?.refinements.find((r) => r.label === label);
+      if (refinement) {
+        btn.onclick = () => refine(refinement);
+      }
+    });
+  });
+  
   const search = instantsearch({
     indexName,
     searchClient,
