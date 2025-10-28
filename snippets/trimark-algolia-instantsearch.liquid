@@ -242,6 +242,26 @@ hits({
 
   search.start();
 
+      // Pull ?q=... from the URL and sync with InstantSearch
+    const urlParams = new URLSearchParams(window.location.search);
+    const queryParam = urlParams.get('q');
+
+    if (queryParam) {
+      // Set initial query state for InstantSearch
+      search.setUiState({
+        [indexName]: {
+          query: queryParam,
+          page: 1,
+        },
+      });
+
+      // Update the searchbox widget display value
+      const searchInput = document.querySelector('#searchbox input[type="search"], #searchbox input[type="text"]');
+      if (searchInput) {
+        searchInput.value = queryParam;
+      }
+    }
+
 
     document.addEventListener('click', (e) => {
         const header = e.target.closest('.ais-Panel-header');
