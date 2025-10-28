@@ -2,10 +2,10 @@
 Allows us to keep the block installed so we can use algoliashopify globals
 but also implement a custom layout as needed. in the widget and hits templates.
 Results in maximum flexibility and provides algoliashopify access for store context. */
-
+/* 
 /* #algolia-shopify-instantsearch {
     display: none !important;
-} */
+} */ */
 
 /* === Layout === */
 .ais-InstantSearch {
