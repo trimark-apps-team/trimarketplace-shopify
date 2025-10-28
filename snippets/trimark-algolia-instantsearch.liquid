@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
-  
+
   const search = instantsearch({
     indexName,
     searchClient,
@@ -110,11 +110,8 @@ document.addEventListener('DOMContentLoaded', () => {
     searchBox({
       container: '#searchbox',
       placeholder: 'Search products...',
-    }),
+  }),
 
-    clearRefinements({
-      container: '#clear-refinements',
-    }),
   customCurrentRefinements({
     container: document.querySelector('#current-refinements'),
   }),
