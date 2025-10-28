@@ -61,6 +61,9 @@ document.addEventListener('DOMContentLoaded', () => {
     clearRefinements({
       container: '#clear-refinements',
     }),
+    currentRefinements({
+        container: '#current-refinements', // A DOM element where the widget will be rendered
+      }),
 
 {% comment %} widgets.panel({
   templates: { header: 'Selected Filters' },
