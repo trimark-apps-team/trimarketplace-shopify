@@ -9,7 +9,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   const { algoliasearch, instantsearch, widgets } = algoliaShopify.externals;
-
+  const { connectCurrentRefinements } = algoliaShopify.externals.connectors;
   // Destructure widgets from the top-level `widgets` object (not instantsearch.widgets)
   const {
     searchBox,
@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     configure,
     rangeInput
   } = widgets;
+  
 
   const searchClient =
     algoliaShopify.searchClient ||
