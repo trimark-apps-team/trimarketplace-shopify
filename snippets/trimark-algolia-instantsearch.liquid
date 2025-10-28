@@ -61,19 +61,12 @@ document.addEventListener('DOMContentLoaded', () => {
       container: '#clear-refinements',
     }),
 
-    widgets.panel({
-  templates: { header: 'Selected Filters' },
-})(widgets.currentRefinements)({
-  container: '#current-refinements',
-  includedAttributes: ['vendor', 'product_type', 'tags', 'price_range'],
-  cssClasses: {
-    list: 'ais-CurrentRefinements-list',
-    item: 'ais-CurrentRefinements-item',
-    label: 'ais-CurrentRefinements-label',
-    category: 'ais-CurrentRefinements-category',
-    delete: 'ais-CurrentRefinements-delete',
-  },
-}),
+  widgets.panel({
+    templates: { header: 'Selected Filters' },
+  })(widgets.currentRefinements)({
+    container: '#current-refinements',
+    includedAttributes: ['vendor', 'product_type', 'tags', 'price_range'],
+  }),
 
   widgets.panel({
   templates: { header: 'Brand' },
