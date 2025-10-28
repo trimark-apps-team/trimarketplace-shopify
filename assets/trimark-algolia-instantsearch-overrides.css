@@ -72,7 +72,7 @@ Results in maximum flexibility and provides algoliashopify access for store cont
 
 .clear-refinements-container span {
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 1.2rem;
   color: #444;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -82,7 +82,7 @@ Results in maximum flexibility and provides algoliashopify access for store cont
   background: transparent;
   border: 1px solid #ccc;
   border-radius: 4px;
-  font-size: 0.9rem;
+  font-size: 1.2rem;
   color: #444;
   padding: 4px 10px;
   cursor: pointer;
@@ -114,7 +114,7 @@ Results in maximum flexibility and provides algoliashopify access for store cont
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.95rem;
+  font-size: 1.2rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.4px;
@@ -127,7 +127,7 @@ Results in maximum flexibility and provides algoliashopify access for store cont
   background: none;
   border: 1px solid #ccc;
   border-radius: 4px;
-  font-size: 0.85rem;
+  font-size: 1rem;
   padding: 0.25rem 0.6rem;
   cursor: pointer;
   transition: all 0.15s ease;
@@ -147,7 +147,7 @@ Results in maximum flexibility and provides algoliashopify access for store cont
 /* Each refinement item */
 .ais-CurrentRefinements-item {
   margin: 0.4rem 0;
-  font-size: 0.95rem;
+  font-size: 1.1rem;
   color: #222;
   display: flex;
   flex-wrap: wrap;
@@ -171,7 +171,7 @@ Results in maximum flexibility and provides algoliashopify access for store cont
   border-radius: 20px;
   padding: 0.25rem 0.6rem;
   margin: 0.2rem 0.3rem 0.2rem 0;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   color: #333;
   transition: background 0.2s ease;
 }
@@ -184,7 +184,7 @@ Results in maximum flexibility and provides algoliashopify access for store cont
   background: none;
   border: none;
   margin-left: 6px;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   line-height: 1;
   color: #666;
   cursor: pointer;
