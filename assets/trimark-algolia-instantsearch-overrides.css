@@ -60,6 +60,46 @@ Results in maximum flexibility and provides algoliashopify access for store cont
   display: none;
 }
 
+.clear-refinements-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f6f6f6;
+  padding: 8px 16px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+.clear-refinements-container span {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #444;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.clear-refinements-container .ais-ClearRefinements-button {
+  background: transparent;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  color: #444;
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.clear-refinements-container .ais-ClearRefinements-button:hover:not([disabled]) {
+  background: #444;
+  color: #fff;
+  border-color: #444;
+}
+
+.clear-refinements-container .ais-ClearRefinements-button[disabled] {
+  opacity: 0.5;
+  cursor: default;
+}
+
 /* Main wrapper */
 .ais-CurrentRefinements {
   background: #fafafa;
