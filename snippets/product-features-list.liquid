@@ -11,7 +11,7 @@
   <strong><p>Features:</p></strong>
   <ul class="product-feature-list">
     {% if bullet1_text != blank and bullet1_text != 'N/A' %}
-      <li>{{ product.metafields.custom['8_feature_bullet_1'] | metafield_tag }}</li>
+      <li>{{ product.metafields.custom['8_feature_bullet_1'] }}</li>
     {% endif %}
     {% if bullet2_text != blank and bullet2_text != 'N/A' %}
       <li>{{ product.metafields.custom['8_feature_bullet_2'] | metafield_tag }}</li>
