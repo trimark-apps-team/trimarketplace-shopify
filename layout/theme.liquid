@@ -893,13 +893,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Convert NodeList to Array to use .slice()
     const limitedRows = Array.from(rows).slice(0, 2);
 
-    // Ensure savedCartContainer exists
-    const savedCartContainer = document.querySelector("#savedCartContainer");
-    if (!savedCartContainer) {
-      console.error("Missing #savedCartContainer element in DOM");
-      return;
-    }
-
     // Loop and create cards
     limitedRows.forEach(item => {
       const link = item.querySelector("a");
