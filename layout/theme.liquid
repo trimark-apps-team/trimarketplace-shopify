@@ -877,37 +877,33 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
-  async function fetchSavedCarts() {
-  try {
-    const url = `/a/saved-carts`;
-    const res = await fetch(url);
-    const data = await res.text();
+async function fetchSavedCarts() {
+    try {
+      const url = `/a/saved-carts`;
+      const res = await fetch(url);
+      const data = await res.text();
 
-    // Parse the HTML string
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(data, 'text/html');
+      const parser = new DOMParser();
 
-    // Select rows
-    const rows = doc.querySelectorAll(".cs-table tbody tr");
+      const doc = parser.parseFromString(data, 'text/html');
 
-    // Convert NodeList to Array to use .slice()
-    const limitedRows = Array.from(rows).slice(0, 2);
+      const element = doc.querySelectorAll(".cs-table tbody tr");
 
-    // Loop and create cards
-    limitedRows.forEach(item => {
-      const link = item.querySelector("a");
-      const name = link?.innerText?.trim() || "Unnamed Cart";
-      const href = link?.href || "#";
-      const count = item.querySelector(".cs-center-text span")?.innerText?.trim() || "0";
+       const limitedRows = Array.from(rows).slice(0, 2);
 
-      const card = createSavedCartCard(href, name, count);
-      savedCartContainer.appendChild(card);
-    });
+      limitedRows.forEach(item => {
+         const card = createSavedCartCard(
+            item.querySelector("a").href,
+            item.querySelector("a").innerText,
+            item.querySelector(".cs-center-text span").innerText
+          );
+          savedCartContainer.appendChild(card);
+      })
 
-  } catch (err) {
-    console.error("Saved Cart Error:", err);
+    } catch (err) {
+      console.error("Saved Cart Error:", err);
+    } 
   }
-}
 
 
   async function fetchOrderList() {
