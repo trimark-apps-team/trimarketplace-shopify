@@ -33,8 +33,8 @@
 
 }
 
-/* Suggestion item style */
-.aa-SuggestionItem {
+
+/* .aa-SuggestionItem {
   padding: 8px 0;
   cursor: pointer;
 }
@@ -45,10 +45,6 @@
 }
 
 
-
-
-
-/* Autocomplete Item Styling — scaled for better legibility */
 .aa-ItemContentBody {
   text-align: left;
   padding: 0.75rem 0;
@@ -95,7 +91,7 @@
   height: 64px;
   object-fit: contain;
   border-radius: 4px;
-}
+} */
 
 
 /* Container for each autocomplete hit */
