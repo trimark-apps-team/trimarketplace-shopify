@@ -133,8 +133,6 @@ widgets.panel({
 })(widgets.refinementList)({
   container: '#collections-list',
   attribute: 'collections',
-  showMore: true,
-  showMoreLimit: 100,
   transformItems(items) {
     return items.map((item) => {
       const pretty = item.label
