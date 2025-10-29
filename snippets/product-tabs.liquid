@@ -55,7 +55,7 @@
     <!-- Table 1: 7 fields -->
     <table class="spec-table spec-table--1">
       <tbody>
-        {% if product.metafields.custom[erp_id_key] %}
+        {% if product.metafields.custom[erp_id_key] and product.metafields.custom[erp_id_key] != 'N/A' %}
         <tr>
           <td class="spec-label">Item Number</td>
           <td>
