@@ -139,7 +139,7 @@
     <!-- Table 2: 6 fields -->
     <table class="spec-table spec-table--2">
       <tbody>
-        {% if product.metafields.custom["9_country_of_origin"] %}
+        {% if product.metafields.custom["9_country_of_origin"] and  product.metafields.custom["9_country_of_origin"] != "N/A" %}
           <tr>
             <td class="spec-label">Country of Origin</td>
             <td>{{ product.metafields.custom["9_country_of_origin"] }}</td>
