@@ -49,7 +49,12 @@ const customCurrentRefinements = connectCurrentRefinements(
     const list = container.querySelector('.ais-CurrentRefinements-list');
     list.innerHTML = items
       .map((group) => {
-        // build the label text for each refinement
+        // normalize attribute labels
+        let attributeLabel = group.attribute.replace(/_/g, ' ');
+        if (group.attribute === 'inventory_available') attributeLabel = 'Availability';
+        if (group.attribute === 'options.color') attributeLabel = 'Colors';
+        if (group.attribute === 'vendor') attributeLabel = 'Brand';
+
         const refinementsHtml = group.refinements
           .map((refinement) => {
             let label = refinement.label.replace(':', '–');
@@ -65,8 +70,8 @@ const customCurrentRefinements = connectCurrentRefinements(
             return `
               <span class="ais-CurrentRefinements-label">
                 ${label}
-                <button class="ais-CurrentRefinements-remove" 
-                  data-attribute="${group.attribute}" 
+                <button class="ais-CurrentRefinements-remove"
+                  data-attribute="${group.attribute}"
                   data-label="${refinement.label}">
                   ×
                 </button>
@@ -76,7 +81,7 @@ const customCurrentRefinements = connectCurrentRefinements(
 
         return `
           <li class="ais-CurrentRefinements-item">
-            <strong>${group.attribute.replace(/_/g, ' ')}</strong>:
+            <strong>${attributeLabel}</strong>:
             ${refinementsHtml}
           </li>`;
       })
@@ -93,7 +98,6 @@ const customCurrentRefinements = connectCurrentRefinements(
     });
   }
 );
-
   const search = instantsearch({
     indexName,
     searchClient,
@@ -239,8 +243,8 @@ widgets.panel({
  widgets.sortBy({
   container: '#sort-by',
   items: [
-    { label: 'Relevance', value: `${indexName}` },
     { label: 'Price (asc)', value: `${indexName}_price_asc` },
+    { label: 'Relevance', value: `${indexName}` },
     { label: 'Price (desc)', value: `${indexName}_price_desc` },
   ],
 }),
