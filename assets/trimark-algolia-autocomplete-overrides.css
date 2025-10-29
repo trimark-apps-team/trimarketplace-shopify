@@ -5,7 +5,9 @@
 .aa-Source[data-autocomplete-source-id=products] .aa-ItemContent {
     flex-direction: row !important;
 }
-
+.aa-ItemPicture {
+  width: auto !important;
+}
 /* Panel layout */
 .aa-PanelLayout {
   display: flex;
