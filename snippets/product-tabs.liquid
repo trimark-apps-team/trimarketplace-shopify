@@ -120,14 +120,14 @@
           </tr>
         {% endif %}
 
-        {% if product.metafields.custom["12_color"] %}
+        {% if product.metafields.custom["12_color"] and product.metafields.custom["12_color"] != 'N/A'  %}
           <tr>
             <td class="spec-label">Color</td>
             <td>{{ product.metafields.custom["12_color"] }}</td>
           </tr>
         {% endif %}
 
-        {% if product.metafields.custom["12_material"] %}
+        {% if product.metafields.custom["12_material"] and product.metafields.custom["12_material"] != 'N/A' %}
           <tr>
             <td class="spec-label">Material</td>
             <td>{{ product.metafields.custom["12_material"] }}</td>
