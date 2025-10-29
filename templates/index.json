@@ -90,11 +90,6 @@
     "feature_cards_JkfJhb": {
       "type": "feature-cards",
       "blocks": {
-        "logo_bn9mcx": {
-          "type": "logo",
-          "disabled": true,
-          "settings": {}
-        },
         "feature_6E3HtY": {
           "type": "feature",
           "settings": {
@@ -103,18 +98,6 @@
             "custom-liquid": "",
             "link_label": "View All",
             "link_url": "/collections/all",
-            "app_url": ""
-          }
-        },
-        "feature_y6w6GE": {
-          "type": "feature",
-          "disabled": true,
-          "settings": {
-            "heading": "Wishlist",
-            "description": "View, Track, Return or buy products again.",
-            "custom-liquid": "",
-            "link_label": "View All",
-            "link_url": "/apps/advanced-wishlist",
             "app_url": ""
           }
         },
@@ -132,7 +115,7 @@
           "settings": {
             "heading": "Saved Carts",
             "description": "",
-              "custom-liquid": "<div class=\"saved-cart-list_data\"></div>",
+            "custom-liquid": "<div class=\"saved-cart-list_data\"></div>",
             "link_label": "View All",
             "link_url": "/a/saved-carts",
             "app_url": ""
@@ -140,9 +123,7 @@
         }
       },
       "block_order": [
-        "logo_bn9mcx",
         "feature_6E3HtY",
-        "feature_y6w6GE",
         "sales_contact_block_bPFnUe",
         "feature_6kaUBq"
       ],
@@ -185,7 +166,7 @@
           "settings": {
             "heading": "Orders & Invoices",
             "description": "Manage your profile details.",
-            "custom-liquid": "",
+            "custom-liquid": "{% render \"orders-list\" %}",
             "link_label": "View All",
             "link_url": "",
             "app_url": "https://shopify.com/{{shop.id}}/account/orders"
@@ -196,7 +177,7 @@
           "settings": {
             "heading": "Wishlist",
             "description": "View, Track, Return or buy products again.",
-               "custom-liquid": "<div class=\"wishlist-list_data\"></div>",
+            "custom-liquid": "<div class=\"wishlist-list_data\"></div>",
             "link_label": "View All",
             "link_url": "/apps/advanced-wishlist",
             "app_url": ""
