@@ -864,7 +864,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const data = await res.json();
 
       if (Array.isArray(data)) {
-        data.slice(1, 3).forEach(list => {
+        data.slice(0, 2).forEach(list => {
             const card = createWishlistCard(
               list.name,
               list.total_products
