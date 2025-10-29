@@ -244,7 +244,7 @@
 
       {%- if shop.customer_accounts_enabled -%}
         <a
-          href="{%- if customer -%}https://shopify.com/{{ shop.id }}/account/profile{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
+          href="{%- if customer -%}https://shopify.com/{{ shop.id }}/account/profile{%- else -%}{{ routes.storefront_login_url }}{%- endif -%}"
           class="header__icon header__icon--account link focus-inset{% if section.settings.menu != blank %} small-hide{% endif %}"
           rel="nofollow"
         >
