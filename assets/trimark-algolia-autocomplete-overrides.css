@@ -74,7 +74,7 @@
 }
 
 .aa-ItemContentTitle {
-  font-size: .9rem;
+  font-size: 1.35rem !important;
   font-weight: 700;
   color: #111;
   line-height: 1.35;
