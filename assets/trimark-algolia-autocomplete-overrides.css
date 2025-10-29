@@ -28,6 +28,10 @@
   padding: 12px 16px;
 }
 
+.aa-Source[data-autocomplete-source-id=products] .aa-ItemContentTitle {
+  font-size: auto !important;
+}
+
 /* Header styling */
 .aa-SourceHeader {
   margin-bottom: 8px;
