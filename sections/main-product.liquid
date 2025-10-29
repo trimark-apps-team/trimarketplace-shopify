@@ -338,7 +338,7 @@
                 <span>{{ product.metafields.custom["3_price_floor"] }}</span>
               </div>
              {% endif %}
-             {% if product.metafields.custom["3_inv_available"] != blank %}
+             {% if product.metafields.custom["3_inv_available"] == blank %}
               <div class="tier-price-item">
                 <span class="label">Inv Available:</span>
                 <span>{{ product.metafields.custom["3_inv_available"] }}</span>
