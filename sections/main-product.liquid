@@ -314,37 +314,37 @@
             {% if show_table %}
               
               <div class="tier-price-row">
-                {% if product.metafields.custom["3_price_cost"] != blank and product.metafields.custom["3_price_cost"] != 'N/A' %}
+                {% if product.metafields.custom["3_price_cost"] != blank %}
               <div class="tier-price-item">
                 <span class="label">Cost Price:</span>
                 <span>{{ product.metafields.custom["3_price_cost"] }}</span>
               </div>
               {% endif %}
-              {% if product.metafields.custom["3_price_pg"] != blank and product.metafields.custom["3_price_pg"] != 'N/A' %}
+              {% if product.metafields.custom["3_price_pg"] != blank %}
               <div class="tier-price-item">
                 <span class="label">PG Price:</span>
                 <span>{{ product.metafields.custom["3_price_pg"] }}</span>
               </div>
                {% endif %}
-               {% if product.metafields.custom["3_m_u"] != blank and product.metafields.custom["3_m_u"] != 'N/A' %}
+               {% if product.metafields.custom["3_m_u"] != blank %}
               <div class="tier-price-item">
                 <span class="label">M/U%:</span>
                 <span>{{ product.metafields.custom["3_m_u"] }}</span>
               </div>
               {% endif %}
-               {% if product.metafields.custom["3_price_floor"] != blank  %}
+               {% if product.metafields.custom["3_price_floor"] != blank %}
               <div class="tier-price-item">
                 <span class="label">Floor Price:</span>
                 <span>{{ product.metafields.custom["3_price_floor"] }}</span>
               </div>
              {% endif %}
-             {% if product.metafields.custom["3_inv_available"] != blank and product.metafields.custom["3_inv_available"] != 'N/A' %}
+             {% if product.metafields.custom["3_inv_available"] != blank %}
               <div class="tier-price-item">
                 <span class="label">Inv Available:</span>
                 <span>{{ product.metafields.custom["3_inv_available"] }}</span>
               </div>
               {% endif %}
-               {% if product.metafields.custom["3_on_order"] != blank and product.metafields.custom["3_on_order"] != 'N/A' %}
+               {% if product.metafields.custom["3_on_order"] != blank %}
               <div class="tier-price-item">
                 <span class="label">On-Order:</span>
                 <span>{{ product.metafields.custom["3_on_order"] }}</span>
