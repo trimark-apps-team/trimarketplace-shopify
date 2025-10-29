@@ -28,9 +28,6 @@
   padding: 12px 16px;
 }
 
-.aa-Source[data-autocomplete-source-id=products] .aa-ItemContentTitle {
-  font-size: auto !important;
-}
 
 /* Header styling */
 .aa-SourceHeader {
@@ -77,7 +74,7 @@
 }
 
 .aa-ItemContentTitle {
-  font-size: 1.1rem;
+  font-size: .9rem;
   font-weight: 700;
   color: #111;
   line-height: 1.35;
