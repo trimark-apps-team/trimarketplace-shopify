@@ -6,7 +6,7 @@
      <strong><p>Features:</p></strong>
   <ul class="product-feature-list">
     {% if bullet1 != 'N/A' %}
-      <li>{{ bullet1 }}</li>
+      <li>{{ bullet1 | metafield_tag }}</li>
     {% endif %}
     {% if bullet2 %}
       <li>{{ bullet2 | metafield_tag }}</li>
