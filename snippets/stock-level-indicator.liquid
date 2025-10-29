@@ -51,7 +51,7 @@
   endfor
 -%}
 
-{% if inventory_variant.inventory_policy != 'continue' %}
+
   <stock-level-indicator
     {{ block_attributes }} 
     data-flow-product-id="{{ stock_product.id }}"
@@ -67,7 +67,7 @@
         <span class="stock-level-message">
           {% render 'icon-dot' with class: 'error', dot_pulsing: animate_pulsing_dot %}
            {% if sales_order %}
-             <p class="level-indicator-message">Out of stock – 0 On hand</p>
+             <p class="level-indicator-message"> 0 On hand</p>
            {% else %}
           <p class="level-indicator-message">{{ out_of_stock_message | default: out_of_stock_string }}</p>
            {% endif %}
@@ -161,4 +161,4 @@
   </stock-level-indicator>
 
   <script src="{{ 'component-stock-level-indicator.js' | asset_url }}" defer="defer" type="module" data-internal-script data-flow-load-key="component-stock-level-indicator"></script>
-{% endif %}
+
