@@ -9,9 +9,9 @@
 {% if bullet1 or bullet2 or bullet3 %}
      <strong><p>Features:</p></strong>
   <ul class="product-feature-list">
-    {% if bullet1 %}
+    {% unless bullet2_value contains "N/A" or !bullet1_value %}
       <li>{{ bullet1_value }}</li>
-    {% endif %}
+    {% endunless %}
     {% unless bullet2_value contains "N/A" %}
       <li>{{ bullet2 | metafield_tag }}</li>
     {% endunless %}
