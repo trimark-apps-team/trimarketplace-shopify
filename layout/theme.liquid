@@ -886,19 +886,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Parse the HTML string
     const parser = new DOMParser();
     const doc = parser.parseFromString(data, 'text/html');
-
-    // Select rows
     const rows = doc.querySelectorAll(".cs-table tbody tr");
 
-    // Convert NodeList to Array to use .slice()
     const limitedRows = Array.from(rows).slice(0, 2);
 
 
     // Loop and create cards
     limitedRows.forEach(item => {
       const link = item.querySelector("a");
-      const name = link?.innerText?.trim() || "Unnamed Cart";
-      const href = link?.href || "#";
+      const name = link?.innerText?.trim();
+      const href = link?.href;
       const count = item.querySelector(".cs-center-text span")?.innerText?.trim() || "0";
 
       const card = createSavedCartCard(href, name, count);
