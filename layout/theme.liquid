@@ -883,6 +883,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const res = await fetch(url);
     const data = await res.text();
 
+    // Parse the HTML string
     const parser = new DOMParser();
     const doc = parser.parseFromString(data, 'text/html');
     const rows = doc.querySelectorAll(".cs-table tbody tr");
