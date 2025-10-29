@@ -927,6 +927,26 @@ async function fetchOrderList() {
     } 
   }
 
+  async function fetchOrderList() {
+  try {
+    const url = `https://trimark-draft-order-api-pearl.vercel.app/api/orders?shopDomain=${domainName}&email=${email}`;
+    const res = await fetch(url);
+    const data = await res.json();
+
+    const { orders, pageUrl } = data;
+
+    orders.slice(0, 2).forEach(list => {
+      const card = createOrderListCard(list.orderName, list.status);
+      orderListContainer.appendChild(card);
+    });
+
+    console.log("Approval page URL:", pageUrl);
+
+  } catch (err) {
+    console.error("Order List Error:", err);
+  }
+}
+
   await Promise.all([fetchSavedCarts(), fetchWishlist(), fetchOrderList()]);
 });
 
