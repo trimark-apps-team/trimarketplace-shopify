@@ -800,12 +800,14 @@
 <script>
 document.addEventListener("DOMContentLoaded", async () => {
   const domainName = "{{ shop.domain }}";
-  const customerId = "{{ customer.id }}"; 
+  const customerId = "{{ customer.id }}";
+  const email = "{{ customer.email }}";  
 
   const authKey = "{{ shop.metafields.custom.wishlist_app_token }}";
 
   const wishlistContainer = document.querySelector(".wishlist-list_data");
   const savedCartContainer = document.querySelector(".saved-cart-list_data");
+  const orderListContainer = document.querySelector(".orders-list_data");
 
   function createSavedCartCard(url, title, count) {
     const div = document.createElement("ul");
@@ -814,6 +816,18 @@ document.addEventListener("DOMContentLoaded", async () => {
       <li class="block">
         <a href="${url}" target="_blank" class="item-title">${title}</a>
         <div class="item-count">${count}</div>
+      </li>
+    `;
+    return div;
+  }
+
+   function createOrderListCard(number, status) {
+    const div = document.createElement("ul");
+    div.className = "item-card";
+    div.innerHTML = `
+      <li class="block">
+        <div class="order-number">${number}</div>
+        <div class="order-status">${status}</div>
       </li>
     `;
     return div;
@@ -864,34 +878,59 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   async function fetchSavedCarts() {
+  try {
+    const url = `/a/saved-carts`;
+    const res = await fetch(url);
+    const data = await res.text();
+
+    // Parse the HTML string
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(data, 'text/html');
+
+    // Select rows
+    const rows = doc.querySelectorAll(".cs-table tbody tr");
+
+    // Convert NodeList to Array to use .slice()
+    const limitedRows = Array.from(rows).slice(0, 2);
+
+
+    // Loop and create cards
+    limitedRows.forEach(item => {
+      const link = item.querySelector("a");
+      const name = link?.innerText?.trim() || "Unnamed Cart";
+      const href = link?.href || "#";
+      const count = item.querySelector(".cs-center-text span")?.innerText?.trim() || "0";
+
+      const card = createSavedCartCard(href, name, count);
+      savedCartContainer.appendChild(card);
+    });
+
+  } catch (err) {
+    console.error("Saved Cart Error:", err);
+  }
+}
+
+
+async function fetchOrderList() {
     try {
-      const url = `/a/saved-carts`;
+      const url = `https://trimark-draft-order-api-pearl.vercel.app/api/orders?shopDomain=${domainName}&email=${email}`;
       const res = await fetch(url);
-      const data = await res.text();
+      const data = await res.json();
 
-      const parser = new DOMParser();
-
-      const doc = parser.parseFromString(data, 'text/html');
-
-      const element = doc.querySelectorAll(".cs-table tbody tr");
-
-      console.log(element);
-
-      element.forEach(item => {
-         const card = createSavedCartCard(
-            item.querySelector("a").href,
-            item.querySelector("a").innerText,
-            item.querySelector(".cs-center-text span").innerText
-          );
-          savedCartContainer.appendChild(card);
-      })
+      data.slice(0, 2).forEach(list => {
+            const card = createOrderListCard(
+              list.orderName,
+              list.status
+            );
+            orderListContainer.appendChild(card);
+      });
 
     } catch (err) {
       console.error("Saved Cart Error:", err);
     } 
   }
 
-  await Promise.all([fetchSavedCarts(), fetchWishlist()]);
+  await Promise.all([fetchSavedCarts(), fetchWishlist(), fetchOrderList()]);
 });
 
 </script>
