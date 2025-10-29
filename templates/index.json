@@ -170,7 +170,6 @@
           "type": "feature",
           "settings": {
             "heading": "Approvals",
-            "custom-liquid": "<div class=\"orders-list_data\"></div>",
             "description": "Manage approval requests.",
             "link_label": "View All",
             "link_url": "",
