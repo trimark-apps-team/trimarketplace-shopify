@@ -160,10 +160,17 @@ widgets.panel({
   container: '#inventory-available',
   attribute: 'inventory_available',
   transformItems(items) {
-    return items.map(item => ({
-      ...item,
-      label: item.label === 'true' ? 'In Stock' : 'Out of Stock',
-    }));
+    return items.map((item) => {
+      const raw = item.label ?? item.value;
+      const isTrue =
+        raw === true || raw === 'true' || raw === 1 || raw === '1';
+      const pretty = isTrue ? 'In Stock' : 'Out of Stock';
+      return {
+        ...item,
+        label: pretty,        // used by most templates
+        highlighted: pretty,  // used when the widget renders the highlighted label
+      };
+    });
   },
 }),
 
