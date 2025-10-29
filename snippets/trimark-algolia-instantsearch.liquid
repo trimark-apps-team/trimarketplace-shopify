@@ -153,6 +153,20 @@ widgets.panel({
   container: '#colors',
   attribute: 'options.color'
 }),
+
+widgets.panel({
+  templates: { header: 'Availability' },
+})(widgets.refinementList)({
+  container: '#inventory-available',
+  attribute: 'inventory_available',
+  transformItems(items) {
+    return items.map(item => ({
+      ...item,
+      label: item.label === 'true' ? 'In Stock' : 'Out of Stock',
+    }));
+  },
+}),
+
 widgets.panel({
   templates: { header: 'Product Type' },
 })(widgets.refinementList)({
