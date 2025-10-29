@@ -7,7 +7,10 @@
 {% assign bullet3_value = bullet3 | metafield_tag %}
 
 
-{% if bullet1 or bullet2 or bullet3 %}
+{% unless bullet1_value contains "N/A" and bullet1_value == blank 
+and bullet2_value contains "N/A" and bullet2_value == blank 
+and bullet3_value contains "N/A" and bullet3_value == blank 
+%}
      <strong><p>Features:</p></strong>
   <ul class="product-feature-list">
     {% unless bullet1_value contains "N/A" or bullet1_value == blank %}
@@ -20,4 +23,4 @@
       <li>{{ bullet3_value }}</li>
     {% endunless %}
   </ul>
-{% endif %}
+{% endunless %}
