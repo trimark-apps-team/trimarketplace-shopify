@@ -10,7 +10,7 @@
     <strong><p>Features:</p></strong>
     <ul class="product-feature-list">
       {% if bullet1_text != 'N/A' %}
-        <li>{{ bullet1_text | metafield_tag }}</li>
+        <li>{{ bullet1_text }}</li>
       {% endif %}
       {% if bullet2_text != blank and bullet2_text != 'N/A' %}
         <li>{{ bullet2 | metafield_tag }}</li>
