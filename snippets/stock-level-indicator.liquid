@@ -66,7 +66,11 @@
       {% if inventory_variant.available == false %}
         <span class="stock-level-message">
           {% render 'icon-dot' with class: 'error', dot_pulsing: animate_pulsing_dot %}
+           {% if sales_order %}
+             <p class="level-indicator-message">{{ inventory_variant.inventory_quantity }} Out of stock</p>
+           {% else %}
           <p class="level-indicator-message">{{ out_of_stock_message | default: out_of_stock_string }}</p>
+           {% endif %}
         </span>
       {% elsif inventory_variant.inventory_quantity <= stock_amt %}
         <span class="stock-level-message">
