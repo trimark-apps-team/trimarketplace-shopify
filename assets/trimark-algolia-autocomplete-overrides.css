@@ -9,6 +9,8 @@
       width: 90px !important;
     margin-right: 5px;
 }
+
+
 /* Panel layout */
 .aa-PanelLayout {
   display: flex;
@@ -109,7 +111,11 @@
 }
 
 
-
+@media screen and (max-width: 680px) {
+    .aa-Source[data-autocomplete-source-id=products] .aa-Item {
+        width: auto !important;
+    }
+}
 /* Responsive: collapse to single column on smaller screens */
 @media (max-width: 600px) {
   .aa-PanelLayout {
