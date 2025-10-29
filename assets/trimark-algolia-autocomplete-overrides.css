@@ -133,7 +133,6 @@
 /* Product details */
 .aa-ItemContentBody {
   display: flex;
-  flex-direction: column;
   justify-content: center;
 }
 
