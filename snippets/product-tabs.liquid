@@ -88,21 +88,21 @@
           </tr>
         {% endif %}
 
-        {% if product.metafields.custom["6_brand"] %}
+        {% if product.metafields.custom["6_brand"] and product.metafields.custom["6_brand"] != 'N/A' %}
           <tr>
             <td class="spec-label">Brand</td>
             <td>{{ product.metafields.custom["6_brand"] }}</td>
           </tr>
         {% endif %}
 
-        {% if product.metafields.custom["6_manufacturer_id"] %}
+        {% if product.metafields.custom["6_manufacturer_id"] and product.metafields.custom["6_manufacturer_id"] != 'N/A' %}
           <tr>
             <td class="spec-label">Manufacturer Number</td>
             <td>{{ product.metafields.custom["6_manufacturer_id"] }}</td>
           </tr>
         {% endif %}
 
-        {% if product.metafields.custom["11_capacity_1"] %}
+        {% if product.metafields.custom["11_capacity_1"] and product.metafields.custom["11_capacity_1"] != 'N/A' %}
           {% assign capacity = product.metafields.custom["11_capacity_1"] %}
           <tr>
             <td class="spec-label">Capacity</td>
