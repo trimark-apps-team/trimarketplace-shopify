@@ -889,9 +889,9 @@ async function fetchSavedCarts() {
 
       const element = doc.querySelectorAll(".cs-table tbody tr");
 
-       const limitedRows = Array.from(rows).slice(0, 2);
+      console.log(element);
 
-      limitedRows.forEach(item => {
+      element.forEach(item => {
          const card = createSavedCartCard(
             item.querySelector("a").href,
             item.querySelector("a").innerText,
