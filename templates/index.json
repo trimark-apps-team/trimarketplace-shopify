@@ -132,7 +132,7 @@
           "settings": {
             "heading": "Saved Carts",
             "description": "",
-            "custom-liquid": "",
+              "custom-liquid": "<div class=\"saved-cart-list_data\"></div>",
             "link_label": "View All",
             "link_url": "/a/saved-carts",
             "app_url": ""
@@ -196,7 +196,7 @@
           "settings": {
             "heading": "Wishlist",
             "description": "View, Track, Return or buy products again.",
-            "custom-liquid": "",
+               "custom-liquid": "<div class=\"wishlist-list_data\"></div>",
             "link_label": "View All",
             "link_url": "/apps/advanced-wishlist",
             "app_url": ""
