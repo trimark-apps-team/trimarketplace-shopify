@@ -9,14 +9,14 @@
 {% if bullet1 or bullet2 or bullet3 %}
      <strong><p>Features:</p></strong>
   <ul class="product-feature-list">
-    {% unless bullet2_value contains "N/A" or bullet1_value == blank %}
+    {% unless bullet1_value contains "N/A" or bullet1_value == blank %}
       <li>{{ bullet1_value }}</li>
     {% endunless %}
-    {% unless bullet2_value contains "N/A" %}
-      <li>{{ bullet2 | metafield_tag }}</li>
+    {% unless bullet2_value contains "N/A" or bullet2_value == blank %}
+      <li>{{ bullet2_value }}</li>
     {% endunless %}
-    {% if bullet3 %}
-      <li>{{ bullet3 | metafield_tag }}</li>
-    {% endif %}
+    {% unless bullet3_value contains "N/A" or bullet3_value == blank %}
+      <li>{{ bullet3_value }}</li>
+    {% endunless %}
   </ul>
 {% endif %}
