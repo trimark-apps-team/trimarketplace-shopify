@@ -2,23 +2,17 @@
 {% assign bullet2 = product.metafields.custom['8_feature_bullet_2'] %}
 {% assign bullet3 = product.metafields.custom['8_feature_bullet_3'] %}
 
-{% assign bullet1_text = bullet1.value | strip %}
-{% assign bullet2_text = bullet2.value | strip %}
-{% assign bullet3_text = bullet3.value | strip %}
-
-{% if bullet1_text != blank or bullet2_text != blank or bullet3_text != blank %}
-  {% if bullet1_text != 'N/A' or bullet2_text != 'N/A' or bullet3_text != 'N/A' %}
-    <strong><p>Features:</p></strong>
-    <ul class="product-feature-list">
-      {% if bullet1_text != blank and bullet1_text != 'N/A' %}
-        <li>{{ bullet1_text }}</li>
-      {% endif %}
-      {% if bullet2_text != blank and bullet2_text != 'N/A' %}
-        <li>{{ bullet2 | metafield_tag }}</li>
-      {% endif %}
-      {% if bullet3_text != blank and bullet3_text != 'N/A' %}
-        <li>{{ bullet3 | metafield_tag }}</li>
-      {% endif %}
-    </ul>
-  {% endif %}
+{% if bullet1 or bullet2 or bullet3 %}
+     <strong><p>Features:</p></strong>
+  <ul class="product-feature-list">
+    {% if bullet1 %}
+      <li>{{ bullet1 | metafield_tag }}</li>
+    {% endif %}
+    {% if bullet2 %}
+      <li>{{ bullet2 | metafield_tag }}</li>
+    {% endif %}
+    {% if bullet3 %}
+      <li>{{ bullet3 | metafield_tag }}</li>
+    {% endif %}
+  </ul>
 {% endif %}
