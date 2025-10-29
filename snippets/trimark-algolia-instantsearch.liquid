@@ -127,14 +127,24 @@ document.addEventListener('DOMContentLoaded', () => {
   showMore: true,       // enable "Show more" button
   showMoreLimit: 100,   // max total when expanded
 }),
+
 widgets.panel({
   templates: { header: 'Collections List' },
 })(widgets.refinementList)({
   container: '#collections-list',
-  attribute: 'collections',         
-  showMore: true,     
-  showMoreLimit: 100,   
-}),
+  attribute: 'collections',
+  showMore: true,
+  showMoreLimit: 100,
+  transformItems(items) {
+    return items.map(item => ({
+      ...item,
+      label: item.label
+        .replace(/-/g, ' ') // replace dashes with spaces
+        .replace(/\b\w/g, c => c.toUpperCase()) // capitalize first letter of each word
+    }));
+  },
+})
+
 widgets.panel({
   templates: { header: 'Colors' },
 })(widgets.refinementList)({
