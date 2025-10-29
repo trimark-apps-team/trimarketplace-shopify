@@ -2,6 +2,9 @@
 .aa-Source[data-autocomplete-source-id=products] .aa-List {
   display: block !important;
 }
+.aa-Source[data-autocomplete-source-id=products] .aa-ItemContent {
+    flex-direction: row !important;
+}
 
 /* Panel layout */
 .aa-PanelLayout {
