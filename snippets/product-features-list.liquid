@@ -10,15 +10,15 @@
 {% assign has_bullet2 = false %}
 {% assign has_bullet3 = false %}
 
-{% if bullet1 and bullet1_value != blank and bullet1_value != "N/A" %}
+{% if bullet1 and bullet1_value != blank and bullet1_value contains "N/A" %}
   {% assign has_bullet1 = true %}
 {% endif %}
 
-{% if bullet2 and bullet2_value != blank and bullet2_value != "N/A" %}
+{% if bullet2 and bullet2_value != blank and bullet2_value contains "N/A" %}
   {% assign has_bullet2 = true %}
 {% endif %}
 
-{% if bullet3 and bullet3_value != blank and bullet3_value != "N/A" %}
+{% if bullet3 and bullet3_value != blank and bullet3_value contains "N/A" %}
   {% assign has_bullet3 = true %}
 {% endif %}
 
