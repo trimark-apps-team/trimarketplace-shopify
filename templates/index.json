@@ -100,6 +100,7 @@
           "settings": {
             "heading": "Catalog",
             "description": "View, edit, and place orders from your Managed Order Guide.",
+            "custom-liquid": "",
             "link_label": "View All",
             "link_url": "/collections/all",
             "app_url": ""
@@ -111,6 +112,7 @@
           "settings": {
             "heading": "Wishlist",
             "description": "View, Track, Return or buy products again.",
+            "custom-liquid": "",
             "link_label": "View All",
             "link_url": "/apps/advanced-wishlist",
             "app_url": ""
@@ -130,6 +132,7 @@
           "settings": {
             "heading": "Saved Carts",
             "description": "",
+            "custom-liquid": "",
             "link_label": "View All",
             "link_url": "/a/saved-carts",
             "app_url": ""
@@ -171,6 +174,7 @@
           "settings": {
             "heading": "Approvals",
             "description": "Manage approval requests.",
+            "custom-liquid": "<div class=\"orders-list_data\"></div>",
             "link_label": "View All",
             "link_url": "",
             "app_url": ""
@@ -181,6 +185,7 @@
           "settings": {
             "heading": "Orders & Invoices",
             "description": "Manage your profile details.",
+            "custom-liquid": "",
             "link_label": "View All",
             "link_url": "",
             "app_url": "https://shopify.com/{{shop.id}}/account/orders"
@@ -191,6 +196,7 @@
           "settings": {
             "heading": "Wishlist",
             "description": "View, Track, Return or buy products again.",
+            "custom-liquid": "",
             "link_label": "View All",
             "link_url": "/apps/advanced-wishlist",
             "app_url": ""
