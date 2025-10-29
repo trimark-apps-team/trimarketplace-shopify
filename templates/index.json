@@ -130,7 +130,6 @@
           "settings": {
             "heading": "Saved Carts",
             "description": "",
-            "custom-liquid": "<div class=\"saved-cart-list_data\">\n \n    </div>",
             "link_label": "View All",
             "link_url": "/a/saved-carts",
             "app_url": ""
@@ -171,8 +170,8 @@
           "type": "feature",
           "settings": {
             "heading": "Approvals",
+            "custom-liquid": "<div class=\"orders-list_data\"></div>",
             "description": "Manage approval requests.",
-            "custom-liquid": "<div class=\"approval-list_data\">\n \n    </div>",
             "link_label": "View All",
             "link_url": "",
             "app_url": ""
@@ -183,7 +182,6 @@
           "settings": {
             "heading": "Orders & Invoices",
             "description": "Manage your profile details.",
-           "custom-liquid": "<div class=\"orders-list_data\"> {% render \"orders-list\" %} </div>",
             "link_label": "View All",
             "link_url": "",
             "app_url": "https://shopify.com/{{shop.id}}/account/orders"
@@ -194,11 +192,10 @@
           "settings": {
             "heading": "Wishlist",
             "description": "View, Track, Return or buy products again.",
-            "custom-liquid": "<div class=\"wishlist-list_data\">\n \n    </div>",
             "link_label": "View All",
             "link_url": "/apps/advanced-wishlist",
             "app_url": ""
-          } 
+          }
         }
       },
       "block_order": [
