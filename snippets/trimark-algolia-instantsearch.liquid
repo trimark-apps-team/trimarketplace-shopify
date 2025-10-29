@@ -33,7 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const indexName = `${algoliaShopify.config.index_prefix}products`;
 
-  const customCurrentRefinements = connectCurrentRefinements((renderOptions, isFirstRender) => {
+const customCurrentRefinements = connectCurrentRefinements(
+  (renderOptions, isFirstRender) => {
     const { items, refine } = renderOptions;
 
     const container = document.querySelector('#selected-filters');
@@ -47,22 +48,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const list = container.querySelector('.ais-CurrentRefinements-list');
     list.innerHTML = items
-      .map(
-        (group) => `
-        <li class="ais-CurrentRefinements-item">
-          <strong>${group.attribute.replace(/_/g, ' ')}</strong>:
-          ${group.refinements
-            .map(
-              (refinement) => `
+      .map((group) => {
+        // build the label text for each refinement
+        const refinementsHtml = group.refinements
+          .map((refinement) => {
+            let label = refinement.label.replace(':', '–');
+
+            // translate inventory_available labels
+            if (group.attribute === 'inventory_available') {
+              const raw = refinement.label ?? refinement.value;
+              const isTrue =
+                raw === true || raw === 'true' || raw === 1 || raw === '1';
+              label = isTrue ? 'In Stock' : 'Out of Stock';
+            }
+
+            return `
               <span class="ais-CurrentRefinements-label">
-                ${refinement.label.replace(':', '–')}
-                <button class="ais-CurrentRefinements-remove" data-attribute="${group.attribute}" data-label="${refinement.label}">×</button>
-              </span>
-            `
-            )
-            .join('')}
-        </li>`
-      )
+                ${label}
+                <button class="ais-CurrentRefinements-remove" 
+                  data-attribute="${group.attribute}" 
+                  data-label="${refinement.label}">
+                  ×
+                </button>
+              </span>`;
+          })
+          .join('');
+
+        return `
+          <li class="ais-CurrentRefinements-item">
+            <strong>${group.attribute.replace(/_/g, ' ')}</strong>:
+            ${refinementsHtml}
+          </li>`;
+      })
       .join('');
 
     list.querySelectorAll('.ais-CurrentRefinements-remove').forEach((btn) => {
@@ -74,7 +91,8 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.onclick = () => refine(refinement);
       }
     });
-  });
+  }
+);
 
   const search = instantsearch({
     indexName,
