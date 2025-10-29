@@ -81,7 +81,7 @@
           </tr>
        
 
-        {% if product.metafields.custom["1_erp_id_trmk_golden"] %}
+        {% if product.metafields.custom["1_erp_id_trmk_golden"] and product.metafields.custom["1_erp_id_trmk_golden"] != 'N/A' %}
           <tr>
             <td class="spec-label">Legacy ERP</td>
             <td>{{ product.metafields.custom["1_erp_id_trmk_golden"] }}</td>
