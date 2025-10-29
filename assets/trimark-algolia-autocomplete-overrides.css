@@ -67,14 +67,14 @@
 }
 
 .aa-ItemContentVendor {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   color: #777;
   text-transform: uppercase;
   letter-spacing: 0.4px;
 }
 
 .aa-ItemContentTitle {
-  font-size: 1.35rem !important;
+  font-size: 1.3rem !important;
   font-weight: 700;
   color: #111;
   line-height: 1.35;
@@ -82,7 +82,7 @@
 }
 
 .aa-ItemContentPrice {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: 700;
   color: #000;
 }
