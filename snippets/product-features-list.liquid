@@ -1,19 +1,24 @@
-{% assign bullets = "" | split: "," %}
+{% assign bullet1 = product.metafields.custom['8_feature_bullet_1'] %}
+{% assign bullet2 = product.metafields.custom['8_feature_bullet_2'] %}
+{% assign bullet3 = product.metafields.custom['8_feature_bullet_3'] %}
 
-{%- for metafield in product.metafields.custom -%}
-  {%- if metafield[0] contains "8_feature_bullet" -%}
-    {% assign value_text = metafield[1].value | strip %}
-    {% if value_text != blank and value_text != "N/A" %}
-      {% assign bullets = bullets | push: metafield[1] %}
-    {% endif %}
-  {%- endif -%}
-{%- endfor -%}
+{% assign bullet1_text = bullet1.value | strip %}
+{% assign bullet2_text = bullet2.value | strip %}
+{% assign bullet3_text = bullet3.value | strip %}
 
-{% if bullets.size > 0 %}
-  <strong><p>Features:</p></strong>
-  <ul class="product-feature-list">
-    {%- for b in bullets -%}
-      <li>{{ b | metafield_tag }}</li>
-    {%- endfor -%}
-  </ul>
+{% if bullet1_text != blank or bullet2_text != blank or bullet3_text != blank %}
+  {% if bullet1_text != 'N/A' or bullet2_text != 'N/A' or bullet3_text != 'N/A' %}
+    <strong><p>Features:</p></strong>
+    <ul class="product-feature-list">
+      {% if bullet1_text != blank and bullet1_text != 'N/A' %}
+        <li>{{ bullet1_text }}</li>
+      {% endif %}
+      {% if bullet2_text != blank and bullet2_text != 'N/A' %}
+        <li>{{ bullet2 | metafield_tag }}</li>
+      {% endif %}
+      {% if bullet3_text != blank and bullet3_text != 'N/A' %}
+        <li>{{ bullet3 | metafield_tag }}</li>
+      {% endif %}
+    </ul>
+  {% endif %}
 {% endif %}
