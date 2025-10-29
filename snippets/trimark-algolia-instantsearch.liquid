@@ -136,12 +136,16 @@ widgets.panel({
   showMore: true,
   showMoreLimit: 100,
   transformItems(items) {
-    return items.map(item => ({
-      ...item,
-      label: item.label
-        .replace(/-/g, ' ') // replace dashes with spaces
-        .replace(/\b\w/g, c => c.toUpperCase()) // capitalize first letter of each word
-    }));
+    return items.map((item) => {
+      const pretty = item.label
+        .replace(/-/g, ' ')
+        .replace(/\b\w/g, (c) => c.toUpperCase());
+      return {
+        ...item,
+        label: pretty,
+        highlighted: pretty, // refinementList may render this
+      };
+    });
   },
 }),
 
