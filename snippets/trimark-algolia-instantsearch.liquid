@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }),
 
   widgets.panel({
-  templates: { header: 'Vendor' },
+  templates: { header: 'Brand' },
 })(widgets.refinementList)({
   container: '#brand-list',
   attribute: 'vendor',
@@ -131,10 +131,9 @@ widgets.panel({
   templates: { header: 'Collections List' },
 })(widgets.refinementList)({
   container: '#collections-list',
-  attribute: 'collections',
-  limit: 10,            // show 20 types initially
-  showMore: true,       // enable "Show more" button
-  showMoreLimit: 100,   // max total when expanded
+  attribute: 'collections',         
+  showMore: true,     
+  showMoreLimit: 100,   
 }),
 widgets.panel({
   templates: { header: 'Colors' },
