@@ -11,7 +11,7 @@
           <tr>
             <td><a href="{{ order.customer_order_url }}">Order {{ order.name }}</a> ({{ order.item_count }} items)</td>
             <td>{{ order.financial_status_label }}</td>
-            <td>{{ order.created_at | date: "%b %d" }}</td>
+            <td>{{ order.created_at | date: "%m/%d/%Y" }}</td>
           </tr>
           {% if forloop.index == 2 %}
             {% break %}
