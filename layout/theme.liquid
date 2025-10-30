@@ -875,7 +875,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const data = await res.json();
       const { orders, pageUrl } = data;
       if(orders.length > 0) {
-       orders?.slice(0, 2).forEach(a => {
+       orders?.slice(0, 2)..reverse().forEach(a => {
         appendRow(approvalsTable, [`<a href="${pageUrl}">${a.orderName}</a>`, a.status, new Date(a.submittedAt).toLocaleDateString("en-US") || ""]);
        });
       } else {
