@@ -1231,6 +1231,9 @@ button.quick-add__submit::after, #cart-click::after {
   background-color: #f9f9f9;
 }
 
+.feature-data-list a {
+  color: #b11830;
+}
 
 @media (max-width: 768px) {
   .feature-table, .feature-table thead, .feature-table tbody, .feature-table th, .feature-table td, .feature-table tr {

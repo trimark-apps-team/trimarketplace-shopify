@@ -9,7 +9,7 @@
       <tbody>
         {% for order in customer.orders %}
           <tr>
-            <td>Order {{ order.name }} ({{ order.item_count }} items)</td>
+            <td><a href="{{ order.customer_order_url }}">Order {{ order.name }}</a> ({{ order.item_count }} items)</td>
             <td>{{ order.financial_status_label }}</td>
             <td>{{ order.created_at | date: "%b %d" }}</td>
           </tr>

@@ -857,7 +857,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const name = link?.innerText?.trim();
         const href = link?.href;
         const count = row.querySelector(".cs-center-text span")?.innerText?.trim() || "0";
-        appendRow(savedCartTable, [`<a href="${href}" target="_blank">${name}</a>`, count]);
+        appendRow(savedCartTable, [`<a href="${href}">${name}</a>`, count]);
       });
       } else {
         savedCartTable.closest(".feature-card").querySelector(".feature-data-list").style.display = "none";
@@ -876,10 +876,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       const { orders, pageUrl } = data;
       if(orders.length > 0) {
        orders?.slice(0, 2).forEach(a => {
-        appendRow(approvalsTable, [a.orderName, a.status, new Date(a.submittedAt).toLocaleDateString("en-US") || ""]);
+        appendRow(approvalsTable, [`<a href="${pageUrl}">${a.orderName}</a>`, a.status, new Date(a.submittedAt).toLocaleDateString("en-US") || ""]);
        });
       } else {
-       approvalsTable.closest(".feature-card").querySelector(".feature-data-list").style.display = "none";
+        approvalsTable.closest(".feature-card").querySelector(".feature-data-list").style.display = "none";
       }  
 
        approvalsTable.closest(".feature-card").querySelector(".feature-card-link").href = pageUrl;
