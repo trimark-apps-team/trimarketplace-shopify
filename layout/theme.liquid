@@ -802,75 +802,43 @@ document.addEventListener("DOMContentLoaded", async () => {
   const domainName = "{{ shop.domain }}";
   const customerId = "{{ customer.id }}";
   const email = "{{ customer.email }}";  
-
   const authKey = "{{ shop.metafields.custom.wishlist_app_token }}";
 
-  const wishlistContainer = document.querySelector(".wishlist-list_data");
-  const savedCartContainer = document.querySelector(".saved-cart-list_data");
-  const orderListContainer = document.querySelector(".orders-list_data");
+  const wishlistTable = document.querySelector(".wishlist-list_data tbody");
+  const savedCartTable = document.querySelector(".saved-cart-list_data tbody");
+  const approvalsTable = document.querySelector(".approvals-list_data tbody");
 
-  function createSavedCartCard(url, title, count) {
-    const div = document.createElement("ul");
-    div.className = "item-card";
-    div.innerHTML = `
-      <li class="block">
-        <a href="${url}" target="_blank" class="item-title">${title}</a>
-        <div class="item-count">${count}</div>
-      </li>
-    `;
-    return div;
-  }
-
-   function createOrderListCard(number, status) {
-    const div = document.createElement("ul");
-    div.className = "item-card";
-    div.innerHTML = `
-      <li class="block">
-        <div class="order-number">${number}</div>
-        <div class="order-status">${status}</div>
-      </li>
-    `;
-    return div;
-  }
-
-  function createWishlistCard(title, count) {
-    const div = document.createElement("ul");
-    div.className = "item-card";
-    div.innerHTML = `
-      <li class="block">
-        <div class="item-title">${title}</div>
-        <div class="item-count">${count}</div>
-      </li>
-    `;
-    return div;
+  function appendRow(table, cols) {
+    const tr = document.createElement("tr");
+    cols.forEach(html => {
+      const td = document.createElement("td");
+      td.innerHTML = html;
+      tr.appendChild(td);
+    });
+    table.appendChild(tr);
   }
 
   async function fetchWishlist() {
     try {
-      const encryptToken = btoa(
-        CryptoJS.SHA256(domainName + customerId).toString()
-      );
-
+      const encryptToken = btoa(CryptoJS.SHA256(domainName + customerId).toString());
       const url = new URL("https://advanced-wishlist.hulkapps.com/api/public/v1/wishlist/lists");
       url.searchParams.append("customer_id", customerId);
-
-      const headers = {
-        "Authorization": `Bearer ${authKey}`,
-        "Encrypt-token": encryptToken,
-        "Accept": "application/json"
-      };
-
-      const res = await fetch(url, { headers });
+      const res = await fetch(url, {
+        headers: {
+          "Authorization": `Bearer ${authKey}`,
+          "Encrypt-token": encryptToken,
+          "Accept": "application/json"
+        }
+      });
       const data = await res.json();
-
       if (Array.isArray(data)) {
-        data.slice(0, 2).forEach(list => {
-            const card = createWishlistCard(
-              list.name,
-              list.total_products
-            );
-            wishlistContainer.appendChild(card);
-        });
+        if(data.length > 0) {
+          data.slice(0, 2).forEach(list => {
+            appendRow(wishlistTable, [list.name, list.total_products]);
+          });
+        } else {
+          wishlistTable.closest(".feature-card").querySelector(".feature-data-list").style.display = "none";
+        } 
       }
     } catch (err) {
       console.error("Wishlist Error:", err);
@@ -878,77 +846,68 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   async function fetchSavedCarts() {
-  try {
-    const url = `/a/saved-carts`;
-    const res = await fetch(url);
-    const data = await res.text();
+    try {
+      const res = await fetch(`/a/saved-carts`);
+      const html = await res.text();
+      const doc = new DOMParser().parseFromString(html, "text/html");
+      const rows = doc.querySelectorAll(".cs-table tbody tr");
+      if(Array.from(rows).length > 0) { 
+      Array.from(rows).slice(0, 2).forEach(row => {
+        const link = row.querySelector("a");
+        const name = link?.innerText?.trim();
+        const href = link?.href;
+        const count = row.querySelector(".cs-center-text span")?.innerText?.trim() || "0";
+        appendRow(savedCartTable, [`<a href="${href}" target="_blank">${name}</a>`, count]);
+      });
+      } else {
+        savedCartTable.closest(".feature-card").querySelector(".feature-data-list").style.display = "none";
+      }
 
-    // Parse the HTML string
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(data, 'text/html');
-    const rows = doc.querySelectorAll(".cs-table tbody tr");
-
-    const limitedRows = Array.from(rows).slice(0, 2);
-
-
-    // Loop and create cards
-    limitedRows.forEach(item => {
-      const link = item.querySelector("a");
-      const name = link?.innerText?.trim();
-      const href = link?.href;
-      const count = item.querySelector(".cs-center-text span")?.innerText?.trim() || "0";
-
-      const card = createSavedCartCard(href, name, count);
-      savedCartContainer.appendChild(card);
-    });
-
-  } catch (err) {
-    console.error("Saved Cart Error:", err);
+    } catch (err) {
+      console.error("Saved Cart Error:", err);
+    }
   }
-}
 
-
-async function fetchOrderList() {
+  async function fetchApprovals() {
     try {
       const url = `https://trimark-draft-order-api-pearl.vercel.app/api/orders?shopDomain=${domainName}&email=${email}`;
       const res = await fetch(url);
       const data = await res.json();
+      const { orders, pageUrl } = data;
+      if(orders.length > 0) {
+       orders?.slice(0, 2).forEach(a => {
+        appendRow(approvalsTable, [a.orderName, a.status, new Date(a.submittedAt).toLocaleDateString("en-US") || ""]);
+       });
+      } else {
+       approvalsTable.closest(".feature-card").querySelector(".feature-data-list").style.display = "none";
+      }  
 
-      data.slice(0, 2).forEach(list => {
-            const card = createOrderListCard(
-              list.orderName,
-              list.status
-            );
-            orderListContainer.appendChild(card);
-      });
-
+       approvalsTable.closest(".feature-card").querySelector(".feature-card-link").href = pageUrl;
     } catch (err) {
-      console.error("Saved Cart Error:", err);
-    } 
+      console.error("Approvals Error:", err);
+    }
   }
 
-  async function fetchOrderList() {
-  try {
-    const url = `https://trimark-draft-order-api-pearl.vercel.app/api/orders?shopDomain=${domainName}&email=${email}`;
-    const res = await fetch(url);
-    const data = await res.json();
-
-    const { orders, pageUrl } = data;
-
-    orders.slice(0, 2).forEach(list => {
-      const card = createOrderListCard(list.orderName, list.status);
-      orderListContainer.appendChild(card);
-    });
-
-    orderListContainer.closest(".feature-card").querySelector(".feature-card-link").href = pageUrl;
-
-  } catch (err) {
-    console.error("Order List Error:", err);
-  }
-}
-
-  await Promise.all([fetchSavedCarts(), fetchWishlist(), fetchOrderList()]);
+  await Promise.all([
+    fetchWishlist(),
+    fetchSavedCarts(),
+    fetchApprovals()
+  ]);
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </script>
 

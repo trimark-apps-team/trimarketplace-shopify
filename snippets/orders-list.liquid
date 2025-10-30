@@ -1,7 +1,21 @@
-{% for order in customer.orders %} 
-    Order {{ order.name }} {{ order.financial_status_label }}
-    {{ order.item_count }} Items
-      {% if forloop.index == 2 %}
-         {% break %} 
-      {% endif %}
-{% endfor %}
+   <table class="feature-table orders-list_data">
+      <thead>
+        <tr>
+          <th>Order</th>
+          <th>Status</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for order in customer.orders %}
+          <tr>
+            <td>Order {{ order.name }} ({{ order.item_count }} items)</td>
+            <td>{{ order.financial_status_label }}</td>
+            <td>{{ order.created_at | date: "%b %d" }}</td>
+          </tr>
+          {% if forloop.index == 2 %}
+            {% break %}
+          {% endif %}
+        {% endfor %}
+      </tbody>
+    </table>

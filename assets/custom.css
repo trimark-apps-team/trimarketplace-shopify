@@ -1193,3 +1193,63 @@ button.quick-add__submit::after, #cart-click::after {
 .saved-cart-list_data, .wishlist-list_data, .approval-list_data {
   margin-block: 3px;
 }
+
+.feature-card {
+  background: #fff;
+  border: 1px solid #eaeaea;
+  border-radius: 10px;
+  padding: 15px 20px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+.feature-card h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #f4f4f4;
+  padding-bottom: 5px;
+}
+
+.feature-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.feature-table th, .feature-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+
+.feature-table th {
+  font-weight: 600;
+  background-color: #fafafa;
+}
+
+.feature-table tr:hover {
+  background-color: #f9f9f9;
+}
+
+
+@media (max-width: 768px) {
+  .feature-table, .feature-table thead, .feature-table tbody, .feature-table th, .feature-table td, .feature-table tr {
+    display: block;
+  }
+  .feature-table tr {
+    margin-bottom: 15px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 10px;
+  }
+  .feature-table td {
+    border: none;
+    padding: 8px 0;
+  }
+  .feature-table th {
+    display: none;
+  }
+  .feature-data-list thead tr {
+    display: none;
+  }
+}

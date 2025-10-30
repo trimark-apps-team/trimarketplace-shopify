@@ -115,7 +115,7 @@
           "settings": {
             "heading": "Saved Carts",
             "description": "",
-            "custom-liquid": "<div class=\"saved-cart-list_data\"></div>",
+            "custom-liquid": "<table class=\"feature-table saved-cart-list_data\">\n      <thead>\n        <tr>\n          <th>Cart Name</th>\n          <th>Items</th>\n        </tr>\n      </thead>\n      <tbody></tbody>\n    </table>",
             "link_label": "View All",
             "link_url": "/a/saved-carts",
             "app_url": ""
@@ -155,7 +155,7 @@
           "settings": {
             "heading": "Approvals",
             "description": "Manage approval requests.",
-            "custom-liquid": "<div class=\"orders-list_data\"></div>",
+            "custom-liquid": "<table class=\"feature-table approvals-list_data\">\n      <thead>\n        <tr>\n          <th>Order</th>\n          <th>Status</th>\n          <th>Date</th>\n        </tr>\n      </thead>\n      <tbody></tbody>\n    </table>",
             "link_label": "View All",
             "link_url": "",
             "app_url": ""
@@ -177,7 +177,7 @@
           "settings": {
             "heading": "Wishlist",
             "description": "View, Track, Return or buy products again.",
-            "custom-liquid": "<div class=\"wishlist-list_data\"></div>",
+            "custom-liquid": "<table class=\"feature-table wishlist-list_data\">\n      <thead>\n        <tr>\n          <th>List Name</th>\n          <th>Products</th>\n        </tr>\n      </thead>\n      <tbody></tbody>\n    </table>",
             "link_label": "View All",
             "link_url": "/apps/advanced-wishlist",
             "app_url": ""
