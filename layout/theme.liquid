@@ -876,8 +876,11 @@ document.addEventListener("DOMContentLoaded", async () => {
       const { orders, pageUrl } = data;
       if(orders.length > 0) {
        orders?.slice(0, 2).reverse().forEach(a => {
-        appendRow(approvalsTable, [`<a href="${pageUrl}">${a.orderName}</a>`, a.status, new Date(a.submittedAt).toLocaleDateString("en-US") || ""]);
-       });
+  appendRow(
+    approvalsTable,
+    [`<a href="${pageUrl}">${a.orderName}</a>`, a.status, new Date(a.submittedAt).toLocaleDateString("en-US") || ""]
+  );
+});
       } else {
         approvalsTable.closest(".feature-card").querySelector(".feature-data-list").style.display = "none";
       }  
