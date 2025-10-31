@@ -86,7 +86,11 @@
             <p class="level-indicator-message">{{ preorder_message | default: preorder_string | append: stock_count }}</p>
           {% else %}
             {% if sales_order %}
+              {% if inventory_variant.inventory_quantity < 0 %}
+                <p class="level-indicator-message">Backordered</p>
+              {% else %}
               <p class="level-indicator-message">{{ inventory_variant.inventory_quantity }} On hand</p>
+              {% endif %}
               {% else %}
                 <p class="level-indicator-message">{{ in_stock_message | default: in_stock_string | append: stock_count }}</p>
               {% endif %}
@@ -143,9 +147,9 @@
           {% else %}
             {% if sales_order %}
               <p class="level-indicator-message">{{ inventory_variant.inventory_quantity }} On hand</p>
-              {% else %}
-                <p class="level-indicator-message">{{ low_stock_message | default: in_stock_string | append: stock_count }}</p>
-              {% endif %}
+            {% else %}
+              <p class="level-indicator-message">{{ low_stock_message | default: in_stock_string | append: stock_count }}</p>
+            {% endif %}
           {% endif %}
         </span>
         {% liquid
