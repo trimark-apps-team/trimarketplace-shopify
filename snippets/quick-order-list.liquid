@@ -567,7 +567,7 @@ function updateRowsWithCart(cart) {
   nextBtn.addEventListener('click', () => { currentPage++; renderPage(); });
 
   const COMPANY_LOCATION_ID = '{{ customer.current_location.id }}';
-  const DOMAIN = '{{ shop.domain }}';
+  const DOMAIN = '{{ shop.permanent_domain }}';
   allProducts = await fetchProducts(COMPANY_LOCATION_ID, DOMAIN);
   applyFilters();
 });

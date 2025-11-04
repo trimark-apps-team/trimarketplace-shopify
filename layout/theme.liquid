@@ -469,7 +469,7 @@
   const levelOfApproval = "{{ customer.current_company.metafields.custom.level_of_approval_required }}";
   const customerId = "{{ customer.id }}";
   const customerName = "{{ customer.name }}";
-  const domain = "{{ shop.domain }}";
+  const domain = "{{ shop.permanent_domain }}";
   const companyName = "{{ customer.current_company.name }}"
 
   document.addEventListener('click', async (e) => {
@@ -661,7 +661,7 @@
           const confirmBtn = document.getElementById('confirm-location-switch');
           const statusBox = document.getElementById('company-popup-status');
 
-          const domain = '{{ shop.domain }}';
+          const domain = '{{ shop.permanent_domain }}';
           const salesRepCustomerId = '{{ customer.id }}';
           const cookieKey = 'salesrep_selected';
 
@@ -799,7 +799,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", async () => {
-  const domainName = "{{ shop.domain }}";
+  const domainName = "{{ shop.permanent_domain }}";
   const customerId = "{{ customer.id }}";
   const email = "{{ customer.email }}";  
   const authKey = "{{ shop.metafields.custom.wishlist_app_token }}";
