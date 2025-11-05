@@ -2845,25 +2845,29 @@ function selectTier(row) {
   const tier = row.dataset.tier;
   const price = row.dataset.price;
   const commission = row.dataset.commission;
-  const rawPrice = parseFloat(price.replace(/[^0-9.-]+/g,""));
+  const rawPrice = parseFloat(price.replace(/[^0-9.-]+/g, ""));
 
   document.getElementById('selected-tier-name').value = tier;
-  document.getElementById('selected-tier-price').value = document.body.dataset.symbol + rawPrice;
+  document.getElementById('selected-tier-price').value = document.body.dataset.symbol + rawPrice.toFixed(2);
   document.getElementById('selected-tier-commission').value = commission;
 
-  document.getElementById('selected-display').textContent = tier;
-  document.getElementById('selected-display').style.backgroundColor = row.dataset.color;
+  const displayEl = document.getElementById('selected-display');
+  displayEl.textContent = tier;
+  displayEl.style.backgroundColor = row.dataset.color;
 
-  document.getElementById('inline-price-edit-wrapper').style.display = "flex";
-  document.getElementById('editable-price-text').textContent = price;
-  document.getElementById('editable-price-input').value = rawPrice;
-
-  document.getElementById('editable-price-input').dataset.original = rawPrice;
+  const wrapper = document.getElementById('inline-price-edit-wrapper');
+  const textEl = document.getElementById('editable-price-text');
+  const inputEl = document.getElementById('editable-price-input');
+  
+  wrapper.style.display = "flex";
+  textEl.textContent = price;
+  inputEl.value = rawPrice;
+  inputEl.dataset.original = rawPrice;
   document.getElementById('price-error-msg').style.display = 'none';
 
   document.getElementById('popup').classList.add('hidden');
   document.querySelector("product-info .price-item--regular")?.classList.add("hidden");
-  document.querySelector('.order-modal_overlay').style.visibility='hidden';
+  document.querySelector('.order-modal_overlay').style.visibility = 'hidden';
 }
 
 function enablePriceEdit() {
@@ -2875,33 +2879,75 @@ function enablePriceEdit() {
   inputEl.style.display = "inline-block";
   inputEl.focus();
 
-  inputEl.addEventListener('input', function () {
-    let enteredPrice = parseFloat(inputEl.value);
+  inputEl.oninput = null;
+  inputEl.onblur = null;
 
-    if (isNaN(enteredPrice) || enteredPrice < inputEl.dataset.floor) {
+  inputEl.oninput = function () {
+    let enteredPrice = parseFloat(inputEl.value);
+    const floor = parseFloat(inputEl.dataset.floor);
+
+    if (isNaN(enteredPrice) || enteredPrice < floor) {
       errorEl.style.display = "inline";
       return;
     }
-
     errorEl.style.display = "none";
 
     const formattedPrice = document.body.dataset.symbol + enteredPrice.toFixed(2);
     textEl.textContent = formattedPrice;
     document.getElementById('selected-tier-price').value = formattedPrice;
-  });
 
-  inputEl.addEventListener('blur', function () {
+    const tiers = [...document.querySelectorAll('.tier-row')].map(row => ({
+      tier: row.dataset.tier,
+      price: parseFloat(row.dataset.price.replace(/[^0-9.-]+/g, "")),
+      commission: row.dataset.commission,
+      color: row.dataset.color,
+      row
+    }));
+
+    tiers.sort((a, b) => a.price - b.price);
+
+    let selectedTier = tiers[0];
+    for (let t of tiers) {
+      if (enteredPrice >= t.price) {
+        selectedTier = t;
+      } else {
+        break;
+      }
+    }
+
+
+    document.querySelectorAll('.tier-row').forEach(r => r.classList.remove('selected'));
+    selectedTier.row.classList.add('selected');
+
+    document.getElementById('selected-tier-name').value = selectedTier.tier;
+    document.getElementById('selected-tier-commission').value = selectedTier.commission;
+
+    const displayEl = document.getElementById('selected-display');
+    displayEl.textContent = selectedTier.tier;
+    displayEl.style.backgroundColor = selectedTier.color;
+  };
+
+  inputEl.onblur = function () {
     let enteredPrice = parseFloat(inputEl.value);
+    const floor = parseFloat(inputEl.dataset.floor);
 
-    if (isNaN(enteredPrice) || enteredPrice < inputEl.dataset.floor) {
+    if (isNaN(enteredPrice) || enteredPrice < floor) {
       inputEl.value = inputEl.dataset.original;
-      textEl.textContent = document.body.dataset.symbol + parseFloat(inputEl.dataset.original).toFixed(2);
+      textEl.textContent =
+        document.body.dataset.symbol + parseFloat(inputEl.dataset.original).toFixed(2);
     }
 
     inputEl.style.display = "none";
     textEl.style.display = "inline";
-  });
+  };
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  const defaultTierRow = document.querySelector('.tier-row[data-tier="F"]');
+  if (defaultTierRow) {
+    selectTier(defaultTierRow);
+  }
+});
 </script>
   
   

@@ -92,6 +92,7 @@ function checkAndToggleCheckoutButtons(cart) {
     for (const btn of checkoutButtons) {
       if (approvalRequired) {
         btn.classList.add("hidden");
+        document.querySelector('button[data-show-go-to-checkout-param="true"]')?.classList.add("hidden");
         document.querySelectorAll("#create-draft-order").forEach(el => {
           el.classList.remove("hidden");
         });
@@ -99,11 +100,11 @@ function checkAndToggleCheckoutButtons(cart) {
         document.querySelectorAll("#create-draft-order").forEach(el => {
           el.classList.add("hidden");
         });
+        document.querySelector('button[data-show-go-to-checkout-param="true"]')?.classList.remove("hidden");
         btn.classList.remove("hidden");
       }
     }
 }
-
 function refreshCart() {
     const cartDrawer = document.getElementById('CartDrawer');
 
