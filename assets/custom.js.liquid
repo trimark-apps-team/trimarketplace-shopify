@@ -152,11 +152,13 @@ function checkAndToggleCheckoutButtons(cart) {
     const checkoutButtons = document.querySelectorAll('button[name="checkout"]');
     for (const btn of checkoutButtons) {
       if (approvalRequired) {
+        document.querySelector('button[data-show-go-to-checkout-param="true"]')?.classList.add("hidden");
         btn.classList.add("hidden");
         document.querySelectorAll("#create-draft-order").forEach(el => {
           el.classList.remove("hidden");
         });
       } else {
+        document.querySelector('button[data-show-go-to-checkout-param="true"]')?.classList.remove("hidden");
         document.querySelectorAll("#create-draft-order").forEach(el => {
           el.classList.add("hidden");
         });
