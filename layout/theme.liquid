@@ -795,7 +795,7 @@
       window.hulkappsWishlist.baseURL = '/apps/advanced-wishlist/api';
       window.hulkappsWishlist.hasAppBlockSupport = '1';
     </script>
-    
+    {% if template.name == "index" %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", async () => {
@@ -945,7 +945,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 </script>
-
+{% endif %}
   {% include 'punchout' %}
 {% include 'punchout_settings' %}
 <script type="text/javascript">if(typeof window.hulkappsWishlist === 'undefined') {
@@ -1050,6 +1050,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       <script>
       window.draftorder_threshold = {{ customer.current_company.metafields.custom.approver_1_cart_threshold | times: 100 }};
       window.approval_required = {{ customer.current_company.metafields.custom.approvals_required | default: false }};
+      window.buyer_role = "{{ customer.metafields.custom.buyer_role.value }}";
       window.shopUrl = '{{ request.origin }}';
       window.routes = {
         cart_add_url: '{{ routes.cart_add_url }}',

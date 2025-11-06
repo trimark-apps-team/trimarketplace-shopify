@@ -1,4 +1,4 @@
-if(window.approval_required) {
+if(window.approval_required || window.buyer_role == "Sales Rep") {
 document.addEventListener("click", function (e) {
   if (e.target && e.target.classList.contains("edit-tier-price-btn")) {
     const button = e.target;
@@ -37,6 +37,20 @@ document.addEventListener("click", function (e) {
         return;
       }
 
+    const tr = input.closest('tr.cart-item');
+
+    const tiers = JSON.parse(tr.dataset.tiers);
+    tiers.sort((a, b) => a.price - b.price);
+
+    let selectedTier = tiers[0];
+        for (let t of tiers) {
+          if (newPrice >= t.price) {
+            selectedTier = t;
+          } else {
+            break;
+          }
+    }
+
       errorSpan.textContent = "";
 
       newPrice = newPrice.toFixed(2);
@@ -50,6 +64,8 @@ document.addEventListener("click", function (e) {
 
           const updatedProperties = { ...(lineItem.properties || {}) };
           updatedProperties["_Tier Price"] = document.body.dataset.symbol + newPrice;
+          updatedProperties["_Tier"] = selectedTier.tier;
+          updatedProperties["_Commission"] = selectedTier.commission;
 
           return fetch("/cart/change.js", {
             method: "POST",

@@ -115,7 +115,21 @@
 
                   <tbody role="rowgroup">
                     {%- for item in cart.items -%}
-                      <tr id="CartDrawer-Item-{{ item.index | plus: 1 }}" class="cart-item" role="row" data-floor="{{ item.product.metafields.custom["7_sip_tier_f"] | split: '-' | first }}">
+                      <tr 
+  id="CartDrawer-Item-{{ item.index | plus: 1 }}" 
+  class="cart-item" 
+  role="row"
+  data-floor="{{ item.product.metafields.custom["7_sip_tier_f"] | split: '-' | first }}"
+  data-tiers='[
+    {"tier":"F","price":{{ item.product.metafields.custom["7_sip_tier_f"] | split: '-' | first }},"commission":{{ item.product.metafields.custom["7_sip_tier_f"] | split: '-' | last }}},
+    {"tier":"E","price":{{ item.product.metafields.custom["7_sip_tier_e"] | split: '-' | first }},"commission":{{ item.product.metafields.custom["7_sip_tier_e"] | split: '-' | last }}},
+    {"tier":"D","price":{{ item.product.metafields.custom["7_sip_tier_d"] | split: '-' | first }},"commission":{{ item.product.metafields.custom["7_sip_tier_d"] | split: '-' | last }}},
+    {"tier":"C","price":{{ item.product.metafields.custom["7_sip_tier_c"] | split: '-' | first }},"commission":{{ item.product.metafields.custom["7_sip_tier_c"] | split: '-' | last }}},
+    {"tier":"B","price":{{ item.product.metafields.custom["7_sip_tier_b"] | split: '-' | first }},"commission":{{ item.product.metafields.custom["7_sip_tier_b"] | split: '-' | last }}},
+    {"tier":"A","price":{{ item.product.metafields.custom["7_sip_tier_a"] | split: '-' | first }},"commission":{{ item.product.metafields.custom["7_sip_tier_a"] | split: '-' | last }}}
+  ]'
+>
+
                         <td class="cart-item__media" role="cell" headers="CartDrawer-ColumnProductImage">
                           {% if item.image %}
                             {% comment %} Leave empty space due to a:empty CSS display: none rule {% endcomment %}
