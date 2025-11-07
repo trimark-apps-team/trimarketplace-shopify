@@ -97,7 +97,19 @@
 
                 <tbody>
                   {%- for item in cart.items -%}
-                    <tr class="cart-item" id="CartItem-{{ item.index | plus: 1 }}" data-floor="{{ item.product.metafields.custom["7_sip_tier_f"] | split: '-' | first }}">
+                      <tr 
+  id="CartItem-{{ item.index | plus: 1 }}" 
+  class="cart-item" 
+  data-floor="{{ item.product.metafields.custom["7_sip_tier_f"] | split: '-' | first }}"
+  data-tiers='[
+    {"tier":"F","price":{{ item.product.metafields.custom["7_sip_tier_f"] | split: '-' | first }},"commission":{{ item.product.metafields.custom["7_sip_tier_f"] | split: '-' | last }}},
+    {"tier":"E","price":{{ item.product.metafields.custom["7_sip_tier_e"] | split: '-' | first }},"commission":{{ item.product.metafields.custom["7_sip_tier_e"] | split: '-' | last }}},
+    {"tier":"D","price":{{ item.product.metafields.custom["7_sip_tier_d"] | split: '-' | first }},"commission":{{ item.product.metafields.custom["7_sip_tier_d"] | split: '-' | last }}},
+    {"tier":"C","price":{{ item.product.metafields.custom["7_sip_tier_c"] | split: '-' | first }},"commission":{{ item.product.metafields.custom["7_sip_tier_c"] | split: '-' | last }}},
+    {"tier":"B","price":{{ item.product.metafields.custom["7_sip_tier_b"] | split: '-' | first }},"commission":{{ item.product.metafields.custom["7_sip_tier_b"] | split: '-' | last }}},
+    {"tier":"A","price":{{ item.product.metafields.custom["7_sip_tier_a"] | split: '-' | first }},"commission":{{ item.product.metafields.custom["7_sip_tier_a"] | split: '-' | last }}}
+  ]'
+>
                       <td class="cart-item__media">
                         {% if item.image %}
                           {% comment %} Leave empty space due to a:empty CSS display: none rule {% endcomment %}
@@ -147,6 +159,7 @@
                         {%- else -%}
                           {% if item.properties["_Tier Price"] != blank and item.properties["_Tier Price"] != "NA" %}
                                 <div style="display: flex; align-items: center; gap: 6px;position: relative;">
+                            <span class="sip-tier">{{ item.properties["_Tier"] }}</span>
                             <span class="cart-tier-price-text" data-line="{{ forloop.index0 }}">{{ item.properties["_Tier Price"] }}</span>
                             <input type="number" step="1" class="cart-tier-price-input" min="1" max="1000"
                                   data-line="{{ forloop.index0 }}"
@@ -612,7 +625,23 @@ document.addEventListener("DOMContentLoaded", () => {
     const handleBlur = async () => {
       input.removeEventListener("blur", handleBlur);
 
+      
+
       let newPrice = parseFloat(input.value);
+
+      const tr = input.closest('tr.cart-item');
+
+      const tiers = JSON.parse(tr.dataset.tiers);
+      tiers.sort((a, b) => a.price - b.price);
+
+      let selectedTier = tiers[0];
+          for (let t of tiers) {
+            if (newPrice >= t.price) {
+              selectedTier = t;
+            } else {
+              break;
+            }
+      }
       if (isNaN(newPrice) || newPrice < input.closest("tr.cart-item").dataset.floor) {
         errorSpan.textContent = `Enter a price above $${input.closest("tr.cart-item").dataset.floor}`;
         input.value = original;
@@ -623,6 +652,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const lineItem = cart.items[parseInt(line)];
         if (lineItem) {
           const updatedProps = { ...(lineItem.properties || {}), "_Tier Price": document.body.dataset.symbol + newPrice };
+          updatedProps["_Tier"] = selectedTier.tier;
+          updatedProps["_Commission"] = selectedTier.commission;
           await fetch("/cart/change.js", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
