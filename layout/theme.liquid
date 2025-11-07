@@ -608,6 +608,13 @@
     {% assign assigned_locations = customer.metafields.locations.assigned_locations.value %}
 
     {% if customer.metafields.custom.buyer_role.value == 'Sales Rep' and assigned_locations != blank %}
+
+    <style>
+      button.cs-button[data-show-go-to-checkout-param="true"] {
+        display: none;
+      }
+    </style>
+
       <div id="company-popup-overlay" class="company-overlay"></div>
 
       <div id="company-popup" class="company-modal">
