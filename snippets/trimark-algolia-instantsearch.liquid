@@ -176,7 +176,7 @@ widgets.panel({
   attribute: 'options.color'
 }),
 
-widgets.panel({
+{% comment %} widgets.panel({
   templates: { header: 'Availability' },
 })(widgets.refinementList)({
   container: '#inventory-available',
@@ -194,7 +194,7 @@ widgets.panel({
       };
     });
   },
-}),
+}), {% endcomment %}
 
 widgets.panel({
   templates: { header: 'Product Type' },
