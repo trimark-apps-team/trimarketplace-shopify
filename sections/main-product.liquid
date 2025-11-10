@@ -351,7 +351,7 @@
               </div>
               {% endif %}
             </div>
-              <button class="button" onclick="document.getElementById('popup').classList.remove('hidden'); document.querySelector('.order-modal_overlay').style.visibility='visible';" style="color:{{ block.settings.tire_price_button_text_color }};font-size:{{ block.settings.tire_price_button_text_font_size }}px;background-color:{{ block.settings.tire_price_button_bg_color }};border-radius: {{ block.settings.tire_price_button_border_radius }}px">
+              <button data-productprice="{{ product.selected_or_first_available_variant.price | money }}" class="button choose-tier" onclick="document.getElementById('popup').classList.remove('hidden'); document.querySelector('.order-modal_overlay').style.visibility='visible';" style="color:{{ block.settings.tire_price_button_text_color }};font-size:{{ block.settings.tire_price_button_text_font_size }}px;background-color:{{ block.settings.tire_price_button_bg_color }};border-radius: {{ block.settings.tire_price_button_border_radius }}px">
                 {{ block.settings.tire_price_button_text }}
               </button>
               <div id="popup" class="popup hidden">
@@ -408,7 +408,7 @@
                       {% endfor %}
                     </tbody>
                   </table>
-                  <button class="button" onclick="document.getElementById('popup').classList.add('hidden'); document.querySelector('.order-modal_overlay').style.visibility='hidden';" style="color:{{ block.settings.close_button_text_color }};font-size:{{ block.settings.close_button_text_font_size }}px;background-color:{{ block.settings.close_button_bg_color }};border-radius: {{ block.settings.close_button_border_radius }}px">{{ block.settings.close_button_text }}</button>
+                  <button class="button" data-product-price="{{ product.selected_or_first_available_variant.unit_price | money }}"onclick="document.getElementById('popup').classList.add('hidden'); document.querySelector('.order-modal_overlay').style.visibility='hidden';" style="color:{{ block.settings.close_button_text_color }};font-size:{{ block.settings.close_button_text_font_size }}px;background-color:{{ block.settings.close_button_bg_color }};border-radius: {{ block.settings.close_button_border_radius }}px">{{ block.settings.close_button_text }}</button>
                 </div>
               </div>
             {% endif %}
@@ -2848,7 +2848,7 @@ function selectTier(row) {
   const rawPrice = parseFloat(price.replace(/[^0-9.-]+/g, ""));
 
   document.getElementById('selected-tier-name').value = tier;
-  document.getElementById('selected-tier-price').value = document.body.dataset.symbol + rawPrice.toFixed(2);
+  document.getElementById('selected-tier-price').value = document.body.dataset.symbol + rawPrice;
   document.getElementById('selected-tier-commission').value = commission;
 
   const displayEl = document.getElementById('selected-display');
@@ -2892,7 +2892,7 @@ function enablePriceEdit() {
     }
     errorEl.style.display = "none";
 
-    const formattedPrice = document.body.dataset.symbol + enteredPrice.toFixed(2);
+    const formattedPrice = document.body.dataset.symbol + enteredPrice;
     textEl.textContent = formattedPrice;
     document.getElementById('selected-tier-price').value = formattedPrice;
 
@@ -2934,7 +2934,7 @@ function enablePriceEdit() {
     if (isNaN(enteredPrice) || enteredPrice < floor) {
       inputEl.value = inputEl.dataset.original;
       textEl.textContent =
-        document.body.dataset.symbol + parseFloat(inputEl.dataset.original).toFixed(2);
+        document.body.dataset.symbol + parseFloat(inputEl.dataset.original);
     }
 
     inputEl.style.display = "none";
@@ -2943,11 +2943,50 @@ function enablePriceEdit() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  const defaultTierRow = document.querySelector('.tier-row[data-tier="F"]');
-  if (defaultTierRow) {
-    selectTier(defaultTierRow);
-  }
+  const enteredPrice = document.querySelector('.choose-tier')?.dataset.productprice.replace(/[^0-9.-]+/g, "");
+  const tiers = [...document.querySelectorAll('.tier-row')].map(row => ({
+      tier: row.dataset.tier,
+      price: parseFloat(row.dataset.price.replace(/[^0-9.-]+/g, "")),
+      commission: row.dataset.commission,
+      color: row.dataset.color,
+      row
+    }));
+
+    tiers.sort((a, b) => a.price - b.price);
+
+    let selectedTier = tiers[0];
+    for (let t of tiers) {
+      if (enteredPrice >= t.price) {
+        selectedTier = t;
+      } else {
+        break;
+      }
+    }
+
+    document.getElementById('selected-tier-name')?.value = selectedTier.tier;
+    document.getElementById('selected-tier-commission')?.value = selectedTier.commission;
+    document.getElementById('selected-tier-price')?.value = document.body.dataset.symbol + enteredPrice;
+
+    const rawPrice = parseFloat(enteredPrice);
+
+    const displayEl = document.getElementById('selected-display');
+    displayEl.textContent = selectedTier.tier;
+    displayEl.style.backgroundColor = selectedTier.color;
+
+    const wrapper = document.getElementById('inline-price-edit-wrapper');
+    const textEl = document.getElementById('editable-price-text');
+    const inputEl = document.getElementById('editable-price-input');
+
+    wrapper.style.display = "flex";
+    textEl.textContent = document.body.dataset.symbol + rawPrice;
+    inputEl.value = rawPrice;
+    inputEl.dataset.original = rawPrice;
+    document.getElementById('price-error-msg')?.style.display = 'none';
+
+    document.querySelector("product-info .price-item--regular")?.classList.add("hidden");
+
 });
+
 </script>
   
   
