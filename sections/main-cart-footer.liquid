@@ -38,6 +38,19 @@
               placeholder="{{ 'sections.cart.note' | t }}"
             >{{ cart.attributes["Customer note"] }}</textarea>
           </cart-note>
+         <po-number class="cart__note field">
+            <label for="Cart-po-number">PO Number</label>
+            <input
+              class="field__input"
+              type="text"
+              name="note"
+              form="cart"
+              id="Cart-po-number"
+              value="{{ cart.attributes["PO Number"] }}"
+              placeholder="PO Number"
+            >
+          </po-number>
+          
         {%- endif -%}
 
         <div class="cart__blocks">

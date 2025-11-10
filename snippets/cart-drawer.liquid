@@ -499,6 +499,25 @@
               >{{ cart.attributes["Customer note"] }}</textarea>
             </cart-note>
           </details>
+
+          <details id="Details-CartDrawer-PoNumber" class="po-number_details">
+            <summary>
+              <span class="summary__title">
+                PO Number
+                {{- 'icon-caret.svg' | inline_asset_content -}}
+              </span>
+            </summary>
+            <po-number class="field">
+              <label class="visually-hidden" for="CartDrawer-PoNumber">PO Number</label>
+              <input
+                id="CartDrawer-PoNumber"
+                class="field__input"
+                name="note"
+                placeholder="PO Number"
+                value="{{ cart.attributes["PO Number"] }}"
+              />
+            </po-number>
+          </details>
         {%- endif -%}
 
         <!-- Start blocks -->

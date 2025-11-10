@@ -1235,6 +1235,14 @@ button.quick-add__submit::after, #cart-click::after {
   color: #b11830;
 }
 
+.po-number_details {
+  margin-top: 0!important;
+}
+
+.po-number_details .field__input {
+  padding-block: 0!important;
+}
+
 @media (max-width: 768px) {
   .feature-table, .feature-table thead, .feature-table tbody, .feature-table th, .feature-table td, .feature-table tr {
     display: block;

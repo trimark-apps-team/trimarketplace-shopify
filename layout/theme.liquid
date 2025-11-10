@@ -478,7 +478,7 @@
 
       let customerNote = document.querySelector("#CartDrawer-Note")?.value || document.querySelector("#Cart-note")?.value || "";
 
-      
+      let poNumber = document.querySelector("#CartDrawer-PoNumber")?.value || document.querySelector("#Cart-po-number")?.value || "";
       try {
         const cartRes = await fetch('/cart.js');
         const cart = await cartRes.json();
@@ -514,7 +514,8 @@
                 customerName,
                 customerNote,
                 domain,
-                cartTotal
+                cartTotal,
+                poNumber
             })
         });
 
@@ -549,6 +550,8 @@
             let customerNote =
               document.querySelector('#CartDrawer-Note')?.value || document.querySelector('#Cart-note')?.value || '';
 
+                    let poNumber = document.querySelector("#CartDrawer-PoNumber")?.value || document.querySelector("#Cart-po-number")?.value || "";
+
             showPopup('Creating order...', `Placing order on behalf of ${companyName}`);
 
             try {
@@ -581,6 +584,7 @@
                   customerName,
                   customerNote,
                   domain,
+                  poNumber
                 }),
               });
 
