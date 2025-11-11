@@ -156,50 +156,31 @@
     },
     "content_for_index": [],
     "blocks": {
-      "5073133894706448843": {
-        "type": "shopify://apps/pluralcart/blocks/save-cart-embed/6d5574dc-9fb8-484c-96e4-d6123e2934d8",
+      "1744347199190486471": {
+        "type": "shopify://apps/advanced-wishlist/blocks/app/330d9272-08ea-4193-b3e0-475a69fa65fa",
         "disabled": false,
-        "settings": {
-          "target": "",
-          "embed_parent_container": "cart-drawer",
-          "button_class": "button btn btn-primary",
-          "allow_outside_cart_page": false,
-          "show_view_carts": true,
-          "show_save_cart": true,
-          "show_send_to_sales": false,
-          "customer_tags": "",
-          "show_modal": false,
-          "show_id": true,
-          "view_carts_button": "View Carts",
-          "save_cart_button": "Save Cart",
-          "send_to_sales_button": "Send to Sales",
-          "empty_cart_text": "You must have items in your cart",
-          "modal_title_text": "Save Cart",
-          "create_new_section_text": "Create new",
-          "create_new_placeholder_text": "My new collection",
-          "existing_section_text": "Save to existing",
-          "create_new_text": "Save",
-          "view_all_text": "View all",
-          "load_more_text": "Load More",
-          "success_text": "Cart saved to",
-          "error_text": "An error occurred",
-          "login_text": "Log in to save",
-          "login_create_text": "Log in to create a new collection"
-        }
+        "settings": {}
       },
-      "14832512241302024094": {
-        "type": "shopify://apps/pluralcart/blocks/list-carts/6d5574dc-9fb8-484c-96e4-d6123e2934d8",
-        "disabled": false,
+      "384495262013941155": {
+        "type": "shopify://apps/advanced-wishlist/blocks/collection-btn/330d9272-08ea-4193-b3e0-475a69fa65fa",
+        "disabled": true,
         "settings": {
-          "target": "",
-          "table_class": "",
-          "items_per_page": 20,
-          "section_title_text": "Saved Collections",
-          "empty_text": "You haven't saved any collections yet.",
-          "table_head_id_text": "ID",
-          "table_head_date_text": "Date",
-          "table_head_title_text": "Title",
-          "table_head_count_text": "Item Count"
+          "is_added_selector": false,
+          "collection_icon_selector": ".card__heading",
+          "collection_icon_type": "outline",
+          "collection_icon_background_type": "icon_no_background",
+          "collection_icon_size": 16,
+          "collection_icon_background_color": "#ffffff",
+          "collection_icon_fill_color": "#5c6ac4",
+          "collection_icon_border_color": "#5c6ac4",
+          "collection_icon_hover_color": "#f5f5f5",
+          "collection_selected_icon_fill_color": "#5c6ac4",
+          "collection_selected_icon_border_color": "#5c6ac4",
+          "custom_wishlist_icon": false,
+          "custom_wishlist_icon_right": "true",
+          "collection_count_layout": "top_count",
+          "collection_count_background_color": "#5c6ac4",
+          "collection_count_color": "#ffffff"
         }
       },
       "11391643856454973168": {
@@ -238,37 +219,51 @@
           "login_create_text": "Log in to create a new collection"
         }
       },
-      "1744347199190486471": {
-        "type": "shopify://apps/advanced-wishlist/blocks/app/330d9272-08ea-4193-b3e0-475a69fa65fa",
+      "14832512241302024094": {
+        "type": "shopify://apps/pluralcart/blocks/list-carts/6d5574dc-9fb8-484c-96e4-d6123e2934d8",
         "disabled": false,
-        "settings": {}
-      },
-      "384495262013941155": {
-        "type": "shopify://apps/advanced-wishlist/blocks/collection-btn/330d9272-08ea-4193-b3e0-475a69fa65fa",
-        "disabled": true,
         "settings": {
-          "is_added_selector": false,
-          "collection_icon_selector": ".card__heading",
-          "collection_icon_type": "outline",
-          "collection_icon_background_type": "icon_no_background",
-          "collection_icon_size": 16,
-          "collection_icon_background_color": "#ffffff",
-          "collection_icon_fill_color": "#5c6ac4",
-          "collection_icon_border_color": "#5c6ac4",
-          "collection_icon_hover_color": "#f5f5f5",
-          "collection_selected_icon_fill_color": "#5c6ac4",
-          "collection_selected_icon_border_color": "#5c6ac4",
-          "custom_wishlist_icon": false,
-          "custom_wishlist_icon_right": "true",
-          "collection_count_layout": "top_count",
-          "collection_count_background_color": "#5c6ac4",
-          "collection_count_color": "#ffffff"
+          "target": "",
+          "table_class": "",
+          "items_per_page": 20,
+          "section_title_text": "Saved Collections",
+          "empty_text": "You haven't saved any collections yet.",
+          "table_head_id_text": "ID",
+          "table_head_date_text": "Date",
+          "table_head_title_text": "Title",
+          "table_head_count_text": "Item Count"
         }
       },
-      "11735689235857492391": {
-        "type": "shopify://apps/algolia-ai-search-discovery/blocks/autocomplete/57bb7f86-d5fe-4d43-96ca-3953324494cf",
+      "5073133894706448843": {
+        "type": "shopify://apps/pluralcart/blocks/save-cart-embed/6d5574dc-9fb8-484c-96e4-d6123e2934d8",
         "disabled": false,
-        "settings": {}
+        "settings": {
+          "target": "",
+          "embed_parent_container": "cart-drawer",
+          "button_class": "button btn btn-primary",
+          "allow_outside_cart_page": false,
+          "show_view_carts": true,
+          "show_save_cart": true,
+          "show_send_to_sales": false,
+          "customer_tags": "",
+          "show_modal": false,
+          "show_id": true,
+          "view_carts_button": "View Carts",
+          "save_cart_button": "Save Cart",
+          "send_to_sales_button": "Send to Sales",
+          "empty_cart_text": "You must have items in your cart",
+          "modal_title_text": "Save Cart",
+          "create_new_section_text": "Create new",
+          "create_new_placeholder_text": "My new collection",
+          "existing_section_text": "Save to existing",
+          "create_new_text": "Save",
+          "view_all_text": "View all",
+          "load_more_text": "Load More",
+          "success_text": "Cart saved to",
+          "error_text": "An error occurred",
+          "login_text": "Log in to save",
+          "login_create_text": "Log in to create a new collection"
+        }
       }
     },
     "color_schemes": {
