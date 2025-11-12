@@ -135,7 +135,7 @@
                   {% else %}
                     {% assign erp_id_key = '' %}
                   {% endif %}
-              {% if product.metafields.custom[erp_id_key] %}
+              {% if product.variant.metafields.custom[erp_id_key] %}
                 <p>Item Number: <span class="trimark-red">
                   {{ product.metafields.custom[erp_id_key] }}
                 </span></p>
