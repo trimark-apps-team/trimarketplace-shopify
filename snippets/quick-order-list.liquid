@@ -320,73 +320,37 @@ document.addEventListener('DOMContentLoaded', async function () {
   });
 
     async function fetchProducts(companyLocationId, domain) {
-  // 1️⃣ Step: Start the bulk operation
-  const startRes = await fetch('/apps/api/start-company-location-products-bulk', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ companyLocationId, domain }),
-  });
-  
-  const startData = await startRes.json();
-  if (!startData.success) {
-    console.error('Failed to start bulk operation:', startData);
-    return [];
+    let cursor = null;
+    const products = [];
+    let isFirstCall = true;
+
+    do {
+      const first = isFirstCall ? 250 : 100;
+      const url = `/apps/api/get-company-location-products?companyLocationId=${companyLocationId}&domain=${domain}&first=${first}${cursor ? `&after=${cursor}` : ''}`;
+      
+      const res = await fetch(url);
+      const data = await res.json();
+      if (!data.success) break;
+
+      const catalogs = data.data.companyLocation.catalogs.edges;
+      catalogs.forEach(c => {
+        const productsEdges = c.node.publication?.products?.edges || [];
+        products.push(...productsEdges.map(p => {
+          const node = p.node;
+          node.recent = node.purchasedDate?.value ? new Date(node.purchasedDate.value).toISOString() : "1970-01-01T00:00:00Z";
+          return node;
+        }));
+      });
+
+      const lastCatalog = catalogs[catalogs.length - 1];
+      const pageInfo = lastCatalog?.node.publication?.products?.pageInfo;
+      cursor = pageInfo?.hasNextPage ? pageInfo.endCursor : null;
+
+      isFirstCall = false; 
+    } while (cursor);
+
+    return products;
   }
-
-  console.log('📦 Bulk operation started... polling for completion');
-
-  // 2️⃣ Step: Poll every 5 seconds for status
-  let bulkUrl = null;
-  for (let i = 0; i < 30; i++) { // timeout after ~150 seconds
-    const checkRes = await fetch(`/apps/api/check-bulk-status?domain=${domain}`);
-    const checkData = await checkRes.json();
-
-    if (checkData.success && checkData.bulk?.status === 'COMPLETED') {
-      bulkUrl = checkData.bulk.url;
-      console.log('✅ Bulk completed. Download URL:', bulkUrl);
-      break;
-    }
-
-    if (checkData.bulk?.status === 'FAILED') {
-      console.error('❌ Bulk operation failed:', checkData.bulk.errorCode);
-      return [];
-    }
-
-    console.log(`⏳ Still processing... (${checkData.bulk?.status || 'unknown'})`);
-    await new Promise(r => setTimeout(r, 5000));
-  }
-
-  if (!bulkUrl) {
-    console.error('Timeout: Bulk operation did not complete in time.');
-    return [];
-  }
-
-  // 3️⃣ Step: Download and parse the JSONL file
-  const fileRes = await fetch(bulkUrl);
-  const text = await fileRes.text();
-
-  const lines = text.split('\n').filter(Boolean);
-  const products = [];
-
-  for (const line of lines) {
-    try {
-      const obj = JSON.parse(line);
-      if (obj && obj.__typename === 'Product') {
-        const node = obj;
-        node.recent = node.metafield?.value
-          ? new Date(node.metafield.value).toISOString()
-          : "1970-01-01T00:00:00Z";
-        products.push(node);
-      }
-    } catch (err) {
-      console.error('Error parsing line:', err);
-    }
-  }
-
-  console.log(`🎉 Loaded ${products.length} products from bulk file`);
-  return products;
-}
-
 
 
   function createProductRow(product) {
