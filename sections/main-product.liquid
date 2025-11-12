@@ -122,7 +122,7 @@
 
                   
                   {% assign domain = shop.url | downcase %}
-                  <p>{{ domain.value }}</p>
+                  
                   {% assign erp_id_key = '' %}
                   {% if domain contains 'marlinn' or domain contains 'fiveguys' %}
                     {% assign erp_id_key = '1_erp_id_marlinn_ipics' %}
@@ -135,6 +135,7 @@
                   {% else %}
                     {% assign erp_id_key = '' %}
                   {% endif %}
+                  <p>{{ domain }}</p>
               {% if product.metafields.custom[erp_id_key] %}
                 <p>Item Number: <span class="trimark-red">
                   {{ product.metafields.custom[erp_id_key] }}
