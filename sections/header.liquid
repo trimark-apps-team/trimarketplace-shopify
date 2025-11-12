@@ -323,6 +323,7 @@
   </header>
   {% unless template == 'search' %}
 <div class="page-width">
+  <p>{{ shop.ur }}</p>
 {% if shop.url contains 'marlinn' %}
   {% render 'trimark-algolia-search-input' %}
   {% else %}
