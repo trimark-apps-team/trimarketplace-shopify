@@ -324,7 +324,7 @@
   {% unless template == 'search' %}
 <div class="page-width">
 <p>test</p>
-{% if shop.permanent_domain contains 'marlinn' %}
+{% if shop.url contains 'marlinn' %}
   {% render 'trimark-algolia-search-input' %}
   {% else %}
   {% if settings.predictive_search_enabled %}

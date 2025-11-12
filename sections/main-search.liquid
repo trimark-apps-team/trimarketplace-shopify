@@ -70,7 +70,7 @@
 {% endcomment %}
 
 
-{% if shop.permanent_domain contains 'marlinn' %}
+{% if shop.url contains 'marlinn' %}
   {% render 'trimark-algolia-search-page' %}
 {% else %}
   {% render 'trimark-default-search' %}
