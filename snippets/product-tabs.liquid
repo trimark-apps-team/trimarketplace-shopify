@@ -56,11 +56,11 @@
     <!-- Table 1: 7 fields -->
     <table class="spec-table spec-table--1">
       <tbody>
-        {% if product.metafields.custom[erp_id_key] != blank %}
+        {% if product.metafields.custom["1_erp_id_marlinn_ipics"] != blank %}
         <tr>
           <td class="spec-label">Item Number</td>
           <td>
-            {{ product.metafields.custom[erp_id_key] }}
+            {{ product.metafields.custom["1_erp_id_marlinn_ipics"] }}
           </td>
         </tr>
         {% endif %}
