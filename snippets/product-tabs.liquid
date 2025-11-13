@@ -2,7 +2,7 @@
 
          {% assign domain = shop.url | downcase %}
                   {% assign erp_id_key = '' %}
-            {% if domain contains 'marlinn' or domain contains 'fiveguys' %}
+            {% if domain contains 'marlinn' or domain contains 'fiveguys' or domain contains 'demo' %}
                     {% assign erp_id_key = '1_erp_id_marlinn_ipics' %}
                   {% elsif domain contains 'ab' %}
                     {% assign erp_id_key = '1_erp_id_adams_burch_sx' %}
@@ -41,7 +41,6 @@
     
       <div class="tab-content active" id="tab-description">
         {% if product.metafields.custom["8_description_web"] %}
-          <p>{{ shop.url }}</p>
           {{ product.metafields.custom["8_description_web"] | metafield_tag }}
         {% else %}
           {{ product.description }}
@@ -56,11 +55,11 @@
     <!-- Table 1: 7 fields -->
     <table class="spec-table spec-table--1">
       <tbody>
-        {% if product.metafields.custom[erp_id_key] and product.metafields.custom[erp_id_key] != 'N/A' %}
+        {% if product.metafields.custom["1_erp_id_marlinn_ipics"] != blank %}
         <tr>
           <td class="spec-label">Item Number</td>
           <td>
-            {{ product.metafields.custom[erp_id_key] }}
+            {{ product.metafields.custom["1_erp_id_marlinn_ipics"] }}
           </td>
         </tr>
         {% endif %}
