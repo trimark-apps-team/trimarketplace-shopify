@@ -1,6 +1,6 @@
 
 
-         {% assign domain = shop.url | downcase %}
+         {% assign domain = shop.permanent_domain | downcase %}
                   {% assign erp_id_key = '' %}
             {% if domain contains 'marlinn' or domain contains 'fiveguys' %}
                     {% assign erp_id_key = '1_erp_id_marlinn_ipics' %}
@@ -41,7 +41,7 @@
     
       <div class="tab-content active" id="tab-description">
         {% if product.metafields.custom["8_description_web"] %}
-          {{ product.metafields.custom["8_description_web"] | metafield_tag }}
+          {{ product.selected_or_first_available_variant.metafields.custom["8_description_web"] | metafield_tag }}
         {% else %}
           {{ product.description }}
         {% endif %}
