@@ -41,7 +41,7 @@
     
       <div class="tab-content active" id="tab-description">
         {% if product.metafields.custom["8_description_web"] %}
-          {{ product.metafields.custom["1_erp_id_marlinn_ipics"] }}
+          {{ shop.permanent_domain }}
           {{ product.metafields.custom["8_description_web"] | metafield_tag }}
         {% else %}
           {{ product.description }}
