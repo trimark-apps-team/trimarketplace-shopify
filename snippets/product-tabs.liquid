@@ -41,7 +41,7 @@
     
       <div class="tab-content active" id="tab-description">
         {% if product.metafields.custom["8_description_web"] %}
-          {{ shop.url }}
+          <p>{{ shop.url }}</p>
           {{ product.metafields.custom["8_description_web"] | metafield_tag }}
         {% else %}
           {{ product.description }}
