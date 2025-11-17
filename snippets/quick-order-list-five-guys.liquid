@@ -320,48 +320,51 @@ document.addEventListener('DOMContentLoaded', async function () {
   });
 
     async function fetchProducts(companyLocationId, domain) {
-    let cursor = null;
-    const products = [];
-    let isFirstCall = true;
+      let cursor = null;
+      const products = [];
+      const seenProductIds = new Set(); 
+      let isFirstCall = true;
 
-    do {
-      const first = isFirstCall ? 250 : 100;
-      const url = `/apps/api/get-company-location-products?companyLocationId=${companyLocationId}&domain=${domain}&first=${first}${cursor ? `&after=${cursor}` : ''}`;
-      
-      const res = await fetch(url);
-      const data = await res.json();
-      if (!data.success) break;
+      do {
+        const first = isFirstCall ? 250 : 100;
+        const url = `/apps/api/get-company-location-products?companyLocationId=${companyLocationId}&domain=${domain}&first=${first}${cursor ? `&after=${cursor}` : ''}`;
+        
+        const res = await fetch(url);
+        const data = await res.json();
+        if (!data.success) break;
 
-      const catalogs = data.data.companyLocation.catalogs.edges;
-      catalogs.forEach(c => {
-      const productsEdges = c.node.publication?.products?.edges || [];
+        const catalogs = data.data.companyLocation.catalogs.edges;
 
-      products.push(
-        ...productsEdges
-          .filter(p => {
-            const url = p.node?.onlineStorePreviewUrl || "";
-            return !url.includes("products_preview"); 
-          })
-          .map(p => {
+        catalogs.forEach(c => {
+          const productsEdges = c.node.publication?.products?.edges || [];
+
+          productsEdges.forEach(p => {
             const node = p.node;
-            node.recent = node.purchasedDate?.value 
-              ? new Date(node.purchasedDate.value).toISOString() 
+
+            const url = node?.onlineStoreUrl || "";
+            if (url.includes("products_preview")) return;
+
+            if (seenProductIds.has(node.id)) return;
+
+            seenProductIds.add(node.id);
+
+            node.recent = node.purchasedDate?.value
+              ? new Date(node.purchasedDate.value).toISOString()
               : "1970-01-01T00:00:00Z";
-            return node;
-          })
-      );
-    });
 
+            products.push(node);
+          });
+        });
 
-      const lastCatalog = catalogs[catalogs.length - 1];
-      const pageInfo = lastCatalog?.node.publication?.products?.pageInfo;
-      cursor = pageInfo?.hasNextPage ? pageInfo.endCursor : null;
+        const lastCatalog = catalogs[catalogs.length - 1];
+        const pageInfo = lastCatalog?.node.publication?.products?.pageInfo;
+        cursor = pageInfo?.hasNextPage ? pageInfo.endCursor : null;
 
-      isFirstCall = false; 
-    } while (cursor);
+        isFirstCall = false;
+      } while (cursor);
 
-    return products;
-  }
+      return products;
+    }
 
 
   function createProductRow(product) {
