@@ -334,13 +334,23 @@ document.addEventListener('DOMContentLoaded', async function () {
 
       const catalogs = data.data.companyLocation.catalogs.edges;
       catalogs.forEach(c => {
-        const productsEdges = c.node.publication?.products?.edges || [];
-        products.push(...productsEdges.map(p => {
-          const node = p.node;
-          node.recent = node.purchasedDate?.value ? new Date(node.purchasedDate.value).toISOString() : "1970-01-01T00:00:00Z";
-          return node;
-        }));
-      });
+      const productsEdges = c.node.publication?.products?.edges || [];
+
+      products.push(
+        ...productsEdges
+          .filter(p => {
+            const url = p.node?.onlineStoreUrl || "";
+            return !url.includes("products_preview"); 
+          })
+          .map(p => {
+            const node = p.node;
+            node.recent = node.purchasedDate?.value 
+              ? new Date(node.purchasedDate.value).toISOString() 
+              : "1970-01-01T00:00:00Z";
+            return node;
+          })
+      );
+    });
 
       const lastCatalog = catalogs[catalogs.length - 1];
       const pageInfo = lastCatalog?.node.publication?.products?.pageInfo;
