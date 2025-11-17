@@ -339,7 +339,7 @@ document.addEventListener('DOMContentLoaded', async function () {
       products.push(
         ...productsEdges
           .filter(p => {
-            const url = p.node?.onlineStoreUrl || "";
+            const url = p.node?.onlineStorePreviewUrl || "";
             return !url.includes("products_preview"); 
           })
           .map(p => {
