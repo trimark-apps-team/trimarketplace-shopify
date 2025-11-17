@@ -384,13 +384,13 @@ document.addEventListener('DOMContentLoaded', async function () {
   </div>
   <div class="small-hide medium-hide">
     <span class="variant-item__name h4 break"><a class="full-unstyled-link" href="/products/${product.handle}">${product.title}</a></span>
-    <span class="variant-item__sku break">${variant.sku ? `${variant.sku}` : ""}${orderedDate ? ` | Ordered at: ${orderedDate}` : ""}</span>
+    <span class="variant-item__sku break">${variant.sku ? `${variant.sku} ${orderedDate ? ` | Ordered at: ${orderedDate}` : ""}` : `${orderedDate ? `Ordered at: ${orderedDate}` : ""}`}</span>
   </div>
 </td>
 <td class="variant-item__details large-up-hide">
   <div class="variant-item__info">
     <span class="variant-item__name h4 break"><a class="full-unstyled-link" href="/products/${product.handle}">${product.title}</a></span>
-    <span class="variant-item__sku break">${variant.sku ? `${variant.sku}` : ""}${orderedDate ? ` | Ordered at: ${orderedDate}` : ""}</span>
+    <span class="variant-item__sku break">${variant.sku ? `${variant.sku} ${orderedDate ? ` | Ordered at: ${orderedDate}` : ""}` : `${orderedDate ? `Ordered at: ${orderedDate}` : ""}`}</span>
   </div>
   <span class="price">$${variant.price}</span>
 </td>
