@@ -336,6 +336,7 @@ document.addEventListener('DOMContentLoaded', async function () {
       catalogs.forEach(c => {
         const productsEdges = c.node.publication?.products?.edges || [];
         products.push(...productsEdges.map(p => {
+          if(p.node.onlineStorePreviewUrl.includes("products_preview")) return;
           const node = p.node;
           node.recent = node.purchasedDate?.value ? new Date(node.purchasedDate.value).toISOString() : "1970-01-01T00:00:00Z";
           return node;
