@@ -24,7 +24,6 @@
       <option value="inv_high">Inventory: High → Low</option>
     </select>
 
-    {% if collections.size > 0 %}
     <div class="dropdown-collection">
       <input type="text" id="collection-search" placeholder="Search collections..." class="collection-search-input">
       <div class="dropdown-menu hidden">
@@ -40,7 +39,6 @@
         </div>
       </div>
     </div>
-   {% endif %}
     <button class="active-collection__button button hidden">
       <span class="collection-title"></span>
       <span class="svg-wrapper">
