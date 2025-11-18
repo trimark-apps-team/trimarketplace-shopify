@@ -51,23 +51,14 @@
 .card__badge--non-stock {
   background-color: #C76E00;
   color: white;
-  padding: 0.4rem 0.8rem;
+  padding: 0.1rem 0.8rem;
   font-size: 1.2rem;
   font-weight: 300;
  /* text-transform: uppercase;*/
-  border-radius: 0.3rem;
+  border-radius: 4px;
   position: absolute;
   top: 2rem;
   z-index: 10;
-  
-
-   
-    width: 88%;
-    margin: 0 auto;
-    border-radius: 4px 4px 0 0;
-    font-size: 13px;
-    color: #fff;
-    bottom: 37px;
 
 }
 
