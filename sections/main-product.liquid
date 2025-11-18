@@ -160,7 +160,7 @@
                     {% for tag in product.tags %}
                       {%- if tag contains "Non-Stock" -%}
                         <div class="ribbon non-stock">
-                          <span class="tag non-stock">Non-Stock{{ tag }}</span>
+                          <span class="tag non-stock">{{ tag }}</span>
                         </div>
                       {%- endif %}
                     {% endfor %}
