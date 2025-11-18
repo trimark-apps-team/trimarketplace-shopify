@@ -4,8 +4,8 @@
 {% endcomment %}
 
 
- {% if product.metafields.custom['9_prop_65'] == true %}
-  prop 65
+ {% comment %} {% if product.metafields.custom['9_prop_65'] == true %} {% endcomment %}
+  
   <div class="prop65">
     <div class="inner-alert">
       <img 
@@ -22,5 +22,5 @@
       for additional information.
     </div>
   </div>
-  {% endif %}
+  {% comment %} {% endif %} {% endcomment %}
 
