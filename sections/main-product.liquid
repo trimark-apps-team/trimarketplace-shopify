@@ -125,7 +125,7 @@
     <div class="product-tags {{ block.settings.text_style }}" {{ block.shopify_attributes }}>
       {% for tag in product.tags %}
         {% if tag contains "Non-Stock" %}
-          <span class="product-label out-of-stock-label">NON-STOCK</span>
+          <span class="product-label out-of-stock-label">NON-STOCK.</span>
         {% endif %}
       {% endfor %}
     </div>
