@@ -635,6 +635,16 @@
       },
       "addresses": {
         "shipping_address_card_title": "Shipping Address"
+      },
+      "purchase_order_number": {
+        "add_accessibility_label": " ",
+        "add_modal_title": " ",
+        "close_modal_accessibility_label": " ",
+        "edit_accessibility_label": " ",
+        "edit_modal_title": " ",
+        "empty_state": " ",
+        "modal_po_number_input_label": " ",
+        "modal_po_number_input_max_length_error": " "
       }
     },
     "navigation_and_structure": {
@@ -793,7 +803,8 @@
         "track_shipment": "Track Shipment",
         "breadcrumbs_in_review": "In Review",
         "resend_gift_cards_by_email": "Resend Email",
-        "company_location_section_title": "Company and Location"
+        "company_location_section_title": "Company and Location",
+        "purchase_order_number_title": " "
       },
       "contact": {
         "delivery_option_title": "Delivery Method",
@@ -972,7 +983,10 @@
           "change_shipping_address_link_label": "Change Shipping Address",
           "change_shipping_method_link_label": "Change Shipping Method",
           "change_payment_method_link_label": "Change Payment Method",
-          "company_location": "Company Location"
+          "company_location": "Company Location",
+          "purchase_order_number_title": " ",
+          "change_purchase_order_number_label": " ",
+          "no_purchase_order_number": " "
         }
       },
       "change_currency": {
