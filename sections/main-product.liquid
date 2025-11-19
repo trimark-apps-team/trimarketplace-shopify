@@ -125,14 +125,17 @@
                   {% if age_in_seconds < seconds_in_3_days %}
                   <span class="product-label new-arrival-label">NEW ARRIVAL</span>
                   {% endif %} 
+
                   {% if product.available == false %}
                   <span class="product-label out-of-stock-label">NOT AVAILABLE</span>
                   {% endif %}   
+
                   {% if product.metafields.custom['5_non_stock'] == true %}
                    <span class="product-label out-of-stock-label">NON-STOCK</span>
                   {% endif %}   
                   
                   {% assign domain = shop.url | downcase %}
+                  
                   {% assign erp_id_key = '' %}
                 {% if domain contains 'marlinn' or domain contains 'fiveguys' %}
                     {% assign erp_id_key = '1_erp_id_marlinn_ipics' %}
@@ -160,7 +163,20 @@
                     </h2>
                   </a>
                 </div>
-            
+
+              {% when 'product_tags' %}
+                <!-- check for tags -->
+                {% if product.tags.size > 0 %}
+                  <div class="product-tags {{ block.settings.text_style }}" {{ block.shopify_attributes }}>
+                    {% for tag in product.tags %}
+                      {%- if tag contains "Non-Stock" -%}
+                        {% comment %} <div class="ribbon non-stock">
+                          <span class="tag non-stock">{{ tag }}</span>
+                        </div> {% endcomment %}
+                      {%- endif %}
+                    {% endfor %}
+                  </div>
+                {% endif %}
               {%- when 'price' -%}
                 <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
                   {%- render 'price',
