@@ -101,7 +101,7 @@
                   {{- block.settings.text -}}
                 </p>
   
-             
+              {%- when 'title' -%}
                 {%- assign published_date = product.published_at | date: "%s" -%}
                 {%- assign current_date = 'now' | date: "%s" -%}
                 {%- assign seconds_in_3_days = 60 | times: 60 | times: 24 | times: 3 -%}
@@ -151,6 +151,9 @@
                     </h2>
                   </a>
                 </div>
+
+              
+              {%- when 'price' -%}
                 <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
                   {%- render 'price',
                     product: product,
@@ -186,7 +189,7 @@
                   {%- endform -%}
                 </div>
 
-                
+                {% when 'stock-level-indicator' %}
                     {% comment %} ===== STOCK LEVEL INDICATOR BLOCK ===== {% endcomment %}
                     <div
                       data-updates-on-change
