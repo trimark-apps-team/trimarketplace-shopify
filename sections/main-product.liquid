@@ -189,7 +189,7 @@
                   {%- endform -%}
                 </div>
 
-                {% when 'stock-level-indicator' %}
+                
                     {% comment %} ===== STOCK LEVEL INDICATOR BLOCK ===== {% endcomment %}
                     <div
                       data-updates-on-change
@@ -214,7 +214,7 @@
                         medium_stock_message: block.settings.medium-stock-message
                       %}
                     </div>
-              {%- when 'inventory' -%}
+              
     
                 {% comment %} <p
                   class="product__inventory{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if product.selected_or_first_available_variant.inventory_management != 'shopify' %} visibility-hidden{% endif %}"
