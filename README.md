@@ -7,7 +7,8 @@ This workflow assumes all stores are set up the same with identical themes, cont
 
 ## Pre-launch (current phase, before any stores go live)
 - All Shopify stores use `default-trimarketplace` as the theme branch.  
-- No additional branches should be created during this phase unless discussed and agreed on ahead of time.  
+- No additional branches need be created during this phase unless discussed and agreed on ahead of time.
+- Limiting new branch creation should help prevent configuration cdifferences and merge conflicts across multiple stores.
 
 ## Post-launch (after stores start going live)
 - Create a single `default-trimarketplace-qa` branch based on `default-trimarketplace`.  
