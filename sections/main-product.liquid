@@ -107,7 +107,16 @@
                 {%- assign current_date = 'now' | date: "%s" -%}
                 {%- assign seconds_in_3_days = 60 | times: 60 | times: 24 | times: 3 -%}
                 {%- assign age_in_seconds = current_date | minus: published_date -%}
-              
+                 {% when 'product_tags' %}
+                  {% if product.tags.size > 0 %}
+                    <div class="product-tags {{ block.settings.text_style }}" {{ block.shopify_attributes }}>
+                      {% for tag in product.tags %}
+                        {% if tag contains "Non-Stock" %}
+                         {%- assign is_non_stock = true -%}
+                        {% endif %}
+                      {% endfor %}
+                    </div>
+                  {% endif %}
                 
                   {% if product.metafields.custom.private_label == true %}
                   <span class="product-label private-label">PRIVATE LABEL</span>
