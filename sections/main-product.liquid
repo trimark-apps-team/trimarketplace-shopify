@@ -216,7 +216,7 @@
                 {% when 'stock-level-indicator' %}
                     {% comment %} ===== STOCK LEVEL INDICATOR BLOCK ===== {% endcomment %}
                     <div
-                      data-updates-on-change
+                      {% comment %} data-updates-on-change {% endcomment %}
                       data-update-id="item-{{ block.id }}"
                       data-block-id="{{ block.id }}"
                       style="margin-block: {{ block.settings.margin_block }}px"
