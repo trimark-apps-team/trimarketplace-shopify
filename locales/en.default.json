@@ -930,10 +930,6 @@
           "heading": "Gift Card",
           "payment_tag": "Gift Card"
         },
-        "purchase_order_number": {
-          "title": "PO Number",
-          "label": "PO Number (optional)"
-        },
         "waiting_on_taxes_notice": "Calculating Taxes",
         "payment_method": "Payment Method",
         "payment_method_rollup_accessibility_label": "Payment Method Options"
