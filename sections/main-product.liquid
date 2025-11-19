@@ -130,8 +130,8 @@
                   <span class="product-label out-of-stock-label">NOT AVAILABLE</span>
                   {% endif %}   
 
-                  {% if is_non_stock == true %}
-                  <span class="product-label out-of-stock-label">NON-STOCK</span>
+                  {% if product.metafields.custom['5_non_stock'] == true %}}
+                   <span class="product-label out-of-stock-label">NON-STOCK</span>
                   {% endif %}   
                   
                   {% assign domain = shop.url | downcase %}
