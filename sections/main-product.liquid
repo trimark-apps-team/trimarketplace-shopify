@@ -102,7 +102,6 @@
                 </p>
   
               {%- when 'title' -%}
-                {}
                 {%- assign published_date = product.published_at | date: "%s" -%}
                 {%- assign current_date = 'now' | date: "%s" -%}
                 {%- assign seconds_in_3_days = 60 | times: 60 | times: 24 | times: 3 -%}
