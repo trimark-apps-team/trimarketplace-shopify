@@ -24,8 +24,7 @@ This workflow assumes all stores are set up the same with identical themes, cont
 - Once all required content, media, app configurations, and store settings are in place on production stores, merge QA branch updates into `default-trimarketplace` for deployment to production stores.  
 
 ## New store setup
-- Add all required content, media, app configurations, and store settings before applying the theme.  
-- Confirm `templates/index.json` is present in the new store so the homepage renders correctly.  
+- Add all required content, media, app configurations, and store settings before applying the theme. 
 
 .  
 
