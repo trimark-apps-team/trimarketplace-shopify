@@ -932,7 +932,11 @@
         },
         "waiting_on_taxes_notice": "Calculating Taxes",
         "payment_method": "Payment Method",
-        "payment_method_rollup_accessibility_label": "Payment Method Options"
+        "payment_method_rollup_accessibility_label": "Payment Method Options",
+        "purchase_order_number": {
+          "title": " ",
+          "label": " "
+        }
       },
       "billing": {
         "billing_address_title": "Bill To",
