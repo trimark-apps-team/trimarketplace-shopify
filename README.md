@@ -2,6 +2,8 @@
 
 
 ---
+## Note
+This workflow assumes all stores are set up the same with identical themes, content, settings, configurations, and media. If a one-off difference is required for a specific store, then a dedicated branch can be created to support that store
 
 ## Pre-launch (current phase, before any stores go live)
 - All Shopify stores use `default-trimarketplace` as the theme branch.  
@@ -24,6 +26,5 @@
 - Add all required content, media, app configurations, and store settings before applying the theme.  
 - Confirm `templates/index.json` is present in the new store so the homepage renders correctly.  
 
-## Note
-This workflow assumes all stores are set up the same with identical themes, content, settings, configurations, and media. If a one-off difference is required for a specific store, then a dedicated branch can be created to support that store.  
+.  
 
