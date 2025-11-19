@@ -804,7 +804,7 @@
         "breadcrumbs_in_review": "In Review",
         "resend_gift_cards_by_email": "Resend Email",
         "company_location_section_title": "Company and Location",
-        "purchase_order_number_title": " czxc"
+        "purchase_order_number_title": "      "
       },
       "contact": {
         "delivery_option_title": "Delivery Method",
@@ -945,8 +945,8 @@
         "payment_method": "Payment Method",
         "payment_method_rollup_accessibility_label": "Payment Method Options",
         "purchase_order_number": {
-          "title": " cxzc",
-          "label": " As"
+          "title": "      ",
+          "label": "  "
         }
       },
       "billing": {
