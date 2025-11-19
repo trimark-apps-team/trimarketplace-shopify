@@ -16,18 +16,30 @@
           "type": "title",
           "settings": {}
         },
+        "product_tags_6g4jnp": {
+          "type": "product_tags",
+          "settings": {
+            "text_style": "body"
+          }
+        },
         "sku_aVwE4P": {
           "type": "sku",
           "settings": {
             "text_style": "body"
           }
         },
-        "price": {
-          "type": "price",
-          "settings": {}
-        },
         "description": {
           "type": "description",
+          "settings": {}
+        },
+        "custom_liquid_N8U98j": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<div class=\"short_description\">\n      {{ product.metafields.content.shortdescription.value }}\n    </div>"
+          }
+        },
+        "price": {
+          "type": "price",
           "settings": {}
         },
         "stock_level_indicator_XaVyK4": {
@@ -47,21 +59,9 @@
             "margin_block": 8
           }
         },
-        "custom_liquid_N8U98j": {
-          "type": "custom_liquid",
-          "settings": {
-            "custom_liquid": "<div class=\"short_description\">\n      {{ product.metafields.content.shortdescription.value }}\n    </div>"
-          }
-        },
         "shipping_time_8nHjrd": {
           "type": "shipping-time",
           "settings": {}
-        },
-        "product_tags_6g4jnp": {
-          "type": "product_tags",
-          "settings": {
-            "text_style": "body"
-          }
         },
         "variant_picker": {
           "type": "variant_picker",
@@ -175,13 +175,13 @@
       },
       "block_order": [
         "title",
-        "sku_aVwE4P",
-        "price",
-        "description",
-        "stock_level_indicator_XaVyK4",
-        "custom_liquid_N8U98j",
-        "shipping_time_8nHjrd",
         "product_tags_6g4jnp",
+        "sku_aVwE4P",
+        "description",
+        "custom_liquid_N8U98j",
+        "price",
+        "stock_level_indicator_XaVyK4",
+        "shipping_time_8nHjrd",
         "variant_picker",
         "quantity_selector",
         "advanced_wishlist_wishlist_btn_FzD9M6",
