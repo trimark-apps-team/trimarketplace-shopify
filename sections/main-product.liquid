@@ -125,11 +125,9 @@
                   {% if age_in_seconds < seconds_in_3_days %}
                   <span class="product-label new-arrival-label">NEW ARRIVAL</span>
                   {% endif %} 
-
                   {% if product.available == false %}
                   <span class="product-label out-of-stock-label">NOT AVAILABLE</span>
                   {% endif %}   
-
                   {% if product.metafields.custom['5_non_stock'] == true %}
                    <span class="product-label out-of-stock-label">NON-STOCK</span>
                   {% endif %}   
