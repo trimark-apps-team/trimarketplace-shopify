@@ -945,7 +945,7 @@
         "payment_method_rollup_accessibility_label": "Payment Method Options",
         "purchase_order_number": {
           "title": "      ",
-          "label": "  Add order number of previous order"
+          "label": "Add contact number"
         }
       },
       "billing": {
