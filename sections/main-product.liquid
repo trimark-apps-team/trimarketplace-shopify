@@ -164,20 +164,7 @@
                   </a>
                 </div>
 
-              {% when 'product_tags' %}
-                <!-- check for tags -->
-                {% if product.tags.size > 0 %}
-                  <div class="product-tags {{ block.settings.text_style }}" {{ block.shopify_attributes }}>
-                    {% for tag in product.tags %}
-                      {%- if tag contains "Non-Stock" -%}
-                        {% comment %} <div class="ribbon non-stock">
-                          <span class="tag non-stock">{{ tag }}</span>
-                        </div> {% endcomment %}
-                      {%- endif %}
-                    {% endfor %}
-                  </div>
-                  
-                {% endif %}
+              
               {%- when 'price' -%}
                 <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
                   {%- render 'price',
