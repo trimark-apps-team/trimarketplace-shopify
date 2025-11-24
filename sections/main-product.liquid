@@ -313,119 +313,166 @@
                 </div>
               
            {%- when 'tier-pricing' -%}
-           {% if customer and customer.metafields.custom.buyer_role.value != blank %}
-             {% assign show_table = false %}
+  {% if customer and customer.metafields.custom.buyer_role.value != blank %}
+    
+    {% assign show_table = false %}
+    {% assign tiers = "a,b,c,d,e,f" | split: "," %}
+
+    {%- comment -%}
+      CHECK IF ANY TIER HAS PRICE DATA
+    {%- endcomment -%}
+    {% for tier in tiers %}
+      {% assign price_key = "7_sip_price_tier_" | append: tier %}
+      {% assign price_mf = product.metafields.custom[price_key] %}
+      {% if price_mf != blank %}
+        {% assign show_table = true %}
+        {% break %}
+      {% endif %}
+    {% endfor %}
+
+    {% if show_table %}
+    
+      <div class="tier-price-row">
+        {% if product.metafields.custom["3_price_cost"] != blank and product.metafields.custom["3_price_cost"] != 'N/A' %}
+        <div class="tier-price-item">
+          <span class="label">Cost Price:</span>
+          <span>{{ product.metafields.custom["3_price_cost"] }}</span>
+        </div>
+        {% endif %}
+
+        {% if product.metafields.custom["3_price_pg"] != blank and product.metafields.custom["3_price_pg"] != 'N/A' %}
+        <div class="tier-price-item">
+          <span class="label">PG Price:</span>
+          <span>{{ product.metafields.custom["3_price_pg"] }}</span>
+        </div>
+        {% endif %}
+
+        {% if product.metafields.custom["3_m_u"] != blank and product.metafields.custom["3_m_u"] != 'N/A' %}
+        <div class="tier-price-item">
+          <span class="label">M/U%:</span>
+          <span>{{ product.metafields.custom["3_m_u"] }}</span>
+        </div>
+        {% endif %}
+
+        {% if product.metafields.custom["3_price_floor"] != blank and product.metafields.custom["3_price_floor"] != 'N/A' %}
+        <div class="tier-price-item">
+          <span class="label">Floor Price:</span>
+          <span>{{ product.metafields.custom["3_price_floor"] }}</span>
+        </div>
+        {% endif %}
+
+        {% if product.metafields.custom["3_inv_available"] != blank and product.metafields.custom["3_inv_available"] != 'N/A' %}
+        <div class="tier-price-item">
+          <span class="label">Inv Available:</span>
+          <span>{{ product.metafields.custom["3_inv_available"] }}</span>
+        </div>
+        {% endif %}
+
+        {% if product.metafields.custom["3_on_order"] != blank and product.metafields.custom["3_on_order"] != 'N/A' %}
+        <div class="tier-price-item">
+          <span class="label">On-Order:</span>
+          <span>{{ product.metafields.custom["3_on_order"] }}</span>
+        </div>
+        {% endif %}
+      </div>
+
+      <button 
+        data-productprice="{{ product.selected_or_first_available_variant.price | money }}"
+        class="button choose-tier"
+        onclick="document.getElementById('popup').classList.remove('hidden'); document.querySelector('.order-modal_overlay').style.visibility='visible';"
+        style="color:{{ block.settings.tire_price_button_text_color }};
+               font-size:{{ block.settings.tire_price_button_text_font_size }}px;
+               background-color:{{ block.settings.tire_price_button_bg_color }};
+               border-radius:{{ block.settings.tire_price_button_border_radius }}px">
+        {{ block.settings.tire_price_button_text }}
+      </button>
+
+      <div id="popup" class="popup hidden">
+        <div class="popup-content">
+          
+          <h3>{{ block.settings.tier_table_heading }}</h3>
+
+          <table>
+            <thead>
+              <tr>
+                <th style="background-color:{{ block.settings.tire_price_table_header_bg_color }}!important;color:{{ block.settings.tire_price_table_header_color }};">{{ block.settings.tire_text }}</th>
+                <th style="background-color:{{ block.settings.tire_price_table_header_bg_color }}!important;color:{{ block.settings.tire_price_table_header_color }};">{{ block.settings.tire_price_text }}</th>
+                <th style="background-color:{{ block.settings.tire_price_table_header_bg_color }}!important;color:{{ block.settings.tire_price_table_header_color }};">{{ block.settings.commission_text }}</th>
+              </tr>
+            </thead>
+
+            <tbody>
               {% assign tiers = "a,b,c,d,e,f" | split: "," %}
+
               {% for tier in tiers %}
-                {% assign metafield_key = "7_sip_tier_" | append: tier %}
-                {% assign metafield = product.metafields.custom[metafield_key] %}
-                {% if metafield != blank %}
-                  {% assign show_table = true %}
-                  {% break %}
+                
+                {% assign tier_label = tier | upcase %}
+                {% assign price_key = "7_sip_price_tier_" | append: tier %}
+                {% assign comm_key = "7_sip_comm_tier_" | append: tier %}
+
+                {% assign price_val = product.metafields.custom[price_key] %}
+                {% assign comm_val = product.metafields.custom[comm_key] %}
+
+                {%- comment -%} TIER COLORS {%- endcomment -%}
+                {% if forloop.index == 1 %}
+                  {% assign bg = block.settings.tire_a_bg_color %}
+                  {% assign color = block.settings.tire_a_text_color %}
+                {% elsif forloop.index == 2 %}
+                  {% assign bg = block.settings.tire_b_bg_color %}
+                  {% assign color = block.settings.tire_b_text_color %}
+                {% elsif forloop.index == 3 %}
+                  {% assign bg = block.settings.tire_c_bg_color %}
+                  {% assign color = block.settings.tire_c_text_color %}
+                {% elsif forloop.index == 4 %}
+                  {% assign bg = block.settings.tire_d_bg_color %}
+                  {% assign color = block.settings.tire_d_text_color %}
+                {% elsif forloop.index == 5 %}
+                  {% assign bg = block.settings.tire_e_bg_color %}
+                  {% assign color = block.settings.tire_e_text_color %}
+                {% else %}
+                  {% assign bg = block.settings.tire_f_bg_color %}
+                  {% assign color = block.settings.tire_f_text_color %}
+                {% endif %}
+
+                {% if price_val != blank %}
+                <tr class="tier-row"
+                    data-color="{{ bg }}"
+                    data-tier="{{ tier_label }}"
+                    data-price="{{ price_val | times: 100 | money }}"
+                    data-commission="{{ comm_val | times: 100 | money }}"
+                    onclick="selectTier(this)">
+
+                  <td>
+                    <div class="tier-badge" style="background-color:{{ bg }};color:{{ color }};">
+                      {{ tier_label }}
+                    </div>
+                  </td>
+
+                  <td>{{ price_val | times: 100 | money }}</td>
+                  <td>{{ comm_val | times: 100 | money }}</td>
+                </tr>
                 {% endif %}
               {% endfor %}
-            {% if show_table %}
-              
-              <div class="tier-price-row">
-                {% if product.metafields.custom["3_price_cost"] != blank and product.metafields.custom["3_price_cost"] != 'N/A' %}
-              <div class="tier-price-item">
-                <span class="label">Cost Price:</span>
-                <span>{{ product.metafields.custom["3_price_cost"] }}</span>
-              </div>
-              {% endif %}
-              {% if product.metafields.custom["3_price_pg"] != blank and product.metafields.custom["3_price_pg"] != 'N/A' %}
-              <div class="tier-price-item">
-                <span class="label">PG Price:</span>
-                <span>{{ product.metafields.custom["3_price_pg"] }}</span>
-              </div>
-               {% endif %}
-               {% if product.metafields.custom["3_m_u"] != blank and product.metafields.custom["3_m_u"] != 'N/A' %}
-              <div class="tier-price-item">
-                <span class="label">M/U%:</span>
-                <span>{{ product.metafields.custom["3_m_u"] }}</span>
-              </div>
-              {% endif %}
-              {% if product.metafields.custom["3_price_floor"] != blank and product.metafields.custom["3_price_floor"] != 'N/A' %}
-              <div class="tier-price-item">
-                <span class="label">Floor Price:</span>
-                <span>{{ product.metafields.custom["3_price_floor"] }}</span>
-              </div>
-             {% endif %}
-             {% if product.metafields.custom["3_inv_available"] != blank and product.metafields.custom["3_inv_available"] != 'N/A' %}
-              <div class="tier-price-item">
-                <span class="label">Inv Available:</span>
-                <span>{{ product.metafields.custom["3_inv_available"] }}</span>
-              </div>
-              {% endif %}
-               {% if product.metafields.custom["3_on_order"] != blank and product.metafields.custom["3_on_order"] != 'N/A' %}
-              <div class="tier-price-item">
-                <span class="label">On-Order:</span>
-                <span>{{ product.metafields.custom["3_on_order"] }}</span>
-              </div>
-              {% endif %}
-            </div>
-              <button data-productprice="{{ product.selected_or_first_available_variant.price | money }}" class="button choose-tier" onclick="document.getElementById('popup').classList.remove('hidden'); document.querySelector('.order-modal_overlay').style.visibility='visible';" style="color:{{ block.settings.tire_price_button_text_color }};font-size:{{ block.settings.tire_price_button_text_font_size }}px;background-color:{{ block.settings.tire_price_button_bg_color }};border-radius: {{ block.settings.tire_price_button_border_radius }}px">
-                {{ block.settings.tire_price_button_text }}
-              </button>
-              <div id="popup" class="popup hidden">
-                <div class="popup-content">
-                  <h3>{{ block.settings.tier_table_heading }}</h3>
-                  <table>
-                    <thead>
-                      <tr>
-                        <th style="background-color:{{ block.settings.tire_price_table_header_bg_color }}!important;color: {{ block.settings.tire_price_table_header_color }};">{{ block.settings.tire_text }}</th>
-                        <th style="background-color:{{ block.settings.tire_price_table_header_bg_color }}!important;color: {{ block.settings.tire_price_table_header_color }};">{{ block.settings.tire_price_text }}</th>
-                        <th style="background-color:{{ block.settings.tire_price_table_header_bg_color }}!important;color: {{ block.settings.tire_price_table_header_color }};">{{ block.settings.commission_text }}</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {% assign tiers = "a,b,c,d,e,f" | split: "," %}
-                      {% for tier in tiers %}
-                        {% assign tier_label = tier | upcase %}
-                        {% assign metafield_key = "7_sip_tier_" | append: tier %}
-                        {% assign metafield = product.metafields.custom[metafield_key] %}
-                        {% if forloop.index == 1 %}
-                          {% assign tire_alphabet_bg_color = block.settings.tire_a_bg_color %}
-                          {% assign tire_alphabet_color = block.settings.tire_a_text_color %}
-                        {% elsif forloop.index == 2 %}
-                          {% assign tire_alphabet_bg_color = block.settings.tire_b_bg_color %}
-                          {% assign tire_alphabet_color = block.settings.tire_b_text_color %}
-                        {% elsif forloop.index == 3 %}
-                          {% assign tire_alphabet_bg_color = block.settings.tire_c_bg_color %}
-                          {% assign tire_alphabet_color = block.settings.tire_c_text_color %}
-                        {% elsif forloop.index == 4 %}
-                          {% assign tire_alphabet_bg_color = block.settings.tire_d_bg_color %}
-                          {% assign tire_alphabet_color = block.settings.tire_d_text_color %}
-                        {% elsif forloop.index == 5 %}
-                          {% assign tire_alphabet_bg_color = block.settings.tire_e_bg_color %}
-                          {% assign tire_alphabet_color = block.settings.tire_e_text_color %}
-                        {% else %}
-                          {% assign tire_alphabet_bg_color = block.settings.tire_f_bg_color %}
-                          {% assign tire_alphabet_color = block.settings.tire_f_text_color %}  
-                        {% endif %}
-                        {% if metafield != blank %}
-                          {% assign parts = metafield | split: "-" %}
-                          <tr class="tier-row"
-                              data-color="{{ tire_alphabet_bg_color }}"
-                              data-tier="{{ tier_label }}"
-                              data-price="{{ parts[0] | times: 100 | money }}"
-                              data-commission="{{ parts[1] | times: 100  | money }}"
-                              onclick="selectTier(this)">
-                            <td>
-                              <div class="tier-badge" style="background-color: {{ tire_alphabet_bg_color }};color:{{ tire_alphabet_color }};">{{ tier_label }}</div>
-                            </td>
-                            <td>{{ parts[0] | times: 100 | money }}</td>
-                            <td>{{ parts[1] | times: 100 | money }}</td>
-                          </tr>
-                        {% endif %}
-                      {% endfor %}
-                    </tbody>
-                  </table>
-                  <button class="button" data-product-price="{{ product.selected_or_first_available_variant.unit_price | money }}"onclick="document.getElementById('popup').classList.add('hidden'); document.querySelector('.order-modal_overlay').style.visibility='hidden';" style="color:{{ block.settings.close_button_text_color }};font-size:{{ block.settings.close_button_text_font_size }}px;background-color:{{ block.settings.close_button_bg_color }};border-radius: {{ block.settings.close_button_border_radius }}px">{{ block.settings.close_button_text }}</button>
-                </div>
-              </div>
-            {% endif %}
-           {% endif %}
+            </tbody>
+          </table>
+
+          <button 
+            class="button"
+            data-product-price="{{ product.selected_or_first_available_variant.unit_price | money }}"
+            onclick="document.getElementById('popup').classList.add('hidden'); document.querySelector('.order-modal_overlay').style.visibility='hidden';"
+            style="color:{{ block.settings.close_button_text_color }};
+                   font-size:{{ block.settings.close_button_text_font_size }}px;
+                   background-color:{{ block.settings.close_button_bg_color }};
+                   border-radius:{{ block.settings.close_button_border_radius }}px">
+            {{ block.settings.close_button_text }}
+          </button>
+
+        </div>
+      </div>
+
+    {% endif %}
+  {% endif %}
+
               {%- when 'sku' -%}
                 <p
                   class="product__sku{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if product.selected_or_first_available_variant.sku.size == 0 %} visibility-hidden{% endif %}"

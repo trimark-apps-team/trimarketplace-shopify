@@ -211,41 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
   .catch(err => console.error('Cart fetch failed:', err));
 });
 
-document.addEventListener("pc-cart:added", function (event) {
-  function refreshCart() {
-  const cartDrawer = document.getElementById('CartDrawer');
 
-  if (cartDrawer) {
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', window.location.href);
-    xhr.onload = () => {
-      if (xhr.status === 200) {
-        const parser = new DOMParser();
-        const responseDoc = parser.parseFromString(xhr.responseText, 'text/html');
-
-        if (cartDrawer) {
-          const newDrawer = responseDoc.querySelector('#CartDrawer');
-          if (newDrawer) cartDrawer.innerHTML = newDrawer.innerHTML;
-        }
-
-      }
-    };
-    xhr.send();
-  }
-}
-
- refreshCart();
-if(document.querySelector("cart-drawer").classList.contains("is-empty")) {
-    document.querySelector("cart-drawer").classList.remove("is-empty");
-}
-fetch('/cart.js')
-  .then(res => res.json())
-  .then(cart => {
-    document.querySelectorAll('.cart-count-bubble span').forEach(el => {
-          el.innerHTML = cart.item_count;
-        });
-  });
-});
 }
 
 // subscribe(PUB_SUB_EVENTS.variantChange, async function (e) {
@@ -280,4 +246,49 @@ subscribe(PUB_SUB_EVENTS.cartUpdate, async function (e) {
     }
   });
 })
+
+document.addEventListener("pc-cart:added", function (event) {
+
+  console.log(12454545);
+  
+  function refreshCart() {
+  const cartDrawer = document.getElementById('CartDrawer');
+  const cartIcon = document.getElementById('cart-icon-bubble');
+
+  if (cartDrawer) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', shopUrl);
+    xhr.onload = () => {
+      if (xhr.status === 200) {
+        const parser = new DOMParser();
+        const responseDoc = parser.parseFromString(xhr.responseText, 'text/html');
+
+        if (cartDrawer) {
+          const newDrawer = responseDoc.querySelector('#CartDrawer');
+          const newCartIcon = responseDoc.querySelector('#cart-icon-bubble');
+
+          if (newCartIcon) cartIcon.innerHTML = newCartIcon.innerHTML;
+          if (newDrawer) cartDrawer.innerHTML = newDrawer.innerHTML;
+        }
+
+      }
+    };
+    xhr.send();
+  }
+
+
+}
+
+ refreshCart();
+if(document.querySelector("cart-drawer").classList.contains("is-empty")) {
+    document.querySelector("cart-drawer").classList.remove("is-empty");
+}
+fetch('/cart.js')
+  .then(res => res.json())
+  .then(cart => {
+    document.querySelectorAll('.cart-count-bubble span').forEach(el => {
+          el.innerHTML = cart.item_count;
+        });
+  });
+});
 

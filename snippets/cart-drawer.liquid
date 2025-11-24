@@ -119,14 +119,39 @@
   id="CartDrawer-Item-{{ item.index | plus: 1 }}" 
   class="cart-item" 
   role="row"
-  data-floor="{{ item.product.metafields.custom["7_sip_tier_f"] | split: '-' | first }}"
+  data-floor="{{ item.product.metafields.custom["7_sip_price_tier_f"] }}"
+
   data-tiers='[
-    {"tier":"F","price":{{ item.product.metafields.custom["7_sip_tier_f"] | split: '-' | first }},"commission":{{ item.product.metafields.custom["7_sip_tier_f"] | split: '-' | last }}},
-    {"tier":"E","price":{{ item.product.metafields.custom["7_sip_tier_e"] | split: '-' | first }},"commission":{{ item.product.metafields.custom["7_sip_tier_e"] | split: '-' | last }}},
-    {"tier":"D","price":{{ item.product.metafields.custom["7_sip_tier_d"] | split: '-' | first }},"commission":{{ item.product.metafields.custom["7_sip_tier_d"] | split: '-' | last }}},
-    {"tier":"C","price":{{ item.product.metafields.custom["7_sip_tier_c"] | split: '-' | first }},"commission":{{ item.product.metafields.custom["7_sip_tier_c"] | split: '-' | last }}},
-    {"tier":"B","price":{{ item.product.metafields.custom["7_sip_tier_b"] | split: '-' | first }},"commission":{{ item.product.metafields.custom["7_sip_tier_b"] | split: '-' | last }}},
-    {"tier":"A","price":{{ item.product.metafields.custom["7_sip_tier_a"] | split: '-' | first }},"commission":{{ item.product.metafields.custom["7_sip_tier_a"] | split: '-' | last }}}
+    {
+      "tier":"F",
+      "price":{{ item.product.metafields.custom["7_sip_price_tier_f"] | default: 0 }},
+      "commission":{{ item.product.metafields.custom["7_sip_comm_tier_f"] | default: 0 }}
+    },
+    {
+      "tier":"E",
+      "price":{{ item.product.metafields.custom["7_sip_price_tier_e"] | default: 0 }},
+      "commission":{{ item.product.metafields.custom["7_sip_comm_tier_e"] | default: 0 }}
+    },
+    {
+      "tier":"D",
+      "price":{{ item.product.metafields.custom["7_sip_price_tier_d"] | default: 0 }},
+      "commission":{{ item.product.metafields.custom["7_sip_comm_tier_d"] | default: 0 }}
+    },
+    {
+      "tier":"C",
+      "price":{{ item.product.metafields.custom["7_sip_price_tier_c"] | default: 0 }},
+      "commission":{{ item.product.metafields.custom["7_sip_comm_tier_c"] | default: 0 }}
+    },
+    {
+      "tier":"B",
+      "price":{{ item.product.metafields.custom["7_sip_price_tier_b"] | default: 0 }},
+      "commission":{{ item.product.metafields.custom["7_sip_comm_tier_b"] | default: 0 }}
+    },
+    {
+      "tier":"A",
+      "price":{{ item.product.metafields.custom["7_sip_price_tier_a"] | default: 0 }},
+      "commission":{{ item.product.metafields.custom["7_sip_comm_tier_a"] | default: 0 }}
+    }
   ]'
 >
 
