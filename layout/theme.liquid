@@ -38,11 +38,10 @@
     <script src="{{ 'search-form.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'accessibe-loader.js' | asset_url }}" defer="defer"></script>
 
-
     <script>
-  window.referrerUrl = "{{ request.referrer | escape }}";
-  console.log("Referrer:", window);
-</script>
+      window.referrerUrl = '{{ request.referrer | escape }}';
+      console.log('Referrer:', window);
+    </script>
 
     {%- if settings.animations_reveal_on_scroll -%}
       <script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>
@@ -550,7 +549,10 @@
             let customerNote =
               document.querySelector('#CartDrawer-Note')?.value || document.querySelector('#Cart-note')?.value || '';
 
-                    let poNumber = document.querySelector("#CartDrawer-PoNumber")?.value || document.querySelector("#Cart-po-number")?.value || "";
+            let poNumber =
+              document.querySelector('#CartDrawer-PoNumber')?.value ||
+              document.querySelector('#Cart-po-number')?.value ||
+              '';
 
             showPopup('Creating order...', `Placing order on behalf of ${companyName}`);
 
@@ -584,7 +586,7 @@
                   customerName,
                   customerNote,
                   domain,
-                  poNumber
+                  poNumber,
                 }),
               });
 
@@ -612,12 +614,11 @@
     {% assign assigned_locations = customer.metafields.locations.assigned_locations.value %}
 
     {% if customer.metafields.custom.buyer_role.value == 'Sales Rep' and assigned_locations != blank %}
-
-    <style>
-      button.cs-button[data-show-go-to-checkout-param="true"] {
-        display: none;
-      }
-    </style>
+      <style>
+        button.cs-button[data-show-go-to-checkout-param='true'] {
+          display: none;
+        }
+      </style>
 
       <div id="company-popup-overlay" class="company-overlay"></div>
 
@@ -655,9 +656,11 @@
           <div id="company-popup-status" class="company-status"></div>
           <button id="confirm-location-switch" class="company-btn primary">
             <span>Switch</span>
-              <div class="loading__spinner hidden">
-                   <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66"><circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle></svg>
-              </div>
+            <div class="loading__spinner hidden">
+              <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66">
+                <circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle>
+              </svg>
+            </div>
           </button>
         </div>
       </div>
@@ -806,35 +809,35 @@
       window.hulkappsWishlist.baseURL = '/apps/advanced-wishlist/api';
       window.hulkappsWishlist.hasAppBlockSupport = '1';
     </script>
-    {% if template.name == "index" %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-<script>
-document.addEventListener("DOMContentLoaded", async () => {
-  const domainName = "{{ shop.permanent_domain }}";
-  const customerId = "{{ customer.id }}";
-  const email = "{{ customer.email }}";  
-  const authKey = "{{ shop.metafields.custom.wishlist_app_token }}";
+    {% if template.name == 'index' %}
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+      <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+          const domainName = '{{ shop.permanent_domain }}';
+          const customerId = '{{ customer.id }}';
+          const email = '{{ customer.email }}';
+          const authKey = '{{ shop.metafields.custom.wishlist_app_token }}';
 
-  const wishlistTable = document.querySelector(".wishlist-list_data tbody");
-  const savedCartTable = document.querySelector(".saved-cart-list_data tbody");
-  const approvalsTable = document.querySelector(".approvals-list_data tbody");
+          const wishlistTable = document.querySelector('.wishlist-list_data tbody');
+          const savedCartTable = document.querySelector('.saved-cart-list_data tbody');
+          const approvalsTable = document.querySelector('.approvals-list_data tbody');
 
-  function appendRow(table, cols) {
-    const tr = document.createElement("tr");
-    cols.forEach(html => {
-      const td = document.createElement("td");
-      td.innerHTML = html;
-      tr.appendChild(td);
-    });
-    table.appendChild(tr);
-  }
+          function appendRow(table, cols) {
+            const tr = document.createElement('tr');
+            cols.forEach((html) => {
+              const td = document.createElement('td');
+              td.innerHTML = html;
+              tr.appendChild(td);
+            });
+            table.appendChild(tr);
+          }
 
-  function showLoader(table) {
-    const tr = document.createElement("tr");
-    tr.classList.add("loading-row");
-    const td = document.createElement("td");
-    td.colSpan = 3;
-    td.innerHTML = `
+          function showLoader(table) {
+            const tr = document.createElement('tr');
+            tr.classList.add('loading-row');
+            const td = document.createElement('td');
+            td.colSpan = 3;
+            td.innerHTML = `
       <div class="loader" style="text-align:center; padding:10px;">
         <span class="spinner" style="
           display:inline-block;
@@ -847,159 +850,156 @@ document.addEventListener("DOMContentLoaded", async () => {
         "></span> Loading...
       </div>
     `;
-    tr.appendChild(td);
-    table.appendChild(tr);
-  }
+            tr.appendChild(td);
+            table.appendChild(tr);
+          }
 
-  function removeLoader(table) {
-    const loaderRow = table.querySelector(".loading-row");
-    if (loaderRow) loaderRow.remove();
-  }
+          function removeLoader(table) {
+            const loaderRow = table.querySelector('.loading-row');
+            if (loaderRow) loaderRow.remove();
+          }
 
-  // Inject keyframe for spinner
-  const style = document.createElement("style");
-  style.innerHTML = `
+          // Inject keyframe for spinner
+          const style = document.createElement('style');
+          style.innerHTML = `
     @keyframes spin {
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
     }
   `;
-  document.head.appendChild(style);
+          document.head.appendChild(style);
 
-  async function fetchWishlist() {
-    showLoader(wishlistTable);
-    try {
-      const encryptToken = btoa(CryptoJS.SHA256(domainName + customerId).toString());
-      const url = new URL("https://advanced-wishlist.hulkapps.com/api/public/v1/wishlist/lists");
-      url.searchParams.append("customer_id", customerId);
-      const res = await fetch(url, {
-        headers: {
-          "Authorization": `Bearer ${authKey}`,
-          "Encrypt-token": encryptToken,
-          "Accept": "application/json"
-        }
-      });
-      const data = await res.json();
-      removeLoader(wishlistTable);
+          async function fetchWishlist() {
+            showLoader(wishlistTable);
+            try {
+              const encryptToken = btoa(CryptoJS.SHA256(domainName + customerId).toString());
+              const url = new URL('https://advanced-wishlist.hulkapps.com/api/public/v1/wishlist/lists');
+              url.searchParams.append('customer_id', customerId);
+              const res = await fetch(url, {
+                headers: {
+                  Authorization: `Bearer ${authKey}`,
+                  'Encrypt-token': encryptToken,
+                  Accept: 'application/json',
+                },
+              });
+              const data = await res.json();
+              removeLoader(wishlistTable);
 
-      if (Array.isArray(data) && data.length > 0) {
-        data.slice(0, 2).forEach(list => {
-          appendRow(wishlistTable, [list.name, list.total_products]);
+              if (Array.isArray(data) && data.length > 0) {
+                data.slice(0, 2).forEach((list) => {
+                  appendRow(wishlistTable, [list.name, list.total_products]);
+                });
+              } else {
+                wishlistTable.closest('.feature-card').querySelector('.feature-data-list').style.display = 'none';
+              }
+            } catch (err) {
+              removeLoader(wishlistTable);
+              console.error('Wishlist Error:', err);
+            }
+          }
+
+          async function fetchSavedCarts() {
+            showLoader(savedCartTable);
+            try {
+              const res = await fetch(`/a/saved-carts`);
+              const html = await res.text();
+              const doc = new DOMParser().parseFromString(html, 'text/html');
+              const rows = doc.querySelectorAll('.cs-table tbody tr');
+              removeLoader(savedCartTable);
+
+              if (Array.from(rows).length > 0) {
+                Array.from(rows)
+                  .slice(0, 2)
+                  .forEach((row) => {
+                    const link = row.querySelector('a');
+                    const name = link?.innerText?.trim();
+                    const href = link?.href;
+                    const count = row.querySelector('.cs-center-text span')?.innerText?.trim() || '0';
+                    appendRow(savedCartTable, [`<a href="${href}">${name}</a>`, count]);
+                  });
+              } else {
+                savedCartTable.closest('.feature-card').querySelector('.feature-data-list').style.display = 'none';
+              }
+            } catch (err) {
+              removeLoader(savedCartTable);
+              console.error('Saved Cart Error:', err);
+            }
+          }
+
+          async function fetchApprovals() {
+            showLoader(approvalsTable);
+            try {
+              const url = `/apps/api/orders?shopDomain=${domainName}&email=${email}`;
+              const res = await fetch(url);
+              const data = await res.json();
+              removeLoader(approvalsTable);
+
+              const { orders, pageUrl } = data;
+              if (orders?.length > 0) {
+                orders
+                  .slice(0, 2)
+                  .reverse()
+                  .forEach((a) => {
+                    appendRow(approvalsTable, [
+                      `<a href="${pageUrl}">${a.orderName}</a>`,
+                      a.status,
+                      new Date(a.submittedAt).toLocaleDateString('en-US') || '',
+                    ]);
+                  });
+              } else {
+                approvalsTable.closest('.feature-card').querySelector('.feature-data-list').style.display = 'none';
+              }
+
+              approvalsTable.closest('.feature-card').querySelector('.feature-card-link').href = pageUrl;
+            } catch (err) {
+              removeLoader(approvalsTable);
+              console.error('Approvals Error:', err);
+            }
+          }
+
+          await Promise.all([fetchWishlist(), fetchSavedCarts(), fetchApprovals()]);
         });
-      } else {
-        wishlistTable.closest(".feature-card").querySelector(".feature-data-list").style.display = "none";
+      </script>
+    {% endif %}
+    {% include 'punchout' %}
+    {% include 'punchout_settings' %}
+    <script type="text/javascript">
+      if (typeof window.hulkappsWishlist === 'undefined') {
+        window.hulkappsWishlist = {};
       }
-    } catch (err) {
-      removeLoader(wishlistTable);
-      console.error("Wishlist Error:", err);
-    }
-  }
-
-  async function fetchSavedCarts() {
-    showLoader(savedCartTable);
-    try {
-      const res = await fetch(`/a/saved-carts`);
-      const html = await res.text();
-      const doc = new DOMParser().parseFromString(html, "text/html");
-      const rows = doc.querySelectorAll(".cs-table tbody tr");
-      removeLoader(savedCartTable);
-
-      if (Array.from(rows).length > 0) { 
-        Array.from(rows).slice(0, 2).forEach(row => {
-          const link = row.querySelector("a");
-          const name = link?.innerText?.trim();
-          const href = link?.href;
-          const count = row.querySelector(".cs-center-text span")?.innerText?.trim() || "0";
-          appendRow(savedCartTable, [`<a href="${href}">${name}</a>`, count]);
-        });
-      } else {
-        savedCartTable.closest(".feature-card").querySelector(".feature-data-list").style.display = "none";
-      }
-    } catch (err) {
-      removeLoader(savedCartTable);
-      console.error("Saved Cart Error:", err);
-    }
-  }
-
-  async function fetchApprovals() {
-    showLoader(approvalsTable);
-    try {
-      const url = `/apps/api/orders?shopDomain=${domainName}&email=${email}`;
-      const res = await fetch(url);
-      const data = await res.json();
-      removeLoader(approvalsTable);
-
-      const { orders, pageUrl } = data;
-      if (orders?.length > 0) {
-        orders.slice(0, 2).reverse().forEach(a => {
-          appendRow(
-            approvalsTable,
-            [`<a href="${pageUrl}">${a.orderName}</a>`, a.status, new Date(a.submittedAt).toLocaleDateString("en-US") || ""]
-          );
-        });
-      } else {
-        approvalsTable.closest(".feature-card").querySelector(".feature-data-list").style.display = "none";
-      }
-
-      approvalsTable.closest(".feature-card").querySelector(".feature-card-link").href = pageUrl;
-    } catch (err) {
-      removeLoader(approvalsTable);
-      console.error("Approvals Error:", err);
-    }
-  }
-
-  await Promise.all([
-    fetchWishlist(),
-    fetchSavedCarts(),
-    fetchApprovals()
-  ]);
-});
-
-</script>
-{% endif %}
-  {% include 'punchout' %}
-{% include 'punchout_settings' %}
-<script type="text/javascript">if(typeof window.hulkappsWishlist === 'undefined') {
-                            window.hulkappsWishlist = {};
-                        }
-                        window.hulkappsWishlist.baseURL = '/apps/advanced-wishlist/api';
-                        window.hulkappsWishlist.hasAppBlockSupport = '1';
-                        </script>
-</head>
+      window.hulkappsWishlist.baseURL = '/apps/advanced-wishlist/api';
+      window.hulkappsWishlist.hasAppBlockSupport = '1';
+    </script>
+  </head>
 
   <body
     class=" gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %} template-{{ template.name }}"
     data-symbol="{{ localization.country.currency.symbol }}"
   >
-
-  
     <div class="main-content">
-
       {% unless customer %}
-      <script>
-        document.addEventListener('DOMContentLoaded', () => {
-          const referrer = document.referrer || '';
-          const url = window.location.href;
-          const isInIframe = window.top !== window.self;
+        <script>
+          document.addEventListener('DOMContentLoaded', () => {
+            const referrer = document.referrer || '';
+            const url = window.location.href;
+            const isInIframe = window.top !== window.self;
 
-          const isAdminRef = referrer.includes('admin.shopify.com');
-          const isDesignMode = !!(window.Shopify && window.Shopify.designMode);
-          const isPreviewURL = url.includes('preview_theme_id') || url.includes('preview=true');
+            const isAdminRef = referrer.includes('admin.shopify.com');
+            const isDesignMode = !!(window.Shopify && window.Shopify.designMode);
+            const isPreviewURL = url.includes('preview_theme_id') || url.includes('preview=true');
 
-          const isShopifyInternal = isInIframe && (isAdminRef || isDesignMode || isPreviewURL);
-          const isCustomer = {{ customer | json }} !== null;
+            const isShopifyInternal = isInIframe && (isAdminRef || isDesignMode || isPreviewURL);
+            const isCustomer = {{ customer | json }} !== null;
 
-          // Debug (optional)
-          console.debug('Detection:', { isInIframe, isAdminRef, isDesignMode, isPreviewURL, isCustomer, isShopifyInternal });
+            // Debug (optional)
+            console.debug('Detection:', { isInIframe, isAdminRef, isDesignMode, isPreviewURL, isCustomer, isShopifyInternal });
 
-          if (!isShopifyInternal && !isCustomer) {
-            // Redirect guests to login page
-            window.location.href = '/account/login?return_to=/';
-          }
-        });
-      </script>
-
-
+            if (!isShopifyInternal && !isCustomer) {
+              // Redirect guests to login page
+              window.location.href = '/account/login?return_to=/';
+            }
+          });
+        </script>
       {% endunless %}
 
       <a class="skip-to-content-link button visually-hidden" href="#MainContent">
@@ -1037,10 +1037,9 @@ document.addEventListener("DOMContentLoaded", async () => {
                     {% if customer.current_company.name != blank %}
                       <p><span>Company:</span> {{ customer.current_company.name }}</p>
                     {% endif %}
-                      {% if customer.current_company.name != blank %}
+                    {% if customer.current_company.name != blank %}
                       <p><span>Location:</span> {{ customer.current_location.name }}</p>
-                      {% endif %}
-                    
+                    {% endif %}
                   </div>
                 </div>
               </div>
@@ -1117,17 +1116,14 @@ document.addEventListener("DOMContentLoaded", async () => {
       <script src="{{ 'kevin-poc.js' | asset_url }}" defer="defer"></script>
     </div>
 
-
-   {% comment %} {% else %}
-    <script>
-      window.location.href = '/account/login';
-    </script>
-    <noscript>
-      <p>You must <a href="/account/login">log in</a> to access this site.</p>
-    </noscript> {% endcomment %}
-
-
-
-
+    {% comment %}
+      {% else %}
+      <script>
+        window.location.href = '/account/login';
+      </script>
+      <noscript>
+        <p>You must <a href="/account/login">log in</a> to access this site.</p>
+      </noscript>
+    {% endcomment %}
   </body>
 </html>
