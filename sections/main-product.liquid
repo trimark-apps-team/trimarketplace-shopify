@@ -1,3 +1,16 @@
+{% assign meta = product.metafields.custom %}
+
+{% for pair in meta %}
+  {% assign key = pair[0] %}
+  {% assign mf = meta[key] %}
+  
+  <div>
+    <strong>{{ key }}</strong>: {{ mf.value }}
+  </div>
+{% endfor %}
+
+
+
 <product-info
   id="MainProduct-{{ section.id }}"
   class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}"
