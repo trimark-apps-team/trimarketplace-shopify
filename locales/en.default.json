@@ -803,7 +803,8 @@
         "track_shipment": "Track Shipment",
         "breadcrumbs_in_review": "In Review",
         "resend_gift_cards_by_email": "Resend Email",
-        "company_location_section_title": "Company and Location"
+        "company_location_section_title": "Company and Location",
+        "purchase_order_number_title": "Internal message only {{ purchase_order_number }}"
       },
       "contact": {
         "delivery_option_title": "Delivery Method",
