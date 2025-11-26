@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
             item({ item, components, html }) {
               const productUrl = item.url || `/products/${item.handle}`;
               const price = item.price;
-              const uom = item.meta.custom['3_uom'] || '';
+              const uom = item?.meta?.custom?.['3_uom'] ?? '';
 
               return html`
                 <div class="aa-ItemWrapper">
