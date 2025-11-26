@@ -1,4 +1,4 @@
-{% comment %} {% assign meta = product.metafields.custom %}
+ {% assign meta = product.metafields.custom %}
 
 {% for pair in meta %}
   {% assign key = pair[0] %}
@@ -7,7 +7,7 @@
   <div>
     <strong>{{ key }}</strong>: {{ mf.value }}
   </div>
-{% endfor %} {% endcomment %}
+{% endfor %} 
 
 
 
