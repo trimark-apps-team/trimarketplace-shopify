@@ -326,7 +326,7 @@
                 </div>
               
            {%- when 'tier-pricing' -%}
-  {% if customer and customer.metafields.custom.buyer_role.value != blank %}
+  {% if customer and customer.metafields.custom.buyer_role.value == 'Sales Rep' %}
     
     {% assign show_table = false %}
     {% assign tiers = "a,b,c,d,e,f" | split: "," %}
