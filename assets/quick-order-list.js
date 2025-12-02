@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function refreshCart() {
   const cartDrawer = document.getElementById('CartDrawer');
   const quickOrderForm = document.querySelector('.quick-order-list__contents');
+  const cartBubble = document.getElementById('cart-icon-bubble');
 
   if (cartDrawer || quickOrderForm) {
     const xhr = new XMLHttpRequest();
@@ -14,6 +15,11 @@ document.addEventListener("DOMContentLoaded", () => {
         if (cartDrawer) {
           const newDrawer = responseDoc.querySelector('#CartDrawer');
           if (newDrawer) cartDrawer.innerHTML = newDrawer.innerHTML;
+        }
+
+        if (cartBubble) {
+          const newCount = responseDoc.getElementById('cart-icon-bubble');
+          if (newCount) cartBubble.innerHTML = newCount.innerHTML;
         }
 
         if (quickOrderForm) {
