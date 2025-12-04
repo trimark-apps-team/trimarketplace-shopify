@@ -86,6 +86,20 @@
           </tr>
         {% endif %}
 
+         {% if product.metafields.custom["1_manufacturer_part_number"] and product.metafields.custom["1_manufacturer_part_number"] != 'N/A' %}
+          <tr>
+            <td class="spec-label">Manfucturer Part Number</td>
+            <td>{{ product.metafields.custom["1_manufacturer_part_number"] }}</td>
+          </tr>
+        {% endif %}
+
+        {% if product.metafields.custom["1_manufacturer_name"] and product.metafields.custom["1_manufacturer_name"] != 'N/A' %}
+          <tr>
+            <td class="spec-label">Manufacturer Name</td>
+            <td>{{ product.metafields.custom["1_manufacturer_name"] }}</td>
+          </tr>
+        {% endif %}
+
         {% if product.metafields.custom["6_brand"] and product.metafields.custom["6_brand"] != 'N/A' %}
           <tr>
             <td class="spec-label">Brand</td>
