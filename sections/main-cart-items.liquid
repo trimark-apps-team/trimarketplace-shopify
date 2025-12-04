@@ -188,12 +188,7 @@
                                 <div style="display: flex; align-items: center; gap: 6px;position: relative;">
                             <span class="sip-tier">{{ item.properties["_Tier"] }}</span>
                             <span class="cart-tier-price-text" data-line="{{ forloop.index0 }}">{{ item.properties["_Tier Price"] }}</span>
-                            <input type="number" step="1" class="cart-tier-price-input" min="1" max="1000"
-                                  data-line="{{ forloop.index0 }}"
-                                  style="display:none; width: 80px;"
-                                  value="{{ item.properties["_Tier Price"] | replace: localization.country.currency.symbol , '' }}" />
-                            <button type="button" class="cart-edit-tier-price-btn" data-line="{{ forloop.index0 }}"
-                                    style="background:none; border:none; cursor:pointer;">✏️</button> <p class="loading-cart" style="display:none;">Updating cart...</p>
+                            <p class="loading-cart" style="display:none;">Updating cart...</p>
                           </div>
 
                               {% else %}
@@ -623,81 +618,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
-
-  document.addEventListener("click", e => {
-    if (!e.target.classList.contains("cart-edit-tier-price-btn")) return;
-
-    const button = e.target;
-    const line = button.dataset.line;
-    const input = document.querySelector(`.cart-tier-price-input[data-line="${line}"]`);
-    const text = document.querySelector(`.cart-tier-price-text[data-line="${line}"]`);
-    if (!input || !text) return;
-
-    const original = input.value;
-    text.style.display = "none";
-    input.style.display = "inline-block";
-    input.focus();
-
-    console.log(input.closest("tr.cart-item").dataset.floor);
-
-    let errorSpan = document.querySelector(`.cart-tier-price-error[data-line="${line}"]`);
-    if (!errorSpan) {
-      errorSpan = document.createElement("span");
-      errorSpan.className = "cart-tier-price-error";
-      errorSpan.dataset.line = line;
-      Object.assign(errorSpan.style, { color: "red", fontSize: "12px", marginLeft: "8px" });
-      input.closest("tr.cart-item").after(errorSpan);
-    }
-
-    const handleBlur = async () => {
-      input.removeEventListener("blur", handleBlur);
-
-      
-
-      let newPrice = parseFloat(input.value);
-
-      const tr = input.closest('tr.cart-item');
-
-      const tiers = JSON.parse(tr.dataset.tiers);
-      tiers.sort((a, b) => a.price - b.price);
-
-      let selectedTier = tiers[0];
-          for (let t of tiers) {
-            if (newPrice >= t.price) {
-              selectedTier = t;
-            } else {
-              break;
-            }
-      }
-      if (isNaN(newPrice) || newPrice < input.closest("tr.cart-item").dataset.floor) {
-        errorSpan.textContent = `Enter a price above $${input.closest("tr.cart-item").dataset.floor}`;
-        input.value = original;
-      } else {
-        errorSpan.textContent = "";
-        newPrice = newPrice.toFixed(2);
-        const cart = await fetchCart();
-        const lineItem = cart.items[parseInt(line)];
-        if (lineItem) {
-          const updatedProps = { ...(lineItem.properties || {}), "_Tier Price": document.body.dataset.symbol + newPrice };
-          updatedProps["_Tier"] = selectedTier.tier;
-          updatedProps["_Commission"] = selectedTier.commission;
-          await fetch("/cart/change.js", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ id: lineItem.key, quantity: lineItem.quantity, properties: updatedProps }),
-          });
-          button.closest(".cart-item").querySelector(".loading__spinner")?.classList.remove("hidden");
-          await renderCart();
-        }
-        text.textContent = document.body.dataset.symbol + newPrice;
-      }
-
-      text.style.display = "inline";
-      input.style.display = "none";
-    };
-
-    input.addEventListener("blur", handleBlur);
-  });
 
   async function applyCartFromUrl() {
     const urlParams = new URLSearchParams(window.location.search);
