@@ -114,8 +114,10 @@
           </tr>
         {% endif %}
 
-        {% if product.metafields.custom["11_capacity_1"] and product.metafields.custom["11_capacity_1"] != 'N/A' %}
-          {% assign capacity = product.metafields.custom["11_capacity_1"] %}
+        {% assign capacity_field = product.metafields.custom["11_capacity_1"] | default: product.metafields.custom["11_capacity"] %}
+
+        {% if capacity_field and capacity_field != 'N/A' %}
+          {% assign capacity = capacity_field %}
           <tr>
             <td class="spec-label">Capacity</td>
             <td>
