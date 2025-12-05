@@ -51,7 +51,7 @@
             "in-stock-message": "Inventory is Low",
             "low-stock-message": "Inventory is High",
             "medium-stock-message": "Inventory is Medium",
-            "out-of-stock-message": "Out of stock",
+            "out-of-stock-message": "Backorder",
             "preorder-message": "Preorder today",
             "stock-level-indicator-style": "classic",
             "bar-indicator-color": "standard",
