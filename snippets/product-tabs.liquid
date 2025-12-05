@@ -40,8 +40,8 @@
 
     
       <div class="tab-content active" id="tab-description">
-        {% if product.metafields.custom["8_description_web"] %}
-          {{ product.metafields.custom["8_description_web"] | metafield_tag }}
+        {% if product.metafields.custom["8_web_description"] %}
+          {{ product.metafields.custom["8_web_description"] | metafield_tag }}
         {% else %}
           {{ product.description }}
         {% endif %}
