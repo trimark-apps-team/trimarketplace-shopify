@@ -426,6 +426,12 @@ Results in maximum flexibility and provides algoliashopify access for store cont
   text-transform: uppercase;
 }
 
+.ais-Highlight mark {
+  background: none;
+  color: inherit;
+  font-weight: bold;
+  padding: 0;
+}
 /* === Responsive adjustments === */
 @media (max-width: 900px) {
   .ais-Hits-list {
