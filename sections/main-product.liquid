@@ -3072,8 +3072,8 @@ async function fetchPriceMatrix() {
     GetPriceMatrix: [
       {
         Business_Unit: "321010",
-        Item_Number: "{{ product.metafields.custom['1_erp_id_marlinn_ipics'] | default: 1507719 }}",
-        Unit_Of_Measure: "CA",
+        Item_Number: "1507719",
+        Unit_Of_Measure: "EA",
         Bill_To: "850020",
         Ship_To_Number: "{{ customer.current_location.metafields.custom['1_erp_id_shipto'] | default: '' }}",
         Customer_Group: "",
