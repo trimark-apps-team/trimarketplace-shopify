@@ -3138,10 +3138,10 @@ async function fetchPriceMatrix() {
     if (selectedTierEl) selectedTierEl.value = formattedPrice;
 
     const editableTextEl = document.getElementById("editable-price-text");
-    if (editableTextEl) editableTextEl.textContent = formattedPrice;
+    if (editableTextEl) editableTextEl.textContent = formattedPrice + priceObj.Unit_Of_Measure;
 
     const regularPriceEl = document.querySelector(".price__regular .price-item--regular");
-    if (regularPriceEl) regularPriceEl.textContent = formattedPrice;
+    if (regularPriceEl) regularPriceEl.textContent = formattedPrice + priceObj.Unit_Of_Measure;
 
     const qtyEl = document.getElementById("quantity-available");
     if (qtyEl && typeof priceObj.mnQuantityAvailable !== "undefined") {
