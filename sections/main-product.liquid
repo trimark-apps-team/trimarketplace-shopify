@@ -3127,9 +3127,12 @@ async function fetchPriceMatrix() {
       throw new Error("Unexpected response format (missing mnBaseSalePrice).");
     }
 
-    const rawPrice = Number(priceObj.mnBaseSalePrice);
+    const useContract = priceObj.cPriceEditableFlag.toUpperCase() === "Y";
+
+    const rawPrice = Number(useContract ? priceObj.mnContractprice : priceObj.mnBaseSalePrice);
+
     if (!Number.isFinite(rawPrice)) {
-      throw new Error("Invalid mnBaseSalePrice value returned from API.");
+      throw new Error("Invalid price value returned from API.");
     }
 
     const formattedPrice = `$${rawPrice.toFixed(2)}`;
