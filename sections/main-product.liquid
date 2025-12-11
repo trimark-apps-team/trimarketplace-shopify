@@ -3060,6 +3060,88 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
+
+{% comment %} JDE API {% endcomment %}
+
+
+async function fetchPriceMatrix() {
+  const url = "https://jdedevais.trimarkusa.com/jderest/orchestrator/MRS_ORCH_58_GetPriceMatrix";
+  const headers = {
+    "Content-Type": "application/json",
+    "Authorization": "Basic VEVTVEpERVNIUDptVmp3dzhrcypeMCo="
+  };
+
+  const body = {
+    GetPriceMatrix: [
+      {
+        Business_Unit: "321010",
+        Item_Number: "{{ product.metafields.custom['1_erp_id_marlinn_ipics'] | default: 1507719 }}",
+        Unit_Of_Measure: "CA",
+        Bill_To: "{{ customer.current_location.metafields.custom['1_erp_id_billto'] | default: '' }}",
+        Ship_To_Number: "{{ customer.current_location.metafields.custom['1_erp_id_shipto'] | default: '' }}",
+        Customer_Group: "",
+        TAMU_Stratification: ""
+      }
+    ]
+  };
+
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers,
+      body: JSON.stringify(body),
+      redirect: "follow"
+    });
+
+    if (!res.ok) {
+      throw new Error(`Network error: ${res.status} ${res.statusText}`);
+    }
+
+    let data;
+    try {
+      data = await res.json();
+    } catch (jsonErr) {
+      const text = await res.text();
+      try {
+        data = JSON.parse(text);
+      } catch (parseErr) {
+        throw new Error("Response is not valid JSON");
+      }
+    }
+
+    console.log("data", data);
+
+    const repeating = data?.Response?.response?.MRS_ORCH_58_PriceMatrixConnector_Repeating;
+    const priceWrapper = Array.isArray(repeating) && repeating.length ? repeating[0] : null;
+    const priceObj = priceWrapper?.MRS_ORCH_58_PriceMatrixConnector;
+
+    if (!priceObj || typeof priceObj.mnBaseSalePrice === "undefined") {
+      throw new Error("Unexpected response format (missing mnBaseSalePrice).");
+    }
+
+    const rawPrice = Number(priceObj.mnBaseSalePrice);
+
+    const formattedPrice = `$${rawPrice.toFixed(2)}`;
+
+    const selectedTierEl = document.getElementById("selected-tier-price");
+    if (selectedTierEl) selectedTierEl.value = formattedPrice;
+
+    const editableTextEl = document.getElementById("editable-price-text");
+    if (editableTextEl) editableTextEl.textContent = formattedPrice;
+
+    const regularPriceEl = document.querySelector(".price__regular .price-item--regular");
+    if (regularPriceEl) regularPriceEl.textContent = formattedPrice;
+
+
+    return { success: true, price: rawPrice, formatted: formattedPrice };
+  } catch (err) {
+    console.error("PriceMatrix Error:", err);
+    return { success: false, error: err.message || err };
+  }
+}
+
+fetchPriceMatrix();
+
 </script>
   
   
