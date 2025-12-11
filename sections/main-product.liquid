@@ -3061,9 +3061,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-{% comment %} JDE API {% endcomment %}
-
-
 async function fetchPriceMatrix() {
   const url = "https://jdedevais.trimarkusa.com/jderest/orchestrator/MRS_ORCH_58_GetPriceMatrix";
   const headers = {
@@ -3109,17 +3106,31 @@ async function fetchPriceMatrix() {
       }
     }
 
-    console.log("data", data);
+    const repeating =
+      data?.MRS_ORCH_58_PriceMatrixConnector_Repeating ||
+      data?.Response?.response?.MRS_ORCH_58_PriceMatrixConnector_Repeating ||
+      data?.Response?.MRS_ORCH_58_PriceMatrixConnector_Repeating ||
+      null;
 
-    const repeating = data?.Response?.response?.MRS_ORCH_58_PriceMatrixConnector_Repeating;
-    const priceWrapper = Array.isArray(repeating) && repeating.length ? repeating[0] : null;
-    const priceObj = priceWrapper?.MRS_ORCH_58_PriceMatrixConnector;
+    if (!Array.isArray(repeating) || repeating.length === 0) {
+      throw new Error("No price matrix repeating block found in response.");
+    }
+
+    const priceWrapper = repeating[0];
+    const priceObj =
+      priceWrapper?.MRS_ORCH_58_PriceMatrixConnector ||
+      (typeof priceWrapper === "object" && priceWrapper !== null && priceWrapper.mnBaseSalePrice !== undefined
+        ? priceWrapper
+        : null);
 
     if (!priceObj || typeof priceObj.mnBaseSalePrice === "undefined") {
       throw new Error("Unexpected response format (missing mnBaseSalePrice).");
     }
 
     const rawPrice = Number(priceObj.mnBaseSalePrice);
+    if (!Number.isFinite(rawPrice)) {
+      throw new Error("Invalid mnBaseSalePrice value returned from API.");
+    }
 
     const formattedPrice = `$${rawPrice.toFixed(2)}`;
 
@@ -3132,8 +3143,15 @@ async function fetchPriceMatrix() {
     const regularPriceEl = document.querySelector(".price__regular .price-item--regular");
     if (regularPriceEl) regularPriceEl.textContent = formattedPrice;
 
+    const qtyEl = document.getElementById("quantity-available");
+    if (qtyEl && typeof priceObj.mnQuantityAvailable !== "undefined") {
+      qtyEl.textContent = String(priceObj.mnQuantityAvailable);
+    }
 
-    return { success: true, price: rawPrice, formatted: formattedPrice };
+    console.log("PriceMatrix response object:", priceObj);
+    console.log("Displayed price:", formattedPrice);
+
+    return { success: true, price: rawPrice, formatted: formattedPrice, rawResponse: data };
   } catch (err) {
     console.error("PriceMatrix Error:", err);
     return { success: false, error: err.message || err };
@@ -3141,6 +3159,7 @@ async function fetchPriceMatrix() {
 }
 
 fetchPriceMatrix();
+
 
 </script>
   
