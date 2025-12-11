@@ -3145,7 +3145,7 @@ async function fetchPriceMatrix() {
 
     const qtyEl = document.getElementById("quantity-available");
     if (qtyEl && typeof priceObj.mnQuantityAvailable !== "undefined") {
-      qtyEl.textContent = String(priceObj.mnQuantityAvailable);
+      qtyEl.textContent = "Inventory: " + String(priceObj.mnQuantityAvailable);
     }
 
     console.log("PriceMatrix response object:", priceObj);
