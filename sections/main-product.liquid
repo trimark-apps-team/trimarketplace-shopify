@@ -404,11 +404,6 @@
               {% for tier in tiers %}
                 
                 {% assign tier_label = tier | upcase %}
-                {% assign price_key = "7_sip_price_tier_" | append: tier %}
-                {% assign comm_key = "7_sip_comm_tier_" | append: tier %}
-
-                {% assign price_val = product.metafields.custom[price_key] %}
-                {% assign comm_val = product.metafields.custom[comm_key] %}
 
                 {%- comment -%} TIER COLORS {%- endcomment -%}
                 {% if forloop.index == 1 %}
@@ -3008,7 +3003,54 @@ async function fetchPriceMatrix() {
 updateTierTable(priceObj, false);
 {% endcomment %}
 
+function updateTierTable(priceObj = {}, useContract = false) {
+  if (!priceObj || typeof priceObj !== 'object') return;
 
+  const tiers = ['A','B','C','D','E','F'];
+
+  tiers.forEach(tier => {
+    const priceKey = `mnMarketBracketPrice_${tier}`;
+    const commKey  = `mnAmountCommission_${tier}`;
+
+    const rawBracketPrice = priceObj[priceKey];
+    const rawCommission   = priceObj[commKey];
+
+    const contractPrice = (typeof priceObj.mnContractprice !== 'undefined') ? priceObj.mnContractprice
+                        : (typeof priceObj.mnContractPrice !== 'undefined') ? priceObj.mnContractPrice
+                        : null;
+
+    let finalPrice = (typeof rawBracketPrice !== 'undefined') ? rawBracketPrice : null;
+
+    if (contractPrice != null && (useContract === true || priceObj.cPriceEditableFlag === 'Y')) {
+      finalPrice = contractPrice;
+    }
+
+    const parsedPrice = Number(finalPrice);
+    const displayPrice = "$" + Number.isFinite(parsedPrice) ? parsedPrice.toFixed(2) : "";
+
+    const parsedComm = Number(rawCommission);
+    const displayComm = "$" + Number.isFinite(parsedComm) ? parsedComm.toFixed(2) : "";
+
+    const row = document.querySelector(`tr.tier-row[data-tier="${tier}"]`);
+    if (!row) return;
+
+    row.setAttribute('data-price', displayPrice);
+    row.setAttribute('data-commission', displayComm);
+
+    const tds = row.querySelectorAll('td');
+    if (tds && tds.length >= 3) {
+      tds[1].textContent = displayPrice;
+      tds[2].textContent = displayComm;
+    } 
+  });
+}
+
+/* --------------------------
+   Usage example:
+   -------------------------- */
+// assume `priceObj` is the JSON object you posted
+// and the table is already present in DOM:
+updateTierTable(priceObj, false);
 
     const formattedPrice = `$${rawPrice.toFixed(2)}`;
 
