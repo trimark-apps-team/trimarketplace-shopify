@@ -3021,7 +3021,7 @@ function updateTierTable(priceObj = {}, useContract = false) {
       }
     }
 
-    const parsedPrice = finalPrice;
+    const parsedPrice = rawBracketPrice;
     const displayPrice = "$" + parsedPrice.toFixed(2);
 
     const parsedComm = rawCommission;
