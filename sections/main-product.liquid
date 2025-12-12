@@ -2954,7 +2954,7 @@ async function fetchPriceMatrix() {
 
     const useContract = priceObj.cPriceEditableFlag.toUpperCase() === "Y";
 
-    const rawPrice = Number(useContract ? priceObj.mnContractPrice : priceObj.mnDropShipCost);
+    const rawPrice = Number(useContract ? priceObj.mnContractPrice : priceObj.mnBaseSalePrice);
 
 
 function updateTierTable(priceObj = {}) {
