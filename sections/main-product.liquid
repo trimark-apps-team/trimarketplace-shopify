@@ -431,19 +431,19 @@
 
                 <tr class="tier-row"
                     data-color="{{ bg }}"
-                    data-tier="{{ tier-label }}"
-                    data-{{ price-key }}=""
-                    data-{{ comm-key }}=""
+                    data-tier="{{ tier_label }}"
+                    data-price=""
+                    data-commission=""
                     onclick="selectTier(this)">
 
                   <td>
                     <div class="tier-badge" style="background-color:{{ bg }};color:{{ color }};">
-                      {{ tier-label }}
+                      {{ tier_label }}
                     </div>
                   </td>
 
-                  <td data-{{ price-key }}-val=""></td>
-                  <td data-{{ comm-key }}-val></td>
+                  <td></td>
+                  <td></td>
                 </tr>
 
               {% endfor %}
@@ -2966,7 +2966,7 @@ async function fetchPriceMatrix() {
       throw new Error("Invalid price value returned from API.");
     }
 
-function updateTierTable(priceObj, useContract = false) {
+{% comment %} function updateTierTable(priceObj, useContract = false) {
   const tiers = ["A", "B", "C", "D", "E", "F"];
 
   tiers.forEach(tier => {
@@ -2999,10 +2999,12 @@ function updateTierTable(priceObj, useContract = false) {
     }
 
   });
-}
+} 
 
 
 updateTierTable(priceObj, false);
+{% endcomment %}
+
 
 
     const formattedPrice = `$${rawPrice.toFixed(2)}`;
@@ -3023,6 +3025,8 @@ updateTierTable(priceObj, false);
 
     console.log("PriceMatrix response object:", priceObj);
     console.log("Displayed price:", formattedPrice);
+
+     document.querySelector(".add-to-cart-pdp")?.disabled = false;
 
     return { success: true, price: rawPrice, formatted: formattedPrice, rawResponse: data };
   } catch (err) {
