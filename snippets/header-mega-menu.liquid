@@ -1,4 +1,4 @@
-{% comment %} {% comment %}
+{% comment %}
   Renders a megamenu for the header.
 
   Usage:
@@ -7,6 +7,7 @@
 
 <nav class="header__inline-menu">
   <ul class="list-menu list-menu--inline" role="list">
+    {{ customer.current_company.metafields.custom.collections }}
     {%- for link in section.settings.menu.links -%}
       <li>
         {%- if link.links != blank -%}
@@ -91,4 +92,4 @@
       </li>
     {%- endfor -%}
   </ul>
-</nav> {% endcomment %}
+</nav>
