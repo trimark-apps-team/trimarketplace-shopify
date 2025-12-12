@@ -54,27 +54,9 @@
                 <input type="hidden" name="properties[Expected Shipping]" value="{{ eta_time }}"> {% endcomment %}
 
 {% if customer and customer.metafields.custom.buyer_role.value == 'Sales Rep' %}
-  
-  {% assign show_table = false %}
-  {% assign tiers = "a,b,c,d,e,f" | split: "," %}
 
-  {% for tier in tiers %}
-    {% assign price_key = "7_sip_price_tier_" | append: tier %}
-    {% assign comm_key  = "7_sip_comm_tier_"  | append: tier %}
-
-    {% assign price_val = product.metafields.custom[price_key] %}
-    {% assign comm_val  = product.metafields.custom[comm_key] %}
-
-    {% if price_val != blank or comm_val != blank %}
-      {% assign show_table = true %}
-      {% break %}
-    {% endif %}
-  {% endfor %}
-
-  {% if show_table %}
     <input type="hidden" name="properties[_Tier]" id="selected-tier-name" value="NA">
     <input type="hidden" name="properties[_Commission]" id="selected-tier-commission" value="NA">
-  {% endif %}
 
 {% endif %}
     <input type="hidden" name="properties[_Tier Price]" id="selected-tier-price" value="NA">
