@@ -3015,21 +3015,17 @@ function updateTierTable(priceObj = {}, useContract = false) {
     const rawBracketPrice = priceObj[priceKey];
     const rawCommission   = priceObj[commKey];
 
-    const contractPrice = (typeof priceObj.mnContractprice !== 'undefined') ? priceObj.mnContractprice
-                        : (typeof priceObj.mnContractPrice !== 'undefined') ? priceObj.mnContractPrice
-                        : null;
-
-    let finalPrice = (typeof rawBracketPrice !== 'undefined') ? rawBracketPrice : null;
-
-    if (contractPrice != null && (useContract === true || priceObj.cPriceEditableFlag === 'Y')) {
-      finalPrice = contractPrice;
+    if (!useContract) {
+      if (priceObj.cPriceEditableFlag === "Y") {
+        priceValue = priceObj.mnContractprice ?? priceObj.mnContractPrice ?? priceValue;
+      }
     }
 
-    const parsedPrice = Number(finalPrice);
-    const displayPrice = "$" + Number.isFinite(parsedPrice) ? parsedPrice.toFixed(2) : "";
+    const parsedPrice = finalPrice;
+    const displayPrice = "$" + parsedPrice.toFixed(2);
 
-    const parsedComm = Number(rawCommission);
-    const displayComm = "$" + Number.isFinite(parsedComm) ? parsedComm.toFixed(2) : "";
+    const parsedComm = rawCommission;
+    const displayComm = "$" + parsedComm.toFixed(2);
 
     const row = document.querySelector(`tr.tier-row[data-tier="${tier}"]`);
     if (!row) return;
@@ -3045,11 +3041,6 @@ function updateTierTable(priceObj = {}, useContract = false) {
   });
 }
 
-/* --------------------------
-   Usage example:
-   -------------------------- */
-// assume `priceObj` is the JSON object you posted
-// and the table is already present in DOM:
 updateTierTable(priceObj, false);
 
     const formattedPrice = `$${rawPrice.toFixed(2)}`;
