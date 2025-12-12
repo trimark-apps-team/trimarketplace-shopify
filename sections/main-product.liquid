@@ -3131,7 +3131,7 @@ function enablePriceEdit() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  const enteredPrice = document.querySelector('.choose-tier').dataset.productprice.replace(/[^0-9.-]+/g, "");
+  const enteredPrice = document.querySelector('.choose-tier')?.dataset.productprice.replace(/[^0-9.-]+/g, "");
   const tiers = [...document.querySelectorAll('.tier-row')].map(row => ({
       tier: row.dataset.tier,
       price: parseFloat(row.dataset.price.replace(/[^0-9.-]+/g, "")),
