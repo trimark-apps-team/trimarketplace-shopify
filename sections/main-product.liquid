@@ -2989,12 +2989,12 @@ function updateTierTable(priceObj = {}) {
 
     if (!useContract) { 
      updateTierTable(priceObj);
-     document.querySelector(".choose-tier").classList.remove("hidden");
-     document.querySelector("#floor-price").textContent = "$" + priceObj.mnFloorPrice;
-     document.querySelector("#editable-price-input").setAttribute('data-floor', priceObj.mnFloorPrice);
+     document.querySelector(".choose-tier")?.classList.remove("hidden");
+     document.querySelector("#floor-price")?.textContent = "$" + priceObj.mnFloorPrice;
+     document.querySelector("#editable-price-input")?.setAttribute('data-floor', priceObj.mnFloorPrice);
      const editableTextEl = document.getElementById("editable-price-text");
      if (editableTextEl) editableTextEl.textContent = `${formattedPrice} ` + priceObj.Unit_Of_Measure;
-     document.getElementById('inline-price-edit-wrapper').style.display = "flex";
+     document.getElementById('inline-price-edit-wrapper')?.style.display = "flex";
     } else {
      const regularPriceEl = document.querySelector(".price__regular .price-item--regular");
      if (regularPriceEl) regularPriceEl.textContent = `${formattedPrice} ` + priceObj.Unit_Of_Measure;
@@ -3012,7 +3012,7 @@ function updateTierTable(priceObj = {}) {
     console.log("PriceMatrix response object:", priceObj);
     console.log("Displayed price:", formattedPrice);
 
-    document.querySelector(".add-to-cart-pdp").disabled = false;
+    document.querySelector(".add-to-cart-pdp")?.disabled = false;
 
 
 
