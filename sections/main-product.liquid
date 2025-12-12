@@ -2913,6 +2913,8 @@ async function fetchPriceMatrix() {
 
   const buyer_role = "{{ customer.metafields.custom.buyer_role.value }}";
 
+  console.log(buyer_role,"role");
+
   try {
     const res = await fetch(url, {
       method: "POST",
