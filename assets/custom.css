@@ -506,10 +506,10 @@ footer .svg-wrapper .icon path {
   overflow: hidden;
 }
 
-body .facets-container {
+/* body .facets-container {
   position: sticky;
   top: 0;
-}
+} */
 
 @media screen and (max-width: 1054px) {
   .header__menu-item {
