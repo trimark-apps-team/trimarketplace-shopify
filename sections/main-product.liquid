@@ -2954,87 +2954,65 @@ async function fetchPriceMatrix() {
 
 
 function updateTierTable(priceObj = {}) {
-  if (!priceObj || typeof priceObj !== "object") return;
+  if (!priceObj || typeof priceObj !== 'object') return;
 
-  const tiers = ["A", "B", "C", "D", "E", "F"];
+  const tiers = ['A','B','C','D','E','F'];
 
   tiers.forEach(tier => {
     const priceKey = `mnMarketBracketPrice_${tier}`;
     const commKey  = `mnAmountCommission_${tier}`;
 
-    const rawBracketPrice = priceObj[priceKey] ?? 0;
-    const rawCommission   = priceObj[commKey] ?? 0;
+    const rawBracketPrice = priceObj[priceKey];
+    const rawCommission   = priceObj[commKey];
 
-    const parsedPrice = Number(rawBracketPrice);
-    const displayPrice = isNaN(parsedPrice) ? "" : `$${parsedPrice.toFixed(2)}`;
+    const parsedPrice = rawBracketPrice;
+    const displayPrice = "$" + parsedPrice.toFixed(2);
 
-    const parsedComm = Number(rawCommission);
-    const displayComm = isNaN(parsedComm) ? "" : `$${parsedComm.toFixed(2)}`;
+    const parsedComm = rawCommission;
+    const displayComm = "$" + parsedComm.toFixed(2);
 
-    const row = document.querySelector(`tr.tier-row[data-tier="${tier}"]`) ?? null;
+    const row = document.querySelector(`tr.tier-row[data-tier="${tier}"]`);
     if (!row) return;
 
-    row.setAttribute("data-price", displayPrice);
-    row.setAttribute("data-commission", displayComm);
+    row.setAttribute('data-price', displayPrice);
+    row.setAttribute('data-commission', displayComm);
 
-    const tds = row.querySelectorAll("td") ?? [];
-
-    if (tds.length >= 3) {
+    const tds = row.querySelectorAll('td');
+    if (tds && tds.length >= 3) {
       tds[1].textContent = displayPrice;
       tds[2].textContent = displayComm;
-    }
+    } 
   });
 }
 
+   const formattedPrice = `$${rawPrice.toFixed(2)}`;
 
-// ---------------------------
-// SAFE MAIN EXECUTION BLOCK
-// ---------------------------
-const formattedPrice = `$${(rawPrice ?? 0).toFixed(2)}`;
+    if (!useContract) { 
+     updateTierTable(priceObj);
+     document.querySelector(".choose-tier").classList.remove("hidden");
+     document.querySelector("#floor-price").textContent = "$" + priceObj.mnFloorPrice;
+     document.querySelector("#editable-price-input").setAttribute('data-floor', priceObj.mnFloorPrice);
+     const editableTextEl = document.getElementById("editable-price-text");
+     if (editableTextEl) editableTextEl.textContent = `${formattedPrice} ` + priceObj.Unit_Of_Measure;
+     document.getElementById('inline-price-edit-wrapper').style.display = "flex";
+    } else {
+     const regularPriceEl = document.querySelector(".price__regular .price-item--regular");
+     if (regularPriceEl) regularPriceEl.textContent = `${formattedPrice} ` + priceObj.Unit_Of_Measure;
+     regularPriceEl.classList.remove("hidden");
+    }
 
-if (!useContract) { 
-  updateTierTable(priceObj);
+    const selectedTierEl = document.getElementById("selected-tier-price");
+    if (selectedTierEl) selectedTierEl.value = formattedPrice;
 
-  document.querySelector(".choose-tier")?.classList.remove("hidden");
+    const qtyEl = document.getElementById("quantity-available");
+    if (qtyEl && typeof priceObj.mnQuantityAvailable !== "undefined") {
+      qtyEl.textContent = "Inventory: " + String(priceObj.mnQuantityAvailable);
+    }
 
-  document.querySelector("#floor-price") 
-    ? document.querySelector("#floor-price").textContent = "$" + (priceObj.mnFloorPrice ?? 0)
-    : null;
+    console.log("PriceMatrix response object:", priceObj);
+    console.log("Displayed price:", formattedPrice);
 
-  document.querySelector("#editable-price-input")
-    ?.setAttribute("data-floor", priceObj.mnFloorPrice ?? 0);
-
-  const editableTextEl = document.getElementById("editable-price-text");
-  if (editableTextEl) {
-    editableTextEl.textContent = `${formattedPrice} ${priceObj.Unit_Of_Measure ?? ""}`;
-  }
-
-  const wrap = document.getElementById("inline-price-edit-wrapper");
-  if (wrap) wrap.style.display = "flex";
-
-} else {
-  const regularPriceEl = document.querySelector(".price__regular .price-item--regular");
-  if (regularPriceEl) {
-    regularPriceEl.textContent = `${formattedPrice} ${priceObj.Unit_Of_Measure ?? ""}`;
-    regularPriceEl.classList.remove("hidden");
-  }
-}
-
-const selectedTierEl = document.getElementById("selected-tier-price");
-if (selectedTierEl) selectedTierEl.value = formattedPrice ?? "";
-
-const qtyEl = document.getElementById("quantity-available");
-if (qtyEl) {
-  qtyEl.textContent = `Inventory: ${String(priceObj.mnQuantityAvailable ?? 0)}`;
-}
-
-console.log("PriceMatrix response object:", priceObj ?? {});
-console.log("Displayed price:", formattedPrice ?? "");
-
-document.querySelector(".add-to-cart-pdp") 
-  ? document.querySelector(".add-to-cart-pdp").disabled = false 
-  : null;
-
+    document.querySelector(".add-to-cart-pdp").disabled = false;
 
 
 
