@@ -2891,6 +2891,110 @@
 }
 {% endschema %}
 <script>
+
+async function fetchPriceMatrix() {
+  const url = "https://jdedevais.trimarkusa.com/jderest/orchestrator/MRS_ORCH_58_GetPriceMatrix";
+  const headers = {
+    "Content-Type": "application/json",
+    "Authorization": "Basic VEVTVEpERVNIUDptVmp3dzhrcypeMCo="
+  };
+
+  const body = {
+    GetPriceMatrix: [
+      {
+        Business_Unit: "321010",
+        Item_Number: "{{ product.metafields.custom['1_erp_id_marlinn_ipics'] }}",
+        Unit_Of_Measure: "{{ product.metafields.custom['3_uom'] | default: "EA" }}",
+        Bill_To: "{{ customer.current_location.metafields.custom['1_erp_id_billto'] }}",
+        Ship_To_Number: "{{ customer.current_location.metafields.custom['1_erp_id_shipto'] | default: '0' }}",
+        Customer_Group: "",
+        TAMU_Stratification: ""
+      }
+    ]
+  };
+
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers,
+      body: JSON.stringify(body),
+      redirect: "follow"
+    });
+
+    if (!res.ok) {
+      throw new Error(`Network error: ${res.status} ${res.statusText}`);
+    }
+
+    let data;
+    try {
+      data = await res.json();
+    } catch (jsonErr) {
+      const text = await res.text();
+      try {
+        data = JSON.parse(text);
+      } catch (parseErr) {
+        throw new Error("Response is not valid JSON");
+      }
+    }
+
+    const repeating =
+      data?.MRS_ORCH_58_PriceMatrixConnector_Repeating ||
+      data?.Response?.response?.MRS_ORCH_58_PriceMatrixConnector_Repeating ||
+      data?.Response?.MRS_ORCH_58_PriceMatrixConnector_Repeating ||
+      null;
+
+    if (!Array.isArray(repeating) || repeating.length === 0) {
+      throw new Error("No price matrix repeating block found in response.");
+    }
+
+    const priceWrapper = repeating[0];
+    const priceObj =
+      priceWrapper?.MRS_ORCH_58_PriceMatrixConnector ||
+      (typeof priceWrapper === "object" && priceWrapper !== null && priceWrapper.mnBaseSalePrice !== undefined
+        ? priceWrapper
+        : null);
+
+    if (!priceObj || typeof priceObj.mnBaseSalePrice === "undefined") {
+      throw new Error("Unexpected response format (missing mnBaseSalePrice).");
+    }
+
+    const useContract = priceObj.cPriceEditableFlag.toUpperCase() === "Y";
+
+    const rawPrice = Number(useContract ? priceObj.mnContractprice : priceObj.mnBaseSalePrice);
+
+    if (!Number.isFinite(rawPrice)) {
+      throw new Error("Invalid price value returned from API.");
+    }
+
+    const formattedPrice = `$${rawPrice.toFixed(2)}`;
+
+    const selectedTierEl = document.getElementById("selected-tier-price");
+    if (selectedTierEl) selectedTierEl.value = formattedPrice;
+
+    const editableTextEl = document.getElementById("editable-price-text");
+    if (editableTextEl) editableTextEl.textContent = `${formattedPrice} ` + priceObj.Unit_Of_Measure;
+
+    const regularPriceEl = document.querySelector(".price__regular .price-item--regular");
+    if (regularPriceEl) regularPriceEl.textContent = `${formattedPrice} ` + priceObj.Unit_Of_Measure;
+
+    const qtyEl = document.getElementById("quantity-available");
+    if (qtyEl && typeof priceObj.mnQuantityAvailable !== "undefined") {
+      qtyEl.textContent = "Inventory: " + String(priceObj.mnQuantityAvailable);
+    }
+
+    console.log("PriceMatrix response object:", priceObj);
+    console.log("Displayed price:", formattedPrice);
+
+    return { success: true, price: rawPrice, formatted: formattedPrice, rawResponse: data };
+  } catch (err) {
+    console.error("PriceMatrix Error:", err);
+    return { success: false, error: err.message || err };
+  }
+}
+
+fetchPriceMatrix();
+
+
 function selectTier(row) {
   document.querySelectorAll('.tier-row').forEach(r => r.classList.remove('selected'));
   row.classList.add('selected');
@@ -3039,109 +3143,6 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelector("product-info .price-item--regular")?.classList.add("hidden");
 
 });
-
-
-async function fetchPriceMatrix() {
-  const url = "https://jdedevais.trimarkusa.com/jderest/orchestrator/MRS_ORCH_58_GetPriceMatrix";
-  const headers = {
-    "Content-Type": "application/json",
-    "Authorization": "Basic VEVTVEpERVNIUDptVmp3dzhrcypeMCo="
-  };
-
-  const body = {
-    GetPriceMatrix: [
-      {
-        Business_Unit: "321010",
-        Item_Number: "{{ product.metafields.custom['1_erp_id_marlinn_ipics'] }}",
-        Unit_Of_Measure: "{{ product.metafields.custom['3_uom'] | default: "EA" }}",
-        Bill_To: "{{ customer.current_location.metafields.custom['1_erp_id_billto'] }}",
-        Ship_To_Number: "{{ customer.current_location.metafields.custom['1_erp_id_shipto'] | default: '0' }}",
-        Customer_Group: "",
-        TAMU_Stratification: ""
-      }
-    ]
-  };
-
-  try {
-    const res = await fetch(url, {
-      method: "POST",
-      headers,
-      body: JSON.stringify(body),
-      redirect: "follow"
-    });
-
-    if (!res.ok) {
-      throw new Error(`Network error: ${res.status} ${res.statusText}`);
-    }
-
-    let data;
-    try {
-      data = await res.json();
-    } catch (jsonErr) {
-      const text = await res.text();
-      try {
-        data = JSON.parse(text);
-      } catch (parseErr) {
-        throw new Error("Response is not valid JSON");
-      }
-    }
-
-    const repeating =
-      data?.MRS_ORCH_58_PriceMatrixConnector_Repeating ||
-      data?.Response?.response?.MRS_ORCH_58_PriceMatrixConnector_Repeating ||
-      data?.Response?.MRS_ORCH_58_PriceMatrixConnector_Repeating ||
-      null;
-
-    if (!Array.isArray(repeating) || repeating.length === 0) {
-      throw new Error("No price matrix repeating block found in response.");
-    }
-
-    const priceWrapper = repeating[0];
-    const priceObj =
-      priceWrapper?.MRS_ORCH_58_PriceMatrixConnector ||
-      (typeof priceWrapper === "object" && priceWrapper !== null && priceWrapper.mnBaseSalePrice !== undefined
-        ? priceWrapper
-        : null);
-
-    if (!priceObj || typeof priceObj.mnBaseSalePrice === "undefined") {
-      throw new Error("Unexpected response format (missing mnBaseSalePrice).");
-    }
-
-    const useContract = priceObj.cPriceEditableFlag.toUpperCase() === "Y";
-
-    const rawPrice = Number(useContract ? priceObj.mnContractprice : priceObj.mnBaseSalePrice);
-
-    if (!Number.isFinite(rawPrice)) {
-      throw new Error("Invalid price value returned from API.");
-    }
-
-    const formattedPrice = `$${rawPrice.toFixed(2)}`;
-
-    const selectedTierEl = document.getElementById("selected-tier-price");
-    if (selectedTierEl) selectedTierEl.value = formattedPrice;
-
-    const editableTextEl = document.getElementById("editable-price-text");
-    if (editableTextEl) editableTextEl.textContent = `${formattedPrice} ` + priceObj.Unit_Of_Measure;
-
-    const regularPriceEl = document.querySelector(".price__regular .price-item--regular");
-    if (regularPriceEl) regularPriceEl.textContent = `${formattedPrice} ` + priceObj.Unit_Of_Measure;
-
-    const qtyEl = document.getElementById("quantity-available");
-    if (qtyEl && typeof priceObj.mnQuantityAvailable !== "undefined") {
-      qtyEl.textContent = "Inventory: " + String(priceObj.mnQuantityAvailable);
-    }
-
-    console.log("PriceMatrix response object:", priceObj);
-    console.log("Displayed price:", formattedPrice);
-
-    return { success: true, price: rawPrice, formatted: formattedPrice, rawResponse: data };
-  } catch (err) {
-    console.error("PriceMatrix Error:", err);
-    return { success: false, error: err.message || err };
-  }
-}
-
-fetchPriceMatrix();
 
 </script>
   
