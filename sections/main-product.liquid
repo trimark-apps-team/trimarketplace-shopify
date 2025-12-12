@@ -403,9 +403,12 @@
 
               {% for tier in tiers %}
                 
-                {% assign tier-label = tier | upcase %}
-                {% assign price-key = "7-sip-price-tier-" | append: tier %}
-                {% assign comm-key = "7-sip-comm-tier-" | append: tier %}
+                {% assign tier_label = tier | upcase %}
+                {% assign price_key = "7_sip_price_tier_" | append: tier %}
+                {% assign comm_key = "7_sip_comm_tier_" | append: tier %}
+
+                {% assign price_val = product.metafields.custom[price_key] %}
+                {% assign comm_val = product.metafields.custom[comm_key] %}
 
                 {%- comment -%} TIER COLORS {%- endcomment -%}
                 {% if forloop.index == 1 %}
