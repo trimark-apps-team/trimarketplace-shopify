@@ -3066,8 +3066,8 @@ updateTierTable(priceObj, false);
 
      document.querySelector(".choose-tier").classList.remove("hidden");
 
-     document.querySelctor("#floor-price").textContent = "$" + priceObj.mnFloorPrice;
-     document.querySelctor("#editable-price-input").setAttribute('data-floor', priceObj.mnFloorPrice)
+     document.querySelector("#floor-price").textContent = "$" + priceObj.mnFloorPrice;
+     document.querySelector("#editable-price-input").setAttribute('data-floor', priceObj.mnFloorPrice)
 
     return { success: true, price: rawPrice, formatted: formattedPrice, rawResponse: data };
   } catch (err) {
