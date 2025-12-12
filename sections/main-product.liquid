@@ -2946,15 +2946,7 @@ async function fetchPriceMatrix() {
     }
 
     const priceWrapper = repeating[0];
-    const priceObj =
-      priceWrapper?.MRS_ORCH_58_PriceMatrixConnector ||
-      (typeof priceWrapper === "object" && priceWrapper !== null && priceWrapper.mnBaseSalePrice !== undefined
-        ? priceWrapper
-        : null);
-
-    if (!priceObj || typeof priceObj.mnBaseSalePrice === "undefined") {
-      throw new Error("Unexpected response format (missing mnBaseSalePrice).");
-    }
+    const priceObj = priceWrapper?.MRS_ORCH_58_PriceMatrixConnector;
 
     const useContract = priceObj.cPriceEditableFlag.toUpperCase() === "Y";
 
