@@ -7,7 +7,7 @@
 
 <nav class="header__inline-menu">
   <ul class="list-menu list-menu--inline" role="list">
-     {% for menu in customer.current_company.metafields.collections.value %}
+     {% for menu in customer.current_company.metafields.custom.collections %}
       <li>
         <a id="HeaderMenu-sales-order" href="{{ menu.url }}" class="header__menu-item list-menu__item link link--text focus-inset">
             <span>{{ menu.title }}</span>
