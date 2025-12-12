@@ -506,6 +506,8 @@ footer .svg-wrapper .icon path {
   overflow: hidden;
 }
 
+
+
 /* body .facets-container {
   position: sticky;
   top: 0;
@@ -646,7 +648,7 @@ footer .svg-wrapper .icon path {
 
 /* override z-index for hulkapp heart icon kk 9/18/25*/
 .wishlist-btn[data-custom-wishlist-icon] {
-  z-index: 998 !important;
+  z-index: 2 !important;
 }
 
 
