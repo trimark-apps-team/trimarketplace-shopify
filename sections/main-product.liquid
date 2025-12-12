@@ -2902,7 +2902,7 @@ async function fetchPriceMatrix() {
       {
         Business_Unit: "321010",
         Item_Number: "{{ product.metafields.custom['1_erp_id_marlinn_ipics'] }}",
-        Unit_Of_Measure: "{{ product.metafields.custom['3_uom'] | default: "EA" }}",
+        Unit_Of_Measure: "{{ product.metafields.custom['3_uom'] }}",
         Bill_To: "{{ customer.current_location.metafields.custom['1_erp_id_billto'] }}",
         Ship_To_Number: "0",
         Customer_Group: "",
