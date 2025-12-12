@@ -2966,6 +2966,40 @@ async function fetchPriceMatrix() {
       throw new Error("Invalid price value returned from API.");
     }
 
+    function updateTierTable(priceObj, useContract = false) {
+  const tiers = ["A", "B", "C", "D", "E", "F"];
+
+  tiers.forEach(tier => {
+    const priceKey = `mnMarketBracketPrice_${tier}`;
+    const commKey = `mnAmountCommission_${tier}`;
+
+    let priceValue = priceObj[priceKey] ?? "";
+    let commValue = priceObj[commKey] ?? "";
+
+    // ----------------------------
+    // If contract pricing applies
+    // ----------------------------
+    if (!useContract) {
+      // If editable flag is Y → use contract price
+      if (priceObj.cPriceEditableFlag === "Y") {
+        priceValue = priceObj.mnContractprice ?? priceObj.mnContractPrice ?? priceValue;
+      }
+    }
+
+    // ----------------------------
+    // Update HTML table
+    // ----------------------------
+    const priceCell = document.querySelector(`[data-7-sip-price-tier-${tier.toLowerCase()}-val]`);
+    const commCell = document.querySelector(`[data-7-sip-comm-tier-${tier.toLowerCase()}-val]`);
+
+    if (priceCell) priceCell.textContent = Number(priceValue).toFixed(2);
+    if (commCell)  commCell.textContent = Number(commValue).toFixed(2);
+  });
+}
+
+updateTierTable(priceObj, false);
+
+
     const formattedPrice = `$${rawPrice.toFixed(2)}`;
 
     const selectedTierEl = document.getElementById("selected-tier-price");
