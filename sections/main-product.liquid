@@ -3026,7 +3026,7 @@ updateTierTable(priceObj, false);
     console.log("PriceMatrix response object:", priceObj);
     console.log("Displayed price:", formattedPrice);
 
-     document.querySelector(".add-to-cart-pdp")?.disabled = false;
+     document.querySelector(".add-to-cart-pdp").disabled = false;
 
     return { success: true, price: rawPrice, formatted: formattedPrice, rawResponse: data };
   } catch (err) {
