@@ -8,8 +8,10 @@
 <nav class="header__inline-menu">
   <ul class="list-menu list-menu--inline" role="list">
     {% for i in customer.current_company.metafields.custom.collections.value %}
-       {{ i.url }}
-       {{ i.handle }}
+      <li><a id="HeaderMenu-sales-order" href="{{ i.url }}" class="header__menu-item list-menu__item link link--text focus-inset">
+            <span>{{ i.title }}</span>
+          </a>
+        </li>
     {% endfor %}
     {%- for link in section.settings.menu.links -%}
       <li>
