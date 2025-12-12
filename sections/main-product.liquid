@@ -328,22 +328,6 @@
            {%- when 'tier-pricing' -%}
   {% if customer and customer.metafields.custom.buyer_role.value == 'Sales Rep' %}
     
-    {% assign show_table = false %}
-    {% assign tiers = "a,b,c,d,e,f" | split: "," %}
-
-    {%- comment -%}
-      CHECK IF ANY TIER HAS PRICE DATA
-    {%- endcomment -%}
-    {% for tier in tiers %}
-      {% assign price_key = "7_sip_price_tier_" | append: tier %}
-      {% assign price_mf = product.metafields.custom[price_key] %}
-      {% if price_mf != blank %}
-        {% assign show_table = true %}
-        {% break %}
-      {% endif %}
-    {% endfor %}
-
-    {% if show_table %}
     
       <div class="tier-price-row">
         {% if product.metafields.custom["3_price_cost"] != blank and product.metafields.custom["3_price_cost"] != 'N/A' %}
@@ -415,18 +399,8 @@
             </thead>
 
             <tbody>
-              {% assign tiers = "a,b,c,d,e,f" | split: "," %}
+              {% for tier in (1..6) %}
 
-              {% for tier in tiers %}
-                
-                {% assign tier_label = tier | upcase %}
-                {% assign price_key = "7_sip_price_tier_" | append: tier %}
-                {% assign comm_key = "7_sip_comm_tier_" | append: tier %}
-
-                {% assign price_val = product.metafields.custom[price_key] %}
-                {% assign comm_val = product.metafields.custom[comm_key] %}
-
-                {%- comment -%} TIER COLORS {%- endcomment -%}
                 {% if forloop.index == 1 %}
                   {% assign bg = block.settings.tire_a_bg_color %}
                   {% assign color = block.settings.tire_a_text_color %}
@@ -447,24 +421,23 @@
                   {% assign color = block.settings.tire_f_text_color %}
                 {% endif %}
 
-                {% if price_val != blank %}
+
                 <tr class="tier-row"
                     data-color="{{ bg }}"
-                    data-tier="{{ tier_label }}"
-                    data-price="{{ price_val | times: 100 | money }}"
-                    data-commission="{{ comm_val | times: 100 | money }}"
+                    data-tier=""
+                    data-price=""
+                    data-commission=""
                     onclick="selectTier(this)">
 
                   <td>
                     <div class="tier-badge" style="background-color:{{ bg }};color:{{ color }};">
-                      {{ tier_label }}
+                      
                     </div>
                   </td>
 
-                  <td>{{ price_val | times: 100 | money }}</td>
-                  <td>{{ comm_val | times: 100 | money }}</td>
+                  <td></td>
+                  <td></td>
                 </tr>
-                {% endif %}
               {% endfor %}
             </tbody>
           </table>
@@ -483,7 +456,6 @@
         </div>
       </div>
 
-    {% endif %}
   {% endif %}
 
               {%- when 'sku' -%}
