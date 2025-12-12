@@ -2911,7 +2911,7 @@ async function fetchPriceMatrix() {
     ]
   };
 
-  const buyer_role = "{{ customer.metafields.custom.buyer_role.value }}";
+  const buyer_role = "{{ customer.metafields.custom.buyer_role.value | default: "" }}";
 
   console.log(buyer_role,"role");
 
