@@ -2958,7 +2958,7 @@ async function fetchPriceMatrix() {
 
     const useContract = priceObj.cPriceEditableFlag.toUpperCase() === "Y";
 
-    const rawPrice = Number(useContract ? priceObj.mnContractPrice : priceObj.mnLastPrice);
+    const rawPrice = Number(useContract ? priceObj.mnContractPrice : priceObj.mnBaseSalePrice);
 
     if (!Number.isFinite(rawPrice)) {
       throw new Error("Invalid price value returned from API.");
