@@ -404,8 +404,8 @@
               {% for tier in tiers %}
                 
                 {% assign tier_label = tier | upcase %}
-                {% assign price_key = "7-sip-price-tier_" | append: tier %}
-                {% assign comm_key = "7-sip-comm-tier_" | append: tier %}
+                {% assign price_key = "7-sip-price-tier-" | append: tier %}
+                {% assign comm_key = "7-sip-comm-tier-" | append: tier %}
 
                 {%- comment -%} TIER COLORS {%- endcomment -%}
                 {% if forloop.index == 1 %}
