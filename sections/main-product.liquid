@@ -2952,9 +2952,6 @@ async function fetchPriceMatrix() {
 
     const rawPrice = Number(useContract ? priceObj.mnContractPrice : priceObj.mnBaseSalePrice);
 
-    if (!Number.isFinite(rawPrice)) {
-      throw new Error("Invalid price value returned from API.");
-    }
 
 function updateTierTable(priceObj = {}) {
   if (!priceObj || typeof priceObj !== 'object') return;
