@@ -3103,7 +3103,7 @@ function selectTier(row) {
   document.getElementById('price-error-msg').style.display = 'none';
 
   document.getElementById('popup').classList.add('hidden');
-  document.querySelector("product-info .price-item--regular")?.classList.add("hidden");
+  {% comment %} document.querySelector("product-info .price-item--regular")?.classList.add("hidden"); {% endcomment %}
   document.querySelector('.order-modal_overlay').style.visibility = 'hidden';
 }
 
@@ -3220,7 +3220,7 @@ document.addEventListener("DOMContentLoaded", function () {
     inputEl.dataset.original = rawPrice;
     document.getElementById('price-error-msg').style.display = 'none';
 
-    document.querySelector("product-info .price-item--regular")?.classList.add("hidden");
+    {% comment %} document.querySelector("product-info .price-item--regular")?.classList.add("hidden"); {% endcomment %}
 
 });
 
