@@ -2989,7 +2989,7 @@ function updateTierTable(priceObj = {}) {
 
     if (!useContract) { 
      updateTierTable(priceObj);
-     document.querySelector(".choose-tier")?.classList.remove("hidden");
+     document.querySelector(".choose-tier").classList.remove("hidden");
      document.querySelector("#floor-price").textContent = "$" + priceObj.mnFloorPrice;
      document.querySelector("#editable-price-input").setAttribute('data-floor', priceObj.mnFloorPrice);
      const editableTextEl = document.getElementById("editable-price-text");
