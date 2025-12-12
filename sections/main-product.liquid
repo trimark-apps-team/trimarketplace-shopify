@@ -2966,7 +2966,7 @@ async function fetchPriceMatrix() {
       throw new Error("Invalid price value returned from API.");
     }
 
-    function updateTierTable(priceObj, useContract = false) {
+function updateTierTable(priceObj, useContract = false) {
   const tiers = ["A", "B", "C", "D", "E", "F"];
 
   tiers.forEach(tier => {
@@ -2976,26 +2976,31 @@ async function fetchPriceMatrix() {
     let priceValue = priceObj[priceKey] ?? "";
     let commValue = priceObj[commKey] ?? "";
 
-    // ----------------------------
-    // If contract pricing applies
-    // ----------------------------
     if (!useContract) {
-      // If editable flag is Y → use contract price
       if (priceObj.cPriceEditableFlag === "Y") {
         priceValue = priceObj.mnContractprice ?? priceObj.mnContractPrice ?? priceValue;
       }
     }
 
-    // ----------------------------
-    // Update HTML table
-    // ----------------------------
-    const priceCell = document.querySelector(`[data-7-sip-price-tier-${tier.toLowerCase()}-val]`);
-    const commCell = document.querySelector(`[data-7-sip-comm-tier-${tier.toLowerCase()}-val]`);
+    const displayPrice = Number(priceValue).toFixed(2);
+    const displayComm = Number(commValue).toFixed(2);
 
-    if (priceCell) priceCell.textContent = Number(priceValue).toFixed(2);
-    if (commCell)  commCell.textContent = Number(commValue).toFixed(2);
+    const priceCell = document.querySelector(`[data-7-sip-price-tier-${tier.toLowerCase()}-val]`);
+    const commCell  = document.querySelector(`[data-7-sip-comm-tier-${tier.toLowerCase()}-val]`);
+
+    if (priceCell) priceCell.textContent = displayPrice;
+    if (commCell)  commCell.textContent = displayComm;
+
+    const row = document.querySelector(`tr[data-tier="${tier}"]`);
+
+    if (row) {
+      row.setAttribute(`data-7-sip-price-tier-${tier.toLowerCase()}`, displayPrice);
+      row.setAttribute(`data-7-sip-comm-tier-${tier.toLowerCase()}`, displayComm);
+    }
+
   });
 }
+
 
 updateTierTable(priceObj, false);
 
