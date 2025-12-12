@@ -3027,7 +3027,7 @@ fetchPriceMatrix();
 
 
 function selectTier(row) {
-  document.querySelectorAll('.tier-row').forEach(r => r.classList.remove('selected'));
+  document.querySelectorAll('.tier-row')?.forEach(r => r.classList.remove('selected'));
   row.classList.add('selected');
 
   const tier = row.dataset.tier;
@@ -3035,9 +3035,9 @@ function selectTier(row) {
   const commission = row.dataset.commission;
   const rawPrice = parseFloat(price.replace(/[^0-9.-]+/g, ""));
 
-  document.getElementById('selected-tier-name').value = tier;
-  document.getElementById('selected-tier-price').value = document.body.dataset.symbol + rawPrice;
-  document.getElementById('selected-tier-commission').value = commission;
+  document.getElementById('selected-tier-name')?.value = tier;
+  document.getElementById('selected-tier-price')?.value = document.body.dataset.symbol + rawPrice;
+  document.getElementById('selected-tier-commission')?.value = commission;
 
   const displayEl = document.getElementById('selected-display');
   displayEl.textContent = tier;
@@ -3051,11 +3051,11 @@ function selectTier(row) {
   textEl.textContent = price;
   inputEl.value = rawPrice;
   inputEl.dataset.original = rawPrice;
-  document.getElementById('price-error-msg').style.display = 'none';
+  document.getElementById('price-error-msg')?.style.display = 'none';
 
-  document.getElementById('popup').classList.add('hidden');
+  document.getElementById('popup')?.classList.add('hidden');
  document.querySelector("product-info .price-item--regular")?.classList.add("hidden"); 
-  document.querySelector('.order-modal_overlay').style.visibility = 'hidden';
+  document.querySelector('.order-modal_overlay')?.style.visibility = 'hidden';
 }
 
 function enablePriceEdit() {
@@ -3082,7 +3082,7 @@ function enablePriceEdit() {
 
     const formattedPrice = document.body.dataset.symbol + enteredPrice;
     textEl.textContent = formattedPrice;
-    document.getElementById('selected-tier-price').value = formattedPrice;
+    document.getElementById('selected-tier-price')?.value = formattedPrice;
 
     const tiers = [...document.querySelectorAll('.tier-row')].map(row => ({
       tier: row.dataset.tier,
@@ -3107,8 +3107,8 @@ function enablePriceEdit() {
     document.querySelectorAll('.tier-row').forEach(r => r.classList.remove('selected'));
     selectedTier.row.classList.add('selected');
 
-    document.getElementById('selected-tier-name').value = selectedTier.tier;
-    document.getElementById('selected-tier-commission').value = selectedTier.commission;
+    document.getElementById('selected-tier-name')?.value = selectedTier.tier;
+    document.getElementById('selected-tier-commission')?.value = selectedTier.commission;
 
     const displayEl = document.getElementById('selected-display');
     displayEl.textContent = selectedTier.tier;
@@ -3151,9 +3151,9 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
 
-    document.getElementById('selected-tier-name').value = selectedTier.tier;
-    document.getElementById('selected-tier-commission').value = selectedTier.commission;
-    document.getElementById('selected-tier-price').value = document.body.dataset.symbol + enteredPrice;
+    document.getElementById('selected-tier-name')?.value = selectedTier.tier;
+    document.getElementById('selected-tier-commission')?.value = selectedTier.commission;
+    document.getElementById('selected-tier-price')?.value = document.body.dataset.symbol + enteredPrice;
 
     const rawPrice = parseFloat(enteredPrice);
 
@@ -3169,7 +3169,7 @@ document.addEventListener("DOMContentLoaded", function () {
     textEl.textContent = document.body.dataset.symbol + rawPrice;
     inputEl.value = rawPrice;
     inputEl.dataset.original = rawPrice;
-    document.getElementById('price-error-msg').style.display = 'none';
+    document.getElementById('price-error-msg')?.style.display = 'none';
 
     document.querySelector("product-info .price-item--regular")?.classList.add("hidden"); 
 
