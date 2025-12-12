@@ -58,18 +58,17 @@
           - div.price__regular: Displayed when there are no variants on sale
           - div.price__sale: Displayed when a variant is a sale
       {%- endcomment -%}
-       <span id="price-error-msg" style="display:none; color:red; margin-left:10px;">Price should be above ${{ product.metafields.custom["7_sip_price_tier_f"] | default: 0 }}</span>
       <div class="price__regular">
-       <div id="inline-price-edit-wrapper" style="display:none; margin-top: 10px;">
-  <div id="selected-display"></div>
-  <div style="display: flex; align-items: center;">
-    <span id="editable-price-text" style="margin-inline: 10px;"></span>
-    <input type="number" step="1" min="1" max="1000" id="editable-price-input" data-floor="{{ product.metafields.custom["7_sip_price_tier_f"] | default: 0 }}" style="display:none; width: 70px;margin-left:10px;" />
-    <button id="edit-price-button" onclick="enablePriceEdit()" style="background: none; border: none; cursor: pointer;">
-      ✏️
-    </button>
+          <div id="price-loader" style="display:none; margin-top:8px;">Loading price... <span class="loader"></span></div>
+         <div id="inline-price-edit-wrapper" style="display:none; margin-top: 10px;">
+    <div id="selected-display"></div>
+    <div style="display: flex; align-items: center;">
+      <span id="editable-price-text" style="margin-inline: 10px;"></span>
+      <input type="number" step="0.01" min="0" id="editable-price-input" data-floor="0" style="display:none; width: 100px; margin-left:10px;" />
+      <button id="edit-price-button" onclick="enablePriceEdit()" style="background: none; border: none; cursor: pointer;"> ✏️ </button>
+    </div>
+    <div id="price-error-msg" style="display:none; color: #c00; margin-top:6px;">Price cannot be below floor price</div>
   </div>
-</div>
         {%- if product.quantity_price_breaks_configured? -%}
           {%- if show_compare_at_price and compare_at_price -%}
             {%- unless product.price_varies == false and product.compare_at_price_varies %}
