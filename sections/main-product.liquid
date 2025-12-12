@@ -3044,6 +3044,7 @@ function updateTierTable(priceObj = {}) {
      document.querySelector("#editable-price-input").setAttribute('data-floor', priceObj.mnFloorPrice);
      const editableTextEl = document.getElementById("editable-price-text");
      if (editableTextEl) editableTextEl.textContent = `${formattedPrice} ` + priceObj.Unit_Of_Measure;
+     document.getElementById('inline-price-edit-wrapper').style.display = "flex";
     }
 
     const selectedTierEl = document.getElementById("selected-tier-price");
@@ -3091,11 +3092,11 @@ function selectTier(row) {
   displayEl.textContent = tier;
   displayEl.style.backgroundColor = row.dataset.color;
 
-  const wrapper = document.getElementById('inline-price-edit-wrapper');
+  {% comment %} const wrapper = document.getElementById('inline-price-edit-wrapper'); {% endcomment %}
   const textEl = document.getElementById('editable-price-text');
   const inputEl = document.getElementById('editable-price-input');
   
-  wrapper.style.display = "flex";
+  {% comment %} wrapper.style.display = "flex"; {% endcomment %}
   textEl.textContent = price;
   inputEl.value = rawPrice;
   inputEl.dataset.original = rawPrice;
@@ -3209,11 +3210,11 @@ document.addEventListener("DOMContentLoaded", function () {
     displayEl.textContent = selectedTier.tier;
     displayEl.style.backgroundColor = selectedTier.color;
 
-    const wrapper = document.getElementById('inline-price-edit-wrapper');
+    {% comment %} const wrapper = document.getElementById('inline-price-edit-wrapper'); {% endcomment %}
     const textEl = document.getElementById('editable-price-text');
     const inputEl = document.getElementById('editable-price-input');
 
-    wrapper.style.display = "flex";
+    {% comment %} wrapper.style.display = "flex"; {% endcomment %}
     textEl.textContent = document.body.dataset.symbol + rawPrice;
     inputEl.value = rawPrice;
     inputEl.dataset.original = rawPrice;
