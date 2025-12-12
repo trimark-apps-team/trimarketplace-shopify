@@ -375,7 +375,7 @@
 
       <button 
         data-productprice="{{ product.selected_or_first_available_variant.price | money }}"
-        class="button choose-tier"
+        class="button choose-tier hidden"
         onclick="document.getElementById('popup').classList.remove('hidden'); document.querySelector('.order-modal_overlay').style.visibility='visible';"
         style="color:{{ block.settings.tire_price_button_text_color }};
                font-size:{{ block.settings.tire_price_button_text_font_size }}px;
