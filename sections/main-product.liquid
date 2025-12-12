@@ -2987,32 +2987,47 @@ function updateTierTable(priceObj = {}) {
 
    const formattedPrice = `$${rawPrice.toFixed(2)}`;
 
-    if (!useContract) { 
-     updateTierTable(priceObj);
-     document.querySelector(".choose-tier").classList.remove("hidden");
-     document.querySelector("#floor-price").textContent = "$" + priceObj.mnFloorPrice;
-     document.querySelector("#editable-price-input").setAttribute('data-floor', priceObj.mnFloorPrice);
-     const editableTextEl = document.getElementById("editable-price-text");
-     if (editableTextEl) editableTextEl.textContent = `${formattedPrice} ` + priceObj.Unit_Of_Measure;
-     document.getElementById('inline-price-edit-wrapper').style.display = "flex";
-    } else {
-     const regularPriceEl = document.querySelector(".price__regular .price-item--regular");
-     if (regularPriceEl) regularPriceEl.textContent = `${formattedPrice} ` + priceObj.Unit_Of_Measure;
-     regularPriceEl.classList.remove("hidden");
-    }
+if (!useContract) { 
+  updateTierTable(priceObj);
 
-    const selectedTierEl = document.getElementById("selected-tier-price");
-    if (selectedTierEl) selectedTierEl.value = formattedPrice;
+  const chooseTier = document.querySelector(".choose-tier");
+  if (chooseTier) chooseTier.classList.remove("hidden");
 
-    const qtyEl = document.getElementById("quantity-available");
-    if (qtyEl && typeof priceObj.mnQuantityAvailable !== "undefined") {
-      qtyEl.textContent = "Inventory: " + String(priceObj.mnQuantityAvailable);
-    }
+  const floorPriceEl = document.querySelector("#floor-price");
+  if (floorPriceEl) floorPriceEl.textContent = "$" + priceObj.mnFloorPrice;
 
-    console.log("PriceMatrix response object:", priceObj);
-    console.log("Displayed price:", formattedPrice);
+  const editableInput = document.querySelector("#editable-price-input");
+  if (editableInput) editableInput.setAttribute('data-floor', priceObj.mnFloorPrice);
 
-    document.querySelector(".add-to-cart-pdp").disabled = false;
+  const editableTextEl = document.getElementById("editable-price-text");
+  if (editableTextEl) editableTextEl.textContent = `${formattedPrice} ${priceObj.Unit_Of_Measure}`;
+
+  const inlineWrapper = document.getElementById('inline-price-edit-wrapper');
+  if (inlineWrapper) inlineWrapper.style.display = "flex";
+
+} else {
+
+  const regularPriceEl = document.querySelector(".price__regular .price-item--regular");
+  if (regularPriceEl) {
+    regularPriceEl.textContent = `${formattedPrice} ${priceObj.Unit_Of_Measure}`;
+    regularPriceEl.classList.remove("hidden");
+  }
+}
+
+const selectedTierEl = document.getElementById("selected-tier-price");
+if (selectedTierEl) selectedTierEl.value = formattedPrice;
+
+const qtyEl = document.getElementById("quantity-available");
+if (qtyEl && typeof priceObj.mnQuantityAvailable !== "undefined") {
+  qtyEl.textContent = "Inventory: " + String(priceObj.mnQuantityAvailable);
+}
+
+console.log("PriceMatrix response object:", priceObj);
+console.log("Displayed price:", formattedPrice);
+
+const addToCartButton = document.querySelector(".add-to-cart-pdp");
+if (addToCartButton) addToCartButton.disabled = false;
+
 
 
 
