@@ -3045,15 +3045,13 @@ function updateTierTable(priceObj = {}) {
      const editableTextEl = document.getElementById("editable-price-text");
      if (editableTextEl) editableTextEl.textContent = `${formattedPrice} ` + priceObj.Unit_Of_Measure;
      document.getElementById('inline-price-edit-wrapper').style.display = "flex";
-    }
+     const regularPriceEl = document.querySelector(".price__regular .price-item--regular");
+     if (regularPriceEl) regularPriceEl.textContent = `${formattedPrice} ` + priceObj.Unit_Of_Measure;
+     regularPriceEl.classList.remove("hidden");
+    } 
 
     const selectedTierEl = document.getElementById("selected-tier-price");
     if (selectedTierEl) selectedTierEl.value = formattedPrice;
-
-    const regularPriceEl = document.querySelector(".price__regular .price-item--regular");
-    if (regularPriceEl) regularPriceEl.textContent = `${formattedPrice} ` + priceObj.Unit_Of_Measure;
-
-    regularPriceEl.classList.remove("hidden");
 
     const qtyEl = document.getElementById("quantity-available");
     if (qtyEl && typeof priceObj.mnQuantityAvailable !== "undefined") {
