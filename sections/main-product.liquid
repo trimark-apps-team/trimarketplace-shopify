@@ -398,9 +398,16 @@
               </tr>
             </thead>
 
-            <tbody>
-              {% for tier in (1..6) %}
+             <tbody>
+              {% assign tiers = "a,b,c,d,e,f" | split: "," %}
 
+              {% for tier in tiers %}
+                
+                {% assign tier_label = tier | upcase %}
+                {% assign price_key = "7-sip-price-tier_" | append: tier %}
+                {% assign comm_key = "7-sip-comm-tier_" | append: tier %}
+
+                {%- comment -%} TIER COLORS {%- endcomment -%}
                 {% if forloop.index == 1 %}
                   {% assign bg = block.settings.tire_a_bg_color %}
                   {% assign color = block.settings.tire_a_text_color %}
@@ -424,20 +431,21 @@
 
                 <tr class="tier-row"
                     data-color="{{ bg }}"
-                    data-tier=""
-                    data-price=""
-                    data-commission=""
+                    data-tier="{{ tier_label }}"
+                    data-{{ price_key }}=""
+                    data-{{ comm_key }}=""
                     onclick="selectTier(this)">
 
                   <td>
                     <div class="tier-badge" style="background-color:{{ bg }};color:{{ color }};">
-                      
+                      {{ tier_label }}
                     </div>
                   </td>
 
-                  <td></td>
-                  <td></td>
+                  <td data-{{ price_key }}-val=""></td>
+                  <td data-{{ comm_key }}-val></td>
                 </tr>
+
               {% endfor %}
             </tbody>
           </table>
