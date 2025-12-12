@@ -3045,10 +3045,11 @@ function updateTierTable(priceObj = {}) {
      const editableTextEl = document.getElementById("editable-price-text");
      if (editableTextEl) editableTextEl.textContent = `${formattedPrice} ` + priceObj.Unit_Of_Measure;
      document.getElementById('inline-price-edit-wrapper').style.display = "flex";
+    } else {
      const regularPriceEl = document.querySelector(".price__regular .price-item--regular");
      if (regularPriceEl) regularPriceEl.textContent = `${formattedPrice} ` + priceObj.Unit_Of_Measure;
      regularPriceEl.classList.remove("hidden");
-    } 
+    }
 
     const selectedTierEl = document.getElementById("selected-tier-price");
     if (selectedTierEl) selectedTierEl.value = formattedPrice;
