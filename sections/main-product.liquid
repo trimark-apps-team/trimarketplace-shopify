@@ -3003,7 +3003,7 @@ async function fetchPriceMatrix() {
 updateTierTable(priceObj, false);
 {% endcomment %}
 
-function updateTierTable(priceObj = {}, useContract = false) {
+function updateTierTable(priceObj = {}) {
   if (!priceObj || typeof priceObj !== 'object') return;
 
   const tiers = ['A','B','C','D','E','F'];
@@ -3014,12 +3014,6 @@ function updateTierTable(priceObj = {}, useContract = false) {
 
     const rawBracketPrice = priceObj[priceKey];
     const rawCommission   = priceObj[commKey];
-
-    if (!useContract) {
-      if (priceObj.cPriceEditableFlag === "Y") {
-        priceValue = priceObj.mnContractprice ?? priceObj.mnContractPrice ?? priceValue;
-      }
-    }
 
     const parsedPrice = rawBracketPrice;
     const displayPrice = "$" + parsedPrice.toFixed(2);
@@ -3041,15 +3035,19 @@ function updateTierTable(priceObj = {}, useContract = false) {
   });
 }
 
-updateTierTable(priceObj, false);
+   const formattedPrice = `$${rawPrice.toFixed(2)}`;
 
-    const formattedPrice = `$${rawPrice.toFixed(2)}`;
+    if (!useContract) { 
+     updateTierTable(priceObj);
+     document.querySelector(".choose-tier").classList.remove("hidden");
+     document.querySelector("#floor-price").textContent = "$" + priceObj.mnFloorPrice;
+     document.querySelector("#editable-price-input").setAttribute('data-floor', priceObj.mnFloorPrice);
+     const editableTextEl = document.getElementById("editable-price-text");
+     if (editableTextEl) editableTextEl.textContent = `${formattedPrice} ` + priceObj.Unit_Of_Measure;
+    }
 
     const selectedTierEl = document.getElementById("selected-tier-price");
     if (selectedTierEl) selectedTierEl.value = formattedPrice;
-
-    const editableTextEl = document.getElementById("editable-price-text");
-    if (editableTextEl) editableTextEl.textContent = `${formattedPrice} ` + priceObj.Unit_Of_Measure;
 
     const regularPriceEl = document.querySelector(".price__regular .price-item--regular");
     if (regularPriceEl) regularPriceEl.textContent = `${formattedPrice} ` + priceObj.Unit_Of_Measure;
@@ -3064,10 +3062,7 @@ updateTierTable(priceObj, false);
 
      document.querySelector(".add-to-cart-pdp").disabled = false;
 
-     document.querySelector(".choose-tier").classList.remove("hidden");
 
-     document.querySelector("#floor-price").textContent = "$" + priceObj.mnFloorPrice;
-     document.querySelector("#editable-price-input").setAttribute('data-floor', priceObj.mnFloorPrice)
 
     return { success: true, price: rawPrice, formatted: formattedPrice, rawResponse: data };
   } catch (err) {
