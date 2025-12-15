@@ -2889,18 +2889,90 @@
 }
 {% endschema %}
 <script>
-/* -----------------------------
-   HELPERS
------------------------------- */
 const SYMBOL = document.body.dataset.symbol || "$";
 
 function safeText(el, text) {
   if (el) el.textContent = text;
 }
 
-/* -----------------------------
-   TIER TABLE
------------------------------- */
+function enablePriceEdit() {
+  const textEl  = document.getElementById('editable-price-text');
+  const inputEl = document.getElementById('editable-price-input');
+  const errorEl = document.getElementById('price-error-msg');
+
+  if (!textEl || !inputEl) return;
+
+  textEl.style.display = "none";
+  inputEl.style.display = "inline-block";
+  inputEl.focus();
+
+  inputEl.oninput = null;
+  inputEl.onblur  = null;
+
+  inputEl.oninput = function () {
+    let enteredPrice = parseFloat(inputEl.value);
+    const floor = parseFloat(inputEl.dataset.floor);
+
+    if (isNaN(enteredPrice) || enteredPrice < floor) {
+      errorEl.style.display = "inline";
+      return;
+    }
+
+    errorEl.style.display = "none";
+
+    const formattedPrice = document.body.dataset.symbol + enteredPrice;
+    textEl.textContent = formattedPrice;
+    document.getElementById('selected-tier-price').value = formattedPrice;
+
+    const tiers = [...document.querySelectorAll('.tier-row')].map(row => ({
+      tier: row.dataset.tier,
+      price: parseFloat(row.dataset.price.replace(/[^0-9.-]+/g, "")),
+      commission: row.dataset.commission,
+      color: row.dataset.color,
+      row
+    })).filter(t => Number.isFinite(t.price));
+
+    tiers.sort((a, b) => a.price - b.price);
+
+    let selectedTier = tiers[0];
+    for (let t of tiers) {
+      if (enteredPrice >= t.price) {
+        selectedTier = t;
+      } else {
+        break;
+      }
+    }
+
+    document.querySelectorAll('.tier-row')
+      .forEach(r => r.classList.remove('selected'));
+
+    selectedTier.row.classList.add('selected');
+
+    document.getElementById('selected-tier-name').value = selectedTier.tier;
+    document.getElementById('selected-tier-commission').value = selectedTier.commission;
+
+    const displayEl = document.getElementById('selected-display');
+    displayEl.textContent = selectedTier.tier;
+    displayEl.style.backgroundColor = selectedTier.color;
+  };
+
+  inputEl.onblur = function () {
+    let enteredPrice = parseFloat(inputEl.value);
+    const floor = parseFloat(inputEl.dataset.floor);
+
+    if (isNaN(enteredPrice) || enteredPrice < floor) {
+      inputEl.value = inputEl.dataset.original;
+      textEl.textContent =
+        document.body.dataset.symbol +
+        parseFloat(inputEl.dataset.original);
+    }
+
+    inputEl.style.display = "none";
+    textEl.style.display = "inline";
+  };
+}
+
+
 function updateTierTable(priceObj = {}) {
   if (!priceObj || typeof priceObj !== "object") return;
 
@@ -2932,10 +3004,6 @@ function updateTierTable(priceObj = {}) {
   });
 }
 
-/* -----------------------------
-   INITIAL TIER SELECTION
-   (RUN AFTER API PRICE IS READY)
------------------------------- */
 function initTierSelectionFromApi() {
   if (window.buyer_role !== "Sales Rep") return;
 
@@ -2988,9 +3056,6 @@ function initTierSelectionFromApi() {
   document.querySelector("product-info .price-item--regular")?.classList.add("hidden");
 }
 
-/* -----------------------------
-   API FETCH
------------------------------- */
 async function fetchPriceMatrix() {
   const url = "https://jdedevais.trimarkusa.com/jderest/orchestrator/MRS_ORCH_58_GetPriceMatrix";
 
@@ -3038,7 +3103,6 @@ async function fetchPriceMatrix() {
 
     const formattedPrice = SYMBOL + rawPrice.toFixed(2);
 
-    /* ----- SALES REP FLOW ----- */
     if (window.buyer_role === "Sales Rep") {
       if (!useContract) {
         updateTierTable(priceObj);
@@ -3070,7 +3134,6 @@ async function fetchPriceMatrix() {
       }
     }
 
-    /* ----- SHARED STATE ----- */
     document.getElementById("selected-tier-price").value = formattedPrice;
 
     const chooseTier = document.querySelector(".choose-tier");
@@ -3085,7 +3148,6 @@ async function fetchPriceMatrix() {
 
     document.querySelector(".add-to-cart-pdp")?.removeAttribute("disabled");
 
-    /* 🔥 FIX: run AFTER API price is set */
     initTierSelectionFromApi();
 
   } catch (err) {
@@ -3093,9 +3155,7 @@ async function fetchPriceMatrix() {
   }
 }
 
-/* -----------------------------
-   BOOT
------------------------------- */
+
 document.addEventListener("DOMContentLoaded", () => {
   fetchPriceMatrix();
 });
