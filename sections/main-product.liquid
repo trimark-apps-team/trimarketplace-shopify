@@ -2889,6 +2889,219 @@
 }
 {% endschema %}
 <script>
+/* -----------------------------
+   HELPERS
+------------------------------ */
+const SYMBOL = document.body.dataset.symbol || "$";
+
+function safeText(el, text) {
+  if (el) el.textContent = text;
+}
+
+/* -----------------------------
+   TIER TABLE
+------------------------------ */
+function updateTierTable(priceObj = {}) {
+  if (!priceObj || typeof priceObj !== "object") return;
+
+  const tiers = ["A", "B", "C", "D", "E", "F"];
+
+  tiers.forEach(tier => {
+    const priceKey = `mnMarketBracketPrice_${tier}`;
+    const commKey  = `mnAmountCommission_${tier}`;
+
+    const rawPrice = Number(priceObj[priceKey]);
+    const rawComm  = Number(priceObj[commKey]);
+
+    if (!Number.isFinite(rawPrice)) return;
+
+    const displayPrice = SYMBOL + rawPrice.toFixed(2);
+    const displayComm  = SYMBOL + (rawComm || 0).toFixed(2);
+
+    const row = document.querySelector(`tr.tier-row[data-tier="${tier}"]`);
+    if (!row) return;
+
+    row.dataset.price = displayPrice;
+    row.dataset.commission = displayComm;
+
+    const tds = row.querySelectorAll("td");
+    if (tds.length >= 3) {
+      tds[1].textContent = displayPrice;
+      tds[2].textContent = displayComm;
+    }
+  });
+}
+
+/* -----------------------------
+   INITIAL TIER SELECTION
+   (RUN AFTER API PRICE IS READY)
+------------------------------ */
+function initTierSelectionFromApi() {
+  if (window.buyer_role !== "Sales Rep") return;
+
+  const wrapper = document.querySelector(".choose-tier");
+  if (!wrapper?.dataset.productprice) return;
+
+  const enteredPrice = parseFloat(
+    wrapper.dataset.productprice.replace(/[^0-9.-]+/g, "")
+  );
+  if (!Number.isFinite(enteredPrice)) return;
+
+  const tiers = [...document.querySelectorAll(".tier-row")].map(row => ({
+    tier: row.dataset.tier,
+    price: parseFloat(row.dataset.price.replace(/[^0-9.-]+/g, "")),
+    commission: row.dataset.commission,
+    color: row.dataset.color,
+    row
+  })).filter(t => Number.isFinite(t.price));
+
+  if (!tiers.length) return;
+
+  tiers.sort((a, b) => a.price - b.price);
+
+  let selectedTier = tiers[0];
+  for (let t of tiers) {
+    if (enteredPrice >= t.price) selectedTier = t;
+    else break;
+  }
+
+  document.getElementById("selected-tier-name").value = selectedTier.tier;
+  document.getElementById("selected-tier-commission").value = selectedTier.commission;
+  document.getElementById("selected-tier-price").value = SYMBOL + enteredPrice;
+
+  const displayEl = document.getElementById("selected-display");
+  if (displayEl) {
+    displayEl.textContent = selectedTier.tier;
+    displayEl.style.backgroundColor = selectedTier.color;
+  }
+
+  const textEl  = document.getElementById("editable-price-text");
+  const inputEl = document.getElementById("editable-price-input");
+
+  safeText(textEl, SYMBOL + enteredPrice);
+  if (inputEl) {
+    inputEl.value = enteredPrice;
+    inputEl.dataset.original = enteredPrice;
+  }
+
+  document.getElementById("price-error-msg")?.style.display = "none";
+  document.querySelector("product-info .price-item--regular")?.classList.add("hidden");
+}
+
+/* -----------------------------
+   API FETCH
+------------------------------ */
+async function fetchPriceMatrix() {
+  const url = "https://jdedevais.trimarkusa.com/jderest/orchestrator/MRS_ORCH_58_GetPriceMatrix";
+
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Basic VEVTVEpERVNIUDptVmp3dzhrcypeMCo="
+      },
+      body: JSON.stringify({
+        GetPriceMatrix: [{
+          Business_Unit: "321010",
+          Item_Number: "{{ product.metafields.custom['1_erp_id_marlinn_ipics'] }}",
+          Unit_Of_Measure: "{{ product.metafields.custom['3_uom'] }}",
+          Bill_To: "{{ customer.current_location.metafields.custom['1_erp_id_billto'] }}",
+          Ship_To_Number: "0",
+          Customer_Group: "",
+          TAMU_Stratification: ""
+        }]
+      })
+    });
+
+    if (!res.ok) throw new Error("Network error");
+
+    const data = await res.json();
+
+    const repeating =
+      data?.MRS_ORCH_58_PriceMatrixConnector_Repeating ||
+      data?.Response?.response?.MRS_ORCH_58_PriceMatrixConnector_Repeating ||
+      data?.Response?.MRS_ORCH_58_PriceMatrixConnector_Repeating;
+
+    if (!Array.isArray(repeating) || !repeating.length) {
+      throw new Error("No price matrix data");
+    }
+
+    const priceObj = repeating[0].MRS_ORCH_58_PriceMatrixConnector;
+
+    const useContract =
+      priceObj.cPriceEditableFlag?.toUpperCase() === "Y";
+
+    const rawPrice = Number(
+      useContract ? priceObj.mnContractPrice : priceObj.mnBaseSalePrice
+    );
+
+    const formattedPrice = SYMBOL + rawPrice.toFixed(2);
+
+    /* ----- SALES REP FLOW ----- */
+    if (window.buyer_role === "Sales Rep") {
+      if (!useContract) {
+        updateTierTable(priceObj);
+
+        document.querySelector(".choose-tier")?.classList.remove("hidden");
+        safeText(document.getElementById("floor-price"), SYMBOL + priceObj.mnFloorPrice);
+
+        const input = document.getElementById("editable-price-input");
+        if (input) input.dataset.floor = priceObj.mnFloorPrice;
+
+        safeText(
+          document.getElementById("editable-price-text"),
+          `${formattedPrice} ${priceObj.Unit_Of_Measure}`
+        );
+
+        document.getElementById("inline-price-edit-wrapper")?.style.setProperty("display", "flex");
+      } else {
+        const el = document.querySelector(".price__regular .price-item--regular");
+        if (el) {
+          el.textContent = `${formattedPrice} ${priceObj.Unit_Of_Measure}`;
+          el.classList.remove("hidden");
+        }
+      }
+    } else {
+      const el = document.querySelector(".price__regular .price-item--regular");
+      if (el) {
+        el.classList.remove("hidden");
+        el.textContent = `${formattedPrice} ${priceObj.Unit_Of_Measure}`;
+      }
+    }
+
+    /* ----- SHARED STATE ----- */
+    document.getElementById("selected-tier-price").value = formattedPrice;
+
+    const chooseTier = document.querySelector(".choose-tier");
+    if (chooseTier) chooseTier.dataset.productprice = formattedPrice;
+
+    safeText(
+      document.getElementById("quantity-available"),
+      priceObj.mnQuantityAvailable !== undefined
+        ? "Inventory: " + priceObj.mnQuantityAvailable
+        : ""
+    );
+
+    document.querySelector(".add-to-cart-pdp")?.removeAttribute("disabled");
+
+    /* 🔥 FIX: run AFTER API price is set */
+    initTierSelectionFromApi();
+
+  } catch (err) {
+    console.error("PriceMatrix Error:", err);
+  }
+}
+
+/* -----------------------------
+   BOOT
+------------------------------ */
+document.addEventListener("DOMContentLoaded", () => {
+  fetchPriceMatrix();
+});
+</script>
+
+{% comment %} <script>
 
 async function fetchPriceMatrix() {
   const url = "https://jdedevais.trimarkusa.com/jderest/orchestrator/MRS_ORCH_58_GetPriceMatrix";
@@ -3201,7 +3414,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
-</script>
+</script> {% endcomment %}
 
 
 {% comment %} <script>
