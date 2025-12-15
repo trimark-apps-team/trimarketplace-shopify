@@ -2889,15 +2889,24 @@
 }
 {% endschema %}
 <script>
-const $ = (sel) => document.querySelector(sel);
-const $$ = (sel) => [...document.querySelectorAll(sel)];
-const formatPrice = (n) => `$${Number(n).toFixed(2)}`;
-const SYMBOL = document.body.dataset.symbol || "$";
+function getEl(selector) {
+  return document.querySelector(selector);
+}
+
+function getAllEls(selector) {
+  return Array.from(document.querySelectorAll(selector));
+}
+
+function formatPrice(value) {
+  return "$" + Number(value).toFixed(2);
+}
+
+const CURRENCY_SYMBOL = document.body.dataset.symbol || "$";
 
 async function fetchPriceMatrix() {
   const url = "https://jdedevais.trimarkusa.com/jderest/orchestrator/MRS_ORCH_58_GetPriceMatrix";
 
-  const body = {
+  const payload = {
     GetPriceMatrix: [{
       Business_Unit: "321010",
       Item_Number: "{{ product.metafields.custom['1_erp_id_marlinn_ipics'] }}",
@@ -2910,148 +2919,187 @@ async function fetchPriceMatrix() {
   };
 
   try {
-    const res = await fetch(url, {
+    const response = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "Authorization": "Basic VEVTVEpERVNIUDptVmp3dzhrcypeMCo="
       },
-      body: JSON.stringify(body)
+      body: JSON.stringify(payload)
     });
 
-    if (!res.ok) throw new Error("PriceMatrix API failed");
+    if (!response.ok) {
+      throw new Error("PriceMatrix API failed");
+    }
 
-    const data = await res.json();
+    const data = await response.json();
+
     const repeating =
       data?.MRS_ORCH_58_PriceMatrixConnector_Repeating ||
       data?.Response?.response?.MRS_ORCH_58_PriceMatrixConnector_Repeating ||
       [];
 
-    if (!repeating.length) throw new Error("No price matrix data");
+    if (!repeating.length) {
+      throw new Error("No price matrix data");
+    }
 
     handlePriceMatrix(repeating[0].MRS_ORCH_58_PriceMatrixConnector);
 
-  } catch (err) {
-    console.error("PriceMatrix Error:", err);
+  } catch (error) {
+    console.error("PriceMatrix Error:", error);
   }
 }
 
 function handlePriceMatrix(priceObj) {
-  const useContract = priceObj.cPriceEditableFlag?.toUpperCase() === "Y";
-  const rawPrice = Number(useContract ? priceObj.mnContractPrice : priceObj.mnBaseSalePrice);
-  const formatted = formatPrice(rawPrice);
+  const isContractPrice = priceObj.cPriceEditableFlag?.toUpperCase() === "Y";
+  const rawPrice = Number(
+    isContractPrice ? priceObj.mnContractPrice : priceObj.mnBaseSalePrice
+  );
 
-  updateMainPrice(formatted, priceObj.Unit_Of_Measure);
+  const formattedPrice = formatPrice(rawPrice);
+
+  updateMainPrice(formattedPrice, priceObj.Unit_Of_Measure);
   updateInventory(priceObj.mnQuantityAvailable);
 
   if (window.buyer_role === "Sales Rep") {
-    useContract ? showContractPrice(formatted, priceObj) : showTierPricing(priceObj, formatted);
+    if (isContractPrice) {
+      showContractPrice(formattedPrice, priceObj);
+    } else {
+      showTierPricing(priceObj, formattedPrice);
+    }
   }
 
-  $("#selected-tier-price") && ($("#selected-tier-price").value = formatted);
-  $(".add-to-cart-pdp") && ($(".add-to-cart-pdp").disabled = false);
+  const selectedTierPrice = getEl("#selected-tier-price");
+  if (selectedTierPrice) selectedTierPrice.value = formattedPrice;
 
-  console.log("PriceMatrix:", priceObj);
+  const addToCartBtn = getEl(".add-to-cart-pdp");
+  if (addToCartBtn) addToCartBtn.disabled = false;
+
+  console.log("PriceMatrix response:", priceObj);
 }
 
 function updateMainPrice(price, uom) {
-  const el = $(".price__regular .price-item--regular");
-  if (!el) return;
-  el.textContent = `${price} ${uom}`;
-  el.classList.remove("hidden");
+  const priceEl = getEl(".price__regular .price-item--regular");
+  if (!priceEl) return;
+
+  priceEl.textContent = `${price} ${uom}`;
+  priceEl.classList.remove("hidden");
 }
 
-function updateInventory(qty) {
-  const el = $("#quantity-available");
-  if (el && qty !== undefined) el.textContent = `Inventory: ${qty}`;
+function updateInventory(quantity) {
+  const inventoryEl = getEl("#quantity-available");
+  if (!inventoryEl || quantity === undefined) return;
+
+  inventoryEl.textContent = "Inventory: " + quantity;
 }
 
 function showContractPrice(price, priceObj) {
   updateMainPrice(price, priceObj.Unit_Of_Measure);
 }
 
-function showTierPricing(priceObj, formatted) {
+function showTierPricing(priceObj, formattedPrice) {
   updateTierTable(priceObj);
 
-  $(".choose-tier")?.classList.remove("hidden");
-  $("#floor-price").textContent = formatPrice(priceObj.mnFloorPrice);
+  const chooseTier = getEl(".choose-tier");
+  if (chooseTier) chooseTier.classList.remove("hidden");
 
-  const input = $("#editable-price-input");
-  input.dataset.floor = priceObj.mnFloorPrice;
+  const floorPrice = getEl("#floor-price");
+  if (floorPrice) floorPrice.textContent = formatPrice(priceObj.mnFloorPrice);
 
-  $("#editable-price-text").textContent = `${formatted} ${priceObj.Unit_Of_Measure}`;
-  $("#inline-price-edit-wrapper").style.display = "flex";
+  const input = getEl("#editable-price-input");
+  if (input) input.dataset.floor = priceObj.mnFloorPrice;
+
+  const editableText = getEl("#editable-price-text");
+  if (editableText) {
+    editableText.textContent = `${formattedPrice} ${priceObj.Unit_Of_Measure}`;
+  }
+
+  const wrapper = getEl("#inline-price-edit-wrapper");
+  if (wrapper) wrapper.style.display = "flex";
 }
 
 function updateTierTable(priceObj) {
-  ['A','B','C','D','E','F'].forEach(tier => {
-    const price = priceObj[`mnMarketBracketPrice_${tier}`];
-    const commission = priceObj[`mnAmountCommission_${tier}`];
-    if (price == null) return;
+  const tiers = ["A", "B", "C", "D", "E", "F"];
 
-    const row = $(`tr.tier-row[data-tier="${tier}"]`);
+  tiers.forEach(function (tier) {
+    const tierPrice = priceObj[`mnMarketBracketPrice_${tier}`];
+    const tierCommission = priceObj[`mnAmountCommission_${tier}`];
+    if (tierPrice == null) return;
+
+    const row = getEl(`tr.tier-row[data-tier="${tier}"]`);
     if (!row) return;
 
-    row.dataset.price = formatPrice(price);
-    row.dataset.commission = formatPrice(commission);
+    row.dataset.price = formatPrice(tierPrice);
+    row.dataset.commission = formatPrice(tierCommission);
 
-    const tds = row.querySelectorAll("td");
-    tds[1].textContent = formatPrice(price);
-    tds[2].textContent = formatPrice(commission);
+    const cells = row.querySelectorAll("td");
+    if (cells.length >= 3) {
+      cells[1].textContent = formatPrice(tierPrice);
+      cells[2].textContent = formatPrice(tierCommission);
+    }
   });
 }
 
 function selectTier(row) {
-  $$('.tier-row').forEach(r => r.classList.remove('selected'));
-  row.classList.add('selected');
+  getAllEls(".tier-row").forEach(function (r) {
+    r.classList.remove("selected");
+  });
 
-  const price = parseFloat(row.dataset.price.replace(/[^\d.-]/g, ""));
+  row.classList.add("selected");
 
-  $("#selected-tier-name").value = row.dataset.tier;
-  $("#selected-tier-price").value = SYMBOL + price;
-  $("#selected-tier-commission").value = row.dataset.commission;
+  const rawPrice = parseFloat(row.dataset.price.replace(/[^\d.-]/g, ""));
 
-  $("#selected-display").textContent = row.dataset.tier;
-  $("#editable-price-text").textContent = row.dataset.price;
+  getEl("#selected-tier-name").value = row.dataset.tier;
+  getEl("#selected-tier-price").value = CURRENCY_SYMBOL + rawPrice;
+  getEl("#selected-tier-commission").value = row.dataset.commission;
 
-  $("#editable-price-input").value = price;
-  $("#editable-price-input").dataset.original = price;
+  getEl("#selected-display").textContent = row.dataset.tier;
+  getEl("#editable-price-text").textContent = row.dataset.price;
 
-  $("#popup")?.classList.add("hidden");
-  $("product-info .price-item--regular")?.classList.add("hidden");
+  const input = getEl("#editable-price-input");
+  input.value = rawPrice;
+  input.dataset.original = rawPrice;
+
+  getEl("#popup")?.classList.add("hidden");
+  getEl("product-info .price-item--regular")?.classList.add("hidden");
 }
-
 
 function enablePriceEdit() {
-  const text = $("#editable-price-text");
-  const input = $("#editable-price-input");
-  const error = $("#price-error-msg");
+  const textEl = getEl("#editable-price-text");
+  const inputEl = getEl("#editable-price-input");
+  const errorEl = getEl("#price-error-msg");
 
-  text.style.display = "none";
-  input.style.display = "inline-block";
-  input.focus();
+  textEl.style.display = "none";
+  inputEl.style.display = "inline-block";
+  inputEl.focus();
 
-  input.oninput = () => {
-    const val = Number(input.value);
-    const floor = Number(input.dataset.floor);
+  inputEl.oninput = function () {
+    const entered = Number(inputEl.value);
+    const floor = Number(inputEl.dataset.floor);
 
-    error.style.display = isNaN(val) || val < floor ? "inline" : "none";
-    if (!error.style.display) text.textContent = SYMBOL + val;
+    if (isNaN(entered) || entered < floor) {
+      errorEl.style.display = "inline";
+      return;
+    }
+
+    errorEl.style.display = "none";
+    textEl.textContent = CURRENCY_SYMBOL + entered;
   };
 
-  input.onblur = () => {
-    if (error.style.display === "inline") {
-      input.value = input.dataset.original;
-      text.textContent = SYMBOL + input.dataset.original;
+  inputEl.onblur = function () {
+    if (errorEl.style.display === "inline") {
+      inputEl.value = inputEl.dataset.original;
+      textEl.textContent = CURRENCY_SYMBOL + inputEl.dataset.original;
     }
-    input.style.display = "none";
-    text.style.display = "inline";
+
+    inputEl.style.display = "none";
+    textEl.style.display = "inline";
   };
 }
-
 
 document.addEventListener("DOMContentLoaded", fetchPriceMatrix);
 </script>
+
 
   
   
