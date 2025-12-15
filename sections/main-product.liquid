@@ -3023,6 +3023,9 @@ function updateTierTable(priceObj = {}) {
 const selectedTierEl = document.getElementById("selected-tier-price");
 if (selectedTierEl) selectedTierEl.value = formattedPrice;
 
+const regularPrice = document.querySelector('.choose-tier')?.dataset.productprice;
+if (regularPrice) regularPrice = formattedPrice;
+
 const qtyEl = document.getElementById("quantity-available");
 if (qtyEl && typeof priceObj.mnQuantityAvailable !== "undefined") {
   qtyEl.textContent = "Inventory: " + String(priceObj.mnQuantityAvailable);
