@@ -2989,11 +2989,9 @@ function selectTier(row) {
   displayEl.textContent = tier;
   displayEl.style.backgroundColor = row.dataset.color;
 
-  const wrapper = document.getElementById('inline-price-edit-wrapper');
   const textEl = document.getElementById('editable-price-text');
   const inputEl = document.getElementById('editable-price-input');
   
-  wrapper.style.display = "flex";
   textEl.textContent = price;
   inputEl.value = rawPrice;
   inputEl.dataset.original = rawPrice;
