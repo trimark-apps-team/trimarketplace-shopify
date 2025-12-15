@@ -2993,7 +2993,10 @@ function updateTierTable(priceObj = {}) {
         updateTierTable(priceObj);
 
         const chooseTier = document.querySelector(".choose-tier");
-        if (chooseTier) chooseTier.classList.remove("hidden");
+        if (chooseTier) {
+            chooseTier.classList.remove("hidden");
+            chooseTier.dataset.productprice = formattedPrice;
+        }
 
         const floorPriceEl = document.querySelector("#floor-price");
         if (floorPriceEl) floorPriceEl.textContent = "$" + priceObj.mnFloorPrice;
@@ -3023,8 +3026,8 @@ function updateTierTable(priceObj = {}) {
 const selectedTierEl = document.getElementById("selected-tier-price");
 if (selectedTierEl) selectedTierEl.value = formattedPrice;
 
-const regularPrice = document.querySelector('.choose-tier');
-if (regularPrice) regularPrice.dataset.productprice = formattedPrice;
+{% comment %} const regularPrice = document.querySelector('.choose-tier');
+if (regularPrice) regularPrice.dataset.productprice = formattedPrice; {% endcomment %}
 
 const qtyEl = document.getElementById("quantity-available");
 if (qtyEl && typeof priceObj.mnQuantityAvailable !== "undefined") {
