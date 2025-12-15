@@ -1344,7 +1344,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const cards = document.querySelectorAll("[data-item-number][data-uom]");
   if (!cards.length) return;
 
-  /* Disable add-to-cart initially */
   cards.forEach(card => {
     const btnSelector = card.dataset.addToCart;
     if (!btnSelector) return;
@@ -1353,7 +1352,6 @@ document.addEventListener("DOMContentLoaded", function () {
     if (btn) btn.disabled = true;
   });
 
-  /* Build API payload safely */
   const items = [];
   cards.forEach(card => {
     const item = card.dataset.itemNumber;
@@ -1406,18 +1404,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const formatted = SYMBOL + rawPrice.toFixed(2);
 
-      /* Update price */
       const priceTarget = card.dataset.priceTarget;
       if (priceTarget) {
         const priceEl = card.querySelector(priceTarget);
         if (priceEl) priceEl.textContent = formatted;
       }
 
-      /* Update hidden input if present */
       const tierInput = card.querySelector(".tier-price");
       if (tierInput) tierInput.value = formatted;
 
-      /* Enable add-to-cart */
       const btnSelector = card.dataset.addToCart;
       if (btnSelector) {
         const btn = card.querySelector(btnSelector);
@@ -1427,7 +1422,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   })
   .catch(() => {
-    /* Fail silently */
     cards.forEach(card => {
       const btnSelector = card.dataset.addToCart;
       if (!btnSelector) return;
