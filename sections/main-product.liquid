@@ -450,7 +450,7 @@
 
           <button 
             class="button"
-            data-product-price="{{ product.selected_or_first_available_variant.unit_price | money }}"
+            data-product-price=""
             onclick="document.getElementById('popup').classList.add('hidden'); document.querySelector('.order-modal_overlay').style.visibility='hidden';"
             style="color:{{ block.settings.close_button_text_color }};
                    font-size:{{ block.settings.close_button_text_font_size }}px;
