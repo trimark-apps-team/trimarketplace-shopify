@@ -71,7 +71,7 @@
     <button id="edit-price-button" onclick="enablePriceEdit()" style="background: none; border: none; cursor: pointer;">
       ✏️
     </button>
-    <span class="price-type"></span>
+    <span id="price-type"></span>
   </div>
 </div>
 {% endif %}
@@ -104,7 +104,7 @@
           <span class="price-item price-item--regular hidden" bss-bcp-quote-product-id="{{ product.id }}" bss-bcp-quote-product-price>
 
           </span>
-          <span class="price-type"></span>
+          <span class="price-type-regular"></span>
         {%- endif -%}
       </div>
       <div class="price__sale">
