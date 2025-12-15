@@ -2891,7 +2891,7 @@
 <script>
 const SYMBOL = document.body.dataset.symbol || "$";
 
-function safeText(el, text) {
+function updateText(el, text) {
   if (el) el.textContent = text;
 }
 
@@ -3074,7 +3074,7 @@ function initTierSelectionFromApi() {
   const textEl  = document.getElementById("editable-price-text");
   const inputEl = document.getElementById("editable-price-input");
 
-  safeText(textEl, SYMBOL + enteredPrice);
+  updateText(textEl, SYMBOL + enteredPrice);
   if (inputEl) {
     inputEl.value = enteredPrice;
     inputEl.dataset.original = enteredPrice;
@@ -3135,12 +3135,12 @@ async function fetchPriceMatrix() {
         updateTierTable(priceObj);
 
         document.querySelector(".choose-tier")?.classList.remove("hidden");
-        safeText(document.getElementById("floor-price"), SYMBOL + priceObj.mnFloorPrice);
+        updateText(document.getElementById("floor-price"), SYMBOL + priceObj.mnFloorPrice);
 
         const input = document.getElementById("editable-price-input");
         if (input) input.dataset.floor = priceObj.mnFloorPrice;
 
-        safeText(
+        updateText(
           document.getElementById("editable-price-text"),
           `${formattedPrice} ${priceObj.Unit_Of_Measure}`
         );
@@ -3166,7 +3166,7 @@ async function fetchPriceMatrix() {
     const chooseTier = document.querySelector(".choose-tier");
     if (chooseTier) chooseTier.dataset.productprice = formattedPrice;
 
-    safeText(
+    updateText(
       document.getElementById("quantity-available"),
       priceObj.mnQuantityAvailable !== undefined
         ? "Inventory: " + priceObj.mnQuantityAvailable
