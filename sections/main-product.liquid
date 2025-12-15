@@ -2998,7 +2998,6 @@ function selectTier(row) {
   document.getElementById('price-error-msg').style.display = 'none';
 
   document.getElementById('popup').classList.add('hidden');
-  document.querySelector("product-info .price-item--regular")?.classList.add("hidden");
   document.querySelector('.order-modal_overlay').style.visibility = 'hidden';
 }
 
@@ -3082,7 +3081,7 @@ function initTierSelectionFromApi() {
   }
 
   document.getElementById("price-error-msg").style.display = "none";
-  document.querySelector("product-info .price-item--regular")?.classList.add("hidden");
+  document.querySelector("product-info .price__regular .price-item--regular")?.classList.add("hidden");
 }
 
 async function fetchPriceMatrix() {
@@ -3149,14 +3148,14 @@ async function fetchPriceMatrix() {
 
         document.getElementById("inline-price-edit-wrapper")?.style.setProperty("display", "flex");
       } else {
-        const el = document.querySelector(".price__regular .price-item--regular");
+        const el = document.querySelector("product-info .price__regular .price-item--regular");
         if (el) {
           el.textContent = `${formattedPrice} ${priceObj.Unit_Of_Measure}`;
           el.classList.remove("hidden");
         }
       }
     } else {
-      const el = document.querySelector(".price__regular .price-item--regular");
+      const el = document.querySelector("product-info .price__regular .price-item--regular");
       if (el) {
         el.classList.remove("hidden");
         el.textContent = `${formattedPrice} ${priceObj.Unit_Of_Measure}`;
@@ -3311,15 +3310,15 @@ function updateTierTable(priceObj = {}) {
 
       } else {
 
-        const regularPriceEl = document.querySelector(".price__regular .price-item--regular");
+        const regularPriceEl = document.querySelector("product-info .price__regular .price-item--regular");
         if (regularPriceEl) {
           regularPriceEl.textContent = `${formattedPrice} ${priceObj.Unit_Of_Measure}`;
           regularPriceEl.classList.remove("hidden");
         }
       }
    } else {
-     document.querySelector(".price__regular .price-item--regular").classList.remove("hidden");
-     document.querySelector(".price__regular .price-item--regular").textContent = `${formattedPrice} ${priceObj.Unit_Of_Measure}`;
+     document.querySelector("product-info .price__regular .price-item--regular").classList.remove("hidden");
+     document.querySelector("product-info .price__regular .price-item--regular").textContent = `${formattedPrice} ${priceObj.Unit_Of_Measure}`;
    }
 
 const selectedTierEl = document.getElementById("selected-tier-price");
@@ -3597,7 +3596,7 @@ function handlePriceMatrix(priceObj) {
 }
 
 function updateMainPrice(price, uom) {
-  const priceEl = getEl(".price__regular .price-item--regular");
+  const priceEl = getEl("product-info .price__regular .price-item--regular");
   if (!priceEl) return;
 
   priceEl.textContent = `${price} ${uom}`;
