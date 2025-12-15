@@ -1331,3 +1331,110 @@ class CartPerformance {
     );
   }
 }
+
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  const SYMBOL = document.body.dataset.symbol || "$";
+  const BILL_TO = document.body.dataset.billto;
+  const BUSINESS_UNIT = "321010";
+
+  if (!BILL_TO) return;
+
+  const cards = document.querySelectorAll("[data-item-number][data-uom]");
+  if (!cards.length) return;
+
+  /* Disable add-to-cart initially */
+  cards.forEach(card => {
+    const btnSelector = card.dataset.addToCart;
+    if (!btnSelector) return;
+
+    const btn = card.querySelector(btnSelector);
+    if (btn) btn.disabled = true;
+  });
+
+  /* Build API payload safely */
+  const items = [];
+  cards.forEach(card => {
+    const item = card.dataset.itemNumber;
+    const uom  = card.dataset.uom;
+
+    if (!item || !uom) return;
+
+    items.push({
+      Business_Unit: BUSINESS_UNIT,
+      Item_Number: item,
+      Unit_Of_Measure: uom,
+      Bill_To: BILL_TO,
+      Ship_To_Number: "0",
+      Customer_Group: "",
+      TAMU_Stratification: ""
+    });
+  });
+
+  if (!items.length) return;
+
+  fetch("https://jdedevais.trimarkusa.com/jderest/orchestrator/MRS_ORCH_58_GetPriceMatrix", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Basic VEVTVEpERVNIUDptVmp3dzhrcypeMCo="
+    },
+    body: JSON.stringify({ GetPriceMatrix: items })
+  })
+  .then(res => res.ok ? res.json() : Promise.reject())
+  .then(data => {
+
+    const repeating = data?.MRS_ORCH_58_PriceMatrixConnector_Repeating || [];
+    if (!Array.isArray(repeating)) return;
+
+    repeating.forEach(entry => {
+      const priceObj = entry.MRS_ORCH_58_PriceMatrixConnector;
+      if (!priceObj?.Item_Number) return;
+
+      const card = document.querySelector(
+        `[data-item-number="${priceObj.Item_Number}"]`
+      );
+      if (!card) return;
+
+      const rawPrice =
+        priceObj.cPriceEditableFlag === "Y"
+          ? priceObj.mnContractPrice
+          : priceObj.mnBaseSalePrice;
+
+      if (!Number.isFinite(rawPrice)) return;
+
+      const formatted = SYMBOL + rawPrice.toFixed(2);
+
+      /* Update price */
+      const priceTarget = card.dataset.priceTarget;
+      if (priceTarget) {
+        const priceEl = card.querySelector(priceTarget);
+        if (priceEl) priceEl.textContent = formatted;
+      }
+
+      /* Update hidden input if present */
+      const tierInput = card.querySelector(".tier-price");
+      if (tierInput) tierInput.value = formatted;
+
+      /* Enable add-to-cart */
+      const btnSelector = card.dataset.addToCart;
+      if (btnSelector) {
+        const btn = card.querySelector(btnSelector);
+        if (btn) btn.disabled = false;
+      }
+    });
+
+  })
+  .catch(() => {
+    /* Fail silently */
+    cards.forEach(card => {
+      const btnSelector = card.dataset.addToCart;
+      if (!btnSelector) return;
+
+      const btn = card.querySelector(btnSelector);
+      if (btn) btn.disabled = false;
+    });
+  });
+
+});
