@@ -3145,6 +3145,11 @@ async function fetchPriceMatrix() {
           `${formattedPrice} ${priceObj.Unit_Of_Measure}`
         );
 
+        updateText(
+          document.getElementById("price-type"),
+          `SIP price`
+        );
+
         document.getElementById("inline-price-edit-wrapper")?.style.setProperty("display", "flex");
       } else {
         const el = document.querySelector("product-info .price__regular .price-item--regular");
@@ -3152,6 +3157,10 @@ async function fetchPriceMatrix() {
           el.textContent = `${formattedPrice} ${priceObj.Unit_Of_Measure}`;
           el.classList.remove("hidden");
         }
+        updateText(
+          document.getElementById("price-type"),
+          `Contract price`
+        );
       }
     } else {
       const el = document.querySelector("product-info .price__regular .price-item--regular");
