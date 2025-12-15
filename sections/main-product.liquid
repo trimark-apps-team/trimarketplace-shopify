@@ -2895,6 +2895,11 @@ function updateText(el, text) {
   if (el) el.textContent = text;
 }
 
+function getNumeric(val) {
+  return parseFloat(String(val).replace(/[^0-9.-]+/g, ""));
+}
+
+
 function enablePriceEdit() {
   const textEl  = document.getElementById('editable-price-text');
   const inputEl = document.getElementById('editable-price-input');
@@ -2902,45 +2907,47 @@ function enablePriceEdit() {
 
   if (!textEl || !inputEl) return;
 
+  const floor = getNumeric(inputEl.dataset.floor);
+  let lastValidPrice = getNumeric(inputEl.dataset.original);
+
   textEl.style.display = "none";
   inputEl.style.display = "inline-block";
   inputEl.focus();
 
-  inputEl.oninput = null;
-  inputEl.onblur  = null;
+  inputEl.oninput = () => {
+    const entered = getNumeric(inputEl.value);
 
-  inputEl.oninput = function () {
-    let enteredPrice = parseFloat(inputEl.value);
-    const floor = parseFloat(inputEl.dataset.floor);
-
-    if (isNaN(enteredPrice) || enteredPrice < floor) {
+    // ❌ INVALID → block everything
+    if (!Number.isFinite(entered) || entered < floor) {
       errorEl.style.display = "inline";
       return;
     }
 
+    // ✅ VALID → commit
     errorEl.style.display = "none";
+    lastValidPrice = entered;
 
-    const formattedPrice = document.body.dataset.symbol + enteredPrice;
-    textEl.textContent = formattedPrice;
-    document.getElementById('selected-tier-price').value = formattedPrice;
+    // update visible price
+    textEl.textContent = SYMBOL + entered.toFixed(2);
+    document.getElementById('selected-tier-price').value =
+      SYMBOL + entered.toFixed(2);
 
-    const tiers = [...document.querySelectorAll('.tier-row')].map(row => ({
-      tier: row.dataset.tier,
-      price: parseFloat(row.dataset.price.replace(/[^0-9.-]+/g, "")),
-      commission: row.dataset.commission,
-      color: row.dataset.color,
-      row
-    })).filter(t => Number.isFinite(t.price));
-
-    tiers.sort((a, b) => a.price - b.price);
+    // tier resolution
+    const tiers = [...document.querySelectorAll('.tier-row')]
+      .map(row => ({
+        tier: row.dataset.tier,
+        price: getNumeric(row.dataset.price),
+        commission: row.dataset.commission,
+        color: row.dataset.color,
+        row
+      }))
+      .filter(t => Number.isFinite(t.price))
+      .sort((a, b) => a.price - b.price);
 
     let selectedTier = tiers[0];
-    for (let t of tiers) {
-      if (enteredPrice >= t.price) {
-        selectedTier = t;
-      } else {
-        break;
-      }
+    for (const t of tiers) {
+      if (entered >= t.price) selectedTier = t;
+      else break;
     }
 
     document.querySelectorAll('.tier-row')
@@ -2956,21 +2963,25 @@ function enablePriceEdit() {
     displayEl.style.backgroundColor = selectedTier.color;
   };
 
-  inputEl.onblur = function () {
-    let enteredPrice = parseFloat(inputEl.value);
-    const floor = parseFloat(inputEl.dataset.floor);
+  inputEl.onblur = () => {
+    const entered = getNumeric(inputEl.value);
 
-    if (isNaN(enteredPrice) || enteredPrice < floor) {
-      inputEl.value = inputEl.dataset.original;
-      textEl.textContent =
-        document.body.dataset.symbol +
-        parseFloat(inputEl.dataset.original);
+    // ❌ INVALID → full revert
+    if (!Number.isFinite(entered) || entered < floor) {
+      inputEl.value = lastValidPrice;
+      textEl.textContent = SYMBOL + lastValidPrice.toFixed(2);
+      document.getElementById('selected-tier-price').value =
+        SYMBOL + lastValidPrice.toFixed(2);
     }
+
+    inputEl.dataset.original = lastValidPrice;
+    errorEl.style.display = "none";
 
     inputEl.style.display = "none";
     textEl.style.display = "inline";
   };
 }
+
 
 function selectTier(row) {
   document.querySelectorAll('.tier-row').forEach(r => r.classList.remove('selected'));
