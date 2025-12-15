@@ -28,11 +28,7 @@
   endif
 -%}
 
-<h3>Debug</h3>
-<p>Template: {{ template.name }}</p>
-<p>Results exists? {% if results %}Yes{% else %}No{% endif %}</p>
-<p>Filters size: {% if results.filters %}{{ results.filters.size }}{% else %}0{% endif %}</p>
-<pre>{{ results | json }}</pre>
+
 
 <div class="facets-container{% if filter_type == 'drawer' %} facets-container-drawer{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
   {%- if filter_type == 'vertical' or filter_type == 'horizontal' -%}
