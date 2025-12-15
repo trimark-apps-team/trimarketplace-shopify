@@ -450,7 +450,7 @@
 
           <button 
             class="button"
-            data-product-price=""
+            data-product-price="{{ product.selected_or_first_available_variant.unit_price | money }}"
             onclick="document.getElementById('popup').classList.add('hidden'); document.querySelector('.order-modal_overlay').style.visibility='hidden';"
             style="color:{{ block.settings.close_button_text_color }};
                    font-size:{{ block.settings.close_button_text_font_size }}px;
@@ -2993,10 +2993,7 @@ function updateTierTable(priceObj = {}) {
         updateTierTable(priceObj);
 
         const chooseTier = document.querySelector(".choose-tier");
-        if (chooseTier) {
-            chooseTier.classList.remove("hidden");
-            chooseTier.dataset.productprice = formattedPrice;
-        }
+        if (chooseTier) chooseTier.classList.remove("hidden");
 
         const floorPriceEl = document.querySelector("#floor-price");
         if (floorPriceEl) floorPriceEl.textContent = "$" + priceObj.mnFloorPrice;
@@ -3026,8 +3023,8 @@ function updateTierTable(priceObj = {}) {
 const selectedTierEl = document.getElementById("selected-tier-price");
 if (selectedTierEl) selectedTierEl.value = formattedPrice;
 
-{% comment %} const regularPrice = document.querySelector('.choose-tier');
-if (regularPrice) regularPrice.dataset.productprice = formattedPrice; {% endcomment %}
+const regularPrice = document.querySelector('.choose-tier')?.dataset.productprice;
+if (regularPrice) regularPrice = formattedPrice;
 
 const qtyEl = document.getElementById("quantity-available");
 if (qtyEl && typeof priceObj.mnQuantityAvailable !== "undefined") {
@@ -3159,7 +3156,7 @@ function enablePriceEdit() {
 
 document.addEventListener("DOMContentLoaded", function () {
    if (window.buyer_role == "Sales Rep") {
-  const enteredPrice = document.querySelector('.choose-tier').dataset.productprice.replace(/[^0-9.-]+/g, "");
+  const enteredPrice = document.querySelector('.choose-tier')?.dataset.productprice.replace(/[^0-9.-]+/g, "");
   const tiers = [...document.querySelectorAll('.tier-row')].map(row => ({
       tier: row.dataset.tier,
       price: parseFloat(row.dataset.price.replace(/[^0-9.-]+/g, "")),
