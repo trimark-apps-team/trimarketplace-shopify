@@ -2910,20 +2910,25 @@ function enablePriceEdit() {
   inputEl.onblur  = null;
 
   inputEl.oninput = function () {
-    let enteredPrice = parseFloat(inputEl.value);
+    const enteredPrice = parseFloat(inputEl.value);
     const floor = parseFloat(inputEl.dataset.floor);
 
+    /* INVALID PRICE */
     if (isNaN(enteredPrice) || enteredPrice < floor) {
       errorEl.style.display = "inline";
       return;
     }
 
+    /* VALID PRICE */
     errorEl.style.display = "none";
 
     const formattedPrice = document.body.dataset.symbol + enteredPrice;
+
+    /* Sync visible price */
     textEl.textContent = formattedPrice;
     document.getElementById('selected-tier-price').value = formattedPrice;
 
+    /* Find correct tier */
     const tiers = [...document.querySelectorAll('.tier-row')].map(row => ({
       tier: row.dataset.tier,
       price: parseFloat(row.dataset.price.replace(/[^0-9.-]+/g, "")),
@@ -2936,13 +2941,11 @@ function enablePriceEdit() {
 
     let selectedTier = tiers[0];
     for (let t of tiers) {
-      if (enteredPrice >= t.price) {
-        selectedTier = t;
-      } else {
-        break;
-      }
+      if (enteredPrice >= t.price) selectedTier = t;
+      else break;
     }
 
+    /* Sync tier UI */
     document.querySelectorAll('.tier-row')
       .forEach(r => r.classList.remove('selected'));
 
@@ -2956,20 +2959,21 @@ function enablePriceEdit() {
     displayEl.style.backgroundColor = selectedTier.color;
   };
 
+
   inputEl.onblur = function () {
-    let enteredPrice = parseFloat(inputEl.value);
+    const enteredPrice = parseFloat(inputEl.value);
     const floor = parseFloat(inputEl.dataset.floor);
 
     if (isNaN(enteredPrice) || enteredPrice < floor) {
-      inputEl.value = inputEl.dataset.original;
-      textEl.textContent =
-        document.body.dataset.symbol +
-        parseFloat(inputEl.dataset.original);
+      const original = parseFloat(inputEl.dataset.original);
+      inputEl.value = original;
+      textEl.textContent = document.body.dataset.symbol + original;
     }
 
     inputEl.style.display = "none";
     textEl.style.display = "inline";
   };
+
 }
 
 function selectTier(row) {
