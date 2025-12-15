@@ -67,7 +67,7 @@
   <div id="selected-display"></div>
   <div style="display: flex; align-items: center;">
     <span id="editable-price-text" style="margin-inline: 10px;"></span>
-    <input type="text" id="editable-price-input" data-floor="" style="display:none; width: 70px;margin-left:10px;" />
+    <input type="number" step="1" min="1" max="1000" id="editable-price-input" data-floor="" style="display:none; width: 70px;margin-left:10px;" />
     <button id="edit-price-button" onclick="enablePriceEdit()" style="background: none; border: none; cursor: pointer;">
       ✏️
     </button>
