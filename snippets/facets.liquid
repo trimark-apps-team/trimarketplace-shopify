@@ -54,6 +54,12 @@
               </h2>
             {%- endif -%}
             {% comment %} Pills are right below the title for filter type vertical {% endcomment %}
+
+{%- unless results.filters == empty -%}
+  {{ results.filters.size }}
+{%- endunless -%}
+
+
             {%- if filter_type == 'vertical' -%}
               <div class="active-facets active-facets-desktop">
                 <div class="active-facets-vertical-filter">
