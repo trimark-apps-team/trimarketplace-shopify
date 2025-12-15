@@ -55,9 +55,9 @@
             {%- endif -%}
             {% comment %} Pills are right below the title for filter type vertical {% endcomment %}
 
-{%- unless results.filters == empty -%}
-  {{ results.filters.size }}
-{%- endunless -%}
+{%- if results.filters == empty -%}
+  empty
+{%- endif -%}
 
 
             {%- if filter_type == 'vertical' -%}
