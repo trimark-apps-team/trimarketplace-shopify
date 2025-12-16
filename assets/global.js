@@ -1372,11 +1372,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (!items.length) return;
 
-  fetch("https://jdedevais.trimarkusa.com/jderest/orchestrator/MRS_ORCH_58_GetPriceMatrix", {
+  fetch("/apps/api/jdeprice", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": "Basic VEVTVEpERVNIUDptVmp3dzhrcypeMCo="
     },
     body: JSON.stringify({ GetPriceMatrix: items })
   })
