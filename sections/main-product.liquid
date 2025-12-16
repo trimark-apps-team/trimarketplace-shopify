@@ -3041,7 +3041,7 @@ function updateTierTable(priceObj = {}) {
 }
 
 function initTierSelectionFromApi() {
-  if (!String(window.buyer_role).includes("Sales Rep")) return;
+  if (!String(window.buyer_role).toLowerCase().includes("sales rep")) return;
 
   const wrapper = document.querySelector(".choose-tier");
   if (!wrapper?.dataset.productprice) return;
@@ -3137,7 +3137,7 @@ async function fetchPriceMatrix() {
 
     const formattedPrice = SYMBOL + rawPrice.toFixed(2);
 
-    if (String(window.buyer_role).includes("Sales Rep")) {
+    if (String(window.buyer_role).toLowerCase().includes("sales rep")) {
       if (!useContract) {
         updateTierTable(priceObj);
 
