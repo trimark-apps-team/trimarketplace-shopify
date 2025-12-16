@@ -1,0 +1,168 @@
+{% comment %}
+  Algolia-powered Facets
+  Replaces Shopify native Search & Discovery filters
+{% endcomment %}
+
+{{ 'component-show-more.css' | asset_url | stylesheet_tag }}
+
+<div
+  class="facets-container scroll-trigger animate--fade-in"
+  data-algolia-facets
+>
+  <!-- ========================= -->
+  <!-- DESKTOP FACETS -->
+  <!-- ========================= -->
+  <div class="facets small-hide">
+    <div class="facets__form-vertical">
+
+      <h2 class="facets__heading caption-large text-body">
+        Filter by
+      </h2>
+
+      <!-- Algolia Clear All -->
+      <div class="active-facets">
+        <button
+          type="button"
+          class="active-facets__button-remove underlined-link"
+          id="algolia-clear-refinements"
+        >
+          Clear all
+        </button>
+      </div>
+
+      <!-- Algolia Facet Containers -->
+      <div class="algolia-facets">
+
+        <details class="facets__disclosure-vertical" open>
+          <summary class="facets__summary caption-large">
+            <span>Categories</span>
+          </summary>
+          <div class="facets__display-vertical">
+            <div id="algolia-refinement-categories"></div>
+          </div>
+        </details>
+
+        <details class="facets__disclosure-vertical">
+          <summary class="facets__summary caption-large">
+            <span>Brand</span>
+          </summary>
+          <div class="facets__display-vertical">
+            <div id="algolia-refinement-vendor"></div>
+          </div>
+        </details>
+
+        <details class="facets__disclosure-vertical">
+          <summary class="facets__summary caption-large">
+            <span>Price</span>
+          </summary>
+          <div class="facets__display-vertical">
+            <div id="algolia-price-range"></div>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================= -->
+  <!-- MOBILE DRAWER -->
+  <!-- ========================= -->
+  <menu-drawer class="mobile-facets__wrapper medium-hide large-up-hide">
+    <details class="mobile-facets__disclosure disclosure-has-popup">
+      <summary class="mobile-facets__open-wrapper">
+        <span class="mobile-facets__open">
+          <span class="svg-wrapper">
+            {{ 'icon-filter.svg' | inline_asset_content }}
+          </span>
+          <span class="mobile-facets__open-label button-label">
+            Filter
+          </span>
+        </span>
+        <span class="mobile-facets__close">
+          <span class="svg-wrapper">
+            {{ 'icon-close.svg' | inline_asset_content }}
+          </span>
+        </span>
+      </summary>
+
+      <div class="mobile-facets__inner gradient">
+
+        <div class="mobile-facets__header">
+          <h2 class="mobile-facets__heading">
+            Filter & Sort
+          </h2>
+
+          <button
+            type="button"
+            class="mobile-facets__clear underlined-link"
+            id="algolia-clear-refinements-mobile"
+          >
+            Clear all
+          </button>
+        </div>
+
+        <!-- Mobile Algolia Facets -->
+        <div class="mobile-facets__main">
+
+          <details class="mobile-facets__details" open>
+            <summary class="mobile-facets__summary">
+              Categories
+            </summary>
+            <div class="mobile-facets__submenu">
+              <div id="algolia-refinement-categories-mobile"></div>
+            </div>
+          </details>
+
+          <details class="mobile-facets__details">
+            <summary class="mobile-facets__summary">
+              Brand
+            </summary>
+            <div class="mobile-facets__submenu">
+              <div id="algolia-refinement-vendor-mobile"></div>
+            </div>
+          </details>
+
+          <details class="mobile-facets__details">
+            <summary class="mobile-facets__summary">
+              Price
+            </summary>
+            <div class="mobile-facets__submenu">
+              <div id="algolia-price-range-mobile"></div>
+            </div>
+          </details>
+
+        </div>
+
+        <div class="mobile-facets__footer">
+          <button
+            type="button"
+            class="button button--primary"
+            onclick="this.closest('menu-drawer').querySelector('summary').click()"
+          >
+            Apply
+          </button>
+        </div>
+
+      </div>
+    </details>
+  </menu-drawer>
+
+  <!-- ========================= -->
+  <!-- SORT + COUNT -->
+  <!-- ========================= -->
+  <div class="product-count light" role="status">
+    <h2 class="product-count__text text-body">
+      <span id="algolia-stats"></span>
+    </h2>
+  </div>
+
+  <div class="facet-filters sorting caption">
+    <div class="facet-filters__field">
+      <h2 class="facet-filters__label caption-large text-body">
+        Sort by
+      </h2>
+      <div id="algolia-sort-by"></div>
+    </div>
+  </div>
+
+</div>
