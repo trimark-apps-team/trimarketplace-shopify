@@ -619,7 +619,7 @@
 
     {% assign assigned_locations = customer.metafields.locations.assigned_locations.value %}
 
-    {% if customer.metafields.custom.buyer_role.value contains 'Sales Rep' and assigned_locations != blank %}
+    {% if customer.metafields.custom.buyer_role.value == 'Sales Rep' and assigned_locations != blank %}
 
       <div id="company-popup-overlay" class="company-overlay"></div>
 

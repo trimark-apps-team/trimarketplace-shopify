@@ -326,7 +326,7 @@
                 </div>
               
            {%- when 'tier-pricing' -%}
-      {% if customer and customer.metafields.custom.buyer_role.value contains 'Sales Rep' %}
+      {% if customer and customer.metafields.custom.buyer_role.value contains 'Territory Sales Rep' %}
     
     
       <div class="tier-price-row">
@@ -3043,7 +3043,7 @@ function updateTierTable(priceObj = {}) {
 }
 
 function initTierSelectionFromApi() {
-  if (window.buyer_role !== "Sales Rep") return;
+  if (window.buyer_role !== "Territory Sales Rep") return;
 
   const wrapper = document.querySelector(".choose-tier");
   if (!wrapper?.dataset.productprice) return;
@@ -3139,7 +3139,7 @@ async function fetchPriceMatrix() {
 
     const formattedPrice = SYMBOL + rawPrice.toFixed(2);
 
-    if (window.buyer_role === "Sales Rep") {
+    if (window.buyer_role === "Territory Sales Rep") {
       if (!useContract) {
         updateTierTable(priceObj);
 
