@@ -1412,9 +1412,9 @@ document.addEventListener("DOMContentLoaded", function () {
       const tierInput = card.querySelector(".tier-price");
       if (tierInput) tierInput.value = formatted;
 
-      // const regularPrice = card.querySelector(".price-item.price-item--regular");
-      // if (regularPrice) tierInput.textContent = formatted;
-      // if (regularPrice) tierInput.classList.remove("hidden");
+      const regularPrice = card.querySelector(".price-item.price-item--regular");
+      if (regularPrice) tierInput.textContent = formatted;
+      if (regularPrice) tierInput.classList.remove("hidden");
 
       const btnSelector = card.dataset.addToCart;
       if (btnSelector) {
