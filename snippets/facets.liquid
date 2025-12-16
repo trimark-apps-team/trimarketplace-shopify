@@ -506,9 +506,10 @@
             <div
               id="FacetsWrapperMobile"
               class="mobile-facets__main has-submenu gradient"
-            >
-              <h1>enabled</h1>
+
               {%- if enable_filtering -%}
+                            >
+              <h1>enabled</h1>
                 {%- for filter in results.filters -%}
                   {% liquid
                     assign presentation = filter.presentation | default: default_presentation
