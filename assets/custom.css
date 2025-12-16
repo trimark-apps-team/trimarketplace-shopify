@@ -506,10 +506,12 @@ footer .svg-wrapper .icon path {
   overflow: hidden;
 }
 
-body .facets-container {
+
+
+/* body .facets-container {
   position: sticky;
   top: 0;
-}
+} */
 
 @media screen and (max-width: 1054px) {
   .header__menu-item {
@@ -646,7 +648,7 @@ body .facets-container {
 
 /* override z-index for hulkapp heart icon kk 9/18/25*/
 .wishlist-btn[data-custom-wishlist-icon] {
-  z-index: 998 !important;
+  z-index: 2 !important;
 }
 
 

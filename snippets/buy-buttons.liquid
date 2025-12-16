@@ -53,7 +53,7 @@
 
                 <input type="hidden" name="properties[Expected Shipping]" value="{{ eta_time }}"> {% endcomment %}
 
-{% if customer and customer.metafields.custom.buyer_role.value == 'Sales Rep' %}
+{% if customer and customer.metafields.custom.buyer_role.value contains 'Sales Rep' %}
   
     <input type="hidden" name="properties[_Tier]" id="selected-tier-name" value="NA">
     <input type="hidden" name="properties[_Commission]" id="selected-tier-commission" value="NA">

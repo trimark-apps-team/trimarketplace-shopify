@@ -619,11 +619,11 @@
       </div>
 
         {%- if card_product.available == false -%}
-          <div class="card__badge--non-stock left">
+          {% comment %} <div class="card__badge--non-stock left">
             <span class="non-stock">
               Not Available
             </span>
-          </div>
+          </div> {% endcomment %}
         {%- elsif card_product.tags contains "Non-Stock" -%}
           <div class="card__badge--non-stock left">
               <span class="non-stock">

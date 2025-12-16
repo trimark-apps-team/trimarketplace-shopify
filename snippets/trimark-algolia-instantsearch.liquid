@@ -206,7 +206,8 @@ widgets.panel({
   showMore: true,       // enable "Show more" button
   showMoreLimit: 100,   // max total when expanded
 }),
-widgets.panel({
+
+{% comment %} widgets.panel({
   templates: { header: 'Price Range' },
 })(widgets.refinementList)({
   container: '#price-range',
@@ -239,14 +240,14 @@ widgets.panel({
       };
     });
   },
-}),
+}), {% endcomment %}
 
  widgets.sortBy({
   container: '#sort-by',
   items: [
-    { label: 'Price (asc)', value: `${indexName}_price_asc` },
+    {% comment %} { label: 'Price (asc)', value: `${indexName}_price_asc` }, {% endcomment %}
     { label: 'Relevance', value: `${indexName}` },
-    { label: 'Price (desc)', value: `${indexName}_price_desc` },
+    {% comment %} { label: 'Price (desc)', value: `${indexName}_price_desc` }, {% endcomment %}
   ],
 }),
 
@@ -278,10 +279,12 @@ hits({
                   ${components.Highlight({ hit, attribute: 'title' })}
                 </div>
              
+                <!-- 
                 <div class="ais-HitPrice">
                           ${price ? html`$${price}` : ''}
                           ${uom ? html`<span class="aa-ItemUOM"> ${uom}</span>` : ''}
-                        </div>
+                </div>
+                  -->
               </div>
             </div>
           </a>

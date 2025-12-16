@@ -161,6 +161,14 @@
                               </strong>
                             </div>
                           {%- else -%}
+                            {% if item.properties["_Tier Price"] != blank and item.properties["_Tier Price"] != "NA" and customer.metafields.custom.buyer_role.value contains 'Sales Rep' %}
+                              <div style="display: flex; align-items: center; gap: 6px;position: relative;">
+                          <span class="sip-tier">{{ item.properties["_Tier"] }}</span>
+                          <span class="tier-price-text" data-line="{{ forloop.index0 }}">{{ item.properties["_Tier Price"] }}</span>
+                        </div>
+
+                            {% else %}
+
                             <div class="product-option">
                               {{ item.original_price | money }}
                             </div>
@@ -583,7 +591,7 @@
             </div>
               {% assign assigned_locations = customer.metafields.locations.assigned_locations.value %}
 
-    {% if customer.metafields.custom.buyer_role.value == 'Sales Rep' and assigned_locations != blank %}
+    {% if customer.metafields.custom.buyer_role.value contains 'Sales Rep' and assigned_locations != blank %}
                       <button id="create-salesrep-order" class="cart__checkout-button button draft-order-drawer">
               Place Order
             </button>

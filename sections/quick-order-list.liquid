@@ -24,7 +24,7 @@
 {% assign sales_rep = customer.metafields.custom.buyer_role.value | default: blank %}
 {% endif %}
 
-{% if shop.metafields.custom.allow_sales_order or sales_rep == 'Sales Rep' %}
+{% if shop.metafields.custom.allow_sales_order or sales_rep contains 'Sales Rep' %}
    {% if shop.metafields.custom.allow_sales_order %} 
     {% render 'quick-order-list-five-guys',
     product: product,
