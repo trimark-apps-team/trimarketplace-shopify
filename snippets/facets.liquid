@@ -511,6 +511,7 @@
                             >
                 
 {%- for filter in algolia.filters -%}
+  <p>test</p>
   {% liquid
     assign presentation = filter.presentation | default: default_presentation
     if presentation == 'image'
