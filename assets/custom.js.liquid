@@ -1,4 +1,4 @@
-if(window.approval_required || window.buyer_role == "Sales Rep") {
+if(window.approval_required || String(window.buyer_role).includes("Sales Rep")) {
 
 function checkAndToggleCheckoutButtons(cart) {
     if (!cart) return;

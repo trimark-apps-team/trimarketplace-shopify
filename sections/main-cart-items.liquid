@@ -184,7 +184,7 @@
                             </strong>
                           </div>
                         {%- else -%}
-                          {% if item.properties["_Tier Price"] != blank and item.properties["_Tier Price"] != "NA" and customer.metafields.custom.buyer_role.value == 'Sales Rep' %}
+                          {% if item.properties["_Tier Price"] != blank and item.properties["_Tier Price"] != "NA" and customer.metafields.custom.buyer_role.value contains 'Sales Rep' %}
                                 <div style="display: flex; align-items: center; gap: 6px;position: relative;">
                             <span class="sip-tier">{{ item.properties["_Tier"] }}</span>
                             <span class="cart-tier-price-text" data-line="{{ forloop.index0 }}">{{ item.properties["_Tier Price"] }}</span>
