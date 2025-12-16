@@ -99,7 +99,7 @@
                   {%- for item in cart.items -%}
                       <tr 
   id="CartItem-{{ item.index | plus: 1 }}" 
-  class="cart-item"
+  class="cart-item" 
 >
 
                       <td class="cart-item__media">
@@ -149,19 +149,9 @@
                             </strong>
                           </div>
                         {%- else -%}
-                          {% if item.properties["_Tier Price"] != blank and item.properties["_Tier Price"] != "NA" and customer.metafields.custom.buyer_role.value contains 'Sales Rep' %}
-                                <div style="display: flex; align-items: center; gap: 6px;position: relative;">
-                            <span class="sip-tier">{{ item.properties["_Tier"] }}</span>
-                            <span class="cart-tier-price-text" data-line="{{ forloop.index0 }}">{{ item.properties["_Tier Price"] }}</span>
-                            <p class="loading-cart" style="display:none;">Updating cart...</p>
-                          </div>
-
-                              {% else %}
-
                               <div class="product-option">
                                 {{ item.original_price | money }}
                               </div>
-
                         {%- endif -%}
 
                         {%- if item.product.has_only_default_variant == false
