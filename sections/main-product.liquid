@@ -3094,14 +3094,13 @@ function initTierSelectionFromApi() {
 }
 
 async function fetchPriceMatrix() {
-  const url = "https://jdedevais.trimarkusa.com/jderest/orchestrator/MRS_ORCH_58_GetPriceMatrix";
+  const url = "/apps/api/jdeprice";
 
   try {
     const res = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Basic VEVTVEpERVNIUDptVmp3dzhrcypeMCo="
       },
       body: JSON.stringify({
         GetPriceMatrix: [{
