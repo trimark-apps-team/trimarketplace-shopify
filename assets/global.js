@@ -1413,8 +1413,11 @@ document.addEventListener("DOMContentLoaded", function () {
       if (tierInput) tierInput.value = formatted;
 
       const regularPrice = card.querySelector(".price-item.price-item--regular");
-      if (regularPrice) tierInput.textContent = formatted;
-      if (regularPrice) tierInput.classList.remove("hidden");
+
+      if (regularPrice) {
+        regularPrice.textContent = formatted;
+        regularPrice.classList.remove("hidden");
+      }
 
       const btnSelector = card.dataset.addToCart;
       if (btnSelector) {
