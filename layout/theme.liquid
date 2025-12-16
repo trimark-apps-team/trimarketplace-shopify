@@ -1126,5 +1126,22 @@
         <p>You must <a href="/account/login">log in</a> to access this site.</p>
       </noscript>
     {% endcomment %}
+   <!-- Algolia core libraries -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"
+      defer
+    ></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/instantsearch.js@4"
+      defer
+    ></script>
+
+    <!-- Your Algolia integration -->
+    <script
+      src="{{ 'algolia-facets.js' | asset_url }}"
+      defer
+    ></script>
+
   </body>
 </html>
