@@ -187,7 +187,7 @@
   {% comment %} Mobile / Drawer Filters {% endcomment %}
   <menu-drawer class="mobile-facets__wrapper{% if filter_type == 'horizontal' or filter_type == 'vertical' %} medium-hide large-up-hide{% endif %}" data-breakpoint="mobile">
     {% comment %} Render mobile filters here using Algolia snippets {% endcomment %}
-    {% render 'algolia-mobile-facets', results: results, filter_type: filter_type, enable_filtering: enable_filtering, enable_sorting: enable_sorting %}
+   
   </menu-drawer>
 
 </div>
