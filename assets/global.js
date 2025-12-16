@@ -1412,6 +1412,9 @@ document.addEventListener("DOMContentLoaded", function () {
       const tierInput = card.querySelector(".tier-price");
       if (tierInput) tierInput.value = formatted;
 
+      const regularPrice = card.querySelector(".price-item price-item--regular");
+      if (regularPrice) tierInput.textContent = formatted;
+
       const btnSelector = card.dataset.addToCart;
       if (btnSelector) {
         const btn = card.querySelector(btnSelector);
