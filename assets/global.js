@@ -1414,6 +1414,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const regularPrice = card.querySelector(".price-item price-item--regular");
       if (regularPrice) tierInput.textContent = formatted;
+      if (regularPrice) tierInput.classList.remove("hidden");
 
       const btnSelector = card.dataset.addToCart;
       if (btnSelector) {
