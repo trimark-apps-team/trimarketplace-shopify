@@ -3041,7 +3041,7 @@ function updateTierTable(priceObj = {}) {
 }
 
 function initTierSelectionFromApi() {
-  {% comment %} if (!String(window.buyer_role).includes("Sales Rep")) return; {% endcomment %}
+  if (!String(window.buyer_role).includes("Sales Rep")) return;
 
   const wrapper = document.querySelector(".choose-tier");
   if (!wrapper?.dataset.productprice) return;
