@@ -507,6 +507,7 @@
               id="FacetsWrapperMobile"
               class="mobile-facets__main has-submenu gradient"
             >
+              <h1>enabled</h1>
               {%- if enable_filtering -%}
                 {%- for filter in results.filters -%}
                   {% liquid
@@ -519,7 +520,7 @@
                   %}
 
                   {% case filter.type %}
-                    <h1>filter</h1>
+                    
                     {% when 'boolean', 'list' %}
                       <details
                         id="Details-Mobile-{{ filter.param_name | escape }}-{{ section.id }}"
