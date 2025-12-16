@@ -326,9 +326,8 @@
                 </div>
               
            {%- when 'tier-pricing' -%}
-      {% if customer and customer.metafields.custom.buyer_role.value contains 'Sales Rep' %}
-    
-    
+            {% assign role = customer.metafields.custom.buyer_role.value | downcase %}
+      {% if customer and role %}
       <div class="tier-price-row">
         {% if product.metafields.custom["3_price_cost"] != blank and product.metafields.custom["3_price_cost"] != 'N/A' %}
         <div class="tier-price-item">
