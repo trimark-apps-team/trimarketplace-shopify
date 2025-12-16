@@ -110,20 +110,13 @@
           id="main-collection-filters"
           data-id="{{ section.id }}"
         >
-          {% comment %} {% render 'facets',
+          {% render 'facets',
             results: collection,
             enable_filtering: section.settings.enable_filtering,
             enable_sorting: section.settings.enable_sorting,
             filter_type: section.settings.filter_type,
             paginate: paginate
-          %} {% endcomment %}
-          {% render 'algolia-facets',
-           results: collection,
-           enable_filtering: section.settings.enable_filtering,
-           enable_sorting: section.settings.enable_sorting,
-           filter_type: section.settings.filter_type,
-           paginate: paginate
-           %}
+          %}
         </aside>
       {%- endif -%}
 
