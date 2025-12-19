@@ -1,5 +1,5 @@
 const searchClient = algoliasearch(
-  'testingMUEWDUHCI5',
+  'testingMUEWDUHC15',
   'e4a767e5c4763e97d5cd8a5af0419f65'
 );
 
