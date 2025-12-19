@@ -18,7 +18,7 @@ console.log('Algolia collection handle:', collectionHandle);
 
 /* 3️⃣ Initialize InstantSearch */
 const search = instantsearch({
-  indexName: 'shopify_products', // <— replace with your exact index name from Algolia dashboard
+  indexName: 'qa-marlinn_shopify_products', // <— replace with your exact index name from Algolia dashboard
   searchClient,
   routing: true,
 });
