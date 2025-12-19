@@ -1,23 +1,39 @@
+/* =========================================
+   ALGOLIA COLLECTION – DAWN COMPATIBLE
+   ========================================= */
+
+/* 1. Algolia credentials */
 const searchClient = algoliasearch(
-  'testingMUEWDUHC15',
-  'e4a767e5c4763e97d5cd8a5af0419f65'
+  'testingMUEWDUHC15', // Application ID
+  'e4a767e5c4763e97d5cd8a5af0419f65' // Search-only API key
 );
 
-const collectionHandle =
-  window.location.pathname.split('/collections/')[1];
+/* 2. Get collection handle safely */
+const collectionHandle = window.location.pathname
+  .replace(/\/$/, '')
+  .split('/collections/')[1];
 
+console.log('Algolia collection handle:', collectionHandle);
+
+/* 3. Init InstantSearch */
 const search = instantsearch({
-  indexName: 'shopify_products',
+  indexName: 'shopify_products', // MUST match Algolia dashboard exactly
   searchClient,
   routing: true,
 });
 
+/* 4. Widgets */
 search.addWidgets([
-  instantsearch.widgets.configure({
-  hitsPerPage: 24,
-  filters: `collections_list:${collectionHandle}`
-}),
 
+  /* 🔑 REQUIRED: filter by collection */
+  instantsearch.widgets.configure({
+    hitsPerPage: 24,
+    filters: collectionHandle
+      ? `collections_list:${collectionHandle}`
+      : ''
+  }),
+
+  /* Product count */
   instantsearch.widgets.stats({
     container: '#algolia-stats',
     templates: {
@@ -27,6 +43,7 @@ search.addWidgets([
     }
   }),
 
+  /* Sorting */
   instantsearch.widgets.sortBy({
     container: '#algolia-sort',
     items: [
@@ -36,75 +53,98 @@ search.addWidgets([
     ],
   }),
 
+  /* Example facet (safe even if empty) */
   instantsearch.widgets.refinementList({
     container: '#algolia-filters',
     attribute: 'vendor',
+    searchable: true,
   }),
 
+  /* Product grid */
   instantsearch.widgets.hits({
-  container: '#algolia-hits',
-  templates: {
-    item(hit) {
-      // Variant index → use product-level fields
-      const productUrl = `/products/${hit.product_handle}`;
-      const image =
-        hit.image ||
-        (hit.product_image && hit.product_image.src) ||
-        '';
+    container: '#algolia-hits',
+    templates: {
+      item(hit) {
+        const productTitle = hit.product_title || hit.title || 'Product';
+        const productHandle = hit.product_handle || hit.handle || '';
+        const productUrl = productHandle
+          ? `/products/${productHandle}`
+          : '#';
 
-      return `
-        <li class="grid__item">
-          <div class="card-wrapper product-card-wrapper underline-links-hover">
-            <div class="card card--standard card--media">
-              <div class="card__inner">
-                <a href="${productUrl}" class="full-unstyled-link">
-                  <div class="card__media">
-                    ${
-                      image
-                        ? `<img
-                            src="${image}"
-                            alt="${hit.product_title}"
-                            loading="lazy"
-                            width="300"
-                            height="300"
-                          >`
-                        : ''
-                    }
-                  </div>
-                </a>
-              </div>
+        const image =
+          hit.image ||
+          (hit.product_image && hit.product_image.src) ||
+          '';
 
-              <div class="card__content">
-                <h3 class="card__heading h5">
+        const price =
+          typeof hit.price === 'number'
+            ? `$${(hit.price / 100).toFixed(2)}`
+            : '';
+
+        return `
+          <li class="grid__item">
+            <div class="card-wrapper product-card-wrapper underline-links-hover">
+              <div class="card card--standard card--media">
+                <div class="card__inner">
                   <a href="${productUrl}" class="full-unstyled-link">
-                    ${hit.product_title}
+                    <div class="card__media">
+                      ${
+                        image
+                          ? `<img
+                              src="${image}"
+                              alt="${productTitle}"
+                              loading="lazy"
+                              width="300"
+                              height="300"
+                            >`
+                          : ''
+                      }
+                    </div>
                   </a>
-                </h3>
+                </div>
 
-                ${
-                  hit.variant_title && hit.variant_title !== 'Default Title'
-                    ? `<div class="caption-with-letter-spacing">${hit.variant_title}</div>`
-                    : ''
-                }
+                <div class="card__content">
+                  <h3 class="card__heading h5">
+                    <a href="${productUrl}" class="full-unstyled-link">
+                      ${productTitle}
+                    </a>
+                  </h3>
 
-                <div class="price">
-                  <span class="price-item price-item--regular">
-                    $${(hit.price / 100).toFixed(2)}
-                  </span>
+                  ${
+                    hit.variant_title && hit.variant_title !== 'Default Title'
+                      ? `<div class="caption-with-letter-spacing">${hit.variant_title}</div>`
+                      : ''
+                  }
+
+                  ${
+                    price
+                      ? `<div class="price">
+                          <span class="price-item price-item--regular">
+                            ${price}
+                          </span>
+                        </div>`
+                      : ''
+                  }
                 </div>
               </div>
             </div>
-          </div>
-        </li>
-      `;
+          </li>
+        `;
+      }
     }
-  }
   }),
 
+  /* Pagination */
   instantsearch.widgets.pagination({
     container: '#algolia-pagination',
   }),
 
 ]);
 
+/* 5. Start search */
 search.start();
+
+/* 6. Debug helpers (optional) */
+search.on('render', () => {
+  console.log('Algolia rendered');
+});
