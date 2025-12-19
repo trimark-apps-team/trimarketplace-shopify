@@ -1,6 +1,8 @@
 if(window.approval_required || String(window.buyer_role).includes("Sales Rep")) {
 
 function checkAndToggleCheckoutButtons(cart) {
+
+  console.log("from custom JS");
     if (!cart) return;
 
    const approvalRequired = cart.total_price >= window.draftorder_threshold;
@@ -149,8 +151,6 @@ subscribe(PUB_SUB_EVENTS.cartUpdate, async function (e) {
 })
 
 document.addEventListener("pc-cart:added", function (event) {
-
-  console.log(12454545);
   
   function refreshCart() {
   const cartDrawer = document.getElementById('CartDrawer');
