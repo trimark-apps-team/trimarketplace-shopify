@@ -621,6 +621,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     validate();
+      checkbox.addEventListener('change', validate);
 
      refreshCartDrawer();
       if(document.querySelector("cart-drawer").classList.contains("is-empty")) {
