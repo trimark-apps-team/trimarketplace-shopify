@@ -571,7 +571,6 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  const fetchCart = () => fetch("/cart.js").then(r => r.json());
   const clearCart = () => fetch("/cart/clear.js", { method: "POST" });
   const addToCart = (items) => fetch("/cart/add.js", {
     method: "POST",
@@ -592,19 +591,11 @@ document.addEventListener("DOMContentLoaded", () => {
     cartPage.querySelectorAll(".cart-item .loading__spinner")
       .forEach(el => el.classList.add("hidden"));
 
-    const cartData = await fetchCart();
-    if(window.approval_required) {
-      checkAndToggleCheckoutButtons(cartData);
-    }
-
      refreshCart();
       if(document.querySelector("cart-drawer").classList.contains("is-empty")) {
           document.querySelector("cart-drawer").classList.remove("is-empty");
       }
-      document.querySelectorAll('.cart-count-bubble span').forEach(el => {
-          el.innerHTML = cartData.item_count;
-      });
-      
+         
     cartPage.querySelector("table.cart-items")?.classList.remove("hidden");
     cartPage.querySelector(".skeleton-shimmer")?.classList.add("hidden");
     cartPage.querySelector(".aasaved-cart-actions")?.classList.remove("hidden");
@@ -642,8 +633,12 @@ document.addEventListener("DOMContentLoaded", () => {
               return response.json();
             })
             .then(cartData => {
-              
-              checkAndToggleCheckoutButtons(cartData);
+              document.querySelectorAll('.cart-count-bubble span').forEach(el => {
+                  el.innerHTML = cartData.item_count;
+              });
+              if(window.approval_required) {
+                  checkAndToggleCheckoutButtons(cartData);
+              }
             })
           }
         }
