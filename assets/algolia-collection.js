@@ -5,7 +5,7 @@
 
 /* 1️⃣ Algolia credentials */
 const searchClient = algoliasearch(
-  'testingMUEWDUHC15', // Application ID
+  'testingMUEWDUHCI5', // Application ID
   'e4a767e5c4763e97d5cd8a5af0419f65' // Search-only API key
 );
 
