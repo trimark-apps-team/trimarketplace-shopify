@@ -3,7 +3,7 @@ const searchClient = algoliasearch(
   'e4a767e5c4763e97d5cd8a5af0419f65'
 );
 
-collectionHandleconst collectionHandle =
+const collectionHandle =
   window.location.pathname.split('/collections/')[1];
 
 const search = instantsearch({
