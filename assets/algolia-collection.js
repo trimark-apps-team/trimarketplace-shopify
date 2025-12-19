@@ -38,46 +38,63 @@ search.addWidgets([
   }),
 
   instantsearch.widgets.hits({
-    container: '#algolia-hits',
-    templates: {
-      item(hit) {
-        return `
-          <li class="grid__item">
-            <div class="card-wrapper product-card-wrapper underline-links-hover">
-              <div class="card card--standard card--media">
-                <div class="card__inner">
-                  <a href="${hit.url}" class="full-unstyled-link">
-                    <div class="card__media">
-                      <img
-                        src="${hit.image}"
-                        alt="${hit.title}"
-                        loading="lazy"
-                        width="300"
-                        height="300"
-                      >
-                    </div>
-                  </a>
-                </div>
+  container: '#algolia-hits',
+  templates: {
+    item(hit) {
+      // Variant index → use product-level fields
+      const productUrl = `/products/${hit.product_handle}`;
+      const image =
+        hit.image ||
+        (hit.product_image && hit.product_image.src) ||
+        '';
 
-                <div class="card__content">
-                  <h3 class="card__heading h5">
-                    <a href="${hit.url}" class="full-unstyled-link">
-                      ${hit.title}
-                    </a>
-                  </h3>
-
-                  <div class="price">
-                    <span class="price-item price-item--regular">
-                      $${(hit.price / 100).toFixed(2)}
-                    </span>
+      return `
+        <li class="grid__item">
+          <div class="card-wrapper product-card-wrapper underline-links-hover">
+            <div class="card card--standard card--media">
+              <div class="card__inner">
+                <a href="${productUrl}" class="full-unstyled-link">
+                  <div class="card__media">
+                    ${
+                      image
+                        ? `<img
+                            src="${image}"
+                            alt="${hit.product_title}"
+                            loading="lazy"
+                            width="300"
+                            height="300"
+                          >`
+                        : ''
+                    }
                   </div>
+                </a>
+              </div>
+
+              <div class="card__content">
+                <h3 class="card__heading h5">
+                  <a href="${productUrl}" class="full-unstyled-link">
+                    ${hit.product_title}
+                  </a>
+                </h3>
+
+                ${
+                  hit.variant_title && hit.variant_title !== 'Default Title'
+                    ? `<div class="caption-with-letter-spacing">${hit.variant_title}</div>`
+                    : ''
+                }
+
+                <div class="price">
+                  <span class="price-item price-item--regular">
+                    $${(hit.price / 100).toFixed(2)}
+                  </span>
                 </div>
               </div>
             </div>
-          </li>
-        `;
-      }
+          </div>
+        </li>
+      `;
     }
+  }
   }),
 
   instantsearch.widgets.pagination({
