@@ -1,31 +1,32 @@
 /* =========================================
-   ALGOLIA COLLECTION – DAWN COMPATIBLE
+   ALGOLIA COLLECTION – DAWN STYLE
+   Variant-indexed setup
    ========================================= */
 
-/* 1. Algolia credentials */
+/* 1️⃣ Algolia credentials */
 const searchClient = algoliasearch(
   'testingMUEWDUHC15', // Application ID
   'e4a767e5c4763e97d5cd8a5af0419f65' // Search-only API key
 );
 
-/* 2. Get collection handle safely */
+/* 2️⃣ Get collection handle from URL safely */
 const collectionHandle = window.location.pathname
   .replace(/\/$/, '')
   .split('/collections/')[1];
 
 console.log('Algolia collection handle:', collectionHandle);
 
-/* 3. Init InstantSearch */
+/* 3️⃣ Initialize InstantSearch */
 const search = instantsearch({
-  indexName: 'shopify_products', // MUST match Algolia dashboard exactly
+  indexName: 'shopify_products', // <— replace with your exact index name from Algolia dashboard
   searchClient,
   routing: true,
 });
 
-/* 4. Widgets */
+/* 4️⃣ Add widgets */
 search.addWidgets([
 
-  /* 🔑 REQUIRED: filter by collection */
+  /* 🔹 Configure widget – essential for collection filter */
   instantsearch.widgets.configure({
     hitsPerPage: 24,
     filters: collectionHandle
@@ -33,7 +34,7 @@ search.addWidgets([
       : ''
   }),
 
-  /* Product count */
+  /* 🔹 Stats */
   instantsearch.widgets.stats({
     container: '#algolia-stats',
     templates: {
@@ -43,7 +44,7 @@ search.addWidgets([
     }
   }),
 
-  /* Sorting */
+  /* 🔹 Sort options */
   instantsearch.widgets.sortBy({
     container: '#algolia-sort',
     items: [
@@ -53,14 +54,15 @@ search.addWidgets([
     ],
   }),
 
-  /* Example facet (safe even if empty) */
+  /* 🔹 Vendor filter example */
   instantsearch.widgets.refinementList({
     container: '#algolia-filters',
     attribute: 'vendor',
     searchable: true,
+    showMore: true,
   }),
 
-  /* Product grid */
+  /* 🔹 Product grid */
   instantsearch.widgets.hits({
     container: '#algolia-hits',
     templates: {
@@ -134,17 +136,17 @@ search.addWidgets([
     }
   }),
 
-  /* Pagination */
+  /* 🔹 Pagination */
   instantsearch.widgets.pagination({
     container: '#algolia-pagination',
   }),
 
 ]);
 
-/* 5. Start search */
+/* 5️⃣ Start search */
 search.start();
 
-/* 6. Debug helpers (optional) */
+/* 6️⃣ Optional debug */
 search.on('render', () => {
   console.log('Algolia rendered');
 });
