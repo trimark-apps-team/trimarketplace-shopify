@@ -22,7 +22,7 @@ console.log('Algolia collection handle:', collectionHandle);
 
 /* 3️⃣ Initialize InstantSearch */
 const search = instantsearch({
-  indexName: 'qa-marlinn_shopify_products', // full index name including prefix
+  indexName: 'qa-marlinn_products', // full index name including prefix
   searchClient,
   routing: true,
 });
