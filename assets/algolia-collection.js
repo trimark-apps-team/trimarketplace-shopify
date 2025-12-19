@@ -1,11 +1,11 @@
 /* =========================================
    ALGOLIA COLLECTION – DAWN STYLE
-   Variant-indexed setup
+   Variant-indexed setup with correct prefix
    ========================================= */
 
 /* 1️⃣ Algolia credentials */
 const searchClient = algoliasearch(
-  'testingMUEWDUHCI5', // Application ID
+  'testingMUEWDUHCI5', // Application ID from Shopify
   'e4a767e5c4763e97d5cd8a5af0419f65' // Search-only API key
 );
 
@@ -18,7 +18,7 @@ console.log('Algolia collection handle:', collectionHandle);
 
 /* 3️⃣ Initialize InstantSearch */
 const search = instantsearch({
-  indexName: 'qa-marlinn_shopify_products', // <— replace with your exact index name from Algolia dashboard
+  indexName: 'qa-marlinn_shopify_products', // <-- full index name including prefix
   searchClient,
   routing: true,
 });
@@ -48,9 +48,9 @@ search.addWidgets([
   instantsearch.widgets.sortBy({
     container: '#algolia-sort',
     items: [
-      { label: 'Featured', value: 'shopify_products' },
-      { label: 'Price (Low → High)', value: 'shopify_products_price_asc' },
-      { label: 'Price (High → Low)', value: 'shopify_products_price_desc' }
+      { label: 'Featured', value: 'qa-marlinn_shopify_products' },
+      { label: 'Price (Low → High)', value: 'qa-marlinn_shopify_products_price_asc' },
+      { label: 'Price (High → Low)', value: 'qa-marlinn_shopify_products_price_desc' }
     ],
   }),
 
