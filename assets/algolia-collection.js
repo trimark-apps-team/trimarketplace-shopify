@@ -22,7 +22,7 @@ console.log('Algolia collection handle:', collectionHandle);
 
 /* 3️⃣ Initialize InstantSearch */
 const search = instantsearch({
-  indexName: 'qa-marlinn_shopify_products', // full index name including prefix
+  indexName: 'qa-marlinn_products', // full index name including prefix
   searchClient,
   routing: true,
 });
@@ -52,7 +52,7 @@ search.addWidgets([
   instantsearch.widgets.sortBy({
     container: '#algolia-sort',
     items: [
-      { label: 'Featured', value: 'qa-marlinn_shopify_products' },
+      { label: 'Featured', value: 'qa-marlinn_products' },
       { label: 'Price (Low → High)', value: 'qa-marlinn_shopify_products_price_asc' },
       { label: 'Price (High → Low)', value: 'qa-marlinn_shopify_products_price_desc' }
     ],
