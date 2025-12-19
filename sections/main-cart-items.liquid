@@ -580,10 +580,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }).then(r => r.json());
 
   const renderCart = async () => {
-    const cartData = await fetchCart();
-    if(window.approval_required) {
-      checkAndToggleCheckoutButtons(cartData);
-    }
     const res = await fetch(window.location.href);
     const html = await res.text();
     const doc = new DOMParser().parseFromString(html, "text/html");
@@ -595,6 +591,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
     cartPage.querySelectorAll(".cart-item .loading__spinner")
       .forEach(el => el.classList.add("hidden"));
+
+    const cartData = await fetchCart();
+    if(window.approval_required) {
+      checkAndToggleCheckoutButtons(cartData);
+    }
+
+    var checkbox    = document.getElementById('terms-cart');
+    var checkoutBtn = document.getElementById('checkout');
+    var draftBtn    = document.querySelector('.draft-order-cart');
+
+    var error = document.createElement('div');
+    error.style.color = 'red';
+    error.style.fontSize = '0.9rem';
+    error.style.display = 'none';
+    error.textContent = 'You must agree to the Terms & Conditions before checkout.';
+    checkbox.closest('.cart-terms').appendChild(error);
+
+    function validate() {
+      if (checkbox.checked) {
+        checkoutBtn.disabled = false;
+        draftBtn.disabled = false;
+        error.style.display = 'none';
+      } else {
+        checkoutBtn.disabled = true;
+        draftBtn.disabled = true;
+        error.style.display = 'block';
+      }
+    }
+
+    validate();
 
      refreshCartDrawer();
       if(document.querySelector("cart-drawer").classList.contains("is-empty")) {
