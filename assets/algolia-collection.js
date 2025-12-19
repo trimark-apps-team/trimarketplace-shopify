@@ -1,28 +1,24 @@
 /* =========================================
    ALGOLIA COLLECTION – DAWN STYLE
-   Robust collection filter
+   Variant-indexed setup with correct prefix
    ========================================= */
 
 /* 1️⃣ Algolia credentials */
 const searchClient = algoliasearch(
-  'testingMUEWDUHCI5', // Application ID
+  'testingMUEWDUHCI5', // Application ID from Shopify
   'e4a767e5c4763e97d5cd8a5af0419f65' // Search-only API key
 );
 
-/* 2️⃣ Get collection handle from URL and normalize */
-const collectionHandleRaw = window.location.pathname
+/* 2️⃣ Get collection handle from URL safely */
+const collectionHandle = window.location.pathname
   .replace(/\/$/, '')
-  .split('/collections/')[1] || '';
-
-const collectionHandle = collectionHandleRaw
-  .toLowerCase()
-  .replace(/\s+/g, '-'); // converts "Prep Tables" → "prep-tables"
+  .split('/collections/')[1];
 
 console.log('Algolia collection handle:', collectionHandle);
 
 /* 3️⃣ Initialize InstantSearch */
 const search = instantsearch({
-  indexName: 'qa-marlinn_shopify_products', // full index name including prefix
+  indexName: 'qa-marlinn_products', // <-- full index name including prefix
   searchClient,
   routing: true,
 });
@@ -30,12 +26,12 @@ const search = instantsearch({
 /* 4️⃣ Add widgets */
 search.addWidgets([
 
-  /* 🔹 Configure widget – hits per page and collection filter */
+  /* 🔹 Configure widget – essential for collection filter */
   instantsearch.widgets.configure({
     hitsPerPage: 24,
-    filters: collectionHandle
-      ? `collections_list:"${collectionHandle}"`
-      : ''
+    // filters: collectionHandle
+    //   ? `collections_list:${collectionHandle}`
+    //   : ''
   }),
 
   /* 🔹 Stats */
@@ -58,7 +54,7 @@ search.addWidgets([
     ],
   }),
 
-  /* 🔹 Vendor filter */
+  /* 🔹 Vendor filter example */
   instantsearch.widgets.refinementList({
     container: '#algolia-filters',
     attribute: 'vendor',
@@ -150,6 +146,7 @@ search.addWidgets([
 /* 5️⃣ Start search */
 search.start();
 
+/* 6️⃣ Optional debug */
 search.on('render', () => {
   console.log('Algolia rendered');
 });
