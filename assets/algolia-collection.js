@@ -33,9 +33,9 @@ search.addWidgets([
   /* 🔹 Configure widget – hits per page and collection filter */
   instantsearch.widgets.configure({
     hitsPerPage: 24,
-    filters: collectionHandle
-      ? `collections_list:"${collectionHandle}"`
-      : ''
+    // filters: collectionHandle
+    //   ? `collections_list:"${collectionHandle}"`
+    //   : ''
   }),
 
   /* 🔹 Stats */
