@@ -571,6 +571,7 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
+  const fetchCart = () => fetch("/cart.js").then(r => r.json());
   const clearCart = () => fetch("/cart/clear.js", { method: "POST" });
   const addToCart = (items) => fetch("/cart/add.js", {
     method: "POST",
@@ -579,6 +580,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }).then(r => r.json());
 
   const renderCart = async () => {
+    const cartData = await fetchCart();
+    if(window.approval_required) {
+      checkAndToggleCheckoutButtons(cartData);
+    }
     const res = await fetch(window.location.href);
     const html = await res.text();
     const doc = new DOMParser().parseFromString(html, "text/html");
@@ -591,7 +596,7 @@ document.addEventListener("DOMContentLoaded", () => {
     cartPage.querySelectorAll(".cart-item .loading__spinner")
       .forEach(el => el.classList.add("hidden"));
 
-     refreshCart();
+     refreshCartDrawer();
       if(document.querySelector("cart-drawer").classList.contains("is-empty")) {
           document.querySelector("cart-drawer").classList.remove("is-empty");
       }
@@ -604,7 +609,7 @@ document.addEventListener("DOMContentLoaded", () => {
     window.history.replaceState({}, document.title, cleanUrl);
   };
 
-  function refreshCart() {
+  function refreshCartDrawer() {
     const cartDrawer = document.getElementById('CartDrawer');
 
     if (cartDrawer) {
