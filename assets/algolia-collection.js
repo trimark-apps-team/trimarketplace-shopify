@@ -53,8 +53,8 @@ search.addWidgets([
     container: '#algolia-sort',
     items: [
       { label: 'Featured', value: 'qa-marlinn_products' },
-      { label: 'Price (Low → High)', value: 'qa-marlinn_shopify_products_price_asc' },
-      { label: 'Price (High → Low)', value: 'qa-marlinn_shopify_products_price_desc' }
+      { label: 'Price (Low → High)', value: 'qa-marlinn_products_price_asc' },
+      { label: 'Price (High → Low)', value: 'qa-marlinn_products_price_desc' }
     ],
   }),
 
