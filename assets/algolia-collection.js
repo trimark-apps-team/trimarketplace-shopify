@@ -13,6 +13,10 @@ const search = instantsearch({
 });
 
 search.addWidgets([
+  instantsearch.widgets.configure({
+  hitsPerPage: 24,
+  filters: `collections_list:${collectionHandle}`
+}),
 
   instantsearch.widgets.stats({
     container: '#algolia-stats',
