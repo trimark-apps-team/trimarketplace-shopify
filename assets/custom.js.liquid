@@ -1,8 +1,8 @@
-if(window.approval_required || String(window.buyer_role).includes("Sales Rep")) {
+if(window.approval_required || String(window.buyer_role).includes("Sales Rep ")) {
 
 function checkAndToggleCheckoutButtons(cart) {
     if (!cart) return;
-
+  
    const approvalRequired = cart.total_price >= window.draftorder_threshold;
 
     const checkoutButtons = document.querySelectorAll('button[name="checkout"]');
