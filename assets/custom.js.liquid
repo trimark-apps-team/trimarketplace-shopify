@@ -177,19 +177,18 @@ function refreshCartDrawer({ openDrawer = true } = {}) {
     });
 }
 
-document.querySelectorAll('[data-addmywishlistprotocart]').forEach(el => {
-  el.addEventListener('click', () => {
-    setTimeout(() => refreshCartDrawer(), 2000);
-  });
-});
-
 document.addEventListener('pc-cart:added', () => {
   refreshCartDrawer();
 });
 
-const moveAllBtn = document.querySelector('[data-hulkmoveallitmes]');
-if (moveAllBtn) {
-  moveAllBtn.addEventListener('click', () => {
-    setTimeout(() => refreshCartDrawer(), 2000);
-  });
-}
+document.addEventListener('click', (e) => {
+  const wishlistBtn = e.target.closest('[data-addmywishlistprotocart]');
+  const moveAllBtn  = e.target.closest('[data-hulkmoveallitmes]');
+
+  if (wishlistBtn || moveAllBtn) {
+    setTimeout(() => {
+      refreshCartDrawer();
+    }, 2000);
+  }
+});
+
