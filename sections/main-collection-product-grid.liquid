@@ -201,7 +201,9 @@
     {{ 'mask-arch.svg' | inline_asset_content }}
   {%- endif -%}
 </div>
-
+<script>
+  setTimeout(function(){ HulkappWishlist.init(); }, 3000);
+</script>
 {% schema %}
 {
   "name": "t:sections.main-collection-product-grid.name",
