@@ -192,3 +192,17 @@ document.addEventListener('click', (e) => {
   }
 });
 
+const observer = new MutationObserver((mutations, obs) => {
+  const gfProducts = document.querySelector('#gf-grid');
+
+  if (gfProducts) {
+    setTimeout(function(){ HulkappWishlist.init(); }, 2000);
+    obs.disconnect();
+  }
+});
+
+observer.observe(document.body, {
+  childList: true,
+  subtree: true
+});
+
