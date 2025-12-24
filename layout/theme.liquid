@@ -984,30 +984,7 @@
     data-symbol="{{ localization.country.currency.symbol }}"
   >
     <div class="main-content">
-      {% unless customer %}
-        <script>
-          document.addEventListener('DOMContentLoaded', () => {
-            const referrer = document.referrer || '';
-            const url = window.location.href;
-            const isInIframe = window.top !== window.self;
 
-            const isAdminRef = referrer.includes('admin.shopify.com');
-            const isDesignMode = !!(window.Shopify && window.Shopify.designMode);
-            const isPreviewURL = url.includes('preview_theme_id') || url.includes('preview=true');
-
-            const isShopifyInternal = isInIframe && (isAdminRef || isDesignMode || isPreviewURL);
-            const isCustomer = {{ customer | json }} !== null;
-
-            // Debug (optional)
-            console.debug('Detection:', { isInIframe, isAdminRef, isDesignMode, isPreviewURL, isCustomer, isShopifyInternal });
-
-            if (!isShopifyInternal && !isCustomer) {
-              // Redirect guests to login page
-              window.location.href = '/account/login?return_to=/';
-            }
-          });
-        </script>
-      {% endunless %}
 
       <a class="skip-to-content-link button visually-hidden" href="#MainContent">
         {{ 'accessibility.skip_to_text' | t }}
