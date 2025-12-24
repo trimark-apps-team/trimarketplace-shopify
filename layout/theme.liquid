@@ -1149,5 +1149,17 @@
       defer
     ></script>
 {%- capture productTemplate -%}{% render 'globo.filter.product', themeTranslation: shop.metafields.globoFilter.themeTranslation.value[request.locale.iso_code] %}{%- endcapture -%}{%- unless productTemplate contains 'Liquid error' -%}<script id="gspfProduct" type="template/html">{{- productTemplate | replace: "script>", "scripttag>" -}}</script>{%- endunless -%}
-  </body>
+{% if template == "collection" or template == "product" %}  
+<script>
+    document.addEventListener("DOMContentLoaded", (event) => {
+        console.log("DOM fully loaded and parsed");
+        setTimeout(function(){ 
+          if (hulkappsWishlistCollection){
+            hulkappsWishlistCollection._loadWishlistIcon();
+          }
+        }, 2000);
+    });
+  </script>  
+{% endif %}  
+</body>
 </html>

@@ -65,7 +65,7 @@
   >
 
     <div class="card-wrapper product-card-wrapper underline-links-hover">
-    <a href="javascript:void(0)" rel="nofollow" class="icon-wishlist-heart-empty wishlist-btn grid-wishlist-btn heart-wishlist-animation" data-wishList data-gridHulkList data-added="false" data-proID="{{ card_product.id }}" data-varID="{{ card_product.selected_or_first_available_variant.id }}" style="display:none;">
+    {% comment %} <a href="javascript:void(0)" rel="nofollow" class="icon-wishlist-heart-empty wishlist-btn grid-wishlist-btn heart-wishlist-animation" data-wishList data-gridHulkList data-added="false" data-proID="{{ card_product.id }}" data-varID="{{ card_product.selected_or_first_available_variant.id }}" style="display:none;">
     <div style="display: initial;" class="wishlist_btn_icon">
         {% if shop.metafields.hulkapps_wishlist.hulkapps_wishlist_buttonstyle.button_icon_type == 'custom_icon' %}
             <img src="{{ shop.metafields.hulkapps_wishlist.hulkapps_wishlist_buttonstyle.empty_set_custom_icon }}" class="hulk-wishlist-custom-icon" width="18px" height="18px" style="display: none; line-height: 1;cursor: pointer;margin-right: 5px;user-select: none;vertical-align: middle;margin-top: -2px;">
@@ -75,7 +75,7 @@
     </div>
     <span>Add to wishlist</span>
     <span class="count">0</span>
-</a>
+</a> {% endcomment %}
     <div
       class="
         card card--{{ settings.card_style }}
