@@ -192,31 +192,31 @@ document.addEventListener('click', (e) => {
   }
 });
 
-let wishlistInitTimeout = null;
+// let wishlistInitTimeout = null;
 
-function initWishlistSafely() {
-  if (wishlistInitTimeout) return;
+// function initWishlistSafely() {
+//   if (wishlistInitTimeout) return;
 
-  wishlistInitTimeout = setTimeout(() => {
-    if (window.HulkappWishlist && typeof HulkappWishlist.init === "function") {
-      HulkappWishlist.init();
-    }
-    wishlistInitTimeout = null;
-  }, 500);
-}
+//   wishlistInitTimeout = setTimeout(() => {
+//     if (window.HulkappWishlist && typeof HulkappWishlist.init === "function") {
+//       HulkappWishlist.init();
+//     }
+//     wishlistInitTimeout = null;
+//   }, 500);
+// }
 
-const observer = new MutationObserver(() => {
-  const gfGrid = document.querySelector('#gf-grid');
-  const gfProducts = document.querySelector('#gf-products');
+// const observer = new MutationObserver(() => {
+//   const gfGrid = document.querySelector('#gf-grid');
+//   const gfProducts = document.querySelector('#gf-products');
 
-  if (gfGrid || gfProducts) {
-    initWishlistSafely();
-  }
-});
+//   if (gfGrid || gfProducts) {
+//     initWishlistSafely();
+//   }
+// });
 
-observer.observe(document.body, {
-  childList: true,
-  subtree: true
-});
+// observer.observe(document.body, {
+//   childList: true,
+//   subtree: true
+// });
 
 
