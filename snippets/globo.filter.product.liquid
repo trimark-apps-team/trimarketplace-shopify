@@ -198,6 +198,9 @@
               {{ card_product.metafields.custom[erp_id_key] }}
           </span></p> 
           {% endif %}
+           <p style="font-size: 12px; margin: 6px 0;">Item#: <span class="trimark-red">
+              {{ card_product.metafields.custom["1_erp_id_marlinn_ipics"] }}
+          </span></p> 
           <h3
             class="card__heading{% if card_product.featured_image or settings.card_style == 'standard' %} h5{% endif %}"
             {% if card_product.featured_image or settings.card_style == 'card' %}
@@ -355,7 +358,7 @@
               </div>
             {%- endif -%}
                       </div>
-                      {% if card_product.metafields.custom['5_non_stock'] == true %}
+                {% if card_product.metafields.custom['5_non_stock'] == true %}
                   {% assign eta_time = settings.non_stock_text %}
                   {% assign eta_font_size = settings.non_stock_text_font_size %}
                 {% else %}
