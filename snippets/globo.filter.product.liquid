@@ -65,7 +65,7 @@
   >
 
     <div class="card-wrapper product-card-wrapper underline-links-hover">
-     <a href="javascript:void(0)" rel="nofollow" class="icon-wishlist-heart-empty wishlist-btn grid-wishlist-btn heart-wishlist-animation" data-wishList data-gridHulkList data-added="false" data-proID="{{ card_product.id }}" data-varID="{{ card_product.selected_or_first_available_variant.id }}" style="display:none;">
+    <a href="javascript:void(0)" rel="nofollow" class="icon-wishlist-heart-empty wishlist-btn grid-wishlist-btn heart-wishlist-animation" data-wishList data-gridHulkList data-added="false" data-proID="{{ card_product.id }}" data-varID="{{ card_product.selected_or_first_available_variant.id }}" style="display:none;">
     <div style="display: initial;" class="wishlist_btn_icon">
         {% if shop.metafields.hulkapps_wishlist.hulkapps_wishlist_buttonstyle.button_icon_type == 'custom_icon' %}
             <img src="{{ shop.metafields.hulkapps_wishlist.hulkapps_wishlist_buttonstyle.empty_set_custom_icon }}" class="hulk-wishlist-custom-icon" width="18px" height="18px" style="display: none; line-height: 1;cursor: pointer;margin-right: 5px;user-select: none;vertical-align: middle;margin-top: -2px;">
@@ -180,6 +180,24 @@
       </div>
       <div class="card__content">
         <div class="card__information">
+        {% assign domain = shop.url | downcase %}
+                  {% assign erp_id_key = '' %}
+            {% if domain contains 'marlinn' or domain contains 'fiveguys' or domain contains 'demo' %}
+                    {% assign erp_id_key = '1_erp_id_marlinn_ipics' %}
+                  {% elsif domain contains 'ab' %}
+                    {% assign erp_id_key = '1_erp_id_adams_burch_sx' %}
+                  {% elsif domain contains 'sskemp' %}
+                    {% assign erp_id_key = '1_erp_id_sskemp_jde' %}
+                  {% elsif domain contains 'rwsmith' %}
+                    {% assign erp_id_key = '1_erp_id_rwsmith_sx' %}
+                  {% else %}
+                    {% assign erp_id_key = '' %}
+            {% endif %}
+            {% if card_product.metafields.custom[erp_id_key] %}
+          <p style="font-size: 12px; margin: 6px 0;">Item#: <span class="trimark-red">
+              {{ card_product.metafields.custom[erp_id_key] }}
+          </span></p> 
+          {% endif %}
           <h3
             class="card__heading{% if card_product.featured_image or settings.card_style == 'standard' %} h5{% endif %}"
             {% if card_product.featured_image or settings.card_style == 'card' %}
@@ -337,6 +355,16 @@
               </div>
             {%- endif -%}
                       </div>
+                      {% if card_product.metafields.custom['5_non_stock'] == true %}
+                  {% assign eta_time = settings.non_stock_text %}
+                  {% assign eta_font_size = settings.non_stock_text_font_size %}
+                {% else %}
+                  {% assign eta_time = settings.in_stock_text  %}
+                  {% assign eta_font_size = settings.in_stock_text_font_size %}
+                {% endif %}
+                <div class="eta-text eta-text-wrapper" style="font-size:{{ eta_font_size }}px;">
+                  Expected Shipping: <span class="trimark-red">{{ eta_time }}</span>
+                </div>
         </div>
         {% assign product_form_id = 'quick-add-' | append: section_id | append: card_product.id %}
         {% if quick_add == 'standard' %}
@@ -419,6 +447,7 @@
                   <form method="post" action="{{ root_url }}/cart/add" id="{{ product_form_id }}" accept-charset="UTF-8" class="form" enctype="multipart/form-data" novalidate="novalidate" data-type="add-to-cart-form">
                   <input type="hidden" name="form_type" value="product">
                   <input type="hidden" name="utf8" value="✓">
+                  <input type="hidden" name="properties[Expected Shipping]" value="{{ eta_time }}">
                   <input
                     type="hidden"
                     name="id"

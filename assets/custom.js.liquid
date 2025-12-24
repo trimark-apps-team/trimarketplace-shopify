@@ -192,17 +192,31 @@ document.addEventListener('click', (e) => {
   }
 });
 
-// const observer = new MutationObserver((mutations, obs) => {
-//   const gfProducts = document.querySelector('#gf-grid');
+let wishlistInitTimeout = null;
 
-//   if (gfProducts) {
-//     setTimeout(function(){ HulkappWishlist.init(); }, 2000);
-//     obs.disconnect();
-//   }
-// });
+function initWishlistSafely() {
+  if (wishlistInitTimeout) return;
 
-// observer.observe(document.body, {
-//   childList: true,
-//   subtree: true
-// });
+  wishlistInitTimeout = setTimeout(() => {
+    if (window.HulkappWishlist && typeof HulkappWishlist.init === "function") {
+      HulkappWishlist.init();
+    }
+    wishlistInitTimeout = null;
+  }, 500);
+}
+
+const observer = new MutationObserver(() => {
+  const gfGrid = document.querySelector('#gf-grid');
+  const gfProducts = document.querySelector('#gf-products');
+
+  if (gfGrid || gfProducts) {
+    initWishlistSafely();
+  }
+});
+
+observer.observe(document.body, {
+  childList: true,
+  subtree: true
+});
+
 
