@@ -167,6 +167,10 @@
               >
                 {% endraw %}{{- themeTranslation.products.product.sold_out -}}{% raw %}
               </span>
+         {% elsif card_product.metafields.custom.private_label == true %}
+            <span class="private-label">
+              PRIVATE LABEL
+            </span>
             {%- elsif card_product.compare_at_price > card_product.price and card_product.available -%}
               <span
                 id="NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
