@@ -184,6 +184,8 @@
       </div>
       <div class="card__content">
         <div class="card__information">
+        {% assign domain = {% endraw %}' {{ shop.url | downcase }} '{% raw %} %}
+        domain- {{ domain }}
         {% assign domain = shop.url | downcase %}
                   {% assign erp_id_key = '' %}
             {% if domain contains 'marlinn' or domain contains 'fiveguys' or domain contains 'demo' %}
