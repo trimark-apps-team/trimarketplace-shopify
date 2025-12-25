@@ -1,0 +1,833 @@
+{{ 'template-collection.css' | asset_url | stylesheet_tag }}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'quick-order-list.css' | asset_url | stylesheet_tag }}
+{{ 'quantity-popover.css' | asset_url | stylesheet_tag }}
+
+<script src="{{ 'quantity-popover.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'price-per-item.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'quick-order-list.js' | asset_url }}" defer="defer"></script>
+
+{% if section.settings.image_shape == 'blob' %}
+  {{ 'mask-blobs.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
+
+{%- unless section.settings.quick_add == 'none' -%}
+  {{ 'quick-add.css' | asset_url | stylesheet_tag }}
+{%- endunless -%}
+
+{%- if section.settings.quick_add == 'standard' -%}
+  <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+{%- if section.settings.quick_add == 'bulk' -%}
+  <script src="{{ 'quick-add-bulk.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'quantity-popover.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'price-per-item.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'quick-order-list.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}">
+  {%- paginate collection.products by section.settings.products_per_page -%}
+    {% comment %} Sort is the first tabbable element when filter type is vertical {% endcomment %}
+    {%- if section.settings.enable_sorting and section.settings.filter_type == 'vertical' -%}
+      <div class="page-width">
+        <div class="quick-order-controls__inner">
+  <button id="cart-click" class="button"><span class="cart-items_count"> CART ({{ cart.items.size }} PRODUCTS, {{ cart.item_count }} QUANTITIES)</span></button>
+  <button id="cart-clear" class="button">CLEAR CART</button>
+      <button id="download-collection-file" class="button hidden">DOWNLOAD FILE</button>
+    <button id="add-collection-to-cart" class="button hidden">ADD COLLECTION TO CART</button>
+    <input
+                  type="text"
+                  id="quick-order-search"
+                  placeholder="Search by title, price, type or SKU"
+                  class="quick-order-search-input"
+              > 
+  </div>
+      <facet-filters-form class="responsive facets facets-vertical-sort">
+        <form class="facets-vertical-form" id="FacetSortForm">
+          <div class="facet-filters sorting caption">
+            <div class="facet-filters__field">
+  
+              <h2 class="facet-filters__label caption-large text-body">
+                <label for="SortBy">{{ 'products.facets.sort_by_label' | t }}</label>
+              </h2> 
+
+              <div class="select">
+                {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
+                <select
+                  name="sort_by"
+                  class="facet-filters__sort select__select caption-large"
+                  id="SortBy"
+                  aria-describedby="a11y-refresh-page-message"
+                >
+                  {%- for option in collection.sort_options -%}
+                    {% if option.value == "title-ascending" or option.value == "title-descending" or option.value == "manual" %}
+                    <option
+                      value="{{ option.value | escape }}"
+                      {% if option.value == sort_by %}
+                        selected="selected"
+                      {% endif %}
+                     >
+                      {% if option.value == "manual" %} Recently Purchased {% else %} {{ option.name | escape }} {% endif %}
+                    </option>
+                   {% endif %}
+                  {%- endfor -%}
+                </select>
+                <span class="svg-wrapper">
+                  {{- 'icon-caret.svg' | inline_asset_content -}}
+                </span>
+              </div>
+               
+            </div>
+          </div>
+
+          <div class="product-count-vertical light" role="status">
+          <h2 class="product-count__text text-body small-hide">
+              <span id="ProductCountDesktop">
+                {%- if collection.results_count -%}
+                  {{
+                    'templates.search.results_with_count'
+                    | t: terms: collection.terms, count: collection.results_count
+                  }}
+                {%- elsif collection.products_count == collection.all_products_count -%}
+                  {{ 'products.facets.product_count_simple' | t: count: collection.products_count }}
+                {%- else -%}
+                  {{
+                    'products.facets.product_count'
+                    | t: product_count: collection.products_count, count: collection.all_products_count
+                  }}
+                {%- endif -%}
+              </span>
+            </h2> 
+            {%- render 'loading-spinner' -%}
+          </div>
+        </form>
+      </facet-filters-form>
+      </div>
+    {%- endif -%}
+
+    <div class="page-width">
+      <div class="responsive quick-order_page {% if section.settings.filter_type == 'vertical' %} facets-vertical{% endif %}">
+    
+  
+      {{ 'component-facets.css' | asset_url | stylesheet_tag }}
+      <script src="{{ 'facets.js' | asset_url }}" defer="defer"></script>
+
+      <div
+        class="product-grid-container{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+        id="ProductGridContainer"
+        {% if settings.animations_reveal_on_scroll %}
+          data-cascade
+        {% endif %}
+      >
+        {%- if collection.products.size == 0 -%}
+          <div class="collection collection--empty page-width" id="product-grid" data-id="{{ section.id }}">
+            <div class="loading-overlay gradient"></div>
+            <div class="title-wrapper center">
+              <h2 class="title title--primary">
+                {{ 'sections.collection_template.empty' | t -}}
+                <br>
+                {{
+                  'sections.collection_template.use_fewer_filters_html'
+                  | t: link: collection.url, class: 'underlined-link link'
+                }}
+              </h2>
+            </div>
+          </div>
+        {%- else -%}
+          <div class="quick-order_loader hidden"></div> 
+          <div
+            class="collection{% if section.settings.filter_type != 'vertical' %} page-width{% endif %} quick-order-list__container" id="main-variant-items"
+          >
+            <div class="loading-overlay gradient"></div>
+            <quick-order-list>
+            <table
+              class="quick-order-list__table"
+              id="product-grid"
+              data-id="{{ section.id }}"
+            >
+              <thead class="">
+                    <tr>
+                      <th class="caption-with-letter-spacing" scope="col">
+                       Item
+                      </th>
+                      <th class="large-up-hide right caption-with-letter-spacing" scope="col">Variant total </th>
+                      <th class="quick-order-list__table-heading--wide small-hide medium-hide caption-with-letter-spacing" scope="col" style="text-align: center; padding-left: 0;">
+                      Quantity
+                      </th>
+                      <th class="quick-order-list__table-heading--wide small-hide medium-hide caption-with-letter-spacing" scope="col" style="text-align: center; padding-left: 0;">
+                      Action
+                      </th> 
+                      <th class="quick-order-list__table-heading--wide small-hide medium-hide caption-with-letter-spacing" scope="col">
+                       Price
+                      </th>
+                      <th class="small-hide medium-hide right caption-with-letter-spacing" scope="col">
+                        Item Total
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody id="quick-order-products">
+              {%- for product in collection.products -%}
+               {% assign variant = product.selected_or_first_available_variant %}
+    {% assign ordered_date = product.metafields.custom.purchased_date.value %}
+
+    <tr class="variant-item" data-variant-id="{{ variant.id }}">
+<td class="variant-item__inner">
+  <div class="variant-item__media">
+    <div class="variant-item__image-container global-media-settings gradient">
+      <img src="{{ product.featured_image | image_url: width: 86 }}" alt="{{ product.title | escape }}" width="43" height="43" loading="lazy" fetchpriority="low" decoding="async" class="variant-item__image">
+    </div>
+  </div>
+  <div class="small-hide medium-hide">
+    <span class="variant-item__name h4 break"><a class="full-unstyled-link" href="{{ product.url }}">
+              {{ product.title }}</a></span>
+    <span class="variant-item__sku break">            {% if variant.sku != blank %}
+              {{ variant.sku }}
+              {% if ordered_date %}
+                | Ordered at: {{ ordered_date | date: "%m/%d/%Y" }}
+              {% endif %}
+            {% elsif ordered_date %}
+              Ordered at: {{ ordered_date | date: "%m/%d/%Y" }}
+            {% endif %}</span>
+  </div>
+</td>
+<td class="variant-item__details large-up-hide">
+  <div class="variant-item__info">
+    <span class="variant-item__name h4 break"><a class="full-unstyled-link" href="{{ product.url }}">
+              {{ product.title }}</a></span>
+    <span class="variant-item__sku break">            {% if variant.sku != blank %}
+              {{ variant.sku }}
+              {% if ordered_date %}
+                | Ordered at: {{ ordered_date | date: "%m/%d/%Y" }}
+              {% endif %}
+            {% elsif ordered_date %}
+              Ordered at: {{ ordered_date | date: "%m/%d/%Y" }}
+            {% endif %}</span>
+  </div>
+  <span class="price">{{ variant.price | money }}</span>
+</td>
+<td class="variant-item__totals right large-up-hide">
+  <div class="loading__spinner hidden">
+    <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66"><circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle></svg>
+  </div>
+  <span class="price">{{ cart | line_items_for: product | sum: 'original_line_price' | money }}</span>
+</td>
+
+<td class="variant-item__quantity">
+  <quantity-popover>
+    <div class="variant-item__quantity-wrapper quantity-popover-wrapper variant-item__quantity-wrapper--no-info">
+      <label class="visually-hidden">Quantity</label>
+      <div class="quantity-popover-container">
+        <quantity-input class="quantity cart-quantity">
+<button class="quantity__button disabled" name="minus" type="button">
+    <span class="visually-hidden">Decrease quantity for Default Title</span>
+    <span class="svg-wrapper"><svg xmlns="http://www.w3.org/2000/svg" fill="none" class="icon icon-minus" viewBox="0 0 10 2"><path fill="currentColor" fill-rule="evenodd" d="M.5 1C.5.7.7.5 1 .5h8a.5.5 0 1 1 0 1H1A.5.5 0 0 1 .5 1" clip-rule="evenodd"></path></svg>
+</span>
+  </button>
+          <input type="number" class="quantity__input" value="1" min="1" />
+<button class="quantity__button" name="plus" type="button">
+    <span class="visually-hidden">Increase quantity for Default Title</span>
+    <span class="svg-wrapper"><svg xmlns="http://www.w3.org/2000/svg" fill="none" class="icon icon-plus" viewBox="0 0 10 10"><path fill="currentColor" fill-rule="evenodd" d="M1 4.51a.5.5 0 0 0 0 1h3.5l.01 3.5a.5.5 0 0 0 1-.01V5.5l3.5-.01a.5.5 0 0 0-.01-1H5.5L5.49.99a.5.5 0 0 0-1 .01v3.5l-3.5.01z" clip-rule="evenodd"></path></svg>
+</span>
+  </button>
+          <div class="progress-bar-container hidden">
+            <div class="progress-bar"><div class="progress-bar-value"></div></div>
+          </div>
+        </quantity-input>
+        <button class="quick-add__submit button large-up-hide">
+          <span>Add to cart</span>
+          <div class="loading__spinner hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66"><circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle></svg>
+          </div>
+        </button>
+      </div>
+    </div>
+    <div class="variant-item__error large-up-hide" role="alert">
+      <small class="variant-item__error-text"></small>
+    </div>
+  </quantity-popover>
+</td>
+<td class="variant-item__quantity small-hide medium-hide" style="text-align: center; padding-left: 0;">
+  <button class="quick-add__submit button">
+    <span>Add to cart</span>
+    <div class="loading__spinner hidden">
+      <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66"><circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle></svg>
+    </div>
+  </button>
+</td>
+<td class="variant-item__price small-hide medium-hide"><span class="price">{{ variant.price | money }}</span></td>
+<td class="variant-item__totals right small-hide medium-hide">
+  <div class="loading__spinner hidden">
+    <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66"><circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle></svg>
+  </div>
+  <span class="price">{{ cart | line_items_for: product | sum: 'original_line_price' | money }}</span>
+</td>
+    </tr>
+              {%- endfor -%}
+            </tbody>
+          </table>
+          </quick-order-list>
+  
+
+            <div id="quick-order-pagination" class="pagination-controls hidden">
+  <button id="prev-page" disabled>Prev</button>
+  <span id="page-info"></span>
+  <button id="next-page">Next</button>
+</div>
+<div id="no-results" class="no-results-message hidden">No products found matching your search.</div>
+         {%- if paginate.pages > 1 -%}
+              {% render 'pagination', paginate: paginate, anchor: '' %}
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+  {%- endpaginate -%}
+  {% if section.settings.image_shape == 'arch' %}
+    {{ 'mask-arch.svg' | inline_asset_content }}
+  {%- endif -%}
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', async function () {
+  const searchInput = document.getElementById('quick-order-search');
+  {% comment %} const sortSelect = document.getElementById('quick-order-sort'); {% endcomment %}
+  const container = document.getElementById('quick-order-products');
+  const pagination = document.getElementById('quick-order-pagination');
+  const prevBtn = document.getElementById('prev-page');
+  const nextBtn = document.getElementById('next-page');
+  const pageInfoEl = document.getElementById('page-info');
+  const noResults = document.getElementById('no-results');
+  const cartClear = document.querySelector("#cart-clear");
+
+  const ITEMS_PER_PAGE = 20;
+  const DOMAIN = '{{ shop.permanent_domain }}';
+
+  let currentPageInfo = null;
+
+  function showLoader(show = true) {
+    document.querySelector("#main-variant-items")
+      ?.classList.toggle("hidden", show);
+    document.querySelector(".quick-order_loader")
+      ?.classList.toggle("hidden", !show);
+  }
+
+  /* ----------------------------------------
+     API FETCH
+  ---------------------------------------- */
+  async function fetchProducts({
+    after = null,
+    before = null,
+    direction = 'next'
+  } = {}) {
+
+    const params = new URLSearchParams();
+    params.set('domain', DOMAIN);
+
+    if (direction === 'prev' && before) {
+      params.set('last', ITEMS_PER_PAGE);
+      params.set('before', before);
+    } else {
+      params.set('first', ITEMS_PER_PAGE);
+      if (after) params.set('after', after);
+    }
+
+    const search = searchInput.value?.trim();
+    if(!search) {
+      const tBody = document.getElementById('main-variant-items');
+
+    if (tBody) {
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', window.location.href);
+      xhr.onload = () => {
+        if (xhr.status === 200) {
+          const parser = new DOMParser();
+          const responseDoc = parser.parseFromString(xhr.responseText, 'text/html');
+          const newContent = responseDoc.querySelector('#main-variant-items');
+          if (newContent) {
+            tBody.innerHTML = newContent.innerHTML;
+          }
+        }
+      };
+      xhr.send();
+    }
+          document.querySelector(".pagination-wrapper").classList.remove('hidden');
+      return null;
+    }
+
+    if (search) params.set('search', search);
+
+    {% comment %} const sort = sortSelect.value;
+    if (sort) params.set('sort', sort); {% endcomment %}
+
+    showLoader(true);
+    const res = await fetch(`/apps/api/get-products-custom?${params.toString()}`);
+    const data = await res.json();
+    showLoader(false);
+    document.querySelector(".pagination-wrapper").classList.add('hidden');
+    return data;
+  }
+
+  /* ----------------------------------------
+     RENDER
+  ---------------------------------------- */
+  function createProductRow(product) {
+    const variant = product.variant;
+    if (!variant) return null;
+
+    const orderedDate = product.purchasedDate
+      ? new Date(product.purchasedDate).toLocaleDateString('en-US')
+      : '';
+
+    const tr = document.createElement('tr');
+    tr.className = 'variant-item';
+    tr.dataset.variantId = variant.idNumeric;
+
+    tr.innerHTML = `
+<td class="variant-item__inner">
+  <div class="variant-item__media">
+    <div class="variant-item__image-container global-media-settings gradient">
+      <img src="${product.featuredImageUrl}" alt="${product.title}" width="43" height="43" loading="lazy" fetchpriority="low" decoding="async" class="variant-item__image">
+    </div>
+  </div>
+  <div class="small-hide medium-hide">
+    <span class="variant-item__name h4 break"><a class="full-unstyled-link" href="/products/${product.handle}">${product.title}</a></span>
+    <span class="variant-item__sku break">${variant.sku ? `${variant.sku} ${orderedDate ? ` | Ordered at: ${orderedDate}` : ""}` : `${orderedDate ? `Ordered at: ${orderedDate}` : ""}`}</span>
+  </div>
+</td>
+<td class="variant-item__details large-up-hide">
+  <div class="variant-item__info">
+    <span class="variant-item__name h4 break"><a class="full-unstyled-link" href="/products/${product.handle}">${product.title}</a></span>
+    <span class="variant-item__sku break">${variant.sku ? `${variant.sku} ${orderedDate ? ` | Ordered at: ${orderedDate}` : ""}` : `${orderedDate ? `Ordered at: ${orderedDate}` : ""}`}</span>
+  </div>
+  <span class="price">$${variant.price}</span>
+</td>
+<td class="variant-item__totals right large-up-hide">
+  <div class="loading__spinner hidden">
+    <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66"><circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle></svg>
+  </div>
+  <span class="price">$0</span>
+</td>
+
+<td class="variant-item__quantity">
+  <quantity-popover>
+    <div class="variant-item__quantity-wrapper quantity-popover-wrapper variant-item__quantity-wrapper--no-info">
+      <label class="visually-hidden">Quantity</label>
+      <div class="quantity-popover-container">
+        <quantity-input class="quantity cart-quantity">
+<button class="quantity__button disabled" name="minus" type="button">
+    <span class="visually-hidden">Decrease quantity for Default Title</span>
+    <span class="svg-wrapper"><svg xmlns="http://www.w3.org/2000/svg" fill="none" class="icon icon-minus" viewBox="0 0 10 2"><path fill="currentColor" fill-rule="evenodd" d="M.5 1C.5.7.7.5 1 .5h8a.5.5 0 1 1 0 1H1A.5.5 0 0 1 .5 1" clip-rule="evenodd"></path></svg>
+</span>
+  </button>
+          <input type="number" class="quantity__input" value="1" min="1" />
+<button class="quantity__button" name="plus" type="button">
+    <span class="visually-hidden">Increase quantity for Default Title</span>
+    <span class="svg-wrapper"><svg xmlns="http://www.w3.org/2000/svg" fill="none" class="icon icon-plus" viewBox="0 0 10 10"><path fill="currentColor" fill-rule="evenodd" d="M1 4.51a.5.5 0 0 0 0 1h3.5l.01 3.5a.5.5 0 0 0 1-.01V5.5l3.5-.01a.5.5 0 0 0-.01-1H5.5L5.49.99a.5.5 0 0 0-1 .01v3.5l-3.5.01z" clip-rule="evenodd"></path></svg>
+</span>
+  </button>
+          <div class="progress-bar-container hidden">
+            <div class="progress-bar"><div class="progress-bar-value"></div></div>
+          </div>
+        </quantity-input>
+        <button class="quick-add__submit button large-up-hide">
+          <span>Add to cart</span>
+          <div class="loading__spinner hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66"><circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle></svg>
+          </div>
+        </button>
+      </div>
+    </div>
+    <div class="variant-item__error large-up-hide" role="alert">
+      <small class="variant-item__error-text"></small>
+    </div>
+  </quantity-popover>
+</td>
+<td class="variant-item__quantity small-hide medium-hide" style="text-align: center; padding-left: 0;">
+  <button class="quick-add__submit button">
+    <span>Add to cart</span>
+    <div class="loading__spinner hidden">
+      <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66"><circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle></svg>
+    </div>
+  </button>
+</td>
+<td class="variant-item__price small-hide medium-hide"><span class="price">$${variant.price}</span></td>
+<td class="variant-item__totals right small-hide medium-hide">
+  <div class="loading__spinner hidden">
+    <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66"><circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle></svg>
+  </div>
+  <span class="price">$0</span>
+</td>
+    `;
+
+    return tr;
+  }
+
+  function updateRowsWithCart(cart) {
+  const rows = container.querySelectorAll('.variant-item');
+  rows.forEach(row => {
+    const variantId = row.dataset.variantId;
+    const cartItem = cart.items.find(i => i.variant_id.toString() === variantId);
+
+    if (cartItem) {
+
+      const totals = row.querySelectorAll('.variant-item__totals .price');
+      totals.forEach(totalEl => {
+        totalEl.textContent = `$${(cartItem.price * cartItem.quantity / 100).toFixed(2)}`;
+      });
+    } else {
+      const totals = row.querySelectorAll('.variant-item__totals .price');
+      totals.forEach(totalEl => {
+        totalEl.textContent = "$0";
+      });
+    }
+  });
+}
+
+ async function getCart() {
+  const res = await fetch('/cart.js');
+  return res.json();
+  }
+
+  async function render(data) {
+    container.innerHTML = '';
+
+    if (!data?.success || !data.items?.length) {
+      noResults.classList.remove('hidden');
+      pagination.classList.add('hidden');
+      return;
+    }
+
+    noResults.classList.add('hidden');
+    pagination.classList.remove('hidden');
+
+    data.items.forEach(p => {
+      const row = createProductRow(p);
+      if (row) container.appendChild(row);
+    });
+
+    currentPageInfo = data.pageInfo;
+
+    pageInfoEl.textContent = `Showing ${data.items.length} products`;
+
+    prevBtn.disabled = !currentPageInfo.hasPreviousPage;
+    nextBtn.disabled = !currentPageInfo.hasNextPage;
+
+  const cart = await getCart();
+  updateRowsWithCart(cart);
+  }
+
+  function clearCart() {
+    fetch('/cart/clear.js', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+        refreshCart();
+        document.querySelector("cart-drawer").classList.add("is-empty");
+        const cartCountBubble = document.querySelector('.cart-count-bubble');
+        const cartItemsCount = document.querySelector('#cart-click .cart-items_count');
+        
+        if (cartCountBubble) cartCountBubble.innerText = data.item_count;
+        if (cartItemsCount) {
+          cartItemsCount.innerText = `CART (${data.items.length} PRODUCTS, ${data.item_count} QUANTITY)`;
+        }
+        updateRowsWithCart(data);
+    })
+  }
+
+  cartClear.addEventListener('click', function () {
+    clearCart()
+  });
+
+  /* ----------------------------------------
+     LOADERS
+  ---------------------------------------- */
+  async function loadInitial() {
+    const data = await fetchProducts();
+      
+     {% comment %} if (!data) {
+      
+     return;
+    } {% endcomment %}
+ 
+     await render(data);
+  }
+
+  const debounce = (fn, d = 300) => {
+    let t;
+    return (...a) => {
+      clearTimeout(t);
+      t = setTimeout(() => fn(...a), d);
+    };
+  };
+
+  /* ----------------------------------------
+     EVENTS
+  ---------------------------------------- */
+  searchInput.addEventListener('input', debounce(loadInitial, 350));
+  {% comment %} sortSelect.addEventListener('change', loadInitial); {% endcomment %}
+
+  nextBtn.addEventListener('click', async () => {
+    const data = await fetchProducts({
+      after: currentPageInfo?.endCursor,
+      direction: 'next'
+    });
+    await render(data);
+  });
+
+  prevBtn.addEventListener('click', async () => {
+    const data = await fetchProducts({
+      before: currentPageInfo?.startCursor,
+      direction: 'prev'
+    });
+    await render(data);
+  });
+
+});
+</script>
+
+{% schema %}
+{
+  "name": "t:sections.main-collection-product-grid.name",
+  "class": "section",
+  "settings": [
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "min": 8,
+      "max": 36,
+      "step": 4,
+      "default": 16,
+      "label": "t:sections.main-collection-product-grid.settings.products_per_page.label"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "default": 4,
+      "label": "t:sections.main-collection-product-grid.settings.columns_desktop.label"
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "default": "2",
+      "label": "t:sections.main-collection-product-grid.settings.columns_mobile.label",
+      "options": [
+        {
+          "value": "1",
+          "label": "t:sections.main-collection-product-grid.settings.columns_mobile.options__1.label"
+        },
+        {
+          "value": "2",
+          "label": "t:sections.main-collection-product-grid.settings.columns_mobile.options__2.label"
+        }
+      ]
+    },    
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "info": "t:sections.all.colors.has_cards_info",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.main-collection-product-grid.settings.header__3.content"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "t:sections.main-collection-product-grid.settings.image_ratio.options__1.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:sections.main-collection-product-grid.settings.image_ratio.options__2.label"
+        },
+        {
+          "value": "square",
+          "label": "t:sections.main-collection-product-grid.settings.image_ratio.options__3.label"
+        }
+      ],
+      "default": "adapt",
+      "label": "t:sections.main-collection-product-grid.settings.image_ratio.label"
+    },
+    {
+      "type": "select",
+      "id": "image_shape",
+      "options": [
+        {
+          "value": "default",
+          "label": "t:sections.all.image_shape.options__1.label"
+        },
+        {
+          "value": "arch",
+          "label": "t:sections.all.image_shape.options__2.label"
+        },
+        {
+          "value": "blob",
+          "label": "t:sections.all.image_shape.options__3.label"
+        },
+        {
+          "value": "chevronleft",
+          "label": "t:sections.all.image_shape.options__4.label"
+        },
+        {
+          "value": "chevronright",
+          "label": "t:sections.all.image_shape.options__5.label"
+        },
+        {
+          "value": "diamond",
+          "label": "t:sections.all.image_shape.options__6.label"
+        },
+        {
+          "value": "parallelogram",
+          "label": "t:sections.all.image_shape.options__7.label"
+        },
+        {
+          "value": "round",
+          "label": "t:sections.all.image_shape.options__8.label"
+        }
+      ],
+      "default": "default",
+      "label": "t:sections.all.image_shape.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secondary_image",
+      "default": false,
+      "label": "t:sections.main-collection-product-grid.settings.show_secondary_image.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "default": false,
+      "label": "t:sections.main-collection-product-grid.settings.show_vendor.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "default": false,
+      "label": "t:sections.main-collection-product-grid.settings.show_rating.label",
+      "info": "t:sections.main-collection-product-grid.settings.show_rating.info"
+    },
+    {
+      "type": "select",
+      "id": "quick_add",
+      "default": "none",
+      "label": "t:sections.main-collection-product-grid.settings.quick_add.label",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:sections.main-collection-product-grid.settings.quick_add.options.option_1"
+        },
+        {
+          "value": "standard",
+          "label": "t:sections.main-collection-product-grid.settings.quick_add.options.option_2"
+        },
+        {
+          "value": "bulk",
+          "label": "t:sections.main-collection-product-grid.settings.quick_add.options.option_3"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:sections.main-collection-product-grid.settings.header__1.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_filtering",
+      "default": true,
+      "label": "t:sections.main-collection-product-grid.settings.enable_filtering.label",
+      "info": "t:sections.main-collection-product-grid.settings.enable_filtering.info"
+    },
+    {
+      "type": "select",
+      "id": "filter_type",
+      "options": [
+        {
+          "value": "horizontal",
+          "label": "t:sections.main-collection-product-grid.settings.filter_type.options__1.label"
+        },
+        {
+          "value": "vertical",
+          "label": "t:sections.main-collection-product-grid.settings.filter_type.options__2.label"
+        },
+        {
+          "value": "drawer",
+          "label": "t:sections.main-collection-product-grid.settings.filter_type.options__3.label"
+        }
+      ],
+      "default": "horizontal",
+      "label": "t:sections.main-collection-product-grid.settings.filter_type.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sorting",
+      "default": true,
+      "label": "t:sections.main-collection-product-grid.settings.enable_sorting.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ]
+}
+{% endschema %}
+
+
+
