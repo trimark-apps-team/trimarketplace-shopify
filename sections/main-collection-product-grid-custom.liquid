@@ -43,12 +43,17 @@
     }
   }
 {%- endstyle -%}
+{% if customer %}
+{% assign sales_rep = customer.metafields.custom.buyer_role.value | default: blank %}
+{% endif %}
+{% if shop.metafields.custom.allow_sales_order or sales_rep contains 'Sales Rep' %}
 
 <div class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}">
   {%- paginate collection.products by section.settings.products_per_page -%}
     {% comment %} Sort is the first tabbable element when filter type is vertical {% endcomment %}
     {%- if section.settings.enable_sorting and section.settings.filter_type == 'vertical' -%}
       <div class="page-width">
+
         <div class="quick-order-controls__inner">
   <button id="cart-click" class="button"><span class="cart-items_count"> CART ({{ cart.items.size }} PRODUCTS, {{ cart.item_count }} QUANTITIES)</span></button>
   <button id="cart-clear" class="button">CLEAR CART</button>
@@ -300,6 +305,7 @@
         {%- endif -%}
       </div>
     </div>
+   
   </div>
   {%- endpaginate -%}
   {% if section.settings.image_shape == 'arch' %}
@@ -614,6 +620,10 @@ document.addEventListener('DOMContentLoaded', async function () {
 
 });
 </script>
+
+ {% else %}
+  <h3 class="page-width center page-margin">You don't have permission to view this page.</h3>
+{% endif %}
 
 {% schema %}
 {
