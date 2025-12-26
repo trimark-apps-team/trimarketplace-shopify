@@ -202,6 +202,12 @@
   data-price-target=".quick-order-item-price"
   data-add-to-cart=".quick-order-atc">
 <td class="variant-item__inner">
+              {% if product.metafields.custom['5_non_stock'] == true %}
+                  {% assign eta_time = settings.non_stock_text %}
+                {% else %}
+                  {% assign eta_time = settings.in_stock_text  %}
+                {% endif %}
+  <input type="hidden" name="properties[Expected Shipping]" class="eta-time" value="{{ eta_time }}">
   <input type="hidden" name="properties[_Tier Price]" class="tier-price" value="NA">
   <div class="variant-item__media">
     <div class="variant-item__image-container global-media-settings gradient">
