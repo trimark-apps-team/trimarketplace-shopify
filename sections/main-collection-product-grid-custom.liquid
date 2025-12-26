@@ -422,17 +422,18 @@ document.addEventListener('DOMContentLoaded', async function () {
       ? new Date(product.purchasedDate).toLocaleDateString('en-US')
       : '';
 
-    const uom = product.uom ? : '';
-    const itemNumber = product.itemNumber ? : '';
-    const etaTime = product.nonStock ? "14-21 Days" : "2-3 Days";
+  const uom = product.uom ?? '';
+  const itemNumber = product.itemNumber ?? '';
+  const etaTime = product.nonStock ? '14-21 Days' : '2-3 Days';
 
-    const tr = document.createElement('tr');
-    tr.className = 'variant-item';
-    tr.dataset.variantId = variant.idNumeric;
-    tr.dataset.uom = uom;
-    tr.dataset.itemNumber = itemNumber;
-    tr.dataset.priceTarget=".quick-order-item-price";
-    tr.dataset.addToCart=".quick-order-atc";
+  const tr = document.createElement('tr');
+  tr.className = 'variant-item';
+
+  tr.dataset.variantId = variant.idNumeric;
+  tr.dataset.uom = uom;
+  tr.dataset.itemNumber = itemNumber;
+  tr.dataset.priceTarget = '.quick-order-item-price';
+  tr.dataset.addToCart = '.quick-order-atc';
 
     tr.innerHTML = `
 <td class="variant-item__inner">
