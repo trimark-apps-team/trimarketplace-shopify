@@ -602,7 +602,7 @@ document.addEventListener('DOMContentLoaded', async function () {
   /* ----------------------------------------
      EVENTS
   ---------------------------------------- */
-  searchInput.addEventListener('input', debounce(loadInitial, 500));
+  searchInput.addEventListener('input', debounce(loadInitial, 350));
   {% comment %} sortSelect.addEventListener('change', loadInitial); {% endcomment %}
 
   nextBtn.addEventListener('click', async () => {
