@@ -763,3 +763,7 @@ body .variant-item__quantity-wrapper .quick-order_loader {
   display: flex;
   flex-direction: column;
 }
+
+.quick-order_page {
+  margin-bottom: 10px;
+}

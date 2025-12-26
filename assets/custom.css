@@ -1259,6 +1259,9 @@ button.quick-add__submit::after, #cart-click::after {
   .feature-table, .feature-table thead, .feature-table tbody, .feature-table th, .feature-table td, .feature-table tr {
     display: block;
   }
+  .quick-add__submit.button, #product-grid .btn.btn-secondary.button {
+    min-width: 120px;
+  }
   .feature-table tr {
     margin-bottom: 15px;
     border: 1px solid #eee;
