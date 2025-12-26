@@ -202,6 +202,7 @@
   data-price-target=".quick-order-item-price"
   data-add-to-cart=".quick-order-atc">
 <td class="variant-item__inner">
+  <input type="hidden" name="properties[_Tier Price]" class="tier-price" value="NA">
   <div class="variant-item__media">
     <div class="variant-item__image-container global-media-settings gradient">
       <img src="{{ product.featured_image | image_url: width: 86 }}" alt="{{ product.title | escape }}" width="43" height="43" loading="lazy" fetchpriority="low" decoding="async" class="variant-item__image">
@@ -278,7 +279,6 @@
 </td>
 <td class="variant-item__quantity small-hide medium-hide" style="text-align: center; padding-left: 0;">
   <button class="quick-add__submit button quick-order-atc" disabled>
-    <input type="hidden" name="properties[_Tier Price]" class="tier-price" value="NA">
     <span>Add to cart</span>
     <div class="loading__spinner hidden">
       <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66"><circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle></svg>
