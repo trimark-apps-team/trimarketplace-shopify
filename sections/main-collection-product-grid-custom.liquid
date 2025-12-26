@@ -380,6 +380,8 @@ document.addEventListener('DOMContentLoaded', async function () {
       xhr.send();
     }
       document.querySelector(".pagination-wrapper").classList.remove('hidden');
+      document.querySelector("#no-results").classList.add('hidden');
+      document.querySelector("#quick-order-pagination").classList.add('hidden');
       return null;
     }
 
