@@ -1,0 +1,33 @@
+{{ 'template-collection.css' | asset_url | stylesheet_tag }}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'component-facets.css' | asset_url | stylesheet_tag }}
+
+<div class="section-collection-padding gradient">
+  <div class="page-width">
+
+    <!-- Algolia layout -->
+    <div class="facets-vertical">
+      <aside class="facets-wrapper">
+        <div id="algolia-filters"></div>
+      </aside>
+
+      <div class="product-grid-container">
+        <div id="algolia-stats" class="product-count"></div>
+        <div id="algolia-sort"></div>
+
+        <ul
+          id="algolia-hits"
+          class="grid product-grid grid--2-col-tablet-down grid--4-col-desktop"
+        ></ul>
+
+        <div id="algolia-pagination"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4"></script>
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4"></script>
+<script src="{{ 'algolia-collection.js' | asset_url }}" defer></script>

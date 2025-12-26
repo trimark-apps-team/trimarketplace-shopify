@@ -112,14 +112,8 @@ document.addEventListener('DOMContentLoaded', () => {
   .catch(err => console.error('Cart fetch failed:', err));
 });
 
-
 }
 
-// subscribe(PUB_SUB_EVENTS.variantChange, async function (e) {
-//   if(document.querySelector(".product__info-container p .trimark-red")) {
-//   document.querySelector(".product__info-container p .trimark-red").innerText = e.data.variant.sku;
-//   }
-// })
 
 subscribe(PUB_SUB_EVENTS.cartUpdate, async function (e) {
   const rows = document.querySelectorAll('#quick-order-products .variant-item');
@@ -148,49 +142,84 @@ subscribe(PUB_SUB_EVENTS.cartUpdate, async function (e) {
   });
 })
 
-document.addEventListener("pc-cart:added", function (event) {
-
-  console.log(12454545);
-  
-  function refreshCart() {
+function refreshCartDrawer({ openDrawer = true } = {}) {
   const cartDrawer = document.getElementById('CartDrawer');
   const cartIcon = document.getElementById('cart-icon-bubble');
 
-  if (cartDrawer) {
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', shopUrl);
-    xhr.onload = () => {
-      if (xhr.status === 200) {
-        const parser = new DOMParser();
-        const responseDoc = parser.parseFromString(xhr.responseText, 'text/html');
+  if (!cartDrawer || !cartIcon) return;
 
-        if (cartDrawer) {
-          const newDrawer = responseDoc.querySelector('#CartDrawer');
-          const newCartIcon = responseDoc.querySelector('#cart-icon-bubble');
+  fetch(shopUrl)
+    .then(res => res.text())
+    .then(html => {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
 
-          if (newCartIcon) cartIcon.innerHTML = newCartIcon.innerHTML;
-          if (newDrawer) cartDrawer.innerHTML = newDrawer.innerHTML;
-          cartIcon.click();
-        }
+      const newDrawer = doc.querySelector('#CartDrawer');
+      const newCartIcon = doc.querySelector('#cart-icon-bubble');
 
-      }
-    };
-    xhr.send();
+      if (newCartIcon) cartIcon.innerHTML = newCartIcon.innerHTML;
+      if (newDrawer) cartDrawer.innerHTML = newDrawer.innerHTML;
+
+      if (openDrawer) cartIcon.click();
+    });
+
+  const drawerEl = document.querySelector('cart-drawer');
+  if (drawerEl?.classList.contains('is-empty')) {
+    drawerEl.classList.remove('is-empty');
   }
 
-
+  fetch('/cart.js')
+    .then(res => res.json())
+    .then(cart => {
+      document
+        .querySelectorAll('.cart-count-bubble span')
+        .forEach(el => (el.textContent = cart.item_count));
+    });
 }
 
- refreshCart();
-if(document.querySelector("cart-drawer").classList.contains("is-empty")) {
-    document.querySelector("cart-drawer").classList.remove("is-empty");
-}
-fetch('/cart.js')
-  .then(res => res.json())
-  .then(cart => {
-    document.querySelectorAll('.cart-count-bubble span').forEach(el => {
-          el.innerHTML = cart.item_count;
-        });
-  });
+document.addEventListener('pc-cart:added', () => {
+  refreshCartDrawer();
 });
 
+document.addEventListener('click', (e) => {
+  const wishlistBtn = e.target.closest('[data-addmywishlistprotocart]');
+  const moveAllBtn  = e.target.closest('[data-hulkmoveallitmes]');
+
+  if (wishlistBtn || moveAllBtn) {
+    setTimeout(() => {
+      refreshCartDrawer();
+    }, 2000);
+  }
+});
+
+// let wishlistInitTimeout = null;
+
+// function initWishlistSafely() {
+//   if (wishlistInitTimeout) return;
+
+//   wishlistInitTimeout = setTimeout(() => {
+//     if (window.HulkappWishlist && typeof HulkappWishlist.init === "function") {
+//       HulkappWishlist.init();
+//     }
+//     wishlistInitTimeout = null;
+//   }, 500);
+// }
+
+// const observer = new MutationObserver(() => {
+//   const gfGrid = document.querySelector('#gf-grid');
+//   const gfProducts = document.querySelector('#gf-products');
+
+//   if (gfGrid || gfProducts) {
+//     initWishlistSafely();
+//   }
+// });
+
+// observer.observe(document.body, {
+//   childList: true,
+//   subtree: true
+// });
+
+
+window.addEventListener("globoFilterRenderCompleted", function() {
+  HulkappWishlist.init();
+})

@@ -10,7 +10,7 @@
     <input
       type="text"
       id="quick-order-search"
-      placeholder="Search by title, price, type or SKU"
+      placeholder="Search by title, type, SKU and Item Number"
       class="quick-order-search-input"
     >
 
@@ -18,13 +18,9 @@
       <option value="recent">Recently Purchased</option>
       <option value="az">Title: A → Z</option>
       <option value="za">Title: Z → A</option>
-      <option value="plh">Price: Low → High</option>
-      <option value="phl">Price: High → Low</option>
-      <option value="inv_low">Inventory: Low → High</option>
-      <option value="inv_high">Inventory: High → Low</option>
     </select>
 
-    <div class="dropdown-collection">
+    {% comment %} <div class="dropdown-collection">
       <input type="text" id="collection-search" placeholder="Search collections..." class="collection-search-input">
       <div class="dropdown-menu hidden">
         <div id="quick-order-collections" class="quick-order-collections">
@@ -44,7 +40,7 @@
       <span class="svg-wrapper">
          {{- 'icon-close.svg' | inline_asset_content -}}
        </span>
-     </button>
+     </button> {% endcomment %}
   </div>
 </div>
 
@@ -92,308 +88,82 @@
 document.addEventListener('DOMContentLoaded', async function () {
   const searchInput = document.getElementById('quick-order-search');
   const sortSelect = document.getElementById('quick-order-sort');
-  const collectionCheckboxes = document.querySelectorAll('.collection-filter');
-  const collectionSearch = document.getElementById('collection-search');
-  const dropdownToggle = collectionSearch;
-  const dropdownMenu = document.querySelector('.dropdown-menu');
   const container = document.getElementById('quick-order-products');
   const pagination = document.getElementById('quick-order-pagination');
   const prevBtn = document.getElementById('prev-page');
   const nextBtn = document.getElementById('next-page');
-  const pageInfo = document.getElementById('page-info');
+  const pageInfoEl = document.getElementById('page-info');
   const noResults = document.getElementById('no-results');
-  const activeCollectionBtn = document.querySelector(".active-collection__button");
   const cartClear = document.querySelector("#cart-clear");
 
-  const downloadBtn = document.getElementById('download-collection-file');
-  const addCollectionBtn = document.getElementById('add-collection-to-cart');
-
   const ITEMS_PER_PAGE = 20;
-  let currentPage = 1;
-  let allProducts = [];
-  let filteredProducts = [];
-  let selectedCollectionHandle = null;
-  let selectedCollectionTitle = null;
-  let selectedCollectionDownload = null;
+  const DOMAIN = '{{ shop.permanent_domain }}';
+  const LOCATIONID = "{{ customer.current_location.id }}";
 
-  const modal = document.querySelector('.modal');
-  const overlay = document.querySelector('.overlay');
-  const modalTitle = document.getElementById('modal-title');
-  const modalMessage = document.getElementById('modal-message');
-  const closeIcon = document.getElementById('close-icon');
-  const approverName = document.getElementById('approver-name');
+  let currentPageInfo = null;
 
-  function showPopup(title, message, approver ,isError = false) {
-    modalTitle.innerHTML = title;
-    modalMessage.innerHTML = message;
-    overlay.style.visibility = 'visible';
-    modal.style.display = 'block';
-    closeIcon.style.display = 'block';
-    approverName.textContent = approver;
+  function showLoader(show = true) {
+    document.querySelector("#main-variant-items")
+      ?.classList.toggle("hidden", show);
+    document.querySelector(".quick-order_loader")
+      ?.classList.toggle("hidden", !show);
+  }
 
-    if (isError) {
-      modal.classList.add('error');
+  /* ----------------------------------------
+     API FETCH
+  ---------------------------------------- */
+  async function fetchProducts({
+    after = null,
+    before = null,
+    direction = 'next'
+  } = {}) {
+
+    const params = new URLSearchParams();
+    params.set('domain', DOMAIN);
+    params.set('companyLocationId', LOCATIONID);
+
+    if (direction === 'prev' && before) {
+      params.set('last', ITEMS_PER_PAGE);
+      params.set('before', before);
     } else {
-      modal.classList.remove('error');
+      params.set('first', ITEMS_PER_PAGE);
+      if (after) params.set('after', after);
     }
+
+    const search = searchInput.value?.trim();
+    if (search) params.set('search', search);
+
+    const sort = sortSelect.value;
+    if (sort) params.set('sort', sort);
+
+    showLoader(true);
+    const res = await fetch(`/apps/api/get-products-custom?${params.toString()}`);
+    const data = await res.json();
+    showLoader(false);
+
+    return data;
   }
 
-  dropdownToggle.addEventListener('focus', () => dropdownMenu.classList.remove('hidden'));
-  activeCollectionBtn.addEventListener("click", function () {
-     collectionCheckboxes.forEach(checkbox => {
-        checkbox.checked = false;
-        checkbox.dispatchEvent(new Event("change")); 
-      });
-  });
-
-  document.addEventListener("click", e => {
-    if (!dropdownMenu.contains(e.target) && e.target !== dropdownToggle) {
-      dropdownMenu.classList.add('hidden');
-    }
-  });
-
-  collectionSearch.addEventListener('input', function () {
-    const val = this.value?.toLowerCase();
-    document.querySelectorAll('#quick-order-collections label').forEach(label => {
-      label.style.display = label.textContent?.toLowerCase().includes(val) ? '' : 'none';
-    });
-  });
-
-  collectionCheckboxes.forEach(cb => {
-    cb.addEventListener('change', () => {
-      collectionCheckboxes.forEach(other => { if (other !== cb) other.checked = false; });
-      if (cb.checked) {
-        selectedCollectionHandle = cb.value;
-        if(cb.value == "new-store-opening-1" || cb.value == "new-store-opening-2") {
-          selectedCollectionDownload = cb.dataset.download;
-          selectedCollectionTitle = cb.dataset.title;
-          downloadBtn.classList.remove('hidden');
-          addCollectionBtn.classList.remove('hidden');
-        } else {
-          downloadBtn.classList.add('hidden');
-          addCollectionBtn.classList.add('hidden');
-        }
-          document.querySelector(".active-collection__button .collection-title").innerText = cb.dataset.title;
-          document.querySelector(".active-collection__button").classList.remove("hidden");
-      } else {
-        selectedCollectionHandle = null;
-        selectedCollectionDownload = null;
-        selectedCollectionTitle = null;
-        downloadBtn.classList.add('hidden');
-        addCollectionBtn.classList.add('hidden');
-        document.querySelector(".active-collection__button").classList.add("hidden");
-      }
-      applyFilters();
-    });
-  });
-
-  downloadBtn.addEventListener('click', () => {
-    console.log("selectedCollectionDownload", selectedCollectionDownload)
-    if (!selectedCollectionDownload) return;
-    const link = document.createElement('a');
-    link.href = selectedCollectionDownload;
-    link.download = '';
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-  });
-
-  function refreshCart() {
-  const cartDrawer = document.getElementById('CartDrawer');
-
-  if (cartDrawer || quickOrderForm) {
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', window.location.href);
-    xhr.onload = () => {
-      if (xhr.status === 200) {
-        const parser = new DOMParser();
-        const responseDoc = parser.parseFromString(xhr.responseText, 'text/html');
-
-        if (cartDrawer) {
-          const newDrawer = responseDoc.querySelector('#CartDrawer');
-          if (newDrawer) cartDrawer.innerHTML = newDrawer.innerHTML;
-        }
-
-      }
-    };
-    xhr.send();
-  }
-}
-
- function clearCart() {
-    fetch('/cart/clear.js', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      }
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then(data => {
-        refreshCart();
-        document.querySelector("cart-drawer").classList.add("is-empty");
-        const cartCountBubble = document.querySelector('.cart-count-bubble');
-        const cartItemsCount = document.querySelector('#cart-click .cart-items_count');
-        
-        if (cartCountBubble) cartCountBubble.innerText = data.item_count;
-        if (cartItemsCount) {
-          cartItemsCount.innerText = `CART (${data.items.length} PRODUCTS, ${data.item_count} QUANTITY)`;
-        }
-        updateRowsWithCart(data);
-    })
-  }
-
-  cartClear.addEventListener('click', function () {
-    clearCart()
-  });
-
-
-  addCollectionBtn.addEventListener('click', async () => {
-
-    const productsToAdd = allProducts
-  .filter(p => p.collections?.edges.some(c => c.node.handle === selectedCollectionHandle))
-  .map(p => {
-    const variant = p.variants.edges[0]?.node;
-    if (!variant) return null;
-    const quantity = parseInt(p.quantitySet?.value || 1);
-    return {
-      id: variant.id.split("/").pop(),
-      quantity
-    };
-  })
-  .filter(Boolean);
-
-    if (productsToAdd.length === 0) return;
-
-
-    showPopup(
-            `Adding <b>${selectedCollectionTitle}</b> collection to the cart.`,
-            `Total items:- ${productsToAdd.length}`,
-            ``
-     );
-    try {
-      const res = await fetch('/cart/add.js', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ items: productsToAdd })
-      })
-
-      const data = await res.json();
-    
-    refreshCart();
-    
-    if(document.querySelector("cart-drawer")?.classList.contains("is-empty")) {
-      document.querySelector("cart-drawer").classList.remove("is-empty");
-    }
-    
-    fetch('/cart.js')
-      .then(res => res.json())
-      .then(cart => {
-        const cartCountBubble = document.querySelector('.cart-count-bubble');
-        const cartItemsCount = document.querySelector('#cart-click .cart-items_count');
-        
-        if (cartCountBubble) cartCountBubble.innerText = cart.item_count;
-        if (cartItemsCount) {
-          cartItemsCount.innerText = `CART (${cart.items.length} PRODUCTS, ${cart.item_count} QUANTITY)`;
-        }
-        updateRowsWithCart(cart);
-      });
-
-      document.querySelector('.spinner-wrapper').style.display = 'none';
-
-       showPopup(
-            `Successfully added <b>${selectedCollectionTitle}</b> collection to the cart.`,
-            `Total items:- ${productsToAdd.length}`,
-            ``
-        );
-
-    
-    } catch (error) {
-      console.error('Error adding collection to cart:', error);
-      alert('Failed to add collection to cart.');
-    }
-  });
-
-    async function fetchProducts(companyLocationId, domain) {
-      let cursor = null;
-      const products = [];
-      const seenProductIds = new Set(); 
-      let isFirstCall = true;
-
-      do {
-        const first = isFirstCall ? 250 : 100;
-        const url = `/apps/api/get-company-location-products?companyLocationId=${companyLocationId}&domain=${domain}&first=${first}${cursor ? `&after=${cursor}` : ''}`;
-        
-        const res = await fetch(url);
-        const data = await res.json();
-        if (!data.success) break;
-
-        const catalogs = data.data.companyLocation.catalogs.edges;
-
-        catalogs.forEach(c => {
-          const productsEdges = c.node.publication?.products?.edges || [];
-
-          productsEdges.forEach(p => {
-            const node = p.node;
-
-            const url = node?.onlineStoreUrl || "";
-            if (url.includes("products_preview")) return;
-
-            if (seenProductIds.has(node.id)) return;
-
-            seenProductIds.add(node.id);
-
-            node.recent = node.purchasedDate?.value
-              ? new Date(node.purchasedDate.value).toISOString()
-              : "1970-01-01T00:00:00Z";
-
-            products.push(node);
-          });
-        });
-
-        const lastCatalog = catalogs[catalogs.length - 1];
-        const pageInfo = lastCatalog?.node.publication?.products?.pageInfo;
-        cursor = pageInfo?.hasNextPage ? pageInfo.endCursor : null;
-
-        isFirstCall = false;
-      } while (cursor);
-
-      return products;
-    }
-
-
+  /* ----------------------------------------
+     RENDER
+  ---------------------------------------- */
   function createProductRow(product) {
-    const variant = product.variants.edges[0]?.node;
+    const variant = product.variant;
     if (!variant) return null;
 
-    const row = document.createElement('tr');
-    row.classList.add('variant-item');
-    row.dataset.variantId = variant.id.split("/").pop();
-    row.dataset.title = product.title?.toLowerCase();
-    row.dataset.price = variant.price;
-    row.dataset.inventory = variant.inventoryQuantity;
-    row.dataset.type = product.productType?.toLowerCase();
-    row.dataset.collection = product.tags.join(',')?.toLowerCase();
-    row.dataset.sku = variant.sku?.toLowerCase();
-    row.dataset.recent = product.recent;
-    row.dataset.collection = product.collections?.edges
-      .map(c => c.node.handle?.toLowerCase())
-      .join(',');
+    const orderedDate = product.purchasedDate
+      ? new Date(product.purchasedDate).toLocaleDateString('en-US')
+      : '';
 
-    const orderedDate = product.purchasedDate?.value
-      ? new Date(product.purchasedDate.value).toLocaleDateString('en-US')
-      : "";
+    const tr = document.createElement('tr');
+    tr.className = 'variant-item';
+    tr.dataset.variantId = variant.idNumeric;
 
-    row.innerHTML = `
+    tr.innerHTML = `
 <td class="variant-item__inner">
   <div class="variant-item__media">
     <div class="variant-item__image-container global-media-settings gradient">
-      <img src="${product.featuredMedia?.preview?.image?.url}" alt="${product.title}" width="43" height="43" loading="lazy" fetchpriority="low" decoding="async" class="variant-item__image">
+      <img src="${product.featuredImageUrl}" alt="${product.title}" width="43" height="43" loading="lazy" fetchpriority="low" decoding="async" class="variant-item__image">
     </div>
   </div>
   <div class="small-hide medium-hide">
@@ -465,87 +235,11 @@ document.addEventListener('DOMContentLoaded', async function () {
   <span class="price">$0</span>
 </td>
     `;
-    return row;
+
+    return tr;
   }
 
-  function applyFilters() {
-    const searchVal = searchInput.value?.toLowerCase();
-    const sortVal = sortSelect.value;
-
-    filteredProducts = allProducts.filter(p => {
-      const title = p.title?.toLowerCase();
-      const type = p.productType?.toLowerCase();
-      const sku = p.variants.edges[0]?.node.sku?.toLowerCase() || '';
-      const price = p.variants.edges[0]?.node.price || '';
-      const productCollections = p.collections?.edges.map(c => c.node.handle?.toLowerCase()) || [];
-
-      const matchesSearch =
-        title.includes(searchVal) ||
-        sku.includes(searchVal) ||
-        price.includes(searchVal) ||
-        type.includes(searchVal) ||
-        productCollections.some(c => c.includes(searchVal));
-
-      const matchesCollection =
-        !selectedCollectionHandle || productCollections.includes(selectedCollectionHandle?.toLowerCase());
-
-      return matchesSearch && matchesCollection;
-    });
-
-    filteredProducts.sort((a, b) => {
-      const aVar = a.variants.edges[0]?.node;
-      const bVar = b.variants.edges[0]?.node;
-      switch (sortVal) {
-        case 'az': return a.title.localeCompare(b.title);
-        case 'za': return b.title.localeCompare(a.title);
-        case 'plh': return parseFloat(aVar?.price || 0) - parseFloat(bVar?.price || 0);
-        case 'phl': return parseFloat(bVar?.price || 0) - parseFloat(aVar?.price || 0);
-        case 'recent': return new Date(b.recent) - new Date(a.recent);
-        case 'inv_low': return (aVar?.inventoryQuantity || 0) - (bVar?.inventoryQuantity || 0);
-        case 'inv_high': return (bVar?.inventoryQuantity || 0) - (aVar?.inventoryQuantity || 0);
-      }
-    });
-
-    currentPage = 1;
-    renderPage();
-  }
-
-  async function getCart() {
-  const res = await fetch('/cart.js');
-  return res.json();
-  }
-
-  async function renderPage() {
-  container.innerHTML = '';
-  const start = (currentPage - 1) * ITEMS_PER_PAGE;
-  const end = start + ITEMS_PER_PAGE;
-  const paginatedProducts = filteredProducts.slice(start, end);
-
-  if (paginatedProducts.length === 0) {
-    noResults.classList.remove('hidden');
-    pagination.style.display = 'none';
-  } else {
-    noResults.classList.add('hidden');
-    pagination.style.display = 'flex';
-
-    paginatedProducts.forEach(p => {
-      const row = createProductRow(p);
-      if (row) container.appendChild(row);
-    });
-  }
-
-  pageInfo.textContent = `Page ${currentPage} of ${Math.ceil(filteredProducts.length / ITEMS_PER_PAGE)}`;
-  prevBtn.disabled = currentPage === 1;
-  nextBtn.disabled = currentPage === Math.ceil(filteredProducts.length / ITEMS_PER_PAGE);
-  document.querySelector(".quick-order_loader").classList.add("hidden");
-  document.querySelector("#main-variant-items").classList.remove("hidden");
-  pagination.classList.remove("hidden");
-
-  const cart = await getCart();
-  updateRowsWithCart(cart);
-}
-
-function updateRowsWithCart(cart) {
+  function updateRowsWithCart(cart) {
   const rows = container.querySelectorAll('.variant-item');
   rows.forEach(row => {
     const variantId = row.dataset.variantId;
@@ -566,23 +260,112 @@ function updateRowsWithCart(cart) {
   });
 }
 
-  function debounce(func, delay) {
-    let timer;
-    return function (...args) {
-      clearTimeout(timer);
-      timer = setTimeout(() => func.apply(this, args), delay);
-    }
+ async function getCart() {
+  const res = await fetch('/cart.js');
+  return res.json();
   }
 
-  searchInput.addEventListener('input', debounce(applyFilters, 300));
-  sortSelect.addEventListener('change', applyFilters);
-  collectionCheckboxes.forEach(cb => cb.addEventListener('change', applyFilters));
-  prevBtn.addEventListener('click', () => { currentPage--; renderPage(); });
-  nextBtn.addEventListener('click', () => { currentPage++; renderPage(); });
+  async function render(data) {
+    container.innerHTML = '';
 
-  const COMPANY_LOCATION_ID = '{{ customer.current_location.id }}';
-  const DOMAIN = '{{ shop.permanent_domain }}';
-  allProducts = await fetchProducts(COMPANY_LOCATION_ID, DOMAIN);
-  applyFilters();
+    if (!data?.success || !data.items?.length) {
+      noResults.classList.remove('hidden');
+      pagination.classList.add('hidden');
+      return;
+    }
+
+    noResults.classList.add('hidden');
+    pagination.classList.remove('hidden');
+
+    data.items.forEach(p => {
+      const row = createProductRow(p);
+      if (row) container.appendChild(row);
+    });
+
+    currentPageInfo = data.pageInfo;
+
+    pageInfoEl.textContent = `Showing ${data.items.length} products`;
+
+    prevBtn.disabled = !currentPageInfo.hasPreviousPage;
+    nextBtn.disabled = !currentPageInfo.hasNextPage;
+
+  const cart = await getCart();
+  updateRowsWithCart(cart);
+  }
+
+  function clearCart() {
+    fetch('/cart/clear.js', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+        refreshCart();
+        document.querySelector("cart-drawer").classList.add("is-empty");
+        const cartCountBubble = document.querySelector('.cart-count-bubble');
+        const cartItemsCount = document.querySelector('#cart-click .cart-items_count');
+        
+        if (cartCountBubble) cartCountBubble.innerText = data.item_count;
+        if (cartItemsCount) {
+          cartItemsCount.innerText = `CART (${data.items.length} PRODUCTS, ${data.item_count} QUANTITY)`;
+        }
+        updateRowsWithCart(data);
+    })
+  }
+
+  cartClear.addEventListener('click', function () {
+    clearCart()
+  });
+
+  /* ----------------------------------------
+     LOADERS
+  ---------------------------------------- */
+  async function loadInitial() {
+    const data = await fetchProducts();
+    await render(data);
+  }
+
+  const debounce = (fn, d = 300) => {
+    let t;
+    return (...a) => {
+      clearTimeout(t);
+      t = setTimeout(() => fn(...a), d);
+    };
+  };
+
+  /* ----------------------------------------
+     EVENTS
+  ---------------------------------------- */
+  searchInput.addEventListener('input', debounce(loadInitial, 350));
+  sortSelect.addEventListener('change', loadInitial);
+
+  nextBtn.addEventListener('click', async () => {
+    const data = await fetchProducts({
+      after: currentPageInfo?.endCursor,
+      direction: 'next'
+    });
+    await render(data);
+  });
+
+  prevBtn.addEventListener('click', async () => {
+    const data = await fetchProducts({
+      before: currentPageInfo?.startCursor,
+      direction: 'prev'
+    });
+    await render(data);
+  });
+
+  /* ----------------------------------------
+     INIT
+  ---------------------------------------- */
+  await loadInitial();
 });
 </script>

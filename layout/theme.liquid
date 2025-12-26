@@ -971,14 +971,6 @@
       window.hulkappsWishlist.baseURL = '/apps/advanced-wishlist/api';
       window.hulkappsWishlist.hasAppBlockSupport = '1';
     </script>
-
-    
-  <script type="text/javascript">if(typeof window.hulkappsWishlist === 'undefined') {
-                            window.hulkappsWishlist = {};
-                        }
-                        window.hulkappsWishlist.baseURL = '/apps/advanced-wishlist/api';
-                        window.hulkappsWishlist.hasAppBlockSupport = '1';
-                        </script>
 </head>
 
   <body
@@ -1135,5 +1127,34 @@
         <p>You must <a href="/account/login">log in</a> to access this site.</p>
       </noscript>
     {% endcomment %}
-  </body>
+   <!-- Algolia core libraries -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"
+      defer
+    ></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/instantsearch.js@4"
+      defer
+    ></script>
+
+    <!-- Algolia integration -->
+    <script
+      src="{{ algolia-facets | asset_url }}"
+      defer
+    ></script>
+{%- capture productTemplate -%}{% render 'globo.filter.product', themeTranslation: shop.metafields.globoFilter.themeTranslation.value[request.locale.iso_code] %}{%- endcapture -%}{%- unless productTemplate contains 'Liquid error' -%}<script id="gspfProduct" type="template/html">{{- productTemplate | replace: "script>", "scripttag>" -}}</script>{%- endunless -%}
+{% comment %} {% if template == "collection" or template == "product" %}  
+<script>
+    document.addEventListener("DOMContentLoaded", (event) => {
+        console.log("DOM fully loaded and parsed");
+        setTimeout(function(){ 
+          if (hulkappsWishlistCollection){
+            hulkappsWishlistCollection._loadWishlistIcon();
+          }
+        }, 2000);
+    });
+  </script>  
+{% endif %}   {% endcomment %}
+</body>
 </html>

@@ -1245,9 +1245,22 @@ button.quick-add__submit::after, #cart-click::after {
   padding-block: 0!important;
 }
 
+.out-of-stock-label {
+  background-color: #c76e00;
+  color: white;
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-size: 12px;
+  margin-right: 0;
+}
+
+
 @media (max-width: 768px) {
   .feature-table, .feature-table thead, .feature-table tbody, .feature-table th, .feature-table td, .feature-table tr {
     display: block;
+  }
+  .quick-add__submit.button, #product-grid .btn.btn-secondary.button {
+    min-width: 120px;
   }
   .feature-table tr {
     margin-bottom: 15px;

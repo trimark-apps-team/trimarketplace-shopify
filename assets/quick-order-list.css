@@ -3,7 +3,7 @@ quick-order-list {
 }
 
 quick-order-list .quantity {
-  width: calc(11rem / var(--font-body-scale) + var(--inputs-border-width) * 2);
+  width: 140px;
   min-height: calc((var(--inputs-border-width) * 2) + 3.5rem);
 }
 
@@ -762,4 +762,8 @@ body .variant-item__quantity-wrapper .quick-order_loader {
 .quick-order-collections {
   display: flex;
   flex-direction: column;
+}
+
+.quick-order_page {
+  margin-bottom: 10px;
 }

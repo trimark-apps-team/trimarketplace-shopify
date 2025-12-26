@@ -161,28 +161,6 @@
         "disabled": false,
         "settings": {}
       },
-      "384495262013941155": {
-        "type": "shopify://apps/advanced-wishlist/blocks/collection-btn/330d9272-08ea-4193-b3e0-475a69fa65fa",
-        "disabled": true,
-        "settings": {
-          "is_added_selector": false,
-          "collection_icon_selector": ".card__heading",
-          "collection_icon_type": "outline",
-          "collection_icon_background_type": "icon_no_background",
-          "collection_icon_size": 16,
-          "collection_icon_background_color": "#ffffff",
-          "collection_icon_fill_color": "#5c6ac4",
-          "collection_icon_border_color": "#5c6ac4",
-          "collection_icon_hover_color": "#f5f5f5",
-          "collection_selected_icon_fill_color": "#5c6ac4",
-          "collection_selected_icon_border_color": "#5c6ac4",
-          "custom_wishlist_icon": false,
-          "custom_wishlist_icon_right": "true",
-          "collection_count_layout": "top_count",
-          "collection_count_background_color": "#5c6ac4",
-          "collection_count_color": "#ffffff"
-        }
-      },
       "11391643856454973168": {
         "type": "shopify://apps/pluralcart/blocks/tools/6d5574dc-9fb8-484c-96e4-d6123e2934d8",
         "disabled": false,
@@ -269,6 +247,44 @@
         "type": "shopify://apps/algolia-ai-search-discovery/blocks/autocomplete/57bb7f86-d5fe-4d43-96ca-3953324494cf",
         "disabled": false,
         "settings": {}
+      },
+      "5059203847231188605": {
+        "type": "shopify://apps/smart-product-filter-search/blocks/app-embed/5cc1944c-3014-4a2a-af40-7d65abc0ef73",
+        "disabled": false,
+        "settings": {
+          "productGridSelector": "",
+          "useCustomQuickviewTemplate": false,
+          "customJs": "",
+          "customCss": "",
+          "customProductTemplateLoader": "{%- capture productTemplate -%}{% render 'globo.filter.product', themeTranslation: shop.metafields.globoFilter.themeTranslation.value[request.locale.iso_code] %}{%- endcapture -%}{%- unless productTemplate contains 'Liquid error' -%}<script id=\"gspfProduct\" type=\"template/html\">{{- productTemplate | replace: \"script>\", \"scripttag>\" -}}</script>{%- endunless -%}",
+          "customTreeTemplateLoader": "{%- capture treeTemplate -%}{% render 'globo.filter.tree' %}{%- endcapture -%}{%- unless treeTemplate contains 'Liquid error' -%}<script id=\"gspfFilterTree\" type=\"template/html\">{{- treeTemplate | replace: \"script>\", \"scripttag>\" -}}</script>{%- endunless -%}",
+          "customSortTemplateLoader": "",
+          "customSearchTemplateLoader": "",
+          "customPaginationTemplateLoader": "",
+          "customYMMTemplateLoader": ""
+        }
+      },
+      "384495262013941155": {
+        "type": "shopify://apps/advanced-wishlist/blocks/collection-btn/330d9272-08ea-4193-b3e0-475a69fa65fa",
+        "disabled": true,
+        "settings": {
+          "is_added_selector": false,
+          "collection_icon_selector": ".card__heading",
+          "collection_icon_type": "outline",
+          "collection_icon_background_type": "icon_no_background",
+          "collection_icon_size": 16,
+          "collection_icon_background_color": "#ffffff",
+          "collection_icon_fill_color": "#5c6ac4",
+          "collection_icon_border_color": "#5c6ac4",
+          "collection_icon_hover_color": "#f5f5f5",
+          "collection_selected_icon_fill_color": "#5c6ac4",
+          "collection_selected_icon_border_color": "#5c6ac4",
+          "custom_wishlist_icon": false,
+          "custom_wishlist_icon_right": "true",
+          "collection_count_layout": "top_count",
+          "collection_count_background_color": "#5c6ac4",
+          "collection_count_color": "#ffffff"
+        }
       }
     },
     "color_schemes": {

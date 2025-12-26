@@ -548,8 +548,41 @@ document.addEventListener("DOMContentLoaded", () => {
       .forEach(el => el.classList.add("hidden"));
 
     const cartData = await fetchCart();
-    checkAndToggleCheckoutButtons(cartData);
+    if(window.approval_required) {
+      checkAndToggleCheckoutButtons(cartData);
+    }
 
+    var checkbox    = document.getElementById('terms-cart');
+    var checkoutBtn = document.getElementById('checkout');
+    var draftBtn    = document.querySelector('.draft-order-cart');
+
+    var error = document.createElement('div');
+    error.style.color = 'red';
+    error.style.fontSize = '0.9rem';
+    error.style.display = 'none';
+    error.textContent = 'You must agree to the Terms & Conditions before checkout.';
+    checkbox.closest('.cart-terms').appendChild(error);
+
+    function validate() {
+      if (checkbox.checked) {
+        checkoutBtn.disabled = false;
+        draftBtn.disabled = false;
+        error.style.display = 'none';
+      } else {
+        checkoutBtn.disabled = true;
+        draftBtn.disabled = true;
+        error.style.display = 'block';
+      }
+    }
+
+    validate();
+      checkbox.addEventListener('change', validate);
+
+     refreshCartDrawer();
+      if(document.querySelector("cart-drawer").classList.contains("is-empty")) {
+          document.querySelector("cart-drawer").classList.remove("is-empty");
+      }
+         
     cartPage.querySelector("table.cart-items")?.classList.remove("hidden");
     cartPage.querySelector(".skeleton-shimmer")?.classList.add("hidden");
     cartPage.querySelector(".aasaved-cart-actions")?.classList.remove("hidden");
@@ -558,21 +591,71 @@ document.addEventListener("DOMContentLoaded", () => {
     window.history.replaceState({}, document.title, cleanUrl);
   };
 
+  function refreshCartDrawer() {
+    const cartDrawer = document.getElementById('CartDrawer');
+
+    if (cartDrawer) {
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', window.location.href);
+      xhr.onload = () => {
+        if (xhr.status === 200) {
+          const parser = new DOMParser();
+          const responseDoc = parser.parseFromString(xhr.responseText, 'text/html');
+          const newContent = responseDoc.querySelector('#CartDrawer');
+          if (newContent) {
+            cartDrawer.innerHTML = newContent.innerHTML;
+            document.querySelectorAll(".cart-item .loading__spinner").forEach(el => {
+              el.classList.add("hidden");
+            });
+            fetch('/cart.js', {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+           })
+            .then(response => {
+              if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+              }
+              return response.json();
+            })
+            .then(cartData => {
+              document.querySelectorAll('.cart-count-bubble span').forEach(el => {
+                  el.innerHTML = cartData.item_count;
+              });
+              if(window.approval_required) {
+                  checkAndToggleCheckoutButtons(cartData);
+              }
+            })
+          }
+        }
+      };
+      xhr.send();
+    }
+  }
+
   function checkAndToggleCheckoutButtons(cart) {
     if (!cart) return;
-    const approvalRequired = cart.total_price >= window.draftorder_threshold;
-    const checkoutBtns = document.querySelectorAll('button[name="checkout"]');
 
-    checkoutBtns.forEach(btn => {
+   const approvalRequired = cart.total_price >= window.draftorder_threshold;
+
+    const checkoutButtons = document.querySelectorAll('button[name="checkout"]');
+    for (const btn of checkoutButtons) {
       if (approvalRequired) {
         btn.classList.add("hidden");
-        document.querySelectorAll("#create-draft-order").forEach(el => el.classList.remove("hidden"));
+        document.querySelector('button[data-show-go-to-checkout-param="true"]')?.classList.add("hidden");
+        document.querySelectorAll("#create-draft-order").forEach(el => {
+          el.classList.remove("hidden");
+        });
       } else {
+        document.querySelectorAll("#create-draft-order").forEach(el => {
+          el.classList.add("hidden");
+        });
+        document.querySelector('button[data-show-go-to-checkout-param="true"]')?.classList.remove("hidden");
         btn.classList.remove("hidden");
-        document.querySelectorAll("#create-draft-order").forEach(el => el.classList.add("hidden"));
       }
-    });
-  }
+    }
+}
 
   async function applyCartFromUrl() {
     const urlParams = new URLSearchParams(window.location.search);
