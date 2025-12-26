@@ -1333,7 +1333,7 @@ class CartPerformance {
 }
 
 
-document.addEventListener("DOMContentLoaded", function () {
+window.initJDEPricing = function initJDEPricing() {
 
   const SYMBOL = document.body.dataset.symbol || "$";
   const BILL_TO = document.body.dataset.billto;
@@ -1344,6 +1344,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const cards = document.querySelectorAll("[data-item-number][data-uom]");
   if (!cards.length) return;
 
+  // Disable add-to-cart buttons
   cards.forEach(card => {
     const btnSelector = card.dataset.addToCart;
     if (!btnSelector) return;
@@ -1356,7 +1357,6 @@ document.addEventListener("DOMContentLoaded", function () {
   cards.forEach(card => {
     const item = card.dataset.itemNumber;
     const uom  = card.dataset.uom;
-
     if (!item || !uom) return;
 
     items.push({
@@ -1374,9 +1374,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   fetch("/apps/api/jdeprice", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ GetPriceMatrix: items })
   })
   .then(res => res.ok ? res.json() : Promise.reject())
@@ -1403,6 +1401,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const formatted = SYMBOL + rawPrice.toFixed(2);
 
+      // Update price display
       const priceTarget = card.dataset.priceTarget;
       if (priceTarget) {
         const priceEl = card.querySelector(priceTarget);
@@ -1413,12 +1412,12 @@ document.addEventListener("DOMContentLoaded", function () {
       if (tierInput) tierInput.value = formatted;
 
       const regularPrice = card.querySelector(".price-item.price-item--regular");
-
       if (regularPrice) {
         regularPrice.textContent = formatted;
         regularPrice.classList.remove("hidden");
       }
 
+      // Enable add-to-cart
       const btnSelector = card.dataset.addToCart;
       if (btnSelector) {
         const btn = card.querySelector(btnSelector);
@@ -1436,5 +1435,9 @@ document.addEventListener("DOMContentLoaded", function () {
       if (btn) btn.disabled = false;
     });
   });
+};
 
+document.addEventListener("DOMContentLoaded", () => {
+  window.initJDEPricing();
 });
+
