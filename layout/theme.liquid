@@ -1149,7 +1149,7 @@
       defer
     ></script>
 {%- capture productTemplate -%}{% render 'globo.filter.product', themeTranslation: shop.metafields.globoFilter.themeTranslation.value[request.locale.iso_code] %}{%- endcapture -%}{%- unless productTemplate contains 'Liquid error' -%}<script id="gspfProduct" type="template/html">{{- productTemplate | replace: "script>", "scripttag>" -}}</script>{%- endunless -%}
-{% if template == "collection" or template == "product" %}  
+{% comment %} {% if template == "collection" or template == "product" %}  
 <script>
     document.addEventListener("DOMContentLoaded", (event) => {
         console.log("DOM fully loaded and parsed");
@@ -1160,6 +1160,6 @@
         }, 2000);
     });
   </script>  
-{% endif %}  
+{% endif %}   {% endcomment %}
 </body>
 </html>
