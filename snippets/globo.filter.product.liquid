@@ -451,9 +451,6 @@
                   <input type="hidden" name="form_type" value="product">
                   <input type="hidden" name="utf8" value="✓">
                   <input type="hidden" name="properties[Expected Shipping]" value="{{ eta_time }}">
-                  {% if card_product.metafields.custom.requires_approval == true %}
-                    <input type="hidden" name="properties[_approval]" value="true">
-                  {% endif %}
                      <input type="hidden" name="properties[_Tier Price]" class="tier-price" value="NA">
                   <input
                     type="hidden"
