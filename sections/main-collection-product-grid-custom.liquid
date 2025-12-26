@@ -362,7 +362,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     const search = searchInput.value?.trim();
     if(!search) {
       console.log("search empty");
-      const tBody = document.getElementById('main-variant-items');
+      const tBody = document.getElementById('quick-order-products');
 
     if (tBody) {
       const xhr = new XMLHttpRequest();
@@ -371,7 +371,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         if (xhr.status === 200) {
           const parser = new DOMParser();
           const responseDoc = parser.parseFromString(xhr.responseText, 'text/html');
-          const newContent = responseDoc.querySelector('#main-variant-items');
+          const newContent = responseDoc.querySelector('#quick-order-products');
           if (newContent) {
             tBody.innerHTML = newContent.innerHTML;
           }
