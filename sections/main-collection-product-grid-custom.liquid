@@ -388,6 +388,7 @@ document.addEventListener('DOMContentLoaded', async function () {
           if (newContent) {
             tBody.innerHTML = newContent.innerHTML;
             showLoader(false);
+            window.initJDEPricing();
           }
         }
       };
@@ -407,6 +408,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     const res = await fetch(`/apps/api/get-products-custom?${params.toString()}`);
     const data = await res.json();
     showLoader(false);
+    window.initJDEPricing();
     document.querySelector(".pagination-wrapper").classList.add('hidden');
     return data;
   }
