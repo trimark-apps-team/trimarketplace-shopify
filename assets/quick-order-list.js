@@ -67,6 +67,8 @@ document.addEventListener("click", async (e) => {
 
   button.disabled = true;
 
+  console.log(etaTime, tierPrice);
+
   try {
     const res = await fetch("/cart/add.js", {
       method: "POST",
