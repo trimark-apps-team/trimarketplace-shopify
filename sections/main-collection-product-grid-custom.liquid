@@ -422,12 +422,21 @@ document.addEventListener('DOMContentLoaded', async function () {
       ? new Date(product.purchasedDate).toLocaleDateString('en-US')
       : '';
 
+    const uom = product.uom ? : '';
+    const itemNumber = product.itemNumber ? : '';
+    const etaTime = product.nonStock ? "14-21 Days" : "2-3 Days";
+
     const tr = document.createElement('tr');
     tr.className = 'variant-item';
     tr.dataset.variantId = variant.idNumeric;
+    tr.dataset.uom = uom;
+    tr.dataset.itemNumber = itemNumber;
+    tr.dataset.priceTarget=".quick-order-item-price"
+    tr.dataset.addToCart=".quick-order-atc"
 
     tr.innerHTML = `
 <td class="variant-item__inner">
+  <input type="hidden" name="properties[Expected Shipping]" value="${etaTime}">
   <input type="hidden" name="properties[_Tier Price]" class="tier-price" value="NA">
   <div class="variant-item__media">
     <div class="variant-item__image-container global-media-settings gradient">
@@ -444,7 +453,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     <span class="variant-item__name h4 break"><a class="full-unstyled-link" href="/products/${product.handle}">${product.title}</a></span>
     <span class="variant-item__sku break">${variant.sku ? `${variant.sku} ${orderedDate ? ` | Ordered at: ${orderedDate}` : ""}` : `${orderedDate ? `Ordered at: ${orderedDate}` : ""}`}</span>
   </div>
-  <span class="price">$${variant.price}</span>
+  <span class="price quick-order-item-price">$${variant.price}</span>
 </td>
 <td class="variant-item__totals right large-up-hide">
   <div class="loading__spinner hidden">
@@ -474,7 +483,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             <div class="progress-bar"><div class="progress-bar-value"></div></div>
           </div>
         </quantity-input>
-        <button class="quick-add__submit button large-up-hide">
+        <button class="quick-add__submit button large-up-hide quick-order-atc" disabled>
           <span>Add to cart</span>
           <div class="loading__spinner hidden">
             <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66"><circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle></svg>
@@ -488,14 +497,14 @@ document.addEventListener('DOMContentLoaded', async function () {
   </quantity-popover>
 </td>
 <td class="variant-item__quantity small-hide medium-hide" style="text-align: center; padding-left: 0;">
-  <button class="quick-add__submit button">
+  <button class="quick-add__submit button quick-order-atc" disabled>
     <span>Add to cart</span>
     <div class="loading__spinner hidden">
       <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66"><circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle></svg>
     </div>
   </button>
 </td>
-<td class="variant-item__price small-hide medium-hide"><span class="price">$${variant.price}</span></td>
+<td class="variant-item__price small-hide medium-hide"><span class="price quick-order-item-price">$${variant.price}</span></td>
 <td class="variant-item__totals right small-hide medium-hide">
   <div class="loading__spinner hidden">
     <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66"><circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle></svg>
