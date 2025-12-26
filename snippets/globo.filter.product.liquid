@@ -67,7 +67,7 @@
     <div class="card-wrapper product-card-wrapper underline-links-hover"
     data-item-number="{{ card_product.metafields.custom['1_erp_id_marlinn_ipics'] }}" 
     data-uom="{{ card_product.metafields.custom['3_uom'] }}"
-    data-price-target=".price"
+    data-price-target=".card-price"
     data-add-to-cart=".add-to-cart-plp"
     >
    <a href="javascript:void(0)" rel="nofollow" class="icon-wishlist-heart-empty wishlist-btn grid-wishlist-btn heart-wishlist-animation" data-wishList data-gridHulkList data-added="false" data-proID="{{ card_product.id }}" data-varID="{{ card_product.selected_or_first_available_variant.id }}" style="display:none;">
@@ -746,7 +746,7 @@
                                 </span>
                               {%- else -%}
                                 <span class="visually-hidden visually-hidden--inline">{% endraw %}{{ themeTranslation.products.product.price.regular_price }}{% raw %}</span>
-                                <span class="price-item price-item--regular">
+                                <span class="card-price price-item price-item--regular">
                                   {{ money_price }}
                                 </span>
                               {%- endif -%}
