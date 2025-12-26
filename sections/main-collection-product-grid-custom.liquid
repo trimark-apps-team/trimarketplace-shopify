@@ -378,7 +378,7 @@ document.addEventListener('DOMContentLoaded', async function () {
       };
       xhr.send();
     }
-          document.querySelector(".pagination-wrapper").classList.remove('hidden');
+      document.querySelector(".pagination-wrapper").classList.remove('hidden');
       return null;
     }
 
@@ -582,10 +582,10 @@ document.addEventListener('DOMContentLoaded', async function () {
   async function loadInitial() {
     const data = await fetchProducts();
       
-     {% comment %} if (!data) {
+    if (!data) {
       
      return;
-    } {% endcomment %}
+    }
  
      await render(data);
   }
@@ -601,7 +601,7 @@ document.addEventListener('DOMContentLoaded', async function () {
   /* ----------------------------------------
      EVENTS
   ---------------------------------------- */
-  searchInput.addEventListener('input', debounce(loadInitial, 350));
+  searchInput.addEventListener('input', debounce(loadInitial, 500));
   {% comment %} sortSelect.addEventListener('change', loadInitial); {% endcomment %}
 
   nextBtn.addEventListener('click', async () => {
