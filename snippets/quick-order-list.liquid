@@ -98,6 +98,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
   const ITEMS_PER_PAGE = 20;
   const DOMAIN = '{{ shop.permanent_domain }}';
+  const LOCATIONID = "{{ customer.current_location.id }}";
 
   let currentPageInfo = null;
 
@@ -119,6 +120,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     const params = new URLSearchParams();
     params.set('domain', DOMAIN);
+    params.set('companyLocationId', LOCATIONID);
 
     if (direction === 'prev' && before) {
       params.set('last', ITEMS_PER_PAGE);
