@@ -362,7 +362,6 @@ document.addEventListener('DOMContentLoaded', async function () {
     const search = searchInput.value?.trim();
     if(!search) {
       showLoader(true);
-      console.log("search empty");
       const tBody = document.getElementById('quick-order-products');
 
     if (tBody) {
@@ -394,7 +393,6 @@ document.addEventListener('DOMContentLoaded', async function () {
     showLoader(true);
     const res = await fetch(`/apps/api/get-products-custom?${params.toString()}`);
     const data = await res.json();
-    console.log("api call");
     showLoader(false);
     document.querySelector(".pagination-wrapper").classList.add('hidden');
     return data;
@@ -588,10 +586,8 @@ document.addEventListener('DOMContentLoaded', async function () {
     const data = await fetchProducts();
       
     if (!data) {
-     console.log("notdata") 
      return;
     }
-     console.log("renderdata");
      await render(data);
   }
 
