@@ -1344,19 +1344,27 @@ window.initJDEPricing = function initJDEPricing() {
   const cards = document.querySelectorAll("[data-item-number][data-uom]");
   if (!cards.length) return;
 
-  // Disable add-to-cart buttons
+  /* -------------------------------
+     DISABLE ALL ADD-TO-CART BUTTONS
+  -------------------------------- */
   cards.forEach(card => {
     const btnSelector = card.dataset.addToCart;
     if (!btnSelector) return;
 
-    const btn = card.querySelector(btnSelector);
-    if (btn) btn.disabled = true;
+    card.querySelectorAll(btnSelector).forEach(btn => {
+      btn.disabled = true;
+    });
   });
 
+  /* -------------------------------
+     BUILD REQUEST PAYLOAD
+  -------------------------------- */
   const items = [];
+
   cards.forEach(card => {
     const item = card.dataset.itemNumber;
     const uom  = card.dataset.uom;
+
     if (!item || !uom) return;
 
     items.push({
@@ -1372,6 +1380,9 @@ window.initJDEPricing = function initJDEPricing() {
 
   if (!items.length) return;
 
+  /* -------------------------------
+     FETCH JDE PRICE MATRIX
+  -------------------------------- */
   fetch("/apps/api/jdeprice", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -1380,7 +1391,9 @@ window.initJDEPricing = function initJDEPricing() {
   .then(res => res.ok ? res.json() : Promise.reject())
   .then(data => {
 
-    const repeating = data?.MRS_ORCH_58_PriceMatrixConnector_Repeating || [];
+    const repeating =
+      data?.MRS_ORCH_58_PriceMatrixConnector_Repeating || [];
+
     if (!Array.isArray(repeating)) return;
 
     repeating.forEach(entry => {
@@ -1401,41 +1414,60 @@ window.initJDEPricing = function initJDEPricing() {
 
       const formatted = SYMBOL + rawPrice.toFixed(2);
 
-      // Update price display
+      /* -------------------------------
+         UPDATE ALL PRICE TARGETS
+      -------------------------------- */
       const priceTarget = card.dataset.priceTarget;
       if (priceTarget) {
-        const priceEl = card.querySelector(priceTarget);
-        if (priceEl) priceEl.textContent = formatted;
+        card.querySelectorAll(priceTarget).forEach(priceEl => {
+          priceEl.textContent = formatted;
+        });
       }
 
-      const tierInput = card.querySelector(".tier-price");
-      if (tierInput) tierInput.value = formatted;
+      /* -------------------------------
+         UPDATE ALL TIER INPUTS
+      -------------------------------- */
+      card.querySelectorAll(".tier-price").forEach(input => {
+        input.value = formatted;
+      });
 
-      const regularPrice = card.querySelector(".price-item.price-item--regular");
-      if (regularPrice) {
-        regularPrice.textContent = formatted;
-        regularPrice.classList.remove("hidden");
-      }
+      /* -------------------------------
+         UPDATE ALL REGULAR PRICES
+      -------------------------------- */
+      card
+        .querySelectorAll(".price-item.price-item--regular")
+        .forEach(priceEl => {
+          priceEl.textContent = formatted;
+          priceEl.classList.remove("hidden");
+        });
 
-      // Enable add-to-cart
+      /* -------------------------------
+         ENABLE ALL ADD-TO-CART BUTTONS
+      -------------------------------- */
       const btnSelector = card.dataset.addToCart;
       if (btnSelector) {
-        const btn = card.querySelector(btnSelector);
-        if (btn) btn.disabled = false;
+        card.querySelectorAll(btnSelector).forEach(btn => {
+          btn.disabled = false;
+        });
       }
     });
 
   })
   .catch(() => {
+    /* -------------------------------
+       FAILSAFE: ENABLE BUTTONS
+    -------------------------------- */
     cards.forEach(card => {
       const btnSelector = card.dataset.addToCart;
       if (!btnSelector) return;
 
-      const btn = card.querySelector(btnSelector);
-      if (btn) btn.disabled = false;
+      card.querySelectorAll(btnSelector).forEach(btn => {
+        btn.disabled = false;
+      });
     });
   });
 };
+
 
 document.addEventListener("DOMContentLoaded", () => {
   window.initJDEPricing();
