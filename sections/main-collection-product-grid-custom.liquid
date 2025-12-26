@@ -191,12 +191,16 @@
                       </th>
                     </tr>
                   </thead>
-                  <tbody id="quick-order-products">
+                  <tbody id="quick-order-products" >
               {%- for product in collection.products -%}
                {% assign variant = product.selected_or_first_available_variant %}
     {% assign ordered_date = product.metafields.custom.purchased_date.value %}
 
-    <tr class="variant-item" data-variant-id="{{ variant.id }}">
+    <tr class="variant-item" data-variant-id="{{ variant.id }}" 
+  data-item-number="{{ product.metafields.custom['1_erp_id_marlinn_ipics'] }}" 
+  data-uom="{{ product.metafields.custom['3_uom'] }}"
+  data-price-target=".quick-order-item-price"
+  data-add-to-cart=".quick-order-atc">
 <td class="variant-item__inner">
   <div class="variant-item__media">
     <div class="variant-item__image-container global-media-settings gradient">
@@ -229,7 +233,7 @@
               Ordered at: {{ ordered_date | date: "%m/%d/%Y" }}
             {% endif %}</span>
   </div>
-  <span class="price">{{ variant.price | money }}</span>
+  <span class="price quick-order-item-price">{{ variant.price | money }}</span>
 </td>
 <td class="variant-item__totals right large-up-hide">
   <div class="loading__spinner hidden">
@@ -259,7 +263,7 @@
             <div class="progress-bar"><div class="progress-bar-value"></div></div>
           </div>
         </quantity-input>
-        <button class="quick-add__submit button large-up-hide">
+        <button class="quick-add__submit button large-up-hide quick-order-atc" disabled>
           <span>Add to cart</span>
           <div class="loading__spinner hidden">
             <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66"><circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle></svg>
@@ -273,20 +277,20 @@
   </quantity-popover>
 </td>
 <td class="variant-item__quantity small-hide medium-hide" style="text-align: center; padding-left: 0;">
-  <button class="quick-add__submit button">
+  <button class="quick-add__submit button quick-order-atc" disabled>
     <span>Add to cart</span>
     <div class="loading__spinner hidden">
       <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66"><circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle></svg>
     </div>
   </button>
 </td>
-<td class="variant-item__price small-hide medium-hide"><span class="price">{{ variant.price | money }}</span></td>
+<td class="variant-item__price small-hide medium-hide quick-order-item-price"><span class="price">{{ variant.price | money }}</span></td>
 <td class="variant-item__totals right small-hide medium-hide">
   <div class="loading__spinner hidden">
     <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66"><circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle></svg>
   </div>
   <span class="price">{{ cart | line_items_for: product | sum: 'original_line_price' | money }}</span>
-</td>
+  </td>
     </tr>
               {%- endfor -%}
             </tbody>
