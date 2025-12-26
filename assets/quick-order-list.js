@@ -80,8 +80,8 @@ document.addEventListener("click", async (e) => {
         id: variantId,
         quantity: quantity,
         properties: {
-          '_Tier Price': etaTime,
-          'Expected Shipping': tierPrice
+          '_Tier Price': tierPrice,
+          'Expected Shipping': etaTime
         }
       })
     });
