@@ -361,6 +361,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     const search = searchInput.value?.trim();
     if(!search) {
+      showLoader(true);
       console.log("search empty");
       const tBody = document.getElementById('quick-order-products');
 
@@ -374,6 +375,7 @@ document.addEventListener('DOMContentLoaded', async function () {
           const newContent = responseDoc.querySelector('#quick-order-products');
           if (newContent) {
             tBody.innerHTML = newContent.innerHTML;
+            showLoader(false);
           }
         }
       };
