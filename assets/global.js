@@ -1335,11 +1335,20 @@ class CartPerformance {
 /* ---------------------------------------------------
    JDE UOM MAP (FROM Unit_Of_Measure.csv)
 --------------------------------------------------- */
+/* ---------------------------------------------------
+   COMPLETE JDE UOM MAP (FROM MASTER LIST)
+--------------------------------------------------- */
 window.JDE_UOM_MAP = {
+  "blank": "",
   "percent": "%",
+
   "one gallon": "1G",
   "five gallon": "5G",
+
   "acre": "AC",
+  "annual salary rounded": "AS",
+  "annual salary truncated": "AT",
+
   "bale": "BA",
   "bucket": "BC",
   "bundle": "BD",
@@ -1348,51 +1357,175 @@ window.JDE_UOM_MAP = {
   "bottle": "BO",
   "bushel": "BU",
   "box": "BX",
-  "case": "CS",
+
+  "case": "CA",
+  "case pack": "CP",
+  "master case": "MC",
+
+  "cubic centimeter": "CC",
+  "hundred feet": "CF",
+  "centiliters": "CL",
+  "centimeters": "CM",
+  "can": "CN",
+  "container": "CO",
   "carton": "CT",
-  "cylinder": "CY",
+  "cubic meter": "CU",
+  "hundredweight": "CW",
+  "cubic yard": "CY",
+
+  "decimeters": "DC",
+  "deciliter": "DL",
+  "drum": "DR",
+  "days": "DY",
   "dozen": "DZ",
+
   "each": "EA",
-  "foot": "FT",
-  "gallon": "GA",
-  "gross": "GR",
-  "hundred": "HD",
-  "inch": "IN",
+
+  "cubic feet": "FC",
+  "feet inches": "FF",
+  "fluid ounce": "FO",
+  "feet": "FT",
+
+  "hundred gallons": "G1",
+  "gallons": "GA",
+  "half gallon": "GH",
+  "giga joule": "GJ",
+  "grams": "GM",
+  "potent gallons": "GP",
+  "gross": "GS",
+
+  "half hour": "H1",
+  "average hourly rate": "HA",
+  "head count": "HE",
+  "hours x hours": "HH",
+  "high": "HI",
+  "hectoliter": "HL",
+  "hours per period": "HQ",
+  "hour": "HR",
+  "hectare": "HT",
+  "hours zero": "HZ",
+
+  "cubic inches": "IC",
+  "imperial gallons": "IG",
+  "inches": "IN",
+
   "jar": "JR",
-  "kilogram": "KG",
+  "joints": "JT",
+
+  "kilograms": "KG",
   "kiloliter": "KL",
-  "kilometer": "KM",
-  "liter": "LT",
-  "meter": "ME",
+  "kilometers": "KM",
+  "kit": "KT",
+  "kilowatt hour": "KW",
+
+  "pounds per square inch": "L3",
+  "pounds": "LB",
+  "cubic liters": "LC",
+  "linear feet": "LF",
+  "log": "LG",
+  "lot": "LO",
+  "potent liters": "LP",
+  "layer": "LR",
+  "lump sum": "LS",
+  "liters": "LT",
+  "linear yard": "LY",
+
+  "cubic meters": "M3",
+  "thousand feet": "MF",
+  "milligrams": "MG",
+  "man hour": "MH",
+  "miles": "MI",
+  "micrograms": "MK",
   "milliliter": "ML",
-  "ounce": "OZ",
-  "pallet": "PL",
-  "pack": "PK",
-  "pound": "LB",
+  "millimeters": "MM",
+  "minutes": "MN",
+  "months": "MO",
+  "thousand pieces": "MP",
+  "thousand square feet": "MS",
+  "meters": "MT",
+  "thousand pounds": "MW",
+
+  "potent ounces": "OP",
+  "troy ounces": "OT",
+  "ounces": "OZ",
+
+  "three pack": "P3",
+  "four pack": "P4",
+  "five pack": "P5",
+  "six pack": "P6",
+  "seven pack": "P7",
+  "eight pack": "P8",
+  "nine pack": "P9",
+  "pail": "PA",
+  "piece": "PC",
+  "pad": "PD",
+  "pallet": "PF",
+  "pack": "PH",
   "pair": "PR",
+  "pint": "PT",
+  "quart": "QT",
+
+  "rack": "RA",
+  "rental deposit": "RD",
   "roll": "RL",
-  "set": "SE",
-  "sheet": "SH",
+  "ream": "RM",
+
+  "salary thousands": "RT",
+
+  "square centimeters": "SC",
+  "section": "SE",
   "square foot": "SF",
-  "square inch": "SI",
-  "ton": "TN",
+  "sheet": "SH",
+  "square inches": "SI",
+  "skein": "SK",
+  "sleeve": "SL",
+  "square meters": "SM",
+  "spool": "SO",
+  "spaces": "SP",
+  "set": "ST",
+  "square yard": "SY",
+
+  "tube": "TB",
   "tote": "TE",
-  "unit": "UN",
+  "tier": "TI",
+  "tank": "TK",
+  "long ton": "TL",
+  "metric ton": "TM",
+  "ton": "TN",
+  "ten pack": "TP",
+  "short ton": "TS",
+
+  "units": "UN",
   "vial": "VI",
-  "yard": "YD",
+
+  "weeks": "WK",
+  "weld units": "WU",
+
+  "excess life": "XL",
+  "tub": "Y4",
+  "yards": "YD",
   "year": "YR"
 };
+
 
 window.getJDEUOM = function (uom) {
   if (!uom) return "";
 
-  const key = uom
+  const normalized = uom
     .toString()
     .trim()
     .toLowerCase();
 
-  return window.JDE_UOM_MAP[key] || key.toUpperCase();
+  // 1️⃣ Direct map (case, each, five gallon, etc.)
+  if (window.JDE_UOM_MAP[normalized]) {
+    return window.JDE_UOM_MAP[normalized];
+  }
+
+  // 2️⃣ Already a valid JDE code → pass through
+  return normalized.toUpperCase();
 };
+
+
 
 
 window.initJDEPricing = function initJDEPricing() {
