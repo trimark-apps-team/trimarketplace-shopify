@@ -1332,6 +1332,69 @@ class CartPerformance {
   }
 }
 
+/* ---------------------------------------------------
+   JDE UOM MAP (FROM Unit_Of_Measure.csv)
+--------------------------------------------------- */
+window.JDE_UOM_MAP = {
+  "blank": "",
+  "percent": "%",
+  "one gallon": "1G",
+  "five gallon": "5G",
+  "acre": "AC",
+  "bale": "BA",
+  "bucket": "BC",
+  "bundle": "BD",
+  "bag": "BG",
+  "bolt": "BM",
+  "bottle": "BO",
+  "bushel": "BU",
+  "box": "BX",
+  "case": "CS",
+  "carton": "CT",
+  "cylinder": "CY",
+  "dozen": "DZ",
+  "each": "EA",
+  "foot": "FT",
+  "gallon": "GA",
+  "gross": "GR",
+  "hundred": "HD",
+  "inch": "IN",
+  "jar": "JR",
+  "kilogram": "KG",
+  "kiloliter": "KL",
+  "kilometer": "KM",
+  "liter": "LT",
+  "meter": "ME",
+  "milliliter": "ML",
+  "ounce": "OZ",
+  "pallet": "PL",
+  "pack": "PK",
+  "pound": "LB",
+  "pair": "PR",
+  "roll": "RL",
+  "set": "SE",
+  "sheet": "SH",
+  "square foot": "SF",
+  "square inch": "SI",
+  "ton": "TN",
+  "tote": "TE",
+  "unit": "UN",
+  "vial": "VI",
+  "yard": "YD",
+  "year": "YR"
+};
+
+window.getJDEUOM = function (uom) {
+  if (!uom) return "";
+
+  const key = uom
+    .toString()
+    .trim()
+    .toLowerCase();
+
+  return window.JDE_UOM_MAP[key] || key.toUpperCase();
+};
+
 
 window.initJDEPricing = function initJDEPricing() {
 
@@ -1377,6 +1440,28 @@ window.initJDEPricing = function initJDEPricing() {
       TAMU_Stratification: ""
     });
   });
+
+  cards.forEach(card => {
+    const item = card.dataset.itemNumber;
+    const rawUom = card.dataset.uom;
+
+    if (!item || !rawUom) return;
+
+    const jdeUom = window.getJDEUOM(rawUom);
+
+    card.dataset.jdeUom = jdeUom;
+
+    items.push({
+      Business_Unit: BUSINESS_UNIT,
+      Item_Number: item,
+      Unit_Of_Measure: jdeUom,
+      Bill_To: BILL_TO,
+      Ship_To_Number: "0",
+      Customer_Group: "",
+      TAMU_Stratification: ""
+    });
+  });
+
 
   if (!items.length) return;
 
