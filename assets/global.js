@@ -1336,7 +1336,6 @@ class CartPerformance {
    JDE UOM MAP (FROM Unit_Of_Measure.csv)
 --------------------------------------------------- */
 window.JDE_UOM_MAP = {
-  "blank": "",
   "percent": "%",
   "one gallon": "1G",
   "five gallon": "5G",
