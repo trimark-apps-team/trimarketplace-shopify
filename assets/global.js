@@ -1336,6 +1336,7 @@ class CartPerformance {
    JDE UOM MAP (FROM Unit_Of_Measure.csv)
 --------------------------------------------------- */
 window.JDE_UOM_MAP = {
+  "blank": "",
   "percent": "%",
   "one gallon": "1G",
   "five gallon": "5G",
@@ -1425,27 +1426,11 @@ window.initJDEPricing = function initJDEPricing() {
 
   cards.forEach(card => {
     const item = card.dataset.itemNumber;
-    const uom  = card.dataset.uom;
-
-    if (!item || !uom) return;
-
-    items.push({
-      Business_Unit: BUSINESS_UNIT,
-      Item_Number: item,
-      Unit_Of_Measure: uom,
-      Bill_To: BILL_TO,
-      Ship_To_Number: "0",
-      Customer_Group: "",
-      TAMU_Stratification: ""
-    });
-  });
-
-  cards.forEach(card => {
-    const item = card.dataset.itemNumber;
     const rawUom = card.dataset.uom;
 
     if (!item || !rawUom) return;
 
+    // 🔑 Convert UI UOM → JDE UOM
     const jdeUom = window.getJDEUOM(rawUom);
 
     card.dataset.jdeUom = jdeUom;
@@ -1453,7 +1438,7 @@ window.initJDEPricing = function initJDEPricing() {
     items.push({
       Business_Unit: BUSINESS_UNIT,
       Item_Number: item,
-      Unit_Of_Measure: jdeUom,
+      Unit_Of_Measure: jdeUom, // ✅ mapped value
       Bill_To: BILL_TO,
       Ship_To_Number: "0",
       Customer_Group: "",
