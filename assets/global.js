@@ -1516,12 +1516,10 @@ window.getJDEUOM = function (uom) {
     .trim()
     .toLowerCase();
 
-  // 1️⃣ Direct map (case, each, five gallon, etc.)
   if (window.JDE_UOM_MAP[normalized]) {
     return window.JDE_UOM_MAP[normalized];
   }
 
-  // 2️⃣ Already a valid JDE code → pass through
   return normalized.toUpperCase();
 };
 
@@ -1562,7 +1560,6 @@ window.initJDEPricing = function initJDEPricing() {
 
     if (!item || !rawUom) return;
 
-    // 🔑 Convert UI UOM → JDE UOM
     const jdeUom = window.getJDEUOM(rawUom);
 
     card.dataset.jdeUom = jdeUom;
