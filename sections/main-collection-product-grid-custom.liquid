@@ -414,6 +414,29 @@ document.addEventListener('DOMContentLoaded', async function () {
   /* ----------------------------------------
      RENDER
   ---------------------------------------- */
+
+
+  function refreshCart() {
+      const cartDrawer = document.getElementById('CartDrawer');
+
+      if (cartDrawer) {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', window.location.href);
+        xhr.onload = () => {
+          if (xhr.status === 200) {
+            const parser = new DOMParser();
+            const responseDoc = parser.parseFromString(xhr.responseText, 'text/html');
+            const newContent = responseDoc.querySelector('#CartDrawer');
+            if (newContent) {
+              cartDrawer.innerHTML = newContent.innerHTML;
+            }
+          }
+        };
+        xhr.send();
+      }
+    }
+
+
   function createProductRow(product) {
     const variant = product.variant;
     if (!variant) return null;
