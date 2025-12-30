@@ -388,6 +388,7 @@ document.addEventListener('DOMContentLoaded', async function () {
           if (newContent) {
             tBody.innerHTML = newContent.innerHTML;
             showLoader(false);
+            window.initJDEPricing();
           }
         }
       };
