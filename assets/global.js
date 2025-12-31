@@ -1648,11 +1648,6 @@ window.initJDEPricing = function initJDEPricing() {
           btn.disabled = false;
         });
       }
-
-      card.querySelectorAll(".loading__spinner").forEach(loader => {
-        loader.classList.add("hidden");
-      });
-
     });
 
   })
@@ -1662,22 +1657,13 @@ window.initJDEPricing = function initJDEPricing() {
     -------------------------------- */
     cards.forEach(card => {
       const btnSelector = card.dataset.addToCart;
-      card.querySelectorAll(".loading__spinner").forEach(loader => {
-        loader.classList.add("hidden");
-      });
-
       if (!btnSelector) return;
 
       card.querySelectorAll(btnSelector).forEach(btn => {
         btn.disabled = false;
       });
-
     });
-
- 
   });
-
- 
 };
 
 
