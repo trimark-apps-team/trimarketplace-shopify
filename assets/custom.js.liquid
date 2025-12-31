@@ -116,6 +116,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 subscribe(PUB_SUB_EVENTS.cartUpdate, async function (e) {
+  const data = e.cartData;
+
+  const zeroPriceItems = data.items.filter(item => item.price === 0);
+
+  if (zeroPriceItems.length) {
+    await Promise.all(
+      zeroPriceItems.map(item =>
+        fetch('/cart/change.js', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            id: item.key,
+            quantity: 0
+          })
+        })
+      )
+    );
+  }
+
   const rows = document.querySelectorAll('#quick-order-products .variant-item');
   rows.forEach(row => {
     const variantId = row.dataset.variantId;
