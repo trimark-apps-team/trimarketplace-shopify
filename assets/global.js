@@ -1535,6 +1535,9 @@ window.initJDEPricing = function initJDEPricing() {
   if (!BILL_TO) return;
 
   const cards = document.querySelectorAll("[data-item-number][data-uom]");
+      card.querySelectorAll(".loading__spinner").forEach(loader => {
+        loader.classList.add("hidden");
+    });
   if (!cards.length) return;
 
   /* -------------------------------
@@ -1547,10 +1550,6 @@ window.initJDEPricing = function initJDEPricing() {
     card.querySelectorAll(btnSelector).forEach(btn => {
       btn.disabled = true;
     });
-
-    card.querySelectorAll(".loading__spinner").forEach(loader => {
-        loader.classList.add("hidden");
-    });
   });
 
   /* -------------------------------
@@ -1562,7 +1561,13 @@ window.initJDEPricing = function initJDEPricing() {
     const item = card.dataset.itemNumber;
     const rawUom = card.dataset.uom;
 
-    if (!item || !rawUom) return;
+    if (!item || !rawUom) {
+      card.querySelectorAll(".loading__spinner").forEach(loader => {
+        loader.classList.add("hidden");
+      });
+      return;
+    }
+
 
     const jdeUom = window.getJDEUOM(rawUom);
 
