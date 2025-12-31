@@ -43,6 +43,9 @@
     }
   }
 {%- endstyle -%}
+ <h2 class="main-page-title page-title page-width">
+    {{ collection.title }}
+  </h2>
 {% if customer %}
 {% assign sales_rep = customer.metafields.custom.buyer_role.value | default: blank %}
 {% endif %}
@@ -53,9 +56,6 @@
     {% comment %} Sort is the first tabbable element when filter type is vertical {% endcomment %}
     {%- if section.settings.enable_sorting and section.settings.filter_type == 'vertical' -%}
       <div class="page-width">
-  <h2 class="main-page-title page-title">
-    {{ collection.title }}
-  </h2>
         <div class="quick-order-controls__inner">
   <button id="cart-click" class="button"><span class="cart-items_count"> CART ({{ cart.items.size }} PRODUCTS, {{ cart.item_count }} QUANTITIES)</span></button>
   <button id="cart-clear" class="button">CLEAR CART</button>
