@@ -201,12 +201,14 @@ function refreshCartDrawer({ openDrawer = true } = {}) {
       if (newDrawer) cartDrawer.innerHTML = newDrawer.innerHTML;
 
       if (openDrawer) cartIcon.click();
+      const drawerEl = document.querySelector('cart-drawer');
+        if (drawerEl?.classList.contains('is-empty')) {
+          drawerEl.classList.remove('is-empty');
+        }
+
     });
 
-  const drawerEl = document.querySelector('cart-drawer');
-  if (drawerEl?.classList.contains('is-empty')) {
-    drawerEl.classList.remove('is-empty');
-  }
+  
 
   fetch('/cart.js')
     .then(res => res.json())
