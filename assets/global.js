@@ -1535,9 +1535,6 @@ window.initJDEPricing = function initJDEPricing() {
   if (!BILL_TO) return;
 
   const cards = document.querySelectorAll("[data-item-number][data-uom]");
-      card.querySelectorAll(".loading__spinner").forEach(loader => {
-        loader.classList.add("hidden");
-    });
   if (!cards.length) return;
 
   /* -------------------------------
@@ -1561,13 +1558,7 @@ window.initJDEPricing = function initJDEPricing() {
     const item = card.dataset.itemNumber;
     const rawUom = card.dataset.uom;
 
-    if (!item || !rawUom) {
-      card.querySelectorAll(".loading__spinner").forEach(loader => {
-        loader.classList.add("hidden");
-      });
-      return;
-    }
-
+    if (!item || !rawUom) return;
 
     const jdeUom = window.getJDEUOM(rawUom);
 
