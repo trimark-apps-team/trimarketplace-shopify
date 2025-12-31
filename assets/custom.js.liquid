@@ -117,31 +117,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
 subscribe(PUB_SUB_EVENTS.cartUpdate, async function (e) {
 
-fetch('/cart.js')
-  .then(res => res.json())
-  .then(cart => 
-    
-  const zeroPriceItems = cart.items.filter(item => item.price === 0);
+  try {
+    // 1️⃣ Fetch latest cart
+    const res = await fetch('/cart.js');
+    const cart = await res.json();
 
-  if (zeroPriceItems.length) {
-    await Promise.all(
-      zeroPriceItems.map(item =>
-        fetch('/cart/change.js', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            id: item.key,
-            quantity: 0
-          }).then(res => res.json()).then(cart => {
-             refreshCartDrawer();
+    // 2️⃣ Remove zero-price items instantly
+    const zeroPriceItems = cart.items.filter(item => item.price === 0);
+
+    if (zeroPriceItems.length) {
+      await Promise.all(
+        zeroPriceItems.map(item =>
+          fetch('/cart/change.js', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              id: item.key,
+              quantity: 0
+            })
           })
-        })
-      )
-    );
-  })
-  .catch(err => console.error('Cart fetch failed:', err));
+        )
+      );
 
-  
+      // Refresh cart UI and stop further execution
+      refreshCartDrawer();
+      return;
+    }
+
 
   const rows = document.querySelectorAll('#quick-order-products .variant-item');
   rows.forEach(row => {
