@@ -206,17 +206,16 @@ function refreshCartDrawer({ openDrawer = true } = {}) {
           drawerEl.classList.remove('is-empty');
         }
 
-    });
-
-  
-
-  fetch('/cart.js')
+        fetch('/cart.js')
     .then(res => res.json())
     .then(cart => {
       document
         .querySelectorAll('.cart-count-bubble span')
         .forEach(el => (el.textContent = cart.item_count));
     });
+
+    });
+ 
 }
 
 document.addEventListener('pc-cart:added', () => {
