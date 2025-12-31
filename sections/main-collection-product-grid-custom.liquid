@@ -240,9 +240,7 @@
               Ordered at: {{ ordered_date | date: "%m/%d/%Y" }}
             {% endif %}</span>
   </div>
-  <span class="price quick-order-item-price"><div class="loading__spinner">
-            <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66"><circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle></svg>
-          </div></span>
+  <span class="price quick-order-item-price"></span>
 </td>
 <td class="variant-item__totals right large-up-hide">
   <div class="loading__spinner hidden">
@@ -293,9 +291,7 @@
     </div>
   </button>
 </td>
-<td class="variant-item__price small-hide medium-hide"><span class="price quick-order-item-price"><div class="loading__spinner">
-            <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66"><circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle></svg>
-          </div></span></td>
+<td class="variant-item__price small-hide medium-hide"><span class="price quick-order-item-price"></span></td>
 <td class="variant-item__totals right small-hide medium-hide">
   <div class="loading__spinner hidden">
     <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66"><circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle></svg>
@@ -482,9 +478,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     <span class="variant-item__name h4 break"><a class="full-unstyled-link" href="/products/${product.handle}">${product.title}</a></span>
     <span class="variant-item__sku break">${variant.sku ? `${variant.sku} ${orderedDate ? ` | Ordered at: ${orderedDate}` : ""}` : `${orderedDate ? `Ordered at: ${orderedDate}` : ""}`}</span>
   </div>
-  <span class="price quick-order-item-price"><div class="loading__spinner">
-            <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66"><circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle></svg>
-          </div></span>
+  <span class="price quick-order-item-price"></span>
 </td>
 <td class="variant-item__totals right large-up-hide">
   <div class="loading__spinner hidden">
@@ -535,9 +529,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     </div>
   </button>
 </td>
-<td class="variant-item__price small-hide medium-hide"><span class="price quick-order-item-price"><div class="loading__spinner">
-            <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66"><circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle></svg>
-          </div></span></td>
+<td class="variant-item__price small-hide medium-hide"><span class="price quick-order-item-price"></span></td>
 <td class="variant-item__totals right small-hide medium-hide">
   <div class="loading__spinner hidden">
     <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66"><circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle></svg>
