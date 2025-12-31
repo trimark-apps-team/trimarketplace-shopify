@@ -932,7 +932,7 @@ button.quick-add__submit::after, #cart-click::after {
     stroke-width: 1.4;
 }
 
-.quick-order-item-price .loading__spinner {
+.variant-item__price .loading__spinner {
   position: unset;
   padding: 0;
 }
