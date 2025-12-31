@@ -1649,6 +1649,10 @@ window.initJDEPricing = function initJDEPricing() {
         });
       }
 
+      card.querySelectorAll(".loading__spinner").forEach(loader => {
+        loader.classList.add("hidden");
+      });
+
     });
 
   })
@@ -1658,6 +1662,10 @@ window.initJDEPricing = function initJDEPricing() {
     -------------------------------- */
     cards.forEach(card => {
       const btnSelector = card.dataset.addToCart;
+      card.querySelectorAll(".loading__spinner").forEach(loader => {
+        loader.classList.add("hidden");
+      });
+
       if (!btnSelector) return;
 
       card.querySelectorAll(btnSelector).forEach(btn => {
@@ -1669,11 +1677,6 @@ window.initJDEPricing = function initJDEPricing() {
  
   });
 
-  await cards.forEach(card => {
-      card.querySelectorAll(".loading__spinner").forEach(loader => {
-        loader.classList.add("hidden");
-      });
-  });
  
 };
 
