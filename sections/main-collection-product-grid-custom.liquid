@@ -580,6 +580,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
   async function render(data) {
     container.innerHTML = '';
+    console.log(container);
 
     if (!data?.success || !data.items?.length) {
       noResults.classList.remove('hidden');
