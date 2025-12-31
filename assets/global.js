@@ -1547,6 +1547,10 @@ window.initJDEPricing = function initJDEPricing() {
     card.querySelectorAll(btnSelector).forEach(btn => {
       btn.disabled = true;
     });
+
+    card.querySelectorAll(".loading__spinner").forEach(loader => {
+        loader.classList.add("hidden");
+    });
   });
 
   /* -------------------------------
