@@ -207,12 +207,12 @@ function refreshCartDrawer({ openDrawer = true } = {}) {
         }
 
         fetch('/cart.js')
-    .then(res => res.json())
-    .then(cart => {
-      document
-        .querySelectorAll('.cart-count-bubble span')
-        .forEach(el => (el.textContent = cart.item_count));
-    });
+        .then(res => res.json())
+        .then(cart => {
+          document
+            .querySelectorAll('.cart-count-bubble span')
+            .forEach(el => (el.textContent = cart.item_count));
+        });
 
     });
  
