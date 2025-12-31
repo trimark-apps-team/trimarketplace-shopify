@@ -585,6 +585,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     if (!data?.success || !data.items?.length) {
       noResults.classList.remove('hidden');
       pagination.classList.add('hidden');
+      console.log("not success", container);
       return;
     }
 
