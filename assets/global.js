@@ -1649,6 +1649,10 @@ window.initJDEPricing = function initJDEPricing() {
         });
       }
 
+      card.querySelectorAll(".loading__spinner").forEach(loader => {
+        loader.classList.add("hidden");
+      });
+
     });
 
   })
@@ -1663,11 +1667,13 @@ window.initJDEPricing = function initJDEPricing() {
       card.querySelectorAll(btnSelector).forEach(btn => {
         btn.disabled = false;
       });
-    });
 
-    card.querySelectorAll(".loading__spinner").forEach(loader => {
+     card.querySelectorAll(".loading__spinner").forEach(loader => {
       loader.classList.add("hidden");
     });
+    });
+
+ 
   });
 
  
