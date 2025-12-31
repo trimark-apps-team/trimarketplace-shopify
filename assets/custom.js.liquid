@@ -120,6 +120,8 @@ subscribe(PUB_SUB_EVENTS.cartUpdate, async function (e) {
 
   const zeroPriceItems = data.items.filter(item => item.price === 0);
 
+  console.log(zeroPriceItems,data);
+
   if (zeroPriceItems.length) {
     await Promise.all(
       zeroPriceItems.map(item =>
