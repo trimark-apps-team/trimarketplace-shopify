@@ -116,11 +116,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 subscribe(PUB_SUB_EVENTS.cartUpdate, async function (e) {
-  const data = e.cartData;
-  console.log(data);
-  const zeroPriceItems = data.items.filter(item => item.price === 0);
 
-  console.log(zeroPriceItems,data);
+fetch('/cart.js')
+  .then(res => res.json())
+  .then(cart => 
+    
+  const zeroPriceItems = cart.items.filter(item => item.price === 0);
 
   if (zeroPriceItems.length) {
     await Promise.all(
@@ -135,7 +136,10 @@ subscribe(PUB_SUB_EVENTS.cartUpdate, async function (e) {
         })
       )
     );
-  }
+  })
+  .catch(err => console.error('Cart fetch failed:', err));
+
+  
 
   const rows = document.querySelectorAll('#quick-order-products .variant-item');
   rows.forEach(row => {
