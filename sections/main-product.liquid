@@ -3191,6 +3191,8 @@ async function fetchPriceMatrix() {
 
     document.querySelector(".add-to-cart-pdp")?.removeAttribute("disabled");
 
+    document.querySelector(".price__container .loading__spinner").classList.add("hidden");
+
     initTierSelectionFromApi();
 
   } catch (err) {
