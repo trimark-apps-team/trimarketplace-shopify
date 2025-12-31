@@ -1673,10 +1673,8 @@ window.initJDEPricing = function initJDEPricing() {
       });
 
     });
-
  
   });
-
  
 };
 
