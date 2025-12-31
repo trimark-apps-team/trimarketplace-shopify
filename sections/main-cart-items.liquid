@@ -6,6 +6,13 @@
 {{ 'quantity-popover.css' | asset_url | stylesheet_tag }}
 {{ 'empty-cart-modal.css' | asset_url | stylesheet_tag }}
 
+{% if cart.total_price == 0 %}
+<script>
+  window.location.href('/cart/clear');
+</script>
+{% endif %}
+
+
 {%- style -%}
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
