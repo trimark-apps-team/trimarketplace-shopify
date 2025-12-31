@@ -594,7 +594,9 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     data.items.forEach(p => {
       const row = createProductRow(p);
-      if (row) container.appendChild(row);
+      if (row) {
+        container.appendChild(row)
+      };
       console.log(1,container);
     });
 
