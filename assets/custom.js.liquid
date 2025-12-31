@@ -116,71 +116,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 subscribe(PUB_SUB_EVENTS.cartUpdate, async function (e) {
-  try {
-    // 1️⃣ Fetch latest cart
-    const res = await fetch('/cart.js');
-    const cart = await res.json();
+  const rows = document.querySelectorAll('#quick-order-products .variant-item');
+  rows.forEach(row => {
+    const variantId = row.dataset.variantId;
+    const cart = e.cartData;
+    const cartItem = cart.items.find(i => i.variant_id.toString() === variantId);
 
-    // 2️⃣ Remove zero-price items instantly
-    const zeroPriceItems = cart.items.filter(item => item.price === 0);
+    document.querySelector('#cart-click .cart-items_count').innerText = `CART (${cart.items.length} PRODUCTS, ${cart.item_count} QUANTITY)`;
 
-    if (zeroPriceItems.length) {
-      await Promise.all(
-        zeroPriceItems.map(item =>
-          fetch('/cart/change.js', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              id: item.key,
-              quantity: 0
-            })
-          })
-        )
-      );
+    if (cartItem) {
 
-      // Refresh cart UI and stop further execution
-      refreshCartDrawer();
-      return;
+      const qtyInput = row.querySelector('.quantity__input');
+      if (qtyInput) qtyInput.value = cartItem.quantity;
+
+      const totals = row.querySelectorAll('.variant-item__totals .price');
+      totals.forEach(totalEl => {
+        totalEl.textContent = `$${(cartItem.price * cartItem.quantity / 100).toFixed(2)}`;
+      });
+    } else {
+      const totals = row.querySelectorAll('.variant-item__totals .price');
+      totals.forEach(totalEl => {
+        totalEl.textContent = "$0";
+      });
     }
-
-    // 3️⃣ Normal UI updates
-    const rows = document.querySelectorAll('#quick-order-products .variant-item');
-
-    rows.forEach(row => {
-      const variantId = row.dataset.variantId;
-      const cartItem = cart.items.find(
-        i => i.variant_id.toString() === variantId
-      );
-
-      const cartCountEl = document.querySelector('#cart-click .cart-items_count');
-      if (cartCountEl) {
-        cartCountEl.innerText =
-          `CART (${cart.items.length} PRODUCTS, ${cart.item_count} QUANTITY)`;
-      }
-
-      if (cartItem) {
-        const qtyInput = row.querySelector('.quantity__input');
-        if (qtyInput) qtyInput.value = cartItem.quantity;
-
-        const totals = row.querySelectorAll('.variant-item__totals .price');
-        totals.forEach(totalEl => {
-          totalEl.textContent = `$${(
-            (cartItem.price * cartItem.quantity) / 100
-          ).toFixed(2)}`;
-        });
-      } else {
-        const totals = row.querySelectorAll('.variant-item__totals .price');
-        totals.forEach(totalEl => {
-          totalEl.textContent = '$0';
-        });
-      }
-    });
-
-  } catch (err) {
-    console.error('Cart update failed:', err);
-  }
-});
-
+  });
+})
 
 function refreshCartDrawer({ openDrawer = true } = {}) {
   const cartDrawer = document.getElementById('CartDrawer');
@@ -201,21 +161,20 @@ function refreshCartDrawer({ openDrawer = true } = {}) {
       if (newDrawer) cartDrawer.innerHTML = newDrawer.innerHTML;
 
       if (openDrawer) cartIcon.click();
-      const drawerEl = document.querySelector('cart-drawer');
-        if (drawerEl?.classList.contains('is-empty')) {
-          drawerEl.classList.remove('is-empty');
-        }
-
-        fetch('/cart.js')
-        .then(res => res.json())
-        .then(cart => {
-          document
-            .querySelectorAll('.cart-count-bubble span')
-            .forEach(el => (el.textContent = cart.item_count));
-        });
-
     });
- 
+
+  const drawerEl = document.querySelector('cart-drawer');
+  if (drawerEl?.classList.contains('is-empty')) {
+    drawerEl.classList.remove('is-empty');
+  }
+
+  fetch('/cart.js')
+    .then(res => res.json())
+    .then(cart => {
+      document
+        .querySelectorAll('.cart-count-bubble span')
+        .forEach(el => (el.textContent = cart.item_count));
+    });
 }
 
 document.addEventListener('pc-cart:added', () => {
