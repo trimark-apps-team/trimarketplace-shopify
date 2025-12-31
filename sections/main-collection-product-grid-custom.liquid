@@ -391,7 +391,6 @@ document.addEventListener('DOMContentLoaded', async function () {
           const responseDoc = parser.parseFromString(xhr.responseText, 'text/html');
           const newContent = responseDoc.querySelector('#quick-order-products');
           if (newContent) {
-            console.log("newContent content");
             tBody.innerHTML = newContent.innerHTML;
             showLoader(false);
             window.initJDEPricing();
@@ -403,7 +402,6 @@ document.addEventListener('DOMContentLoaded', async function () {
       document.querySelector(".pagination-wrapper").classList.remove('hidden');
       document.querySelector("#no-results").classList.add('hidden');
       document.querySelector("#quick-order-pagination").classList.add('hidden');
-      console.log(12121212121);
       return null;
     }
 
@@ -581,7 +579,6 @@ document.addEventListener('DOMContentLoaded', async function () {
   }
 
   async function render(data) {
-        console.log(container);
     container.innerHTML = '';
 
     if (!data?.success || !data.items?.length) {
@@ -668,12 +665,9 @@ document.addEventListener('DOMContentLoaded', async function () {
     const data = await fetchProducts();
       
     if (!data) {
-
-     console.log("not return loaded products")
      return;
     }
      await render(data);
-     console.log("render products")
     window.initJDEPricing();
   }
 
