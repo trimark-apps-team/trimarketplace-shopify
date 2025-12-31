@@ -116,7 +116,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 subscribe(PUB_SUB_EVENTS.cartUpdate, async function (e) {
-
   try {
     // 1️⃣ Fetch latest cart
     const res = await fetch('/cart.js');
@@ -144,32 +143,44 @@ subscribe(PUB_SUB_EVENTS.cartUpdate, async function (e) {
       return;
     }
 
+    // 3️⃣ Normal UI updates
+    const rows = document.querySelectorAll('#quick-order-products .variant-item');
 
-  const rows = document.querySelectorAll('#quick-order-products .variant-item');
-  rows.forEach(row => {
-    const variantId = row.dataset.variantId;
-    const cart = e.cartData;
-    const cartItem = cart.items.find(i => i.variant_id.toString() === variantId);
+    rows.forEach(row => {
+      const variantId = row.dataset.variantId;
+      const cartItem = cart.items.find(
+        i => i.variant_id.toString() === variantId
+      );
 
-    document.querySelector('#cart-click .cart-items_count').innerText = `CART (${cart.items.length} PRODUCTS, ${cart.item_count} QUANTITY)`;
+      const cartCountEl = document.querySelector('#cart-click .cart-items_count');
+      if (cartCountEl) {
+        cartCountEl.innerText =
+          `CART (${cart.items.length} PRODUCTS, ${cart.item_count} QUANTITY)`;
+      }
 
-    if (cartItem) {
+      if (cartItem) {
+        const qtyInput = row.querySelector('.quantity__input');
+        if (qtyInput) qtyInput.value = cartItem.quantity;
 
-      const qtyInput = row.querySelector('.quantity__input');
-      if (qtyInput) qtyInput.value = cartItem.quantity;
+        const totals = row.querySelectorAll('.variant-item__totals .price');
+        totals.forEach(totalEl => {
+          totalEl.textContent = `$${(
+            (cartItem.price * cartItem.quantity) / 100
+          ).toFixed(2)}`;
+        });
+      } else {
+        const totals = row.querySelectorAll('.variant-item__totals .price');
+        totals.forEach(totalEl => {
+          totalEl.textContent = '$0';
+        });
+      }
+    });
 
-      const totals = row.querySelectorAll('.variant-item__totals .price');
-      totals.forEach(totalEl => {
-        totalEl.textContent = `$${(cartItem.price * cartItem.quantity / 100).toFixed(2)}`;
-      });
-    } else {
-      const totals = row.querySelectorAll('.variant-item__totals .price');
-      totals.forEach(totalEl => {
-        totalEl.textContent = "$0";
-      });
-    }
-  });
-})
+  } catch (err) {
+    console.error('Cart update failed:', err);
+  }
+});
+
 
 function refreshCartDrawer({ openDrawer = true } = {}) {
   const cartDrawer = document.getElementById('CartDrawer');
