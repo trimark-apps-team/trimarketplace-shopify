@@ -6,11 +6,20 @@
 {{ 'quantity-popover.css' | asset_url | stylesheet_tag }}
 {{ 'empty-cart-modal.css' | asset_url | stylesheet_tag }}
 
-{% if cart.total_price == 0 and cart.items.size > 0 %}
-<script>
-  window.location.reload('/cart/clear');
-</script>
+{% assign has_zero_price_item = false %}
+
+{% for item in cart.items %}
+  {% if item.final_price == 0 %}
+    {% assign has_zero_price_item = true %}
+  {% endif %}
+{% endfor %}
+
+{% if has_zero_price_item %}
+  <script>
+    window.location.href = '/cart/clear';
+  </script>
 {% endif %}
+
 
 
 {%- style -%}
