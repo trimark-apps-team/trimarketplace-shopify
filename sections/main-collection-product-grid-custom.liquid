@@ -522,7 +522,7 @@ document.addEventListener('DOMContentLoaded', async function () {
   }
 
   async function render(data) {
-    container.innerHTML = '';
+    document.querySelector("#quick-order-products").innerHTML = '';
 
     if (!data?.success || !data.items?.length) {
       noResults.classList.remove('hidden');
@@ -535,7 +535,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     data.items.forEach(p => {
       const row = createProductRow(p);
-      if (row) container.appendChild(row);
+      if (row) document.querySelector("#quick-order-products").appendChild(row);
     });
 
     currentPageInfo = data.pageInfo;
