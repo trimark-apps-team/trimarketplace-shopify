@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 subscribe(PUB_SUB_EVENTS.cartUpdate, async function (e) {
   const data = e.cartData;
-
+  console.log(data);
   const zeroPriceItems = data.items.filter(item => item.price === 0);
 
   console.log(zeroPriceItems,data);
