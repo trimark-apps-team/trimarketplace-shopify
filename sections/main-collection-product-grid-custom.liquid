@@ -581,6 +581,7 @@ document.addEventListener('DOMContentLoaded', async function () {
   }
 
   async function render(data) {
+        console.log(container);
     container.innerHTML = '';
 
     if (!data?.success || !data.items?.length) {
