@@ -6,7 +6,7 @@
 {{ 'quantity-popover.css' | asset_url | stylesheet_tag }}
 {{ 'empty-cart-modal.css' | asset_url | stylesheet_tag }}
 
-{% if cart.total_price == 0 and cart.items > 0 %}
+{% if cart.total_price == 0 and cart.items.size > 0 %}
 <script>
   window.location.reload('/cart/clear');
 </script>
