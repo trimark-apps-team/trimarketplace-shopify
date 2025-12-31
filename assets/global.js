@@ -1669,12 +1669,11 @@ window.initJDEPricing = function initJDEPricing() {
  
   });
 
-  cards.forEach(card => {
+  await cards.forEach(card => {
       card.querySelectorAll(".loading__spinner").forEach(loader => {
         loader.classList.add("hidden");
       });
   });
-
  
 };
 
