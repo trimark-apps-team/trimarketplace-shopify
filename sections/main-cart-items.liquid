@@ -715,16 +715,27 @@ document.addEventListener("DOMContentLoaded", () => {
       if (key.startsWith("properties[")) {
         const match = key.match(/properties\[(.*?)\](?:\[(.*?)\])?/);
         if (!match) continue;
-        const [ , idOrKey, prop ] = match;
-        const propName = prop || idOrKey;
+
+        const [, idOrKey, prop] = match;
+
+        const rawPropName = prop || idOrKey;
+        const propName = rawPropName.replace(/\+/g, ' '); // ✅ FIX
+
         if (/^\d+$/.test(idOrKey)) {
           const vid = parseInt(idOrKey, 10);
-          variantProps[vid] = { ...(variantProps[vid] || {}), [propName]: value };
+          variantProps[vid] = {
+            ...(variantProps[vid] || {}),
+            [propName]: value
+          };
         } else {
-          variantProps._global = { ...(variantProps._global || {}), [idOrKey]: value };
+          variantProps._global = {
+            ...(variantProps._global || {}),
+            [propName]: value
+          };
         }
       }
     }
+
 
     const lineItems = addParams.map(param => {
       const [variantId, qty] = param.split(":");
