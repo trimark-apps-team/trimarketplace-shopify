@@ -597,7 +597,7 @@ document.addEventListener("DOMContentLoaded", () => {
       checkAndToggleCheckoutButtons(cartData);
     }
 
-    {% comment %} var checkbox    = document.getElementById('terms-cart');
+    var checkbox    = document.getElementById('terms-cart');
     var checkoutBtn = document.getElementById('checkout');
     var draftBtn    = document.querySelector('.draft-order-cart');
 
@@ -621,7 +621,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     validate();
-      checkbox.addEventListener('change', validate); {% endcomment %}
+      checkbox.addEventListener('change', validate);
 
      refreshCartDrawer();
       if(document.querySelector("cart-drawer").classList.contains("is-empty")) {
