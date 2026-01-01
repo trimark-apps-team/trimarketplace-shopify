@@ -597,11 +597,11 @@ document.addEventListener("DOMContentLoaded", () => {
       checkAndToggleCheckoutButtons(cartData);
     }
 
-    var checkbox    = document.getElementById('terms-cart');
-    var checkoutBtn = document.getElementById('checkout');
-    var draftBtn    = document.querySelector('.draft-order-cart');
+    const checkbox    = document.getElementById('terms-cart');
+    const checkoutBtn = document.getElementById('checkout');
+    const draftBtn    = document.querySelector('.draft-order-cart');
 
-    var error = document.createElement('div');
+    const error = document.createElement('div');
     error.style.color = 'red';
     error.style.fontSize = '0.9rem';
     error.style.display = 'none';
