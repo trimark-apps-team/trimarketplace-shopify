@@ -104,6 +104,9 @@
         "sales_contact_block_bPFnUe": {
           "type": "sales-contact-block",
           "settings": {
+            "block_heading": "Order Entry",
+            "link_url": "shopify://collections/sales-order",
+            "link_label": "View All",
             "heading-1": "Sales Contact",
             "heading-2": "Phone",
             "heading-3": "Email",
