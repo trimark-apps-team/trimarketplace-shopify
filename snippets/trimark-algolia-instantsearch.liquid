@@ -52,8 +52,8 @@ const customCurrentRefinements = connectCurrentRefinements(
         // normalize attribute labels
         let attributeLabel = group.attribute.replace(/_/g, ' ');
         if (group.attribute === 'inventory_available') attributeLabel = 'Availability';
-        if (group.attribute === 'options.color') attributeLabel = 'Colors';
-        if (group.attribute === 'vendor') attributeLabel = 'Brand';
+        if (group.attribute === 'meta.custom.12_color') attributeLabel = 'Colors';
+        if (group.attribute === 'meta.custom.6_brand') attributeLabel = 'Brand';
 
         const refinementsHtml = group.refinements
           .map((refinement) => {
