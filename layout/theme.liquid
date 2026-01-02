@@ -381,6 +381,9 @@
     })
     .then(data => {
       refreshCartDrawer();
+      document.querySelector("cart-drawer")?.classList.add("is-empty");
+      document.querySelector(".cart-count-bubble")?.style.display = "none";
+      document.querySelector(".drawer__close")?.click();
       refreshCartPage();
     })
   }
@@ -397,25 +400,7 @@
           const responseDoc = parser.parseFromString(xhr.responseText, 'text/html');
           const newContent = responseDoc.querySelector('#CartDrawer');
           if (newContent) {
-            document.querySelector("cart-drawer").classList.add("is-empty");
-            document.querySelector(".cart-count-bubble").style.display = "none";
             cartDrawer.innerHTML = newContent.innerHTML;
-            document.querySelector(".drawer__close").click();
-            fetch('/cart.js', {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json'
-            }
-           })
-            .then(response => {
-              if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-              }
-              return response.json();
-            })
-            .then(cartData => {
-              {% comment %} console.log(cartData,"cartData"); {% endcomment %}
-            })
           }
         }
       };
