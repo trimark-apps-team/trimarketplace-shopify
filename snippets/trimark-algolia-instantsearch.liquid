@@ -150,7 +150,7 @@ widgets.panel({
   showMore: true
 }),
 
- widgets.panel({
+ {% comment %} widgets.panel({
   templates: { header: 'Collections' },
 })(widgets.refinementList)({
   container: '#collections-list',
@@ -167,7 +167,7 @@ widgets.panel({
       };
     });
   },
-}),
+}), {% endcomment %}
 
 widgets.panel({
   templates: { header: 'Colors' },
