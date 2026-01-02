@@ -210,8 +210,8 @@ Results in maximum flexibility and provides algoliashopify access for store cont
     text-decoration: underline;
 }
 
-.ais-RefinementList-showMore--disabled {
-  display: none !important;
+.ais-RefinementList-showMore .ais-RefinementList-showMore--disabled {
+  display: none;
 }
 
 /* === Pagination === */
