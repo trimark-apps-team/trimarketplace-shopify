@@ -174,7 +174,7 @@ widgets.panel({
   container: '#colors',
   attribute: 'meta.custom.12_color',
   sortBy: ['name:asc'],
-  limit: 20,
+  limit: 15,
   showMore: true,       // enable "Show more" button
   showMoreLimit: 100,   // max total when expanded
 }),
@@ -205,7 +205,8 @@ widgets.panel({
 })(widgets.refinementList)({
   container: '#product-type',
   attribute: 'product_type',
-  limit: 10,            // show 20 types initially
+  sortBy: ['name:asc'],
+  limit: 15,            // show 20 types initially
   showMore: true,       // enable "Show more" button
   showMoreLimit: 100,   // max total when expanded
 }),
