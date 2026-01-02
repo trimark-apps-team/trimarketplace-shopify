@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
     onSubmit({ state }) {
       const query = state.query;
       if (query) {
-        window.location.assign(`/search?q=${state.query}`);
+        window.location.assign(`/search?q=${encodeURIComponent(query)}`);
       }
     },
     getSources({ query }) {
