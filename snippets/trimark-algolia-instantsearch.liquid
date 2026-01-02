@@ -55,6 +55,7 @@ const customCurrentRefinements = connectCurrentRefinements(
         if (group.attribute === 'meta.custom.12_color') attributeLabel = 'Colors';
         if (group.attribute === 'meta.custom.6_brand') attributeLabel = 'Brand';
         if (group.attribute === 'meta.custom.5_non_stock') attributeLabel = 'Non Stock';
+        if (group.attribute === 'category.lvl0') attributeLabel = 'Category';
 
         const refinementsHtml = group.refinements
           .map((refinement) => {
