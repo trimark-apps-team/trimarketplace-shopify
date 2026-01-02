@@ -358,12 +358,29 @@ hits({
         panel.classList.toggle('ais-Panel--collapsed');
     });
 
-  search.on('render', () => {
-    document.querySelectorAll('.ais-Panel').forEach(panel => {
-      const empty = panel.querySelector('.ais-RefinementList--noRefinement');
-      panel.style.display = empty ? 'none' : '';
+    search.on('render', () => {
+      document.querySelectorAll('.ais-Panel').forEach(panel => {
+        const refinementList = panel.querySelector('.ais-RefinementList');
+        if (!refinementList) return;
+
+        const isEmpty = refinementList.classList.contains(
+          'ais-RefinementList--noRefinement'
+        );
+
+        // 1. Hide entire panel when no refinements
+        panel.style.display = isEmpty ? 'none' : '';
+
+        // 2. Hide "Show more" when not needed
+        const showMoreBtn = panel.querySelector('.ais-RefinementList-showMore');
+        if (showMoreBtn) {
+          const isDisabled =
+            showMoreBtn.hasAttribute('disabled') ||
+            showMoreBtn.classList.contains('ais-RefinementList-showMore--disabled');
+
+          showMoreBtn.style.display = isDisabled ? 'none' : '';
+        }
+      });
     });
-  });
-  
+
 });
 </script>
