@@ -357,5 +357,13 @@ hits({
 
         panel.classList.toggle('ais-Panel--collapsed');
     });
+
+  search.on('render', () => {
+    document.querySelectorAll('.ais-Panel').forEach(panel => {
+      const empty = panel.querySelector('.ais-RefinementList--noRefinement');
+      panel.style.display = empty ? 'none' : '';
+    });
+  });
+  
 });
 </script>
