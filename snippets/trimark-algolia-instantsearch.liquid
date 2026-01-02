@@ -149,7 +149,7 @@ widgets.panel({
   showMore: false,
 });
 
-{% comment %} widgets.panel({
+ widgets.panel({
   templates: { header: 'Collections' },
 })(widgets.refinementList)({
   container: '#collections-list',
@@ -166,14 +166,18 @@ widgets.panel({
       };
     });
   },
-}), {% endcomment %}
+}),
 
 widgets.panel({
   templates: { header: 'Colors' },
 })(widgets.refinementList)({
   container: '#colors',
-  attribute: 'options.color'
-}),
+  attribute: 'meta.custom.12_color',
+  sortBy: ['name:asc'],
+  limit: 20,
+  showMore: true,       // enable "Show more" button
+  showMoreLimit: 100,   // max total when expanded
+});
 
 
 {% comment %} widgets.panel({
