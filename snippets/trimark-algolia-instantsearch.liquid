@@ -209,6 +209,16 @@ widgets.panel({
 }), {% endcomment %}
 
 widgets.panel({
+  templates: { header: 'Category' },
+})(widgets.refinementList)({
+  container: '#category',
+  attribute: 'category.lvl0',
+  sortBy: ['name:asc'],
+  limit: 15,            
+  showMore: true       // enable "Show more" button
+}),
+
+widgets.panel({
   templates: { header: 'Product Type' },
 })(widgets.refinementList)({
   container: '#product-type',
