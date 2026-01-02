@@ -145,8 +145,9 @@ widgets.panel({
 })(widgets.refinementList)({
   container: '#brand-list',
   attribute: 'meta.custom.6_brand',
-  limit: 10,
-  showMore: false,
+  sortBy: ['name:asc'],
+  limit: 15,
+  showMore: true
 }),
 
  widgets.panel({
@@ -175,8 +176,7 @@ widgets.panel({
   attribute: 'meta.custom.12_color',
   sortBy: ['name:asc'],
   limit: 15,
-  showMore: true,       // enable "Show more" button
-  showMoreLimit: 100,   // max total when expanded
+  showMore: true      // enable "Show more" button
 }),
 
 
@@ -207,8 +207,7 @@ widgets.panel({
   attribute: 'product_type',
   sortBy: ['name:asc'],
   limit: 15,            // show 20 types initially
-  showMore: true,       // enable "Show more" button
-  showMoreLimit: 100,   // max total when expanded
+  showMore: true       // enable "Show more" button
 }),
 
 {% comment %} widgets.panel({
