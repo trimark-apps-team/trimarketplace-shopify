@@ -52,7 +52,7 @@ const customCurrentRefinements = connectCurrentRefinements(
         // normalize attribute labels
         let attributeLabel = group.attribute.replace(/_/g, ' ');
         if (group.attribute === 'inventory_available') attributeLabel = 'Availability';
-        if (group.attribute === 'meta.custom.12_color') attributeLabel = 'Colors';
+        if (group.attribute === 'meta.custom.12_color') attributeLabel = 'Color';
         if (group.attribute === 'meta.custom.6_brand') attributeLabel = 'Brand';
         if (group.attribute === 'meta.custom.5_non_stock') attributeLabel = 'Non Stock';
         if (group.attribute === 'category.lvl0') attributeLabel = 'Category';
@@ -172,7 +172,7 @@ widgets.panel({
 }), {% endcomment %}
 
 widgets.panel({
-  templates: { header: 'Colors' },
+  templates: { header: 'Color' },
 })(widgets.refinementList)({
   container: '#colors',
   attribute: 'meta.custom.12_color',
