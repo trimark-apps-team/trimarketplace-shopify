@@ -179,6 +179,14 @@ widgets.panel({
   showMore: true      // enable "Show more" button
 }),
 
+widgets.panel({
+  templates: { header: 'Non Stock' },
+})(widgets.refinementList)({
+  container: '#non-stock',
+  attribute: 'meta.custom.5_non_stock',
+  sortBy: ['name:desc'],
+}),
+
 
 {% comment %} widgets.panel({
   templates: { header: 'Availability' },
