@@ -382,7 +382,7 @@
     .then(data => {
       refreshCartDrawer();
       document.querySelector("cart-drawer")?.classList.add("is-empty");
-      document.querySelector(".cart-count-bubble")?.style.display = "none";
+      document.querySelector(".cart-count-bubble").style.display = "none";
       document.querySelector(".drawer__close")?.click();
       refreshCartPage();
     })
