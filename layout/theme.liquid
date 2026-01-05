@@ -592,10 +592,12 @@
                 );
               } else {
                 showPopup("{{ settings.error_text }}", "{{ settings.error_message }}", "");
+                document.querySelector('.spinner-wrapper').style.display = 'none';
                 console.log(result);
               }
             } catch (error) {
               console.error(error);
+              document.querySelector('.spinner-wrapper').style.display = 'none';
               showPopup("{{ settings.error_text }}", "{{ settings.error_message }}", "");
             }
           }
