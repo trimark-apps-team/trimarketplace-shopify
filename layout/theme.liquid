@@ -591,11 +591,12 @@
                   `Customer: ${companyName}`
                 );
               } else {
-                showPopup('Order Creation Failed', result.message || 'Something went wrong.', true);
+                showPopup("{{ settings.error_text }}", "{{ settings.error_message }}", "");
+                console.log(result);
               }
             } catch (error) {
               console.error(error);
-              showPopup('Error', 'Unexpected error occurred.', true);
+              showPopup("{{ settings.error_text }}", "{{ settings.error_message }}", "");
             }
           }
         });
