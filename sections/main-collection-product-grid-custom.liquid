@@ -592,7 +592,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     data.items.forEach(p => {
       const row = createProductRow(p);
-      if (row) document.querySelector("#quick-order-products").appendChild(row)
+      if (row) document.querySelector("#quick-order-products").appendChild(row);
     });
 
     currentPageInfo = data.pageInfo;

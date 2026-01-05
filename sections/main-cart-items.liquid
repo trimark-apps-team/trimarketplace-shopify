@@ -567,9 +567,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     var checkbox    = document.getElementById('terms-cart');
-    var checkoutBtn = document.getElementById('checkout');
+    var checkoutBtn = document.querySelector('.cart__checkout-button');
     var draftBtn    = document.querySelector('.draft-order-cart');
 
+    console.log(checkbox,checkoutBtn,draftBtn);
+     
     var error = document.createElement('div');
     error.style.color = 'red';
     error.style.fontSize = '0.9rem';
@@ -682,16 +684,27 @@ document.addEventListener("DOMContentLoaded", () => {
       if (key.startsWith("properties[")) {
         const match = key.match(/properties\[(.*?)\](?:\[(.*?)\])?/);
         if (!match) continue;
-        const [ , idOrKey, prop ] = match;
-        const propName = prop || idOrKey;
+
+        const [, idOrKey, prop] = match;
+
+        const rawPropName = prop || idOrKey;
+        const propName = rawPropName.replace(/\+/g, ' '); // ✅ FIX
+
         if (/^\d+$/.test(idOrKey)) {
           const vid = parseInt(idOrKey, 10);
-          variantProps[vid] = { ...(variantProps[vid] || {}), [propName]: value };
+          variantProps[vid] = {
+            ...(variantProps[vid] || {}),
+            [propName]: value
+          };
         } else {
-          variantProps._global = { ...(variantProps._global || {}), [idOrKey]: value };
+          variantProps._global = {
+            ...(variantProps._global || {}),
+            [propName]: value
+          };
         }
       }
     }
+
 
     const lineItems = addParams.map(param => {
       const [variantId, qty] = param.split(":");
