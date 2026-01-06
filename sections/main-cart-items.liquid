@@ -193,6 +193,12 @@
 
                               {% else %}
 
+                               {% if item.quantity > item.product.selected_or_first_available_variant.inventory_quantity %}
+                               <div class="product-option">
+                                Backordered
+                               </div>
+                              {% endif %}
+
                               <div class="product-option">
                                 {{ item.original_price | money }}
                               </div>
