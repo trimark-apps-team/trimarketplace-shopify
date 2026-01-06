@@ -116,6 +116,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 subscribe(PUB_SUB_EVENTS.cartUpdate, async function (e) {
+fetch(window.location.href)
+  .then((response) => response.text())
+  .then((responseText) => {
+    const html = new DOMParser().parseFromString(responseText, 'text/html');
+    const data = html.querySelector('.backordered_text');
+      console.log(data,document.querySelector('.backordered_text'))
+      document.querySelector('.backordered_text').innerHTML = data.innerHTML;
+      document.querySelector('.backordered_text').classList.remove("hidden");
+  })
+  .catch((e) => {
+    console.error(e);
+  });
+
+
+
   const rows = document.querySelectorAll('#quick-order-products .variant-item');
   rows.forEach(row => {
     const variantId = row.dataset.variantId;
@@ -191,34 +206,6 @@ document.addEventListener('click', (e) => {
     }, 2000);
   }
 });
-
-// let wishlistInitTimeout = null;
-
-// function initWishlistSafely() {
-//   if (wishlistInitTimeout) return;
-
-//   wishlistInitTimeout = setTimeout(() => {
-//     if (window.HulkappWishlist && typeof HulkappWishlist.init === "function") {
-//       HulkappWishlist.init();
-//     }
-//     wishlistInitTimeout = null;
-//   }, 500);
-// }
-
-// const observer = new MutationObserver(() => {
-//   const gfGrid = document.querySelector('#gf-grid');
-//   const gfProducts = document.querySelector('#gf-products');
-
-//   if (gfGrid || gfProducts) {
-//     initWishlistSafely();
-//   }
-// });
-
-// observer.observe(document.body, {
-//   childList: true,
-//   subtree: true
-// });
-
 
 window.addEventListener("globoFilterRenderCompleted", function() {
   HulkappWishlist.init();
