@@ -47,7 +47,10 @@
             </div>
             {%- when 'sales-contact-block' -%}
             <div class="feature-card sales-contact_details">
-              {% if customer.metafields.custom.buyer_role.value contains 'Sales Rep' %}
+              {% if customer %}
+                {% assign sales_rep = customer.metafields.custom.buyer_role.value | default: blank %}
+              {% endif %}
+              {% if shop.metafields.custom.allow_sales_order or sales_rep contains 'Sales Rep' %}
               <div class="feature-heading">
                 {{ block.settings.block_heading }}
               </div>
@@ -56,7 +59,7 @@
                <p><b>{{ block.settings.heading-2 }}: </b><a href="tel:{{ customer.current_company.metafields.custom.company_sales_contact_details.value.phone }}">{{ customer.current_company.metafields.custom.company_sales_contact_details.value.phone }}</a></p>
                <p><b>{{ block.settings.heading-3 }}: </b><a href="mailto:{{ customer.current_company.metafields.custom.company_sales_contact_details.value.email }}">{{ customer.current_company.metafields.custom.company_sales_contact_details.value.email }}</a></p>
                <p><b>{{ block.settings.heading-4 }}: </b>{{ customer.current_company.metafields.custom.company_sales_contact_details.value.address }}</p>
-              {% if customer.metafields.custom.buyer_role.value contains 'Sales Rep' %}
+               {% if shop.metafields.custom.allow_sales_order or sales_rep contains 'Sales Rep' %}
                <a href="{% if block.settings.link_url %}{{ block.settings.link_url }}{% endif %}" class="feature-card-link">
                   {{ block.settings.link_label }}
                   <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
