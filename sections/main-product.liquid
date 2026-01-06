@@ -525,7 +525,7 @@
                     | item_count_for_variant: product.selected_or_first_available_variant.id
                   -%}
                 <div class="quantity__rules-cart {% if cart_qty == 0 %} hidden{% endif %}">
-                {% if cart_qty > product.selected_or_first_available_variant.inventory_quantity %}
+                 {% if cart_qty > product.selected_or_first_available_variant.inventory_quantity %}
                     <p>Backordered</p>
                  {% endif %}
                 </div>
