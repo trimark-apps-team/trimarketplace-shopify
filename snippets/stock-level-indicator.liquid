@@ -63,7 +63,7 @@
       class="stock-indicator-wrapper"
       data-flow-selector="stock-level-indicator" data-variant-id="{{ inventory_variant.id }}"
     >
-      {% if inventory_variant.available == false %}
+      {% if inventory_variant.inventory_quantity <= 0 %}
         <span class="stock-level-message">
           {% render 'icon-dot' with class: 'error', dot_pulsing: animate_pulsing_dot %}
            {% if sales_order %}
