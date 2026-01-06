@@ -1168,7 +1168,8 @@ class ProductRecommendations extends HTMLElement {
         if (html.querySelector('.grid__item')) {
           this.classList.add('product-recommendations--loaded');
         }
-        HulkappWishlist._updateWishlistButton();
+        HulkappWishlist.init();
+        window.initJDEPricing();
       })
       .catch((e) => {
         console.error(e);
