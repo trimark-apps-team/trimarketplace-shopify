@@ -121,15 +121,12 @@ fetch(window.location.href)
   .then((responseText) => {
     const html = new DOMParser().parseFromString(responseText, 'text/html');
     const data = html.querySelector('.backordered_text');
-      console.log(data,document.querySelector('.backordered_text'))
       document.querySelector('.backordered_text').innerHTML = data.innerHTML;
       document.querySelector('.backordered_text').classList.remove("hidden");
   })
   .catch((e) => {
     console.error(e);
   });
-
-
 
   const rows = document.querySelectorAll('#quick-order-products .variant-item');
   rows.forEach(row => {
