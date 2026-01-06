@@ -340,7 +340,9 @@ if (!customElements.get('product-info')) {
         const currentVariantId = this.productForm?.variantIdInput?.value;
         if (!currentVariantId) return;
 
-        this.querySelector('.quantity__rules-cart .loading__spinner').classList.remove('hidden');
+        const spinners = this.querySelectorAll('.quantity__rules-cart .loading__spinner');
+        spinners.forEach(spinner => spinner.classList.remove('hidden'));
+
         return fetch(`${this.dataset.url}?variant=${currentVariantId}&section_id=${this.dataset.section}`)
           .then((response) => response.text())
           .then((responseText) => {
@@ -348,7 +350,9 @@ if (!customElements.get('product-info')) {
             this.updateQuantityRules(this.dataset.section, html);
           })
           .catch((e) => console.error(e))
-          .finally(() => this.querySelector('.quantity__rules-cart .loading__spinner').classList.add('hidden'));
+          .finally(() => {
+            spinners.forEach(spinner => spinner.classList.add('hidden'));
+          });
       }
 
       updateQuantityRules(sectionId, html) {
