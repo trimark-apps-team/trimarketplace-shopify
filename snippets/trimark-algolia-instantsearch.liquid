@@ -363,7 +363,20 @@ hits({
         panel.classList.toggle('ais-Panel--collapsed');
     });
 
+   
+
+     const MOBILE_BREAKPOINT = 900;
+    let facetsInitialized = false;
     search.on('render', () => {
+
+       // on render for mobile, 
+       if (facetsInitialized) return;
+       if (window.innerWidth > MOBILE_BREAKPOINT) return;
+       document.querySelectorAll('.ais-Panel').forEach(panel => {
+          panel.classList.add('ais-Panel--collapsed');
+        });
+       facetsInitialized = true;
+       
       document.querySelectorAll('.ais-Panel').forEach(panel => {
         const refinementList = panel.querySelector('.ais-RefinementList');
         if (!refinementList) return;
@@ -387,9 +400,8 @@ hits({
       });
     });
 
+
     // handle facet collapse for mobile window resizing or when user visits search on mobile device.
-    // keep facets closed by default on mobile. window width 900px or less.
-    const MOBILE_BREAKPOINT = 768;
     let wasMobile = window.innerWidth <= MOBILE_BREAKPOINT;
 
     const collapseFacets = () => {
