@@ -222,11 +222,10 @@ Results in maximum flexibility and provides algoliashopify access for store cont
 }
 
 .ais-Pagination-list {
-  display: flex;
+ display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 0.5rem;
-  list-style: none;
-  padding: 0;
-  margin: 0;
 }
 
 /* Page buttons */
