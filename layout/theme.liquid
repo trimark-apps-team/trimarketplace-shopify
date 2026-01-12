@@ -1058,7 +1058,7 @@
       {% endif %}
       <script>
       window.draftorder_threshold = {{ customer.current_company.metafields.custom.approver_1_cart_threshold | times: 100 }};
-      window.approval_required = {{ approvals_required | json }};
+      window.approval_required = {{ approvals_required }};
       window.buyer_role = "{{ customer.metafields.custom.buyer_role.value }}";
       window.shopUrl = '{{ request.origin }}';
       window.routes = {
