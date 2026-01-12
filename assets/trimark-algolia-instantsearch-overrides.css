@@ -350,6 +350,7 @@ Results in maximum flexibility and provides algoliashopify access for store cont
   justify-content: space-between;
   box-shadow: 0 1px 3px rgba(0,0,0,0.05);
   transition: box-shadow 0.2s ease, transform 0.2s ease;
+  max-width: 300px;
 }
 
 .ais-Hits-item:hover {
