@@ -354,34 +354,17 @@ hits({
 
 
     document.addEventListener('click', (e) => {
-        const header = e.target.closest('.ais-Panel-header');
-        if (!header) return;
+      const header = e.target.closest('.ais-Panel-header');
+      if (!header) return;
 
-        const panel = header.closest('.ais-Panel');
-        if (!panel) return;
+      const panel = header.closest('.ais-Panel');
+      if (!panel) return;
 
-        panel.classList.toggle('ais-Panel--collapsed');
+      panel.classList.toggle('ais-Panel--open');
     });
 
-   
-
-    const MOBILE_BREAKPOINT = 900;
-    let didInitMobileCollapse = false;
 
     search.on('render', () => {
-
-       // on render for mobile, 
-      if (window.innerWidth > MOBILE_BREAKPOINT) return;
-
-      const panels = document.querySelectorAll('.ais-Panel');
-      if (!panels.length) return;
-
-      if (!didInitMobileCollapse) {
-        panels.forEach(panel => {
-          panel.classList.add('ais-Panel--collapsed');
-        });
-        didInitMobileCollapse = true;
-      }
 
        //handle facet list rendering
       document.querySelectorAll('.ais-Panel').forEach(panel => {
@@ -406,9 +389,6 @@ hits({
         }
       });
     });
-
-
-
 
 });
 </script>
