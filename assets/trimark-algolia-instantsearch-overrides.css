@@ -559,6 +559,18 @@ Results in maximum flexibility and provides algoliashopify access for store cont
   border-color: #8C072A; /* TriMark red */
 }
 
+@media (min-width: 901px) {
+  .ais-Panel .ais-Panel-body {
+    display: block;
+  }
+
+  /* optional: allow desktop collapse */
+  .ais-Panel:not(.ais-Panel--open) .ais-Panel-body {
+    display: none;
+  }
+}
+
+
 /* === Responsive adjustments === */
 @media (max-width: 900px) {
     .ais-InstantSearch {
@@ -581,6 +593,8 @@ Results in maximum flexibility and provides algoliashopify access for store cont
   .ais-Panel.ais-Panel--open .ais-Panel-body {
     display: block;
   }
+
+  
     .ais-Panel-header::after {
     transform: rotate(-90deg);
   }
