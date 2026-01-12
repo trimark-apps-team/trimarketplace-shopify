@@ -446,6 +446,9 @@ Results in maximum flexibility and provides algoliashopify access for store cont
   .ais-Hits-list {
     grid-template-columns: 1fr;
   }
+  .ais-Hits-item {
+    margin: 0 auto;
+  }
 }
 
 /* === Responsive === */
