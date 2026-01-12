@@ -448,6 +448,7 @@ Results in maximum flexibility and provides algoliashopify access for store cont
   }
   .ais-Hits-item {
     margin: 0 auto;
+    width: 100%;
   }
 }
 
