@@ -353,6 +353,7 @@ hits({
     }
 
 
+    const MOBILEBREAKPOINT = 900;
     document.addEventListener('click', (e) => {
       const header = e.target.closest('.ais-Panel-header');
       if (!header) return;
@@ -360,7 +361,13 @@ hits({
       const panel = header.closest('.ais-Panel');
       if (!panel) return;
 
-      panel.classList.toggle('ais-Panel--open');
+      if (window.innerWidth <= MOBILEBREAKPOINT) {
+        // mobile: open/close
+        panel.classList.toggle('ais-Panel--open');
+      } else {
+        // desktop: collapse/expand
+        panel.classList.toggle('ais-Panel--collapsed');
+      }
     });
 
 
