@@ -336,6 +336,7 @@ Results in maximum flexibility and provides algoliashopify access for store cont
   margin-top: 1rem;
   list-style: none;
   padding: 0;
+  justify-items: stretch;
 }
 
 /* === Product card === */
