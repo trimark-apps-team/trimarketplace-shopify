@@ -437,6 +437,15 @@ Results in maximum flexibility and provides algoliashopify access for store cont
 }
 /* === Responsive adjustments === */
 @media (max-width: 900px) {
+    .ais-InstantSearch {
+    flex-direction: column;
+  }
+  .left-panel {
+    border-right: none;
+    border-bottom: 1px solid #eee;
+    padding-right: 0;
+    padding-bottom: 1rem;
+  }
   .ais-Hits-list {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   }
@@ -450,8 +459,6 @@ Results in maximum flexibility and provides algoliashopify access for store cont
     display: block;
   }
 }
-
-
 @media (max-width: 530px) {
   .ais-Hits-list {
     grid-template-columns: 1fr;
@@ -462,19 +469,6 @@ Results in maximum flexibility and provides algoliashopify access for store cont
   }
 }
 
-/* === Responsive === */
-@media (max-width: 900px) {
-  .ais-InstantSearch {
-    flex-direction: column;
-  }
-
-  .left-panel {
-    border-right: none;
-    border-bottom: 1px solid #eee;
-    padding-right: 0;
-    padding-bottom: 1rem;
-  }
-}
 
 /* === Search box size + styling === */
 .ais-SearchBox {
