@@ -435,39 +435,6 @@ Results in maximum flexibility and provides algoliashopify access for store cont
   font-weight: bold;
   padding: 0;
 }
-/* === Responsive adjustments === */
-@media (max-width: 900px) {
-    .ais-InstantSearch {
-    flex-direction: column;
-  }
-  .left-panel {
-    border-right: none;
-    border-bottom: 1px solid #eee;
-    padding-right: 0;
-    padding-bottom: 1rem;
-  }
-  .ais-Hits-list {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  }
-
-  /* === handle facet panel bodies on mobile. keep them collapsed on mobile by default === */
-    .ais-Panel .ais-Panel-body {
-    display: none;
-  }
-
-  .ais-Panel.ais-Panel--open .ais-Panel-body {
-    display: block;
-  }
-}
-@media (max-width: 530px) {
-  .ais-Hits-list {
-    grid-template-columns: 1fr;
-  }
-  .ais-Hits-item {
-    margin: 0 auto;
-    width: 100%;
-  }
-}
 
 
 /* === Search box size + styling === */
@@ -590,4 +557,44 @@ Results in maximum flexibility and provides algoliashopify access for store cont
 .ais-SortBy select:focus {
   outline: none;
   border-color: #8C072A; /* TriMark red */
+}
+
+/* === Responsive adjustments === */
+@media (max-width: 900px) {
+    .ais-InstantSearch {
+    flex-direction: column;
+  }
+  .left-panel {
+    border-right: none;
+    border-bottom: 1px solid #eee;
+    padding-right: 0;
+    padding-bottom: 1rem;
+  }
+  .ais-Hits-list {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+  /* === handle facet panel bodies on mobile. keep them collapsed on mobile by default === */
+    .ais-Panel .ais-Panel-body {
+    display: none;
+  }
+
+  .ais-Panel.ais-Panel--open .ais-Panel-body {
+    display: block;
+  }
+    .ais-Panel-header::after {
+    transform: rotate(-90deg);
+  }
+
+  .ais-Panel.ais-Panel--open .ais-Panel-header::after {
+    transform: rotate(0deg);
+  }
+}
+@media (max-width: 530px) {
+  .ais-Hits-list {
+    grid-template-columns: 1fr;
+  }
+  .ais-Hits-item {
+    margin: 0 auto;
+    width: 100%;
+  }
 }
