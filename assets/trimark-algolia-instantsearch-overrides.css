@@ -560,12 +560,13 @@ Results in maximum flexibility and provides algoliashopify access for store cont
 }
 
 @media (min-width: 901px) {
+  /* open by default */
   .ais-Panel .ais-Panel-body {
     display: block;
   }
 
-  /* optional: allow desktop collapse */
-  .ais-Panel:not(.ais-Panel--open) .ais-Panel-body {
+  /* collapse only when explicitly collapsed */
+  .ais-Panel.ais-Panel--collapsed .ais-Panel-body {
     display: none;
   }
 }
