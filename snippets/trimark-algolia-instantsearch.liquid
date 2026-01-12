@@ -387,5 +387,35 @@ hits({
       });
     });
 
+    // handle facet collapse for mobile window resizing or when user visits search on mobile device.
+    // keep facets closed by default on mobile. window width 900px or less.
+    const MOBILE_BREAKPOINT = 768;
+    let wasMobile = window.innerWidth <= MOBILE_BREAKPOINT;
+
+    const collapseFacets = () => {
+      document.querySelectorAll('.ais-Panel').forEach(panel => {
+        panel.classList.add('ais-Panel--collapsed');
+      });
+    };
+
+    // Initial load
+    document.addEventListener('DOMContentLoaded', () => {
+      if (wasMobile) {
+        collapseFacets();
+      }
+    });
+
+    // Resize / orientation change
+    window.addEventListener('resize', () => {
+      const isMobile = window.innerWidth <= MOBILE_BREAKPOINT;
+
+      // Only act when crossing into mobile
+      if (isMobile && !wasMobile) {
+        collapseFacets();
+      }
+
+      wasMobile = isMobile;
+    });
+
 });
 </script>
