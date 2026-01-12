@@ -440,10 +440,9 @@ Results in maximum flexibility and provides algoliashopify access for store cont
   .ais-Hits-list {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   }
-}
 
-@media (max-width: 900px) {
-  .ais-Panel .ais-Panel-body {
+  /* === handle facet panel bodies on mobile. keep them collapsed on mobile by default === */
+    .ais-Panel .ais-Panel-body {
     display: none;
   }
 
@@ -451,6 +450,7 @@ Results in maximum flexibility and provides algoliashopify access for store cont
     display: block;
   }
 }
+
 
 @media (max-width: 530px) {
   .ais-Hits-list {
