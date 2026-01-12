@@ -442,6 +442,16 @@ Results in maximum flexibility and provides algoliashopify access for store cont
   }
 }
 
+@media (max-width: 900px) {
+  .ais-Panel .ais-Panel-body {
+    display: none;
+  }
+
+  .ais-Panel.ais-Panel--open .ais-Panel-body {
+    display: block;
+  }
+}
+
 @media (max-width: 530px) {
   .ais-Hits-list {
     grid-template-columns: 1fr;
