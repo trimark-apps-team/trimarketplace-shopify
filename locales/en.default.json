@@ -808,7 +808,7 @@
         "missing_shipping_address_banner": {
           "contact_us": "Contact us"
         },
-        "contact_us_html": "Need help? <a href=\"https://share.hsforms.com/1QKr9rberR1WgN9ToxQNZcw5ltn6\">Contact Us</a>"
+        "contact_us_html": "Need help? <a href=\"https://share.hsforms.com/1QKr9rberR1WgN9ToxQNZcw5ltn6\" target=\"_blank\">Contact Us</a>"
       },
       "contact": {
         "delivery_option_title": "Delivery Method",
