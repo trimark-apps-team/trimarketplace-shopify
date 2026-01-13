@@ -806,7 +806,7 @@
         "company_location_section_title": "Company and Location",
         "purchase_order_number_title": "Internal message only {{ purchase_order_number }}",
         "missing_shipping_address_banner": {
-          "contact_us": "Contact Us"
+          "contact_us": "Contact us"
         }
       },
       "contact": {
