@@ -804,7 +804,10 @@
         "breadcrumbs_in_review": "In Review",
         "resend_gift_cards_by_email": "Resend Email",
         "company_location_section_title": "Company and Location",
-        "purchase_order_number_title": "Internal message only {{ purchase_order_number }}"
+        "purchase_order_number_title": "Internal message only {{ purchase_order_number }}",
+        "missing_shipping_address_banner": {
+          "contact_us": "Contact Us"
+        }
       },
       "contact": {
         "delivery_option_title": "Delivery Method",
