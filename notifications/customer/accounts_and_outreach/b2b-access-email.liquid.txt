@@ -105,14 +105,60 @@
   <tr>
     <td class="footer__cell">
       <center>
-        <table class="container">
-          <tr>
-            <td>
-              
-              <p class="disclaimer__subtext">If you have any questions, reply to this email or contact us at <a href="mailto:{{ shop.email }}">{{ shop.email }}</a></p>
-            </td>
-          </tr>
-        </table>
+            <!-- responsive footer -->
+          <table width="100%" cellpadding="0" cellspacing="0" style="background-color:white; font-family:Helvetica, Arial, sans-serif; font-size:12px; color:#666; text-align:center; padding:20px 0;">
+            <tr>
+              <!-- Support Hours -->
+              <td class="footer-col" style="width:33%; padding:10px; vertical-align:top;">
+                <img src="https://9416274.fs1.hubspotusercontent-na1.net/hub/9416274/hubfs/Transactional%20Emails/icon-times-trans.png" alt="Support Hours" width="48" style="display:block; margin:0 auto;">
+                <p style="font-weight:bold; margin:8px 0 4px;">Support Hours</p>
+                <p style="margin:0;">Mon–Fri, 9AM–5PM EST<br>
+                <strong style="color:#cc0201;">888.662.6935</strong></p>
+              </td>
+          
+              <!-- FAQs -->
+              <td class="footer-col" style="width:33%; padding:10px; vertical-align:top;">
+                <img src="https://9416274.fs1.hubspotusercontent-na1.net/hub/9416274/hubfs/Transactional%20Emails/icon-faq-trans.png" alt="FAQs" width="48" style="display:block; margin:0 auto;">
+                <p style="font-weight:bold; margin:8px 0 4px;">Explore FAQs</p>
+                <p style="margin:0;">Have a question?<br>
+                <a href="https://support.trimarketplace.com/en/knowledge" style="text-decoration:underline;color: #cc0201;"><strong style="color: #cc0201;">View FAQs</strong></a></p>
+              </td>
+          
+              <!-- Support Forms -->
+              <td class="footer-col" style="width:33%; padding:10px; vertical-align:top;">
+                <img src="https://9416274.fs1.hubspotusercontent-na1.net/hub/9416274/hubfs/Transactional%20Emails/icon-email-trans.png" alt="Support Forms" width="48" style="display:block; margin:0 auto;">
+                <p style="font-weight:bold; margin:8px 0 4px;">Support Forms</p>
+                <p style="margin:0;">Need help?<br>
+                <a href="https://support.trimarketplace.com/en/knowledge/contact-us" style="text-decoration:underline;color: #cc0201;"><strong style="color: #cc0201;">Submit a Request</strong></a></p>
+              </td>
+            </tr>
+          </table>
+          
+          <!-- Social Links -->
+          <table width="100%" cellpadding="0" cellspacing="0" style="background-color:white; text-align:center; padding:10px 0;margin-top:20px;">
+            <tr>
+              <td>
+                <a href="https://www.facebook.com" target="_blank" style="padding: 5px;margin:5px;"><img src="https://static.hubspot.com/final/img/common/icons/social/facebook-24x24.png" alt="Facebook" style="margin:5px"></a>
+                <a href="https://www.linkedin.com" target="_blank" style="padding:5px;margin:5px;"><img src="https://static.hubspot.com/final/img/common/icons/social/linkedin-24x24.png" alt="LinkedIn" style="margin:5px" width="24"></a>
+                <a href="https://twitter.com" target="_blank" style="padding:5px;margin:5px;"><img src="https://static.hubspot.com/final/img/common/icons/social/twitter-24x24.png" alt="Twitter" style="margin:5px" width="24"></a>
+                <a href="https://www.pinterest.com" target="_blank" style="padding:5px;margin:5px;"><img src="https://static.hubspot.com/final/img/common/icons/social/pinterest-24x24.png" style="margin:5px" alt="Pinterest" width="24"></a>
+              </td>
+            </tr>
+          </table>
+          
+          <!-- Company Info -->
+          <table width="100%" cellpadding="0" cellspacing="0" style="background-color:white; font-family:Helvetica, Arial, sans-serif; font-size:12px; color:#999; text-align:center; padding:20px;margin-top:40px;">
+            <tr>
+              <td>
+                <img src="https://9416274.fs1.hubspotusercontent-na1.net/hub/9416274/hubfs/Logos/TriMark-Logo-No-Tagline-Registered-4c.png" alt="TriMark Logo" width="113" style="margin-bottom:10px;">
+                <p style="margin:0;font-size:14px;">You received this email because you are a customer of TriMark USA.</p>
+                <p style="margin:0;font-size:14px;"> Copyright ©{{ 'now' | date: '%Y' }} TriMark USA, LLC</p>
+                <p style="margin:0;font-size:14px;">9 Hampshire St | Mansfield, MA 02048</p>
+                <p style="margin:0;font-size:14px;">All Rights Reserved.</p>
+              </td>
+            </tr>
+          </table>
+          <!-- end responsive footer -->  
       </center>
     </td>
   </tr>
