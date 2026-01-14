@@ -600,7 +600,7 @@
               <td>
                 <img src="https://9416274.fs1.hubspotusercontent-na1.net/hub/9416274/hubfs/Logos/TriMark-Logo-No-Tagline-Registered-4c.png" alt="TriMark Logo" width="113" style="margin-bottom:10px;">
                 <p style="margin:0;font-size:14px;">You received this email because you are a customer of TriMark USA.</p>
-                <p style="margin:0;font-size:14px;">Copyright ©2025 TriMark USA, LLC</p>
+                <p style="margin:0;font-size:14px;"> Copyright ©{{ 'now' | date: '%Y' }} TriMark USA, LLC</p>
                 <p style="margin:0;font-size:14px;">9 Hampshire St | Mansfield, MA 02048</p>
                 <p style="margin:0;font-size:14px;">All Rights Reserved.</p>
               </td>
