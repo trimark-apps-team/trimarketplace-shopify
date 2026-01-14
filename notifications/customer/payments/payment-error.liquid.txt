@@ -1,0 +1,179 @@
+{% capture email_title %} Your payment couldn’t be processed {% endcapture %}
+{% capture email_body %}
+  You added items to your shopping cart but the payment couldn’t be processed. You haven’t been charged.
+{% endcapture %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <title>{{ email_title }}</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" type="text/css" href="/assets/notifications/styles.css">
+  <style>
+    .button__cell { background: {{ shop.email_accent_color }}; }
+    a, a:hover, a:active, a:visited { color: {{ shop.email_accent_color }}; }
+  </style>
+</head>
+
+  <body>
+    <table class="body">
+      <tr>
+        <td>
+          <table class="header row">
+  <tr>
+    <td class="header__cell">
+      <center>
+
+        <table class="container">
+          <tr>
+            <td>
+
+              <table class="row">
+                <tr>
+                  <td class="shop-name__cell">
+                    {%- if shop.email_logo_url %}
+                      <img src="{{shop.email_logo_url}}" alt="{{ shop.name }}" width="{{ shop.email_logo_width }}">
+                    {%- else %}
+                      <h1 class="shop-name__text">
+                        <a href="{{shop.url}}">{{ shop.name }}</a>
+                      </h1>
+                    {%- endif %}
+                  </td>
+
+                </tr>
+              </table>
+
+            </td>
+          </tr>
+        </table>
+
+      </center>
+    </td>
+  </tr>
+</table>
+
+          <table class="row content">
+  <tr>
+    <td class="content__cell">
+      <center>
+        <table class="container">
+          <tr>
+            <td>
+              
+            <h2>{{ email_title }}</h2>
+            <p>{{ email_body }}</p>
+            <p> You can still return to your cart to complete your purchase. </p>
+            {% if shop.url %}
+              <table class="row actions">
+                <tr>
+                  <td class="actions__cell">
+                    <table class="button main-action-cell">
+                      <tr>
+                        <table class="row actions">
+  <tr>
+    <td class="empty-line">&nbsp;</td>
+  </tr>
+  <tr>
+    <td class="actions__cell">
+      <table class="button main-action-cell">
+        <tr>
+          <td class="button__cell"><a href="{{ url }}" class="button__text">Return to cart</a></td>
+        </tr>
+      </table>
+        {% if shop.url %}
+    <table class="link secondary-action-cell">
+      <tr>
+        <td class="link__cell">or <a href="{{ shop.url }}">Visit our store</a></td>
+      </tr>
+    </table>
+{% endif %}
+
+    </td>
+  </tr>
+</table>
+
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            {% endif %}
+
+            </td>
+          </tr>
+        </table>
+      </center>
+    </td>
+  </tr>
+</table>
+          <table class="row footer">
+  <tr>
+    <td class="footer__cell">
+      <center>
+          <!-- responsive footer -->
+          <table width="100%" cellpadding="0" cellspacing="0" style="background-color:white; font-family:Helvetica, Arial, sans-serif; font-size:12px; color:#666; text-align:center; padding:20px 0;">
+            <tr>
+              <!-- Support Hours -->
+              <td class="footer-col" style="width:33%; padding:10px; vertical-align:top;">
+                <img src="https://9416274.fs1.hubspotusercontent-na1.net/hub/9416274/hubfs/Transactional%20Emails/icon-times-trans.png" alt="Support Hours" width="48" style="display:block; margin:0 auto;">
+                <p style="font-weight:bold; margin:8px 0 4px;">Support Hours</p>
+                <p style="margin:0;">Mon–Fri, 9AM–5PM EST<br>
+                <strong style="color:#cc0201;">888.662.6935</strong></p>
+              </td>
+          
+              <!-- FAQs -->
+              <td class="footer-col" style="width:33%; padding:10px; vertical-align:top;">
+                <img src="https://9416274.fs1.hubspotusercontent-na1.net/hub/9416274/hubfs/Transactional%20Emails/icon-faq-trans.png" alt="FAQs" width="48" style="display:block; margin:0 auto;">
+                <p style="font-weight:bold; margin:8px 0 4px;">Explore FAQs</p>
+                <p style="margin:0;">Have a question?<br>
+                <a href="https://support.trimarketplace.com/en/knowledge" style="text-decoration:underline;color: #cc0201;"><strong style="color: #cc0201;">View FAQs</strong></a></p>
+              </td>
+          
+              <!-- Support Forms -->
+              <td class="footer-col" style="width:33%; padding:10px; vertical-align:top;">
+                <img src="https://9416274.fs1.hubspotusercontent-na1.net/hub/9416274/hubfs/Transactional%20Emails/icon-email-trans.png" alt="Support Forms" width="48" style="display:block; margin:0 auto;">
+                <p style="font-weight:bold; margin:8px 0 4px;">Support Forms</p>
+                <p style="margin:0;">Need help?<br>
+                <a href="https://support.trimarketplace.com/en/knowledge/contact-us" style="text-decoration:underline;color: #cc0201;"><strong style="color: #cc0201;">Submit a Request</strong></a></p>
+              </td>
+            </tr>
+          </table>
+          
+          <!-- Social Links -->
+          <table width="100%" cellpadding="0" cellspacing="0" style="background-color:white; text-align:center; padding:10px 0;margin-top:20px;">
+            <tr>
+              <td>
+                <a href="https://www.facebook.com" target="_blank" style="padding: 5px;margin:5px;"><img src="https://static.hubspot.com/final/img/common/icons/social/facebook-24x24.png" alt="Facebook" style="margin:5px"></a>
+                <a href="https://www.linkedin.com" target="_blank" style="padding:5px;margin:5px;"><img src="https://static.hubspot.com/final/img/common/icons/social/linkedin-24x24.png" alt="LinkedIn" style="margin:5px" width="24"></a>
+                <a href="https://twitter.com" target="_blank" style="padding:5px;margin:5px;"><img src="https://static.hubspot.com/final/img/common/icons/social/twitter-24x24.png" alt="Twitter" style="margin:5px" width="24"></a>
+                <a href="https://www.pinterest.com" target="_blank" style="padding:5px;margin:5px;"><img src="https://static.hubspot.com/final/img/common/icons/social/pinterest-24x24.png" style="margin:5px" alt="Pinterest" width="24"></a>
+              </td>
+            </tr>
+          </table>
+          
+          <!-- Company Info -->
+          <table width="100%" cellpadding="0" cellspacing="0" style="background-color:white; font-family:Helvetica, Arial, sans-serif; font-size:12px; color:#999; text-align:center; padding:20px;margin-top:40px;">
+            <tr>
+              <td>
+                <img src="https://9416274.fs1.hubspotusercontent-na1.net/hub/9416274/hubfs/Logos/TriMark-Logo-No-Tagline-Registered-4c.png" alt="TriMark Logo" width="113" style="margin-bottom:10px;">
+                <p style="margin:0;font-size:14px;">You received this email because you are a customer of TriMark USA.</p>
+                <p style="margin:0;font-size:14px;">Copyright ©2025 TriMark USA, LLC</p>
+                <p style="margin:0;font-size:14px;">9 Hampshire St | Mansfield, MA 02048</p>
+                <p style="margin:0;font-size:14px;">All Rights Reserved.</p>
+              </td>
+            </tr>
+          </table>
+          <!-- end responsive footer -->   
+      </center>
+    </td>
+  </tr>
+</table>
+
+<img src="{{ 'notifications/spacer.png' | shopify_asset_url }}" class="spacer" height="1" />
+
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

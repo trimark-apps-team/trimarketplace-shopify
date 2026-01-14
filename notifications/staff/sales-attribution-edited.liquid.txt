@@ -1,0 +1,218 @@
+
+{% capture email_title %}
+  POS sales attribution edit on order {{ order.name }}
+{% endcapture %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <title>{{ email_title }}</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width">
+  
+  <link rel="stylesheet" type="text/css" media="screen" href="/assets/admin/merchant_mailer/style.css">
+  <style data-premailer="ignore">
+    .button__cell { background: {{ shop.email_accent_color }}; }
+    a, a:hover, a:active, a:visited { color: {{ shop.email_accent_color }}; }
+    @media print{
+      body {
+        color: black !important;
+      }
+
+      .subtitle-lines,
+      .subtotal-line__title,
+      .subtotal-line__value {
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+
+      .subtotal-table {
+        margin: 0 !important;
+      }
+    }
+  </style>
+</head>
+
+  <body>
+    <table class="body">
+      <tr>
+        <td>
+          <table class="row">
+  <tr>
+    <td class="section__cell">
+      <center>
+        <table class="container section">
+          <tr>
+            <td>
+              
+            <table class="row content">
+  <tr>
+    <td class="content__cell {% if no_top_border == 'hide_border' %}no_top__border{% endif %}">
+      <center>
+        <table class="container">
+          <tr>
+            <td>
+              
+              <table class="row">
+                <tr>
+                  <td>
+                    {{ user_name }} edited the attributed staff on order {{ order.name}} from Shopify POS on {{ edit_date }} at {{ edit_time }}.
+                    <table class="row actions" style="width: auto;">
+  <tr>
+    <td class="empty-line">&nbsp;</td>
+  </tr>
+    <tr>
+      <td class="actions__cell">
+        <table class="button main-action-cell">
+          <tr>
+            <td><a href="{{ order_admin_url }}" class="mail-button" style="margin-right:5px">View Order</a></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+</table>
+
+                  </td>
+                </tr>
+              </table>
+
+            </td>
+          </tr>
+        </table>
+      </center>
+    </td>
+  </tr>
+</table>
+
+            <table class="row content">
+  <tr>
+    <td class="content__cell {% if no_top_border == 'hide_border' %}no_top__border{% endif %}">
+      <center>
+        <table class="container">
+          <tr>
+            <td>
+              
+              {% if has_deleted? %}
+                <strong class="order-list__summary-title">Removed</strong>
+                <table class="row">
+                  {% for change_set in deleted_attribution_changes_summary%}
+                    <tr>
+                      <td class="customer-info__item customer-info__item--last">
+                        {{ change_set.staff_name }} (-{{change_set.total_sales | money}} from total sales)
+                      </td>
+                    </tr>
+                    {% for item in change_set.line_items%}
+                      <tr>
+                        <td class="customer-info__item customer-info__item--last">
+                          {{ item.quantity }}x {{ item.name }}
+                          
+                          {% for group in item.groups %}
+                            {% if group.deliverable? %}
+                              <p class="customer-info__item-variant">For: {{ group.display_title }}</p>
+                            {% else %}
+                              <p class="customer-info__item-variant">Part of: {{ group.display_title }}</p>
+                            {% endif %}
+                          {% endfor %}
+                        </td>
+                    </tr>
+                    {% endfor%}
+                  {% endfor%}
+                </table>
+              {% endif %}
+
+              {% if has_deleted? and has_added? %}
+                <br>
+                <br>
+              {% endif %}
+
+              {% if has_added? %}
+                <strong class="order-list__summary-title">Added</strong>
+                <table class="row">
+                  {% for change_set in added_attribution_changes_summary%}
+                    <tr>
+                      <td class="customer-info__item customer-info__item--last">
+                        {{ change_set.staff_name }} (+{{change_set.total_sales | money}} to total sales)
+                      </td>
+                    </tr>
+                    {% for item in change_set.line_items%}
+                      <tr>
+                        <td class="customer-info__item customer-info__item--last">
+                          {{ item.quantity }}x {{ item.name }}
+                          {% for group in item.groups %}
+                            {% if group.deliverable? %}
+                              <p class="customer-info__item-variant">For: {{ group.display_title }}</p>
+                            {% else %}
+                              <p class="customer-info__item-variant">Part of: {{ group.display_title }}</p>
+                            {% endif %}
+                          {% endfor %}
+                        </td>
+                    </tr>
+                    {% endfor%}
+                  {% endfor%}
+                </table>
+              {% endif %}
+
+            </td>
+          </tr>
+        </table>
+      </center>
+    </td>
+  </tr>
+</table>
+
+            <table class="row content">
+  <tr>
+    <td class="content__cell {% if no_top_border == 'hide_border' %}no_top__border{% endif %}">
+      <center>
+        <table class="container">
+          <tr>
+            <td>
+              
+              <table class="row">
+                <tr>
+                  <td class="customer-info__item customer-info__item--last">
+                    The <a href="{{ link_to_report }}">retail sales by staff attributed to sale</a> report was updated to reflect this edit.
+                  </td>
+                </tr>
+              </table>
+
+            </td>
+          </tr>
+        </table>
+      </center>
+    </td>
+  </tr>
+</table>
+
+            </td>
+          </tr>
+        </table>
+      </center>
+    </td>
+  </tr>
+</table>
+          <footer class="no-print">
+  <br>
+  <table border="0" cellpadding="0" cellspacing="0" class="mail-footer">
+    <tbody>
+      <tr>
+        <td align="center" valign="bottom">
+          <img src="{{ 'mailer/merchant/shopify_logo.png' | cdn_asset_url }}" alt="Shopify" width="89">
+        </td>
+      </tr>
+      <tr>
+        <td align="center">
+          <p><span class="apple-link">151 O'Connor Street, Ground floor, Ottawa, ON, K2P 2L8</span></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</footer>
+
+<img class="no-print" src="{{ 'notifications/spacer.png' | shopify_asset_url }}" class="spacer" height="1" />
+
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
+

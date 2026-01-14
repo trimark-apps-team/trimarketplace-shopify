@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>{{ email_title }}</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" type="text/css" href="/assets/notifications/styles.css">
+  <style>
+    .button__cell { background: {{ shop.email_accent_color }}; }
+    a, a:hover, a:active, a:visited { color: {{ shop.email_accent_color }}; }
+  </style>
+</head>
+
+<body>
+  <table class="body">
+    <tr>
+      <td>
+        <table class="header row">
+  <tr>
+    <td class="header__cell">
+      <center>
+
+        <table class="container">
+          <tr>
+            <td>
+
+              <table class="row">
+                <tr>
+                  <td class="shop-name__cell">
+                    {%- if shop.email_logo_url %}
+                      <img src="{{shop.email_logo_url}}" alt="{{ shop.name }}" width="{{ shop.email_logo_width }}">
+                    {%- else %}
+                      <h1 class="shop-name__text">
+                        <a href="{{shop.url}}">{{ shop.name }}</a>
+                      </h1>
+                    {%- endif %}
+                  </td>
+
+                    <td>
+                      <table class="order-po-number__container">
+                        <tr>
+                          <td class="order-number__cell">
+                            <span class="order-number__text">
+                              Order {{ order_name }}
+                            </span>
+                          </td>
+                        </tr>
+                        {%- if po_number %}
+                            <tr>
+                              <td class="po-number__cell">
+                                <span class="po-number__text">
+                                  PO number #{{ po_number }}
+                                </span>
+                              </td>
+                            </tr>
+                        {%- endif %}
+                      </table>
+                    </td>
+                </tr>
+              </table>
+
+            </td>
+          </tr>
+        </table>
+
+      </center>
+    </td>
+  </tr>
+</table>
+
+          <table class="row content">
+  <tr>
+    <td class="content__cell">
+      <center>
+        <table class="container">
+          <tr>
+            <td>
+              
+            {% if payment_schedule.overdue? and payment_schedule.number_of_days_overdue == 0 %}
+              <h2>Your payment is due today</h2>
+            {% elsif payment_schedule.due_later? and payment_schedule.due_in_days == 0 %}
+              <h2>Your payment is due today</h2>
+            {% elsif payment_schedule.overdue? and payment_schedule.number_of_days_overdue == 1 %}
+              <h2>Your payment was due yesterday</h2>
+            {% elsif payment_schedule.due_later? and payment_schedule.due_in_days == 1 %}
+              <h2>Your payment is due tomorrow</h2>
+            {% elsif payment_schedule.due_later? and payment_schedule.due_in_days > 1 %}
+              <h2>Your payment is due in {{ payment_schedule.due_in_days}} days</h2>
+            {% else %}
+              <h2>Your payment is {{ payment_schedule.number_of_days_overdue }} days overdue</h2>
+            {% endif %}
+            {% if custom_message != blank %}
+              <p>{{ custom_message }}</p>
+            {% else %}
+              {% if payment_schedule.overdue? and payment_schedule.number_of_days_overdue == 0 %}
+                <p>
+                  This is a reminder that you have a payment of {{ payment_schedule.amount_due | money_with_currency }} due today for order {{ name }}.
+
+                </p>
+              {% elsif payment_schedule.due_later? %}
+                <p>
+                  This is a reminder that your payment of {{ payment_schedule.amount_due | money_with_currency }} for order {{ name }} is due on {{ payment_schedule.due_at | date: '%B %e, %Y' }}.
+
+                </p>
+              {% else %}
+                <p>
+                  This is a reminder that your payment of {{ payment_schedule.amount_due | money_with_currency }} for order {{ name }} was due on {{ payment_schedule.due_at | date: '%B %e, %Y' }}.
+
+                </p>
+              {% endif %}
+              <p>
+                Thank you.
+              </p>
+            {% endif %}
+            {% if checkout_payment_collection_url %}
+              <table class="row actions">
+  <tr>
+    <td class="actions__cell">
+      <table class="button main-action-cell">
+        <tr>
+          <td class="button__cell"><a href="{{ checkout_payment_collection_url }}" class="button__text">Pay now</a></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+            {% endif %}
+
+            </td>
+          </tr>
+        </table>
+      </center>
+    </td>
+  </tr>
+</table>
+        <table class="row footer">
+  <tr>
+    <td class="footer__cell">
+      <center>
+          <!-- responsive footer -->
+          <table width="75%" cellpadding="0" cellspacing="0" style="background-color:white; font-family:Helvetica, Arial, sans-serif; font-size:12px; color:#666; text-align:center; padding:20px 0;">
+            <tr>
+              <!-- Support Hours -->
+              <td class="footer-col" style="width:33%; padding:10px; vertical-align:top;">
+                <img src="https://cdn.shopify.com/s/files/1/0733/2275/8322/files/icon-times-trans.png?v=1761241327" alt="Support Hours" width="48" style="display:block; margin:0 auto;">
+                <p style="font-weight:bold; margin:8px 0 4px;">Support Hours</p>
+                <p style="margin:0;">Mon–Fri, 9AM–5PM EST<br>
+                <strong style="color:#cc0201;">888.662.6935</strong></p>
+              </td>
+          
+              <!-- FAQs -->
+              <td class="footer-col" style="width:33%; padding:10px; vertical-align:top;">
+                <img src="https://cdn.shopify.com/s/files/1/0733/2275/8322/files/icon-faq-trans.png?v=1761241327" alt="FAQs" width="48" style="display:block; margin:0 auto;">
+                <p style="font-weight:bold; margin:8px 0 4px;">Explore FAQs</p>
+                <p style="margin:0;">Have a question?<br>
+                <a href="https://faq.trimarketplace.com/" style="text-decoration:underline;color: #cc0201;"><strong style="color: #cc0201;">View FAQs</strong></a></p>
+              </td>
+          
+              <!-- Support Forms -->
+              <td class="footer-col" style="width:33%; padding:10px; vertical-align:top;">
+                <img src="https://cdn.shopify.com/s/files/1/0733/2275/8322/files/icon-email-trans.png?v=1761241327" alt="Support Forms" width="48" style="display:block; margin:0 auto;">
+                <p style="font-weight:bold; margin:8px 0 4px;">Support Forms</p>
+                <p style="margin:0;">Need help?<br>
+                <a href="https://share.hsforms.com/1QKr9rberR1WgN9ToxQNZcw5ltn6" style="text-decoration:underline;color: #cc0201;"><strong style="color: #cc0201;">Submit a Request</strong></a></p>
+              </td>
+            </tr>
+          </table>
+          
+          <!-- Social Links -->
+          <table width="75%" cellpadding="0" cellspacing="0" style="background-color:white; text-align:center; padding:5px 0;margin-top:40px;">
+            <tr>
+              <td>
+                <a href="https://www.facebook.com/TrimarkUSA" target="_blank" style="padding:5px;margin:5px;"><img src="https://cdn.shopify.com/s/files/1/0733/2275/8322/files/facebook-email-icon.gif?v=1761577923" alt="facebook" style="margin:5px; padding:10px;" width="26"></a> &nbsp;&nbsp;
+                <a href="https://x.com/TriMarkUSA" target="_blank" style="padding:5px;margin:5px;"><img src="https://cdn.shopify.com/s/files/1/0733/2275/8322/files/x-email-icon.gif?v=1761577923" alt="X" style="margin:5px;padding:10px;" width="26"></a>
+                &nbsp;&nbsp;
+                <a href="https://www.linkedin.com/company/trimarkusa/posts/?feedView=all" target="_blank" style="padding:5px;margin:5px;"><img src="https://cdn.shopify.com/s/files/1/0733/2275/8322/files/linkedin-email-icon.gif?v=1761577923" style="margin:5px;padding:10px;" alt="Linked In" width="26"></a>
+                &nbsp;&nbsp;
+                 <a href="https://www.youtube.com/channel/UC-_N3m1fOpMpdFTldZyKMvA" target="_blank" style="padding:5px;margin:5px;"><img src="https://cdn.shopify.com/s/files/1/0733/2275/8322/files/youtube-email-icon.gif?v=1761577923" alt="YouTube" style="margin:5px;padding:10px;" width="26"></a>
+                &nbsp;&nbsp;
+                <a href="https://www.instagram.com/trimarkusa/" target="_blank" style="padding:5px;margin:5px;"><img src="https://cdn.shopify.com/s/files/1/0733/2275/8322/files/instagram-email-icon.gif?v=1761577923" alt="Twitter" style="margin:5px;padding:10px;" width="26"></a>
+                &nbsp;&nbsp;
+                <a href="https://www.pinterest.com/TriMarkUSA/" target="_blank" style="padding:5px;margin:5px;"><img src="https://cdn.shopify.com/s/files/1/0733/2275/8322/files/pinterest-email-icon.gif?v=1761577923" style="margin:5px;padding:10px;" alt="Pinterest" width="26"></a>
+              </td>
+            </tr>
+          </table>
+          
+          <!-- Company Info -->
+          <table width="100%" cellpadding="0" cellspacing="0" style="background-color:white; font-family:Helvetica, Arial, sans-serif; font-size:12px; color:#999; text-align:center; padding:20px;margin-top:20px;">
+            <tr>
+              <td>
+                <img src="https://cdn.shopify.com/s/files/1/0733/2275/8322/files/TriMark-Logo-No-Tagline-Registered-4c.png?v=1761241327" alt="TriMark Logo" width="113" style="margin-bottom:10px;">
+                <p style="margin:0;font-size:14px;">You received this email because you are a customer of TriMark USA.</p>
+                <p style="margin:0;font-size:14px;">Copyright ©2025 TriMark USA, LLC</p>
+                <p style="margin:0;font-size:14px;">9 Hamps
+                  hire St | Mansfield, MA 02048</p>
+                <p style="margin:0;font-size:14px;">All Rights Reserved.</p>
+              </td>
+            </tr>
+          </table>
+          <!-- end responsive footer -->   
+      </center>
+    </td>
+  </tr>
+</table>
+
+<img src="{{ 'notifications/spacer.png' | shopify_asset_url }}" class="spacer" height="1" />
+
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

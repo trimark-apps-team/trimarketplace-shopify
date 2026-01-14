@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <title>{{ email_title }}</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width">
+  
+  <link rel="stylesheet" type="text/css" media="screen" href="/assets/admin/merchant_mailer/style.css">
+  <style data-premailer="ignore">
+    .button__cell { background: {{ shop.email_accent_color }}; }
+    a, a:hover, a:active, a:visited { color: {{ shop.email_accent_color }}; }
+    @media print{
+      body {
+        color: black !important;
+      }
+
+      .subtitle-lines,
+      .subtotal-line__title,
+      .subtotal-line__value {
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+
+      .subtotal-table {
+        margin: 0 !important;
+      }
+    }
+  </style>
+</head>
+
+  <body>
+    <table class="row">
+      <tr class="mail-priority-indicator mail-priority-indicator--{% if fulfillment_aborted or has_high_risks? %}high{% else %}low{% endif %}">
+        <td></td>
+      </tr>
+    </table>
+    <table class="body">
+      <tr>
+        <td>
+          <table class="row">
+  <tr>
+    <td class="section__cell">
+      <center>
+        <table class="container section">
+          <tr>
+            <td>
+              
+            <table class="row content">
+  <tr>
+    <td class="content__cell {% if no_top_border == 'hide_border' %}no_top__border{% endif %}">
+      <center>
+        <table class="container">
+          <tr>
+            <td>
+              
+              <table class="row">
+                <tr>
+                  <td>
+                    {% assign current_date = date | date: "%b %d" %}
+                    {% assign current_time = date | date: "%l:%M %P" %}
+                    {% if customer.name %}
+                      {{ customer.name }} submitted draft order {{ name }} on {{ current_date }} at {{ current_time | strip }}.
+                    {% else %}
+                      Someone submitted draft order {{ name }} on {{ current_date }} at {{ current_time | strip }}.
+                    {% endif %}
+                    <table class="row actions" style="width: auto;">
+  <tr>
+    <td class="empty-line">&nbsp;</td>
+  </tr>
+    <tr>
+      <td class="actions__cell">
+        <table class="button main-action-cell">
+          <tr>
+            <td><a href="https://{{ shop.permanent_domain }}/admin/draft_orders/{{ id }}" class="mail-button" style="margin-right:5px">Review draft order</a></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+</table>
+
+                  </td>
+                </tr>
+              </table>
+
+            </td>
+          </tr>
+        </table>
+      </center>
+    </td>
+  </tr>
+</table>
+            <table class="row content">
+  <tr>
+    <td class="content__cell {% if no_top_border == 'hide_border' %}no_top__border{% endif %}">
+      <center>
+        <table class="container">
+          <tr>
+            <td>
+              
+              <strong class="order-list__summary-title">Order summary</strong>
+              <br>
+              <br>
+              
+  <table class="row">
+    {% for line in subtotal_line_items %}
+      
+<tr class="order-list__item">
+  <td class="order-list__item__cell">
+    <table>
+        {% assign expand_bundles = true %}
+
+      {% if expand_bundles and line.bundle_parent? %}
+        <td class="order-list__parent-image-cell">
+      {% else %}
+        <td class="order-list__image-cell">
+      {% endif %}
+        {% if line.image %}
+          <img src="{{ line | img_url: 'compact_cropped' }}" align="left" width="60" height="60" class="order-list__product-image"/>
+        {% else %}
+            <div class="order-list__no-image-cell">
+              <img src="{{ 'notifications/no-image.png' | shopify_asset_url }}" align="left" width="60" height="60" class="order-list__no-product-image"/>
+            </div>
+        {% endif %}
+      </td>
+      <td class="order-list__product-description-cell">
+        {% if line.quantity < line.quantity %}
+          {% capture line_display %}
+            {{ line.quantity }} of {{ line.quantity }}
+          {% endcapture %}
+        {% else %}
+          {% assign line_display = line.quantity  %}
+        {% endif %}
+
+        <span class="order-list__item-title">
+          {% if line.product.title == blank %}
+            {{ line.title }}</span><br/>
+          {% else %}
+            {{ line.product.title }}
+          {% endif %}
+        </span><br/>
+
+        {% if line.quantity %}
+          {% if line.original_line_price != line.final_line_price %}
+            <span><del class="order-list__item-original-price">{{ line.original_price | money }}</del></span>
+          {% endif %}
+            <span>{{ line.final_price | money }} × {{ line.quantity }} </span><br/>
+        {% endif %}
+
+        {% if expand_bundles %}
+          {% for component in line.bundle_components %}
+            <table>
+              <tr class="order-list__item">
+                <td class="order-list__bundle-item">
+                  <table>
+                    <td class="order-list__image-cell">
+                      {% if component.image %}
+                        <img src="{{ component | img_url: 'compact_cropped' }}" align="left" width="40" height="40" class="order-list__product-image small"/>
+                      {% else %}
+                          <div class="order-list__no-image-cell small">
+                            <img src="{{ 'notifications/no-image.png' | shopify_asset_url }}" align="left" width="40" height="40" class="order-list__no-product-image small"/>
+                          </div>
+                      {% endif %}
+                    </td>
+
+                    <td class="order-list__product-description-cell">
+                      {% if component.product.title %}
+                        {% assign component_title = component.product.title %}
+                      {% else %}
+                        {% assign component_title = component.title %}
+                      {% endif %}
+
+                      {% assign component_display = component.quantity %}
+
+                      <span class="order-list__item-title">{{ component_title }}&nbsp;&times;&nbsp;{{ component_display }}</span><br>
+
+                      {% if component.variant.title != 'Default Title'%}
+                        <span class="order-list__item-variant">{{ component.variant.title }}</span>
+                      {% endif %}
+                    </td>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          {% endfor %}
+        {% else %}
+          {% for group in line.groups %}
+            {% if group.deliverable? %}
+              <span class="order-list__item-variant">For: {{ group.display_title }}</span><br/>
+            {% else %}
+              <span class="order-list__item-variant">Part of: {{ group.display_title }}</span><br/>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+
+        {% if line.variant.title != 'Default Title' and line.bundle_parent? == false %}
+          <span class="order-list__item-variant">{{ line.variant.title }}</span>
+
+          {% if line.sku != blank %}
+            <span class="order-list__item-variant">• </span>
+          {% endif %}
+        {% elsif line.variant.title != 'Default Title' and line.bundle_parent? and expand_bundles == false %}
+          <span class="order-list__item-variant">{{ line.variant.title }}</span>
+
+          {% if line.sku != blank %}
+            <span class="order-list__item-variant">• </span>
+          {% endif %}
+        {% endif %}
+
+        {% if line.sku != blank %}
+          <span class="order-list__item-variant">SKU: {{ line.sku }}</span>
+        {% endif %}
+
+        {% if line.selling_plan_allocation != nil %}
+          <p class="order-list__item-variant">{{ line.selling_plan_allocation.selling_plan.name }}</p>
+        {% endif %}
+
+        {% if line.discount_allocations %}
+          {% for discount_allocation in line.discount_allocations %}
+            {% if discount_allocation.discount_application.target_selection != 'all' %}
+              <span class="order-list__item-discount-allocation">
+                <img src="{{ 'notifications/discounttag.png' | shopify_asset_url }}" width="18" height="18" class="discount-tag-icon" />
+                <span>
+                  {{ discount_allocation.discount_application.title | upcase }}
+                  (-{{ discount_allocation.amount | money }})
+                </span>
+              </span>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      </td>
+        {% if expand_bundles and line.bundle_parent? %}
+          <td class="order-list__parent-price-cell">
+        {% else %}
+          <td class="order-list__price-cell">
+        {% endif %}
+          <p class="order-list__item-price">
+            {% if line.final_line_price > 0 %}
+              {{ line.final_line_price | money }}
+              {% if line.unit_price_measurement %}
+  <div class="order-list__unit-price">
+    {{- line.unit_price | unit_price_with_measurement: line.unit_price_measurement -}}
+  </div>
+{% endif %}
+            {% else %}
+              Free
+            {% endif %}
+          </p>
+        </td>
+    </table>
+  </td>
+</tr>
+
+    {% endfor %}
+  </table>
+
+              <table class="row subtotal-lines">
+  <tr>
+    <td>
+      <table class="row subtotal-table">
+
+
+        {% assign order_discount_count = 0 %}
+        {% assign total_order_discounts = 0 %}
+        {% assign has_shipping_discount = false %}
+        {% assign epsilon = 0.00001 %}
+
+        {% for discount_application in discount_applications %}
+          {% if discount_application.target_selection == 'all' and discount_application.target_type == 'line_item' %}
+            {% assign order_discount_count = order_discount_count | plus: 1 %}
+            {% assign total_order_discount_amount = total_order_discounts | plus: discount_application.total_allocated_amount  %}
+          {% endif %}
+           {% if discount_application.target_type == 'shipping_line' %}
+            {% assign has_shipping_discount = true %}
+            {% assign shipping_discount_title = discount_application.title %}
+            {% assign discount_value_price = discount_application.total_allocated_amount %}
+            {% assign shipping_amount_minus_discount_value_price = shipping_price | minus: discount_value_price %}
+            {% assign shipping_amount_minus_discount_value_price_abs = shipping_amount_minus_discount_value_price | abs %}
+            {% assign discount_application_value_type = discount_application.value_type | strip %}
+            {% if shipping_amount_minus_discount_value_price_abs < epsilon or discount_application_value_type == 'percentage' and discount_application.value == 100 %}
+              {% assign free_shipping = true %}
+            {% else %}
+              {% assign discounted_shipping_price = shipping_amount_minus_discount_value_price %}
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+
+        
+<tr class="subtotal-line">
+  <td class="subtotal-line__title">
+    <p>
+      {% if titleBold %}
+        <span><strong>Subtotal</strong></span>
+      {% else %}
+        <span>Subtotal</span>
+      {% endif %}
+    </p>
+  </td>
+  <td class="subtotal-line__value">
+    {% if valueBold %}
+      <strong>{{ subtotal_price | plus: total_order_discount_amount | money }}</strong>
+    {% else %}
+      {{ subtotal_price | plus: total_order_discount_amount | money }}
+    {% endif %}
+  </td>
+</tr>
+
+
+        {% if order_discount_count > 0 %}
+          {% if order_discount_count == 1 %}
+            
+<tr class="subtotal-line">
+  <td class="subtotal-line__title">
+    <p>
+      <span>Order discount</span>
+    </p>
+  </td>
+  <td class="subtotal-line__value">
+      <span>-{{ total_order_discount_amount | money }}</span>
+  </td>
+</tr>
+
+          {% endif %}
+          {% if order_discount_count > 1 %}
+            
+<tr class="subtotal-line">
+  <td class="subtotal-line__title">
+    <p>
+      <span>Order discounts</span>
+    </p>
+  </td>
+  <td class="subtotal-line__value">
+      <span>-{{ total_order_discount_amount  | money }}</span>
+  </td>
+</tr>
+
+          {% endif %}
+          {% for discount_application in discount_applications %}
+
+            {% if discount_application.target_selection == 'all' and discount_application.target_type != 'shipping_line' %}
+              <tr class="subtotal-line">
+  <td class="subtotal-line__title">
+    <p>
+      <span class="subtotal-line__discount">
+        <img src="{{ 'notifications/discounttag.png' | shopify_asset_url }}" width="18" height="18" class="discount-tag-icon" />
+        <span class="subtotal-line__discount-title">
+            {{ discount_application.title }} (-{{ discount_application.total_allocated_amount | money }})
+        </span>
+      </span>
+    </p>
+  </td>
+</tr>
+
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+
+        {% unless retail_delivery_only %}
+          {% if delivery_method == 'pick-up' %}
+            
+<tr class="subtotal-line">
+  <td class="subtotal-line__title">
+    <p>
+      {% if titleBold %}
+        <span><strong>Pickup</strong></span>
+      {% else %}
+        <span>Pickup</span>
+      {% endif %}
+    </p>
+  </td>
+  <td class="subtotal-line__value">
+    {% if valueBold %}
+      <strong>{{ shipping_price | money }}</strong>
+    {% else %}
+      {{ shipping_price | money }}
+    {% endif %}
+  </td>
+</tr>
+
+          {% else %}
+            {% if has_shipping_discount %}
+              {% if free_shipping %}
+                
+<tr class="subtotal-line">
+  <td class="subtotal-line__title">
+    <p>
+      {% if titleBold %}
+        <span><strong>Shipping</strong></span>
+      {% else %}
+        <span>Shipping</span>
+      {% endif %}
+        <span class="">
+          <span class="subtotal-line__discount-title">{% if shipping_method.title.size > 0 %}({{ shipping_method.title }}){% endif %}</span>
+        </span>
+    </p>
+  </td>
+  <td class="subtotal-line__value">
+      <del>{% if shipping_price != 0 %}{{ shipping_price | money}}{% endif %}</del>
+    {% if valueBold %}
+      <strong>Free</strong>
+    {% else %}
+      Free
+    {% endif %}
+  </td>
+</tr>
+
+              {% else %}
+                  
+<tr class="subtotal-line">
+  <td class="subtotal-line__title">
+    <p>
+      {% if titleBold %}
+        <span><strong>Shipping</strong></span>
+      {% else %}
+        <span>Shipping</span>
+      {% endif %}
+        <span class="">
+          <span class="subtotal-line__discount-title">{% if shipping_method.title.size > 0 %}({{ shipping_method.title }}){% endif %}</span>
+        </span>
+    </p>
+  </td>
+  <td class="subtotal-line__value">
+      <del>{{ shipping_price | money }}</del>
+    {% if valueBold %}
+      <strong>{{ discounted_shipping_price | money }}</strong>
+    {% else %}
+      {{ discounted_shipping_price | money }}
+    {% endif %}
+  </td>
+</tr>
+
+              {% endif %}
+                <tr class="subtotal-line">
+  <td class="subtotal-line__title">
+    <p>
+      <span class="subtotal-line__discount">
+        <img src="{{ 'notifications/discounttag.png' | shopify_asset_url }}" width="18" height="18" class="discount-tag-icon" />
+        <span class="subtotal-line__discount-title">
+            {{ shipping_discount_title }} 
+            {% if discount_value_price != 0 %}
+              (-{{ discount_value_price | money }})
+            {% endif %}
+        </span>
+      </span>
+    </p>
+  </td>
+</tr>
+
+            {% else %}
+              
+<tr class="subtotal-line">
+  <td class="subtotal-line__title">
+    <p>
+      {% if titleBold %}
+        <span><strong>Shipping</strong></span>
+      {% else %}
+        <span>Shipping</span>
+      {% endif %}
+        <span class="">
+          <span class="subtotal-line__discount-title">{% if shipping_method.title.size > 0 %}({{ shipping_method.title }}){% endif %}</span>
+        </span>
+    </p>
+  </td>
+  <td class="subtotal-line__value">
+    {% if valueBold %}
+      <strong>{{ shipping_price | money }}</strong>
+    {% else %}
+      {{ shipping_price | money }}
+    {% endif %}
+  </td>
+</tr>
+
+            {% endif %}
+          {% endif %}
+        {% endunless %}
+
+        {% if total_duties %}
+          
+<tr class="subtotal-line">
+  <td class="subtotal-line__title">
+    <p>
+      {% if titleBold %}
+        <span><strong>Duties</strong></span>
+      {% else %}
+        <span>Duties</span>
+      {% endif %}
+    </p>
+  </td>
+  <td class="subtotal-line__value">
+    {% if valueBold %}
+      <strong>{{ total_duties | money }}</strong>
+    {% else %}
+      {{ total_duties | money }}
+    {% endif %}
+  </td>
+</tr>
+
+        {% endif %}
+
+        {% for tax_line in tax_lines %}
+          
+<tr class="subtotal-line">
+  <td class="subtotal-line__title">
+    <p>
+      {% if titleBold %}
+        <span><strong>Tax</strong></span>
+      {% else %}
+        <span>Tax</span>
+      {% endif %}
+        <span class="subtotal-line__discount">
+          <span class="subtotal-line__discount-title">{% if tax_line.title.size > 0 %}({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%){% endif %}</span>
+        </span>
+    </p>
+  </td>
+  <td class="subtotal-line__value">
+    {% if valueBold %}
+      <strong>{{ tax_line.price | money }}</strong>
+    {% else %}
+      {{ tax_line.price | money }}
+    {% endif %}
+  </td>
+</tr>
+
+        {% endfor %}
+
+      </table>
+      <table class="row subtotal-table subtotal-table--total">
+        
+<tr class="subtotal-line">
+  <td class="subtotal-line__title">
+    <p>
+      {% if titleBold %}
+        <span><strong>Total</strong></span>
+      {% else %}
+        <span>Total</span>
+      {% endif %}
+    </p>
+  </td>
+  <td class="subtotal-line__value">
+    {% if valueBold %}
+      <strong>{{ total_price | money_with_currency }}</strong>
+    {% else %}
+      {{ total_price | money_with_currency }}
+    {% endif %}
+  </td>
+</tr>
+
+      </table>
+    </td>
+  </tr>
+</table>
+
+
+            </td>
+          </tr>
+        </table>
+      </center>
+    </td>
+  </tr>
+</table>
+            <table class="row content">
+  <tr>
+    <td class="content__cell {% if no_top_border == 'hide_border' %}no_top__border{% endif %}">
+      <center>
+        <table class="container">
+          <tr>
+            <td>
+              
+              <table class="row">
+                <tr>
+                  <td class="customer-info__item customer-info__item--last">
+                    <strong>Payment</strong>
+                    <br>
+                    <p>
+                      {% if payment_methods.size > 0 %}
+                        Card selected at checkout
+                      {% else %}
+                        Payment method chosen later
+                      {% endif %}
+                    </p>
+                    {% if payment_terms.name %}
+                      <p>{{ payment_terms.name }}</p>
+                    {% endif %}
+                  </td>
+                </tr>
+              </table>
+              {% if requires_shipping and shipping_address %}
+                {% if shipping_methods.first %}
+                  <br>
+                  <table class="row">
+                    <tr>
+                      <td class="customer-info__item customer-info__item--last">
+                        <strong>Delivery method</strong>
+                        <br>
+                        {% for shipping_method in shipping_methods %}
+                          <p>{{ shipping_method.title }}</p>
+                        {% endfor %}
+                      </td>
+                    </tr>
+                  </table>
+                {% endif %}
+                <br>
+                <table class="row">
+                  <tr>
+                    <td class="customer-info__item customer-info__item--last">
+                      <strong>Shipping address</strong>
+                      <br>
+                      <p>
+                        {{ shipping_address.name }}<br>
+                        {{ shipping_address.street }}<br>
+                        {{ shipping_address.city }},
+                        {{ shipping_address.province }}
+                        {{ shipping_address.zip }}<br>
+                        {{ shipping_address.country }}<br>
+                        {{ shipping_address.phone }}<br>
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+              {% endif %}
+
+            </td>
+          </tr>
+        </table>
+      </center>
+    </td>
+  </tr>
+</table>
+
+            </td>
+          </tr>
+        </table>
+      </center>
+    </td>
+  </tr>
+</table>
+          <footer class="no-print">
+  <br>
+  <table border="0" cellpadding="0" cellspacing="0" class="mail-footer">
+    <tbody>
+      <tr>
+        <td align="center" valign="bottom">
+          <img src="{{ 'mailer/merchant/shopify_logo.png' | cdn_asset_url }}" alt="Shopify" width="89">
+        </td>
+      </tr>
+      <tr>
+        <td align="center">
+          <p><span class="apple-link">151 O'Connor Street, Ground floor, Ottawa, ON, K2P 2L8</span></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</footer>
+
+<img class="no-print" src="{{ 'notifications/spacer.png' | shopify_asset_url }}" class="spacer" height="1" />
+
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
+
