@@ -627,7 +627,8 @@
       },
       "locations": {
         "contact_phone_number": "Phone Number",
-        "location_picker_label": "Location Name"
+        "location_picker_label": "Location Name",
+        "staff_and_permissions_title": "Staff and Permissions"
       },
       "location_selection": {
         "continue_to_store": "Continue to Store",
