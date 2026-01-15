@@ -634,7 +634,8 @@
         "list_accessibility_label": "Locations List"
       },
       "addresses": {
-        "shipping_address_card_title": "Shipping Address"
+        "shipping_address_card_title": "Shipping Address",
+        "billing_address_card_title": "Billing Address"
       },
       "purchase_order_number": {
         "add_accessibility_label": " ",
@@ -722,6 +723,20 @@
       "add_payment_method_button": "Add Payment Methods",
       "store_credit": {
         "label": "Store Credit"
+      },
+      "payment_details": {
+        "billing_title": "Billing Address"
+      },
+      "edit_payment_method": {
+        "billing_address": "Billing Address"
+      },
+      "update_payment_method": {
+        "billing_address": "Billing Address"
+      },
+      "add_payment_method": {
+        "billing_address": {
+          "title": "Billing Address"
+        }
       }
     },
     "sign_in": {
@@ -952,7 +967,8 @@
           "title": "      ",
           "label": "Internal message only"
         },
-        "billing_address_title": "Billing Address"
+        "billing_address_title": "Billing Address",
+        "fact_billing_address_label": "Billing Address"
       },
       "billing": {
         "billing_address_title": "Bill To",
