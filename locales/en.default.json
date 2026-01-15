@@ -951,7 +951,8 @@
         "purchase_order_number": {
           "title": "      ",
           "label": "Internal message only"
-        }
+        },
+        "billing_address_title": "Billing Address"
       },
       "billing": {
         "billing_address_title": "Bill To",
