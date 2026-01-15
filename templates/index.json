@@ -178,7 +178,7 @@
         "feature_MinG96": {
           "type": "feature",
           "settings": {
-            "heading": "Wishlist",
+            "heading": "Wishlists",
             "description": "View, Track, Return or buy products again.",
             "custom-liquid": "<table class=\"feature-table wishlist-list_data\">\n      <thead>\n        <tr>\n          <th>List Name</th>\n          <th>Products</th>\n        </tr>\n      </thead>\n      <tbody></tbody>\n    </table>",
             "link_label": "View All",
