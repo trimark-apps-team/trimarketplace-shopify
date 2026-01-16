@@ -1259,6 +1259,9 @@ button.quick-add__submit::after, #cart-click::after {
   margin-right: 0;
 }
 
+.cs-cart-items__availability--warning {
+  display: none!important;
+}
 
 @media (max-width: 768px) {
   .feature-table, .feature-table thead, .feature-table tbody, .feature-table th, .feature-table td, .feature-table tr {

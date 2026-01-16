@@ -965,6 +965,10 @@
                         window.hulkappsWishlist.baseURL = '/apps/advanced-wishlist/api';
                         window.hulkappsWishlist.hasAppBlockSupport = '1';
                         </script>
+  
+  {% if request.path contains "apps/advanced-wishlist" %}
+    <script src="{{ 'hulk-custom.js' | asset_url }}"></script>
+  {% endif %}
 </head>
 
   <body
@@ -1052,10 +1056,14 @@
         <li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li>
         <li id="a11y-new-window-message">{{ 'accessibility.link_messages.new_window' | t }}</li>
       </ul>
+      {% assign approvals_required = customer.current_company.metafields.custom.approvals_required | default: false %}
 
+      {% if customer.metafields.custom.is_approver == true or customer.metafields.custom.approval_level != blank %}
+        {% assign approvals_required = false %}
+      {% endif %}
       <script>
       window.draftorder_threshold = {{ customer.current_company.metafields.custom.approver_1_cart_threshold | times: 100 }};
-      window.approval_required = {{ customer.current_company.metafields.custom.approvals_required | default: false }};
+      window.approval_required = {{ approvals_required }};
       window.buyer_role = "{{ customer.metafields.custom.buyer_role.value }}";
       window.shopUrl = '{{ request.origin }}';
       window.routes = {

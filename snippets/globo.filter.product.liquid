@@ -264,7 +264,7 @@
               endif
             
               assign compare_at_price = target.compare_at_price
-              assign price = target.price | default: 1999
+              assign price = target.price | default: 0
               assign price_min = card_product.price_min
               assign price_max = card_product.price_max
               assign available = target.available | default: false
@@ -692,7 +692,7 @@
                           endif
                         
                           assign compare_at_price = target.compare_at_price
-                          assign price = target.price | default: 1999
+                          assign price = target.price | default: 0
                           assign price_min = card_product.price_min
                           assign price_max = card_product.price_max
                           assign available = target.available | default: false
@@ -806,7 +806,7 @@
                           endif
                         
                           assign compare_at_price = target.compare_at_price
-                          assign price = target.price | default: 1999
+                          assign price = target.price | default: 0
                           assign price_min = card_product.price_min
                           assign price_max = card_product.price_max
                           assign available = target.available | default: false

@@ -268,8 +268,13 @@ widgets.panel({
   container: '#sort-by',
   items: [
     {% comment %} { label: 'Price (asc)', value: `${indexName}_price_asc` }, {% endcomment %}
+     { label: 'Alphabetically, A-Z', value: `${indexName}_title_asc` },
+    { label: 'Alphabetically, Z-A', value: `${indexName}_title_desc` },
     { label: 'Relevance', value: `${indexName}` },
+    { label: 'Date,  old to new', value: `${indexName}_published_at_asc` },
+    { label: 'Date, new to old', value: `${indexName}_published_at_desc` },
     {% comment %} { label: 'Price (desc)', value: `${indexName}_price_desc` }, {% endcomment %}
+    
   ],
 }),
 
@@ -295,7 +300,7 @@ hits({
               </div>
               <div class="ais-HitContentBody">
                 <div class="ais-HitVendor">
-                  ${components.Highlight({ hit, attribute: 'vendor' })}
+                  ${components.Highlight({ hit, attribute: 'meta.custom.6_brand' })}
                 </div>
                 <div class="ais-HitTitle">
                   ${components.Highlight({ hit, attribute: 'title' })}
@@ -348,17 +353,27 @@ hits({
     }
 
 
+    const MOBILEBREAKPOINT = 900;
     document.addEventListener('click', (e) => {
-        const header = e.target.closest('.ais-Panel-header');
-        if (!header) return;
+      const header = e.target.closest('.ais-Panel-header');
+      if (!header) return;
 
-        const panel = header.closest('.ais-Panel');
-        if (!panel) return;
+      const panel = header.closest('.ais-Panel');
+      if (!panel) return;
 
+      if (window.innerWidth <= MOBILEBREAKPOINT) {
+        // mobile: open/close
+        panel.classList.toggle('ais-Panel--open');
+      } else {
+        // desktop: collapse/expand
         panel.classList.toggle('ais-Panel--collapsed');
+      }
     });
 
+
     search.on('render', () => {
+
+       //handle facet list rendering
       document.querySelectorAll('.ais-Panel').forEach(panel => {
         const refinementList = panel.querySelector('.ais-RefinementList');
         if (!refinementList) return;

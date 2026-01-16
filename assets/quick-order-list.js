@@ -117,7 +117,7 @@ document.addEventListener("click", async (e) => {
 
         button.disabled = false;
       setTimeout(() => {
-        buttonText.innerText = "Add to cart";
+        buttonText.innerText = "Add to Cart";
       }, 2000);
     }
 

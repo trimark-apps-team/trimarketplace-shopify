@@ -627,14 +627,16 @@
       },
       "locations": {
         "contact_phone_number": "Phone Number",
-        "location_picker_label": "Location Name"
+        "location_picker_label": "Location Name",
+        "staff_and_permissions_title": "Staff and Permissions"
       },
       "location_selection": {
         "continue_to_store": "Continue to Store",
         "list_accessibility_label": "Locations List"
       },
       "addresses": {
-        "shipping_address_card_title": "Shipping Address"
+        "shipping_address_card_title": "Shipping Address",
+        "billing_address_card_title": "Billing Address"
       },
       "purchase_order_number": {
         "add_accessibility_label": " ",
@@ -722,6 +724,20 @@
       "add_payment_method_button": "Add Payment Methods",
       "store_credit": {
         "label": "Store Credit"
+      },
+      "payment_details": {
+        "billing_title": "Billing Address"
+      },
+      "edit_payment_method": {
+        "billing_address": "Billing Address"
+      },
+      "update_payment_method": {
+        "billing_address": "Billing Address"
+      },
+      "add_payment_method": {
+        "billing_address": {
+          "title": "Billing Address"
+        }
       }
     },
     "sign_in": {
@@ -804,7 +820,11 @@
         "breadcrumbs_in_review": "In Review",
         "resend_gift_cards_by_email": "Resend Email",
         "company_location_section_title": "Company and Location",
-        "purchase_order_number_title": "Internal message only {{ purchase_order_number }}"
+        "purchase_order_number_title": "Internal message only {{ purchase_order_number }}",
+        "missing_shipping_address_banner": {
+          "contact_us": "Contact us"
+        },
+        "contact_us_html": "Need help? <a href=\"https://share.hsforms.com/1QKr9rberR1WgN9ToxQNZcw5ltn6\" target=\"_blank\">Contact Us</a>"
       },
       "contact": {
         "delivery_option_title": "Delivery Method",
@@ -947,7 +967,9 @@
         "purchase_order_number": {
           "title": "      ",
           "label": "Internal message only"
-        }
+        },
+        "billing_address_title": "Billing Address",
+        "fact_billing_address_label": "Billing Address"
       },
       "billing": {
         "billing_address_title": "Bill To",
