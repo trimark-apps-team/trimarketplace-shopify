@@ -191,13 +191,24 @@
                       </th>
                     </tr>
                   </thead>
-                  <tbody id="quick-order-products">
+                  <tbody id="quick-order-products" >
               {%- for product in collection.products -%}
                {% assign variant = product.selected_or_first_available_variant %}
     {% assign ordered_date = product.metafields.custom.purchased_date.value %}
 
-    <tr class="variant-item" data-variant-id="{{ variant.id }}">
+    <tr class="variant-item" data-variant-id="{{ variant.id }}" 
+  data-item-number="{{ product.metafields.custom['1_erp_id_marlinn_ipics'] }}" 
+  data-uom="{{ product.metafields.custom['3_uom'] }}"
+  data-price-target=".quick-order-item-price"
+  data-add-to-cart=".quick-order-atc">
 <td class="variant-item__inner">
+              {% if product.metafields.custom['5_non_stock'] == true %}
+                  {% assign eta_time = settings.non_stock_text %}
+                {% else %}
+                  {% assign eta_time = settings.in_stock_text  %}
+                {% endif %}
+  <input type="hidden" name="properties[Expected Shipping]" class="eta-time" value="{{ eta_time }}">
+  <input type="hidden" name="properties[_Tier Price]" class="tier-price" value="NA">
   <div class="variant-item__media">
     <div class="variant-item__image-container global-media-settings gradient">
       <img src="{{ product.featured_image | image_url: width: 86 }}" alt="{{ product.title | escape }}" width="43" height="43" loading="lazy" fetchpriority="low" decoding="async" class="variant-item__image">
@@ -229,7 +240,10 @@
               Ordered at: {{ ordered_date | date: "%m/%d/%Y" }}
             {% endif %}</span>
   </div>
-  <span class="price">{{ variant.price | money }}</span>
+  <span class="price quick-order-item-price"></span>
+  <div class="loading__spinner">
+            <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66"><circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle></svg>
+          </div>
 </td>
 <td class="variant-item__totals right large-up-hide">
   <div class="loading__spinner hidden">
@@ -280,13 +294,15 @@
     </div>
   </button>
 </td>
-<td class="variant-item__price small-hide medium-hide"><span class="price">{{ variant.price | money }}</span></td>
+<td class="variant-item__price small-hide medium-hide"><div class="loading__spinner">
+            <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66"><circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle></svg>
+          </div><span class="price quick-order-item-price"></span></td>
 <td class="variant-item__totals right small-hide medium-hide">
   <div class="loading__spinner hidden">
     <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66"><circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle></svg>
   </div>
   <span class="price">{{ cart | line_items_for: product | sum: 'original_line_price' | money }}</span>
-</td>
+  </td>
     </tr>
               {%- endfor -%}
             </tbody>
@@ -377,6 +393,7 @@ document.addEventListener('DOMContentLoaded', async function () {
           if (newContent) {
             tBody.innerHTML = newContent.innerHTML;
             showLoader(false);
+            window.initJDEPricing();
           }
         }
       };
@@ -403,6 +420,29 @@ document.addEventListener('DOMContentLoaded', async function () {
   /* ----------------------------------------
      RENDER
   ---------------------------------------- */
+
+
+  function refreshCart() {
+      const cartDrawer = document.getElementById('CartDrawer');
+
+      if (cartDrawer) {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', window.location.href);
+        xhr.onload = () => {
+          if (xhr.status === 200) {
+            const parser = new DOMParser();
+            const responseDoc = parser.parseFromString(xhr.responseText, 'text/html');
+            const newContent = responseDoc.querySelector('#CartDrawer');
+            if (newContent) {
+              cartDrawer.innerHTML = newContent.innerHTML;
+            }
+          }
+        };
+        xhr.send();
+      }
+    }
+
+
   function createProductRow(product) {
     const variant = product.variant;
     if (!variant) return null;
@@ -411,12 +451,23 @@ document.addEventListener('DOMContentLoaded', async function () {
       ? new Date(product.purchasedDate).toLocaleDateString('en-US')
       : '';
 
-    const tr = document.createElement('tr');
-    tr.className = 'variant-item';
-    tr.dataset.variantId = variant.idNumeric;
+  const uom = product.uom ?? '';
+  const itemNumber = product.itemNumber ?? '';
+  const etaTime = product.nonStock ? '2-3 Weeks' : '2-3 Days';
+
+  const tr = document.createElement('tr');
+  tr.className = 'variant-item';
+
+  tr.dataset.variantId = variant.idNumeric;
+  tr.dataset.uom = uom;
+  tr.dataset.itemNumber = itemNumber;
+  tr.dataset.priceTarget = '.quick-order-item-price';
+  tr.dataset.addToCart = '.quick-order-atc';
 
     tr.innerHTML = `
 <td class="variant-item__inner">
+  <input type="hidden" name="properties[Expected Shipping]" class="eta-time" value="${etaTime}">
+  <input type="hidden" name="properties[_Tier Price]" class="tier-price" value="NA">
   <div class="variant-item__media">
     <div class="variant-item__image-container global-media-settings gradient">
       <img src="${product.featuredImageUrl}" alt="${product.title}" width="43" height="43" loading="lazy" fetchpriority="low" decoding="async" class="variant-item__image">
@@ -432,7 +483,11 @@ document.addEventListener('DOMContentLoaded', async function () {
     <span class="variant-item__name h4 break"><a class="full-unstyled-link" href="/products/${product.handle}">${product.title}</a></span>
     <span class="variant-item__sku break">${variant.sku ? `${variant.sku} ${orderedDate ? ` | Ordered at: ${orderedDate}` : ""}` : `${orderedDate ? `Ordered at: ${orderedDate}` : ""}`}</span>
   </div>
-  <span class="price">$${variant.price}</span>
+  <span class="price quick-order-item-price">
+  <div class="loading__spinner">
+            <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66"><circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle></svg>
+          </div>
+  </span>
 </td>
 <td class="variant-item__totals right large-up-hide">
   <div class="loading__spinner hidden">
@@ -483,7 +538,9 @@ document.addEventListener('DOMContentLoaded', async function () {
     </div>
   </button>
 </td>
-<td class="variant-item__price small-hide medium-hide"><span class="price">$${variant.price}</span></td>
+<td class="variant-item__price small-hide medium-hide"><div class="loading__spinner">
+            <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66"><circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle></svg>
+          </div><span class="price quick-order-item-price"></span></td>
 <td class="variant-item__totals right small-hide medium-hide">
   <div class="loading__spinner hidden">
     <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66"><circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle></svg>
@@ -611,6 +668,7 @@ document.addEventListener('DOMContentLoaded', async function () {
      return;
     }
      await render(data);
+    window.initJDEPricing();
   }
 
   const debounce = (fn, d = 300) => {

@@ -64,7 +64,12 @@
     {% endif %}    
   >
 
-    <div class="card-wrapper product-card-wrapper underline-links-hover">
+    <div class="card-wrapper product-card-wrapper underline-links-hover"
+    data-item-number="{{ card_product.metafields.custom['1_erp_id_marlinn_ipics'] }}" 
+    data-uom="{{ card_product.metafields.custom['3_uom'] }}"
+    data-price-target=".card-price"
+    data-add-to-cart=".add-to-cart-plp"
+    >
    <a href="javascript:void(0)" rel="nofollow" class="icon-wishlist-heart-empty wishlist-btn grid-wishlist-btn heart-wishlist-animation" data-wishList data-gridHulkList data-added="false" data-proID="{{ card_product.id }}" data-varID="{{ card_product.selected_or_first_available_variant.id }}" style="display:none;">
     <div style="display: initial;" class="wishlist_btn_icon">
         {% if shop.metafields.hulkapps_wishlist.hulkapps_wishlist_buttonstyle.button_icon_type == 'custom_icon' %}
@@ -313,9 +318,12 @@
                     </span>
                   {%- else -%}
                     <span class="visually-hidden visually-hidden--inline">{% endraw %}{{ themeTranslation.products.product.price.regular_price }}{% raw %}</span>
-                    <span class="price-item price-item--regular">
-                      {{ money_price }}
+                    <span class="price-item price-item--regular card-price">
+          
                     </span>
+                     <div class="loading__spinner">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66"><circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle></svg>
+                    </div>
                   {%- endif -%}
                 </div>
                 <div class="price__sale">
@@ -446,6 +454,7 @@
                   <input type="hidden" name="form_type" value="product">
                   <input type="hidden" name="utf8" value="✓">
                   <input type="hidden" name="properties[Expected Shipping]" value="{{ eta_time }}">
+                  <input type="hidden" name="properties[_Tier Price]" class="tier-price" value="NA">
                   <input
                     type="hidden"
                     name="id"
@@ -459,14 +468,12 @@
                     id="{{ product_form_id }}-submit"
                     type="submit"
                     name="add"
-                    class="quick-add__submit button button--full-width button--secondary{% if horizontal_quick_add %} card--horizontal__quick-add{% endif %}"
+                    class="quick-add__submit button button--full-width button--secondary add-to-cart-plp{% if horizontal_quick_add %} card--horizontal__quick-add{% endif %}"
                     aria-haspopup="dialog"
                     aria-labelledby="{{ product_form_id }}-submit title-{{ section_id }}-{{ card_product.id }}"
                     aria-live="polite"
                     data-sold-out-message="true"
-                    {% if card_product.selected_or_first_available_variant.available == false %}
-                      disabled
-                    {% endif %}
+                    disabled
                   >
                     <span>
                       {%- if card_product.selected_or_first_available_variant.available -%}
@@ -739,9 +746,12 @@
                                 </span>
                               {%- else -%}
                                 <span class="visually-hidden visually-hidden--inline">{% endraw %}{{ themeTranslation.products.product.price.regular_price }}{% raw %}</span>
-                                <span class="price-item price-item--regular">
-                                  {{ money_price }}
+                                <span class="price-item price-item--regular card-price">
+                           
                                 </span>
+                                 <div class="loading__spinner">
+                                  <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66"><circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle></svg>
+                                </div>
                               {%- endif -%}
                             </div>
                             <div class="price__sale">
@@ -850,8 +860,8 @@
                                 </span>
                               {%- else -%}
                                 <span class="visually-hidden visually-hidden--inline">{% endraw %}{{ themeTranslation.products.product.price.regular_price }}{% raw %}</span>
-                                <span class="price-item price-item--regular">
-                                  {{ money_price }}
+                                <span class="price-item price-item--regular card-price">
+                            
                                 </span>
                               {%- endif -%}
                             </div>

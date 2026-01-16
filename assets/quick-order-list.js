@@ -56,6 +56,9 @@ document.addEventListener("click", async (e) => {
   const qtyInput = row.querySelector(".quantity__input");
   const quantity = qtyInput ? parseInt(qtyInput.value) || 1 : 1;
 
+  const etaTime = row.querySelector(".eta-time").value;
+  const tierPrice = row.querySelector(".tier-price").value;
+
   button.classList.add("load-data");
 
   button.querySelector(".loading__spinner").classList.remove("hidden");
@@ -73,7 +76,11 @@ document.addEventListener("click", async (e) => {
       },
       body: JSON.stringify({
         id: variantId,
-        quantity: quantity
+        quantity: quantity,
+        properties: {
+          '_Tier Price': tierPrice,
+          'Expected Shipping': etaTime
+        }
       })
     });
 

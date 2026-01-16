@@ -326,25 +326,7 @@
                 </div>
               
            {%- when 'tier-pricing' -%}
-  {% if customer and customer.metafields.custom.buyer_role.value contains 'Sales Rep' %}
-    
-    {% assign show_table = false %}
-    {% assign tiers = "a,b,c,d,e,f" | split: "," %}
-
-    {%- comment -%}
-      CHECK IF ANY TIER HAS PRICE DATA
-    {%- endcomment -%}
-    {% for tier in tiers %}
-      {% assign price_key = "7_sip_price_tier_" | append: tier %}
-      {% assign price_mf = product.metafields.custom[price_key] %}
-      {% if price_mf != blank %}
-        {% assign show_table = true %}
-        {% break %}
-      {% endif %}
-    {% endfor %}
-
-    {% if show_table %}
-    
+      {% if customer and customer.metafields.custom.buyer_role.value contains 'Sales Rep' %}
       <div class="tier-price-row">
         {% if product.metafields.custom["3_price_cost"] != blank and product.metafields.custom["3_price_cost"] != 'N/A' %}
         <div class="tier-price-item">
@@ -391,7 +373,7 @@
 
       <button 
         data-productprice="{{ product.selected_or_first_available_variant.price | money }}"
-        class="button choose-tier"
+        class="button choose-tier hidden"
         onclick="document.getElementById('popup').classList.remove('hidden'); document.querySelector('.order-modal_overlay').style.visibility='visible';"
         style="color:{{ block.settings.tire_price_button_text_color }};
                font-size:{{ block.settings.tire_price_button_text_font_size }}px;
@@ -414,17 +396,12 @@
               </tr>
             </thead>
 
-            <tbody>
+             <tbody>
               {% assign tiers = "a,b,c,d,e,f" | split: "," %}
 
               {% for tier in tiers %}
                 
                 {% assign tier_label = tier | upcase %}
-                {% assign price_key = "7_sip_price_tier_" | append: tier %}
-                {% assign comm_key = "7_sip_comm_tier_" | append: tier %}
-
-                {% assign price_val = product.metafields.custom[price_key] %}
-                {% assign comm_val = product.metafields.custom[comm_key] %}
 
                 {%- comment -%} TIER COLORS {%- endcomment -%}
                 {% if forloop.index == 1 %}
@@ -447,12 +424,12 @@
                   {% assign color = block.settings.tire_f_text_color %}
                 {% endif %}
 
-                {% if price_val != blank %}
+
                 <tr class="tier-row"
                     data-color="{{ bg }}"
                     data-tier="{{ tier_label }}"
-                    data-price="{{ price_val | times: 100 | money }}"
-                    data-commission="{{ comm_val | times: 100 | money }}"
+                    data-price=""
+                    data-commission=""
                     onclick="selectTier(this)">
 
                   <td>
@@ -461,10 +438,10 @@
                     </div>
                   </td>
 
-                  <td>{{ price_val | times: 100 | money }}</td>
-                  <td>{{ comm_val | times: 100 | money }}</td>
+                  <td></td>
+                  <td></td>
                 </tr>
-                {% endif %}
+
               {% endfor %}
             </tbody>
           </table>
@@ -483,7 +460,6 @@
         </div>
       </div>
 
-    {% endif %}
   {% endif %}
 
               {%- when 'sku' -%}
@@ -2916,6 +2892,99 @@
 }
 {% endschema %}
 <script>
+const SYMBOL = document.body.dataset.symbol || "$";
+
+function updateText(el, text) {
+  if (el) el.textContent = text;
+}
+
+function getNumeric(val) {
+  return parseFloat(String(val).replace(/[^0-9.-]+/g, ""));
+}
+
+function enablePriceEdit() {
+  const textEl  = document.getElementById('editable-price-text');
+  const inputEl = document.getElementById('editable-price-input');
+  const errorEl = document.getElementById('price-error-msg');
+
+  if (!textEl || !inputEl) return;
+
+  const floor = getNumeric(inputEl.dataset.floor);
+  let lastValidPrice = getNumeric(inputEl.dataset.original);
+
+  textEl.style.display = "none";
+  inputEl.style.display = "inline-block";
+  inputEl.focus();
+
+  inputEl.oninput = () => {
+    const entered = getNumeric(inputEl.value);
+
+    // ❌ INVALID → block everything
+    if (!Number.isFinite(entered) || entered < floor) {
+      errorEl.style.display = "inline";
+      return;
+    }
+
+    // ✅ VALID → commit
+    errorEl.style.display = "none";
+    lastValidPrice = entered;
+
+    // update visible price
+    textEl.textContent = SYMBOL + entered.toFixed(2);
+    document.getElementById('selected-tier-price').value =
+      SYMBOL + entered.toFixed(2);
+
+    // tier resolution
+    const tiers = [...document.querySelectorAll('.tier-row')]
+      .map(row => ({
+        tier: row.dataset.tier,
+        price: getNumeric(row.dataset.price),
+        commission: row.dataset.commission,
+        color: row.dataset.color,
+        row
+      }))
+      .filter(t => Number.isFinite(t.price))
+      .sort((a, b) => a.price - b.price);
+
+    let selectedTier = tiers[0];
+    for (const t of tiers) {
+      if (entered >= t.price) selectedTier = t;
+      else break;
+    }
+
+    document.querySelectorAll('.tier-row')
+      .forEach(r => r.classList.remove('selected'));
+
+    selectedTier.row.classList.add('selected');
+
+    document.getElementById('selected-tier-name').value = selectedTier.tier;
+    document.getElementById('selected-tier-commission').value = selectedTier.commission;
+
+    const displayEl = document.getElementById('selected-display');
+    displayEl.textContent = selectedTier.tier;
+    displayEl.style.backgroundColor = selectedTier.color;
+  };
+
+  inputEl.onblur = () => {
+    const entered = getNumeric(inputEl.value);
+
+    // ❌ INVALID → full revert
+    if (!Number.isFinite(entered) || entered < floor) {
+      inputEl.value = lastValidPrice;
+      textEl.textContent = SYMBOL + lastValidPrice.toFixed(2);
+      document.getElementById('selected-tier-price').value =
+        SYMBOL + lastValidPrice.toFixed(2);
+    }
+
+    inputEl.dataset.original = lastValidPrice;
+    errorEl.style.display = "none";
+
+    inputEl.style.display = "none";
+    textEl.style.display = "inline";
+  };
+}
+
+
 function selectTier(row) {
   document.querySelectorAll('.tier-row').forEach(r => r.classList.remove('selected'));
   row.classList.add('selected');
@@ -2933,138 +3002,211 @@ function selectTier(row) {
   displayEl.textContent = tier;
   displayEl.style.backgroundColor = row.dataset.color;
 
-  const wrapper = document.getElementById('inline-price-edit-wrapper');
   const textEl = document.getElementById('editable-price-text');
   const inputEl = document.getElementById('editable-price-input');
   
-  wrapper.style.display = "flex";
   textEl.textContent = price;
   inputEl.value = rawPrice;
   inputEl.dataset.original = rawPrice;
   document.getElementById('price-error-msg').style.display = 'none';
 
   document.getElementById('popup').classList.add('hidden');
-  document.querySelector("product-info .price-item--regular")?.classList.add("hidden");
   document.querySelector('.order-modal_overlay').style.visibility = 'hidden';
 }
 
-function enablePriceEdit() {
-  const textEl = document.getElementById('editable-price-text');
-  const inputEl = document.getElementById('editable-price-input');
-  const errorEl = document.getElementById('price-error-msg');
+function updateTierTable(priceObj = {}) {
+  if (!priceObj || typeof priceObj !== "object") return;
 
-  textEl.style.display = "none";
-  inputEl.style.display = "inline-block";
-  inputEl.focus();
+  const tiers = ["A", "B", "C", "D", "E", "F"];
 
-  inputEl.oninput = null;
-  inputEl.onblur = null;
+  tiers.forEach(tier => {
+    const priceKey = `mnMarketBracketPrice_${tier}`;
+    const commKey  = `mnAmountCommission_${tier}`;
 
-  inputEl.oninput = function () {
-    let enteredPrice = parseFloat(inputEl.value);
-    const floor = parseFloat(inputEl.dataset.floor);
+    const rawPrice = Number(priceObj[priceKey]);
+    const rawComm  = Number(priceObj[commKey]);
 
-    if (isNaN(enteredPrice) || enteredPrice < floor) {
-      errorEl.style.display = "inline";
-      return;
+    if (!Number.isFinite(rawPrice)) return;
+
+    const displayPrice = SYMBOL + rawPrice.toFixed(2);
+    const displayComm  = SYMBOL + (rawComm || 0).toFixed(2);
+
+    const row = document.querySelector(`tr.tier-row[data-tier="${tier}"]`);
+    if (!row) return;
+
+    row.dataset.price = displayPrice;
+    row.dataset.commission = displayComm;
+
+    const tds = row.querySelectorAll("td");
+    if (tds.length >= 3) {
+      tds[1].textContent = displayPrice;
+      tds[2].textContent = displayComm;
     }
-    errorEl.style.display = "none";
-
-    const formattedPrice = document.body.dataset.symbol + enteredPrice;
-    textEl.textContent = formattedPrice;
-    document.getElementById('selected-tier-price').value = formattedPrice;
-
-    const tiers = [...document.querySelectorAll('.tier-row')].map(row => ({
-      tier: row.dataset.tier,
-      price: parseFloat(row.dataset.price.replace(/[^0-9.-]+/g, "")),
-      commission: row.dataset.commission,
-      color: row.dataset.color,
-      row
-    }));
-
-    tiers.sort((a, b) => a.price - b.price);
-
-    let selectedTier = tiers[0];
-    for (let t of tiers) {
-      if (enteredPrice >= t.price) {
-        selectedTier = t;
-      } else {
-        break;
-      }
-    }
-
-
-    document.querySelectorAll('.tier-row').forEach(r => r.classList.remove('selected'));
-    selectedTier.row.classList.add('selected');
-
-    document.getElementById('selected-tier-name').value = selectedTier.tier;
-    document.getElementById('selected-tier-commission').value = selectedTier.commission;
-
-    const displayEl = document.getElementById('selected-display');
-    displayEl.textContent = selectedTier.tier;
-    displayEl.style.backgroundColor = selectedTier.color;
-  };
-
-  inputEl.onblur = function () {
-    let enteredPrice = parseFloat(inputEl.value);
-    const floor = parseFloat(inputEl.dataset.floor);
-
-    if (isNaN(enteredPrice) || enteredPrice < floor) {
-      inputEl.value = inputEl.dataset.original;
-      textEl.textContent =
-        document.body.dataset.symbol + parseFloat(inputEl.dataset.original);
-    }
-
-    inputEl.style.display = "none";
-    textEl.style.display = "inline";
-  };
+  });
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-  const enteredPrice = document.querySelector('.choose-tier').dataset.productprice.replace(/[^0-9.-]+/g, "");
-  const tiers = [...document.querySelectorAll('.tier-row')].map(row => ({
-      tier: row.dataset.tier,
-      price: parseFloat(row.dataset.price.replace(/[^0-9.-]+/g, "")),
-      commission: row.dataset.commission,
-      color: row.dataset.color,
-      row
-    }));
+function initTierSelectionFromApi() {
+  if (!String(window.buyer_role).includes("Sales Rep")) return;
 
-    tiers.sort((a, b) => a.price - b.price);
+  const wrapper = document.querySelector(".choose-tier");
+  if (!wrapper?.dataset.productprice) return;
 
-    let selectedTier = tiers[0];
-    for (let t of tiers) {
-      if (enteredPrice >= t.price) {
-        selectedTier = t;
+  const enteredPrice = parseFloat(
+    wrapper.dataset.productprice.replace(/[^0-9.-]+/g, "")
+  );
+  if (!Number.isFinite(enteredPrice)) return;
+
+  const tiers = [...document.querySelectorAll(".tier-row")].map(row => ({
+    tier: row.dataset.tier,
+    price: parseFloat(row.dataset.price.replace(/[^0-9.-]+/g, "")),
+    commission: row.dataset.commission,
+    color: row.dataset.color,
+    row
+  })).filter(t => Number.isFinite(t.price));
+
+  if (!tiers.length) return;
+
+  tiers.sort((a, b) => a.price - b.price);
+
+  let selectedTier = tiers[0];
+  for (let t of tiers) {
+    if (enteredPrice >= t.price) selectedTier = t;
+    else break;
+  }
+
+  document.getElementById("selected-tier-name").value = selectedTier.tier;
+  document.getElementById("selected-tier-commission").value = selectedTier.commission;
+  document.getElementById("selected-tier-price").value = SYMBOL + enteredPrice;
+
+  const displayEl = document.getElementById("selected-display");
+  if (displayEl) {
+    displayEl.textContent = selectedTier.tier;
+    displayEl.style.backgroundColor = selectedTier.color;
+  }
+
+  const textEl  = document.getElementById("editable-price-text");
+  const inputEl = document.getElementById("editable-price-input");
+
+  updateText(textEl, SYMBOL + enteredPrice);
+  if (inputEl) {
+    inputEl.value = enteredPrice;
+    inputEl.dataset.original = enteredPrice;
+  }
+
+  document.getElementById("price-error-msg").style.display = "none";
+}
+
+async function fetchPriceMatrix() {
+  const url = "/apps/api/jdeprice";
+
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        GetPriceMatrix: [{
+          Business_Unit: "321010",
+          Item_Number: "{{ product.metafields.custom['1_erp_id_marlinn_ipics'] }}",
+          Unit_Of_Measure: window.getJDEUOM("{{ product.metafields.custom['3_uom'] }}"),
+          Bill_To: "{{ customer.current_company.metafields.custom['1_erp_id_billto'] }}",
+          Ship_To_Number: "0",
+          Customer_Group: "",
+          TAMU_Stratification: ""
+        }]
+      })
+    });
+
+    if (!res.ok) throw new Error("Network error");
+
+    const data = await res.json();
+
+    const repeating =
+      data?.MRS_ORCH_58_PriceMatrixConnector_Repeating ||
+      data?.Response?.response?.MRS_ORCH_58_PriceMatrixConnector_Repeating ||
+      data?.Response?.MRS_ORCH_58_PriceMatrixConnector_Repeating;
+
+    if (!Array.isArray(repeating) || !repeating.length) {
+      throw new Error("No price matrix data");
+    }
+
+    const priceObj = repeating[0].MRS_ORCH_58_PriceMatrixConnector;
+
+    const useContract =
+      priceObj.cPriceEditableFlag?.toUpperCase() === "Y";
+
+    const rawPrice = Number(
+      useContract ? priceObj.mnEcommerceSalesPrice : priceObj.mnEcommerceSalesPrice
+    );
+
+    const formattedPrice = SYMBOL + rawPrice.toFixed(2);
+
+    if (String(window.buyer_role).includes("Sales Rep")) {
+      if (!useContract) {
+        updateTierTable(priceObj);
+
+        document.querySelector(".choose-tier")?.classList.remove("hidden");
+        updateText(document.getElementById("floor-price"), SYMBOL + priceObj.mnFloorPrice);
+
+        const input = document.getElementById("editable-price-input");
+        if (input) input.dataset.floor = priceObj.mnFloorPrice;
+
+        updateText(
+          document.getElementById("editable-price-text"),
+          `${formattedPrice} ${priceObj.Unit_Of_Measure}`
+        );
+
+        updateText(
+          document.getElementById("price-type"),
+          `SIP price`
+        );
+
+        document.getElementById("inline-price-edit-wrapper")?.style.setProperty("display", "flex");
       } else {
-        break;
+        const el = document.querySelector("product-info .price__regular .price-item--regular");
+        if (el) {
+          el.textContent = `${formattedPrice} ${priceObj.Unit_Of_Measure}`;
+          el.classList.remove("hidden");
+        }
+        updateText(
+          document.getElementById("price-type-regular"),
+          `Contract price`
+        );
+      }
+    } else {
+      const el = document.querySelector("product-info .price__regular .price-item--regular");
+      if (el) {
+        el.classList.remove("hidden");
+        el.textContent = `${formattedPrice} ${priceObj.Unit_Of_Measure}`;
       }
     }
 
-    document.getElementById('selected-tier-name').value = selectedTier.tier;
-    document.getElementById('selected-tier-commission').value = selectedTier.commission;
-    document.getElementById('selected-tier-price').value = document.body.dataset.symbol + enteredPrice;
+    document.getElementById("selected-tier-price").value = formattedPrice;
 
-    const rawPrice = parseFloat(enteredPrice);
+    const chooseTier = document.querySelector(".choose-tier");
+    if (chooseTier) chooseTier.dataset.productprice = formattedPrice;
 
-    const displayEl = document.getElementById('selected-display');
-    displayEl.textContent = selectedTier.tier;
-    displayEl.style.backgroundColor = selectedTier.color;
+    updateText(
+      document.getElementById("quantity-available"),
+      priceObj.mnQuantityAvailable !== undefined
+        ? "Inventory: " + priceObj.mnQuantityAvailable
+        : ""
+    );
 
-    const wrapper = document.getElementById('inline-price-edit-wrapper');
-    const textEl = document.getElementById('editable-price-text');
-    const inputEl = document.getElementById('editable-price-input');
+    document.querySelector(".add-to-cart-pdp")?.removeAttribute("disabled");
 
-    wrapper.style.display = "flex";
-    textEl.textContent = document.body.dataset.symbol + rawPrice;
-    inputEl.value = rawPrice;
-    inputEl.dataset.original = rawPrice;
-    document.getElementById('price-error-msg').style.display = 'none';
+    document.querySelector(".price__container .loading__spinner").classList.add("hidden");
 
-    document.querySelector("product-info .price-item--regular")?.classList.add("hidden");
+    initTierSelectionFromApi();
 
+  } catch (err) {
+    console.error("PriceMatrix Error:", err);
+  }
+}
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  fetchPriceMatrix();
 });
-
 </script>
-  
-  

@@ -6,6 +6,20 @@
 {{ 'quantity-popover.css' | asset_url | stylesheet_tag }}
 {{ 'empty-cart-modal.css' | asset_url | stylesheet_tag }}
 
+{% assign has_zero_price_item = false %}
+
+{% for item in cart.items %}
+  {% if item.final_price == 0 %}
+    {% assign has_zero_price_item = true %}
+  {% endif %}
+{% endfor %}
+
+{% if has_zero_price_item %}
+  <script>
+    window.location.href = '/cart/clear';
+  </script>
+{% endif %}
+
 {%- style -%}
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
@@ -100,41 +114,6 @@
                       <tr 
   id="CartItem-{{ item.index | plus: 1 }}" 
   class="cart-item" 
-
-  data-floor="{{ item.product.metafields.custom["7_sip_price_tier_f"] }}"
-
-  data-tiers='[
-    {
-      "tier":"F",
-      "price":{{ item.product.metafields.custom["7_sip_price_tier_f"] | default: 0 }},
-      "commission":{{ item.product.metafields.custom["7_sip_comm_tier_f"] | default: 0 }}
-    },
-    {
-      "tier":"E",
-      "price":{{ item.product.metafields.custom["7_sip_price_tier_e"] | default: 0 }},
-      "commission":{{ item.product.metafields.custom["7_sip_comm_tier_e"] | default: 0 }}
-    },
-    {
-      "tier":"D",
-      "price":{{ item.product.metafields.custom["7_sip_price_tier_d"] | default: 0 }},
-      "commission":{{ item.product.metafields.custom["7_sip_comm_tier_d"] | default: 0 }}
-    },
-    {
-      "tier":"C",
-      "price":{{ item.product.metafields.custom["7_sip_price_tier_c"] | default: 0 }},
-      "commission":{{ item.product.metafields.custom["7_sip_comm_tier_c"] | default: 0 }}
-    },
-    {
-      "tier":"B",
-      "price":{{ item.product.metafields.custom["7_sip_price_tier_b"] | default: 0 }},
-      "commission":{{ item.product.metafields.custom["7_sip_comm_tier_b"] | default: 0 }}
-    },
-    {
-      "tier":"A",
-      "price":{{ item.product.metafields.custom["7_sip_price_tier_a"] | default: 0 }},
-      "commission":{{ item.product.metafields.custom["7_sip_comm_tier_a"] | default: 0 }}
-    }
-  ]'
 >
 
                       <td class="cart-item__media">
@@ -184,25 +163,14 @@
                             </strong>
                           </div>
                         {%- else -%}
-                          {% if item.properties["_Tier Price"] != blank and item.properties["_Tier Price"] != "NA" and customer.metafields.custom.buyer_role.value contains 'Sales Rep' %}
-                                <div style="display: flex; align-items: center; gap: 6px;position: relative;">
-                            <span class="sip-tier">{{ item.properties["_Tier"] }}</span>
-                            <span class="cart-tier-price-text" data-line="{{ forloop.index0 }}">{{ item.properties["_Tier Price"] }}</span>
-                            <p class="loading-cart" style="display:none;">Updating cart...</p>
-                          </div>
-
-                              {% else %}
-
-                               {% if item.quantity > item.product.selected_or_first_available_variant.inventory_quantity %}
+                           {% if item.quantity > item.product.selected_or_first_available_variant.inventory_quantity %}
                                <div class="product-option">
                                 Backordered
                                </div>
                               {% endif %}
-
                               <div class="product-option">
                                 {{ item.original_price | money }}
                               </div>
-                                {% endif %}
                         {%- endif -%}
 
                         {%- if item.product.has_only_default_variant == false

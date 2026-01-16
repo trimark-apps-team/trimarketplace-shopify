@@ -959,7 +959,7 @@
       window.hulkappsWishlist.baseURL = '/apps/advanced-wishlist/api';
       window.hulkappsWishlist.hasAppBlockSupport = '1';
     </script>
-  <script type="text/javascript">if(typeof window.hulkappsWishlist === 'undefined') {
+<script type="text/javascript">if(typeof window.hulkappsWishlist === 'undefined') {
                             window.hulkappsWishlist = {};
                         }
                         window.hulkappsWishlist.baseURL = '/apps/advanced-wishlist/api';
@@ -974,6 +974,7 @@
   <body
     class=" gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %} template-{{ template.name }}"
     data-symbol="{{ localization.country.currency.symbol }}"
+    data-billto="{{ customer.current_company.metafields.custom['1_erp_id_billto'] }}"
   >
     <div class="main-content">
       {% unless customer %}
