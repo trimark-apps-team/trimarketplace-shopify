@@ -1606,8 +1606,8 @@ window.initJDEPricing = function initJDEPricing() {
 
       const rawPrice =
         priceObj.cPriceEditableFlag === "Y"
-          ? priceObj.mnContractPrice
-          : priceObj.mnBaseSalePrice;
+          ? priceObj.mnEcommerceSalesPrice
+          : priceObj.mnEcommerceSalesPrice;
 
       if (!Number.isFinite(rawPrice)) return;
 

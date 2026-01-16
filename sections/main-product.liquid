@@ -3137,7 +3137,7 @@ async function fetchPriceMatrix() {
       priceObj.cPriceEditableFlag?.toUpperCase() === "Y";
 
     const rawPrice = Number(
-      useContract ? priceObj.mnContractPrice : priceObj.mnBaseSalePrice
+      useContract ? priceObj.mnEcommerceSalesPrice : priceObj.mnEcommerceSalesPrice
     );
 
     const formattedPrice = SYMBOL + rawPrice.toFixed(2);
