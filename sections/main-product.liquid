@@ -2898,6 +2898,15 @@ function updateText(el, text) {
   if (el) el.textContent = text;
 }
 
+function formatPrice(value) {
+  if (!Number.isFinite(value)) return "";
+  return SYMBOL + value.toLocaleString("en-US", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  });
+}
+
+
 function getNumeric(val) {
   return parseFloat(String(val).replace(/[^0-9.-]+/g, ""));
 }
@@ -2930,9 +2939,9 @@ function enablePriceEdit() {
     lastValidPrice = entered;
 
     // update visible price
-    textEl.textContent = SYMBOL + entered.toFixed(2);
+    textEl.textContent = formatPrice(entered);
     document.getElementById('selected-tier-price').value =
-      SYMBOL + entered.toFixed(2);
+      formatPrice(entered);
 
     // tier resolution
     const tiers = [...document.querySelectorAll('.tier-row')]
@@ -2971,9 +2980,9 @@ function enablePriceEdit() {
     // ❌ INVALID → full revert
     if (!Number.isFinite(entered) || entered < floor) {
       inputEl.value = lastValidPrice;
-      textEl.textContent = SYMBOL + lastValidPrice.toFixed(2);
+      textEl.textContent = formatPrice(lastValidPrice);
       document.getElementById('selected-tier-price').value =
-        SYMBOL + lastValidPrice.toFixed(2);
+        formatPrice(lastValidPrice);
     }
 
     inputEl.dataset.original = lastValidPrice;
@@ -2995,7 +3004,7 @@ function selectTier(row) {
   const rawPrice = parseFloat(price.replace(/[^0-9.-]+/g, ""));
 
   document.getElementById('selected-tier-name').value = tier;
-  document.getElementById('selected-tier-price').value = document.body.dataset.symbol + rawPrice;
+  document.getElementById('selected-tier-price').value = formatPrice(rawPrice);
   document.getElementById('selected-tier-commission').value = commission;
 
   const displayEl = document.getElementById('selected-display');
@@ -3028,8 +3037,8 @@ function updateTierTable(priceObj = {}) {
 
     if (!Number.isFinite(rawPrice)) return;
 
-    const displayPrice = SYMBOL + rawPrice.toFixed(2);
-    const displayComm  = SYMBOL + (rawComm || 0).toFixed(2);
+    const displayPrice = formatPrice(rawPrice);
+    const displayComm  = formatPrice(rawComm || 0);
 
     const row = document.querySelector(`tr.tier-row[data-tier="${tier}"]`);
     if (!row) return;
@@ -3076,7 +3085,7 @@ function initTierSelectionFromApi() {
 
   document.getElementById("selected-tier-name").value = selectedTier.tier;
   document.getElementById("selected-tier-commission").value = selectedTier.commission;
-  document.getElementById("selected-tier-price").value = SYMBOL + enteredPrice;
+  document.getElementById("selected-tier-price").value = formatPrice(enteredPrice);
 
   const displayEl = document.getElementById("selected-display");
   if (displayEl) {
@@ -3087,7 +3096,7 @@ function initTierSelectionFromApi() {
   const textEl  = document.getElementById("editable-price-text");
   const inputEl = document.getElementById("editable-price-input");
 
-  updateText(textEl, SYMBOL + enteredPrice);
+  updateText(textEl, formatPrice(enteredPrice));
   if (inputEl) {
     inputEl.value = enteredPrice;
     inputEl.dataset.original = enteredPrice;
@@ -3140,14 +3149,14 @@ async function fetchPriceMatrix() {
       useContract ? priceObj.mnEcommerceSalesPrice : priceObj.mnEcommerceSalesPrice
     );
 
-    const formattedPrice = SYMBOL + rawPrice.toFixed(2);
+    const formattedPrice = formatPrice(rawPrice);
 
     if (String(window.buyer_role).includes("Sales Rep")) {
       if (!useContract) {
         updateTierTable(priceObj);
 
         document.querySelector(".choose-tier")?.classList.remove("hidden");
-        updateText(document.getElementById("floor-price"), SYMBOL + priceObj.mnFloorPrice);
+        updateText(document.getElementById("floor-price"), formatPrice(priceObj.mnFloorPrice);
 
         const input = document.getElementById("editable-price-input");
         if (input) input.dataset.floor = priceObj.mnFloorPrice;

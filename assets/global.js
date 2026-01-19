@@ -1533,6 +1533,14 @@ window.initJDEPricing = function initJDEPricing() {
   const BILL_TO = document.body.dataset.billto;
   const BUSINESS_UNIT = "321010";
 
+  function formatPrice(value) {
+    if (!Number.isFinite(value)) return "";
+    return SYMBOL + value.toLocaleString("en-US", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+  }
+
   if (!BILL_TO) return;
 
   const cards = document.querySelectorAll("[data-item-number][data-uom]");
@@ -1611,7 +1619,7 @@ window.initJDEPricing = function initJDEPricing() {
 
       if (!Number.isFinite(rawPrice)) return;
 
-      const formatted = SYMBOL + rawPrice.toFixed(2);
+      const formatted = formatPrice(rawPrice);
 
       /* -------------------------------
          UPDATE ALL PRICE TARGETS
