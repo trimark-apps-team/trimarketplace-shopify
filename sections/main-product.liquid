@@ -3187,13 +3187,6 @@ async function fetchPriceMatrix() {
     const chooseTier = document.querySelector(".choose-tier");
     if (chooseTier) chooseTier.dataset.productprice = formattedPrice;
 
-    updateText(
-      document.getElementById("quantity-available"),
-      priceObj.mnQuantityAvailable !== undefined
-        ? "Inventory: " + priceObj.mnQuantityAvailable
-        : ""
-    );
-
     document.querySelector(".add-to-cart-pdp")?.removeAttribute("disabled");
 
     document.querySelector(".price__container .loading__spinner").classList.add("hidden");
