@@ -71,7 +71,42 @@
             </details>
           </header-menu>
         {%- else -%}
-          {% if link.title != "Catalog" %}
+          {% if link.title == "Catalog" and customer.current_company.metafields.custom.collections.value != blank %}
+          {% for link in customer.current_company.metafields.custom.collections.value %}
+                <a
+                      id="HeaderMenu-{{ link.handle }}"
+                      href="{{ link.url }}"
+                      class="header__menu-item list-menu__item link link--text focus-inset {%- if link.current %} header-active-effect {% endif %}"
+                      {% if link.current %}
+                        aria-current="page"
+                      {% endif %}
+                    >
+                      <span
+                        {%- if link.current %}
+                          class="header__active-menu-item"
+                        {% endif %}
+                      >
+                        {{- link.title | escape -}}
+                      </span>
+                    </a>
+              {% endfor %}
+            <a
+            id="HeaderMenu-{{ link.handle }}"
+            href="{{ link.url }}"
+            class="header__menu-item list-menu__item link link--text focus-inset {%- if link.current %} header-active-effect {% endif %}"
+            {% if link.current %}
+              aria-current="page"
+            {% endif %}
+          >
+            <span
+              {%- if link.current %}
+                class="header__active-menu-item"
+              {% endif %}
+            >
+              {{- link.title | escape -}}
+            </span>
+          </a>
+          {% else %}
           <a
             id="HeaderMenu-{{ link.handle }}"
             href="{{ link.url }}"
