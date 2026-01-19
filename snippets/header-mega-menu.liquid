@@ -6,13 +6,7 @@
 {% endcomment %}
 
 <nav class="header__inline-menu">
-  <ul class="list-menu list-menu--inline" role="list">
-    {% comment %} {% for i in customer.current_company.metafields.custom.collections.value %}
-      <li><a id="HeaderMenu-sales-order" href="{{ i.url }}" class="header__menu-item list-menu__item link link--text focus-inset">
-            <span>{{ i.title }}</span>
-          </a>
-        </li>
-    {% endfor %} {% endcomment %}
+  <ul class="list-menu list-menu--inline" role="list"> 
     {%- for link in section.settings.menu.links -%}
       <li>
         {%- if link.links != blank -%}
@@ -77,6 +71,7 @@
             </details>
           </header-menu>
         {%- else -%}
+          {% if link.title != "Catalog" %}
           <a
             id="HeaderMenu-{{ link.handle }}"
             href="{{ link.url }}"
@@ -93,6 +88,7 @@
               {{- link.title | escape -}}
             </span>
           </a>
+        {% endif %}
         {%- endif -%}
       </li>
     {%- endfor -%}
