@@ -52,7 +52,7 @@ document.addEventListener("click", async (e) => {
       maximumFractionDigits: 2
     });
   }
-  
+
   if (!button) return;
 
   e.preventDefault();
@@ -94,8 +94,10 @@ document.addEventListener("click", async (e) => {
     });
 
     const data = await res.json();
+
+    const price = line_price / 100;
     
-    const linePrice = formatPrice(data.line_price / 100);
+    const linePrice = formatPrice(price);
     row.querySelector(".variant-item__totals.small-hide span.price").textContent = linePrice;
     row.querySelector(".variant-item__totals.large-up-hide span.price").textContent = linePrice;
     
