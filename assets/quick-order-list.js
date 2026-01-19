@@ -30,6 +30,13 @@ document.addEventListener("DOMContentLoaded", () => {
     };
     xhr.send();
   }
+  function formatPrice(value) {
+    if (!Number.isFinite(value)) return "";
+    return "$" + value.toLocaleString("en-US", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+  }
 }
 
 document.addEventListener("click", (e) => {
@@ -86,7 +93,7 @@ document.addEventListener("click", async (e) => {
 
     const data = await res.json();
     
-    const linePrice = "$" + (data.line_price / 100).toFixed(2);
+    const linePrice = formatPrice(data.line_price / 100);
     row.querySelector(".variant-item__totals.small-hide span.price").textContent = linePrice;
     row.querySelector(".variant-item__totals.large-up-hide span.price").textContent = linePrice;
     
