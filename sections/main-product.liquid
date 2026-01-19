@@ -3156,7 +3156,7 @@ async function fetchPriceMatrix() {
         updateTierTable(priceObj);
 
         document.querySelector(".choose-tier")?.classList.remove("hidden");
-        updateText(document.getElementById("floor-price"), formatPrice(priceObj.mnFloorPrice);
+        updateText(document.getElementById("floor-price"), formatPrice(priceObj.mnFloorPrice));
 
         const input = document.getElementById("editable-price-input");
         if (input) input.dataset.floor = priceObj.mnFloorPrice;
