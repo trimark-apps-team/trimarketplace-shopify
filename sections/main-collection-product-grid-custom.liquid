@@ -193,7 +193,6 @@
                   </thead>
                   <tbody id="quick-order-products" >
               {%- for product in collection.products -%}
-                {% if product.collections contains "five-guys" %}
                {% assign variant = product.selected_or_first_available_variant %}
     {% assign ordered_date = product.metafields.custom.purchased_date.value %}
 
@@ -305,7 +304,6 @@
   <span class="price">{{ cart | line_items_for: product | sum: 'original_line_price' | money }}</span>
   </td>
     </tr>
-  {% endif %}
               {%- endfor -%}
             </tbody>
           </table>
