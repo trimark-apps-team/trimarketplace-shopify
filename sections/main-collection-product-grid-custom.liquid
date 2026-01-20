@@ -46,8 +46,6 @@
  <h2 class="main-page-title page-title page-width">
     {{ collection.title }}
   </h2>
-
-  {% assign collection = collections["five-guys"] %}
 {% if customer %}
 {% assign sales_rep = customer.metafields.custom.buyer_role.value | default: blank %}
 {% endif %}
