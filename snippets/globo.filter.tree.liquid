@@ -98,7 +98,7 @@
                           {% endfor %}
                         </span>
                         {% else %}
-                        <span class="gf-label">{{value_label}}</span>
+                        <span class="gf-label 1">{{value_label}}</span>
                         {% endif %}
                       </strong>
                     </span>
@@ -324,7 +324,7 @@
                   {% elsif filter.style == 'Radio' %}
                     <a {% if value.selected or value.value == collection_id %} class="checked"{% endif %} onclick="toggleRadioFilter({{filter.id}},'{{value.value | replace:"\\", "\\\\" | replace:"\'", "\\\'" | escape}}')" title="{{value.label | escape}}">
                       <span class="gf-RadioButton"></span>
-                      <span class="gf-label">{{value.label | escape}}</span>
+                      <span class="gf-label 2">{{value.label | escape}}</span>
                       <span class="gf-count">({{value.count}})</span>                    </a>
                   {% elsif filter.style == 'Collection' %}
                     <a {% if node.selected or value.value == collection_id %} class="checked"{% endif %} onclick="changeCollection('{{value.handle}}')" title="{{value.label | escape}}">
@@ -358,7 +358,7 @@
                             {% elsif filter.attribute contains 'metafield:' and value.value contains 'https:' %}
                               <span class="gf-swatch-image" style="background-image: url('{{ value.value }}')"></span>
                             {% else %}
-                            <span class="gf-label">{{value_label}}</span>
+                            <span class="gf-label 3">{{value_label}}</span>
                             {% endif %}
                           </strong>
                         </span>
@@ -380,7 +380,7 @@
                   <li>
                     <a{% if value.selected %} class="checked"{% endif %} onclick="toggleRadioFilter({{filter.id}},'{{value.value | replace:"\\", "\\\\" | replace:"\'", "\\\'" | escape}}')" title="{{value_label}}">
                       <span class="gf-RadioButton"></span>
-                      <span class="gf-label">{{value_label}}</span>
+                      <span class="gf-label 4">{{value_label}}</span>
                       <span class="gf-count">({{value.count}})</span>                    </a>
                   </li>
                 {% elsif filter.style contains 'Box - Rectangle' %}
