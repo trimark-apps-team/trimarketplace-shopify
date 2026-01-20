@@ -380,7 +380,7 @@
                   <li>
                     <a{% if value.selected %} class="checked"{% endif %} onclick="toggleRadioFilter({{filter.id}},'{{value.value | replace:"\\", "\\\\" | replace:"\'", "\\\'" | escape}}')" title="{{value_label}}">
                       <span class="gf-RadioButton"></span>
-                      <span class="gf-label 4">{% if value_label =='false'  %}No{% elsif value_label=='true' %} {% else %}{{value_label}}{% endif %}</span>
+                      <span class="gf-label 4">{% if value_label =='false'  %}No{% elsif value_label=='true' %}Yes{% else %}{{value_label}}{% endif %}</span>
                       <span class="gf-count">({{value.count}})</span>                    </a>
                   </li>
                 {% elsif filter.style contains 'Box - Rectangle' %}
