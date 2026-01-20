@@ -1678,8 +1678,15 @@ window.initJDEPricing = function initJDEPricing() {
       if (!btnSelector) return;
 
       card.querySelectorAll(btnSelector).forEach(btn => {
-        btn.disabled = false;
+        btn.disabled = true;
       });
+
+      card
+        .querySelectorAll(".price-item.price-item--regular")
+        .forEach(priceEl => {
+          priceEl.textContent = "Price Not Available";
+          priceEl.classList.remove("hidden");
+        });
 
     });
  
