@@ -1688,6 +1688,13 @@ window.initJDEPricing = function initJDEPricing() {
           priceEl.classList.remove("hidden");
         });
 
+        const priceTarget = card.dataset.priceTarget;
+        if (priceTarget) {
+          card.querySelectorAll(priceTarget).forEach(priceEl => {
+            priceEl.textContent = "Price Not Available";
+          });
+        }
+
     });
  
   });
