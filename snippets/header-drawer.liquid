@@ -120,6 +120,18 @@
                       </div>
                     </details>
                   {%- else -%}
+                    {% if link.title == "Catalog" and customer.current_company.metafields.custom.collections.value != blank %}
+                    <a
+                      id="HeaderDrawer-{{ customer.current_company.metafields.custom.collections.first.handle }}"
+                      href="{{ customer.current_company.metafields.custom.collections.first.url }}"
+                      class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.current %} menu-drawer__menu-item--active{% endif %}"
+                      {% if link.current %}
+                        aria-current="page"
+                      {% endif %}
+                    >
+                      {{ link.title | escape }}
+                    </a>
+                    {% else %}
                     <a
                       id="HeaderDrawer-{{ link.handle }}"
                       href="{{ link.url }}"
@@ -130,6 +142,7 @@
                     >
                       {{ link.title | escape }}
                     </a>
+                  {% endif %}
                   {%- endif -%}
                 </li>
               {%- endfor -%}
