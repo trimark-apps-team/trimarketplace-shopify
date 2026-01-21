@@ -72,24 +72,24 @@
           </header-menu>
         {%- else -%}
           {% if link.title == "Catalog" and customer.current_company.metafields.custom.collections.value != blank %}
-          {% for link in customer.current_company.metafields.custom.collections.value %}
+                {% assign first_collection = customer.current_company.metafields.custom.collections.value | first %}
+                {% assign current_path = request.path %}
                 <a
-                      id="HeaderMenu-{{ link.handle }}"
-                      href="{{ link.url }}"
-                      class="header__menu-item list-menu__item link link--text focus-inset {%- if link.current %} header-active-effect {% endif %}"
-                      {% if link.current %}
+                      id="HeaderMenu-{{ first_collection.handle }}"
+                      href="{{ first_collection.url }}"
+                      class="header__menu-item list-menu__item link link--text focus-inset {%- if current_path == first_collection.url %} header-active-effect {% endif %}"
+                      {% if current_patht == first_collection.url %}
                         aria-current="page"
                       {% endif %}
                     >
                       <span
-                        {%- if link.current %}
+                        {% if current_path == first_collection.url %}
                           class="header__active-menu-item"
                         {% endif %}
                       >
                         Catalog
                       </span>
                     </a>
-              {% endfor %}
           {% else %}
           <a
             id="HeaderMenu-{{ link.handle }}"

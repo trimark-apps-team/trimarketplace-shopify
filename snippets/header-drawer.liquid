@@ -120,18 +120,20 @@
                       </div>
                     </details>
                   {%- else -%}
-                    {% if link.title == "Catalog" and customer.current_company.metafields.custom.collections.value != blank %}
+                   {% if link.title == "Catalog" and customer.current_company.metafields.custom.collections.value != blank %}
+                   {% assign first_collection = customer.current_company.metafields.custom.collections.value | first %}
+                   {% assign current_path = request.path %}
                     <a
-                      id="HeaderDrawer-{{ customer.current_company.metafields.custom.collections.first.handle }}"
-                      href="{{ customer.current_company.metafields.custom.collections.first.url }}"
-                      class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.current %} menu-drawer__menu-item--active{% endif %}"
-                      {% if link.current %}
+                      id="HeaderDrawer-{{ first_collection.handle }}"
+                      href="{{ first_collection.url }}"
+                      class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if current_path == first_collection.url %} menu-drawer__menu-item--active{% endif %}"
+                      {% if current_path == first_collection.url %}
                         aria-current="page"
                       {% endif %}
                     >
-                      {{ link.title | escape }}
+                      Catalog
                     </a>
-                    {% else %}
+                   {% else %}
                     <a
                       id="HeaderDrawer-{{ link.handle }}"
                       href="{{ link.url }}"
@@ -142,7 +144,7 @@
                     >
                       {{ link.title | escape }}
                     </a>
-                  {% endif %}
+                    {%- endif -%}
                   {%- endif -%}
                 </li>
               {%- endfor -%}
