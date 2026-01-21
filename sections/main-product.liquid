@@ -3203,7 +3203,7 @@ async function fetchPriceMatrix() {
     initTierSelectionFromApi();
 
   } catch (err) {
-    document.querySelector(".price__container .loading__spinner").classList.remove("hidden");
+    document.querySelector(".price__container .loading__spinner").classList.add("hidden");
     const el = document.querySelector("product-info .price__regular .price-item--regular");
       if (el) {
         el.classList.remove("hidden");
