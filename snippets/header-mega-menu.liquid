@@ -4,7 +4,9 @@
   Usage:
   {% render 'header-mega-menu' %}
 {% endcomment %}
-{{ customer.current_company.metafields.custom.collections.value.url | first }}
+{% assign first_collection = customer.current_company.metafields.custom.collections.value | first %}
+{{ first_collection.title }}
+
 
 <nav class="header__inline-menu">
   <ul class="list-menu list-menu--inline" role="list"> 
