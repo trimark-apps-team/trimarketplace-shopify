@@ -324,7 +324,7 @@
   {% unless template == 'search' %}
 <div class="page-width">
   
-{% if shop.url contains 'marlinn' or shop.url contains 'demo' or shop.url contains 'market-trimarketplace' %}
+{% if shop.url contains 'qa-marlinn-trimarketplace.myshopify.com' or shop.url contains 'demo' or shop.url contains 'market-trimarketplace' %}
   {% render 'trimark-algolia-search-input' %}
   {% else %}
   {% if settings.predictive_search_enabled %}
