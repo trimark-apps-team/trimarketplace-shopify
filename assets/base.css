@@ -3749,6 +3749,9 @@ details-disclosure > details {
     padding: 10px 0;
     grid-template-columns: auto auto auto;
   }
+  .tier-price-row:not(.tier-price-item) {
+    display: none;
+  }
 
   .tier-price-item {
     display: flex;
