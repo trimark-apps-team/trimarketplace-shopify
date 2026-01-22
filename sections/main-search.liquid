@@ -65,11 +65,17 @@
 
 {% comment %}
   Conditional search routing
-  - For all stores → render the default Shopify search layout for now. 
-  See EC-89 https://trimarck.atlassian.net/browse/EC-89
+  - For marlinn stores → let Algolia's app block render automatically
+  - For all other stores → render the default Shopify search layout
 {% endcomment %}
 
+
+{% if shop.url contains 'qa-marlinn-trimarketplace.myshopify.com' or shop.url contains 'demo' or shop.url contains 'market-trimarketplace' %}
+  {% render 'trimark-algolia-search-page' %}
+{% else %}
   {% render 'trimark-default-search' %}
+{% endif %}
+
 
 
 
