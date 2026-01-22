@@ -16,6 +16,12 @@
           "type": "title",
           "settings": {}
         },
+        "product_tags_6g4jnp": {
+          "type": "product_tags",
+          "settings": {
+            "text_style": "body"
+          }
+        },
         "tier_pricing_bjEHBr": {
           "type": "tier-pricing",
           "settings": {
@@ -47,12 +53,6 @@
             "tire_e_bg_color": "#ff0000",
             "tire_f_text_color": "#ffffff",
             "tire_f_bg_color": "#ed143d"
-          }
-        },
-        "product_tags_6g4jnp": {
-          "type": "product_tags",
-          "settings": {
-            "text_style": "body"
           }
         },
         "sku_aVwE4P": {
@@ -175,8 +175,8 @@
       },
       "block_order": [
         "title",
-        "tier_pricing_bjEHBr",
         "product_tags_6g4jnp",
+        "tier_pricing_bjEHBr",
         "sku_aVwE4P",
         "description",
         "custom_liquid_N8U98j",
