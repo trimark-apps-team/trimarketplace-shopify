@@ -234,7 +234,7 @@
       </div>
       {% render 'header-search', input_id: 'Search-In-Modal' %}
       
-          {% assign assigned_locations = customer.metafields.locations.assigned_locations.value %}
+          {% assign assigned_locations = customer.metafields.custom.assigned_locations.value %}
 
     {% if customer.metafields.custom.buyer_role.value contains 'Sales Rep' and assigned_locations != blank %}
       <a href="javascript:void(0)" id="open-company-switch" class="header__icon">

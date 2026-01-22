@@ -136,7 +136,7 @@
               </div>
                 {% endif %}
                 <div class="cart__ctas" {{ block.shopify_attributes }}>
-                  {% assign assigned_locations = customer.metafields.locations.assigned_locations.value %}
+                  {% assign assigned_locations = customer.metafields.custom.assigned_locations.value %}
 
     {% if customer.metafields.custom.buyer_role.value contains 'Sales Rep' %}
                    
