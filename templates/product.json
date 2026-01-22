@@ -22,6 +22,39 @@
             "text_style": "body"
           }
         },
+        "tier_pricing_bjEHBr": {
+          "type": "tier-pricing",
+          "settings": {
+            "tire_price_button_text": "Choose Tier Price",
+            "tire_price_button_text_font_size": 15,
+            "tire_price_button_border_radius": 5,
+            "tire_price_button_text_color": "#ffffff",
+            "tire_price_button_bg_color": "#a8243e",
+            "tire_price_table_header_color": "#ffffff",
+            "tire_price_table_header_bg_color": "#1b7ccc",
+            "tier_table_heading": "Select Tier Pricing",
+            "tire_text": "TIER",
+            "tire_price_text": "Tier Price",
+            "commission_text": "Commission",
+            "close_button_text": "Close",
+            "close_button_text_font_size": 15,
+            "close_button_border_radius": 5,
+            "close_button_text_color": "#ffffff",
+            "close_button_bg_color": "#a8243e",
+            "tire_a_text_color": "#ffffff",
+            "tire_a_bg_color": "#0000ff",
+            "tire_b_text_color": "#ffffff",
+            "tire_b_bg_color": "#87ceeb",
+            "tire_c_text_color": "#ffffff",
+            "tire_c_bg_color": "#008000",
+            "tire_d_text_color": "#ffffff",
+            "tire_d_bg_color": "#00ff00",
+            "tire_e_text_color": "#ffffff",
+            "tire_e_bg_color": "#ff0000",
+            "tire_f_text_color": "#ffffff",
+            "tire_f_bg_color": "#ed143d"
+          }
+        },
         "sku_aVwE4P": {
           "type": "sku",
           "settings": {
@@ -102,39 +135,6 @@
             "selected_icon_border_color": "#5c6ac4"
           }
         },
-        "tier_pricing_bjEHBr": {
-          "type": "tier-pricing",
-          "settings": {
-            "tire_price_button_text": "Choose Tier Price",
-            "tire_price_button_text_font_size": 15,
-            "tire_price_button_border_radius": 5,
-            "tire_price_button_text_color": "#ffffff",
-            "tire_price_button_bg_color": "#a8243e",
-            "tire_price_table_header_color": "#ffffff",
-            "tire_price_table_header_bg_color": "#1b7ccc",
-            "tier_table_heading": "Select Tier Pricing",
-            "tire_text": "TIER",
-            "tire_price_text": "Tier Price",
-            "commission_text": "Commission",
-            "close_button_text": "Close",
-            "close_button_text_font_size": 15,
-            "close_button_border_radius": 5,
-            "close_button_text_color": "#ffffff",
-            "close_button_bg_color": "#a8243e",
-            "tire_a_text_color": "#ffffff",
-            "tire_a_bg_color": "#0000ff",
-            "tire_b_text_color": "#ffffff",
-            "tire_b_bg_color": "#87ceeb",
-            "tire_c_text_color": "#ffffff",
-            "tire_c_bg_color": "#008000",
-            "tire_d_text_color": "#ffffff",
-            "tire_d_bg_color": "#00ff00",
-            "tire_e_text_color": "#ffffff",
-            "tire_e_bg_color": "#ff0000",
-            "tire_f_text_color": "#ffffff",
-            "tire_f_bg_color": "#ed143d"
-          }
-        },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
@@ -176,6 +176,7 @@
       "block_order": [
         "title",
         "product_tags_6g4jnp",
+        "tier_pricing_bjEHBr",
         "sku_aVwE4P",
         "description",
         "custom_liquid_N8U98j",
@@ -185,7 +186,6 @@
         "variant_picker",
         "quantity_selector",
         "advanced_wishlist_wishlist_btn_FzD9M6",
-        "tier_pricing_bjEHBr",
         "buy_buttons",
         "pluralcart_add_product_jyPhVG"
       ],
