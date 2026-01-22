@@ -70,7 +70,7 @@
 {% endcomment %}
 
 
-{% if shop.url contains 'demo' or shop.url contains 'market-trimarketplace' %}
+{% if shop.url contains 'market-trimarketplace' %}
   {% render 'trimark-algolia-search-page' %}
 {% else %}
   {% render 'trimark-default-search' %}
