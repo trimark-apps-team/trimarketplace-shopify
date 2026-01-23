@@ -398,13 +398,13 @@ document.addEventListener('DOMContentLoaded', async function () {
   </div>
   <div class="small-hide medium-hide">
     <span class="variant-item__name h4 break"><a class="full-unstyled-link" href="/products/${product.handle}">${product.title}</a></span>
-    <span class="variant-item__sku break">${variant.sku ? `${variant.sku} ${orderedDate ? ` | <span class="trimark-red">Last ordered: ${orderedDate}</span>` : ""}` : `${orderedDate ? `<span class="trimark-red">Last ordered: ${orderedDate}</span>` : ""}`}</span>
+    <span class="variant-item__sku break">${variant.sku ? `${variant.sku} ${orderedDate ? ` | <span class="color-red">Last ordered: ${orderedDate}</span>` : ""}` : `${orderedDate ? `<span class="color-red">Last ordered: ${orderedDate}</span>` : ""}`}</span>
   </div>
 </td>
 <td class="variant-item__details large-up-hide">
   <div class="variant-item__info">
     <span class="variant-item__name h4 break"><a class="full-unstyled-link" href="/products/${product.handle}">${product.title}</a></span>
-    <span class="variant-item__sku break">${variant.sku ? `${variant.sku} ${orderedDate ? ` | <span class="trimark-red">Last ordered: ${orderedDate}</span>` : ""}` : `${orderedDate ? `<span class="trimark-red">Last ordered: ${orderedDate}</span>` : ""}`}</span>
+    <span class="variant-item__sku break">${variant.sku ? `${variant.sku} ${orderedDate ? ` | <span class="color-red">Last ordered: ${orderedDate}</span>` : ""}` : `${orderedDate ? `<span class="color-red">Last ordered: ${orderedDate}</span>` : ""}`}</span>
   </div>
   <span class="price">$${variant.price}</span>
 </td>

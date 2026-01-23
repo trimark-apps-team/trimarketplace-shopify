@@ -54,7 +54,7 @@
       <span class="variant-item__name h4 break"><a class="full-unstyled-link" href="{{ item.url }}">{{ data.title | escape }}</a></span>
       {%- if show_sku -%}
         <span class="variant-item__sku break">{{ sku | escape }}  {% if data.metafields.custom.purchased_date.value %} 
-         | <span class="trimark-red">Last ordered: {{ data.metafields.custom.purchased_date.value | date: "%m/%d/%Y" }}</span>
+         | <span class="color-red">Last ordered: {{ data.metafields.custom.purchased_date.value | date: "%m/%d/%Y" }}</span>
 
         {% endif %}</span>
       {%- endif -%}
@@ -66,7 +66,7 @@
       <span class="variant-item__name h4 break"><a class="full-unstyled-link" href="{{ item.url }}">{{ data.title | escape }}</a></span>
       {%- if show_sku -%}
         <span class="variant-item__sku break">{{ sku | escape }} {% if data.metafields.custom.purchased_date.value %}
-         | <span class="trimark-red">Last ordered: {{ data.metafields.custom.purchased_date.value | date: "%m/%d/%Y" }}</span>
+         | <span class="color-red">Last ordered: {{ data.metafields.custom.purchased_date.value | date: "%m/%d/%Y" }}</span>
 
         {% endif %}</span>
       {%- endif -%}

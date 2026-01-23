@@ -1259,6 +1259,10 @@ button.quick-add__submit::after, #cart-click::after {
   margin-right: 0;
 }
 
+.color-red {
+  color: red;
+}
+
 .cs-cart-items__availability--warning {
   display: none!important;
 }
