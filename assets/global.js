@@ -1541,10 +1541,10 @@ window.initJDEPricing = function initJDEPricing() {
     });
   }
 
-  if (!BILL_TO) return;
+  // if (!BILL_TO) return;
 
   const cards = document.querySelectorAll("[data-item-number][data-uom]");
-  if (!cards.length) return;
+  // if (!cards.length) return;
 
   /* -------------------------------
      DISABLE ALL ADD-TO-CART BUTTONS
@@ -1669,31 +1669,77 @@ window.initJDEPricing = function initJDEPricing() {
     /* -------------------------------
        FAILSAFE: ENABLE BUTTONS
     -------------------------------- */
-    cards.forEach(card => {
-      const btnSelector = card.dataset.addToCart;
-      card.querySelectorAll(".loading__spinner").forEach(loader => {
-        loader.classList.add("hidden");
+    // cards.forEach(card => {
+    //   const btnSelector = card.dataset.addToCart;
+    //   card.querySelectorAll(".loading__spinner").forEach(loader => {
+    //     loader.classList.add("hidden");
+    //   });
+
+    //   if (!btnSelector) return;
+
+    //   card.querySelectorAll(btnSelector).forEach(btn => {
+    //     btn.disabled = true;
+    //   });
+
+    //   card
+    //     .querySelectorAll(".price-item.price-item--regular")
+    //     .forEach(priceEl => {
+    //       priceEl.textContent = "Price Not Available";
+    //       priceEl.classList.remove("hidden");
+    //     });
+
+    //     const priceTarget = card.dataset.priceTarget;
+    //     if (priceTarget) {
+    //       card.querySelectorAll(priceTarget).forEach(priceEl => {
+    //         priceEl.textContent = "Price Not Available";
+    //       });
+    //     }
+
+    // });
+
+    const formatted = formatPrice(0);
+
+      /* -------------------------------
+         UPDATE ALL PRICE TARGETS
+      -------------------------------- */
+      cards.forEach(card => {
+      const priceTarget = card.dataset.priceTarget;
+      if (priceTarget) {
+        card.querySelectorAll(priceTarget).forEach(priceEl => {
+          priceEl.textContent = formatted;
+        });
+      }
+
+      /* -------------------------------
+         UPDATE ALL TIER INPUTS
+      -------------------------------- */
+      card.querySelectorAll(".tier-price").forEach(input => {
+        input.value = formatted;
       });
 
-      if (!btnSelector) return;
-
-      card.querySelectorAll(btnSelector).forEach(btn => {
-        btn.disabled = true;
-      });
-
+      /* -------------------------------
+         UPDATE ALL REGULAR PRICES
+      -------------------------------- */
       card
         .querySelectorAll(".price-item.price-item--regular")
         .forEach(priceEl => {
-          priceEl.textContent = "Price Not Available";
+          priceEl.textContent = formatted;
           priceEl.classList.remove("hidden");
         });
 
-        const priceTarget = card.dataset.priceTarget;
-        if (priceTarget) {
-          card.querySelectorAll(priceTarget).forEach(priceEl => {
-            priceEl.textContent = "Price Not Available";
-          });
-        }
+      /* -------------------------------
+         ENABLE ALL ADD-TO-CART BUTTONS
+      -------------------------------- */
+      const btnSelector = card.dataset.addToCart;
+      if (btnSelector) {
+        card.querySelectorAll(btnSelector).forEach(btn => {
+          btn.disabled = false;
+        });
+      }
+
+      card.querySelectorAll(".loading__spinner").forEach(loader => {
+        loader.classList.add("hidden");
+      });
 
     });
  
