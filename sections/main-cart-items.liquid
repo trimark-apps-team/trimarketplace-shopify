@@ -6,20 +6,6 @@
 {{ 'quantity-popover.css' | asset_url | stylesheet_tag }}
 {{ 'empty-cart-modal.css' | asset_url | stylesheet_tag }}
 
-{% assign has_zero_price_item = false %}
-
-{% for item in cart.items %}
-  {% if item.final_price == 0 %}
-    {% assign has_zero_price_item = true %}
-  {% endif %}
-{% endfor %}
-
-{% if has_zero_price_item %}
-  <script>
-    window.location.href = '/cart/clear';
-  </script>
-{% endif %}
-
 {%- style -%}
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
