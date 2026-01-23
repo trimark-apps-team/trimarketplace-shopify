@@ -25,7 +25,7 @@
   data-collection="{% for collection in data.collections %}{{ collection.handle }}{% unless forloop.last %},{% endunless %}{% endfor %}"
   data-sku="{% for variant in data.variants %}{{ variant.sku }} {% endfor %}"
 >
- {% comment %} {% if item.metafields.custom.purchased_date.value %}<td class="variant-item__inner">Ordered at: {{ item.metafields.custom.purchased_date.value | date: '%B %d, %Y' }}</td>{% endif %} {% endcomment %}
+ {% comment %} {% if item.metafields.custom.purchased_date.value %}<td class="variant-item__inner">Last ordered: {{ item.metafields.custom.purchased_date.value | date: '%B %d, %Y' }}</td>{% endif %} {% endcomment %}
   <td class="variant-item__inner{% unless sku and show_sku %} variant-item__inner--no-sku{% endunless %}">
     {%- if show_image -%}
       <div class="variant-item__media">
@@ -54,7 +54,7 @@
       <span class="variant-item__name h4 break"><a class="full-unstyled-link" href="{{ item.url }}">{{ data.title | escape }}</a></span>
       {%- if show_sku -%}
         <span class="variant-item__sku break">{{ sku | escape }}  {% if data.metafields.custom.purchased_date.value %} 
-         | Ordered at: {{ data.metafields.custom.purchased_date.value | date: "%m/%d/%Y" }}
+         | <span class="trimark-red">Last ordered: {{ data.metafields.custom.purchased_date.value | date: "%m/%d/%Y" }}</span>
 
         {% endif %}</span>
       {%- endif -%}
@@ -66,7 +66,7 @@
       <span class="variant-item__name h4 break"><a class="full-unstyled-link" href="{{ item.url }}">{{ data.title | escape }}</a></span>
       {%- if show_sku -%}
         <span class="variant-item__sku break">{{ sku | escape }} {% if data.metafields.custom.purchased_date.value %}
-         | Ordered at: {{ data.metafields.custom.purchased_date.value | date: "%m/%d/%Y" }}
+         | <span class="trimark-red">Last ordered: {{ data.metafields.custom.purchased_date.value | date: "%m/%d/%Y" }}</span>
 
         {% endif %}</span>
       {%- endif -%}

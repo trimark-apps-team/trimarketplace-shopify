@@ -220,10 +220,10 @@
     <span class="variant-item__sku break">            {% if variant.sku != blank %}
               {{ variant.sku }}
               {% if ordered_date %}
-                | Ordered at: {{ ordered_date | date: "%m/%d/%Y" }}
+                | <span class="trimark-red">Last ordered: {{ ordered_date | date: "%m/%d/%Y" }}</span>
               {% endif %}
             {% elsif ordered_date %}
-              Ordered at: {{ ordered_date | date: "%m/%d/%Y" }}
+              <span class="trimark-red">Last ordered: {{ ordered_date | date: "%m/%d/%Y" }}</span>
             {% endif %}</span>
   </div>
 </td>
@@ -234,10 +234,10 @@
     <span class="variant-item__sku break">            {% if variant.sku != blank %}
               {{ variant.sku }}
               {% if ordered_date %}
-                | Ordered at: {{ ordered_date | date: "%m/%d/%Y" }}
+                | <span class="trimark-red">Last ordered: {{ ordered_date | date: "%m/%d/%Y" }}</span>
               {% endif %}
             {% elsif ordered_date %}
-              Ordered at: {{ ordered_date | date: "%m/%d/%Y" }}
+              <span class="trimark-red">Last ordered: {{ ordered_date | date: "%m/%d/%Y" }}</span>
             {% endif %}</span>
   </div>
   <span class="price quick-order-item-price"></span>
@@ -475,13 +475,12 @@ document.addEventListener('DOMContentLoaded', async function () {
   </div>
   <div class="small-hide medium-hide">
     <span class="variant-item__name h4 break"><a class="full-unstyled-link" href="/products/${product.handle}">${product.title}</a></span>
-    <span class="variant-item__sku break">${variant.sku ? `${variant.sku} ${orderedDate ? ` | Ordered at: ${orderedDate}` : ""}` : `${orderedDate ? `Ordered at: ${orderedDate}` : ""}`}</span>
   </div>
 </td>
 <td class="variant-item__details large-up-hide">
   <div class="variant-item__info">
     <span class="variant-item__name h4 break"><a class="full-unstyled-link" href="/products/${product.handle}">${product.title}</a></span>
-    <span class="variant-item__sku break">${variant.sku ? `${variant.sku} ${orderedDate ? ` | Ordered at: ${orderedDate}` : ""}` : `${orderedDate ? `Ordered at: ${orderedDate}` : ""}`}</span>
+    <span class="variant-item__sku break">${variant.sku ? `${variant.sku} ${orderedDate ? ` | <span class="trimark-red">Last ordered: ${orderedDate}</span>` : ""}` : `${orderedDate ? `<span class="trimark-red">Last ordered: ${orderedDate}</span>` : ""}`}</span>
   </div>
   <span class="price quick-order-item-price">
   <div class="loading__spinner">

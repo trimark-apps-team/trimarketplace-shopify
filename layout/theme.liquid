@@ -453,7 +453,7 @@
 
   const companyId = "{{ customer.current_company.id }}";
   const companyLocationId = "{{ customer.current_location.id }}";
-  const customerEmail = "{{ customer.email }}";
+  const customerEmail = "{{ customer.email | downcase }}";
   const approver1Threshold = "{{ customer.current_company.metafields.custom.approver_1_cart_threshold }}";
   const approver2Threshold = "{{ customer.current_company.metafields.custom.approver_2_cart_threshold }}";
   const levelOfApproval = "{{ customer.current_company.metafields.custom.level_of_approval_required }}";
