@@ -1,3 +1,6 @@
+{% assign first_collection = customer.current_company.metafields.custom.collections.value | first %}
+{% assign company_collection = collections[first_collection.handle] %}
+
 {% paginate search.results by 24 %}
   <div class="template-search{% unless search.performed and search.results_count > 0 %} template-search--empty{% endunless %} section-{{ section.id }}-padding">
     <div class="template-search__header page-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
@@ -192,7 +195,18 @@
                 role="list"
               >
                 {%- assign skip_card_product_styles = false -%}
+                {% assign visible_results = 0 %}
+
                 {%- for item in search.results -%}
+
+                  {%- if item.object_type == 'product' -%}
+                    {%- if company_collection != blank and item.collections contains company_collection == false -%}
+                      {% continue %}
+                    {%- endif -%}
+                  {%- endif -%}
+
+                  {% assign visible_results = visible_results | plus: 1 %}
+
                   {% assign lazy_load = false %}
                   {%- if forloop.index > 2 -%}
                     {%- assign lazy_load = true -%}
@@ -254,6 +268,13 @@
                   </li>
                 {%- endfor -%}
               </ul>
+
+              {% if visible_results == 0 %}
+                <p class="center">
+                  No products available for your company.
+                </p>
+              {% endif %}
+
               {%- if paginate.pages > 1 -%}
                 {% render 'pagination', paginate: paginate %}
               {%- endif -%}
