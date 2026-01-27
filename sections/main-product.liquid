@@ -3097,7 +3097,7 @@ function initTierSelectionFromApi() {
   const textEl  = document.getElementById("editable-price-text");
   const inputEl = document.getElementById("editable-price-input");
 
-  updateText(textEl, `${formatPrice(enteredPrice))} / ${uom}`;
+  updateText(textEl, `${formatPrice(enteredPrice)} / ${uom}`);
   if (inputEl) {
     inputEl.value = enteredPrice;
     inputEl.dataset.original = enteredPrice;
