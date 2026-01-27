@@ -773,8 +773,20 @@
               const result = await res.json();
               if (!result.success) throw result;
 
-              const clearRes = await fetch('/cart/clear.js', {
+              await fetch('/cart/clear.js', {
                 method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'same-origin',
+              });
+
+              await fetch('/cart/update.js', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'same-origin',
+                body: JSON.stringify({
+                  attributes: {},
+                  note: null,
+                }),
               });
 
               setCookie(cookieKey, 'yes', 59);
