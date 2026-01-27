@@ -746,64 +746,78 @@
             if (openBtn) openBtn.addEventListener('click', showPopup);
           });
 
-          confirmBtn.addEventListener('click', async () => {
-            if (!selectedLocation) {
-              statusBox.innerHTML = '<div class="error">⚠ Please select a location.</div>';
-              return;
-            }
+         confirmBtn.addEventListener('click', async () => {
+          if (!selectedLocation) {
+            statusBox.innerHTML = '<div class="error">⚠ Please select a location.</div>';
+            return;
+          }
 
-            confirmBtn.disabled = true;
-            confirmBtn.querySelector(".loading__spinner").classList.remove("hidden");
-            confirmBtn.querySelector("span").innerText = "";
+          confirmBtn.disabled = true;
+          confirmBtn.querySelector(".loading__spinner").classList.remove("hidden");
+          confirmBtn.querySelector("span").innerText = "";
 
-            {% comment %} statusBox.innerHTML = '<div class="loading"><span class="spinner"></span> Switching location...</div>'; {% endcomment %}
+          try {
+            /* 1️⃣ CLEAR CART FIRST */
+            await fetch('/cart/clear.js', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+              }
+            });
 
-            try {
-              const res = await fetch('/apps/api/transfer-salesrep', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                  domain,
-                  salesRepCustomerId,
-                  targetCompanyId: selectedLocation.companyId,
-                  targetLocationId: selectedLocation.locationId
-                }),
-              }); 
+            /* 2️⃣ RESET CART ATTRIBUTES */
+            await fetch('/cart/update.js', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+              },
+              body: JSON.stringify({
+                attributes: {
+                  "Customer note": "",
+                  "PO Number": ""
+                },
+                note: null
+              })
+            });
 
-              const result = await res.json();
-              if (!result.success) throw result;
+            /* 3️⃣ HIT SALES REP TRANSFER API */
+            const res = await fetch('/apps/api/transfer-salesrep', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                domain,
+                salesRepCustomerId,
+                targetCompanyId: selectedLocation.companyId,
+                targetLocationId: selectedLocation.locationId
+              })
+            });
 
-              await fetch('/cart/clear.js', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-              });
+            const result = await res.json();
+            if (!result.success) throw result;
 
-              await fetch('/cart/update.js', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                body: JSON.stringify({
-                  attributes: {
-                   "Customer note": "",
-                   "PO Number": ""
-                  },
-                  note: null,
-                }),
-              });
+            /* 4️⃣ SET COOKIE */
+            setCookie(cookieKey, 'yes', 59);
 
-              setCookie(cookieKey, 'yes', 59);
+            /* 5️⃣ REDIRECT */
+            const returnTo = encodeURIComponent(`{{ request.path }}`);
+            const locHref = `https://${domain}/company_location/update?location_id=${encodeURIComponent(
+              selectedLocation.locationId
+            )}&return_to=${returnTo}`;
 
-              const returnTo = encodeURIComponent(`{{ request.path }}`);
-              const locHref = `https://${domain}/company_location/update?location_id=${encodeURIComponent(
-                selectedLocation.locationId
-              )}&return_to=${returnTo}`;
-              window.location.href = locHref;
-            } catch (err) {
-              statusBox.innerHTML = `<div class="error">❌ Failed to switch: ${
-                err.error?.message || 'Unexpected error.'
-              }</div>`;
-              confirmBtn.disabled = false;
-            }
-          });
+            window.location.href = locHref;
+
+          } catch (err) {
+            statusBox.innerHTML = `<div class="error">❌ Failed to switch: ${
+              err?.error?.message || 'Unexpected error.'
+            }</div>`;
+            confirmBtn.disabled = false;
+            confirmBtn.querySelector(".loading__spinner").classList.add("hidden");
+            confirmBtn.querySelector("span").innerText = "Confirm";
+          }
+        });
+
         })();
       </script>
     {% endif %}
