@@ -775,16 +775,7 @@
 
               const clearRes = await fetch('/cart/clear.js', {
                 method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Accept': 'application/json'
-                },
-                credentials: 'same-origin'
               });
-
-              if (!clearRes.ok) {
-                throw new Error('Cart clear failed');
-              }
 
               setCookie(cookieKey, 'yes', 59);
 
