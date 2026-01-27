@@ -2893,6 +2893,7 @@
 {% endschema %}
 <script>
 const SYMBOL = document.body.dataset.symbol || "$";
+const uom = window.getJDEUOM("{{ product.metafields.custom['3_uom'] }}");
 
 function updateText(el, text) {
   if (el) el.textContent = text;
@@ -2939,7 +2940,7 @@ function enablePriceEdit() {
     lastValidPrice = entered;
 
     // update visible price
-    textEl.textContent = formatPrice(entered);
+    textEl.textContent = `${formatPrice(entered)} / ${uom}`;
     document.getElementById('selected-tier-price').value =
       formatPrice(entered);
 
@@ -2980,7 +2981,7 @@ function enablePriceEdit() {
     // ❌ INVALID → full revert
     if (!Number.isFinite(entered) || entered < floor) {
       inputEl.value = lastValidPrice;
-      textEl.textContent = formatPrice(lastValidPrice);
+      textEl.textContent = `${formatPrice(lastValidPrice)} / ${uom}`;
       document.getElementById('selected-tier-price').value =
         formatPrice(lastValidPrice);
     }
@@ -3014,7 +3015,7 @@ function selectTier(row) {
   const textEl = document.getElementById('editable-price-text');
   const inputEl = document.getElementById('editable-price-input');
   
-  textEl.textContent = price;
+  textEl.textContent = `${price} / ${uom}`;
   inputEl.value = rawPrice;
   inputEl.dataset.original = rawPrice;
   document.getElementById('price-error-msg').style.display = 'none';
@@ -3096,7 +3097,7 @@ function initTierSelectionFromApi() {
   const textEl  = document.getElementById("editable-price-text");
   const inputEl = document.getElementById("editable-price-input");
 
-  updateText(textEl, formatPrice(enteredPrice));
+  updateText(textEl, `${formatPrice(enteredPrice))} / ${uom}`;
   if (inputEl) {
     inputEl.value = enteredPrice;
     inputEl.dataset.original = enteredPrice;
