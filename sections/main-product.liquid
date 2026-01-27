@@ -2893,7 +2893,7 @@
 {% endschema %}
 <script>
 const SYMBOL = document.body.dataset.symbol || "$";
-const uom = window.getJDEUOM("{{ product.metafields.custom['3_uom'] }}");
+const uom = "{{ product.metafields.custom['3_uom'] }}";
 
 function updateText(el, text) {
   if (el) el.textContent = text;
