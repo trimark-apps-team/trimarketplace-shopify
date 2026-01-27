@@ -199,11 +199,13 @@
 
                 {%- for item in search.results -%}
 
-                  {%- if item.object_type == 'product' -%}
-                    {%- if company_collection != blank and item.collections contains company_collection == false -%}
+                 {%- if item.object_type == 'product' -%}
+                  {%- if company_collection != blank -%}
+                    {%- unless item.collections contains company_collection -%}
                       {% continue %}
-                    {%- endif -%}
+                    {%- endunless -%}
                   {%- endif -%}
+                {%- endif -%}
 
                   {% assign visible_results = visible_results | plus: 1 %}
 
