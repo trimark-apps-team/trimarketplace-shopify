@@ -772,10 +772,18 @@
 
               const result = await res.json();
               if (!result.success) throw result;
+              await fetch('/cart/clear.js', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Accept': 'application/json'
+                }
+              })
 
               setCookie(cookieKey, 'yes', 59);
 
               const returnTo = encodeURIComponent(`{{ request.path }}`);
+
               const locHref = `https://${domain}/company_location/update?location_id=${encodeURIComponent(
                 selectedLocation.locationId
               )}&return_to=${returnTo}`;
