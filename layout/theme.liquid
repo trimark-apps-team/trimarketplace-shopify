@@ -778,27 +778,17 @@
                 headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
               });
 
-              await fetch('/cart.js')
-              .then(response => response.json())
-              .then(cart => {
-                const clearedAttributes = {};
-                
-                for (const key in cart.attributes) {
-                  clearedAttributes[key] = "";
-                }
-                
-                return fetch('/cart/update.js', {
-                  method: 'POST',
-                  headers: { 
-                    'Content-Type': 'application/json', 
-                    'Accept': 'application/json' 
+              await fetch('/cart/update.js', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify({
+                  attributes: {
+                   "Customer note": "",
+                   "PO Number": ""
                   },
-                  body: JSON.stringify({ attributes: clearedAttributes })
-                });
-              })
-              .then(response => response.json())
-              .then(updatedCart => console.log('All attributes cleared'));
-
+                  note: null,
+                }),
+              });
 
               setCookie(cookieKey, 'yes', 59);
 
