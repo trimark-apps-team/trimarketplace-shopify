@@ -1627,7 +1627,7 @@ window.initJDEPricing = function initJDEPricing() {
       const priceTarget = card.dataset.priceTarget;
       if (priceTarget) {
         card.querySelectorAll(priceTarget).forEach(priceEl => {
-          priceEl.textContent = formatted;
+          priceEl.textContent = `${formatted} / ${priceObj.Unit_Of_Measure}`;
         });
       }
 
@@ -1644,7 +1644,7 @@ window.initJDEPricing = function initJDEPricing() {
       card
         .querySelectorAll(".price-item.price-item--regular")
         .forEach(priceEl => {
-          priceEl.textContent = formatted;
+          priceEl.textContent = `${formatted} / ${priceObj.Unit_Of_Measure}`;
           priceEl.classList.remove("hidden");
         });
 
