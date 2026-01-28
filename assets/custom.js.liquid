@@ -114,13 +114,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 }
 
-const ul = document.getElementById('predictive-search-results-products-list');
-const heading = document.getElementById('predictive-search-products');
-if (!ul.querySelector('li')) heading.style.display = 'none';
-
+document.addEventListener('DOMContentLoaded', () => {
 if (document.querySelector('.restrict-search')) {
   document.querySelector('.search-query').style.display = "none";
 }
+});
 
 subscribe(PUB_SUB_EVENTS.cartUpdate, async function (e) {
 fetch(window.location.href)
