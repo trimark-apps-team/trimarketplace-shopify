@@ -1,6 +1,14 @@
 {% assign first_collection = customer.current_company.metafields.custom.collections.value | first %}
 {% assign company_collection = collections[first_collection.handle] %}
 
+{% assign sales_rep = customer.metafields.custom.buyer_role.value | default: blank %}
+{% assign is_sales_rep = false %}
+
+{% if sales_rep contains 'Sales Rep' %}
+  {% assign is_sales_rep = true %}
+{% endif %}
+
+
 {% paginate search.results by 24 %}
   <div class="template-search{% unless search.performed and search.results_count > 0 %} template-search--empty{% endunless %} section-{{ section.id }}-padding">
     <div class="template-search__header page-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
@@ -199,13 +207,14 @@
 
                 {%- for item in search.results -%}
 
-                 {%- if item.object_type == 'product' -%}
-                  {%- if company_collection != blank -%}
-                    {%- unless item.collections contains company_collection -%}
-                      {% continue %}
-                    {%- endunless -%}
+                  {%- if item.object_type == 'product' and is_sales_rep == false -%}
+                    {%- if company_collection != blank -%}
+                      {%- unless item.collections contains company_collection -%}
+                        {% continue %}
+                      {%- endunless -%}
+                    {%- endif -%}
                   {%- endif -%}
-                {%- endif -%}
+
 
                   {% assign visible_results = visible_results | plus: 1 %}
 

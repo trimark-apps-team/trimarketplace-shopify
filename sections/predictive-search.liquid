@@ -1,6 +1,14 @@
 {% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
  {% assign first_collection = customer.current_company.metafields.custom.collections.value | first %}
 {% assign company_collection = collections[first_collection.handle] %}
+{% assign sales_rep = customer.metafields.custom.buyer_role.value | default: blank %}
+{% assign is_sales_rep = false %}
+
+{% if sales_rep contains 'Sales Rep' %}
+  {% assign is_sales_rep = true %}
+{% endif %}
+
+
 {%- if predictive_search.performed -%}
   {% assign first_column_results_size = predictive_search.resources.queries.size
     | plus: predictive_search.resources.collections.size
@@ -132,7 +140,7 @@
               aria-labelledby="predictive-search-products"
             >
               {%- for product in predictive_search.resources.products -%}
-                {% if company_collection == blank or product.collections contains company_collection %}
+             {% if is_sales_rep or company_collection == blank or product.collections contains company_collection %}
                 <li
                   id="predictive-search-option-product-{{ forloop.index }}"
                   class="predictive-search__list-item"
