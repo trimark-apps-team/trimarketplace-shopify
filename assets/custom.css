@@ -1263,6 +1263,10 @@ button.quick-add__submit::after, #cart-click::after {
   color: red;
 }
 
+.predictive-search__result-group:has(#predictive-search-results-products-list:not(:has(li))) #predictive-search-products {
+  display: none!important;
+}
+
 .cs-cart-items__availability--warning {
   display: none!important;
 }
