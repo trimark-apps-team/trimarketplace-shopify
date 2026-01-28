@@ -4,7 +4,12 @@
   Usage:
   {% render 'header-mega-menu' %}
 {% endcomment %}
+{% assign sales_rep = customer.metafields.custom.buyer_role.value | default: blank %}
+{% assign is_sales_rep = false %}
 
+{% if sales_rep contains 'Sales Rep' %}
+  {% assign is_sales_rep = true %}
+{% endif %}
 <nav class="header__inline-menu">
   <ul class="list-menu list-menu--inline" role="list"> 
     {%- for link in section.settings.menu.links -%}
@@ -71,7 +76,7 @@
             </details>
           </header-menu>
         {%- else -%}
-          {% if link.title == "Catalog" and customer.current_company.metafields.custom.collections.value != blank %}
+          {% if link.title == "Catalog" and customer.current_company.metafields.custom.collections.value != blank and is_sales_rep == false  %}
                 {% assign first_collection = customer.current_company.metafields.custom.collections.value | first %}
                 {% assign current_path = request.path %}
                 <a
