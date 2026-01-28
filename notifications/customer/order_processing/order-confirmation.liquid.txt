@@ -1,3 +1,14 @@
+{% assign po = '' %}
+{% for attr in order.attributes %}
+  {% assign key = attr.first | downcase %}
+  {% if key contains 'po' %}
+    {% if po == '' or attr.last contains '#' %}
+      {% assign po = attr.last %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+
+
 {% assign delivery_method_types = delivery_agreements | map: 'delivery_method_type' | uniq %}
 {% if delivery_method_types.size > 1 %}
   {% assign has_split_cart = true %}
@@ -103,14 +114,17 @@
                           <td class="order-number__cell">
                             <span class="order-number__text">
                               Order {{ order_name }}
+
+                            
                             </span>
-                          </td>
+                          </td> 
                         </tr>
-                        {%- if po_number %}
+                        {%- if po != '' %}
                             <tr>
                               <td class="po-number__cell">
                                 <span class="po-number__text">
-                                  PO number #{{ po_number }}
+                                  PO number #{{ po }}
+                                  
                                 </span>
                               </td>
                             </tr>
@@ -2864,7 +2878,18 @@
   </tr>
 </table>
 
-    {% if order.note != blank %}
+        
+{% comment %}
+  Show Customer note (from order.attributes) if it exists
+{% endcomment %}
+{% assign customer_note = '' %}
+{% for attr in order.attributes %}
+  {% if attr.first == 'Customer note' %}
+    {% assign customer_note = attr.last %}
+  {% endif %}
+{% endfor %}
+
+{% if customer_note != '' %}
   <table class="row section">
     <tr>
       <td class="section__cell">
@@ -2872,8 +2897,11 @@
           <table class="container">
             <tr>
               <td>
-                <h3>Order note</h3>
-                <p>{{ order.note }}</p>
+                {% if customer_note != '' %}
+                  <h3>Shipping Order Instructions</h3>
+                  <p>{{ customer_note }}</p>
+                {% endif %}
+                
               </td>
             </tr>
           </table>
@@ -2882,6 +2910,7 @@
     </tr>
   </table>
 {% endif %}
+
 
           <table class="row section">
 
