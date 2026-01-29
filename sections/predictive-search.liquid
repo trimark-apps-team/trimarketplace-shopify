@@ -1,5 +1,5 @@
 {% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
- {% assign first_collection = customer.current_company.metafields.custom.collection %}
+ {% assign first_collection = customer.current_company.metafields.custom.collection.value %}
 {% assign company_collection = collections[first_collection.handle] %}
 {% assign sales_rep = customer.metafields.custom.buyer_role.value | default: blank %}
 {% assign is_sales_rep = false %}
