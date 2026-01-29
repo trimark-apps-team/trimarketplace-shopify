@@ -284,16 +284,12 @@
                 <p class="center restrict-search">
                   No products available for your company.
                 </p>
-                <style>
-                  .search-query {
-                    display: none;
-                  }
-                </style>
               {% endif %}
-
+              {% if visible_results > 0 %}
               {%- if paginate.pages > 1 -%}
                 {% render 'pagination', paginate: paginate %}
               {%- endif -%}
+              {% endif %}
             </div>
           {%- endif -%}
         </div>
