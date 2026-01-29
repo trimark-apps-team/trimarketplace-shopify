@@ -76,8 +76,8 @@
             </details>
           </header-menu>
         {%- else -%}
-          {% if link.title == "Catalog" and customer.current_company.metafields.custom.collection.value != blank and is_sales_rep == false  %}
-                {% assign first_collection = customer.current_company.metafields.custom.collection.value %}
+          {% if link.title == "Catalog" and customer.current_company.metafields.custom.collection != blank and is_sales_rep == false  %}
+                {% assign first_collection = customer.current_company.metafields.custom.collection %}
                 {% assign current_path = request.path %}
                 <a
                       id="HeaderMenu-{{ first_collection.handle }}"
