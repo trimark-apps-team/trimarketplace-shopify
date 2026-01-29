@@ -4045,6 +4045,7 @@ body .variant-item__quantity-wrapper .quick-order_loader {
 .icon-feature-grid .feature-description {
   line-height: 1.4;
   margin-bottom: 10px;
+  font-size: 12px;
 }
 
 .icon-feature-grid .feature-card-link {
