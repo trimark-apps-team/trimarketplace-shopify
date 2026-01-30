@@ -1058,7 +1058,7 @@
           {% if customer.name != blank %}
             <div class="page-width welcome-tagline">
               <div class="icon-feature-grid">
-                <div class="feature-card">
+                <div class="{% if template == 'index' %}feature-card{% else %}feature-card_company{% endif %}">
                   <div class="feature-description">
                     {% if template == 'index' %}
                     <h2 class="trimark-red">Welcome, {{ customer.name }}</h2>

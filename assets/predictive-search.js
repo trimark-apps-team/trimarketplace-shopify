@@ -192,7 +192,6 @@ class PredictiveSearch extends SearchForm {
         const resultsMarkup = new DOMParser()
           .parseFromString(text, 'text/html')
           .querySelector('#shopify-section-predictive-search').innerHTML;
-        // Save bandwidth keeping the cache in all instances synced
         this.allPredictiveSearchInstances.forEach((predictiveSearchInstance) => {
           predictiveSearchInstance.cachedResults[queryKey] = resultsMarkup;
         });
@@ -200,7 +199,6 @@ class PredictiveSearch extends SearchForm {
       })
       .catch((error) => {
         if (error?.code === 20) {
-          // Code 20 means the call was aborted
           return;
         }
         this.close();
