@@ -40,6 +40,11 @@ class SearchForm extends HTMLElement {
       this.input.value = '';
       this.input.focus();
       this.toggleResetButton();
+      this.dispatchEvent(
+        new CustomEvent('search:reset', {
+          bubbles: true
+        })
+      );
     }
   }
 }

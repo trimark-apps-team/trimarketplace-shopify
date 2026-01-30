@@ -996,12 +996,35 @@
                         window.hulkappsWishlist.baseURL = '/apps/advanced-wishlist/api';
                         window.hulkappsWishlist.hasAppBlockSupport = '1';
                         </script>
+{% assign sales_rep = customer.metafields.custom.buyer_role.value | default: '' %}
+{% assign is_sales_rep = false %}
+
+{% if sales_rep contains 'Sales Rep' %}
+  {% assign is_sales_rep = true %}
+{% endif %}
+
+
+{% if customer.current_company.metafields.custom.collection != blank and is_sales_rep == false %}
+  {% if request.path == "/collections/all" %}
+   <script>
+      window.location.replace('{{ customer.current_company.metafields.custom.collection.value.url }}');
+    </script>
+  {% endif %}
+  <script>
+    window.PREDICTIVE_COLLECTION_ID = "{{ customer.current_company.metafields.custom.collection.value.id }}";
+  </script>
+{% else %}
+  <script>
+    window.PREDICTIVE_COLLECTION_ID = null;
+  </script>
+{% endif %}
+
+
   
   {% if request.path contains "apps/advanced-wishlist" %}
     <script src="{{ 'hulk-custom.js' | asset_url }}"></script>
   {% endif %}
 </head>
-
   <body
     class=" gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %} template-{{ template.name }}"
     data-symbol="{{ localization.country.currency.symbol }}"
